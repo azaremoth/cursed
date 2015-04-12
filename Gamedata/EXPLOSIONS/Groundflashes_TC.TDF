@@ -1,0 +1,63 @@
+[GunGroundFlash_Small]
+{
+   [groundflash]
+	{
+	ttl = 5;
+	flashSize = 30;
+	flashAlpha = 0.4;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      	color = 0.4, 1.0, 0.2;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}
+
+[GunGroundFlash_Small_Yellow]
+{
+   [groundflash]
+	{
+	ttl = 5;
+	flashSize = 30;
+	flashAlpha = 0.4;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      	color = 1, 1, 0;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}
+
+[GunGroundFlash_Medium]
+{
+   [groundflash]
+	{
+	ttl = 5;
+	flashSize = 45;
+	flashAlpha = 0.3;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      	color = 0.4, 1.0, 0.2;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}
+
+[GunGroundFlash_Medium_long]
+{
+   [groundflash]
+	{
+	ttl = 28;
+	flashSize = 45;
+	flashAlpha = 0.3;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      	color = 0.4, 1.0, 0.2;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}

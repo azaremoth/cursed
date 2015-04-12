@@ -1,0 +1,95 @@
+#include "basic_spring_stuff.h"
+
+piece  base, head, emit_gun, emit_summon, torso, tail_1, tail_2, tail_3, tail_4, tail_5, gun;
+
+static-var  statechg_DesiredState, statechg_StateChanging;
+#define GUNFLARE		1024+0
+#define EXPLOSION		1025+0
+
+#define	SIG_AIM1		2
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from torso;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+Create()
+{
+	start-script SmokeUnit();
+}
+
+QueryPrimary(piecenum)
+{
+		piecenum = emit_gun;
+}
+
+
+RestoreAfterDelay()
+{
+	sleep 5000;
+	turn tail_3 to y-axis <0.000000> speed <55.000000>;
+	turn tail_5 to x-axis <0.000000> speed <30.000000>;
+}
+
+
+//AimFromWeapon
+
+AimWeapon1(heading, pitch)
+{
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	turn tail_3 to y-axis heading speed <160.000000>;
+	turn tail_5 to x-axis <0.000000> - pitch speed <160.000000>;
+    wait-for-turn tail_3 around y-axis;
+	wait-for-turn tail_5 around x-axis;
+    start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+FireWeapon1()
+{
+		emit-sfx GUNFLARE from emit_gun;	
+		call-script lua_CreateLightMe(emit_gun, 96, 255, 0, 96);
+		sleep 300;
+		call-script lua_DestroyLightMe();
+		return(1);
+}
+
+
+SweetSpot(piecenum)
+{
+	piecenum = torso;
+}
+
+Killed(severity, corpsetype, smoketype)
+{
+		explode torso type SHATTER | EXPLODE_ON_HIT;
+		explode head type FALL | EXPLODE_ON_HIT;	
+		emit-sfx EXPLOSION from torso;
+		return(0);
+}

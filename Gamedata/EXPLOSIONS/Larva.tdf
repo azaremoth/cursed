@@ -1,0 +1,42 @@
+[Spiting_trail] {
+	[smoke] {
+		class=CSimpleParticleSystem;
+		[properties]{
+			sizeGrowth=1.2;
+			sizeMod=1;
+			pos=0, 0, 0;
+			emitVector=dir;
+			gravity=0, 0, 0;
+			colorMap=0.6 0.6 0.6 0.08 0 0 0 0;
+			Texture=blooddrop_green;
+			airdrag=0.5;
+			particleLife=3;
+			particleLifeSpread=2;
+			numParticles=1;
+			particleSpeed=i1;
+			particleSpeedSpread=0.5;
+			particleSize=8;
+			particleSizeSpread=4;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=1;
+			alwaysVisible=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=2;
+	}
+   [groundflash]
+	{
+	ttl = 5;
+	flashSize = 30;
+	flashAlpha = 0.05;
+	circleGrowth = 0;
+	circleAlpha = 0;
+    color = 0.33, 0.33, 0.0;
+   	air=1;
+    ground=1;
+    water=1;
+	}
+}

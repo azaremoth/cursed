@@ -1,0 +1,35 @@
+[HOVER_LASER]
+{
+  [spikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-15 r20,-15 r20,-15 r20;
+			width=2.0;
+			length=8;
+			alpha=0.8;
+			alphadecay=0.1;
+			color = 0.39, 1.00, 0.84;
+		}
+	air=1;
+	water=1;
+	ground=1;
+    	count=10; 
+	}
+  [groundflash]
+	{
+      		flashSize = 45;
+      		flashAlpha = 0.25;
+      		circleGrowth = 1;
+      		circleAlpha = 0.55;
+      		ttl = 5;
+			color = 0.39, 1.00, 0.84;
+			air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+

@@ -1,0 +1,32 @@
+[FLAKImpact]
+{
+	[Smokecloud]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.2 0.2 0.2 0.1   0.2 0.2 0.2 0.05	0.1 0.1 0.1 0.3	0.1 0.1 0.1 0.3	0.0 0.0 0.0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=40;
+		particleLifeSpread=0;
+		numParticles=18;
+		particleSpeed=1.5;
+		particleSpeedSpread=0.5;
+		particleSize=15;
+		particleSizeSpread=5;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+}

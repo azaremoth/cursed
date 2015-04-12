@@ -1,0 +1,360 @@
+[SMALL_EXPLOSION_BLUE]
+{
+	[Nebel1]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0.05;
+		sizeMod=1.0;
+		pos=10 r-20, 5 r 15, 10 r-20;
+		emitVector=0, 1, 0;
+		gravity=0, 0.002, 0;
+		colorMap=0.1 0.1 0.1 0.01   0.0 0.0 0.0 0.01;
+		Texture=bluenova;
+		airdrag=0.96;
+		particleLife=75;
+		particleLifeSpread=20;
+		numParticles=1;
+		particleSpeed=0.2;
+		particleSpeedSpread=1;
+		particleSize=30;
+		particleSizeSpread=15;
+		emitRot=0;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=10;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=1;
+	}
+	[burnstuff]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0; 
+		emitVector=0, 1, 0;
+	      	gravity=0, -0.4, 0;  
+		colorMap=0.1 1 1 0.01   0 1 1 0.01   0.1 1 0.8 0.01   0 0 0 0.01;
+		Texture=flamespark;
+		airdrag=0.91;
+		particleLife=20;
+		particleLifeSpread=0;
+		numParticles=38;
+		particleSpeed=10.5;
+		particleSpeedSpread=1.8;
+		particleSize=1;
+		particleSizeSpread=2.4;
+		emitRot=30;
+		emitRotSpread=55;
+		directional=1;
+		alwaysVisible=1;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+	[heatcloud]
+	{
+      		[properties]
+      		{
+      		heat = 15;
+		Texture=bluenova;
+      		maxheat = 25;
+      		heatFalloff = 0.86;
+      		size = 4;
+      		sizeGrowth = 3;
+      		sizemod = 2;
+      		sizemodmod = 0;
+      		speed = -0.3 r0.4, -0.3 r0.4, -0.3 r0.4;
+      		pos = 0.05 r-0.1, 0.05 r-0.1, 0.05 r-0.1;
+      		}
+		air=1;
+      	water=0;
+      	ground=1;
+      	count=12;
+	}
+	[watercloud]
+   	{
+	class=heatcloud;
+      		[properties]
+      		{
+      		heat = 15;
+		Texture=water;
+      		maxheat = 15;
+      		heatFalloff = 0.86;
+      		size = 1.1;
+      		sizeGrowth = 1.1;
+      		sizemod = 0;
+      		sizemodmod = 0;
+      		speed = -0.2 r0.4, -0.2 r0.4, -0.2 r0.4;
+      		pos = 0.1 r-0.2, 0.1 r-0.2, 0.1 r-0.2;
+      		}
+		air=0;
+      	water=1;
+      	ground=0;
+      	count=12;
+	}
+	[groundflash]
+	{
+      		flashSize = 100;
+      		flashAlpha = 0.25;
+      		circleGrowth = 1;
+      		circleAlpha = 0.55;
+      		ttl = 20;
+		color = 0.6, 0.91, 0.91;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[MEDIUM_EXPLOSION_BLUE]
+{
+	[Nebel1]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0.05;
+		sizeMod=1.0;
+		pos=10 r-20, 5 r 15, 10 r-20;
+		emitVector=0, 1, 0;
+		gravity=0, 0.002, 0;
+		colorMap=0.1 0.1 0.1 0.01   0.0 0.0 0.0 0.01;
+		Texture=bluenova;
+		airdrag=0.96;
+		particleLife=75;
+		particleLifeSpread=20;
+		numParticles=1;
+		particleSpeed=0.25;
+		particleSpeedSpread=1;
+		particleSize=50;
+		particleSizeSpread=15;
+		emitRot=0;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=10;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=1;
+	}
+	[burnstuff]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0; 
+		emitVector=0, 1, 0;
+	      	gravity=0, -0.4, 0;  
+		colorMap=0.1 1 1 0.01   0 1 1 0.01   0.1 1 0.8 0.01   0 0 0 0.01;
+		Texture=flamespark;
+		airdrag=0.91;
+		particleLife=20;
+		particleLifeSpread=0;
+		numParticles=38;
+		particleSpeed=10.5;
+		particleSpeedSpread=1.8;
+		particleSize=1;
+		particleSizeSpread=2.4;
+		emitRot=30;
+		emitRotSpread=55;
+		directional=1;
+		alwaysVisible=1;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+	[heatcloud]
+	{
+      		[properties]
+      		{
+      		heat = 15;
+		Texture=bluenova;
+      		maxheat = 25;
+      		heatFalloff = 0.86;
+      		size = 6;
+      		sizeGrowth = 3;
+      		sizemod = 2;
+      		sizemodmod = 0;
+      		speed = -0.3 r0.4, -0.3 r0.4, -0.3 r0.4;
+      		pos = 0.05 r-0.1, 0.05 r-0.1, 0.05 r-0.1;
+      		}
+		air=1;
+      	water=0;
+      	ground=1;
+      	count=12;
+	}
+	[watercloud]
+   	{
+	class=heatcloud;
+      		[properties]
+      		{
+      		heat = 15;
+		Texture=water;
+      		maxheat = 15;
+      		heatFalloff = 0.86;
+      		size = 1.1;
+      		sizeGrowth = 1.1;
+      		sizemod = 0;
+      		sizemodmod = 0;
+      		speed = -0.2 r0.4, -0.2 r0.4, -0.2 r0.4;
+      		pos = 0.1 r-0.2, 0.1 r-0.2, 0.1 r-0.2;
+      		}
+		air=0;
+      	water=1;
+      	ground=0;
+      	count=12;
+	}
+	[groundflash]
+	{
+      		flashSize = 150;
+      		flashAlpha = 0.33;
+      		circleGrowth = 1;
+      		circleAlpha = 0.55;
+      		ttl = 20;
+		color = 0.6, 0.91, 0.91;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+
+[BIG_EXPLOSION_BLUE]
+{
+	[Nebel1]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0.05;
+		sizeMod=1.0;
+		pos=10 r-20, 5 r 15, 10 r-20;
+		emitVector=0, 1, 0;
+		gravity=0, 0.002, 0;
+		colorMap=0.1 0.1 0.1 0.01   0.0 0.0 0.0 0.01;
+		Texture=bluenova;
+		airdrag=0.96;
+		particleLife=75;
+		particleLifeSpread=20;
+		numParticles=1;
+		particleSpeed=0.33;
+		particleSpeedSpread=1;
+		particleSize=66;
+		particleSizeSpread=22;
+		emitRot=0;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=20;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=1;
+	}
+	[burnstuff]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0; 
+		emitVector=0, 1, 0;
+	      	gravity=0, -0.4, 0;  
+		colorMap=0.1 1 1 0.01   0 1 1 0.01   0.1 1 0.8 0.01   0 0 0 0.01;
+		Texture=flamespark;
+		airdrag=0.91;
+		particleLife=20;
+		particleLifeSpread=0;
+		numParticles=38;
+		particleSpeed=10.5;
+		particleSpeedSpread=1.8;
+		particleSize=1;
+		particleSizeSpread=2.4;
+		emitRot=30;
+		emitRotSpread=55;
+		directional=1;
+		alwaysVisible=1;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+	[heatcloud]
+	{
+      		[properties]
+      		{
+      		heat = 15;
+		Texture=bluenova;
+      		maxheat = 25;
+      		heatFalloff = 0.86;
+      		size = 8;
+      		sizeGrowth = 4;
+      		sizemod = 2;
+      		sizemodmod = 0;
+      		speed = -0.3 r0.4, -0.3 r0.4, -0.3 r0.4;
+      		pos = 0.05 r-0.1, 0.05 r-0.1, 0.05 r-0.1;
+      		}
+		air=1;
+      	water=0;
+      	ground=1;
+      	count=12;
+	}
+	[watercloud]
+   	{
+	class=heatcloud;
+      		[properties]
+      		{
+      		heat = 15;
+		Texture=water;
+      		maxheat = 15;
+      		heatFalloff = 0.86;
+      		size = 1.1;
+      		sizeGrowth = 1.1;
+      		sizemod = 0;
+      		sizemodmod = 0;
+      		speed = -0.2 r0.4, -0.2 r0.4, -0.2 r0.4;
+      		pos = 0.1 r-0.2, 0.1 r-0.2, 0.1 r-0.2;
+      		}
+		air=0;
+      	water=1;
+      	ground=0;
+      	count=12;
+	}
+	[groundflash]
+	{
+      		flashSize = 200;
+      		flashAlpha = 0.33;
+      		circleGrowth = 1;
+      		circleAlpha = 0.55;
+      		ttl = 20;
+		color = 0.6, 0.91, 0.91;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}

@@ -1,0 +1,115 @@
+#include "basic_spring_stuff.h"
+
+piece  base, theeth, gem1, gem2, gem3, gem4, gem5, gem6, gem7, emit1, createpoint;
+
+static-var IsBuildingNow, RandomNumber2, structureheight, inground;
+
+// Signal definitions
+#define SIG_ACTIVATE			2
+#define PORTALGLOW				1024+0
+#define PORTALSPIKES			1025+0
+#define Big_Explosion_Green		1026+0
+#define STRUCTUREBUILDING		1027+0
+#define animationsleeptime 		500
+#define ringsleeptime	 		400
+
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+BuildingFX1()
+{
+	while (TRUE)
+	{
+		if(IsBuildingNow)
+		{
+			emit-sfx PORTALSPIKES from gem1;
+			emit-sfx PORTALSPIKES from gem2;
+			emit-sfx PORTALSPIKES from gem3;
+			emit-sfx PORTALSPIKES from gem4;
+			emit-sfx PORTALSPIKES from gem5;
+			emit-sfx PORTALSPIKES from gem6;
+			emit-sfx PORTALSPIKES from gem7;
+			emit-sfx PORTALGLOW from createpoint;							
+			sleep 400;
+		}
+	sleep 10;
+	}
+}
+
+BuildScript()
+{
+	sleep 100;										
+	set BUGGER_OFF to 1;
+	set YARD_OPEN to 1;	
+	IsBuildingNow = TRUE;
+	set INBUILDSTANCE to 1;
+}
+
+StopBuild()
+{
+	sleep 100;
+	set BUGGER_OFF to 0;
+	set YARD_OPEN to 0;
+	IsBuildingNow = FALSE;
+	set INBUILDSTANCE to 0;
+	return (0);
+}
+
+Activate()
+{
+	call-script lua_CreateLightMe(emit1, 96, 255, 0, 96);
+	call-script BuildScript();
+}
+
+Deactivate()
+{
+	call-script lua_DestroyLightMe();
+	call-script StopBuild();
+}
+
+QueryBuildInfo(piecenum)
+{
+	piecenum = createpoint;
+	return (0);
+}
+
+QueryNanoPiece(piecenum)
+{	piecenum = base;	}
+
+SweetSpot(piecenum)
+{	piecenum = base;	}
+
+
+Create()
+{
+	IsBuildingNow = FALSE;
+	spin gem1 around y-axis speed <50> accelerate <50>;
+	spin gem2 around y-axis speed <-40> accelerate <50>;
+	spin gem3 around y-axis speed <30> accelerate <50>;
+	spin gem4 around y-axis speed <-30> accelerate <50>;
+	spin gem5 around y-axis speed <50> accelerate <50>;
+	spin gem6 around y-axis speed <-30> accelerate <50>;
+	spin gem7 around y-axis speed <40> accelerate <50>;	
+	
+	
+	//////////////////////////////////START BUILD CYCLE
+	structureheight	= (get UNIT_HEIGHT)*(-1);
+	move theeth to y-axis structureheight now;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		move theeth to y-axis (structureheight * (get BUILD_PERCENT_LEFT)/100) speed [10];
+		emit-sfx STRUCTUREBUILDING from base;
+		sleep 50;
+	}
+	move theeth to y-axis 0 speed [10];
+	/////////////////////////////////END BUILD CYCLE
+
+	start-script BuildingFX1();
+}
+
+Killed(severity, corpsetype, smoketype)
+{
+	emit-sfx Big_Explosion_Green from base;
+	return (0);
+}

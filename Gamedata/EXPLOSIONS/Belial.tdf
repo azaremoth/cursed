@@ -1,0 +1,38 @@
+[BelialBigGunFlare]
+{
+   [BitmapMuzzleFlame]
+   {
+	class = CBitmapMuzzleFlame;
+      
+	[properties]
+      	{
+         	dir = dir;
+         	colorMap=1 1 1 0.01	1 1 1 0.01	0 0 0 0.01; 
+          	size=10;
+          	length=20;
+          	sizeGrowth=1.25;
+          	ttl=10;
+          	frontOffset=0.1;
+          	sideTexture=greengunflare;
+          	frontTexture=greenflare;
+      	}
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[groundflash]
+	{
+      		flashSize = 30;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 10;
+			color = 0.6, 1, 0.1;
+			air=1;
+     			ground=1;
+      		water=1;
+
+	}
+}

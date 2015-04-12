@@ -1,0 +1,138 @@
+[ARTYAIM]
+{
+	[Blitze]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0.1;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.5 1 0.16 0.01  0.8 1 0.8 0.01	0.5 0.8 0 0.01 	0.2 1 0 0.01 	0 0 0 0.01;
+		Texture=lightningball;
+		airdrag=0.95;
+		particleLife=10;
+		particleLifeSpread=6;
+		numParticles=5;
+		particleSpeed=2;
+		particleSpeedSpread=0;
+		particleSize=10;
+		particleSizeSpread=4;
+		emitRot=0;
+		emitRotSpread=180;
+		directional=1;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+}
+
+[BIGLIGHTNINGEXPLOSION]   //big container effect for the lightning impact
+{
+	[Blitze]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0.1;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.5 1 0.16 0.01  0.8 1 0.8 0.01	0.5 0.8 0 0.01 	0.2 1 0 0.01 	0 0 0 0.01;
+		Texture=lightningball;
+		airdrag=0.95;
+		particleLife=13;
+		particleLifeSpread=6;
+		numParticles=15;
+		particleSpeed=2;
+		particleSpeedSpread=0;
+		particleSize=14;
+		particleSizeSpread=8;
+		emitRot=0;
+		emitRotSpread=180;
+		directional=1;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+	[electricstorm]  // residual electricity effect
+	{
+	    class=CExpGenSpawner;
+		[properties]
+		{
+		pos=-25 r50, 1, -25 r50; 
+		delay=10 r100;		
+		explosionGenerator=custom:LIGHTNINGPLOSION_STORMBOLT; 
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=20;
+	}
+      [yellowbolts]
+	{
+		class=CExpGenSpawner;
+		[properties]
+		{
+		pos=0, 0, 0;
+		delay=0;
+		explosionGenerator=custom:LIGHTNINGPLOSION_YELLOWBOLTS;
+	}
+    	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+	[spikes1]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-15 r30,-15 r30,-15 r30;
+			width=3;
+			length=15;
+			alpha=0.6;
+			alphadecay=0.1;
+			color=0.5,1,0.16;
+
+		}
+	air=1;
+	water=1;
+	ground=1;
+    	count=15; 
+	}
+	[spikes2]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-10 r20,-10 r20,-10 r20;
+			width=2;
+			length=10;
+			alpha=0.6;
+			alphadecay=0.1;
+			color=1,1,1;
+
+		}
+	air=1;
+	water=1;
+	ground=1;
+    	count=8; 
+	}
+	[groundflash]
+	{
+		flashsize=66;
+		flashalpha=0.2;
+		circlegrowth=0;
+		circlealpha=1;
+		ttl=12;
+		color=0.5,1,0.16;
+	}
+}

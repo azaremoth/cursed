@@ -1,0 +1,236 @@
+#include "basic_spring_stuff.h"
+
+piece base, tank, rwheel1, tail1, tail2, tail3, tail4, tail5, tail6, beamer, rwheel2, rwheel3, rwheel4, rwheel5, rwheel6, rwheel7, lwheel1, lwheel2, lwheel3, lwheel4, lwheel5, lwheel6, lwheel7, rtracks1, rtracks2, rtracks3, ltracks1, ltracks2, ltracks3, dust1, dust2, emit_groundflash, emit;
+
+static-var moving;
+static-var BUILDTARGET;
+static-var ISBUILDING;
+static-var statechg_DesiredState;
+static-var statechg_StateChanging;
+static-var isaiming;
+
+#define	SIG_AIM1		2
+
+#define DUST			1024+0
+#define EXPLOSION		1025+0
+#define GUNFLARE		1026+0
+#define GROUNDFLASH		1027+0
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+Trackanimation()
+{
+	var TrackSection;
+	TrackSection = 1;
+	show rtracks1;
+	show ltracks1;			
+	hide rtracks2;
+	hide ltracks2;		
+	hide rtracks3;
+	hide ltracks3;	
+	
+	
+	While(TRUE)
+	{
+		if(moving)
+		{
+			If(TrackSection == 4)
+			{
+				TrackSection = 1;
+			}
+			If(TrackSection == 1)
+			{
+				show rtracks1;
+				show ltracks1;			
+				hide rtracks3;
+				hide ltracks3;			
+				emit-sfx DUST from dust1;
+				emit-sfx DUST from dust2;				
+			}
+			If(TrackSection == 2)
+			{
+				show rtracks2;
+				show ltracks2;			
+				hide rtracks1;
+				hide ltracks1;			
+				emit-sfx DUST from dust1;
+				emit-sfx DUST from dust2;					
+			}
+			If(TrackSection == 3)
+			{
+				show rtracks3;
+				show ltracks3;			
+				hide rtracks2;
+				hide ltracks2;			
+				emit-sfx DUST from dust1;
+				emit-sfx DUST from dust2;					
+			}
+		TrackSection = TrackSection+1;
+		}
+	sleep 30;
+	}
+}
+
+Wheelanimation()
+{
+	While(TRUE)
+	{
+		if(moving)
+		{
+		spin rwheel1 around x-axis speed <200> accelerate <300>;
+		spin rwheel2 around x-axis speed <200> accelerate <300>;
+		spin rwheel3 around x-axis speed <200> accelerate <300>;
+		spin rwheel4 around x-axis speed <200> accelerate <300>;
+		spin rwheel5 around x-axis speed <200> accelerate <300>;
+		spin rwheel6 around x-axis speed <200> accelerate <300>;
+		spin rwheel7 around x-axis speed <200> accelerate <300>;	
+		spin lwheel1 around x-axis speed <200> accelerate <300>;
+		spin lwheel2 around x-axis speed <200> accelerate <300>;
+		spin lwheel3 around x-axis speed <200> accelerate <300>;
+		spin lwheel4 around x-axis speed <200> accelerate <300>;	
+		spin lwheel5 around x-axis speed <200> accelerate <300>;
+		spin lwheel6 around x-axis speed <200> accelerate <300>;
+		spin lwheel7 around x-axis speed <200> accelerate <300>;		
+		}
+		if(!moving)
+		{
+		stop-spin rwheel1 around x-axis decelerate <200>;
+		stop-spin rwheel2 around x-axis decelerate <200>;
+		stop-spin rwheel3 around x-axis decelerate <200>;
+		stop-spin rwheel4 around x-axis decelerate <200>;
+		stop-spin rwheel5 around x-axis decelerate <200>;
+		stop-spin rwheel6 around x-axis decelerate <200>;
+		stop-spin rwheel7 around x-axis decelerate <200>;		
+		stop-spin lwheel1 around x-axis decelerate <200>;
+		stop-spin lwheel2 around x-axis decelerate <200>;
+		stop-spin lwheel3 around x-axis decelerate <200>;
+		stop-spin lwheel4 around x-axis decelerate <200>;
+		stop-spin lwheel5 around x-axis decelerate <200>;
+		stop-spin lwheel6 around x-axis decelerate <200>;
+		stop-spin lwheel7 around x-axis decelerate <200>;		
+		}
+	sleep 100;
+	}
+}
+
+
+
+// Builder Stuff //////////////////////////
+StartBuilding(Func_Var_1)
+{
+	sleep 200;
+
+	BUILDTARGET = Func_Var_1;
+	ISBUILDING = 1;
+}
+
+StopBuilding()
+{
+	ISBUILDING = 0;
+}
+
+BuildingAnimation()
+{
+	while (TRUE)
+	{
+		if(ISBUILDING)
+		{
+			turn tail4 to y-axis BUILDTARGET speed <150>;
+			turn tail6 to x-axis <0> speed <200>;
+			set INBUILDSTANCE to 1;		
+		}
+		if(ISBUILDING == 0 and isaiming == FALSE) 
+		{
+			turn tail4 to y-axis <0> speed <150>;
+			turn tail6 to x-axis <0> speed <200>;
+			set INBUILDSTANCE to 0;
+		}
+	sleep 200;
+	}
+}
+
+QueryNanoPiece(piecenum)
+{	piecenum = emit;	}
+
+///////////////////////////////////////////
+
+//weapon 1 -----------------------------------------------------------------
+
+RestoreAfterDelay()
+{
+	sleep 3000;
+	turn tail4 to y-axis <0> speed <200>;
+	turn tail6 to x-axis <0> speed <200>;	
+	isaiming = FALSE;
+}
+
+AimWeapon1(heading, pitch)
+{
+	if (ISBUILDING)
+		{
+		return (0);
+		}
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	isaiming = TRUE;
+	turn tail4 to y-axis heading speed <160.000000>;
+	turn tail6 to x-axis <0.000000> - pitch speed <160.000000>;
+    wait-for-turn tail4 around y-axis;
+	wait-for-turn tail6 around x-axis;	
+	sleep 200;
+    start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+FireWeapon1()
+{
+	emit-sfx GUNFLARE from emit;
+	emit-sfx GROUNDFLASH from emit_groundflash;
+	call-script lua_CreateLightMe(emit, 44, 255, 255, 96);
+	sleep 125;
+	call-script lua_DestroyLightMe();
+	return(1);
+}
+
+//AimFromWeapon
+
+AimFromWeapon1(piecenum)
+{
+		piecenum = tail3;
+}
+
+QueryWeapon1(piecenum)
+{
+		piecenum = emit;
+}
+
+
+Create()
+{
+	moving = FALSE;
+	isaiming = FALSE;
+	start-script Wheelanimation();
+	start-script Trackanimation();
+	start-script BuildingAnimation();
+}
+
+StartMoving()
+{ moving = TRUE; }
+
+StopMoving()
+{ moving = FALSE; }
+
+SweetSpot (piecenum)
+{	piecenum = base;	}
+
+
+Killed(severity, corpsetype)
+{
+		sleep 400;
+		emit-sfx EXPLOSION from tank;
+		emit-sfx EXPLOSION from beamer;
+		return (0);
+}
+
+

@@ -1,0 +1,49 @@
+[LICHBOLT]
+{
+   [groundflash]
+	{
+	ttl = 20;
+	flashSize = 15;
+	flashAlpha = 0.1;
+	circleGrowth = 0;
+	circleAlpha = 0;
+        color = 0.157, 1.0, 1.0;
+   	air=1;
+	ground=1;
+	water=1;
+	}
+}
+
+[LICHBOLT_EXPLOSION]
+{
+	[spikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-12 r25,-12 r24,-12 r24;
+			width=2 r2;
+			length=40 r20;
+			alpha=0.4 r0.1;
+			alphadecay=0.1;
+			color = 0.157, 1.0, 1.0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=12; 
+	}
+	[groundflash]
+	{
+      		flashSize = 50;
+      		flashAlpha = 0.20;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 20;
+			color = 0.157, 1.0, 1.0;
+			air=1;
+     			ground=1;
+      		water=1;
+	}
+}
+

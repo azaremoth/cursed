@@ -1,0 +1,176 @@
+[SPIKES_MAGE]
+{
+	[greenspikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=1 r0.5;
+			length=1.2 r0.25;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 1.0, 0.15;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=6; 
+	}
+	[purplespikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=0.8 r0.5;
+			length=1.4 r0.25;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 0.01, 0.45;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=6; 
+	}
+}
+
+[BALL_MAGE]
+{
+	[heatcloud]
+	{
+      		[properties]
+      		{
+      		heat = 10;
+		Texture=heatcloud_greenpurple;
+      		maxheat = 15;
+      		heatFalloff = 0.86;
+      		size = 0.25;
+      		sizeGrowth = 0.5;
+      		sizemod = 0;
+      		sizemodmod = 0;
+      		speed = -0.3 r0.4, -0.3 r0.4, -0.3 r0.4;
+      		pos = 0.05 r-0.1, 0.05 r-0.1, 0.05 r-0.1;
+      		}
+		air=1;
+      		water=1;
+      		ground=1;
+      		count=12;
+	} 
+	[greenspikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=1 r0.5;
+			length=2 r0.25;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 1.0, 0.15;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=12; 
+	}
+	[purplespikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=0.8 r0.5;
+			length=2.4 r0.25;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 0.01, 0.45;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=12; 
+	}
+}
+
+
+[TELEPORT]
+{
+	[Runes]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0.2;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.05, 0;
+         	colorMap=0.8745 1 0.1568 0.05	0.8745 1 0.1568 0.05		0.2 1 0 0.05	0 0 0 0.01; 
+		Texture=rune;
+		airdrag=0.93;
+		particleLife=10;
+		particleLifeSpread=7;
+		numParticles=5;
+		particleSpeed=2 i-0.5;
+		particleSpeedSpread=0.25;
+		particleSize=1.0 i0.4;
+		particleSizeSpread=0.25;
+		emitRot=10;
+		emitRotSpread=30;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+	[greenspikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=1 r0.5;
+			length=2 r0.25;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 1.0, 0.15;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=12; 
+	}
+	[purplespikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=0.8 r0.5;
+			length=2.4 r0.25;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 0.01, 0.45;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=12; 
+	}
+	[groundflash]
+	{
+      		flashSize = 10;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 7;
+			color = 0.6, 1, 0.1;
+			air=1;
+     			ground=1;
+      		water=1;
+
+	}
+}

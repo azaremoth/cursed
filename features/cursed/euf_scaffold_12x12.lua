@@ -1,0 +1,24 @@
+local objectname= "scaffold_12x12" 
+local featureDef  =  {
+   name           = "scaffold_12x12",
+   blocking       = false,
+    category         = [[corpses]],
+   damage            = 100000,
+   description       = "scaffold 12x12",
+   energy            = 0,
+   flammable         = 0,
+   nodrawundergray   = true,  
+   footprintX        = 12,
+   footprintZ        = 12,
+   upright           = true,
+   height            = "0",
+   hitdensity        = "100000",
+   metal          = 0,
+   object            = "features/euf_scaffold_12x12.s3o",
+   flammable		= false,
+   reclaimable		= false,
+   autoreclaimable	= false,
+   indestructible	= true,
+   world          = "All Worlds",
+}
+return lowerkeys({[featureDef.name] = featureDef})

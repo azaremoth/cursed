@@ -1,0 +1,188 @@
+[MERMEOTH_FLARE]
+{
+   [BitmapMuzzleFlame]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+         	dir = dir; // don't touch me
+         	colorMap=0.8745 1 0.1568 0.01 0.8745 1 0.1568 0.01 0 0 0 0.01; 
+         	size=8;
+         	length=36;
+         	sizeGrowth=1.7;
+         	ttl=15;
+         	frontOffset=0.5;
+	 	frontTexture=BUILDING_BASE_FRONT;
+	 	sideTexture=BUILDING_BASE_SIDE;
+      }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[groundflash]
+	{
+      		flashSize = 20;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 10;
+			color = 0.6, 1, 0.1;
+			air=1;
+     			ground=1;
+      		water=1;
+
+	}
+
+}
+
+[MERMEOTH_GUNEXPLOSION]
+{
+	[heatcloud]
+   	{
+      		[properties]
+      		{
+      		heat = 15;
+			Texture=firecloud7;
+      		maxheat = 15;
+      		heatFalloff = 0.86;
+      		size = 1.45;
+      		sizeGrowth = 1.1;
+      		sizemod = 0;
+      		sizemodmod = 0;
+      		speed = -0.2 r0.4, -0.2 r0.4, -0.2 r0.4;
+      		pos = 0.1 r-0.2, 0.1 r-0.2, 0.1 r-0.2;
+      		}
+		air=1;
+      	water=1;
+      	ground=1;
+      	count=12;
+	}
+	[Firecloud]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.55;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.2 0.2 0.2 0.1   0.2 0.2 0.2 0.05	0.1 0.1 0.1 0.3	0.0 0.0 0.0 0.01;
+		Texture=heatcloud_greenpurple;
+		airdrag=0.91;
+		particleLife=20;
+		particleLifeSpread=0;
+		numParticles=18;
+		particleSpeed=1.5;
+		particleSpeedSpread=0.5;
+		particleSize=20;
+		particleSizeSpread=10;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+	[spikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-10 r20,-10 r20,-10 r20;
+			width=0.6 r0.3;
+			length=2 r0.5;
+			alpha=0.4 r0.3;
+			alphadecay=0.5 r 0.2;
+			color=0.5, 1.0, 0.15;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=8; 
+	}
+  	[groundflash]
+	{
+      		flashSize = 45;
+      		flashAlpha = 0.5;
+      		circleGrowth = 1.25;
+      		circleAlpha = 0.55;
+      		ttl = 20;
+		color = 0.45, 1, 0.1;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[MERMEOTH_SHELLFLARE]
+{
+	[spikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-15 r30,-15 r30,-15 r30;
+			width=3 r0.5;
+			length=6 r0.25;
+			alpha=0.5 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 1.0, 0.15;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=10; 
+	}
+  	[groundflash]
+	{
+      		flashSize = 30;
+      		flashAlpha = 0.3;
+      		circleGrowth = 1;
+      		circleAlpha = 0.55;
+      		ttl = 10;
+			color = 0.45, 1, 0.1;
+			air=1;
+     			ground=1;
+      		water=1;
+
+	}
+}
+
+[Hover_Watercloud]
+{
+	[Watercloud]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0.25;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.5 0.5 0.5 0.1   0.5 0.5 0.5 0.1	0.0 0.0 0.0 0.01;
+		Texture=hoverfoam;
+		airdrag=0.91;
+		particleLife=25;
+		particleLifeSpread=0;
+		numParticles=10;
+		particleSpeed=1.5;
+		particleSpeedSpread=0.5;
+		particleSize=20;
+		particleSizeSpread=5;
+		emitRot=80;
+		emitRotSpread=30;
+		directional=0;
+		}
+	air=0;
+	water=1;
+	ground=0;
+	count=1;
+	}
+}

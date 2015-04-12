@@ -1,0 +1,155 @@
+#include "basic_spring_stuff.h"
+
+piece base, tank, rtracks1, rtracks2, rtracks3, btracks1, btracks2, btracks3, ltracks1, ltracks2, ltracks3, emit_dust1, emit_dust2, emit_dust3, radar, sensors, topsensor;
+
+static-var statechg_DesiredState, statechg_StateChanging, isMoving;
+
+#define	SIG_AIM1		2
+
+#define DUST			1024+0
+#define EXPLOSION		1025+0
+
+Trackanimation()
+{
+	var TrackSection;
+	TrackSection = 1;
+	show rtracks1;
+	show ltracks1;
+	show btracks1;				
+	hide rtracks2;
+	hide ltracks2;
+	show btracks2;		
+	hide rtracks3;
+	hide ltracks3;	
+	show btracks3;	
+	
+	
+	While(TRUE)
+	{
+		if(isMoving)
+		{
+			If(TrackSection == 4)
+			{
+				TrackSection = 1;
+			}
+			If(TrackSection == 1)
+			{
+				show rtracks1;
+				show ltracks1;
+				show btracks1;			
+				hide btracks2;				
+				hide rtracks2;
+				hide ltracks2;			
+			}
+			If(TrackSection == 2)
+			{
+				show rtracks3;
+				show ltracks3;
+				show btracks3;			
+				hide btracks1;							
+				hide rtracks1;
+				hide ltracks1;					
+			}
+			If(TrackSection == 3)
+			{
+				show rtracks2;
+				show ltracks2;
+				show btracks2;			
+				hide btracks3;							
+				hide rtracks3;
+				hide ltracks3;			
+				emit-sfx DUST from emit_dust1;
+				emit-sfx DUST from emit_dust2;
+				emit-sfx DUST from emit_dust3;					
+			}
+		TrackSection = TrackSection+1;
+		}
+	sleep 30;
+	}
+}
+
+Go()
+{}
+
+Stop()
+{}
+
+InitState()
+{
+	statechg_DesiredState = TRUE;
+	statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+	if( statechg_StateChanging )
+	{
+		statechg_DesiredState = requestedstate;
+		return (0);
+	}
+	statechg_StateChanging = TRUE;
+	currentstate = statechg_DesiredState;
+	statechg_DesiredState = requestedstate;
+	while( statechg_DesiredState != currentstate )
+	{
+		if( statechg_DesiredState == 0 )
+		{
+			call-script Go();
+			currentstate = 0;
+		}
+		if( statechg_DesiredState == 1 )
+		{
+			call-script Stop();
+			currentstate = 1;
+		}
+	}
+	statechg_StateChanging = FALSE;
+}
+
+
+StartMoving()
+{
+	set CLOAKED to 0;
+	isMoving = TRUE;
+}
+
+StopMoving()
+{ 
+	set CLOAKED to 1;
+	isMoving = FALSE;
+}
+
+Create()
+{
+	//////////////////////////////////START BUILD CYCLE
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 100;
+	}
+	spin radar around y-axis speed <60>;
+	spin sensors around y-axis speed <-80>;
+	spin topsensor around y-axis speed <200>;		
+	start-script Trackanimation();
+	call-script InitState();
+}
+
+Activate()
+{
+	start-script RequestState(0);
+}
+
+Deactivate()
+{
+	start-script RequestState(1);
+}
+
+
+Killed(severity, corpsetype)
+{
+		sleep 200;
+		explode radar type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP;
+		explode sensors type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP;
+		emit-sfx EXPLOSION from tank;		
+		return (0);
+}
+

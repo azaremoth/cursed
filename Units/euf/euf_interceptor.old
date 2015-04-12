@@ -1,0 +1,181 @@
+-- UNITDEF -- euf_interceptor --
+--------------------------------------------------------------------------------
+
+local unitName = "euf_interceptor"
+
+--------------------------------------------------------------------------------
+
+local unitDef = {
+  unitname           = "euf_interceptor",
+  name               = "Interceptor",  
+  description        = "Fast anti-aircraft",
+   
+  amphibious          = false,
+  isFighter			 = true,		
+  armortype          = "FLYER",  
+  buildCostEnergy     = 220,
+  buildCostMetal      = 220,
+  buildPic           = "euf_interceptor.png",
+  buildTime           = 220,
+  canAttack           = true,
+  canDropFlare        = true,
+  canFly              = true,
+  canGuard            = true,
+  canMove             = true,
+  canPatrol           = true,
+  canstop             = "1",
+  canSubmerge         = false,
+  category            = "EUF AIR",
+  canCrash            = true,
+  crashDrag 		  = 0.001,  
+  collide             = false,
+  cruiseAlt           = 250,
+  customParams       = {	
+	factionname		 = "imperials",
+    helptext = "The Interceptor is the ideal choice against airborne targets."	
+	},
+  defaultmissiontype  = "VTOL_standby",
+  --  energyMake         = "-2",
+    explodeAs          = "SMALL_AIRPLANE_BLAST_YELLOW",
+    selfDestructAs     = "SMALL_AIRPLANE_BLAST_YELLOW",
+  fireState           = 2,
+  floater             = true,
+  footprintX          = 2,
+  footprintZ          = 2,
+  frontToSpeed        = 0.5,
+  iconType           = "triangle",
+  idleAutoHeal        = 0.01,
+  idleTime           = 400,
+  maneuverleashlength = "1280",
+  mass                = 150,
+  maxAcc              = 0.5,
+  maxDamage           = 600, --was 500
+  maxVelocity         = 13,
+  noChaseCategory     = "LAND",
+  objectName         = "euf_interceptor.s3o",
+  script             = "euf_interceptor.lua",  
+  seismicSignature    = 0,
+  side               = "imperials",
+  sightDistance       = 512,
+  smoothAnim          = true,
+  speedToFront        = 0.5,
+  TEDClass            = [[VTOL]],
+  verticalSpeed      = 10.0,
+  nanoColor          = "0 0 0",
+  showNanoFrame      = false,
+  useSmoothMesh      = true, 
+  sfxtypes = {
+    explosiongenerators = {
+      "custom:SMALL_EXPLOSION_YELLOW",
+      "custom:MLRSRocketTrail",	  
+    },
+  },
+   sounds = {
+    build              = "",
+    canceldestruct     = "",
+    repair             = "",
+    underattack        = "voices_emergency",
+    working            = "",
+    arrived = {
+      "",
+    },
+    cant = {
+      "",
+    },
+    count = {
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+    },
+    ok = {
+      "interceptor_move",
+    },
+    select = {
+      "interceptor_select",
+    },
+  },
+  weapons = {
+    [1]  = {
+      def                = "AALAZER",
+      mainDir            = "0 0 1",
+      maxAngleDif        = 110,
+      onlyTargetCategory = "LAND AIR",
+      badTargetCategory = "LAND",	  
+    },
+    [2]  = {
+     	def                = "AALAZER",
+      mainDir            = "0 0 1",
+      maxAngleDif        = 110,
+      onlyTargetCategory = "LAND AIR",
+      badTargetCategory = "LAND",		  
+    },
+  },
+}
+
+
+--------------------------------------------------------------------------------
+
+local weaponDefs = {
+  AALAZER = {
+    areaOfEffect       = 32,
+    avoidFeature       = false,
+    avoidFriendly      = false,
+    avoidneutral       = "0",
+    burnblow           = true,
+    cegTag             = "MLRSRocketTrail",
+    collideFeature     = true,
+    collideFriendly    = false,
+    collideneutral     = "1",
+    collisionSize      = 8,
+    craterBoost        = 0,
+    craterMult         = 0,
+    cylinderTargeting = 0,
+      energypershot           = 0,
+	explosiongenerator=	"custom:SMALL_EXPLOSION_BLUE",
+    explosionSpeed     = 65536,
+    fireStarter        = 70,
+    impulseBoost       = 0,
+    impulseFactor      = 0,
+    interceptedByShieldType = 1,
+    model              = "Rocket.s3o",
+    name               = " Missile",
+    --noSelfDamage       = true,
+    pitchtolerance     = "500",
+    range              = 450,
+    reloadtime         = 2.5,
+    smokeTrail         = false,
+    soundHit           = "mediumexplosion",
+    soundStart         = "launchrocket",
+    soundHitVolume     = 50,
+    soundStartVolume   = 50,
+    soundStartVolume   = 10,
+    startsmoke         = "0",
+    startVelocity      = 400,
+    targetBorder       = 0,
+    tolerance          = 500,
+    tracks             = true,
+    turnRate           = 24000,
+    turret             = true,
+    weaponAcceleration = 100,
+    weaponTimer        = 3,
+    weaponType         = "MissileLauncher",
+    weaponVelocity     = 600,
+    damage = {
+      default            = 180*0.2,
+      flyer              = 180,
+      heavy              = 180*0.2,
+      light              = 180*0.2,
+    },
+  },
+}
+unitDef.weaponDefs = weaponDefs
+
+
+--------------------------------------------------------------------------------
+
+return lowerkeys({ [unitName] = unitDef })
+
+--------------------------------------------------------------------------------

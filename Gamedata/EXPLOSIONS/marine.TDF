@@ -1,0 +1,210 @@
+[MARINEGUNFLARE]
+{
+   [BitmapMuzzleFlame]
+   {
+	class = CBitmapMuzzleFlame;
+      
+	[properties]
+      	{
+         	dir = dir;
+         	colorMap=1 1 0.66 0.02	1 1 0.66 0.02	0 0 0 0.01; 
+          	size=5;
+          	length=20;
+          	sizeGrowth=1;
+          	ttl=2;
+          	frontOffset=0.1;
+          	sideTexture=yellowgunflare;
+          	frontTexture=yellowflare;
+      	}
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[groundflash]
+	{
+      		flashSize = 10;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 3;
+		color = 1, 1, 0.66;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[MARINEGROUNDFLASH]
+{
+	[groundflash]
+	{
+      	flashSize = 10;
+      	flashAlpha = 0.25;
+      	circleGrowth = 0;
+      	circleAlpha = 0;
+      	ttl = 3;
+		color = 1, 1, 0.66;
+		air=1;
+     	ground=1;
+      	water=1;
+
+	}
+}
+
+[SMALL_BULLET_FX]
+{
+	[particlesystem_flash01_SMALL_BULLET_FX]
+		{
+			class=CExploSpikeProjectile;
+			[properties]
+			{
+			dir=-3 r6,-3 r6,-3 r6;
+			width=0.5 r0.5;
+			length=1 r1;
+			alpha=0.8;
+			alphadecay=0.1 r 0.05;
+			color=1.0,1.0,0.8;
+			}
+		air=1;
+		water=0;
+		ground=1;
+		count=15; 
+		underwater=0;
+		useAirLos=1;
+		alwaysVisible=0;
+		}
+	[groundflash]
+		{
+		flashSize = 2;
+		flashAlpha = 0.5;
+		circleGrowth = 0;
+		circleAlpha = 0;
+		ttl = 15;
+		color = 1.0, 0.8, 0.3;
+		air=1;
+		ground=1;
+		water=0;
+		underwater=0;
+		useAirLos=1;
+		alwaysVisible=0;
+		}
+	[smoke]
+		{
+		[properties]
+				{
+					color = 0.3 r0.4;
+					startSize = 0.4;
+					sizeExpansion = 0.1;
+					ageSpeed=0.025;
+					size = 1;
+					pos = 1 r-1, 1 r-1, 1 r-1;
+					speed=0, 0.1 r0.3, 0;
+				}
+		air=1;
+		water=0;
+		ground=1;
+		count=3;
+		underwater=0;
+		useAirLos=1;
+		alwaysVisible=0;
+		}
+	[particlesystem_dirt_SMALL_BULLET_FX]
+		{
+			class=CSphereParticleSpawner;
+			[properties]
+			{
+			sizeGrowth=-0.005;
+			sizeMod=1.0;
+			pos=0, 1.0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, -0.1, 0;
+			colorMap=1.0 1.0 1.0 1.0    1.0 1.0 1.0 1.0;
+			Texture=dirt;
+			airdrag=1;
+			particleLife=60;
+			particleLifeSpread=10;
+			numParticles=10;
+			particleSpeed=0.5;
+			particleSpeedSpread=0.5;
+			particleSize=0.5;
+			particleSizeSpread=0.5;
+			emitRot=0;
+			emitRotSpread=60;
+			directional=1;
+			}
+		air=0;
+		water=0;
+		ground=1;
+		count=1;
+		underwater=0;
+		useAirLos=1;
+		alwaysVisible=0;
+		}
+	[particlesystem_watersplash_SMALL_BULLET_FX01]
+		{
+			class=CSphereParticleSpawner;
+			[properties]
+			{
+			sizeGrowth=-0.1;
+			sizeMod=1.0;
+			pos=0, 0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, -0.05, 0;
+				colorMap=1.0 1.0 1.0 1.0   0.7 0.9 1.0 0.01  0 0 0 0.01;
+			Texture=randdots;
+			airdrag=0.93;
+			particleLife=45;
+			particleLifeSpread=15;
+			numParticles=30 r20;
+			particleSpeed=1.5;
+			particleSpeedSpread=1.5;
+			particleSize=2;
+			particleSizeSpread=2;
+			emitRot=0;
+			emitRotSpread=45;
+			directional=0;
+			}
+		air=0;
+		water=1;
+		ground=0;
+		count=1;
+		underwater=0;
+		useAirLos=1;
+		alwaysVisible=0;
+		}
+	[particlesystem_watersplash_SMALL_BULLET_FX02]
+		{
+			class=CSphereParticleSpawner;
+			[properties]
+			{
+			sizeGrowth=-0.1;
+			sizeMod=1.0;
+			pos=0, 0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, -0.05, 0;
+			colorMap=1.0 1.0 1.0 1.0   0.7 0.9 1.0 0.01  0 0 0 0.01;
+			Texture=watercloud;
+			airdrag=0.93;
+			particleLife=45;
+			particleLifeSpread=15;
+			numParticles=10 r10;
+			particleSpeed=2;
+			particleSpeedSpread=2;
+			particleSize=1.5;
+			particleSizeSpread=4;
+			emitRot=0;
+			emitRotSpread=5;
+			directional=0;
+			}
+		air=0;
+		water=1;
+		ground=0;
+		count=1;
+		underwater=0;
+		useAirLos=1;
+		alwaysVisible=0;
+	}
+}

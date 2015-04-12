@@ -1,0 +1,24 @@
+[DarkAssembler_Laser]
+{
+   [BitmapMuzzleFlame]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+         dir = dir; // don't touch me
+         colorMap=0.6745 1 0.1568 0.01	0.7745 1 0.1568 0.005	0.6745 1 0.1568 0.01	0.7745 1 0.1568 0.005; 
+         size=30;
+         length=30;
+         sizeGrowth=0;
+         ttl=5;
+         frontOffset=0;
+	   frontTexture=null_texture;
+	   sideTexture=beam2;
+      }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}

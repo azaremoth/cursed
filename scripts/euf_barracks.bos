@@ -1,0 +1,225 @@
+#include "basic_spring_stuff.h"
+
+piece  base, barrack, box1, box2, box3, box4, box5, door, extension, light1, light2, light3, light4, light5, buildpoint;
+
+static-var  statechg_DesiredState, statechg_StateChanging, isbuilding, structureheight, inground;
+
+// Signal definitions
+#define SIG_ACTIVATE			2
+#define EXPLOSION	1024+0
+#define STRUCTUREBUILDING		1025+0
+#define LIGHT		1026+0
+
+
+BuildingAnimation()
+{
+	while (TRUE)
+	{
+		if( isbuilding == 1 )
+		{
+			emit-sfx LIGHT from light1;
+			emit-sfx LIGHT from light3;					
+			sleep 300;
+		}
+		if( isbuilding == 1 )		
+		{
+			emit-sfx LIGHT from light4;	
+			sleep 300;
+		}
+		if( isbuilding == 1 )				
+		{
+			emit-sfx LIGHT from light5;	
+			sleep 300;
+		}	
+	sleep 300;
+	}
+}
+
+activatescr()
+{
+	if( TRUE )
+	{
+		sleep 307;
+	}
+	sleep 17;
+}
+
+deactivatescr()
+{
+	if( TRUE )
+	{
+		sleep 388;
+	}
+	sleep 20;
+}
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from base;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+OpenYard()
+{
+	set YARD_OPEN to 1;
+	while( !get YARD_OPEN )
+	{
+		set BUGGER_OFF to 1;
+		sleep 1500;
+		set YARD_OPEN to 1;
+	}
+	set BUGGER_OFF to 0;
+}
+
+CloseYard()
+{
+	set YARD_OPEN to 0;
+	while( get YARD_OPEN )
+	{
+		set BUGGER_OFF to 1;
+		sleep 1500;
+		set YARD_OPEN to 0;
+	}
+	set BUGGER_OFF to 0;
+}
+
+Go()
+{
+	call-script activatescr();
+	call-script OpenYard();
+	move door to y-axis [-18] speed [40];
+	sleep 500;
+	set INBUILDSTANCE to 1;
+}
+
+Stop()
+{
+	move door to y-axis [0] speed [40];
+	sleep 500;	
+	set INBUILDSTANCE to 0;
+	call-script CloseYard();
+	call-script deactivatescr();
+}
+
+InitState()
+{
+	statechg_DesiredState = TRUE;
+	statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+	if( statechg_StateChanging )
+	{
+		statechg_DesiredState = requestedstate;
+		return (0);
+	}
+	statechg_StateChanging = TRUE;
+	currentstate = statechg_DesiredState;
+	statechg_DesiredState = requestedstate;
+	while( statechg_DesiredState != currentstate )
+	{
+		if( statechg_DesiredState == 0 )
+		{
+			call-script Go();
+			currentstate = 0;
+		}
+		if( statechg_DesiredState == 1 )
+		{
+			call-script Stop();
+			currentstate = 1;
+		}
+	}
+	statechg_StateChanging = FALSE;
+}
+
+Create()
+{
+	//////////////////////////////////START BUILD CYCLE
+	structureheight	= (get UNIT_HEIGHT)*(-1);
+	move barrack to y-axis structureheight now;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		move barrack to y-axis (structureheight * (get BUILD_PERCENT_LEFT)/100) speed [10];
+		emit-sfx STRUCTUREBUILDING from base;
+		sleep 100;
+	}
+	move barrack to y-axis 0 speed [10];
+	/////////////////////////////////END BUILD CYCLE
+
+	call-script InitState();
+	start-script SmokeUnit();
+	start-script BuildingAnimation();
+}
+
+QueryNanoPiece(piecenum)
+{	piecenum = base;	}
+
+Activate()
+{
+	signal SIG_ACTIVATE;
+	start-script RequestState(0);
+}
+
+Deactivate()
+{
+	signal SIG_ACTIVATE;
+	set-signal-mask SIG_ACTIVATE;
+	set-signal-mask 0;
+	start-script RequestState(1);
+}
+
+StartBuilding()
+{	
+	isbuilding = 1;
+}
+
+StopBuilding()
+{
+	isbuilding = 0;
+	sleep 200;
+}
+
+QueryBuildInfo(piecenum)
+{	piecenum = buildpoint;	}
+
+SweetSpot(piecenum)
+{	piecenum = buildpoint;	}
+
+Killed(severity, corpsetype, smoketype)
+{
+	if (severity <= 50)
+	{
+		corpsetype = 1;
+		emit-sfx EXPLOSION from barrack;
+		return (corpsetype);
+	}
+	else
+	{
+		corpsetype = 2;
+		emit-sfx EXPLOSION from barrack;
+		return (corpsetype);
+	}
+	return(0);
+}

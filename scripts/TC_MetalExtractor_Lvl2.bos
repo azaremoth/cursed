@@ -1,0 +1,270 @@
+#include "basic_spring_stuff.h"
+
+piece  base, stator, rotator, beam_1, beam_2, beam_3, beam_4, pylon_on, pylon_off, center_on, center_off, gate_r, gate_l;
+
+static-var  Static_Var_1, Static_Var_2, Static_Var_3, statechg_DesiredState, statechg_StateChanging, isoff, structureheight, inground;
+
+#define STRUCTUREBUILDING		1024+0
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		
+		
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from stator;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+
+LoopBeam()
+{
+	while (TRUE)
+	{
+		if(!isoff)
+			{
+			show center_on;
+			hide center_off;
+			show beam_1;
+			hide beam_2;
+			hide beam_3;
+			hide beam_4;	
+			sleep 200;
+			hide beam_1;
+			show beam_2;
+			sleep 200;
+			hide beam_2;
+			show beam_3;
+			sleep 200;		
+			hide beam_3;
+			show beam_4;
+			sleep 200;	
+			hide beam_4;
+			show beam_3;
+			sleep 200;
+			hide beam_3;
+			show beam_2;
+			sleep 150;
+			}
+		
+		if(isoff)	
+			{
+			show center_off;
+			hide center_on;			
+			hide beam_1;
+			hide beam_2;
+			hide beam_3;
+			hide beam_4;		
+			}		
+		sleep 50;
+	}
+}
+
+
+LoopPylons()
+{
+	while (TRUE)
+	{
+		if(!isoff)
+			{		
+			show pylon_on;
+			hide pylon_off;
+			sleep 3000;
+			show pylon_off;		
+			hide pylon_on;
+			sleep 200;
+			}
+		if(isoff)	
+			{			
+			show pylon_off;
+			hide pylon_on;
+			}		
+		sleep 50;
+	}
+}
+
+Go()
+{
+	isoff = TRUE;
+	hide beam_1;
+	hide beam_2;
+	hide beam_3;
+	hide beam_4;
+	show pylon_on;
+	hide pylon_off;
+	turn gate_l to z-axis <-60.000000> speed <13.000000>;
+	turn gate_r to z-axis <60.000000> speed <13.000000>;
+	wait-for-turn gate_l around z-axis;
+	wait-for-turn gate_r around z-axis;
+	move beam_4 to y-axis [20.000000] speed [10.000000];
+	wait-for-move beam_4 along y-axis;
+	show beam_1;
+	hide beam_2;
+	hide beam_3;
+	hide beam_4;
+	isoff = FALSE;
+				
+		if( Static_Var_1 == 0 )
+		{
+		isoff = TRUE;
+		hide beam_1;
+		hide beam_2;
+		hide beam_3;
+		hide beam_4;
+		}
+		
+	spin rotator around y-axis speed Static_Var_1 accelerate Static_Var_2;
+	set ARMORED to 0;
+}
+
+HitByWeapon(Func_Var_1, Func_Var_2)
+{
+	signal 2;
+	set-signal-mask 2;
+	set ACTIVATION to 0;
+	sleep 12000;
+	set ACTIVATION to 1;
+}
+
+Stop()
+{
+	isoff = TRUE;
+	show pylon_off;
+	hide pylon_on;
+	stop-spin rotator around y-axis decelerate Static_Var_3;
+	wait-for-turn rotator around y-axis;
+	hide beam_1;
+	hide beam_2;
+	hide beam_3;
+	hide beam_4;
+	move beam_4 to y-axis [0.000000] speed [16.000000];
+	wait-for-move beam_4 along y-axis;
+	turn gate_l to z-axis <0.000000> speed <13.000000>;
+	turn gate_r to z-axis <0.000000> speed <13.000000>;
+	set ARMORED to 1;
+}
+
+
+InitState()
+{
+	statechg_DesiredState = TRUE;
+	statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+	if( statechg_StateChanging )
+	{
+		statechg_DesiredState = requestedstate;
+		return (0);
+	}
+	statechg_StateChanging = TRUE;
+	currentstate = statechg_DesiredState;
+	statechg_DesiredState = requestedstate;
+	while( statechg_DesiredState != currentstate )
+	{
+		if( statechg_DesiredState == 0 )
+		{
+			call-script Go();
+			currentstate = 0;
+		}
+		if( statechg_DesiredState == 1 )
+		{
+			call-script Stop();
+			currentstate = 1;
+		}
+	}
+	statechg_StateChanging = FALSE;
+}
+
+Create()
+{
+	turn base to y-axis (rand (0 , 65536)) now;
+	
+	Static_Var_1 = 0;
+	Static_Var_2 = 30;
+	Static_Var_3 = 182;
+	isoff = TRUE;
+	hide beam_1;
+	hide beam_2;
+	hide beam_3;
+	hide beam_4;
+	hide center_on;
+	hide pylon_on;
+	dont-shade rotator;
+	dont-cache rotator;
+	dont-shade beam_1;
+	dont-cache beam_1;
+	dont-shade beam_2;
+	dont-cache beam_2;
+	dont-shade beam_3;
+	dont-cache beam_3;
+	dont-shade beam_4;
+	dont-cache beam_4;
+
+	//////////////////////////////////START BUILD CYCLE
+	structureheight	= (get UNIT_HEIGHT)*(-1);
+	move stator to y-axis structureheight now;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		move stator to y-axis (structureheight * (get BUILD_PERCENT_LEFT)/100) speed [10];
+		emit-sfx STRUCTUREBUILDING from base;
+		sleep 50;
+	}
+	move stator to y-axis 0 speed [10];
+	/////////////////////////////////END BUILD CYCLE
+
+	call-script InitState();
+	start-script SmokeUnit();
+	start-script LoopBeam();
+	start-script LoopPylons();
+	set ARMORED to 1;
+}
+
+Activate()
+{
+	start-script RequestState(0);
+}
+
+Deactivate()
+{
+	start-script RequestState(1);
+}
+
+SweetSpot(piecenum)
+{
+	piecenum = stator;
+}
+
+SetSpeed(Func_Var_1)
+{
+	Static_Var_1 = Func_Var_1 * 45;
+}
+
+Killed(severity, corpsetype)
+{
+	corpsetype = 1;
+	explode rotator type FALL | SHATTER | EXPLODE_ON_HIT;
+	return (0);
+}

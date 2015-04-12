@@ -1,0 +1,83 @@
+[BUILDING_BASE]
+{
+   [BitmapMuzzleFlame]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+         dir = dir; // don't touch me
+         colorMap=0.8745 1 0.1568 0.01 0.8745 1 0.1568 0.01 0.2 1 0 0.01 0 0 0 0.01; 
+         size=8;
+         length=36;
+         sizeGrowth=1.7;
+         ttl=20;
+         frontOffset=0.5;
+	 frontTexture=BUILDING_BASE_FRONT;
+	 sideTexture=BUILDING_BASE_SIDE;
+      }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[spikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-5 r10,-5 r10,-5 r10;
+			width=10;
+			length=5;
+			alpha=1;
+			alphadecay=0.18;
+			color=0.4, 1.0, 0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=4; 
+	}
+}
+
+[BUILDING_BASE_LVL2]
+{
+	[heatcloud]
+	{
+      		[properties]
+      		{
+      		heat = 15;
+		Texture=greenflare;
+      		maxheat = 15;
+      		heatFalloff = 0.86;
+      		size = 2;
+      		sizeGrowth = 1.1;
+      		sizemod = 0;
+      		sizemodmod = 0;
+      		speed = -0.3 r0.4, -0.3 r0.4, -0.3 r0.4;
+      		pos = 0.05 r-0.1, 0.05 r-0.1, 0.05 r-0.1;
+      		}
+		air=1;
+      	water=0;
+      	ground=1;
+      	count=12;
+	} 
+ 	[spikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-15 r20,-15 r20,-15 r20;
+			width=2.5;
+			length=8;
+			alpha=0.8;
+			alphadecay=0.1;
+			color = 0.45, 1, 0.1;
+
+		}
+	air=1;
+	water=1;
+	ground=1;
+    	count=10; 
+	}
+}

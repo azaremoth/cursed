@@ -1,0 +1,148 @@
+[SCORPION_CEG]
+{
+   [BitmapMuzzleFlame]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+         dir = dir; // don't touch me
+         colorMap=1 1 1 0.01 	1 0.4 1 0.01 	1 0.2 0.5 0.01 	0 0 0 0.01; 
+         size=2;
+         length=2;
+         sizeGrowth=2;
+         ttl=15;
+         frontOffset=0;
+		frontTexture=whitering;
+		sideTexture=null_texture;
+      }
+   water=1;
+   air=1;
+   underwater=0;
+   ground=1;
+   count=1;
+   }
+    [Bubbles]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+         dir = dir; // don't touch me
+         colorMap=1 1 1 0.01 	1 1 1 0.01	1 1 1 0.01 	0 0 0 0.01; 
+         size=1.5;
+         length=1.5;
+         sizeGrowth=0;
+         ttl=30;
+         frontOffset=0;
+		frontTexture=water;
+		sideTexture=null_texture;
+      }
+   water=0;
+   air=0;
+   underwater=1;
+   ground=0;
+   count=1;
+   }  
+   [groundflash]
+	{
+	ttl = 20;
+	flashSize = 20;
+	flashAlpha = 0.1;
+	circleGrowth = 0;
+	circleAlpha = 0;
+    color = 1, 1, 1;
+   	air=1;
+    ground=1;
+    water=1;
+	}
+}
+
+[ScorpionFlare]
+{
+   [BitmapMuzzleFlame]
+   {
+	class = CBitmapMuzzleFlame;
+      
+	[properties]
+      	{
+         	dir = dir;
+         	colorMap=1 1 1 0.01	1 1 1 0.01	0 0 0 0.01; 
+          	size=5;
+          	length=10;
+          	sizeGrowth=1;
+          	ttl=3;
+          	frontOffset=0.1;
+          	sideTexture=flashside;
+          	frontTexture=flash1;
+      	}
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[groundflash]
+	{
+      		flashSize = 10;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 7;
+			color = 1, 1, 1;
+			air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[ScorpionGroundflash]
+{
+	[groundflash]
+	{
+      		flashSize = 30;
+      		flashAlpha = 0.1;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 7;
+			color = 1, 1, 1;
+			air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[ScorpionImpact]
+{
+  [spikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-15 r20,-15 r20,-15 r20;
+			width=1.5;
+			length=4;
+			alpha=0.8;
+			alphadecay=0.1;
+			color = 1, 1, 1;
+
+		}
+		air=1;
+		water=1;
+		ground=1;
+    	count=10; 
+	}
+  [groundflash]
+	{
+      		flashSize = 5;
+      		flashAlpha = 0.5;
+      		circleGrowth = 1;
+      		circleAlpha = 0.33;
+      		ttl = 100;
+			color = 1, 1, 1;
+			air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}

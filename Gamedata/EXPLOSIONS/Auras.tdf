@@ -1,0 +1,215 @@
+[AURA_FOCUS]
+{
+	[Healing]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0.2;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.05, 0;
+         	colorMap=0.68 0.31 0.70 0.05		0.68 0.31 0.70 0.05	1.0 0.0 1.0 0.05	0 0 0 0.01; 
+		Texture=focus;
+		airdrag=0.93;
+		particleLife=25;
+		particleLifeSpread=15;
+		numParticles=4;
+		particleSpeed=2 i-0.5;
+		particleSpeedSpread=0.25;
+		particleSize=1.0 i0.4;
+		particleSizeSpread=0.25;
+		emitRot=10;
+		emitRotSpread=30;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+}
+
+[AURA_HEAL]
+{
+	[Healing]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0.2;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.05, 0;
+         	colorMap=1 0 0 0.05	1 0 0 0.05	0 0 0 0.01; 
+		Texture=priesthealing;
+		airdrag=0.93;
+		particleLife=25;
+		particleLifeSpread=15;
+		numParticles=4;
+		particleSpeed=2 i-0.5;
+		particleSpeedSpread=0.25;
+		particleSize=1.0 i0.4;
+		particleSizeSpread=0.25;
+		emitRot=10;
+		emitRotSpread=30;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+}
+
+[AURA_FRENZY]
+{
+	[Runes]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0.2;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.05, 0;
+         	colorMap=0.8745 1 0.1568 0.05	0.8745 1 0.1568 0.05		0.2 1 0 0.05	0 0 0 0.01; 
+		Texture=rune;
+		airdrag=0.93;
+		particleLife=25;
+		particleLifeSpread=15;
+		numParticles=4;
+		particleSpeed=2 i-0.5;
+		particleSpeedSpread=0.25;
+		particleSize=1.0 i0.4;
+		particleSizeSpread=0.25;
+		emitRot=10;
+		emitRotSpread=30;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+}
+
+[AURA_CURSE]
+{
+	[Smokecloud]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.2 0.2 0.2 0.1   0.2 0.2 0.2 0.05	0.1 0.1 0.1 0.3	0.1 0.1 0.1 0.3	0.0 0.0 0.0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=40;
+		particleLifeSpread=0;
+		numParticles=4;
+		particleSpeed=2.5;
+		particleSpeedSpread=1.0;
+		particleSize=20;
+		particleSizeSpread=10;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+}
+
+[AURA_HERO]
+{
+   [groundflash]
+	{
+	ttl = 50;
+	flashSize = 35;
+	flashAlpha = 0.5;
+	circleGrowth = 0.2;
+	circleAlpha = 0.1;
+	color=1.0, 1.0, 0.5;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}
+
+
+[AURA_FOCUS_CASTING]
+{
+   [groundflash]
+	{
+	ttl = 50;
+	flashSize = 200;
+	flashAlpha = 0.1;
+	circleGrowth = 0.0;
+	circleAlpha = 0.0;
+	color=0.68, 0.31, 0.70;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}
+
+[AURA_HEAL_CASTING]
+{
+   [groundflash]
+	{
+	ttl = 50;
+	flashSize = 250;
+	flashAlpha = 0.1;
+	circleGrowth = 0.0;
+	circleAlpha = 0.0;
+	color=0.75, 0, 0;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}
+
+[AURA_FRENZY_CASTING]
+{
+   [groundflash]
+	{
+	ttl = 50;
+	flashSize = 200;
+	flashAlpha = 0.1;
+	circleGrowth = 0.0;
+	circleAlpha = 0.0;
+	color=0.5, 1.0, 0.16;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}
+
+[AURA_CURSE_CASTING]
+{
+   [groundflash]
+	{
+	ttl = 50;
+	flashSize = 350;
+	flashAlpha = 0.1;
+	circleGrowth = 0.0;
+	circleAlpha = 0.0;
+	color=0.1, 0.0, 1.0;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}
+
+[AURA_HERO_CASTING]
+{ }

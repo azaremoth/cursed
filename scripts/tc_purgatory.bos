@@ -1,0 +1,337 @@
+#include "basic_spring_stuff.h"
+
+piece base, center, head, gun1, gun2, leg1, leg2, leg3, leg4, soulgem, petal1, petal2, petal3, petal4, radkasten1, radkasten2, radkasten3, radkasten4, rolle11, rolle12, rolle21, rolle22, rolle31, rolle32, rolle41, rolle42, gunturner, biggunbase, biggun, biggunplate, emitgun1, emitgun2, emitartygun, rotator_emitartygun;
+
+static-var moving, gun, sleeptime, deployed, isdeploying, canemit, MOVEANIMATIONSPEED;
+
+#define	SIG_AIM1		2
+#define SIG_AIM2		4
+#define SIG_AIM3		6
+
+#define DEPLOYDUST		1024+0
+#define TRACKDUST		1025+0
+#define DEATHEXPLOSION	1026+0
+#define ARTYFLARE		1027+0
+#define ARTYAIM			1028+0
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+// Walk Motion
+Walkscript()
+{
+	while(1)
+	{
+
+		if (moving) 
+			{
+			MOVEANIMATIONSPEED = ((GET MAX_SPEED)/7);
+			
+			spin rolle11 around x-axis speed MOVEANIMATIONSPEED accelerate <100>;
+			spin rolle12 around x-axis speed MOVEANIMATIONSPEED accelerate <100>;
+			spin rolle21 around x-axis speed MOVEANIMATIONSPEED accelerate <100>;
+			spin rolle22 around x-axis speed MOVEANIMATIONSPEED accelerate <100>;			
+			spin rolle31 around x-axis speed MOVEANIMATIONSPEED accelerate <100>;
+			spin rolle32 around x-axis speed MOVEANIMATIONSPEED accelerate <100>;			
+			spin rolle41 around x-axis speed MOVEANIMATIONSPEED accelerate <100>;
+			spin rolle42 around x-axis speed MOVEANIMATIONSPEED accelerate <100>;			
+			emit-sfx TRACKDUST from rolle12;
+			emit-sfx TRACKDUST from rolle22;
+			emit-sfx TRACKDUST from rolle32;
+			emit-sfx TRACKDUST from rolle42;
+			}
+
+		if (!moving) 
+			{			
+			stop-spin rolle11 around x-axis decelerate <200>;
+			stop-spin rolle12 around x-axis decelerate <200>;
+			stop-spin rolle21 around x-axis decelerate <200>;
+			stop-spin rolle22 around x-axis decelerate <200>;
+			stop-spin rolle31 around x-axis decelerate <200>;
+			stop-spin rolle32 around x-axis decelerate <200>;
+			stop-spin rolle41 around x-axis decelerate <200>;
+			stop-spin rolle42 around x-axis decelerate <200>;
+			}
+		sleep 50;
+	}
+}
+
+lua_Freeze()
+{
+}
+
+lua_UnFreeze()
+{
+}
+
+lua_PurgatoryTransformCommandReactivate()
+{
+}
+
+lua_PurgatoryTransformCommand()
+{
+}
+
+TransformPurgatory()
+		{	deployed = deployed*(-1);	}
+
+Aiminationscript()
+{
+	while(1)
+	{
+	if (canemit)	
+		{
+			emit-sfx ARTYAIM from soulgem;
+		}
+	sleep 10;
+	}
+}
+
+
+
+Deployscript()
+{
+	while(1)
+	{
+		if (deployed == 1)
+		{
+		isdeploying = TRUE;
+		call-script lua_Freeze();
+		moving = FALSE;
+
+//		turn leg1 to x-axis <-18> speed <50>;
+//		turn leg2 to x-axis <-18> speed <50>;
+//		turn leg3 to x-axis <18> speed <50>;
+//		turn leg4 to x-axis <18> speed <50>;
+//		turn radkasten1 to x-axis <18> speed <50>;
+//		turn radkasten2 to x-axis <18> speed <50>;
+//		turn radkasten3 to x-axis <-18> speed <50>;
+//		turn radkasten4 to x-axis <-18> speed <50>;
+	
+		turn head to y-axis <0> speed <200>;
+		turn head to x-axis <10> speed <50>;
+	
+//		move base to y-axis [-2] speed [10];
+	
+		turn biggunbase to x-axis <90> speed <50>;
+		move biggunbase to z-axis [-3] speed [10];
+		wait-for-turn biggunbase around x-axis;
+		wait-for-move biggunbase along z-axis;
+
+		spin biggunplate around z-axis speed <10> accelerate <50>;
+		turn petal1 to x-axis <50> speed <30>;
+		turn petal2 to x-axis <-50> speed <30>;
+		turn petal3 to y-axis <-50> speed <30>;
+		turn petal4 to y-axis <50> speed <30>;
+
+		sleep 500;
+		call-script lua_PurgatoryTransformCommandReactivate();
+		isdeploying = FALSE;
+		canemit = TRUE;
+		call-script lua_CreateLightMe(soulgem, 96, 255, 0, 68);
+		}
+
+		if (deployed != 1)
+		{
+		isdeploying = TRUE;
+		stop-spin biggunplate around z-axis decelerate <50>;
+
+		turn gunturner to y-axis <0> speed <160>;
+		turn biggun to x-axis <0> speed <160>;
+
+		turn petal1 to x-axis <0> speed <30>;
+		turn petal2 to x-axis <0> speed <30>;
+		turn petal3 to y-axis <0> speed <30>;
+		turn petal4 to y-axis <0> speed <30>;
+
+//		turn leg1 to x-axis <0> speed <50>;
+//		turn leg2 to x-axis <0> speed <50>;
+//		turn leg3 to x-axis <0> speed <50>;
+//		turn leg4 to x-axis <0> speed <50>;
+//		turn radkasten1 to x-axis <0> speed <50>;
+//		turn radkasten2 to x-axis <0> speed <50>;
+//		turn radkasten3 to x-axis <0> speed <50>;
+//		turn radkasten4 to x-axis <0> speed <50>;
+	
+		turn head to y-axis <0> speed <200>;
+		turn head to x-axis <0> speed <50>;
+
+//		move base to z-axis [2] speed [10];
+	
+		turn biggunbase to x-axis <0> speed <50>;
+		move biggunbase to z-axis [0] speed [10];
+		wait-for-turn biggunbase around x-axis;
+		wait-for-move biggunbase along z-axis;
+
+		call-script lua_UnFreeze();
+
+		sleep 500;
+		call-script lua_PurgatoryTransformCommandReactivate();
+		canemit = FALSE;
+		call-script lua_DestroyLightMe();
+		isdeploying = FALSE;
+		}
+
+	sleep 500;
+	}
+}
+
+Create()
+{
+//	turn biggunbase to y-axis <180> now;
+	moving = FALSE;
+	deployed = -1;
+	isdeploying = FALSE;
+	gun = 1;
+	start-script Walkscript();
+	start-script Aiminationscript();
+	start-script Deployscript();
+	call-script lua_PurgatoryTransformCommand();
+	spin rotator_emitartygun around z-axis speed <200> accelerate <400>;
+}
+
+StartMoving()
+{ moving = TRUE; }
+
+StopMoving()
+{ moving = FALSE; }
+
+SweetSpot (piecenum)
+{	piecenum = base;	}
+
+
+//weapon 1 -----------------------------------------------------------------
+RestoreAfterDelayWeapon1()
+{
+	sleep 5000;
+    gun = 0;
+}
+
+QueryWeapon1 (piecenum)
+{	piecenum = emitartygun;	}
+
+
+AimFromWeapon1 (piecenum)
+{	piecenum = biggun;	}
+
+AimWeapon1 (heading, pitch)
+{
+	if (isdeploying == 1)
+	{
+	    return (0);
+	}
+	if (deployed != 1)
+	{
+	    return (0);
+	}
+	if (deployed == 1)
+	{
+		signal SIG_AIM1;
+		set-signal-mask SIG_AIM1;
+	    return (1);
+	}
+}
+
+FireWeapon1()
+{
+	emit-sfx ARTYFLARE from emitartygun;
+	return (0);
+}
+
+
+
+//weapon 2 -----------------------------------------------------------------
+
+RestoreAfterDelayWeapon2()
+{
+	sleep 5000;
+	turn head to y-axis <0> speed <55>;
+	turn head to x-axis <0> speed <30>;
+    gun = 0;
+}
+
+QueryWeapon2(piecenum)
+{
+	piecenum = emitgun1;
+}
+
+AimFromWeapon2(piecenum)
+{
+	piecenum = head;
+}
+
+AimWeapon2(heading, pitch)
+{
+	if (isdeploying == 1)
+	{
+	    return (0);
+	}
+	if (deployed == 1)
+		{
+	    return (0);
+	    }
+	if (deployed != 1)
+		{
+		signal SIG_AIM2;
+		set-signal-mask SIG_AIM2;
+		turn head to y-axis heading speed <160>;
+		turn head to x-axis <0> - pitch speed <160>;
+	    wait-for-turn head around y-axis;
+		wait-for-turn head around x-axis;
+	    start-script RestoreAfterDelayWeapon2(); 
+	    return (1);
+	    }
+}
+
+FireWeapon2()
+{
+		sleep 200;
+		return(1);
+}
+
+//weapon 3 -----------------------------------------------------------------
+
+QueryWeapon3(piecenum)
+{
+	piecenum = emitgun2;
+}
+
+AimFromWeapon3(piecenum)
+{
+	piecenum = emitgun2;
+}
+
+AimWeapon3(heading, pitch)
+{
+	if (isdeploying == 1)
+	{
+	    return (0);
+	}
+	if (deployed == 1)
+		{
+	    return (0);
+	    }
+	if (deployed != 1)
+		{
+		signal SIG_AIM3;
+		set-signal-mask SIG_AIM3;
+	    return (1);
+	    }
+}
+
+FireWeapon3()
+{
+		sleep 200;
+		return(1);
+}
+
+//-----------------------------------------------------------------
+	
+Killed(severity, corpsetype)
+{
+	emit-sfx DEATHEXPLOSION from head;
+	emit-sfx DEATHEXPLOSION from soulgem;
+	sleep 500;
+	emit-sfx DEATHEXPLOSION from soulgem;
+	return (0);
+}

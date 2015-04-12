@@ -1,0 +1,150 @@
+#include "basic_spring_stuff.h"
+
+
+piece  base, turretbase, turret, sleeve, missilepack1, missilepack2, emit1, emit2, dust1, dust2, emit_groundflash1, emit_groundflash2;
+
+static-var  gun_1, structureheight, inground;
+
+// Signal definitions
+#define SIG_AIM					2
+#define DUST					1024+0
+#define Small_Explosion			1025+0
+#define STRUCTUREBUILDING		1026+0
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from base;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+Create()
+{
+    gun_1 = 0;
+	//////////////////////////////////START BUILD CYCLE
+	structureheight	= (get UNIT_HEIGHT)*(-1);
+	move turretbase to y-axis structureheight now;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		move turretbase to y-axis (structureheight * (get BUILD_PERCENT_LEFT)/100) speed [10];
+		emit-sfx STRUCTUREBUILDING from base;
+		sleep 100;
+	}
+	move turretbase to y-axis 0 speed [10];
+	/////////////////////////////////END BUILD CYCLE
+
+	turn sleeve to x-axis <-45> speed <100>;
+	spin turret around y-axis speed <50> accelerate <100>;
+	start-script SmokeUnit();
+}
+
+//Weaponstuff
+
+RestoreAfterDelay()
+{
+	sleep 4000;
+	turn sleeve to x-axis <-45> speed <100>;
+	spin turret around y-axis speed <50> accelerate <100>;	
+	return (0);
+}
+
+AimWeapon1(heading, pitch)
+{
+	stop-spin turret around y-axis decelerate <500>;	
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	turn turret to y-axis heading speed <350>;
+	turn sleeve to x-axis <0> - pitch speed <250>;
+	wait-for-turn turret around y-axis;
+	wait-for-turn sleeve around x-axis;
+	start-script RestoreAfterDelay(); 
+	return (1);
+}
+
+FireWeapon1()
+{
+	if( gun_1 == 0 )
+	{
+		move missilepack1 to z-axis [-1] speed [100];
+		emit-sfx DUST from emit1;
+		emit-sfx DUST from dust1;		
+		sleep 100;
+		gun_1 = 1;
+		return(1);
+	}
+	if( gun_1 == 1 )
+	{
+		move missilepack2 to z-axis [-1] speed [100];
+		emit-sfx DUST from emit2;
+		emit-sfx DUST from dust2;			
+		sleep 100;
+		gun_1 = 0;
+		return(1);
+	}
+}
+
+AimFromWeapon1(piecenum)
+{
+	piecenum = sleeve;
+}
+
+QueryWeapon1(piecenum)
+{
+	if( gun_1 == 0 )
+	{
+		piecenum = emit1;
+	}
+	if( gun_1 == 1 )
+	{
+		piecenum = emit2;
+	}
+}
+
+
+SweetSpot(piecenum)
+{
+	piecenum = base;
+}
+
+
+Killed(severity, corpsetype, smoketype)
+{
+	if (severity <= 50)
+	{
+		corpsetype = 1;
+		explode missilepack1 type FALL | EXPLODE_ON_HIT;
+		explode missilepack2 type FALL | EXPLODE_ON_HIT;
+		emit-sfx Small_Explosion from sleeve;
+		return (corpsetype);
+	}
+	else
+	{
+		corpsetype = 2;
+		explode missilepack1 type FALL | SMOKE | FIRE | EXPLODE_ON_HIT;
+		explode missilepack2 type FALL | SMOKE | FIRE | EXPLODE_ON_HIT;
+		emit-sfx Small_Explosion from sleeve;
+		return (corpsetype);
+	}
+	return(0);
+}

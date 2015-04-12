@@ -1,0 +1,261 @@
+#include "basic_spring_stuff.h"
+
+piece  base, ground, sphere, lowerarm, upperarm, finger1, finger2, finger3, finger4, finger5, rotator1, rotator2, rotator3, skull1, skull2, skull3, chain1, chain2, chain3, emit;
+
+static-var gun, fired1, fired2, fired3, structureheight, inground;
+
+
+// Signal definitions
+#define SIG_AIM					2
+#define BLACKFIRE				1024+0
+#define Small_Explosion_Green	1025+0
+#define STRUCTUREBUILDING		1026+0
+
+#define SKULLHIDETIME 2000
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from sphere;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+Restorefirepoint1()
+{
+	sleep SKULLHIDETIME;
+	show skull1;	
+	fired1 = 0;
+}
+
+Restorefirepoint2()
+{
+	sleep SKULLHIDETIME;
+	show skull2;	
+	fired2 = 0;
+}
+
+Restorefirepoint3()
+{
+	sleep SKULLHIDETIME;
+	show skull3;	
+	fired3 = 0;
+}
+
+
+Blackfire()
+{
+	while (TRUE)
+	{
+		if (fired1 == 0)
+		{
+			emit-sfx BLACKFIRE from skull1;
+		}
+		if (fired2 == 0)
+		{
+			emit-sfx BLACKFIRE from skull2;
+		}		
+		if (fired3 == 0)
+		{
+			emit-sfx BLACKFIRE from skull3;
+		}		
+	sleep 10;
+	}
+}
+
+RotateRotator1()
+{
+	while (TRUE)
+	{
+	turn rotator1 to z-axis <20> speed <100>;
+	wait-for-turn rotator1 around z-axis;
+	turn rotator1 to z-axis <-60> speed <100>;
+	wait-for-turn rotator1 around z-axis;	
+	}
+}
+
+RotateRotator2()
+{
+	while (TRUE)
+	{
+	turn rotator2 to z-axis <30> speed <150>;
+	wait-for-turn rotator1 around z-axis;
+	turn rotator2 to z-axis <-30> speed <150>;
+	wait-for-turn rotator1 around z-axis;	
+	}
+}
+
+RotateRotator3()
+{
+	while (TRUE)
+	{
+	turn rotator3 to z-axis <40> speed <50>;
+	wait-for-turn rotator1 around z-axis;
+	turn rotator3 to z-axis <-40> speed <50>;
+	wait-for-turn rotator1 around z-axis;	
+	}
+}
+
+RotateEmit()
+{
+	while (TRUE)
+	{
+	turn emit to x-axis <-30> speed <50>;
+	wait-for-turn emit around x-axis;
+	turn emit to x-axis <-120> speed <50>;
+	wait-for-turn emit around x-axis;	
+	}
+}
+
+Create()
+{
+	gun = 0;
+	fired1 = 0;
+	fired2 = 0;
+	fired3 = 0;
+	hide skull1;
+	hide skull2;
+	hide skull3;		
+
+	//////////////////////////////////START BUILD CYCLE
+	structureheight	= (get UNIT_HEIGHT)*(-2);
+	move ground to y-axis structureheight now;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		move ground to y-axis (structureheight * (get BUILD_PERCENT_LEFT)/100) speed [10];
+		emit-sfx STRUCTUREBUILDING from base;
+		sleep 50;
+	}
+	move ground to y-axis 0 speed [10];
+	/////////////////////////////////END BUILD CYCLE
+	
+	show skull1;
+	show skull2;
+	show skull3;
+	spin rotator1 around y-axis speed <150> accelerate <100>;
+	spin rotator2 around y-axis speed <100> accelerate <150>;
+	spin rotator3 around y-axis speed <200> accelerate <750>;
+
+	start-script RotateEmit();
+	start-script RotateRotator1();
+	start-script RotateRotator2();
+	start-script RotateRotator3();
+	start-script Blackfire();
+	start-script SmokeUnit();
+	set ARMORED to 1;
+}
+
+//Weapon 1
+
+AimWeapon1(heading, pitch)
+{
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	return (1);
+}
+
+FireWeapon1()
+{	
+	if (gun == 0)
+	{
+		hide skull1;
+		fired1 = 1;
+		call-script Restorefirepoint1();		
+		sleep 200;
+		gun = 1;	
+		return (1);
+	}
+	if (gun == 1)
+	{
+		hide skull2;
+		fired2 = 1;
+		call-script Restorefirepoint2();
+		sleep 200;
+		gun = 2;
+		return (1);
+	}		
+	if (gun == 2)
+	{
+		hide skull3;
+		fired3 = 1;
+		call-script Restorefirepoint3();
+		sleep 200;
+		gun = 0;
+		return (1);
+	}	
+}
+
+AimFromWeapon1(piecenum)
+{	
+	piecenum = emit;
+}
+
+QueryWeapon1(piecenum)
+{	
+	if (gun == 0)
+	{
+		piecenum = skull1;
+	}
+	if (gun == 1)
+	{
+		piecenum = skull2;
+	}		
+	if (gun == 2)
+	{
+		piecenum = skull3;
+	}	
+}
+
+SweetSpot(piecenum)
+{	piecenum = rotator1;	}
+
+Killed(severity, corpsetype, smoketype)
+{
+	hide skull1;
+	hide skull2;
+	hide skull3;
+	fired1 = 1;
+	fired2 = 1;
+	fired3 = 1;
+	if (severity <= 50)
+	{
+		corpsetype = 1;
+		turn upperarm to z-axis <20> speed <40>;
+		wait-for-turn upperarm around z-axis;
+		turn upperarm to z-axis <40> speed <70>;
+		wait-for-turn upperarm around z-axis;		
+		turn upperarm to z-axis <120> speed <100>;	
+		wait-for-turn upperarm around z-axis;	
+		emit-sfx Small_Explosion_Green from sphere;
+		turn upperarm to z-axis <170> speed <150>;	
+		wait-for-turn upperarm around z-axis;			
+		emit-sfx Small_Explosion_Green from base;
+		return (corpsetype);
+	}
+	else
+	{
+		corpsetype = 2;
+		emit-sfx Small_Explosion_Green from sphere;
+		return (corpsetype);
+	}
+	return(0);
+}

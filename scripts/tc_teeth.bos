@@ -1,0 +1,19 @@
+#include "basic_spring_stuff.h"
+
+piece  base, teeth, emit_fx;
+
+#define STRUCTUREBUILDING		1024+0
+
+lua_CreateTeeth(Func_Var_1)
+{}
+
+Create()
+{
+	hide teeth;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		emit-sfx STRUCTUREBUILDING from base;
+		sleep 10;
+	}
+	call-script lua_CreateTeeth();
+}

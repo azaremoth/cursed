@@ -1,0 +1,545 @@
+[BURROWING]
+{
+	[Smokecloud]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.28 0.17 0.04 0.5	0 0 0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=30;
+		particleLifeSpread=5;
+		numParticles=15;
+		particleSpeed=1.2;
+		particleSpeedSpread=0.4;
+		particleSize=10;
+		particleSizeSpread=5;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+	[Smokecloud2]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.2 0.2 0.2 0.1   0.2 0.2 0.2 0.1	0.0 0.0 0.0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=30;
+		particleLifeSpread=0;
+		numParticles=8;
+		particleSpeed=1.5;
+		particleSpeedSpread=0.5;
+		particleSize=15;
+		particleSizeSpread=5;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+}
+
+[BURROWING_BIGGER]
+{
+	[Smokecloud]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.28 0.17 0.04 0.5	0 0 0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=30;
+		particleLifeSpread=5;
+		numParticles=15;
+		particleSpeed=2.4;
+		particleSpeedSpread=0.8;
+		particleSize=20;
+		particleSizeSpread=10;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+	[Smokecloud2]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.2 0.2 0.2 0.1   0.2 0.2 0.2 0.1	0.0 0.0 0.0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=30;
+		particleLifeSpread=0;
+		numParticles=8;
+		particleSpeed=3;
+		particleSpeedSpread=1;
+		particleSize=20;
+		particleSizeSpread=10;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+}
+
+[BURROWING_BIGGEST]
+{
+	[Smokecloud]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.28 0.17 0.04 0.5	0 0 0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=30;
+		particleLifeSpread=5;
+		numParticles=20;
+		particleSpeed=2.4;
+		particleSpeedSpread=0.8;
+		particleSize=35;
+		particleSizeSpread=18;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+	[Smokecloud2]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.2 0.2 0.2 0.1   0.2 0.2 0.2 0.1	0.0 0.0 0.0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=30;
+		particleLifeSpread=0;
+		numParticles=12;
+		particleSpeed=3;
+		particleSpeedSpread=1;
+		particleSize=35;
+		particleSizeSpread=18;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+}
+
+[UNBURROWING]
+{
+	[Smokecloud]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.28 0.17 0.04 0.5	0 0 0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=30;
+		particleLifeSpread=5;
+		numParticles=6;
+		particleSpeed=1.2;
+		particleSpeedSpread=0.4;
+		particleSize=10;
+		particleSizeSpread=5;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+	[Smokecloud2]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.14 0.08 0.02 0.25	0 0 0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=30;
+		particleLifeSpread=5;
+		numParticles=6;
+		particleSpeed=1.2;
+		particleSpeedSpread=0.4;
+		particleSize=10;
+		particleSizeSpread=5;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+	[dirtcloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizeGrowth=0.5;
+			sizeMod=1.0;
+			pos=0, 1, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			colorMap=0.28 0.17 0.04 0.5	0 0 0 0.01;
+			Texture=dirtplosion;
+			airdrag=0.8;
+			particleLife=20;
+			particleLifeSpread=5;
+			numParticles=10;
+			particleSpeed=0;
+			particleSpeedSpread=5;
+			particleSize=0.75;
+			particleSizeSpread=0.5;
+			emitRot=0;
+			emitRotSpread=45;
+			directional=1;
+		}
+		air=1;
+		water=0;
+		ground=1;
+		count=1;
+	}
+	[dirtcloud2]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizeGrowth=0.5;
+			sizeMod=1.0;
+			pos=0, 1, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			colorMap=0.14 0.08 0.02 0.25	0 0 0 0.01;
+			Texture=dirtplosion;
+			airdrag=0.8;
+			particleLife=20;
+			particleLifeSpread=5;
+			numParticles=10;
+			particleSpeed=0;
+			particleSpeedSpread=5;
+			particleSize=0.7;
+			particleSizeSpread=0.25;
+			emitRot=0;
+			emitRotSpread=60;
+			directional=1;
+		}
+		air=1;
+		water=0;
+		ground=1;
+		count=1;
+	}
+	[dirtflying]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0; 
+		emitVector=0, 1, 0;
+	      gravity=0, -0.4, 0;  
+		colorMap=0.28 0.17 0.04 0.5	0 0 0 0.01;
+		Texture=flamespark;
+		airdrag=0.91;
+		particleLife=20;
+		particleLifeSpread=0;
+		numParticles=18;
+		particleSpeed=5;
+		particleSpeedSpread=1.5;
+		particleSize=1;
+		particleSizeSpread=1;
+		emitRot=30;
+		emitRotSpread=20;
+		directional=1;
+		alwaysVisible=1;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+	[dirtflying2]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0; 
+		emitVector=0, 1, 0;
+	      gravity=0, -0.4, 0;  
+		colorMap=0.14 0.08 0.02 0.25	0 0 0 0.01;
+		Texture=flamespark;
+		airdrag=0.91;
+		particleLife=20;
+		particleLifeSpread=0;
+		numParticles=20;
+		particleSpeed=6;
+		particleSpeedSpread=1.5;
+		particleSize=1.3;
+		particleSizeSpread=1;
+		emitRot=45;
+		emitRotSpread=30;
+		directional=1;
+		alwaysVisible=1;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+}
+
+[UNBURROWING_BIGGER]
+{
+	[Smokecloud]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.28 0.17 0.04 0.5	0 0 0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=30;
+		particleLifeSpread=5;
+		numParticles=15;
+		particleSpeed=2.4;
+		particleSpeedSpread=0.8;
+		particleSize=20;
+		particleSizeSpread=10;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+	[Smokecloud2]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.2 0.2 0.2 0.1   0.2 0.2 0.2 0.1	0.0 0.0 0.0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.91;
+		particleLife=30;
+		particleLifeSpread=0;
+		numParticles=8;
+		particleSpeed=3;
+		particleSpeedSpread=1;
+		particleSize=20;
+		particleSizeSpread=10;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+	[dirtcloud]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizeGrowth=0.5;
+			sizeMod=1.0;
+			pos=0, 1, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			colorMap=0.28 0.17 0.04 0.5	0 0 0 0.01;
+			Texture=dirtplosion;
+			airdrag=0.8;
+			particleLife=20;
+			particleLifeSpread=5;
+			numParticles=10;
+			particleSpeed=0;
+			particleSpeedSpread=5;
+			particleSize=1;
+			particleSizeSpread=0.75;
+			emitRot=0;
+			emitRotSpread=45;
+			directional=1;
+		}
+		air=1;
+		water=0;
+		ground=1;
+		count=1;
+	}
+	[dirtcloud2]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizeGrowth=0.5;
+			sizeMod=1.0;
+			pos=0, 1, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			colorMap=0.14 0.08 0.02 0.25	0 0 0 0.01;
+			Texture=dirtplosion;
+			airdrag=0.8;
+			particleLife=20;
+			particleLifeSpread=5;
+			numParticles=10;
+			particleSpeed=0;
+			particleSpeedSpread=5;
+			particleSize=1;
+			particleSizeSpread=0.75;
+			emitRot=0;
+			emitRotSpread=60;
+			directional=1;
+		}
+		air=1;
+		water=0;
+		ground=1;
+		count=1;
+	}
+	[dirtflying]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0; 
+		emitVector=0, 1, 0;
+	      gravity=0, -0.4, 0;  
+		colorMap=0.28 0.17 0.04 0.5	0 0 0 0.01;
+		Texture=flamespark;
+		airdrag=0.91;
+		particleLife=20;
+		particleLifeSpread=0;
+		numParticles=18;
+		particleSpeed=5;
+		particleSpeedSpread=1.5;
+		particleSize=1.5;
+		particleSizeSpread=1;
+		emitRot=30;
+		emitRotSpread=20;
+		directional=1;
+		alwaysVisible=1;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+	[dirtflying2]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0; 
+		emitVector=0, 1, 0;
+	      gravity=0, -0.4, 0;  
+		colorMap=0.14 0.08 0.02 0.25	0 0 0 0.01;
+		Texture=flamespark;
+		airdrag=0.91;
+		particleLife=20;
+		particleLifeSpread=0;
+		numParticles=20;
+		particleSpeed=6;
+		particleSpeedSpread=1.5;
+		particleSize=1.7;
+		particleSizeSpread=1;
+		emitRot=45;
+		emitRotSpread=30;
+		directional=1;
+		alwaysVisible=1;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	}
+}

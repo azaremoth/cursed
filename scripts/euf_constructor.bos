@@ -1,0 +1,199 @@
+#include "basic_spring_stuff.h"
+
+piece base, eye, panels, beamer, tail1, tail2, tail3, tail4, tail5, tail6, emit, emit2, emit_groundflash;
+
+static-var moving;
+static-var BUILDTARGET;
+static-var ISBUILDING;
+static-var statechg_DesiredState;
+static-var statechg_StateChanging;
+static-var isaiming;
+static-var inbunker;
+
+#define	SIG_AIM1			2
+#define	SIG_AIM2			4
+#define EXPLOSION			1024+0
+#define GUNFLARE			1025+0
+#define GROUNDFLASH			1026+0
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+Upanddown()
+{
+	while( TRUE )
+	{
+	move base to y-axis [2] speed [2];
+	wait-for-move base along y-axis;
+	move base to y-axis [3] speed [1.5];
+	wait-for-move base along y-axis;
+	move base to y-axis [2] speed [1.5];
+	wait-for-move base along y-axis;
+	move base to y-axis [0] speed [2];
+	wait-for-move base along y-axis;
+	}
+}
+
+// Builder Stuff //////////////////////////
+StartBuilding(Func_Var_1)
+{
+	sleep 200;
+
+	BUILDTARGET = Func_Var_1;
+	ISBUILDING = 1;
+}
+
+StopBuilding()
+{
+	ISBUILDING = 0;
+}
+
+BuildingAnimation()
+{
+	while (TRUE)
+	{
+		if(ISBUILDING)
+		{
+			turn tail3 to y-axis BUILDTARGET speed <150>;
+			turn tail6 to x-axis <0> speed <200>;
+			set INBUILDSTANCE to 1;		
+		}
+		if(ISBUILDING == 0)
+		{
+			turn tail3 to y-axis <0> speed <150>;
+			set INBUILDSTANCE to 0;
+		}
+	sleep 200;
+	}
+}
+
+QueryNanoPiece(piecenum)
+{	piecenum = emit;	}
+
+///////////////////////////////////////////
+
+//weapon 1 -----------------------------------------------------------------
+
+RestoreAfterDelay()
+{
+	sleep 3000;
+	turn tail4 to y-axis <0> speed <200>;
+	turn tail6 to x-axis <0> speed <200>;	
+//	turn eye to y-axis <0> speed <200>;
+//	turn eye to x-axis <0> speed <200>;	
+	isaiming = FALSE;
+}
+
+AimWeapon1(eyeing, pitch)
+{
+	if (ISBUILDING)
+		{	return(0);	}
+	if (inbunker == 1)
+		{	return(0); }		
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	isaiming = TRUE;
+	turn tail4 to y-axis eyeing speed <160.000000>;
+	turn tail5 to x-axis <0.000000> - pitch speed <160.000000>;
+    wait-for-turn tail4 around y-axis;
+	wait-for-turn tail6 around x-axis;	
+	sleep 200;
+    start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+FireWeapon1()
+{
+	emit-sfx GUNFLARE from emit;
+	emit-sfx GROUNDFLASH from emit_groundflash;
+	call-script lua_CreateLightMe(emit, 44, 255, 255, 96);
+	sleep 125;
+	call-script lua_DestroyLightMe();
+	return(1);
+}
+
+//AimFromWeapon
+
+AimFromWeapon1(piecenum)
+{
+		piecenum = tail3;
+}
+
+QueryWeapon1(piecenum)
+{
+		piecenum = emit;
+}
+
+Create()
+{
+	moving = FALSE;
+	isaiming = FALSE;
+	inbunker = 0;
+	spin panels around z-axis speed <60>;
+	start-script Upanddown();
+	start-script BuildingAnimation();
+}
+
+StartMoving()
+{ moving = TRUE; }
+
+StopMoving()
+{ moving = FALSE; }
+
+SweetSpot (piecenum)
+{	piecenum = base;	}
+
+setSFXoccupy (level)
+{
+   if (level > 0)
+   {  
+   		inbunker = 0;
+   		show eye;
+		show panels;
+		show beamer;
+		show tail1;
+		show tail2;
+		show tail3;
+		show tail4;
+		show tail5;
+   	}
+   if (level < 0)
+   {  
+   		inbunker = 0;
+   		show eye;
+		show panels;
+		show beamer;
+		show tail1;
+		show tail2;
+		show tail3;
+		show tail4;
+		show tail5;
+   	}
+   if (level == 0)
+   {  
+   		inbunker = 1;
+   		hide eye;
+		hide panels;
+		hide beamer;
+		hide tail1;
+		hide tail2;
+		hide tail3;
+		hide tail4;
+		hide tail5;
+   }
+}
+
+HitByWeaponId()
+{
+	if (inbunker)
+		{	return (1);	}
+	else return (100);
+}
+
+Killed(severity, corpsetype)
+{
+		sleep 400;
+		emit-sfx EXPLOSION from eye;
+		emit-sfx EXPLOSION from beamer;
+		return (0);
+}

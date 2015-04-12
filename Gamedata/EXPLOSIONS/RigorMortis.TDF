@@ -1,0 +1,73 @@
+[RM_CIRCLE]
+{	[Blitze]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0.1;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=0.1 0.3 0.8 0.01  	0.1 0.3 1 0.01		0.1 0.3 0.8 0.01 		0.2 0.2 0.9 0.01 	0 0 0 0.01;
+		Texture=lightningball;
+		airdrag=0.95;
+		particleLife=13;
+		particleLifeSpread=6;
+		numParticles=18;
+		particleSpeed=3;
+		particleSpeedSpread=1;
+		particleSize=25;
+		particleSizeSpread=10;
+		emitRot=0;
+		emitRotSpread=180;
+		directional=1;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+    	[firepoof]
+   	{
+   	class=CSimpleParticleSystem;
+      		[properties]
+      		{
+      		Texture=firecloud2;
+		colorMap=0.1 0.3 0.8 0.01  	0.1 0.3 1 0.01		0.1 0.3 0.8 0.01 		0.2 0.2 0.9 0.01 	0 0 0 0.01;
+      		pos       = 0, 5, 0;
+      		gravity      = 0, -0.005, 0;
+      		emitVector   = 0, 1, 0;
+       		emitRot      = 60;
+       		emitRotSpread   = 32;
+      		sizeGrowth   = 0.8;
+      		sizeMod      = 1.0;
+      		airdrag         = 0.8;
+      		particleLife      = 7;
+      		particleLifeSpread   = 16;
+      		numParticles      = 24;
+      		particleSpeed      = 20;
+      		particleSpeedSpread   = 1;
+      		particleSize      = 44;
+      		particleSizeSpread   = 0;
+      		directional      = 0;
+      		useAirLos      = 0;
+      		}
+	air=1;
+	ground=1;
+	water=1;
+	count=1;
+	}
+	[groundflash]
+	{
+      		flashSize = 350;
+      		flashAlpha = 0.5;
+      		circleGrowth = 5;
+      		circleAlpha = 0.8;
+      		ttl = 20;
+		color = 0.1, 0.3, 0.8;
+		air=1;
+     		ground=1;
+      		water=1;
+	}
+}

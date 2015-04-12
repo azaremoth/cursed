@@ -1,0 +1,325 @@
+[SUMMONDRAGON]
+{
+	[greenspikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=2 r1.0;
+			length=6 r2.0;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 1.0, 0.15;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=6; 
+	}
+	[purplespikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=2 r1.0;
+			length=8 r3.0;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 0.01, 0.45;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=6; 
+	}
+}
+
+[SUMMONDRAGON2]
+{
+   [BOOM]
+   {
+   class=heatcloud;
+      
+      [properties]
+            {
+      texture=firecloud2;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 0.2;
+
+            size = 100;
+            sizeGrowth = 0.9;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   	air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+   [firepoof2]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=firecloud2;
+
+      colorMap   = 0.2 1.0 0.2 0.04   0.7 0.7 0.2 0.01   0.5 0.01 0.45 0.01;
+
+      pos       = 0, 5, 0;
+      gravity      = 0, -0.005, 0;
+      emitVector   = 0, 1, 0;
+      emitRot      = 60;
+      emitRotSpread   = 32;
+
+      sizeGrowth   = 0.8;
+      sizeMod      = 1.0;
+
+      airdrag         = 0.8;
+      particleLife      = 7;
+      particleLifeSpread   = 16;
+      numParticles      = 16;
+      particleSpeed      = 16;
+      particleSpeedSpread   = 1;
+      particleSize      = 44;
+      particleSizeSpread   = 0;
+
+      directional      = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+	[sparks]
+	{
+	    class=CExpGenSpawner;
+		[properties]
+		{
+		pos=0 r150, 0 r150, 0 r150; 
+		delay=0 r66;	
+		explosionGenerator=custom:SUMMONDRAGON; 
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=60;
+	}
+}
+
+[DRAGONFLAME]
+{
+   [BOOM]
+   {
+   class=heatcloud;
+      [properties]
+            {
+            texture=firecloud3;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 0.4;
+            size = 15;
+            sizeGrowth = -0.5;
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 0, 0;
+            }
+	air=1;
+	water=1;
+	ground=1;
+	count=4;
+   }
+   [groundflash]
+	{
+	ttl = 20;
+	flashSize = 13;
+	flashAlpha = 0.1;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      	color = 0.2, 1.0, 0.1;
+   	air=1;
+      	ground=1;
+     	 water=1;
+	}
+}
+
+[DRAGONFLAMEEXPLOSION]
+{
+[particlesystem_flash01_BIG_EXPLOSION_FX01]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+		dir=-25 r50,-25 r50,-25 r50;
+		width=1 r3;
+		length=1 r0.25;
+		alpha=0.8;
+		alphadecay=0.05 r 0.05;
+		color=1.0,0.5 r0.5,0.3 r0.5;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=45;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=0;
+	}
+   	[groundflash]
+	{
+		ttl = 20;
+		flashSize = 100;
+		flashAlpha = 0.5;
+		circleGrowth = 0;
+		circleAlpha = 0;
+	      	color = 0.2, 1.0, 0.1;
+	   	air=1;
+	      	ground=1;
+     		water=1;
+	}
+   	[groundflash]
+	{
+		ttl = 90;
+		flashSize = 150;
+		flashAlpha = 0.3;
+		circleGrowth = 0;
+		circleAlpha = 0;
+	      	color = 0.2, 1.0, 0.1;
+	   	air=1;
+	      	ground=1;
+     		water=1;
+	}
+	[particlesystem_flame_slow_BIG_EXPLOSION_FX01]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0.05;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0.01, 0;
+		colorMap=1.0 1.0 1.0 0.02     1.0 1.0 1.0 0.02    0.5 0.5 0.5 0.02   0.0 0.0 0.0 0.01;
+		Texture=firecloud2;
+		airdrag=0.91;
+		particleLife=68;
+		particleLifeSpread=23;
+		numParticles=45;
+		particleSpeed=2.5;
+		particleSpeedSpread=2.5;
+		particleSize=15;
+		particleSizeSpread=15;
+		emitRot=0;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=0;
+	}
+	[particlesystem_flame_fast_BIG_EXPLOSION_FX01]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.15;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0.01, 0;
+		colorMap=1.0 1.0 0.8 0.01     1.0 0.8 0.25 0.05    0.0 0.0 0.0 0.01;
+		Texture=firecloud2;
+		airdrag=0.91;
+		particleLife=23;
+		particleLifeSpread=23;
+		numParticles=45;
+		particleSpeed=2.5;
+		particleSpeedSpread=5;
+		particleSize=5.25;
+		particleSizeSpread=2.5;
+		emitRot=0;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=0;
+	}
+	[particlesystem_watersplash_BIG_EXPLOSION_FX01]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.1;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.05, 0;
+      		colorMap=1.0 1.0 1.0 0.1   0.7 0.9 1.0 0.01  0 0 0 0.01;
+		Texture=randdots;
+		airdrag=0.93;
+		particleLife=34;
+		particleLifeSpread=13;
+		numParticles=80 r40;
+		particleSpeed=3;
+		particleSpeedSpread=4;
+		particleSize=2;
+		particleSizeSpread=2;
+		emitRot=0;
+		emitRotSpread=45;
+		directional=0;
+		}
+	air=0;
+	water=1;
+	ground=0;
+	count=1;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=0;
+	}
+	[particlesystem_watersplash_BIG_EXPLOSION_FX02]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.05, 0;
+      		colorMap=0.5 1.0 1.0 0.01   0.8 1.0 1.0 0.01  0 0 0 0.01;
+		Texture=firecloud2;
+		airdrag=0.93;
+		particleLife=34;
+		particleLifeSpread=13;
+		numParticles=1;
+		particleSpeed=20 i-0.5;
+		particleSpeedSpread=0.25;
+		particleSize=2 i0.5;
+		particleSizeSpread=0.25;
+		emitRot=5;
+		emitRotSpread=0;
+		directional=0;
+		}
+	air=0;
+	water=1;
+	ground=0;
+	count=40;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=0;
+	}
+}

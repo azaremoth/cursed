@@ -1,0 +1,175 @@
+[Flamethrower] {
+	usedefaultexplosions=0;
+	[flames] {
+		class=CExpGenSpawner;
+		[properties]{
+			pos=-16 r32, r16, -16 r32;
+			delay=4 r16;
+			explosionGenerator=custom:Flamethrower_Flames;
+		}
+		unit=1;
+		ground=1;
+		count=4;
+	}
+	
+	[fire] {
+		class=CSimpleParticleSystem;
+		[properties]{
+			sizeGrowth=0.75;
+			sizeMod=1;
+			pos=-4 r8, 0, -4 r8;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			colorMap=1 1 1 0.1  0 0 0 0;
+			Texture=fireflame;
+			airdrag=0.75;
+			particleLife=32;
+			particleLifeSpread=16;
+			numParticles=1;
+			particleSpeed=0;
+			particleSpeedSpread=4;
+			particleSize=0.5;
+			particleSizeSpread=1;
+			emitRot=80;
+			emitRotSpread=5;
+			directional=0;
+			alwaysVisible=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=2;
+	}
+	
+	[groundflash] {
+		flashsize=64;
+		flashalpha=0.0625;
+		circlegrowth=10;
+		circlealpha=0;
+		ttl=48;
+		color=1,0.5,0.1;
+	}
+}
+
+[Flamethrower_Flames] {
+	[flames] {
+		class=CSimpleParticleSystem;
+		[properties]{
+			sizeGrowth=0;
+			sizeMod=1;
+			pos=0, 0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0.1, 0;
+			colorMap=1 1 1 0.2  0 0 0 0.3  0 0 0 0;
+			Texture=fireflame;
+			airdrag=0.95;
+			particleLife=24;
+			particleLifeSpread=16;
+			numParticles=1;
+			particleSpeed=0;
+			particleSpeedSpread=1;
+			particleSize=1;
+			particleSizeSpread=8;
+			emitRot=0;
+			emitRotSpread=5;
+			directional=0;
+			alwaysVisible=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=1;
+	}
+}
+
+[FlameTrail] {
+	[smoke] {
+		class=CSimpleParticleSystem;
+		[properties]{
+			sizeGrowth=1.2;
+			sizeMod=1;
+			pos=0, 0, 0;
+			emitVector=dir;
+			gravity=0, 0, 0;
+			colorMap=1 0.8 0 0.08 	0.4 0.4 0.4 0.05 0.35 0.15 0.15 0.05	0 0 0 0;
+			Texture=firetrail;
+			airdrag=0.5;
+			particleLife=3;
+			particleLifeSpread=2;
+			numParticles=1;
+			particleSpeed=i1;
+			particleSpeedSpread=0.5;
+			particleSize=8;
+			particleSizeSpread=4;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=1;
+			alwaysVisible=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=2;
+	}
+   [groundflash]
+	{
+	ttl = 5;
+	flashSize = 30;
+	flashAlpha = 0.05;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      	color = 1, 0.86, 0.22;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}
+
+[FLAMERGROUNDFLASH]
+{
+   [groundflash]
+	{
+	ttl = 5;
+	flashSize = 45;
+	flashAlpha = 0.3;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      	color = 1, 0.86, 0.22;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}
+
+[JUMPBURST]
+{
+	[Smokecloud]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.33;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0, 0;
+		colorMap=1 0.86 0.22 0.1	1 0.86 0.22 0.1		1 0.4 0.0 0.1	0.33 0.33 0.33 0.1		0.0 0.0 0.0 0.01;
+		Texture=blacksmoke;
+		airdrag=0.4;
+		particleLife=8;
+		particleLifeSpread=0;
+		numParticles=18;
+		particleSpeed=1.5;
+		particleSpeedSpread=0.5;
+		particleSize=3;
+		particleSizeSpread=2;
+		emitRot=45;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+}

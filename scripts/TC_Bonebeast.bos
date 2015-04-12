@@ -1,0 +1,281 @@
+#include "basic_spring_stuff.h"
+
+piece base, pelvis, chest, neck, head, turret, gun, flleg1, flleg2, flfoot, frleg1, frleg2, frfoot, rlleg1, rlleg2, rlfoot, rrleg1, rrleg2, rrfoot, emit_gun, emit_summon, emit_groundflash;
+
+static-var moving, MOVEANIMATIONSPEED;
+
+#define	SIG_AIM1		2
+
+#define SUMMONING		1024+0
+#define GREYCLOUD		1025+0
+#define FLARE_FX		1026+0
+#define GROUNDFLASH		1027+0
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+// Walk Motion
+Walkscript()
+{
+	while( TRUE )
+	{
+    	if(moving) 
+   		{    
+			MOVEANIMATIONSPEED = (GET MAX_SPEED)/5;
+			turn base to x-axis <8> speed MOVEANIMATIONSPEED*7.5;
+     
+   	     	turn flleg1 to x-axis <30> speed MOVEANIMATIONSPEED*1.8;
+			turn flleg2 to x-axis <0> speed MOVEANIMATIONSPEED*1.8;
+			turn flfoot to x-axis <-25> speed MOVEANIMATIONSPEED*2.6;
+			
+			turn frleg1 to x-axis <-20> speed MOVEANIMATIONSPEED*2.6;
+			turn frleg2 to x-axis <-10> speed MOVEANIMATIONSPEED*2.6;
+			turn frfoot to x-axis <30> speed MOVEANIMATIONSPEED*2.6;
+			
+			turn rrleg1 to x-axis <40> speed MOVEANIMATIONSPEED*1.44;
+			turn rrleg2 to x-axis <-20> speed MOVEANIMATIONSPEED*1.8;
+			turn rrfoot to x-axis <-50> speed MOVEANIMATIONSPEED*2.6;
+			
+			turn rlleg1 to x-axis <-20> speed MOVEANIMATIONSPEED*2.6;
+			turn rlleg2 to x-axis <-10> speed MOVEANIMATIONSPEED*2.6;
+			turn rlfoot to x-axis <30> speed MOVEANIMATIONSPEED*2.6;
+			
+			turn chest to z-axis <5> speed MOVEANIMATIONSPEED*0.25;
+
+			turn flleg1 to z-axis <-5> speed MOVEANIMATIONSPEED*0.25;
+			turn frleg1 to z-axis <-5> speed MOVEANIMATIONSPEED*0.25;
+			turn rlleg1 to z-axis <-5> speed MOVEANIMATIONSPEED*0.25;
+			turn rrleg1 to z-axis <-5> speed MOVEANIMATIONSPEED*0.25;
+			move base to y-axis [0.7] speed MOVEANIMATIONSPEED*50;			
+
+			turn head to x-axis <-10> speed MOVEANIMATIONSPEED*0.25;
+
+			wait-for-turn frleg1 around x-axis;
+			wait-for-turn rrleg1 around x-axis;
+			wait-for-turn frleg2 around x-axis;
+			wait-for-turn rrleg2 around x-axis;
+   		} 
+   		if(moving) 
+   		{ 
+			turn flleg1 to x-axis <-10> speed MOVEANIMATIONSPEED*2;
+			turn flleg2 to x-axis <-45> speed MOVEANIMATIONSPEED*1.8;
+			turn flfoot to x-axis <30> speed MOVEANIMATIONSPEED*1.8;
+			
+			turn frleg1 to x-axis <40> speed MOVEANIMATIONSPEED*1.8;
+			turn frleg2 to x-axis <-65> speed MOVEANIMATIONSPEED*1.8;
+			turn frfoot to x-axis <35> speed MOVEANIMATIONSPEED*1.8;
+			
+			turn rrleg1 to x-axis <-10> speed MOVEANIMATIONSPEED*2;
+			turn rrleg2 to x-axis <-45> speed MOVEANIMATIONSPEED*1.8;
+			turn rrfoot to x-axis <30> speed MOVEANIMATIONSPEED*1.8;
+			
+			turn rlleg1 to x-axis <40> speed MOVEANIMATIONSPEED*1.8;
+			turn rlleg2 to x-axis <-65> speed MOVEANIMATIONSPEED*1.8;
+			turn rlfoot to x-axis <35> speed MOVEANIMATIONSPEED*1.8;
+			
+			move base to y-axis [0] speed MOVEANIMATIONSPEED*50;
+			turn head to x-axis <10> speed MOVEANIMATIONSPEED*0.25;
+
+			wait-for-turn frleg1 around x-axis;
+			wait-for-turn rrleg1 around x-axis;
+			wait-for-turn frleg2 around x-axis;
+			wait-for-turn rrleg2 around x-axis;
+   		} 
+
+		if (moving)
+		{
+			turn frleg1 to x-axis <30> speed MOVEANIMATIONSPEED*1.8;
+			turn frleg2 to x-axis <-20> speed MOVEANIMATIONSPEED*1.8;
+			turn frfoot to x-axis <-50> speed MOVEANIMATIONSPEED*2.6;
+			
+			turn flleg1 to x-axis <-20> speed MOVEANIMATIONSPEED*2.6;
+			turn flleg2 to x-axis <0> speed MOVEANIMATIONSPEED*2.6;
+			turn flfoot to x-axis <30> speed MOVEANIMATIONSPEED*2.6;
+						
+			turn rlleg1 to x-axis <40> speed MOVEANIMATIONSPEED*1.43;
+			turn rlleg2 to x-axis <10> speed MOVEANIMATIONSPEED*1.8;
+			turn rlfoot to x-axis <0> speed MOVEANIMATIONSPEED*2.6;
+			
+			turn rrleg1 to x-axis <-20> speed MOVEANIMATIONSPEED*2.6;
+			turn rrleg2 to x-axis <-10> speed MOVEANIMATIONSPEED*2.6;
+			turn rrfoot to x-axis <30> speed MOVEANIMATIONSPEED*2.6;
+
+			turn chest to z-axis <-5> speed MOVEANIMATIONSPEED*0.25;
+
+			turn flleg1 to z-axis <5> speed MOVEANIMATIONSPEED*0.25;
+			turn frleg1 to z-axis <5> speed MOVEANIMATIONSPEED*0.25;
+			turn rlleg1 to z-axis <5> speed MOVEANIMATIONSPEED*0.25;
+			turn rrleg1 to z-axis <5> speed MOVEANIMATIONSPEED*0.25;
+			move base to y-axis [0.7] speed MOVEANIMATIONSPEED*50;
+			turn head to x-axis <-10> speed MOVEANIMATIONSPEED*0.25;
+
+			wait-for-turn frleg1 around x-axis;
+			wait-for-turn rrleg1 around x-axis;
+			wait-for-turn frleg2 around x-axis;
+			wait-for-turn rrleg2 around x-axis;
+        }
+
+		if (moving)
+		{
+			turn frleg1 to x-axis <-10> speed MOVEANIMATIONSPEED*2;
+			turn frleg2 to x-axis <-45> speed MOVEANIMATIONSPEED*1.8;
+			turn frfoot to x-axis <30> speed MOVEANIMATIONSPEED*1.8;
+			
+			turn flleg1 to x-axis <40> speed MOVEANIMATIONSPEED*1.8;
+			turn flleg2 to x-axis <-65> speed MOVEANIMATIONSPEED*1.8;
+			turn flfoot to x-axis <35> speed MOVEANIMATIONSPEED*1.8;
+						
+			turn rlleg1 to x-axis <-10> speed MOVEANIMATIONSPEED*2;
+			turn rlleg2 to x-axis <-45> speed MOVEANIMATIONSPEED*1.8;
+			turn rlfoot to x-axis <30> speed MOVEANIMATIONSPEED*1.8;
+			
+			turn rrleg1 to x-axis <40> speed MOVEANIMATIONSPEED*1.8;
+			turn rrleg2 to x-axis <-65> speed MOVEANIMATIONSPEED*1.8;
+			turn rrfoot to x-axis <35> speed MOVEANIMATIONSPEED*1.8;
+
+			move base to y-axis [0] speed MOVEANIMATIONSPEED*50;
+			turn head to x-axis <10> speed MOVEANIMATIONSPEED*0.25;
+
+			wait-for-turn frleg1 around x-axis;
+			wait-for-turn rrleg1 around x-axis;
+			wait-for-turn frleg2 around x-axis;
+			wait-for-turn rrleg2 around x-axis;
+        }
+
+		if (!moving)
+		{
+			turn base to x-axis <0> speed MOVEANIMATIONSPEED*3.75;
+
+			turn frleg1 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+			turn frleg2 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+			turn frfoot to x-axis <0> speed MOVEANIMATIONSPEED*2;
+			
+			turn flleg1 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+			turn flleg2 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+			turn flfoot to x-axis <0> speed MOVEANIMATIONSPEED*2;
+						
+			turn rlleg1 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+			turn rlleg2 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+			turn rlfoot to x-axis <0> speed MOVEANIMATIONSPEED*2;
+			
+			turn rrleg1 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+			turn rrleg2 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+			turn rrfoot to x-axis <0> speed MOVEANIMATIONSPEED*2;
+
+			move base to y-axis [0] speed MOVEANIMATIONSPEED*50;
+			turn head to x-axis <0> speed MOVEANIMATIONSPEED*0.25;
+ 			
+ 			sleep 300;
+        }
+
+	sleep 1;
+	}
+}
+
+
+Create()
+{
+	MOVEANIMATIONSPEED = (GET MAX_SPEED)/5;
+	moving = FALSE;
+	turn emit_summon to x-axis <-90> now;
+
+	//START BUILD CYCLE
+	while( get BUILD_PERCENT_LEFT )
+	{
+			emit-sfx SUMMONING from emit_summon;
+			sleep 300;
+	}
+	//END BUILD CYCLE
+	
+	start-script Walkscript();
+}
+
+StartMoving()
+{ moving = TRUE; }
+
+StopMoving()
+{ moving = FALSE; }
+
+SweetSpot (piecenum)
+{	piecenum = base;	}
+
+
+//weapon 1 -----------------------------------------------------------------
+
+RestoreAfterDelay()
+{
+	sleep 5000;
+	turn turret to y-axis <0.000000> speed <55.000000>;
+	turn gun to x-axis <0.000000> speed <30.000000>;
+}
+
+AimWeapon1(heading, pitch)
+{
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	turn turret to y-axis heading speed <160.000000>;
+	turn gun to x-axis <0.000000> - pitch speed <160.000000>;
+    wait-for-turn turret around y-axis;
+	wait-for-turn gun around x-axis;
+    start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+FireWeapon1()
+{
+		emit-sfx FLARE_FX from emit_gun;
+		emit-sfx GROUNDFLASH from emit_groundflash;
+		call-script lua_CreateLightMe(emit_gun, 96, 255, 0, 96);
+		sleep 200;
+		call-script lua_DestroyLightMe();
+		return(1);
+}
+
+//AimFromWeapon
+
+AimFromWeapon1(piecenum)
+{
+		piecenum = gun;
+}
+
+QueryWeapon1(piecenum)
+{
+		piecenum = emit_gun;
+}
+
+	
+Killed(severity, corpsetype)
+{	
+	move base to y-axis [8] speed [20];
+
+	turn rlleg1 to x-axis <-29> speed <200>;
+	turn rlleg1 to z-axis <-31> speed <200>;
+	turn rrleg1 to z-axis <-4.4> speed <200>;
+	turn flleg1 to x-axis <36> speed <200>;
+	turn flleg1 to z-axis <-34> speed <200>;
+	turn frleg1 to z-axis <16> speed <200>;
+
+	turn base to z-axis <-28> speed <75>;
+	wait-for-turn base around z-axis;
+	turn base to z-axis <-57> speed <150>;
+	wait-for-turn base around z-axis;
+	turn base to z-axis <-85> speed <300>;
+	wait-for-turn base around z-axis;
+
+	emit-sfx GREYCLOUD from rlleg2;
+	emit-sfx GREYCLOUD from rrleg2;
+	emit-sfx GREYCLOUD from flleg2;
+	emit-sfx GREYCLOUD from frleg2;
+	
+	emit-sfx GREYCLOUD from rlfoot;
+	emit-sfx GREYCLOUD from rrfoot;
+	emit-sfx GREYCLOUD from flfoot;
+	emit-sfx GREYCLOUD from frfoot;
+
+	emit-sfx GREYCLOUD from chest;
+	emit-sfx GREYCLOUD from head;
+	emit-sfx GREYCLOUD from gun;
+
+	sleep 100;
+	return (0);
+}

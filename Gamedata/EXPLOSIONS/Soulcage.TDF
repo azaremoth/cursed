@@ -1,0 +1,15 @@
+[Soulcage_Groundflash]
+{
+  [groundflash]
+	{
+      		flashSize = 60;
+      		flashAlpha = 0.15;
+      		circleGrowth = 0;
+      		circleAlpha = 0.55;
+      		ttl = 150;
+			color = 0.45, 0.6, 0.1;
+			air=1;
+     			ground=1;
+      		water=1;
+	}
+}

@@ -1,0 +1,448 @@
+[NULL]
+{
+	[DAMAGE]
+	{
+		default=1;
+	}
+}
+
+[NONE]
+{
+	[DAMAGE]
+	{
+		default=1;
+	}
+}
+
+[SMALL_EXPLOSION_GREEN]
+{
+	name=Medium Green Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=150;
+	soundstart=Small_Explosion;
+	soundhit=Small_Explosion;
+	shakemagnitude=15;
+	shakeduration=1;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:SMALL_EXPLOSION_GREEN;
+	[DAMAGE]
+	{
+		default=1;
+	}
+}
+
+[MEDIUM_EXPLOSION_GREEN]
+{
+	name=Medium Green Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=150;
+	soundstart=Small_Explosion;
+	soundhit=Small_Explosion;
+	shakemagnitude=15;
+	shakeduration=1;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:MEDIUM_EXPLOSION_GREEN;
+	[DAMAGE]
+	{
+		default=25;
+	}
+}
+
+[BIG_EXPLOSION_GREEN]
+{
+	name=Big Green Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=300;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	shakemagnitude=24;
+	shakeduration=1.5;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:BIG_EXPLOSION_GREEN;
+	[DAMAGE]
+	{
+		default=50;
+	}
+}
+
+[SMALL_EXPLOSION_BLUE]
+{
+	name=Medium Blue Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=150;
+	soundstart=Small_Explosion;
+	soundhit=Small_Explosion;
+	shakemagnitude=15;
+	shakeduration=1;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:SMALL_EXPLOSION_BLUE;
+	[DAMAGE]
+	{
+		default=1;
+	}
+}
+
+[MEDIUM_EXPLOSION_BLUE]
+{
+	name=Medium Blue Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=150;
+	soundstart=Small_Explosion;
+	soundhit=Small_Explosion;
+	shakemagnitude=15;
+	shakeduration=1;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:MEDIUM_EXPLOSION_BLUE;
+	[DAMAGE]
+	{
+		default=25;
+	}
+}
+
+[BIG_EXPLOSION_BLUE]
+{
+	name=Big Blue Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=300;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	shakemagnitude=24;
+	shakeduration=1.5;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:BIG_EXPLOSION_BLUE;
+	[DAMAGE]
+	{
+		default=50;
+	}
+}
+
+[SMALL_EXPLOSION_YELLOW]
+{
+	name=Medium Green Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=150;
+	soundstart=Small_Explosion;
+	soundhit=Small_Explosion;
+	shakemagnitude=15;
+	shakeduration=1;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:SMALL_EXPLOSION_YELLOW;
+	[DAMAGE]
+	{
+		default=1;
+	}
+}
+
+[MEDIUM_EXPLOSION_YELLOW]
+{
+	name=Medium Green Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=150;
+	soundstart=Small_Explosion;
+	soundhit=Small_Explosion;
+	shakemagnitude=15;
+	shakeduration=1;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:MEDIUM_EXPLOSION_YELLOW;
+	[DAMAGE]
+	{
+		default=25;
+	}
+}
+
+[BIG_EXPLOSION_YELLOW]
+{
+	name=Big Green Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=300;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	shakemagnitude=24;
+	shakeduration=1.5;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:BIG_EXPLOSION_YELLOW;
+	[DAMAGE]
+	{
+		default=50;
+	}
+}
+
+[BIG_EXPLOSION_GREEN_HD]
+{
+	name=Big Green Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=300;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	shakemagnitude=24;
+	shakeduration=1.5;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:BIG_EXPLOSION_GREEN;
+	[DAMAGE]
+	{
+		default=500;
+	}
+}
+
+[SUICIDEBALL_BLAST]
+{
+	name=Rolling Bomb;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=350;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=556;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:REDGREENBLOOD_EXPLOSION;
+	[DAMAGE]
+	{
+		default=1600;
+	}
+}
+
+[PARALYSE_BLAST]
+{
+	name=Crawling Bomb;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=480;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=556;
+	noselfdamage=1;
+//	soundstart=Big_Explosion;
+//	soundhit=Big_Explosion;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:electric_explosion;
+	NoSelfDamage=1;
+	Paralyzer=1;
+	Impulsefactor=0;
+	[DAMAGE]
+	{
+		default=2000;
+	}
+}
+
+[PARALYSE_BLAST_BIG]
+{
+	name=Crawling Bomb;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=1000;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=556;
+	noselfdamage=1;
+//	soundstart=Big_Explosion;
+//	soundhit=Big_Explosion;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:electric_explosion;
+	NoSelfDamage=1;
+	Paralyzer=1;
+	Impulsefactor=0;
+	[DAMAGE]
+	{
+		default=3500;
+	}
+}
+
+[BOMBER_EXPLOSION]
+{
+	name=Bomber Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=1000;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=300;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:MEDIUM_EXPLOSION_BLUE;
+	Impulsefactor=0;
+	[DAMAGE]
+	{
+		default=250;
+	}
+}
+
+[BLOOD_EXPLOSION]
+{
+	name=Blood Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=1;
+	soundstart=Small_Explosion;
+	soundhit=Small_Explosion;
+	shakemagnitude=15;
+	shakeduration=1;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:BLOOD_EXPLOSION;
+	[DAMAGE]
+	{
+		default=0;
+	}
+}
+
+[SMOKE_EXPLOSION]
+{
+	name=Smoke Explosion;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=50;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=1;
+//	soundstart=Small_Explosion;
+//	soundhit=Small_Explosion;
+	shakemagnitude=15;
+	shakeduration=1;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:Greycloud;
+	[DAMAGE]
+	{
+		default=0;
+	}
+}
+
+[BIG_AIRPLANE_BLAST_YELLOW]
+{
+	name=Big Crash;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=350;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=256;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:MEDIUM_EXPLOSION_YELLOW;
+	[DAMAGE]
+	{
+		default=400;
+	}
+}
+
+[SMALL_AIRPLANE_BLAST_YELLOW]
+{
+	name=Big Crash;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=350;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=128;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:SMALL_EXPLOSION_YELLOW;
+	[DAMAGE]
+	{
+		default=200;
+	}
+}
+
+[BIG_AIRPLANE_BLAST_GREEN]
+{
+	name=Big Crash;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=350;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=256;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:MEDIUM_EXPLOSION_GREEN;
+	[DAMAGE]
+	{
+		default=400;
+	}
+}
+
+[SMALL_AIRPLANE_BLAST_GREEN]
+{
+	name=Big Crash;
+	rendertype=4;
+	ballistic=1;
+	turret=1;
+	range=350;
+	reloadtime=3.6;
+	weaponvelocity=250;
+	areaofeffect=128;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:SMALL_EXPLOSION_GREEN;
+	[DAMAGE]
+	{
+		default=200;
+	}
+}

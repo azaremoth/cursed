@@ -1,0 +1,12 @@
+[SIDE0]
+{
+	Name=imperials;
+	commander=euf_constructor;
+}
+[SIDE1]
+{
+	Name=cursed;
+	commander=tc_obelisk;
+}
+[CANBUILD]
+{}

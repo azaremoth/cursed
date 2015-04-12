@@ -1,0 +1,47 @@
+#include "basic_spring_stuff.h"
+
+piece  base, socket, angel, spear, shield, wing1, wing2;
+
+static-var structureheight, inground, turnangle;
+
+#define STRUCTUREBUILDING		1024+0
+#define DEATH					1025+0
+
+Go()
+{ 	}
+
+Stop()
+{	}
+
+Create()
+{
+	turnangle = (-8190) + rand (0, 16380);
+	turn angel to y-axis turnangle now;
+	//////////////////////////////////START BUILD CYCLE
+	structureheight	= (get UNIT_HEIGHT)*(-1);
+	move socket to y-axis structureheight now;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		move socket to y-axis (structureheight * (get BUILD_PERCENT_LEFT)/100) speed [10];
+		emit-sfx STRUCTUREBUILDING from base;
+		sleep 100;
+	}
+	move socket to y-axis 0 speed [10];
+	/////////////////////////////////END BUILD CYCLE
+}
+
+SweetSpot(piecenum)
+{	piecenum = base; }
+
+Killed(severity, corpsetype, smoketype)
+{
+	emit-sfx DEATH from base;
+	turn angel to y-axis <0> speed <100>;
+	turn angel to x-axis <30> speed <50>;
+	wait-for-turn angel around x-axis;
+	turn angel to x-axis <70> speed <150>;
+	wait-for-turn angel around x-axis;
+	turn angel to x-axis <122> speed <300>;
+	wait-for-turn angel around x-axis;		
+	return (1);
+}

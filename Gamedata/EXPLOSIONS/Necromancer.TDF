@@ -1,0 +1,78 @@
+[SPIKES_NECROMANCER]
+{
+	[spikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=1.5 r0.75;
+			length=3.6 r1.0;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 1.0, 0.15;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=6; 
+	}
+}
+
+[BUILDING_NECROMANCER]
+{
+	[spikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-6 r12,-6 r12,-6 r12;
+			width=2.4 r0.6;
+			length=6.0 r1.5;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 1.0, 0.15;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=6; 
+	}
+}
+
+[PENTAGRAM]
+{
+   [BitmapMuzzleFlame]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+         dir = dir; // don't touch me
+         colorMap=0.8745 1 0.1568 0.01 0.8745 1 0.1568 0.01 0.2 1 0 0.01 0 0 0 0.01; 
+         size=40;
+         length=40;
+         sizeGrowth=0;
+         ttl=90;
+         frontOffset=0;
+	   frontTexture=PENTAGRAM;
+	   sideTexture=null_texture;
+      }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+  [groundflash]
+	{
+      		flashSize = 50;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0.55;
+      		ttl = 120;
+			color = 0.45, 1, 0.1;
+			air=1;
+     			ground=1;
+      		water=1;
+	}
+}

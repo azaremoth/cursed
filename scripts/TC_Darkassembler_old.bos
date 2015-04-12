@@ -1,0 +1,241 @@
+#include "basic_spring_stuff.h"
+
+piece  base, padbase, createpoint, pad, pylon_base, pylon_on, pylon_off, llowerarm, lupperarm, lnanogun, rlowerarm, rupperarm, rnanogun, remit, lemit, emit_light;
+
+static-var  statechg_DesiredState, statechg_StateChanging, isbuilding, structureheight, inground;
+
+// Signal definitions
+#define SIG_ACTIVATE			2
+#define Big_Explosion_Green		1024+0
+#define PORTALSPIKES			1025+0
+#define DarkAssembler_Laser		1026+0
+#define STRUCTUREBUILDING		1027+0
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+BuildingAnimation()
+{
+	while (TRUE)
+	{
+		if( isbuilding == 1 )
+		{
+			call-script lua_CreateLightMe(createpoint, 96, 255, 0, 96);
+			emit-sfx DarkAssembler_Laser from remit;
+			emit-sfx DarkAssembler_Laser from lemit;
+		}
+		if( isbuilding == 0 )
+		{
+			call-script lua_DestroyLightMe();
+		}
+	sleep 100;
+	}
+}
+
+BuildingAnimation2()
+{
+	while (TRUE)
+	{
+		if( isbuilding == 1 )
+		{
+			emit-sfx PORTALSPIKES from emit_light;
+			sleep 100;
+		}
+	sleep 10;
+	}
+}
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from base;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+OpenYard()
+{
+	set YARD_OPEN to 1;
+	while( !get YARD_OPEN )
+	{
+		set BUGGER_OFF to 1;
+		sleep 1500;
+		set YARD_OPEN to 1;
+	}
+	set BUGGER_OFF to 0;
+}
+
+CloseYard()
+{
+	set YARD_OPEN to 0;
+	while( get YARD_OPEN )
+	{
+		set BUGGER_OFF to 1;
+		sleep 1500;
+		set YARD_OPEN to 0;
+	}
+	set BUGGER_OFF to 0;
+}
+
+Go()
+{
+	call-script OpenYard();
+	set INBUILDSTANCE to 1;
+}
+
+Stop()
+{
+	set INBUILDSTANCE to 0;
+	call-script CloseYard();
+	isbuilding = 0;
+	sleep 200;
+}
+
+InitState()
+{
+	statechg_DesiredState = TRUE;
+	statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+	if( statechg_StateChanging )
+	{
+		statechg_DesiredState = requestedstate;
+		return (0);
+	}
+	statechg_StateChanging = TRUE;
+	currentstate = statechg_DesiredState;
+	statechg_DesiredState = requestedstate;
+	while( statechg_DesiredState != currentstate )
+	{
+		if( statechg_DesiredState == 0 )
+		{
+			call-script Go();
+			currentstate = 0;
+		}
+		if( statechg_DesiredState == 1 )
+		{
+			call-script Stop();
+			currentstate = 1;
+		}
+	}
+	statechg_StateChanging = FALSE;
+}
+
+Create()
+{
+	hide pylon_on;
+	hide pylon_off;
+	hide pylon_base;	
+	call-script InitState();
+	turn lnanogun to z-axis <100> now;
+	turn rnanogun to z-axis <-100> now;	
+	turn remit to y-axis <-90> now;
+	turn lemit to y-axis <90> now;	
+	turn remit to x-axis <60> now;
+	turn lemit to x-axis <60> now;
+
+	//////////////////////////////////START BUILD CYCLE
+	structureheight	= (get UNIT_HEIGHT)*(-1);
+	move padbase to y-axis structureheight now;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		move padbase to y-axis (structureheight * (get BUILD_PERCENT_LEFT)/100) speed [10];
+		emit-sfx STRUCTUREBUILDING from base;
+		sleep 50;
+	}
+	move padbase to y-axis 0 speed [10];
+	/////////////////////////////////END BUILD CYCLE
+
+	start-script SmokeUnit();
+	start-script BuildingAnimation();
+	start-script BuildingAnimation2();
+}
+
+QueryNanoPiece(piecenum)
+{	piecenum = base;	}
+
+Activate()
+{
+	signal SIG_ACTIVATE;
+	start-script RequestState(0);
+}
+
+Deactivate()
+{
+	signal SIG_ACTIVATE;
+	set-signal-mask SIG_ACTIVATE;
+	set-signal-mask 0;
+	start-script RequestState(1);
+}
+
+StartBuilding()
+{	
+	turn llowerarm to z-axis <50> speed <50>;
+	turn rlowerarm to z-axis <-50> speed <50>;	
+	turn lupperarm to z-axis <-60> speed <50>;
+	turn rupperarm to z-axis <60> speed <50>;	
+	turn lnanogun to z-axis <70> speed <50>;
+	turn rnanogun to z-axis <-70> speed <50>;
+	wait-for-turn rnanogun around z-axis;
+	sleep 200;
+	isbuilding = 1;
+}
+
+StopBuilding()
+{
+	isbuilding = 0;
+	sleep 100;
+	turn llowerarm to z-axis <0> speed <80>;
+	turn rlowerarm to z-axis <0> speed <80>;	
+	turn lupperarm to z-axis <0> speed <80>;
+	turn rupperarm to z-axis <0> speed <80>;	
+	turn lnanogun to z-axis <100> speed <80>;
+	turn rnanogun to z-axis <-100> speed <80>;
+	sleep 100;
+}
+
+QueryBuildInfo(piecenum)
+{	piecenum = createpoint;	}
+
+SweetSpot(piecenum)
+{	piecenum = base;	}
+
+Killed(severity, corpsetype, smoketype)
+{
+	if (severity <= 50)
+	{
+		corpsetype = 1;
+		emit-sfx Big_Explosion_Green from pad;
+		return (corpsetype);
+	}
+	else
+	{
+		corpsetype = 2;
+		emit-sfx Big_Explosion_Green from base;
+		emit-sfx Big_Explosion_Green from pad;
+		return (corpsetype);
+	}
+	return(0);
+}

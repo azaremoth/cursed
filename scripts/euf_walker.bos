@@ -1,0 +1,326 @@
+#include "basic_spring_stuff.h"
+#define TAK
+
+piece base, pelvis, torso, lleg1, lleg2, lleg3, rleg1, rleg2, rleg3, emit_rleg, emit_lleg, emit_groundflash1, emit_groundflash2, emit_groundflash3, emit11, emit12, emit21, emit22, emit3, turret1, turret2, turret3, gun11, gun12, gun21, gun22, gun3;
+
+
+static-var RandomNumber2, moving, attacking, MOVEANIMATIONSPEED, GUN, justcreated;
+
+#define	SIG_AIM1		2
+#define SIG_AIM2		4
+
+#define FOOTDUST		1024+0
+#define BOOM			1025+0
+#define GUNFLARE		1026+0
+#define GROUNDFLASH		1027+0
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+Sounds()
+{
+	play-sound( "demonwalk", 20 );
+}
+
+
+WalkingFXleft()
+{
+			sleep 50;
+			emit-sfx FOOTDUST from emit_lleg;
+//			GET PLAY_SOUND (0, 1255360, 1, 0);   
+}
+
+WalkingFXright()
+{
+			sleep 50;
+			emit-sfx FOOTDUST from emit_rleg;
+//			GET PLAY_SOUND (0, 1255360, 1, 0);   
+}
+
+// Walk Motion
+Walkscript()
+{
+	while(1)
+	{
+		if (moving) 
+		{
+		MOVEANIMATIONSPEED = ((GET MAX_SPEED)/3);
+			if (!justcreated)
+			{
+				turn lleg1 to x-axis <15> speed MOVEANIMATIONSPEED/3;
+				turn lleg2 to x-axis <15> speed MOVEANIMATIONSPEED/3.4;		
+				turn rleg1 to x-axis <-25> speed MOVEANIMATIONSPEED/2.4;
+				turn rleg2 to x-axis <-10> speed MOVEANIMATIONSPEED/2;	
+				turn rleg3 to x-axis <-20> speed MOVEANIMATIONSPEED/3;		
+	    		wait-for-turn rleg3 around x-axis;
+	    	}
+			if (justcreated)
+			{
+				turn rleg3 to x-axis <-55> speed MOVEANIMATIONSPEED;
+	    		wait-for-turn rleg3 around x-axis;
+	    	} 	
+		}
+		if (moving)
+		{
+			if (!justcreated)
+			{		
+				if (!attacking)
+				{
+					turn torso to z-axis <-4> speed MOVEANIMATIONSPEED/3;
+					turn turret1 to x-axis <8> speed MOVEANIMATIONSPEED/3;
+					turn turret2 to x-axis <-8> speed MOVEANIMATIONSPEED/3;				
+				}			
+				turn rleg1 to x-axis <-25> speed MOVEANIMATIONSPEED/6;
+				turn rleg2 to x-axis <10> speed MOVEANIMATIONSPEED/2;	
+				turn rleg3 to x-axis <-10> speed MOVEANIMATIONSPEED/3.4;			
+	    		wait-for-turn rleg2 around x-axis;
+				call-script WalkingFXright(); 
+			}
+			if (justcreated)
+			{
+				turn rleg3 to x-axis <-33> speed MOVEANIMATIONSPEED;
+	    		wait-for-turn rleg3 around x-axis;
+	    	} 				  		
+		}
+		if (moving)
+		{
+			if (!justcreated)
+			{		
+				turn lleg1 to x-axis <-25> speed MOVEANIMATIONSPEED/2.4;
+				turn lleg2 to x-axis <-10> speed MOVEANIMATIONSPEED/2;
+				turn lleg3 to x-axis <-20> speed MOVEANIMATIONSPEED/3;
+				turn rleg1 to x-axis <15> speed MOVEANIMATIONSPEED/3;
+				turn rleg2 to x-axis <15> speed MOVEANIMATIONSPEED/3.4;	
+	    		wait-for-turn lleg3 around x-axis;
+	    	}
+			if (justcreated)	    	
+			{
+				turn lleg3 to x-axis <-55> speed MOVEANIMATIONSPEED;				
+	    		wait-for-turn lleg3 around x-axis;
+	    	} 		    	
+		}
+		if (moving)
+		{
+			if (!justcreated)
+			{		
+				if (!attacking)
+				{
+					turn torso to z-axis <4> speed MOVEANIMATIONSPEED/3;
+					turn turret1 to x-axis <-8> speed MOVEANIMATIONSPEED/3;
+					turn turret2 to x-axis <8> speed MOVEANIMATIONSPEED/3;					
+				}		
+				turn lleg1 to x-axis <-250> speed MOVEANIMATIONSPEED/6;
+				turn lleg2 to x-axis <10> speed MOVEANIMATIONSPEED/2;
+				turn lleg3 to x-axis <-10> speed MOVEANIMATIONSPEED/3.4;
+	    		wait-for-turn lleg3 around x-axis;
+				call-script WalkingFXleft();        		
+			}
+			if (justcreated)	    	
+			{
+				turn lleg3 to x-axis <-33> speed MOVEANIMATIONSPEED;				
+	    		wait-for-turn lleg3 around x-axis;
+	    	} 			
+		}
+		if (!moving) 
+		{
+			if (!justcreated)
+			{		
+				if (!attacking)	
+				{
+					turn torso to z-axis <0> speed MOVEANIMATIONSPEED;
+					turn turret1 to x-axis <0> speed MOVEANIMATIONSPEED;
+					turn turret2 to x-axis <0> speed MOVEANIMATIONSPEED;	
+				}	
+				turn rleg1 to x-axis <0> speed MOVEANIMATIONSPEED;
+				turn lleg1 to x-axis <0> speed MOVEANIMATIONSPEED;
+				turn rleg2 to x-axis <0> speed MOVEANIMATIONSPEED*1.6;
+				turn lleg2 to x-axis <0> speed MOVEANIMATIONSPEED*1.6;
+				turn rleg3 to x-axis <0> speed MOVEANIMATIONSPEED*1.6;
+				turn lleg3 to x-axis <0> speed MOVEANIMATIONSPEED*1.6;			
+				move pelvis to y-axis <0> speed MOVEANIMATIONSPEED;
+	    		wait-for-turn lleg3 around x-axis;
+	    	}		
+		}
+		sleep 10;
+	}
+}
+
+
+Create()
+{
+	move pelvis to y-axis [-5.5] now;
+	turn lleg2 to x-axis <33> now;
+	turn rleg2 to x-axis <33> now;	
+	turn lleg3 to x-axis <-33> now;
+	turn rleg3 to x-axis <-33> now;		
+	gun = 0;
+	justcreated = 1;
+	MOVEANIMATIONSPEED = ((GET MAX_SPEED)/6.5);
+	moving = FALSE;
+	attacking = FALSE;
+			
+	//////////////////////////////////START BUILD CYCLE
+	while( get BUILD_PERCENT_LEFT )
+	{
+//			emit-sfx SUMMONING from pelvis;
+			sleep 300;
+	}
+	/////////////////////////////////END BUILD CYCLE
+
+	start-script Walkscript();
+	Sleep 6000;
+	move pelvis to y-axis [0] speed [100];
+	turn lleg2 to x-axis <0> speed MOVEANIMATIONSPEED;
+	turn rleg2 to x-axis <0> speed MOVEANIMATIONSPEED;
+	turn lleg3 to x-axis <0> speed MOVEANIMATIONSPEED;
+	turn rleg3 to x-axis <0> speed MOVEANIMATIONSPEED;
+	justcreated = 0;
+}
+
+StartMoving()
+{ moving = TRUE; }
+
+StopMoving()
+{ moving = FALSE; }
+
+SweetSpot (piecenum)
+{	piecenum = base;	}
+
+
+RestoreAfterDelay()
+{
+	sleep 2000;
+	turn torso to y-axis <0> speed <150.000000>;
+	sleep 500;	
+	turn turret1 to x-axis <0> speed <200.000000>;
+	turn turret2 to x-axis <0> speed <200.000000>;
+	turn turret3 to x-axis <0> speed <200.000000>;	
+	attacking = FALSE;
+	return (0);
+}
+
+//weapon 1 -----------------------------------------------------------------
+QueryWeapon1 (piecenum)
+{	
+	if (gun == 0)
+		{	piecenum = emit11;}
+	if (gun == 1)
+		{	piecenum = emit12;}
+	if (gun == 2)
+		{	piecenum = emit21;}
+	if (gun == 3)
+		{	piecenum = emit22;}
+}
+
+AimFromWeapon1 (piecenum)
+{	piecenum = torso;	}
+
+AimWeapon1(heading, pitch)
+{
+	attacking = TRUE;
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+
+	turn torso to y-axis heading speed <160.000000>;
+	turn turret1 to x-axis <0> - pitch speed <160.000000>;
+	turn turret2 to x-axis <0> - pitch speed <160.000000>;
+	
+    wait-for-turn torso around y-axis;
+	wait-for-turn turret1 around x-axis;
+	start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+
+FireWeapon1()
+{
+	if (gun == 0)
+		{
+		emit-sfx GUNFLARE from emit11;
+		emit-sfx GROUNDFLASH from emit_groundflash1;
+		call-script lua_CreateLightMe(emit11, 0, 255, 255, 96);
+		move gun11 to z-axis [-2] now;
+		sleep 100;		
+		move gun11 to z-axis [0] speed [10];		
+		}
+	if (gun == 1)
+		{
+		emit-sfx GUNFLARE from emit12;
+		emit-sfx GROUNDFLASH from emit_groundflash1;
+		call-script lua_CreateLightMe(emit12, 0, 255, 255, 96);
+		move gun12 to z-axis [-2] now;
+		sleep 100;			
+		move gun12 to z-axis [0] speed [10];		
+		}
+	if (gun == 2)
+		{
+		emit-sfx GUNFLARE from emit21;
+		emit-sfx GROUNDFLASH from emit_groundflash2;
+		call-script lua_CreateLightMe(emit21, 0, 255, 255, 96);
+		move gun21 to z-axis [-2] now;
+		sleep 100;	
+		move gun21 to z-axis [0] speed [10];		
+		}		
+	if (gun == 3)
+		{
+		emit-sfx GUNFLARE from emit22;
+		emit-sfx GROUNDFLASH from emit_groundflash2;
+		call-script lua_CreateLightMe(emit22, 0, 255, 255, 96);
+		move gun22 to z-axis [-2] now;
+		sleep 100;		
+		move gun22 to z-axis [0] speed [10];					
+		}
+	gun = gun+1;		
+	if (gun > 3)
+		{
+		gun = 0;
+		}		
+	call-script lua_DestroyLightMe();
+	return(1);
+}
+
+//weapon 2 -----------------------------------------------------------------
+
+QueryWeapon2 (piecenum)
+{	piecenum = emit3;	}
+
+AimFromWeapon2 (piecenum)
+{	piecenum = torso;	}
+
+AimWeapon2 (heading, pitch)
+{
+	attacking = TRUE;
+	signal SIG_AIM2;
+	set-signal-mask SIG_AIM2;
+	turn turret3 to x-axis <0> - pitch speed <320.000000>;
+ 
+    wait-for-turn torso around y-axis;
+	wait-for-turn turret3 around x-axis;
+	start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+FireWeapon2()
+{
+	emit-sfx GUNFLARE from emit3;	
+	emit-sfx GROUNDFLASH from emit_groundflash3;
+	call-script lua_CreateLightMe(emit3, 0, 255, 255, 96);
+	move gun3 to z-axis [-3] now;
+	sleep 300;
+	call-script lua_DestroyLightMe();
+	move gun3 to z-axis [0] speed [10];	
+	return (0);
+}
+
+	
+Killed(severity, corpsetype)
+{
+	move pelvis to y-axis [-20] speed [100];
+	turn pelvis to x-axis <90> speed <100>;
+	emit-sfx BOOM from torso;
+	emit-sfx BOOM from lleg3;
+	sleep 500;
+	emit-sfx BOOM from rleg3;
+	emit-sfx BOOM from turret1;	
+	return (0);
+}

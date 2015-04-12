@@ -1,0 +1,69 @@
+[RICTUSFLAMETHROWER]
+{
+   [BOOM]
+   {
+   class=heatcloud;
+      [properties]
+            {
+		texture=firecloud2;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 0.4;
+            size = 12;
+            sizeGrowth = -0.2;
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 0, 0;
+            }
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+   }
+   [groundflash]
+	{
+	ttl = 20;
+	flashSize = 13;
+	flashAlpha = 0.1;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      color = 0.2, 1.0, 0.1;
+   	air=1;
+      ground=1;
+      water=1;
+	}
+}
+
+[RICTUSFLAMEEXPLOSION]
+{
+   [BOOM]
+   {
+   class=heatcloud;
+      [properties]
+            {
+		texture=firecloud2;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 0.2;
+            size = 15;
+            sizeGrowth = 0.5;
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 0, 0;
+            }
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+   }
+   [groundflash]
+	{
+	ttl = 20;
+	flashSize = 30;
+	flashAlpha = 0.3;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      color = 0.2, 1.0, 0.1;
+   	air=1;
+      ground=1;
+      water=1;
+	}
+}

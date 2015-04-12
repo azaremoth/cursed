@@ -1,0 +1,191 @@
+#include "basic_spring_stuff.h"
+
+piece base, tank, turret, sleeve, rwheel1, rwheel2, rwheel3, rwheel4, rwheel5, rwheel6, rwheel7, rwheel8, rwheel9, lwheel1, lwheel2, lwheel3, lwheel4, lwheel5, lwheel6, lwheel7, lwheel8, lwheel9,  rtracks1, rtracks2, rtracks3, ltracks1, ltracks2, ltracks3, dust1, dust2, emit_groundflash, emit_gun;
+
+static-var isMoving;
+
+#define	SIG_AIM1		2
+
+#define DUST			1024+0
+#define EXPLOSION		1025+0
+#define GUNFLARE		1026+0
+#define GROUNDFLASH		1027+0
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+Trackanimation()
+{
+	var TrackSection;
+	TrackSection = 1;
+	show rtracks1;
+	show ltracks1;			
+	hide rtracks2;
+	hide ltracks2;		
+	hide rtracks3;
+	hide ltracks3;	
+	
+	
+	While(TRUE)
+	{
+		if(isMoving)
+		{
+			If(TrackSection == 4)
+			{
+				TrackSection = 1;
+			}
+			If(TrackSection == 1)
+			{
+				show rtracks1;
+				show ltracks1;			
+				hide rtracks2;
+				hide ltracks2;			
+				emit-sfx DUST from dust1;
+				emit-sfx DUST from dust2;				
+			}
+			If(TrackSection == 2)
+			{
+				show rtracks3;
+				show ltracks3;			
+				hide rtracks1;
+				hide ltracks1;			
+				emit-sfx DUST from dust1;
+				emit-sfx DUST from dust2;					
+			}
+			If(TrackSection == 3)
+			{
+				show rtracks2;
+				show ltracks2;			
+				hide rtracks3;
+				hide ltracks3;			
+				emit-sfx DUST from dust1;
+				emit-sfx DUST from dust2;					
+			}
+		TrackSection = TrackSection+1;
+		}
+	sleep 30;
+	}
+}
+
+Wheelanimation()
+{
+	While(TRUE)
+	{
+		if(isMoving)
+		{
+		spin rwheel1 around x-axis speed <200> accelerate <300>;
+		spin rwheel2 around x-axis speed <200> accelerate <300>;
+		spin rwheel3 around x-axis speed <200> accelerate <300>;
+		spin rwheel4 around x-axis speed <200> accelerate <300>;
+		spin rwheel5 around x-axis speed <200> accelerate <300>;
+		spin rwheel6 around x-axis speed <200> accelerate <300>;
+		spin rwheel7 around x-axis speed <200> accelerate <300>;
+		spin rwheel8 around x-axis speed <200> accelerate <300>;
+		spin rwheel9 around x-axis speed <200> accelerate <300>;		
+		spin lwheel1 around x-axis speed <200> accelerate <300>;
+		spin lwheel2 around x-axis speed <200> accelerate <300>;
+		spin lwheel3 around x-axis speed <200> accelerate <300>;
+		spin lwheel4 around x-axis speed <200> accelerate <300>;	
+		spin lwheel5 around x-axis speed <200> accelerate <300>;
+		spin lwheel6 around x-axis speed <200> accelerate <300>;
+		spin lwheel7 around x-axis speed <200> accelerate <300>;
+		spin lwheel8 around x-axis speed <200> accelerate <300>;
+		spin lwheel9 around x-axis speed <200> accelerate <300>;		
+		}
+		if(!isMoving)
+		{
+		stop-spin rwheel1 around x-axis decelerate <200>;
+		stop-spin rwheel2 around x-axis decelerate <200>;
+		stop-spin rwheel3 around x-axis decelerate <200>;
+		stop-spin rwheel4 around x-axis decelerate <200>;
+		stop-spin rwheel5 around x-axis decelerate <200>;
+		stop-spin rwheel6 around x-axis decelerate <200>;
+		stop-spin rwheel7 around x-axis decelerate <200>;
+		stop-spin rwheel8 around x-axis decelerate <200>;
+		stop-spin rwheel9 around x-axis decelerate <200>;		
+		stop-spin lwheel1 around x-axis decelerate <200>;
+		stop-spin lwheel2 around x-axis decelerate <200>;
+		stop-spin lwheel3 around x-axis decelerate <200>;
+		stop-spin lwheel4 around x-axis decelerate <200>;
+		stop-spin lwheel5 around x-axis decelerate <200>;
+		stop-spin lwheel6 around x-axis decelerate <200>;
+		stop-spin lwheel7 around x-axis decelerate <200>;
+		stop-spin lwheel8 around x-axis decelerate <200>;
+		stop-spin lwheel9 around x-axis decelerate <200>;		
+		}
+	sleep 100;
+	}
+}
+
+
+
+//weapon 1 -----------------------------------------------------------------
+
+RestoreAfterDelay()
+{
+	sleep 5000;
+	turn turret to y-axis <0.000000> speed <55.000000>;
+	turn sleeve to x-axis <0.000000> speed <30.000000>;
+}
+
+AimWeapon1(heading, pitch)
+{
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	turn turret to y-axis heading speed <160.000000>;
+	turn sleeve to x-axis <0.000000> - pitch speed <160.000000>;
+    wait-for-turn turret around y-axis;
+	wait-for-turn sleeve around x-axis;
+    start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+FireWeapon1()
+{
+		emit-sfx GUNFLARE from emit_gun;
+		emit-sfx GROUNDFLASH from emit_groundflash;
+		call-script lua_CreateLightMe(emit_gun, 155, 233, 233, 128);
+		sleep 200;
+		call-script lua_DestroyLightMe();
+		return(1);
+}
+
+//AimFromWeapon
+
+AimFromWeapon1(piecenum)
+{
+		piecenum = turret;
+}
+
+QueryWeapon1(piecenum)
+{
+		piecenum = emit_gun;
+}
+
+StartMoving()
+{ isMoving = TRUE; }
+
+StopMoving()
+{ isMoving = FALSE; }
+
+Create()
+{
+
+	//////////////////////////////////START BUILD CYCLE
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 100;
+	}
+
+	start-script Wheelanimation();
+	start-script Trackanimation();
+}
+
+Killed(severity, corpsetype)
+{
+		sleep 200;
+		explode turret type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP;
+		explode sleeve type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP;
+		return (0);
+}
+

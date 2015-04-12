@@ -1,0 +1,143 @@
+[PLasmaTowerGunFlare]
+{
+   [BitmapMuzzleFlame]
+   {
+	class = CBitmapMuzzleFlame;
+      
+	[properties]
+      	{
+         	dir = dir;
+         	colorMap=1 1 1 0.01	1 1 1 0.01	0 0 0 0.01; 
+          	size=5;
+          	length=10;
+          	sizeGrowth=1;
+          	ttl=3;
+          	frontOffset=0.1;
+          	sideTexture=bluegunflare;
+          	frontTexture=blueflare;
+      	}
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[groundflash]
+	{
+      		flashSize = 10;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 7;
+		color = 0.6, 0.91, 0.91;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[PLasmaTowerGunGroundflash]
+{
+	[groundflash]
+	{
+      		flashSize = 40;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 7;
+		color = 0.6, 0.91, 0.91;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[PLasmaTowerGunProjectileGroundflash]
+{
+	[groundflash]
+	{
+      		flashSize = 20;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 7;
+		color = 0.6, 0.91, 0.91;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[PLasmaTowerGunImpact]
+{
+	[heatcloud]
+	{
+      		[properties]
+      		{
+      		heat = 15;
+		Texture=blueflare;
+      		maxheat = 15;
+      		heatFalloff = 0.86;
+      		size = 1.5;
+      		sizeGrowth = 1.1;
+      		sizemod = 0;
+      		sizemodmod = 0;
+      		speed = -0.3 r0.4, -0.3 r0.4, -0.3 r0.4;
+      		pos = 0.05 r-0.1, 0.05 r-0.1, 0.05 r-0.1;
+      		}
+		air=1;
+      	water=0;
+      	ground=1;
+      	count=12;
+	}
+	[watercloud]
+   	{
+	class=heatcloud;
+      		[properties]
+      		{
+      		heat = 15;
+		Texture=water;
+      		maxheat = 15;
+      		heatFalloff = 0.86;
+      		size = 1.1;
+      		sizeGrowth = 1.1;
+      		sizemod = 0;
+      		sizemodmod = 0;
+      		speed = -0.2 r0.4, -0.2 r0.4, -0.2 r0.4;
+      		pos = 0.1 r-0.2, 0.1 r-0.2, 0.1 r-0.2;
+      		}
+		air=0;
+      	water=1;
+      	ground=0;
+      	count=12;
+	}
+	[groundflash]
+	{
+      		flashSize = 30;
+      		flashAlpha = 0.25;
+      		circleGrowth = 1;
+      		circleAlpha = 0.55;
+      		ttl = 20;
+		color = 0.6, 0.91, 0.91;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+	[groundflash]
+	{
+      		flashSize = 5;
+      		flashAlpha = 1.00;
+      		circleGrowth = 0;
+      		circleAlpha = 1.00;
+      		ttl = 60;
+		color = 0.8, 1.0, 1.0;
+		air=0;
+     		ground=1;
+      		water=0;
+
+	}
+}

@@ -1,0 +1,57 @@
+[BONEARTI_SHELLFLARE]
+{
+	[spikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-15 r30,-15 r30,-15 r30;
+			width=3 r0.5;
+			length=6 r0.25;
+			alpha=0.5 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.5, 1.0, 0.15;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=10; 
+	}
+}
+
+[BONEARTI_CEG]
+{
+   [BitmapMuzzleFlame]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+         dir = dir; // don't touch me
+         colorMap=0.8745 1 0.1568 0.01 0.8745 0.8 0 0.01 0.2 1 0 0.01 0 0 0 0.01; 
+         size=3;
+         length=3;
+         sizeGrowth=3.5;
+         ttl=10;
+         frontOffset=0;
+	 frontTexture=cursedring;
+	 sideTexture=null_texture;
+      }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+   [groundflash]
+	{
+	ttl = 20;
+	flashSize = 20;
+	flashAlpha = 0.1;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      	color = 0.2, 1.0, 0.1;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}

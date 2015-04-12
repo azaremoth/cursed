@@ -1,0 +1,90 @@
+[RaiderLaserFlare]
+{
+   [BitmapMuzzleFlame]
+   {
+	class = CBitmapMuzzleFlame;
+      
+	[properties]
+      	{
+         	dir = dir;
+         	colorMap=1 1 1 0.01	1 1 1 0.01	0 0 0 0.01; 
+          	size=5;
+          	length=10;
+          	sizeGrowth=1;
+          	ttl=3;
+          	frontOffset=0.1;
+          	sideTexture=redgunflare;
+          	frontTexture=redflare;
+      	}
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[groundflash]
+	{
+      		flashSize = 10;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 7;
+		color = 1, 0.1, 0.1;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[RaiderLaserGroundflash]
+{
+	[groundflash]
+	{
+      		flashSize = 30;
+      		flashAlpha = 0.1;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 7;
+		color = 1, 0, 0;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[RaiderLaserImpact]
+{
+  [spikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-15 r20,-15 r20,-15 r20;
+			width=1.5;
+			length=4;
+			alpha=0.8;
+			alphadecay=0.1;
+			color = 1, 0.1, 0.1;
+
+		}
+	air=1;
+	water=1;
+	ground=1;
+    	count=10; 
+	}
+  [groundflash]
+	{
+      		flashSize = 5;
+      		flashAlpha = 0.5;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 100;
+		color = 1, 0.3, 0.3;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}

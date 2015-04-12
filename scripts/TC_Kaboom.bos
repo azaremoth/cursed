@@ -1,0 +1,179 @@
+#include "basic_spring_stuff.h"
+
+piece  base, body, rfleg1, rfleg2, rfleg3, rrleg1, rrleg2, rrleg3, lrleg1, lrleg2, lrleg3, lfleg1, lfleg2, lfleg3, emit;
+
+static-var  bMoving, Static_Var_2, originalspeed, aiming;
+#define	SIG_AIM1			2
+
+lua_Freeze()
+{	}
+
+lua_UnFreeze()
+{	}
+
+Walkscript()
+{
+	while( TRUE )
+	{
+		if (aiming == 0)
+		{
+			move body to y-axis [0] speed [50];
+			turn rrleg1 to z-axis <0> speed <200>;
+			turn rfleg1 to z-axis <0> speed <200>;
+			turn lrleg1 to z-axis <0> speed <200>;
+			turn lfleg1 to z-axis <0> speed <200>;	
+			if( bMoving )
+			{
+				Static_Var_2 = get UNKNOWN_UNIT_VALUE(75) / 5;
+				turn rrleg1 to y-axis <80.000000> * <-0.005495> speed Static_Var_2 * <0.005495>;
+				turn rrleg1 to z-axis <-30.000000> speed Static_Var_2;
+				turn rrleg3 to z-axis <60.000000> speed Static_Var_2;
+				turn rfleg1 to y-axis <80.000000> speed Static_Var_2 * <0.005495>;
+				turn rfleg1 to z-axis <0.000000> speed Static_Var_2;
+				turn lrleg3 to z-axis <0.000000> speed Static_Var_2;
+				turn lrleg1 to y-axis <80.000000> * <0.000000> speed Static_Var_2 * <0.005495>;
+				turn lrleg1 to z-axis <0.000000> speed Static_Var_2;
+				turn lrleg3 to z-axis <0.000000> speed Static_Var_2;
+				turn lfleg1 to y-axis <80.000000> * <0.000000> speed Static_Var_2 * <0.005495>;
+				turn lfleg1 to z-axis <30.000000> speed Static_Var_2;
+				turn lfleg3 to z-axis <-60.000000> speed Static_Var_2;
+				wait-for-turn lfleg3 around z-axis;
+			}
+			if( bMoving )
+			{
+				turn rrleg1 to y-axis <80.000000> * <0.000000> speed Static_Var_2 * <0.005495>;
+				turn rrleg1 to z-axis <0.000000> speed Static_Var_2;
+				turn rrleg3 to z-axis <0.000000> speed Static_Var_2;
+				turn rfleg1 to y-axis <80.000000> * <0.000000> speed Static_Var_2 * <0.005495>;
+				turn rfleg1 to z-axis <-30.000000> speed Static_Var_2;
+				turn lrleg3 to z-axis <60.000000> speed Static_Var_2;
+				turn lrleg1 to y-axis <80.000000> speed Static_Var_2 * <0.005495>;
+				turn lrleg1 to z-axis <30.000000> speed Static_Var_2;
+				turn lrleg3 to z-axis <-60.000000> speed Static_Var_2;
+				turn lfleg1 to y-axis <80.000000> * <-0.005495> speed Static_Var_2 * <0.005495>;
+				turn lfleg1 to z-axis <0.000000> speed Static_Var_2;
+				turn lfleg3 to z-axis <0.000000> speed Static_Var_2;
+				wait-for-turn lrleg3 around z-axis;
+			}
+			if( !bMoving )
+			{
+				turn rrleg1 to y-axis <-45.000000> speed Static_Var_2 * <0.005495>;
+				turn rfleg1 to y-axis <45.000000> speed Static_Var_2 * <0.005495>;
+				turn rrleg1 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn rfleg1 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn rrleg2 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn rrleg3 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn rfleg2 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn rfleg3 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn lfleg1 to y-axis <-45.000000> speed Static_Var_2 * <0.005495>;
+				turn lrleg1 to y-axis <45.000000> speed Static_Var_2 * <0.005495>;
+				turn lfleg1 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn lrleg1 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn lfleg2 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn lfleg3 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn lrleg2 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				turn lrleg3 to z-axis <0.000000> speed Static_Var_2 * <0.005495>;
+				sleep 260;
+			}
+		}
+	if (aiming == 1)
+		{
+			move body to y-axis [-5.5] speed [30];
+			turn rrleg1 to z-axis <60.000000> speed <200>;
+			turn rfleg1 to z-axis <60.000000> speed <200>;
+			turn lfleg1 to z-axis <-60.000000> speed <200>;
+			turn lrleg1 to z-axis <-60.000000> speed <200>;		
+		}
+	sleep (10);
+	}
+}
+
+Create()
+{		
+    originalspeed = get UNKNOWN_UNIT_VALUE(75);
+   	aiming = 0;	 
+	turn rrleg1 to y-axis <-45.000000> now;
+	turn rfleg1 to y-axis <45.000000> now;
+	turn lfleg1 to y-axis <-45.000000> now;
+	turn lrleg1 to y-axis <45.000000> now;
+	bMoving = FALSE;
+	hide base;
+	hide body;
+	hide rfleg1;
+	hide rfleg2;
+	hide rfleg3;
+	hide rrleg1;
+	hide rrleg2;
+	hide rrleg3;
+	hide lrleg1;
+	hide lrleg2;
+	hide lrleg3;
+	hide lfleg1;
+	hide lfleg2;
+	hide lfleg3;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 100;
+	}
+	show base;
+	show body;
+	show rfleg1;
+	show rfleg2;
+	show rfleg3;
+	show rrleg1;
+	show rrleg2;
+	show rrleg3;
+	show lrleg1;
+	show lrleg2;
+	show lrleg3;
+	show lfleg1;
+	show lfleg2;
+	show lfleg3;
+	start-script Walkscript();
+}
+
+StartMoving()
+{	bMoving = TRUE;		}
+
+StopMoving()
+{	bMoving = FALSE;	}
+
+SweetSpot(piecenum)
+{	piecenum = base;	}
+
+RestoreAfterDelay()
+{
+	sleep 10000;
+	call-script lua_Unfreeze();
+	aiming = 0;	
+}
+
+AimWeapon1(heading, pitch)
+{
+	aiming = 1;
+	call-script lua_Freeze();
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	sleep 800;	
+    return (1);
+}
+
+FireWeapon1()
+{
+	sleep 200;
+    start-script RestoreAfterDelay(); 	
+	return(1);
+}
+
+
+AimFromWeapon1(piecenum)
+{	piecenum = body;	}
+
+QueryWeapon1(piecenum)
+{	piecenum = emit;	}
+
+
+Killed(severity, corpsetype)
+{
+	emit-sfx 1024 + 0 from body;
+}

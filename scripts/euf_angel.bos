@@ -1,0 +1,231 @@
+#include "basic_spring_stuff.h"
+
+piece base, hip, chest, skirt, rshoulder, lshoulder, head, lwing, rwing, luparm, lloarm, lhand, ruparm, relbow, lelbow, rloarm, rhand, staff, blade, shield, rthumb, lthumb;
+
+static-var moving;
+static-var isaiming;
+static-var MOVEANIMATIONSPEED;
+
+
+#define	SIG_AIM1		2
+#define BOOM				1024+0
+#define SUMMONING			1025+0
+
+
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+Upanddown()
+{
+	while( TRUE )
+	{
+	move hip to y-axis [2] speed [2];
+	wait-for-move hip along y-axis;
+	move hip to y-axis [3] speed [1.5];
+	wait-for-move hip along y-axis;
+	move hip to y-axis [2] speed [1.5];
+	wait-for-move hip along y-axis;
+	move hip to y-axis [0] speed [2];
+	wait-for-move hip along y-axis;
+	}
+}
+
+Wings()
+{
+	while(1)
+	{
+		Turn rwing to x-axis <0> speed (MOVEANIMATIONSPEED*1);	
+		Turn rwing to y-axis <0> speed (MOVEANIMATIONSPEED*1);
+		Turn rwing to z-axis <0> speed (MOVEANIMATIONSPEED*1);
+		Turn lwing to x-axis <0> speed (MOVEANIMATIONSPEED*1);	
+		Turn lwing to y-axis <0> speed (MOVEANIMATIONSPEED*1);	
+		Turn lwing to z-axis <0> speed (MOVEANIMATIONSPEED*1);
+		wait-for-turn rwing around z-axis;
+		Turn rwing to x-axis <0> speed (MOVEANIMATIONSPEED/2);	
+		Turn rwing to y-axis <0> speed (MOVEANIMATIONSPEED/2);
+		Turn rwing to z-axis <33> speed (MOVEANIMATIONSPEED/2);
+		Turn lwing to x-axis <0> speed (MOVEANIMATIONSPEED/2);	
+		Turn lwing to y-axis <0> speed (MOVEANIMATIONSPEED/2);	
+		Turn lwing to z-axis <-33> speed (MOVEANIMATIONSPEED/2);
+		wait-for-turn rwing around z-axis;
+		Turn rwing to x-axis <0> speed (MOVEANIMATIONSPEED*1);	
+		Turn rwing to y-axis <0> speed (MOVEANIMATIONSPEED*1);
+		Turn rwing to z-axis <0> speed (MOVEANIMATIONSPEED*1);
+		Turn lwing to x-axis <0> speed (MOVEANIMATIONSPEED*1);	
+		Turn lwing to y-axis <0> speed (MOVEANIMATIONSPEED*1);	
+		Turn lwing to z-axis <0> speed (MOVEANIMATIONSPEED*1);
+		wait-for-turn rwing around z-axis;
+		Turn rwing to x-axis <0> speed (MOVEANIMATIONSPEED/2);
+		Turn rwing to y-axis <-20> speed (MOVEANIMATIONSPEED/2);	
+		Turn rwing to z-axis <-25> speed (MOVEANIMATIONSPEED/2);	
+		Turn lwing to x-axis <0> speed (MOVEANIMATIONSPEED/2);	
+		Turn lwing to y-axis <20> speed (MOVEANIMATIONSPEED/2);	
+		Turn lwing to z-axis <25> speed (MOVEANIMATIONSPEED/2);
+		wait-for-turn rwing around z-axis;
+	}
+}
+
+SkirtAnimation()
+{
+	while(1)
+	{
+		Turn skirt to x-axis <-5> speed <30>;
+		wait-for-turn skirt around x-axis;
+		Turn skirt to x-axis <-10> speed <20>;
+		wait-for-turn skirt around x-axis;
+		Turn skirt to x-axis <-5> speed <20>;
+		wait-for-turn skirt around x-axis;
+		Turn skirt to x-axis <5> speed <30>;
+		wait-for-turn skirt around x-axis;
+		Turn skirt to x-axis <10> speed <20>;
+		wait-for-turn skirt around x-axis;
+		Turn skirt to x-axis <0> speed <30>;
+		wait-for-turn skirt around x-axis;
+	}
+}
+
+//weapons  -----------------------------------------------------------------
+RestoreAfterDelay()
+{
+	sleep 3000;
+	isaiming = FALSE;
+	turn ruparm to x-axis <0> speed <200>;
+	turn rloarm to x-axis <0> speed <200>;	
+	turn rhand to x-axis <0> speed <200>;
+	turn staff to x-axis <0> speed <200>;
+	turn relbow to x-axis <0> speed <160>;
+	turn relbow to y-axis <0> speed <160>;
+	sleep 1000;
+}
+//weapon 2 -----------------------------------------------------------------
+AimWeapon1(heading, pitch)
+{
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	isaiming = TRUE;
+
+	turn ruparm to x-axis <-43> speed <200>;
+	turn rloarm to x-axis <-41> speed <200>;	
+	turn rhand to x-axis <63> speed <200>;
+	turn staff to x-axis <21> speed <200>;
+	
+	turn relbow to y-axis heading speed <160>;
+	turn relbow to x-axis <0> - pitch speed <160>;
+    wait-for-turn relbow around y-axis;
+	wait-for-turn relbow around x-axis;
+    start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+FireWeapon1()
+{
+//	emit-sfx FLARE from blade;
+	call-script lua_CreateLightMe(blade, 63, 225, 255, 120);
+	sleep 450;
+	call-script lua_DestroyLightMe();
+	return(1);
+}
+
+AimFromWeapon1(piecenum)
+{
+		piecenum = lelbow;
+}
+
+QueryWeapon1(piecenum)
+{
+		piecenum = blade;
+}
+//---------------------------------------------------------------------
+
+Create()
+{
+	hide base;
+	hide hip;
+	hide chest;
+	hide skirt;
+	hide rshoulder;
+	hide lshoulder;
+	hide head;
+	hide lwing;
+	hide rwing;
+	hide luparm;
+	hide lloarm;
+	hide lhand;
+	hide ruparm;
+	hide relbow;
+	hide lelbow;
+	hide rloarm;
+	hide rhand;
+	hide staff;
+	hide blade;
+	hide shield;
+	hide rthumb;
+	hide lthumb;	
+
+	move base to y-axis [30] now;
+	start-script Upanddown();
+	moving = FALSE;
+	isaiming = FALSE;
+	MOVEANIMATIONSPEED = (GET MAX_SPEED)/6;
+
+	while( get BUILD_PERCENT_LEFT )
+	{
+			emit-sfx SUMMONING from base;
+			sleep 50;
+			emit-sfx SUMMONING from shield;
+			sleep 50;
+			emit-sfx SUMMONING from blade;
+			sleep 50;
+			emit-sfx SUMMONING from head;
+			sleep 50;
+	}
+
+
+	show base;
+	show hip;
+	show chest;
+	show skirt;
+	show rshoulder;
+	show lshoulder;
+	show head;
+	show lwing;
+	show rwing;
+	show luparm;
+	show lloarm;
+	show lhand;
+	show ruparm;
+	show relbow;
+	show lelbow;
+	show rloarm;
+	show rhand;
+	show staff;
+	show blade;
+	show shield;
+	show rthumb;
+	show lthumb;		
+	
+	move base to y-axis [0] speed [20];
+	start-script Wings();	
+	start-script SkirtAnimation();
+	turn lelbow to x-axis <-35> speed <100>;
+	turn lelbow to y-axis <45> speed <80>;
+}
+
+StartMoving()
+{ moving = TRUE; }
+
+StopMoving()
+{ moving = FALSE; }
+
+SweetSpot (piecenum)
+{	piecenum = base;	}
+
+
+Killed(severity, corpsetype)
+{
+		sleep 400;
+		emit-sfx BOOM from head;
+		emit-sfx BOOM from chest;
+		return (0);
+}

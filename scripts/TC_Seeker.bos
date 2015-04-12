@@ -1,0 +1,26 @@
+#include "basic_spring_stuff.h"
+
+#define DEATHEXPLOSION		1024+0
+
+piece  base, hull, trail1;
+
+
+Activate()
+{}
+
+Deactivate()
+{}
+
+Create()
+{	}
+
+SweetSpot(piecenum)
+{
+	piecenum = base;
+}
+
+Killed(severity, corpsetype)
+{
+	corpsetype = 3;
+	emit-sfx DEATHEXPLOSION from hull;
+}

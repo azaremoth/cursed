@@ -1,0 +1,176 @@
+#include "basic_spring_stuff.h"
+
+piece base, torso, head, luparm, lloarm, lhand, rshoulder, ruparm, relbow, rloarm, rhand, staff, rthigh, rlleg, rfoot, lthigh, llleg, lfoot, emit_gun, emit_groundflash;
+
+static-var  Static_Var_1, statechg_DesiredState, statechg_StateChanging;
+
+#define	SIG_AIM1			2
+#define BOOM				1024+0
+#define FLARE				1025+0
+#define DOMINATE			1026+0
+#define GROUNDFLASH			1027+0
+
+#define BUILD_ANIMATION_SPEED <65>
+
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+ShieldOn()
+{
+	Static_Var_1 = 1;
+}
+
+ShieldOff()
+{
+	Static_Var_1 = 0;
+}
+
+InitState()
+{
+	statechg_DesiredState = TRUE;
+	statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+	if( statechg_StateChanging )
+	{
+		statechg_DesiredState = requestedstate;
+		return (0);
+	}
+	statechg_StateChanging = TRUE;
+	currentstate = statechg_DesiredState;
+	statechg_DesiredState = requestedstate;
+	while( statechg_DesiredState != currentstate )
+	{
+		if( statechg_DesiredState == 0 )
+		{
+			call-script ShieldOn();
+			currentstate = 0;
+		}
+		if( statechg_DesiredState == 1 )
+		{
+			call-script ShieldOff();
+			currentstate = 1;
+		}
+	}
+	statechg_StateChanging = FALSE;
+}
+
+Activate()
+{
+	start-script RequestState(0);
+}
+
+Deactivate()
+{
+	start-script RequestState(1);
+}
+
+
+Upanddown()
+{
+	while( TRUE )
+	{
+		move torso to y-axis [2] speed [2];
+		wait-for-move torso along y-axis;
+		move torso to y-axis [3] speed [1.5];
+		wait-for-move torso along y-axis;
+		move torso to y-axis [2] speed [1.5];
+		wait-for-move torso along y-axis;
+		move torso to y-axis [0] speed [2];
+		wait-for-move torso along y-axis;
+	}
+}
+
+Create()
+{
+	turn head to x-axis <-30> speed <300>;
+
+	turn lthigh to x-axis <-45> speed <300>;
+	turn llleg to x-axis <67> speed <300>;	
+	turn lfoot to x-axis <37> speed <300>;
+	turn rfoot to x-axis <37> speed <300>;		
+	
+	turn rthigh to x-axis <-23> speed <300>;
+	turn rlleg to x-axis <20> speed <300>;	
+	turn rlleg to x-axis <26> speed <300>;	
+
+	turn ruparm to x-axis <-55> speed <300>;
+	turn luparm to x-axis <-55> speed <300>;
+	turn rloarm to x-axis <-55> speed <300>;
+	turn lloarm to x-axis <-55> speed <300>;
+			
+	turn rhand to y-axis <-88> speed <300>;			
+	turn lhand to y-axis <-88> speed <300>;	
+
+	move staff to z-axis [2] speed [15];
+
+	move base to y-axis [10] speed [8];
+	turn base to y-axis <90> speed <500>;
+	wait-for-turn base around y-axis;
+	turn base to y-axis <180> speed <800>;
+	wait-for-turn base around y-axis;
+	turn base to y-axis <270> speed <1000>;	
+	wait-for-turn base around y-axis;		
+	turn base to y-axis <360> speed <1000>;	
+	wait-for-turn base around y-axis;
+	turn base to y-axis <90> speed <1000>;	
+	wait-for-turn base around y-axis;	
+	turn base to y-axis <180> speed <1000>;	
+	wait-for-turn base around y-axis;	
+	turn base to y-axis <270> speed <800>;	
+	wait-for-turn base around y-axis;
+	turn base to y-axis <360> speed <500>;	
+	wait-for-turn base around y-axis;			
+
+	spin base around y-axis speed <100> accelerate <500>;
+
+	Static_Var_1 = 1;
+	call-script InitState();
+	start-script Upanddown();
+}
+
+AimPrimary(heading, pitch)
+{
+	sleep 100;
+	return (Static_Var_1);
+}
+
+FirePrimary()
+{	sleep 100;	}
+
+QueryPrimary(piecenum)
+{	piecenum = base;	}
+
+AimFromPrimary(piecenum)
+{	piecenum = base;	}
+
+AimSecondary(heading, pitch)
+{
+	sleep 100;
+	return (Static_Var_1);
+}
+
+FireSecondary()
+{	sleep 100;	}
+
+QuerySecondary(piecenum)
+{	piecenum = base;	}
+
+AimFromSecondary(piecenum)
+{	piecenum = base;	}
+
+
+
+SweetSpot (piecenum)
+{	piecenum = base;	}
+
+Killed(severity, corpsetype)
+{
+		sleep 400;
+		emit-sfx BOOM from head;
+		emit-sfx BOOM from torso;
+		return (0);
+}

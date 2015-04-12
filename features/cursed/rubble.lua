@@ -1,0 +1,22 @@
+local objectname= "rubble" 
+local featureDef  =  {
+   name           = "rubble",
+   blocking       = false,
+   damage            = 1000,
+   description       = "cursed walls",
+   energy            = 0,
+   flammable         = 0,
+   nodrawundergray   = true,
+   footprintX        = 2,
+   footprintZ        = 2,
+   upright          = true,
+   height      		= "2",
+   hitdensity       = "1000",
+   metal            = 0,
+   object           = "empty.s3o",
+   nodrawundergray  = true,     
+   reclaimable		= false,
+   autoreclaimable	= false,
+   world            = "allworld",
+}
+return lowerkeys({[featureDef.name] = featureDef})

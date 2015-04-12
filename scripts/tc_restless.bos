@@ -1,0 +1,218 @@
+#include "basic_spring_stuff.h"
+
+piece base, chest, head, luparm, lloarm, rhand, lhand, ruparm, rloarm, belt, skirt, emit_r, emit_l;
+
+static-var moving;
+static-var BUILDTARGET;
+static-var ISBUILDING;
+static-var statechg_DesiredState;
+static-var statechg_StateChanging;
+static-var sleeptime;
+static-var isaiming;
+static-var buildcyclecount;
+
+#define	SIG_AIM1			2
+#define BUILDFX				1024+0
+#define BOOM				1025+0
+
+#define	buildcycles			5
+#define MOVEANIMATIONSPEED 		<10>
+#define buildtime 			100
+#define BUILD_ANIMATION_SPEED <65>
+
+Walkscript()
+{
+	while( TRUE )
+	{
+       	if(moving) 
+   		{
+ 		turn belt to x-axis <30> speed <40>;
+ 		turn head to x-axis <-30> speed <60>;
+   		}
+       	if(!moving) 
+   		{
+ 		turn belt to x-axis <0> speed <60>;
+ 		turn head to x-axis <0> speed <80>;
+   		}
+	sleep 1;
+	}
+}
+
+Upanddown()
+{
+	while( TRUE )
+	{
+	move belt to y-axis [2] speed [2];
+	wait-for-move belt along y-axis;
+	move belt to y-axis [3] speed [1.5];
+	wait-for-move belt along y-axis;
+	move belt to y-axis [2] speed [1.5];
+	wait-for-move belt along y-axis;
+	move belt to y-axis [0] speed [2];
+	wait-for-move belt along y-axis;
+	}
+}
+
+
+// Builder Stuff //////////////////////////
+StartBuilding(Func_Var_1)
+{
+	sleep 200;
+	BUILDTARGET = Func_Var_1;
+	ISBUILDING = 1;
+}
+
+StopBuilding()
+{
+	ISBUILDING = 0;
+	turn chest to x-axis <0> speed BUILD_ANIMATION_SPEED;
+	turn head to x-axis <0> speed BUILD_ANIMATION_SPEED;
+	turn ruparm to x-axis <0> speed <100>;
+	turn luparm to x-axis <0> speed <100>;	
+	wait-for-turn ruparm around z-axis;
+}
+
+BuildingAnimation()
+{
+	while (TRUE)
+	{
+		if (ISBUILDING)
+		{
+			turn ruparm to x-axis <-90> speed BUILD_ANIMATION_SPEED;
+			turn luparm to x-axis <-50> speed BUILD_ANIMATION_SPEED;
+			wait-for-turn luparm around x-axis;			
+			turn ruparm to x-axis <-50> speed BUILD_ANIMATION_SPEED;
+			turn luparm to x-axis <-90> speed BUILD_ANIMATION_SPEED;
+			wait-for-turn luparm around x-axis;						
+		}
+		if(ISBUILDING)
+		{
+			turn chest to y-axis BUILDTARGET speed <150.000000>;
+			set INBUILDSTANCE to 1;		
+		}
+		if(ISBUILDING == 0)
+		{
+			turn chest to y-axis <0> speed <100>;
+			set INBUILDSTANCE to 0;
+		}
+	sleep 10;
+	}
+}
+
+BuildingFX()
+{
+	while (TRUE)
+	{
+		if (ISBUILDING)
+		{
+			emit-sfx BUILDFX from emit_r;
+			emit-sfx BUILDFX from emit_l;			
+		}
+	sleep 100;
+	}
+}
+
+
+
+QueryNanoPiece(piecenum)
+{	piecenum = emit_r;	}
+
+///////////////////////////////////////////
+
+//weapon 1 -----------------------------------------------------------------
+
+RestoreAfterDelay()
+{
+
+	sleep 1000;
+	isaiming = FALSE;
+	turn head to y-axis <0> speed <55>;
+	turn head to x-axis <0> speed <30>;	
+	turn chest to x-axis <0> speed <55>;	
+	turn chest to y-axis <0> speed <55>;
+	sleep 4000;
+	turn luparm to x-axis <-20> speed <30>;	
+	turn luparm to y-axis <0> speed <30>;	
+	turn luparm to z-axis <-50> speed <30>;	
+	turn lloarm to x-axis <0> speed <30>;
+	turn lloarm to y-axis <50> speed <30>;
+	turn lloarm to z-axis <-40> speed <30>;
+}
+
+AimWeapon1(heading, pitch)
+{
+	if (ISBUILDING)
+		{
+		return (0);
+		}
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	isaiming = TRUE;
+	turn luparm to x-axis <0> speed <120>;	
+	turn luparm to y-axis <0> speed <120>;	
+	turn luparm to z-axis <0> speed <120>;	
+	turn lloarm to x-axis <-20> speed <120>;
+	turn lloarm to y-axis <-320> speed <120>;
+	turn lloarm to z-axis <45> speed <120>;
+	turn chest to y-axis heading speed <160>;
+	turn head to y-axis heading speed <160>;
+	turn head to x-axis <0> - pitch speed <160>;
+    wait-for-turn head around y-axis;
+	wait-for-turn head around x-axis;
+    start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+FireWeapon1()
+{
+	turn luparm to x-axis <-40> speed <500>;	
+	turn luparm to y-axis <-35> speed <500>;	
+	turn luparm to z-axis <-70> speed <500>;	
+	turn lloarm to x-axis <-315> speed <500>;
+	turn lloarm to y-axis <11> speed <500>;
+	turn lloarm to z-axis <-440> speed <500>;
+	turn chest to x-axis <10> speed <500>;
+	sleep 200;
+	return(1);
+}
+
+//AimFromWeapon
+
+AimFromWeapon1(piecenum)
+{
+		piecenum = lloarm;
+}
+
+QueryWeapon1(piecenum)
+{
+		piecenum = emit_r;
+}
+
+
+Create()
+{
+	moving = FALSE;
+	isaiming = FALSE;
+	start-script Upanddown();
+	start-script Walkscript();
+	start-script BuildingAnimation();
+	start-script BuildingFX();	
+}
+
+StartMoving()
+{ moving = TRUE; }
+
+StopMoving()
+{ moving = FALSE; }
+
+SweetSpot (piecenum)
+{	piecenum = base;	}
+
+
+Killed(severity, corpsetype)
+{
+		sleep 400;
+		emit-sfx BOOM from head;
+		emit-sfx BOOM from chest;
+		return (0);
+}

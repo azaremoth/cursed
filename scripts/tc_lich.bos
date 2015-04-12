@@ -1,0 +1,353 @@
+#include "basic_spring_stuff.h"
+
+piece base, chest, neck, head, luparm, lloarm, finger1, finger2, finger3, finger4, ruparm, rloarm, rhand, staff, cloth1, cloth2, cloth3, cloth4, cloth5, cloth6, tail1, tail2, tail3, tail4, tail5, tail6, tail7, tail8, tail9, tail10, tail11, tail12, tail13, tail14, tail15, tail16, tail17, tail18, tail19, tail20, emit_gun, emit_summon, emit_build;
+
+static-var moving;
+static-var BUILDTARGET;
+static-var ISBUILDING;
+static-var statechg_DesiredState;
+static-var statechg_StateChanging;
+static-var sleeptime;
+static-var isaiming;
+
+#define	SIG_AIM1			2
+#define SUMMONING			1024+0
+#define BOOM				1025+0
+#define PENTAGRAM			1026+0
+
+#define MOVEANIMATIONSPEED 		<10>
+#define BUILD_ANIMATION_SPEED <65>
+
+Walkscript()
+{
+	while( TRUE )
+	{
+       	if(moving) 
+   		{
+ 		turn chest to x-axis <30> speed <40>;
+ 		turn neck to x-axis <-30> speed <60>;
+   		}
+       	if(!moving) 
+   		{
+ 		turn chest to x-axis <0> speed <60>;
+ 		turn neck to x-axis <0> speed <80>;
+   		}
+	sleep 1;
+	}
+}
+
+Upanddown()
+{
+	while( TRUE )
+	{
+	move chest to y-axis [2] speed [2];
+	wait-for-move chest along y-axis;
+	move chest to y-axis [3] speed [1.5];
+	wait-for-move chest along y-axis;
+	move chest to y-axis [2] speed [1.5];
+	wait-for-move chest along y-axis;
+	move chest to y-axis [0] speed [2];
+	wait-for-move chest along y-axis;
+	}
+}
+
+Clothanimation()
+{
+	while( TRUE )
+	{
+	if ( !moving )
+		{
+		turn cloth2 to x-axis <-20> speed MOVEANIMATIONSPEED*2;
+		turn cloth3 to x-axis <-20> speed MOVEANIMATIONSPEED*2;
+		}
+	if ( moving )
+		{
+		turn cloth2 to x-axis <20> speed MOVEANIMATIONSPEED*2;
+		turn cloth3 to x-axis <20> speed MOVEANIMATIONSPEED*2;
+		}
+	turn cloth5 to x-axis <20> speed MOVEANIMATIONSPEED*2;
+	turn cloth6 to x-axis <20> speed MOVEANIMATIONSPEED*2;
+	wait-for-turn cloth6 around x-axis;
+	if ( !moving )
+		{
+		turn cloth2 to x-axis <-30> speed MOVEANIMATIONSPEED;
+		turn cloth3 to x-axis <-30> speed MOVEANIMATIONSPEED;
+		}
+	if ( moving )
+		{
+		turn cloth2 to x-axis <30> speed MOVEANIMATIONSPEED;
+		turn cloth3 to x-axis <30> speed MOVEANIMATIONSPEED;
+		}
+	turn cloth5 to x-axis <30> speed MOVEANIMATIONSPEED;
+	turn cloth6 to x-axis <30> speed MOVEANIMATIONSPEED;	
+	wait-for-turn cloth6 around x-axis;	
+	if ( !moving )
+		{
+		turn cloth2 to x-axis <-20> speed MOVEANIMATIONSPEED;
+		turn cloth3 to x-axis <-20> speed MOVEANIMATIONSPEED;
+		}
+	if ( moving )
+		{
+		turn cloth2 to x-axis <20> speed MOVEANIMATIONSPEED;
+		turn cloth3 to x-axis <20> speed MOVEANIMATIONSPEED;
+		}
+	turn cloth5 to x-axis <20> speed MOVEANIMATIONSPEED;
+	turn cloth6 to x-axis <20> speed MOVEANIMATIONSPEED;
+	wait-for-turn cloth6 around x-axis;	
+	turn cloth2 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+	turn cloth3 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+	turn cloth5 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+	turn cloth6 to x-axis <0> speed MOVEANIMATIONSPEED*2;	
+	sleep 100;
+	}
+}
+
+Tailanimation()
+{
+	while( TRUE )
+	{
+		turn tail3 to z-axis <-20> speed MOVEANIMATIONSPEED*4;
+		turn tail7 to z-axis <-30> speed MOVEANIMATIONSPEED*3;
+		turn tail12 to z-axis <20> speed MOVEANIMATIONSPEED*4;
+		turn tail17 to z-axis <30> speed MOVEANIMATIONSPEED*3;
+		turn tail4 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+		turn tail8 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+		turn tail13 to x-axis <0> speed MOVEANIMATIONSPEED*3;
+		turn tail18 to x-axis <0> speed MOVEANIMATIONSPEED*2;
+		sleep 350;
+		turn tail3 to z-axis <-40> speed MOVEANIMATIONSPEED*2;
+		turn tail7 to z-axis <-50> speed MOVEANIMATIONSPEED*3;
+		turn tail12 to z-axis <40> speed MOVEANIMATIONSPEED*2;
+		turn tail17 to z-axis <45> speed MOVEANIMATIONSPEED*2;	
+		turn tail4 to x-axis <-20> speed MOVEANIMATIONSPEED*2;
+		turn tail8 to x-axis <-30> speed MOVEANIMATIONSPEED*3;
+		turn tail13 to x-axis <20> speed MOVEANIMATIONSPEED*3;
+		turn tail18 to x-axis <30> speed MOVEANIMATIONSPEED*2;
+		sleep 350;
+		turn tail3 to z-axis <-30> speed MOVEANIMATIONSPEED*2;
+		turn tail7 to z-axis <-25> speed MOVEANIMATIONSPEED*2;
+		turn tail12 to z-axis <30> speed MOVEANIMATIONSPEED*2;
+		turn tail17 to z-axis <20> speed MOVEANIMATIONSPEED*2;
+		turn tail4 to x-axis <-40> speed MOVEANIMATIONSPEED*4;
+		turn tail8 to x-axis <-50> speed MOVEANIMATIONSPEED*3;
+		turn tail13 to x-axis <40> speed MOVEANIMATIONSPEED*4;
+		turn tail18 to x-axis <30> speed MOVEANIMATIONSPEED*3;
+		sleep 350;
+		turn tail3 to z-axis <0> speed MOVEANIMATIONSPEED*3;
+		turn tail7 to z-axis <0> speed MOVEANIMATIONSPEED*4;
+		turn tail12 to z-axis <0> speed MOVEANIMATIONSPEED*3;
+		turn tail17 to z-axis <0> speed MOVEANIMATIONSPEED*4;	
+		turn tail4 to x-axis <-20> speed MOVEANIMATIONSPEED*2;
+		turn tail8 to x-axis <-30> speed MOVEANIMATIONSPEED*2;
+		turn tail13 to x-axis <20> speed MOVEANIMATIONSPEED*2;
+		turn tail18 to x-axis <30> speed MOVEANIMATIONSPEED*2;
+		sleep 350;
+	}
+}
+// Builder Stuff //////////////////////////
+StartBuilding(Func_Var_1)
+{
+	turn chest to x-axis <-15> speed BUILD_ANIMATION_SPEED;
+	turn neck to x-axis <-40> speed BUILD_ANIMATION_SPEED;
+
+	turn luparm to x-axis <0> speed BUILD_ANIMATION_SPEED;	
+	turn luparm to y-axis <0> speed BUILD_ANIMATION_SPEED;	
+	turn luparm to z-axis <0> speed BUILD_ANIMATION_SPEED;	
+
+	turn lloarm to x-axis <-160> speed BUILD_ANIMATION_SPEED;
+	turn rloarm to x-axis <-70> speed BUILD_ANIMATION_SPEED;
+
+	turn ruparm to x-axis <0> speed BUILD_ANIMATION_SPEED;	
+	turn ruparm to y-axis <0> speed BUILD_ANIMATION_SPEED;	
+	turn ruparm to z-axis <0> speed BUILD_ANIMATION_SPEED;
+	
+	sleep 200;
+
+	BUILDTARGET = Func_Var_1;
+	ISBUILDING = 1;
+}
+
+StopBuilding()
+{
+	ISBUILDING = 0;
+	turn chest to x-axis <0> speed BUILD_ANIMATION_SPEED;
+	turn neck to x-axis <0> speed BUILD_ANIMATION_SPEED;
+	turn luparm to x-axis <-20> speed BUILD_ANIMATION_SPEED;	
+	turn luparm to y-axis <0> speed BUILD_ANIMATION_SPEED;	
+	turn luparm to z-axis <-50> speed BUILD_ANIMATION_SPEED;	
+	turn lloarm to x-axis <0> speed BUILD_ANIMATION_SPEED;
+	turn lloarm to y-axis <50> speed BUILD_ANIMATION_SPEED;
+	turn lloarm to z-axis <-40> speed BUILD_ANIMATION_SPEED;
+	turn ruparm to x-axis <0> speed BUILD_ANIMATION_SPEED;
+	turn ruparm to y-axis <0> speed BUILD_ANIMATION_SPEED;
+	turn ruparm to z-axis <40> speed BUILD_ANIMATION_SPEED;
+	turn rloarm to x-axis <-40> speed BUILD_ANIMATION_SPEED;
+	turn rloarm to z-axis <25> speed BUILD_ANIMATION_SPEED;
+	wait-for-turn ruparm around z-axis;
+}
+
+BuildingAnimation()
+{
+	while (TRUE)
+	{
+		if (ISBUILDING)
+		{
+			turn ruparm to x-axis <-90> speed BUILD_ANIMATION_SPEED;
+			emit-sfx PENTAGRAM from emit_summon;
+			sleep 650;
+			turn ruparm to x-axis <-50> speed BUILD_ANIMATION_SPEED;
+			sleep 650;
+		}
+		if(ISBUILDING)
+		{
+			turn chest to y-axis BUILDTARGET speed <150.000000>;
+			set INBUILDSTANCE to 1;		
+		}
+		if(ISBUILDING == 0)
+		{
+			turn chest to y-axis <0.000000> speed <100.000000>;
+			set INBUILDSTANCE to 0;
+		}
+	sleep 10;
+	}
+}
+
+QueryNanoPiece(piecenum)
+{	piecenum = emit_build;	}
+
+///////////////////////////////////////////
+
+//weapon 1 -----------------------------------------------------------------
+
+RestoreAfterDelay()
+{
+
+	sleep 1000;
+	isaiming = FALSE;
+	turn neck to y-axis <0> speed <55>;
+	turn head to x-axis <0> speed <30>;	
+	turn chest to x-axis <0> speed <55>;	
+	turn chest to y-axis <0> speed <55>;
+	sleep 4000;
+	turn luparm to x-axis <-20> speed <30>;	
+	turn luparm to y-axis <0> speed <30>;	
+	turn luparm to z-axis <-50> speed <30>;	
+	turn lloarm to x-axis <0> speed <30>;
+	turn lloarm to y-axis <50> speed <30>;
+	turn lloarm to z-axis <-40> speed <30>;
+	turn finger1 to z-axis <0> speed <55>;
+	turn finger2 to z-axis <0> speed <55>;
+	turn finger3 to z-axis <0> speed <55>;
+	turn finger4 to y-axis <0> speed <55>;
+}
+
+AimWeapon1(heading, pitch)
+{
+	if (ISBUILDING)
+		{
+		return (0);
+		}
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	isaiming = TRUE;
+	turn luparm to x-axis <0> speed <120>;	
+	turn luparm to y-axis <0> speed <120>;	
+	turn luparm to z-axis <0> speed <120>;	
+	turn lloarm to x-axis <-20> speed <120>;
+	turn lloarm to y-axis <-320> speed <120>;
+	turn lloarm to z-axis <45> speed <120>;
+	turn finger1 to z-axis <60> speed <55>;
+	turn finger2 to z-axis <40> speed <55>;
+	turn finger3 to z-axis <45> speed <55>;
+	turn finger4 to y-axis <55> speed <55>;
+	turn chest to y-axis heading speed <160>;
+	turn neck to y-axis heading speed <160>;
+	turn head to x-axis <0> - pitch speed <160>;
+    wait-for-turn neck around y-axis;
+	wait-for-turn head around x-axis;
+    start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+FireWeapon1()
+{
+	turn luparm to x-axis <-40> speed <500>;	
+	turn luparm to y-axis <-35> speed <500>;	
+	turn luparm to z-axis <-70> speed <500>;	
+	turn lloarm to x-axis <-315> speed <500>;
+	turn lloarm to y-axis <11> speed <500>;
+	turn lloarm to z-axis <-440> speed <500>;
+	turn chest to x-axis <10> speed <500>;
+	sleep 200;
+	return(1);
+}
+
+//AimFromWeapon
+
+AimFromWeapon1(piecenum)
+{
+		piecenum = lloarm;
+}
+
+QueryWeapon1(piecenum)
+{
+		piecenum = emit_gun;
+}
+
+Create()
+{
+	hide emit_gun;
+	moving = FALSE;
+	isaiming = FALSE;
+	turn emit_summon to x-axis <-90> now;
+
+	turn head to x-axis <-25> now;
+	
+	turn ruparm to x-axis <-75> now;
+	turn ruparm to y-axis <15> now;
+	turn ruparm to z-axis <15> now;
+	turn rloarm to x-axis <25> now;
+	turn rloarm to y-axis <-25> now;		
+	turn rloarm to z-axis <11> now;
+
+	turn luparm to x-axis <5> now;
+	turn luparm to y-axis <-5> now;
+	turn luparm to z-axis <-20> now;
+	turn lloarm to x-axis <-35> now;
+	turn lloarm to y-axis <80> now;		
+	turn lloarm to z-axis <30> now;
+	
+	turn head to x-axis <0> speed <150>;
+
+	turn luparm to z-axis <-50> speed <150>;	
+	turn luparm to x-axis <-20> speed <150>;
+	turn lloarm to z-axis <-40> speed <150>;
+	turn lloarm to y-axis <50> speed <150>;
+	turn ruparm to z-axis <40> speed <150>;
+	turn rloarm to x-axis <-40> speed <150>;
+	turn rloarm to z-axis <25> speed <150>;
+
+	start-script Upanddown();
+	start-script Clothanimation();
+	start-script Tailanimation();
+	start-script Walkscript();
+	start-script BuildingAnimation();
+}
+
+StartMoving()
+{ moving = TRUE; }
+
+StopMoving()
+{ moving = FALSE; }
+
+SweetSpot (piecenum)
+{	piecenum = base;	}
+
+
+Killed(severity, corpsetype)
+{
+		sleep 400;
+		emit-sfx BOOM from head;
+		emit-sfx BOOM from chest;
+		return (0);
+}

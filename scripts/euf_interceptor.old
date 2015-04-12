@@ -1,0 +1,148 @@
+include "constants.lua"
+
+local base = piece 'base'
+local hull = piece 'hull'
+local gun1 = piece 'gun1'
+local gun2 = piece 'gun2'
+local wing1 = piece 'wing1'
+local wing2 = piece 'wing2'
+local engine1 = piece 'engine1'
+local engine2 = piece 'engine2'
+local emit_gun1 = piece 'emit_gun1'
+local emit_gun2 = piece 'emit_gun2'
+local emit_thrust1 = piece 'emit_thrust1'
+local emit_thrust2 = piece 'emit_thrust2'
+
+local BOOM	 = 1024+0
+local SMOKE	 = 1025+0
+
+
+--signals
+local SIG_Aim = 1
+local SIG_Aim2 = 4
+
+--cob values and variables
+local CRASHING = 97
+local iscrashing = 0
+local isflying = 0
+
+local function DamageControl()
+	while true do
+	health = Spring.GetUnitHealth(unitID)
+	if health < 200 then
+		EmitSfx(base, SMOKE)
+	end
+	local x, y, z = Spring.GetUnitPosition(unitID)
+	if (y < 50) then
+		if (health < 50) then
+			iscrashing = 1
+			Spring.SetUnitCrashing(unitID, true)
+		end
+		Turn(wing2, z_axis, math.rad(-70), 2)
+		Turn(wing1, z_axis, math.rad(70), 2)
+	else 
+		Turn(wing2, z_axis, math.rad(10), 2)
+		Turn(wing1, z_axis, math.rad(-10), 2)
+	end
+	Sleep(500)		
+	end
+end
+
+function script.Activate()
+	isflying = 1
+end
+
+function script.Deactivate()
+	isflying = 0
+end
+
+function script.HitByWeapon ( x, z, weaponDefID, damage )
+	return(damage)
+end
+
+function script.Create()
+
+	  iscrashing = 0
+	
+	  Hide (wing1)
+	  Hide (wing2)	 
+	  Hide (engine1)
+	  Hide (engine2)	
+
+	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
+		Sleep(100)
+	end
+	
+	  Show (wing1)
+	  Show (wing2)	 
+	  Show (engine1)
+	  Show (engine2)	
+	  
+	Turn(wing2, z_axis, math.rad(-70))
+	Turn(wing1, z_axis, math.rad(70))
+	StartThread( DamageControl )	
+end
+
+function script.MoveRate(moveRate)
+
+	if moveRate == 2 then
+		if  not Static_Var_1   then
+		
+			Static_Var_1 = 1
+			Turn( base , z_axis, math.rad(-(240.000000)), 120.000000 )
+			WaitForTurn(base, z_axis)
+			Turn( base , z_axis, math.rad(-(120.000000)), 180.000000 )
+			WaitForTurn(base, z_axis)
+			Turn( base , z_axis, math.rad(-(0.000000)), 120.000000 )
+			Static_Var_1 = 0
+		end
+	end
+end
+
+function script.Shot1 ()
+end
+
+function script.Shot2 ()
+end
+
+function script.QueryWeapon1()
+	 return emit_gun1
+end
+
+function script.QueryWeapon2()
+	 return emit_gun2
+end
+
+function script.AimFromWeapon1() return base end
+
+function script.AimFromWeapon2() return base end
+
+function script.AimWeapon1(heading, pitch)
+	if ((iscrashing == 1) or (isflying == 0)) then return false end
+	return true
+end
+
+function script.AimWeapon2(heading, pitch)
+	if ((iscrashing == 1) or (isflying == 0)) then return false end
+	return true
+end
+
+function script.Killed(recentDamage, maxHealth)
+	local severity = (recentDamage/maxHealth) * 100
+	if severity < 50 then
+		EmitSfx(base, BOOM)
+		Explode(wing2, sfxNone)
+		Explode(wing1, sfxNone)
+		return 1
+	elseif severity < 100 then
+		EmitSfx(base, BOOM)
+		Explode(wing2, sfxFall + sfxSmoke)
+		Explode(wing1, sfxFall + sfxSmoke)
+		return 2
+	else
+		EmitSfx(base, BOOM)
+		Explode(wing2, sfxSmoke + sfxExplode)
+		Explode(wing1, sfxSmoke + sfxExplode)
+		return 3
+	end
+end

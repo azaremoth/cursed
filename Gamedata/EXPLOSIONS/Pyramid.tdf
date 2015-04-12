@@ -1,0 +1,45 @@
+[DOORSPIKES]
+{
+	[spikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=3;
+			length=5;
+			alpha=1;
+			alphadecay=0.18;
+			color=0.5, 1.0, 0.15;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=4; 
+	}
+}
+
+[DOORGLOW]
+{
+   [BitmapMuzzleFlame]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+         dir = dir; // don't touch me
+         colorMap=0.8745 1 0.1568 1		0.77 1 0.13 0.8		0.8745 1 0.1568 1; 
+         size=63;
+         length=63;
+         sizeGrowth=0;
+         ttl=31;
+         frontOffset=0;
+	   frontTexture=doorglow;
+	   sideTexture=null_texture;
+      }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}

@@ -1,0 +1,188 @@
+#include "basic_spring_stuff.h"
+
+piece  base, body, turret, gun, rotate_r, rotate_l, emit_r, emit_l, emit_rr, emit_rl, front_point, rear_point, left_point, right_point, emit_rgroundflash, emit_lgroundflash;
+
+static-var OverWater;
+static-var WaterDepth;
+static-var weapon;
+
+#define	SIG_AIM1			2
+#define GUNFLARE		1024+0
+#define HOVER_WATERCLOUD	1025+0
+#define GROUNDFLASH			1026+0
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from body;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+
+Upanddown()
+{
+	while( TRUE )
+	{
+	move body to y-axis [2] speed [2];
+	wait-for-move body along y-axis;
+	move body to y-axis [3] speed [1.5];
+	wait-for-move body along y-axis;
+	move body to y-axis [2] speed [1.5];
+	wait-for-move body along y-axis;
+	move body to y-axis [0] speed [2];
+	wait-for-move body along y-axis;
+	}
+}
+
+CheckWaterDepth()
+{
+	while(TRUE)
+	{
+	WaterDepth = get GROUND_HEIGHT(get PIECE_XZ(base));
+   		If( WaterDepth != 0 )
+   		{
+   			OverWater = 0;
+   		}
+   		If( WaterDepth == 0 )
+   		{
+   			OverWater = 1;
+   		}
+   		sleep 500;
+   	}
+   	return(0);
+}
+
+SlopeAdjust()
+{
+	var x-slope, z-slope;
+	while(TRUE)
+		{
+			x-slope=get ATAN (((get GROUND_HEIGHT(get PIECE_XZ(rear_point))) - (get GROUND_HEIGHT(get PIECE_XZ(front_point)))),((get XZ_HYPOT( ((get PIECE_XZ(rear_point)) - (get PIECE_XZ(front_point)))))));
+			z-slope=get ATAN (((get GROUND_HEIGHT(get PIECE_XZ(right_point))) - (get GROUND_HEIGHT(get PIECE_XZ(left_point)))),((get XZ_HYPOT( ((get PIECE_XZ(right_point)) - (get PIECE_XZ(left_point)))))));
+			turn body to x-axis x-slope speed <300>;
+			turn body to z-axis z-slope speed <300>;
+			sleep 400;
+		}
+		return(0);
+}
+
+EmitBubbles()
+{
+	while(TRUE)
+	{
+		sleep 400;
+		if(OverWater == 1)
+		{	
+			emit-sfx HOVER_WATERCLOUD from base;
+		}
+	}
+}
+
+//weapon 1 -----------------------------------------------------------------
+
+RestoreAfterDelay()
+{
+	sleep 5000;
+	turn turret to y-axis <0.000000> speed <55.000000>;
+	turn gun to x-axis <0.000000> speed <30.000000>;
+}
+
+AimWeapon1(heading, pitch)
+{
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	turn turret to y-axis heading speed <160.000000>;
+	turn gun to x-axis <0.000000> - pitch speed <160.000000>;
+    wait-for-turn turret around y-axis;
+	wait-for-turn gun around x-axis;
+    start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+FireWeapon1()
+{
+		if (weapon > 0)
+		{
+			emit-sfx GUNFLARE from emit_r;
+			emit-sfx GUNFLARE from emit_rr;			
+//			emit-sfx GROUNDFLASH from emit_rgroundflash;
+//			call-script lua_CreateLightMe(emit_r, 96, 255, 0, 96);
+
+		}
+		if (weapon < 0)
+		{
+			emit-sfx GUNFLARE from emit_l;
+			emit-sfx GUNFLARE from emit_rl;			
+//			emit-sfx GROUNDFLASH from emit_lgroundflash;
+//			call-script lua_CreateLightMe(emit_l, 96, 255, 0, 96);
+		}
+		sleep 50;
+//		call-script lua_DestroyLightMe();
+		weapon=weapon*(-1);
+		return(1);
+}
+
+//AimFromWeapon
+
+AimFromWeapon1(piecenum)
+{
+		piecenum = gun;
+}
+
+QueryWeapon1(piecenum)
+{
+		if (weapon > 0)
+		{		piecenum = emit_r;		}
+		if (weapon < 0)
+		{		piecenum = emit_l;		}
+}
+
+
+Create()
+{
+	//////////////////////////////////START BUILD CYCLE
+	Weapon=1;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 100;
+	}
+	spin rotate_r around z-axis speed <100> accelerate <500>;
+	spin rotate_l around z-axis speed <100> accelerate <500>;
+	start-script SmokeUnit();
+	start-script EmitBubbles();
+	start-script CheckWaterDepth();
+	start-script SlopeAdjust();
+	start-script Upanddown();
+}
+
+Killed(severity, corpsetype)
+{
+		sleep 200;
+		explode turret type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP;
+		explode gun type FALL | SMOKE | FIRE | EXPLODE_ON_HIT | BITMAP;
+		return (0);
+}

@@ -1,0 +1,274 @@
+piece  base, hull, thrust1, thrust2, thrust3, bigturret, bigsleeve, bemit, mturret, mlasers, memit1, memit2, rturret, rsleeve, rlasers, remit1, remit2, lturret, lsleeve, llasers, lemit1, lemit2;
+static-var  gun1, gun2, gun3, RestoreDelay;
+
+#include "sfxtype.h"
+#include "exptype.h"
+
+#define SIG_AIM				2
+#define SIG_AIM_2			4
+#define SIG_AIM_4			16
+#define SIG_AIM_8		    256
+
+#define BOOM		1024+0
+#define SMALLGUNFLARE	1025+0
+#define BIGGUNFLARE		1026+0
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from hull;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+
+Create()
+{
+	gun1=1;
+	gun2=1;
+	gun3=1;
+	RestoreDelay = 5000;
+	start-script SmokeUnit();
+}
+
+StartMoving()
+{ }
+	
+StopMoving()
+{ }
+
+RestoreAfterDelay()
+{
+	sleep RestoreDelay;
+	turn bigturret to y-axis <0> speed <55>;
+	turn bigsleeve to x-axis <0> speed <30>;
+	turn rturret to x-axis <0> speed <55>;
+	turn rsleeve to y-axis <0> speed <30>;	
+	turn lturret to x-axis <0> speed <55>;
+	turn lsleeve to y-axis <0> speed <30>;
+	turn mturret to x-axis <0> speed <55>;
+	turn mturret to y-axis <0> speed <30>;	
+    gun1 = 1;
+    gun2 = 1;
+    gun3 = 1;        
+}
+
+////////////////////////////Weapon 1
+
+AimWeapon1(heading, pitch)
+{
+	signal SIG_AIM;
+	set-signal-mask SIG_AIM;
+	turn bigturret to y-axis heading speed <160.000000>;
+	turn bigsleeve to x-axis <0.000000> - pitch speed <160.000000>;
+    wait-for-turn bigturret around y-axis;
+	wait-for-turn bigsleeve around x-axis;
+	start-script RestoreAfterDelay();
+    return (1);
+}
+
+FireWeapon1()
+{
+	emit-sfx BIGGUNFLARE from bemit;	
+	call-script lua_CreateLightMe(bemit, 50, 50, 255, 96);
+	sleep 150;
+	call-script lua_DestroyLightMe();
+	return (1);
+}
+
+AimFromWeapon1(piecenum)
+{	piecenum = bigturret; }
+
+QueryWeapon1(piecenum)
+{	piecenum = bemit; }
+
+////////////////////////////Weapon 2
+
+AimWeapon2(heading, pitch)
+{
+	signal SIG_AIM_2;
+	set-signal-mask SIG_AIM_2;
+	turn mturret to y-axis heading speed <160.000000>;
+	turn mturret to x-axis <0.000000> - pitch speed <160.000000>;
+    wait-for-turn mturret around y-axis;
+	wait-for-turn mturret around x-axis;
+	start-script RestoreAfterDelay();
+    return (1);
+}
+
+FireWeapon2() 
+{ 
+   if( gun1 < 0 )
+   { 
+		emit-sfx SMALLGUNFLARE from memit1;	
+		call-script lua_CreateLightMe(memit1, 255, 0, 0, 96);
+		sleep 75;
+		call-script lua_DestroyLightMe();
+		gun1 = gun1*(-1);
+		return (1);
+   }
+   if( gun1 == 1 ) 
+   { 
+		emit-sfx SMALLGUNFLARE from memit2;	
+		call-script lua_CreateLightMe(memit2, 255, 0, 0, 96);
+		sleep 75;
+		call-script lua_DestroyLightMe();
+		gun1 = gun1*(-1);
+		return (1);
+   }
+} 
+
+AimFromWeapon2(piecenum)
+{	 piecenum = mturret; }
+
+QueryWeapon2(piecenum)
+{
+   if( gun1 < 0 ) 
+   { 
+		piecenum = memit1;
+   }
+   if( gun1 > 0 ) 
+   { 
+		piecenum = memit2;
+   }
+}
+
+////////////////////////////Weapon 3
+
+AimWeapon3(heading, pitch)
+{
+	signal SIG_AIM_4;
+	set-signal-mask SIG_AIM_4;
+	turn lsleeve to y-axis <0> - heading speed <160>;
+	turn lturret to x-axis <0> - pitch speed <160>;
+    wait-for-turn lsleeve around y-axis;
+	wait-for-turn lturret around x-axis;
+	start-script RestoreAfterDelay();
+    return (1);
+}
+
+FireWeapon3() 
+{ 
+   if( gun2 < 0 ) 
+   { 
+		emit-sfx SMALLGUNFLARE from lemit1;	
+		call-script lua_CreateLightMe(lemit1, 255, 0, 0, 96);
+		sleep 75;
+		call-script lua_DestroyLightMe();
+		gun2 = gun2*(-1);
+		return (1);
+   }
+   if( gun2 > 0 ) 
+   { 
+		emit-sfx SMALLGUNFLARE from lemit2;	
+		call-script lua_CreateLightMe(lemit2, 255, 0, 0, 96);
+		sleep 75;
+		call-script lua_DestroyLightMe();
+		gun2 = gun2*(-1);
+		return (1);
+   }
+} 
+
+AimFromWeapon3(piecenum)
+{	 piecenum = lturret; }
+
+QueryWeapon3(piecenum)
+{
+   if( gun2 < 0 ) 
+   { 
+		piecenum = lemit1;
+   }
+   if( gun2 > 0 ) 
+   { 
+		piecenum = lemit2;
+   }
+}
+
+////////////////////////////Weapon 4
+
+AimWeapon4(heading, pitch)
+{
+	signal SIG_AIM_8;
+	set-signal-mask SIG_AIM_8;
+	turn rsleeve to y-axis <0> - heading speed <160>;
+	turn rturret to x-axis <0> - pitch speed <160>;
+    wait-for-turn rsleeve around y-axis;
+	wait-for-turn rturret around x-axis;
+	start-script RestoreAfterDelay();
+    return (1);
+}
+
+FireWeapon4() 
+{ 
+   if( gun3 < 0 ) 
+   { 
+		emit-sfx SMALLGUNFLARE from remit1;	
+		call-script lua_CreateLightMe(remit1, 255, 0, 0, 96);
+		sleep 75;
+		call-script lua_DestroyLightMe();
+		gun3 = gun3*(-1);
+		return (1);
+   }
+   if( gun3 > 0 ) 
+   { 
+		emit-sfx SMALLGUNFLARE from remit2;	
+		call-script lua_CreateLightMe(remit2, 255, 0, 0, 96);
+		sleep 75;
+		call-script lua_DestroyLightMe();
+		gun3 = gun3*(-1);
+		return (1);
+   }
+} 
+
+AimFromWeapon4(piecenum)
+{	 piecenum = rturret; }
+
+QueryWeapon4(piecenum)
+{
+   if( gun3 < 0 ) 
+   { 
+		piecenum = remit1;
+   }
+   if( gun3 > 0 ) 
+   { 
+		piecenum = remit2;
+   }
+}
+
+
+SweetSpot(piecenum)
+{	piecenum = hull; }
+
+Killed(severity, corpsetype)
+{
+	emit-sfx BOOM from hull;	
+	emit-sfx BOOM from bigturret;
+	emit-sfx BOOM from rturret;	
+	emit-sfx BOOM from lturret;
+	emit-sfx BOOM from mturret;
+	corpsetype = 3;
+}
+
+

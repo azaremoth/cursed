@@ -1,0 +1,193 @@
+#include "basic_spring_stuff.h"
+
+
+piece  base, bottom, tamper, center, leg_1, leg_1d, leg_1u, leg_2, leg_2d, leg_2u, leg_3, leg_3d, leg_3u;
+static-var  Static_Var_1, Static_Var_2, Static_Var_3, statechg_DesiredState, statechg_StateChanging, isoff, structureheight, inground;
+
+#define BOOM					1024+0
+#define STRUCTUREBUILDING		1025+0
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		
+		
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from tamper;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+
+Animation()
+{
+	while (TRUE)
+	{
+		if(!isoff)
+			{
+				turn leg_1d to z-axis <-10.000000> speed <30.000000>;
+				turn leg_2d to z-axis <-10.000000> speed <30.000000>;
+				turn leg_3d to z-axis <-10.000000> speed <30.000000>;
+				turn leg_1u to z-axis <-20.000000> speed <60.000000>;
+				turn leg_2u to z-axis <-20.000000> speed <60.000000>;
+				turn leg_3u to z-axis <-20.000000> speed <60.000000>;
+				move center to y-axis [6.300000] speed [17.300000];
+				wait-for-turn leg_1u around z-axis;
+				wait-for-turn leg_2u around z-axis;
+				wait-for-turn leg_3u around z-axis;
+				wait-for-move center along y-axis;
+				turn leg_1d to z-axis <0.000000> speed <30.000000>;
+				turn leg_2d to z-axis <0.000000> speed <30.000000>;
+				turn leg_3d to z-axis <0.000000> speed <30.000000>;
+				turn leg_1u to z-axis <0.000000> speed <60.000000>;
+				turn leg_2u to z-axis <0.000000> speed <60.000000>;
+				turn leg_3u to z-axis <0.000000> speed <60.000000>;
+				move center to y-axis [0.000000] speed [17.300000];
+				wait-for-turn leg_1u around z-axis;
+				wait-for-turn leg_2u around z-axis;
+				wait-for-turn leg_3u around z-axis;
+				wait-for-move center along y-axis;
+			}
+		
+//		if(isoff)	
+//			{}		
+		sleep 100;
+	}
+}
+
+
+Go()
+{
+	isoff = FALSE;
+	
+		if( Static_Var_1 == 0 )
+		{
+		isoff = TRUE;
+		}
+	spin tamper around y-axis speed Static_Var_1 accelerate Static_Var_2;
+	set ARMORED to 0;
+}
+
+HitByWeapon(Func_Var_1, Func_Var_2)
+{
+	signal 2;
+	set-signal-mask 2;
+	set ACTIVATION to 0;
+	sleep 12000;
+	set ACTIVATION to 1;
+}
+
+Stop()
+{
+	isoff = TRUE;
+	set ARMORED to 1;
+}
+
+
+InitState()
+{
+	statechg_DesiredState = TRUE;
+	statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+	if( statechg_StateChanging )
+	{
+		statechg_DesiredState = requestedstate;
+		return (0);
+	}
+	statechg_StateChanging = TRUE;
+	currentstate = statechg_DesiredState;
+	statechg_DesiredState = requestedstate;
+	while( statechg_DesiredState != currentstate )
+	{
+		if( statechg_DesiredState == 0 )
+		{
+			call-script Go();
+			currentstate = 0;
+		}
+		if( statechg_DesiredState == 1 )
+		{
+			call-script Stop();
+			currentstate = 1;
+		}
+	}
+	statechg_StateChanging = FALSE;
+}
+
+Create()
+{
+	turn leg_2 to y-axis <120.000000> now;
+	turn leg_3 to y-axis <240.000000> now;	
+	
+	Static_Var_1 = 0;
+	Static_Var_2 = 30;
+	Static_Var_3 = 182;
+	isoff = TRUE;
+
+	//////////////////////////////////START BUILD CYCLE
+	structureheight	= (get UNIT_HEIGHT)*(-1);
+	move bottom to y-axis structureheight now;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		move bottom to y-axis (structureheight * (get BUILD_PERCENT_LEFT)/100) speed [10];
+		emit-sfx STRUCTUREBUILDING from base;
+		sleep 50;
+	}
+	move bottom to y-axis 0 speed [10];
+	/////////////////////////////////END BUILD CYCLE
+
+	isoff = FALSE;
+	spin tamper around y-axis speed Static_Var_1 accelerate Static_Var_2;	
+	call-script InitState();
+	start-script SmokeUnit();
+	start-script Animation();
+	set ARMORED to 0;
+}
+
+Activate()
+{
+	start-script RequestState(0);
+}
+
+Deactivate()
+{
+	start-script RequestState(1);
+}
+
+SweetSpot(piecenum)
+{
+	piecenum = bottom;
+}
+
+SetSpeed(Func_Var_1)
+{
+	Static_Var_1 = Func_Var_1 * 45;
+}
+
+Killed(severity, corpsetype)
+{
+	corpsetype = 1;
+	emit-sfx BOOM from base;	
+	return (0);
+}

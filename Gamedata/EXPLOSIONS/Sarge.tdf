@@ -1,0 +1,104 @@
+[SargePlasmaImpact]
+{
+	[spikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=1.5 r0.75;
+			length=3.6 r1.0;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=0.1, 0.25, 0.9;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=6; 
+	}
+}
+
+
+[SargeGunFlare]
+{
+   [BitmapMuzzleFlame]
+   {
+	class = CBitmapMuzzleFlame;
+      
+	[properties]
+      	{
+         	dir = dir;
+         	colorMap=0.8 0.8 1 0.01	0.8 0.9 1 0.01	0 0 0 0.01; 
+          	size=7;
+          	length=14;
+          	sizeGrowth=1;
+          	ttl=15;
+          	frontOffset=0.1;
+          	sideTexture=bluegunflare;
+          	frontTexture=blueflare;
+      	}
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[groundflash]
+	{
+      		flashSize = 10;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 15;
+		color = 0.6, 0.91, 0.91;
+		air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+
+[BLueFlameTrail] {
+	[smoke] {
+		class=CSimpleParticleSystem;
+		[properties]{
+			sizeGrowth=1.2;
+			sizeMod=1;
+			pos=0, 0, 0;
+			emitVector=dir;
+			gravity=0, 0, 0;
+			colorMap=0 0.8 0.8 0.08 	0.0 0.4 0.4 0.05	0.0 0.15 0.15 0.05	0 0 0 0;
+			Texture=firetrail;
+			airdrag=0.5;
+			particleLife=3;
+			particleLifeSpread=2;
+			numParticles=1;
+			particleSpeed=i1;
+			particleSpeedSpread=0.5;
+			particleSize=8;
+			particleSizeSpread=4;
+			emitRot=0;
+			emitRotSpread=0;
+			directional=1;
+			alwaysVisible=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=2;
+	}
+   [groundflash]
+	{
+	ttl = 5;
+	flashSize = 30;
+	flashAlpha = 0.05;
+	circleGrowth = 0;
+	circleAlpha = 0;
+      	color = 0, 0.8, 0.8;
+   	air=1;
+      	ground=1;
+      	water=1;
+	}
+}

@@ -1,0 +1,64 @@
+[SPARKLES]
+{
+	[sparks]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.4, 0;
+		colorMap=1 1 1 0.01   1 0.7 0.2 0.01   0 0 0 0.01;
+		Texture=plasma;
+		airdrag=0.97;
+		particleLife=20;
+		particleLifeSpread=0;
+		numParticles=7;
+		particleSpeed=3;
+		particleSpeedSpread=2;
+		particleSize=1;
+		particleSizeSpread=2.5;
+		emitRot=0;
+		emitRotSpread=80;
+		directional=1;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+}
+
+[FactorySmoke] {
+	usedefaultexplosions=0;
+	[smoke] {
+		class=CSimpleParticleSystem;
+		[properties]{
+			sizeGrowth=8 r4;
+			sizeMod=0.5;
+			pos=0, 0, 0;
+			emitVector=0, 1, 0;
+			gravity=-0.3 r0.2, 0.6, -0.25 r0.2;
+			colorMap=0.25 0.25 0.25 0.5  0 0 0 0;
+			Texture=smokesmall;
+			airdrag=0.75;
+			particleLife=96;
+			particleLifeSpread=40;
+			numParticles=10;
+			particleSpeed=3;
+			particleSpeedSpread=2;
+			particleSize=5 r2;
+			particleSizeSpread=2 r2;
+			emitRot=0;
+			emitRotSpread=90 r30;
+			directional=0;
+			alwaysVisible=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=1;
+	}
+}

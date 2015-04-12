@@ -1,0 +1,108 @@
+#include "basic_spring_stuff.h"
+
+piece base, car, turret, sleeve, emit_gun, wheel_fr, wheel_rr, wheel_fl, wheel_rl, emit_dust1, emit_dust2, emit_dust3, emit_dust4, emit_groundflash;
+
+static-var moving, MOVEANIMATIONSPEED;
+
+#define	SIG_AIM1		2
+
+#define TRACKDUST		1024+0
+#define DEATHEXPLOSION	1025+0
+#define FLARE			1026+0
+#define GROUNDFLASH		1027+0
+
+lua_CreateLightMe(arg) { return (0); }
+lua_DestroyLightMe(arg) { return (0); }
+
+// Walk Motion
+Walkscript()
+{
+	while(1)
+	{
+
+		if (moving) 
+			{
+			MOVEANIMATIONSPEED = (GET MAX_SPEED)/6;
+			
+			spin wheel_fr around x-axis speed MOVEANIMATIONSPEED*2 accelerate <500>;
+			spin wheel_rr around x-axis speed MOVEANIMATIONSPEED*2 accelerate <500>;
+			spin wheel_fl around x-axis speed MOVEANIMATIONSPEED*2 accelerate <500>;
+			spin wheel_rl around x-axis speed MOVEANIMATIONSPEED*2 accelerate <500>;			
+//			emit-sfx TRACKDUST from emit_dust1;
+//			emit-sfx TRACKDUST from emit_dust2;
+			emit-sfx TRACKDUST from emit_dust3;
+			emit-sfx TRACKDUST from emit_dust4;
+			}
+
+		if (!moving) 
+			{			
+			stop-spin wheel_fr around x-axis decelerate <500>;
+			stop-spin wheel_rr around x-axis decelerate <500>;
+			stop-spin wheel_fl around x-axis decelerate <500>;
+			stop-spin wheel_rl around x-axis decelerate <500>;
+			}
+		sleep 50;
+	}
+}
+
+
+Create()
+{
+	moving = FALSE;
+	start-script Walkscript();
+}
+
+StartMoving()
+{ moving = TRUE; }
+
+StopMoving()
+{ moving = FALSE; }
+
+SweetSpot (piecenum)
+{	piecenum = base;	}
+
+
+//weapon 1 -----------------------------------------------------------------
+RestoreAfterDelay()
+{
+	sleep 5000;
+	turn turret to y-axis <0.000000> speed <55.000000>;
+	turn sleeve to x-axis <0.000000> speed <30.000000>;
+}
+
+
+QueryWeapon1 (piecenum)
+{	piecenum = emit_gun;	}
+
+
+AimFromWeapon1 (piecenum)
+{	piecenum = turret;	}
+
+AimWeapon1(heading, pitch)
+{
+	signal SIG_AIM1;
+	set-signal-mask SIG_AIM1;
+	turn turret to y-axis heading speed <160.000000>;
+	turn sleeve to x-axis <0.000000> - pitch speed <160.000000>;
+    wait-for-turn turret around y-axis;
+	wait-for-turn sleeve around x-axis;
+    start-script RestoreAfterDelay(); 
+    return (1);
+}
+
+Shot1()
+{
+	emit-sfx FLARE from emit_gun;
+	emit-sfx GROUNDFLASH from emit_groundflash;
+	call-script lua_CreateLightMe(emit_gun, 255, 0, 0, 96);
+	sleep 125;
+	call-script lua_DestroyLightMe();
+	return(1);
+}
+
+	
+Killed(severity, corpsetype)
+{
+	emit-sfx DEATHEXPLOSION from car;
+	return (0);
+}

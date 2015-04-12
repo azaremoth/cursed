@@ -1,0 +1,41 @@
+[SHIELDBEAM_FX]
+{
+   [BitmapMuzzleFlame]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+         dir = dir; // don't touch me
+         colorMap=0 1 1 0.01 	0 0.5 1 0.01 	0 0 0 0.01; 
+         size=200;
+         length=200;
+         sizeGrowth=0;
+         ttl=20;
+         frontOffset=0.5;
+	 frontTexture=null_texture;
+	 sideTexture=beam3;
+      }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[spikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-10 r20,-10 r20,-10 r20;
+			width=5;
+			length=10;
+			alpha=1;
+			alphadecay=0.18;
+			color=0.0, 1.0, 1.0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=4; 
+	}
+}

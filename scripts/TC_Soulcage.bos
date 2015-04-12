@@ -1,0 +1,102 @@
+#include "basic_spring_stuff.h"
+
+piece  base, mover, rbase, lbase, rhorns, lhorns, bottom, soulgem;
+
+static-var structureheight, inground;
+
+#define GROUNDFX				1024+0
+#define STRUCTUREBUILDING		1025+0
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from base;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+Upanddown()
+{
+	while( TRUE )
+	{
+	move soulgem to y-axis [2] speed [1];
+	wait-for-move soulgem along y-axis;
+	move soulgem to y-axis [3] speed [0.75];
+	wait-for-move soulgem along y-axis;
+	move soulgem to y-axis [2] speed [0.75];
+	wait-for-move soulgem along y-axis;
+	move soulgem to y-axis [0] speed [1];
+	wait-for-move soulgem along y-axis;
+	}
+}
+
+Go()
+{ 	}
+
+Stop()
+{	}
+
+GroundFlashFX()
+{
+	while (TRUE)
+	{
+	emit-sfx GROUNDFX from base;
+	sleep 500;
+	}
+}
+
+Create()
+{
+	//////////////////////////////////START BUILD CYCLE
+	structureheight	= (get UNIT_HEIGHT)*(-1);
+	move mover to y-axis structureheight now;
+	while( get BUILD_PERCENT_LEFT )
+	{
+		move mover to y-axis (structureheight * (get BUILD_PERCENT_LEFT)/100) speed [10];
+		emit-sfx STRUCTUREBUILDING from base;
+		sleep 50;
+	}
+	move mover to y-axis 0 speed [10];
+	/////////////////////////////////END BUILD CYCLE
+	start-script SmokeUnit();
+	start-script GroundFlashFX();
+	start-script Upanddown();
+}
+
+SweetSpot(piecenum)
+{	piecenum = base; }
+
+Killed(severity, corpsetype, smoketype)
+{
+	if (severity <= 50)
+	{
+		corpsetype = 1;
+		explode soulgem type BITMAPONLY | BITMAP;
+//		return (corpsetype);
+	}
+	else
+	{
+		corpsetype = 2;
+//		return (corpsetype);
+	}
+	return(0);
+}

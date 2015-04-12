@@ -1,0 +1,131 @@
+[SUMMONANGEL]
+{
+	[bluespikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-8 r16,-8 r16,-8 r16;
+			width=1 r0.5;
+			length=6 r2.0;
+			alpha=0.6 r0.3;
+			alphadecay=0.1 r 0.05;
+			color=0, 0.2, 1;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=6; 
+	}
+	[purplespikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-4 r8,-4 r8,-4 r8;
+			width=1.5 r0.75;
+			length=8 r3.0;
+			alpha=0.4 r0.1;
+			alphadecay=0.1 r 0.05;
+			color=1, 0, 0.45;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=6; 
+	}
+}
+
+[HOLYBOLTTRACE]
+{
+	[groundflash]
+	{
+		flashSize = 30;
+		flashAlpha = 0.25;
+		circleGrowth = 0;
+		circleAlpha = 0.1;
+		ttl = 15;
+		color = 0.8, 1.0, 1.0;
+
+	}	
+	[burnstuff]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+		sizeGrowth=-0.4;
+		sizeMod=1.0;
+		pos=0, 15, 0; 
+		emitVector=0, 1, 0;
+	        gravity=0, -0.8, 0;  
+		colorMap=1 1 1 0.01  0.6 0.6 0.8 0.01   0.8 0.7 0.9 0.01   1 1 1 0.01;
+		Texture=spark;
+		airdrag=0.9;
+		particleLife=40;
+		particleLifeSpread=0;
+		numParticles=1;
+		particleSpeed=9;
+		particleSpeedSpread=2;
+		particleSize=5.0;
+		particleSizeSpread=1.4;
+		emitRot=40;
+		emitRotSpread=60;
+		directional=1;
+		alwaysVisible=1;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=1;
+	}
+	usedefaultexplosions=0;	
+	[spikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-10 r20,-10 r20,-10 r20;
+			width=11;
+			length=1; //60;
+			alpha=1;
+			alphadecay=0.1;
+			color=0.8, 0.7, 1.0;
+			alwaysVisible=1;
+
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=3; 
+	}	
+	[glow]
+	{
+		class=CSimpleParticleSystem;
+		[properties]
+		{
+			sizeGrowth=0;
+			sizeMod=1.0;
+			pos=0, 4, 0;
+			emitVector=-0, 1, 0;
+			gravity=0, 0.00, 0;
+			colorMap= 0.9 0.9 1 0.01   0.7 0.7 0.9 0.9 0 0 0 0.01;
+			Texture=diamondstar;
+			airdrag=1;
+			particleLife=5;
+			particleLifeSpread=0;
+			numParticles=1;
+			particleSpeed=3;
+			particleSpeedSpread=0;
+			particleSize=10;
+			particleSizeSpread=1;
+			emitRot=0;
+			emitRotSpread=360;
+			directional=1;
+			alwaysVisible=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=1;
+	}
+}

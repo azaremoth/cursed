@@ -1,0 +1,156 @@
+#include "basic_spring_stuff.h"
+
+piece  base, engine, emitgun1, emitgun2, hull, trail1, trail2;
+
+static-var  statechg_DesiredState, statechg_StateChanging;
+#define DefenderGunFlare		1024+0
+#define Small_Explosion_Green	1025+0
+
+
+SmokeUnit(healthpercent, sleeptime, smoketype)
+{
+	while( get BUILD_PERCENT_LEFT )
+	{
+		sleep 400;
+	}
+	while( TRUE )
+	{
+		healthpercent = get HEALTH;
+		if( healthpercent < 66 )
+		{
+			smoketype = 256 | 2;
+			if( Rand( 1, 66 ) < healthpercent )
+			{
+				smoketype = 256 | 1;
+			}
+			emit-sfx smoketype from hull;
+		}
+		sleeptime = healthpercent * 50;
+		if( sleeptime < 200 )
+		{
+			sleeptime = 200;
+		}
+		sleep sleeptime;
+	}
+}
+
+Go()
+{
+	turn engine to x-axis <90.000000> speed <40.000000>;
+}
+
+Stop()
+{
+	turn engine to x-axis <0.000000> speed <120.000000>;
+}
+
+InitState()
+{
+	statechg_DesiredState = TRUE;
+	statechg_StateChanging = FALSE;
+}
+
+RequestState(requestedstate, currentstate)
+{
+	if( statechg_StateChanging )
+	{
+		statechg_DesiredState = requestedstate;
+		return (0);
+	}
+	statechg_StateChanging = TRUE;
+	currentstate = statechg_DesiredState;
+	statechg_DesiredState = requestedstate;
+	while( statechg_DesiredState != currentstate )
+	{
+		if( statechg_DesiredState == 0 )
+		{
+			call-script Go();
+			currentstate = 0;
+		}
+		if( statechg_DesiredState == 1 )
+		{
+			call-script Stop();
+			currentstate = 1;
+		}
+	}
+	statechg_StateChanging = FALSE;
+}
+
+Create()
+{
+	call-script InitState();
+	start-script SmokeUnit();
+}
+
+Activate()
+{
+	start-script RequestState(0);
+}
+
+Deactivate()
+{
+	start-script RequestState(1);
+}
+
+QueryPrimary(piecenum)
+{
+		piecenum = emitgun1;
+}
+
+QuerySecondary(piecenum)
+{
+		piecenum = emitgun2;
+}
+
+//AimFromWeapon
+
+AimFromWeapon1(piecenum)
+{
+		piecenum = emitgun1;
+}
+
+AimFromWeapon2(piecenum)
+{
+		piecenum = emitgun2;
+}
+
+AimPrimary()
+{
+	return (1);
+}
+
+AimSecondary()
+{
+	return (1);
+}
+
+
+FirePrimary()
+{
+		emit-sfx DefenderGunFlare from emitgun1;
+		sleep 150;
+		return(1);
+}
+
+FireSecondary()
+{
+		emit-sfx DefenderGunFlare from emitgun2;
+		sleep 150;
+		return(1);
+}
+
+
+SweetSpot(piecenum)
+{
+	piecenum = hull;
+}
+
+Killed(severity, corpsetype, smoketype)
+{
+		corpsetype = 3;
+		explode HULL type SHATTER | EXPLODE_ON_HIT;
+		explode ENGINE type SHATTER | EXPLODE_ON_HIT;	
+		emit-sfx Small_Explosion_Green from HULL;
+		return (corpsetype);
+		return(0);
+}

@@ -1,0 +1,106 @@
+function gadget:GetInfo()
+	return {
+		name = "Building stance",
+		desc = "Building stance",
+		author = "aZaremoth & CarRepairer",
+		date = "July 9th, 2009",
+		license = "public domain",
+		layer = 1,
+		enabled = true,
+		}
+end
+
+
+---------------------------------------------------------------------
+local SummonerPairs = {
+	[UnitDefNames.tc_lich.id] = 'tc_lich_sum',
+	[UnitDefNames.tc_lich_sum.id] = 'tc_lich',
+	[UnitDefNames.tc_necromancer.id] = 'tc_necromancer_sum',
+	[UnitDefNames.tc_necromancer_sum.id] = 'tc_necromancer',
+}
+
+local echo = Spring.Echo
+
+local MaxSizeX = Game.mapSizeX
+local MaxSizeZ = Game.mapSizeZ
+
+local CMD_SUMMONINGSTANCE = 32632
+---------------------------------------------------------------------
+
+if (gadgetHandler:IsSyncedCode()) then
+-----------------------------------------------SYNCED
+----------------------------------------------------------------
+------------------------------------------------------------------------
+SummoningStance = {
+		id=CMD_SUMMONINGSTANCE,
+		type=CMDTYPE.ICON,
+		name="",
+		texture="&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/summoning.png",
+		tooltip="Change Stance.\r\nHint: Summoners act like factories in summoning stance.",
+		action="changestance"
+		}
+
+local function HeadingToFacing(heading)
+	return ((heading + 8192) / 16384) % 4
+ end
+		
+function gadget:UnitCreated(u, unitDefID, team)
+	if SummonerPairs [unitDefID] then
+		Spring.InsertUnitCmdDesc(u, SummoningStance)
+	end
+end
+
+function gadget:AllowCommand(u, unitDefID, team, cmd, param, opts)
+	if cmd  == CMD_SUMMONINGSTANCE then
+		local summonerAlt = SummonerPairs[unitDefID]
+		if not summonerAlt then return false end
+		local newunit
+		local valid = 1
+  		local x, y, z = Spring.GetUnitBasePosition(u)
+		
+		local height = Spring.GetGroundHeight(x,z)
+		
+		if x and x < 0  or  x > MaxSizeX or z < 0 or z > MaxSizeZ or height < -5 then valid = 0 else valid = 1 end
+		if valid == 1 then
+			local h = Spring.GetUnitHeading(u)
+			local health = Spring.GetUnitHealth(u)
+			Spring.DestroyUnit(u,false,true)
+			local newunit = Spring.CreateUnit(summonerAlt, x,y,z, HeadingToFacing(h), team)
+			Spring.SetUnitPosition(newunit, x, y, z)
+			Spring.SetUnitHealth(newunit,health)
+			SendToUnsynced("SelectMe", newunit, team)
+			
+		end
+	end
+	return true
+end
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+--SYNCED
+else
+--UNSYNCED
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+local myTeam = Spring.GetLocalTeamID()
+
+local function SelectMe(cmd, unitID, unitTeam)	
+	if (type(unitID) ~= 'number') or unitTeam ~= myTeam then
+		return
+	end
+	Spring.SelectUnitArray({unitID}, true)
+end
+
+function gadget:Initialize()
+  gadgetHandler:AddSyncAction('SelectMe', SelectMe)
+end
+
+function gadget:Shutdown(unitID)
+  gadgetHandler:RemoveSyncAction('SelectMe') 
+end
+
+
+end
+
+

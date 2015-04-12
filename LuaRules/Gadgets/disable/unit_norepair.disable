@@ -1,0 +1,38 @@
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+function gadget:GetInfo()
+  return {
+    name      = "No repair",
+    desc      = "xxx",
+    author    = "aZaremoth",
+    date      = "March 10, 2014",
+    license   = "GNU GPL, v2 or later",
+    layer     = 0,
+    enabled   = true  --  loaded by default?
+  }
+end
+
+if (not gadgetHandler:IsSyncedCode()) then
+  return false -- no unsynced code
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+
+function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOptions)
+	if (cmdID == CMD.REPAIR) then
+		  Spring.Echo("WAAAFLES!")
+		  local RepairedUnit = (cmdParams[1])
+		  local RepairedUnitDefID = Spring.GetUnitDefID(RepairedUnit)
+		  if (UnitDefs[RepairedUnitDefID].customParams.isinfantry ~= nil) then 
+				Spring.Echo("WITHOUT CREME FOR YOU!")
+				return false
+		  else
+				Spring.Echo("CREME AND CHERRIES!")
+				return true
+		  end
+	end
+	return true -- allowed
+end

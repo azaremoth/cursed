@@ -1,0 +1,60 @@
+function gadget:GetInfo()
+	return {
+		name = "Experience Handler",
+		desc = "dole out experience for this wonderful game",
+		author = "Alter-Heide",
+		date = "2010-01-30",
+		license = "GNU GPL v2, or later",
+		layer = 25,
+		enabled = true
+	}
+end
+
+local expRange = 1000
+
+if (gadgetHandler:IsSyncedCode()) then
+
+--SYNCED
+
+
+function gadget:UnitDestroyed(u, ud, team, attacker)
+
+	--get all units around the destroyed one
+	local x,y,z = Spring.GetUnitPosition(u)
+	local unitsAround = Spring.GetUnitsInCylinder(x,z, expRange)
+
+	--now check out for enemy heros around the destroyed unit
+	local enemyHerosAround = {}
+	local i = 0
+	for index,unitIDLoop in pairs(unitsAround) do
+		if (team~=nil)and(Spring.GetUnitTeam(unitIDLoop)~=nil) then
+			if (not Spring.AreTeamsAllied(Spring.GetUnitTeam(unitIDLoop),team)) then
+				if (AllEngines:GetEngineByUnitID(unitIDLoop)~=nil) then
+				i = i + 1
+		 		enemyHerosAround[i] = AllEngines:GetEngineByUnitID(unitIDLoop)
+		 		end
+			end
+		end
+	end
+
+	--distribute the experience
+	local n = 0 --first count the elements of enemyHerosAround
+	n = #enemyHerosAround
+
+	for unitIDLoop,engine in pairs(enemyHerosAround) do --now the experience can be distributed
+		if engines[ud] then
+			engine:AddXP(10/n) --more XP if an engine was killed
+		else
+			engine:AddXP(1.0/n) --lesser if it was a pawn
+		end
+		
+
+	end
+
+end
+
+
+else
+--UNSYNCED
+
+end

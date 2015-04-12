@@ -1,0 +1,76 @@
+local function CopyTable(srcTbl, dstTbl)
+	assert(dstTbl ~= nil)
+
+	for key, val in pairs(srcTbl) do
+		assert(type(key) ~= type({}))
+
+		if (type(val) == type({})) then
+			dstTbl[key] = {}
+
+			srcSubTbl = val
+			dstSubTbl = dstTbl[key]
+
+			CopyTable(srcSubTbl, dstSubTbl)
+		else
+			dstTbl[key] = val
+		end
+	end
+end
+
+
+local rgbSpecMults = {0.25, 0.25, 0.25} -- specular RGB scales
+local copyLightDefs = {
+	["tc"] = {
+		["euf_tank"          ] = "blueplasma",		
+		["tc_belial"          ] = "blueplasma",	
+		}
+--[[		--Juno
+		["ajuno_juno_pulse"          ] = "juno",
+		["cjuno_juno_pulse"          ] = "juno",
+	},]]--
+}
+local dynLightDefs = {
+	["tc"] = {
+		weaponLightDefs = {
+
+			-- Juno Weapon
+			["blueplasma"] = {
+				projectileLightDef = {
+					diffuseColor    = {2.9,                   1.9,                   0.2                  },
+					specularColor   = {2.9 * rgbSpecMults[1], 1.9 * rgbSpecMults[2], 0.2 * rgbSpecMults[3]},
+					priority        = 5 * 10,
+					radius          = 125.0,
+					ttl             = 1000,
+					ignoreLOS       = false,
+				},
+				explosionLightDef = {
+					diffuseColor      = {2.0,                   2.0,                   1.2                  },
+					specularColor     = {2.0 * rgbSpecMults[1], 2.0 * rgbSpecMults[2], 1.2 * rgbSpecMults[3]},
+					priority          = 3 * 10 + 1,
+					radius            = 1620.0,
+					ttl               = 2 * Game.gameSpeed,
+					decayFunctionType = {0.0, 0.0, 0.0},
+					altitudeOffset    = 150.0,
+				},
+			},
+		},
+	},
+}
+
+local modLightDefs = dynLightDefs[Game.modShortName]
+local modCopyDefs = copyLightDefs[Game.modShortName]
+
+-- insert copy-definitions for each light that has one
+if (modLightDefs ~= nil and modCopyDefs ~= nil) then
+	for dstWeaponDef, srcWeaponDef in pairs(modCopyDefs) do
+		modLightDefs.weaponLightDefs[dstWeaponDef] = {}
+
+		srcLightDefTbl = modLightDefs.weaponLightDefs[srcWeaponDef]
+		dstLightDefTbl = modLightDefs.weaponLightDefs[dstWeaponDef]
+
+		CopyTable(srcLightDefTbl, dstLightDefTbl)
+	end
+end
+
+return dynLightDefs
+

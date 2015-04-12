@@ -1,0 +1,590 @@
+function gadget:GetInfo()
+   return {
+	name	= "unit_normalmap_shader_tst.lua",
+	desc	= "adds normal-mapping to S3O models",
+	author    = "Kloot",
+	date	= "31-1-2009",
+	license   = "GPL v2",
+	layer     =  0,
+	enabled   = true
+   }
+end
+
+if (gadgetHandler:IsSyncedCode()) then
+function gadget:Initialize()
+	-- desc	= "adds normal-mapping to S3O models (gadgetized)",
+	-- author    = "Kloot",
+	-- date	= "April 6, 2009",
+	-- license   = "GPL v2",
+end
+
+function gadget:UnitGiven(unitID)
+	SendToUnsynced("MyUnitCrea", unitID)
+	return true
+end
+
+function gadget:UnitDecloaked(unitID)
+	SendToUnsynced("MyUnitCrea", unitID)
+	return true
+end
+
+function gadget:UnitFinished(unitID)
+	SendToUnsynced("MyUnitCrea", unitID)
+	return true
+end
+
+function gadget:UnitDestroyed(unitID)
+	SendToUnsynced("MyUnitDest", unitID)
+	return true
+end
+
+--------------------------------------------------------------END SYNC
+else
+--------------------------------------------------------------UNSYNCED
+local runShader = 0 -- SAFETY CODE
+
+local glLoadIdentity	 = gl.LoadIdentity
+local glPushMatrix	= gl.PushMatrix
+local glPopMatrix	 = gl.PopMatrix
+local glTranslate	 = gl.Translate
+local glBeginEnd	  = gl.BeginEnd
+local glNormal	 = gl.Normal
+local glVertex	 = gl.Vertex
+local glColor	  = gl.Color
+local glLight	  = gl.Light
+local glLighting	  = gl.Lighting
+local glBlending	  = gl.Blending
+local glPushAttrib	= gl.PushAttrib
+local glPopAttrib	 = gl.PopAttrib
+
+local glCulling	= gl.Culling
+local glDepthMask	 = gl.DepthMask
+local glDepthTest	 = gl.DepthTest
+local glAlphaTest    = gl.AlphaTest
+
+local glCreateList	= gl.CreateList
+local glDeleteList	= gl.DeleteList
+
+local glUnit	= gl.Unit
+local glUnitRaw	= gl.UnitRaw
+local glTexture	= gl.Texture
+local glTexCoord	  = gl.TexCoord
+local glMultiTexCoord	= gl.MultiTexCoord
+local glUnitMultMatrix     = gl.UnitMultMatrix
+
+local glGetSun	 = gl.GetSun
+local glGetShadowMapParams = gl.GetShadowMapParams
+local glGetMatrixData	= gl.GetMatrixData
+
+local glGetShaderLog	 = gl.GetShaderLog
+local glCreateShader	 = gl.CreateShader
+local glDeleteShader	 = gl.DeleteShader
+local glUseShader	 = gl.UseShader
+
+local glUniformMatrix	= gl.UniformMatrix
+local glUniformInt	= gl.UniformInt
+local glUniform	= gl.Uniform
+local glGetUniformLocation = gl.GetUniformLocation
+local glGetActiveUniforms  = gl.GetActiveUniforms
+
+	local GL_GREATER = GL.GREATER
+	local GL_SRC_ALPHA = GL.SRC_ALPHA
+	local GL_ONE_MINUS_SRC_ALPHA = GL.ONE_MINUS_SRC_ALPHA
+	local GL_LEQUAL = GL.LEQUAL
+	local GL_BACK = GL.BACK 
+	local GL_POSITION = GL.POSITION
+
+local normalMapNames	= {}
+local textureNames	  = {}
+local preDisplayLists     = {}
+local pstDisplayLists     = {}
+local luaShader	  = nil
+
+local luaShaderLocs = {
+	treeMove = -1,
+	shaderTime = -1,
+	cameraMatrixLoc     = -1,
+	cameraInvMatrixLoc  = -1,
+	shadowMatrixLoc     = -1,
+	shadowParamsLoc     = -1,
+	shadowDensityLoc    = -1,
+
+	unitAmbientLightLoc = -1,
+	unitDiffuseLightLoc = -1,
+
+	shadowMapLoc	  = -1,
+	textureS3O1Loc	= -1,
+	textureS3O2Loc	= -1,
+	--specularMapLoc	= -1,
+	reflectMapLoc	 = -1,
+	normalMapLoc	  = -1,
+   }
+
+local treeMoveList = {}
+local treeMove = {}
+
+local sprGetGameFrame	  = Spring.GetGameFrame
+local sprGetUnitDefID	  = Spring.GetUnitDefID
+local sprGetAllUnits	= Spring.GetAllUnits
+local sprGetVisibleUnits	  = Spring.GetVisibleUnits
+local sprIsUnitVisible	 = Spring.IsUnitVisible
+local sprGetUnitTeam	= Spring.GetUnitTeam
+local sprGetCameraPosition	= Spring.GetCameraPosition
+local sprGetTeamColor	  = Spring.GetTeamColor
+local sprSetUnitNoDraw	 = Spring.SetUnitNoDraw
+local sprHaveShadows	= Spring.HaveShadows
+local sprGetUnitTransformMatrix = Spring.GetUnitTransformMatrix
+local SUR		  = Spring.UnitRendering
+
+local function GetPreDisplayList(unitID)
+	local unitTeam = sprGetUnitTeam(unitID)
+	local unitDefID = sprGetUnitDefID(unitID)
+
+	if (preDisplayLists[unitDefID] == nil) then
+	preDisplayLists[unitDefID] = {}
+	end
+
+	if (preDisplayLists[unitDefID][unitTeam] == nil) then
+	local sdx, sdy, sdz = glGetSun("pos")
+	local tcr, tcg, tcb, tca = sprGetTeamColor(unitTeam)
+
+	preDisplayLists[unitDefID][unitTeam] = glCreateList(
+	function()
+
+	glPushAttrib(GL_ALL_ATTRIB_BITS)
+	glAlphaTest(GL_GREATER,0.01)
+
+	glBlending(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+	glDepthTest(GL_LEQUAL)
+	glDepthMask(true)
+	glCulling(GL_BACK)
+
+	glLighting(true)
+	glLight(0, true)
+	glLight(1, false)
+	glLight(0, GL_POSITION, sdx, sdy, sdz, 0)
+
+	glTexture(4, normalMapNames[unitDefID][1])
+	glColor(tcr, tcg, tcb, tca)
+	glPushMatrix()
+	end)
+	end
+
+	return preDisplayLists[unitDefID][unitTeam]
+end
+
+local function GetPostDisplayList(unitID)
+	local unitTeam = sprGetUnitTeam(unitID)
+	local unitDefID = sprGetUnitDefID(unitID)
+
+	if (pstDisplayLists[unitDefID] == nil) then
+	pstDisplayLists[unitDefID] = {}
+	end
+
+	if (pstDisplayLists[unitDefID][unitTeam] == nil) then
+	pstDisplayLists[unitDefID][unitTeam] = glCreateList(
+	function()
+	glTexture(4, false)
+	glColor(1.0, 1.0, 1.0, 1.0)
+	glPopMatrix()
+
+	glLight(0, false)
+	glLighting(false)
+	--glAlphaTest(GL.LESS,0.5)
+
+	glCulling(GL_BACK)
+	glDepthTest(false)
+	glDepthMask(false)
+	glBlending(true)
+	glPopAttrib()
+	end)
+	end
+
+	return pstDisplayLists[unitDefID][unitTeam]
+end
+
+local function GetUnitDefMaterial(unitDefID, preDL, pstDL)
+	local matTbl = {
+	texunits = {
+	[0] = {tex = textureNames[unitDefID][1],   enable = true},
+	[1] = {tex = textureNames[unitDefID][2],   enable = true},
+	[2] = {tex = "$reflection",	 enable = true},
+	[3] = {tex = normalMapNames[unitDefID][1], enable = true},
+	[4] = {tex = "$shadow",	  enable = true}
+	},
+
+	culling	= GL_BACK,
+	shader	 = luaShader,
+	cameraloc	 = luaShaderLocs.cameraMatrixLoc,
+	--   camerainvloc    = luaShaderLocs.cameraInvMatrixLoc, -- Spring 0.79
+	shadowloc	 = luaShaderLocs.shadowMatrixLoc,
+	shadowparamsloc = luaShaderLocs.shadowParamsLoc,
+	prelist = preDL,
+	postlist = pstDL
+	}
+	return matTbl
+end
+
+
+local function MyUnitCrea(unitID)
+	local unitDefID = sprGetUnitDefID(unitID)
+
+	if (normalMapNames[unitDefID] ~= nil) then
+		if (textureNames[unitDefID] == nil) then
+			textureNames[unitDefID] = {
+			[1] = '%' .. unitDefID .. ":0",
+			[2] = '%' .. unitDefID .. ":1"
+			}
+		end
+
+		local preDL = GetPreDisplayList(unitID)
+		local pstDL = GetPostDisplayList(unitID)
+
+		SUR.SetLODCount(unitID, 1)
+		SUR.SetMaterial(unitID, 1, "opaque", GetUnitDefMaterial(unitDefID, preDL, pstDL))
+		SUR.SetUnitLuaDraw(unitID, true)
+
+		for pieceID, pieceName in pairs(Spring.GetUnitPieceList(unitID) or {}) do
+			if (pieceID ~= "n") then
+				SUR.SetPieceList(unitID, 1, pieceID)
+			end
+		end
+	end
+
+	if treeMoveList[unitDefID] ~= nil then
+		treeMove[unitID] = (tonumber(UnitDefs[unitDefID].customParams.tree_mult) + (math.random(1,50)/100)) or 40.0
+	end
+end
+
+local function MyUnitDest(unitID)
+	local unitDefID = sprGetUnitDefID(unitID)
+
+	if (normalMapNames[unitDefID] ~= nil) then
+	--SUR.SetUnitLuaDraw(unitID, false)
+	--SUR.SetLODCount(unitID, 0)
+	end
+	if treeMoveList[unitDefID] ~= nil then
+		treeMove[unitID] = nil
+	end
+end
+
+local function SetShaderUniformLocations(s)
+	luaShaderLocs.cameraMatrixLoc     = glGetUniformLocation(s, "cameraMatrix")
+	luaShaderLocs.cameraInvMatrixLoc  = glGetUniformLocation(s, "cameraInvMatrix")
+	luaShaderLocs.shadowMatrixLoc     = glGetUniformLocation(s, "shadowMatrix")
+
+	luaShaderLocs.haveShadowsLoc	= glGetUniformLocation(luaShader, "haveShadows")
+	luaShaderLocs.shadowParamsLoc     = glGetUniformLocation(luaShader, "shadowParams")
+	luaShaderLocs.shadowDensityLoc    = glGetUniformLocation(luaShader, "shadowDensity")
+	luaShaderLocs.treeMoveLoc = glGetUniformLocation(luaShader, "treeMove")
+	luaShaderLocs.shaderTime = glGetUniformLocation(luaShader, "shaderTime")
+end
+
+local function CreateShader1()
+	local s = glCreateShader({
+	vertex = [[
+	varying vec3 lvES;
+	varying vec3 hvES;
+	varying vec3 nvES;
+
+	varying mat3 tbnInvMatrix;
+	varying vec3 cdES;
+	//varying vec3 cdTS;
+	uniform float treeMove;
+	uniform float shaderTime;
+
+	uniform int haveShadows;
+	uniform mat4 shadowMatrix;
+	uniform vec4 shadowParams;
+	uniform mat4 cameraMatrix;
+	uniform mat4 cameraInvMatrix;
+
+	void main(void) {
+	
+	vec4 vertexDis = gl_Vertex;
+
+	if (treeMove > 0.1)
+	{
+		float sinTime = (treeMove - floor(treeMove)) + 1.0;
+		float treeMult = vertexDis.y / treeMove;
+		vertexDis.x += sin(shaderTime*sinTime) * treeMult;
+		vertexDis.y += cos(shaderTime*sinTime) * treeMult * 0.02 * (abs(gl_Vertex.x) + abs(gl_Vertex.x));
+		vertexDis.z += cos(shaderTime*sinTime) * treeMult * 0.5;
+	}
+
+	mat4 modelMatrix = cameraInvMatrix * gl_ModelViewMatrix;
+	mat4 modelInvMatrix = gl_ModelViewMatrixInverse * cameraMatrix;
+
+	vec3 vpES = (gl_ModelViewMatrix * vertexDis).xyz;
+	vec3 cpES = vec3(0.0, 0.0, 1.0);
+
+	vec3 svOS = gl_MultiTexCoord5.xyz;
+	vec3 tvOS = gl_MultiTexCoord6.xyz;
+	
+	//Manual transform of the matrix, for GLSL 1.X compatibility
+	mat3 tbnMatrix = mat3(svOS, tvOS, gl_Normal);
+	tbnInvMatrix[0].x = tbnMatrix[0].x;
+	tbnInvMatrix[0].y = tbnMatrix[1].x;
+	tbnInvMatrix[0].z = tbnMatrix[2].x;
+
+	tbnInvMatrix[1].x = tbnMatrix[0].y;
+	tbnInvMatrix[1].y = tbnMatrix[1].y;
+	tbnInvMatrix[1].z = tbnMatrix[2].y;
+
+	tbnInvMatrix[2].x = tbnMatrix[0].z;
+	tbnInvMatrix[2].y = tbnMatrix[1].z;
+	tbnInvMatrix[2].z = tbnMatrix[2].z;
+	
+	cdES = (vpES - cpES);
+	//cdTS = (tbnInvMatrix * (gl_ModelViewMatrixInverse * vec4(cdES, vertexDis.w)).xyz);
+
+	nvES = normalize(gl_NormalMatrix * gl_Normal);
+	lvES = normalize(gl_LightSource[0].position.xyz);
+	hvES = normalize(gl_LightSource[0].halfVector.xyz);
+
+	gl_FrontColor = gl_Color;
+	gl_TexCoord[0].st  = gl_MultiTexCoord0.st;
+	gl_Position = gl_ProjectionMatrix * cameraMatrix * modelMatrix * vertexDis;
+
+
+	if (haveShadows != 0) {
+	vec4 vpWS = modelMatrix * gl_Vertex;
+	gl_TexCoord[3] = vec4(shadowMatrix * vpWS);
+	
+	gl_TexCoord[3].xy *= vec2(1 / sqrt(abs(gl_TexCoord[3].st) + shadowParams.z) + shadowParams.w);
+
+	gl_TexCoord[3].xy += shadowParams.xy;
+	}
+	}
+	]],
+
+	fragment = [[
+	varying vec3 lvES;
+	varying vec3 hvES;
+	varying vec3 nvES;
+
+	varying vec3 cdES;
+	//varying vec3 cdTS;
+
+	uniform sampler2D textureS3O1;
+	uniform sampler2D textureS3O2;
+
+	uniform samplerCube reflectMap;
+	uniform sampler2D normalMap;
+
+	uniform sampler2D shadowMap;
+	uniform int haveShadows;
+
+	uniform vec3 unitAmbientLight;
+	uniform vec3 unitDiffuseLight;
+
+	varying mat3 tbnInvMatrix;
+
+	void main(void) {
+
+	vec2 tc = vec2(gl_TexCoord[0].s, gl_TexCoord[0].t);
+
+
+	vec4 basicColor = texture2D(textureS3O1, tc);
+	vec4 extraColor = texture2D(textureS3O2, tc);
+
+	/*if (extraColor.a < 0.05)
+	{
+		discard;
+		return;
+	}*/
+
+	//Manual transform of the matrix, for GLSL 1.X compatibility
+	mat3 tbnMatrix;
+
+	tbnMatrix[0].x = tbnInvMatrix[0].x;
+	tbnMatrix[0].y = tbnInvMatrix[1].x;
+	tbnMatrix[0].z = tbnInvMatrix[2].x;
+
+	tbnMatrix[1].x = tbnInvMatrix[0].y;
+	tbnMatrix[1].y = tbnInvMatrix[1].y;
+	tbnMatrix[1].z = tbnInvMatrix[2].y;
+
+	tbnMatrix[2].x = tbnInvMatrix[0].z;
+	tbnMatrix[2].y = tbnInvMatrix[1].z;
+	tbnMatrix[2].z = tbnInvMatrix[2].z;
+
+	vec3 nvTS = vec3((texture2D(normalMap, tc) * 2.0) - 1.0);
+
+	float nvDOTlv = 0.0;
+	float nvDOThv = 0.0;
+	vec3 reDirES;
+
+	vec3 nv_OS = normalize(tbnMatrix * nvTS);
+	vec3 nv_ES = normalize(gl_NormalMatrix * nv_OS);
+
+	nvDOTlv = max(nvDOTlv, dot(nv_ES, lvES));
+	nvDOThv = max(nvDOThv, dot(nv_ES, hvES));
+	reDirES = reflect(normalize(cdES), nv_ES);
+
+	float shininess = extraColor.g * 4.0;
+
+	float specPow =
+	(nvDOTlv > 0.0 && nvDOThv > 0.0)?
+	max(0.0, pow(nvDOThv, shininess)):
+	0.0;
+
+	if (extraColor.b > 0.0)
+	{
+		specPow = specPow * extraColor.b;//reduce specularity with blue channel
+	}
+
+	vec3 specColor = textureCube(reflectMap, reDirES).rgb * specPow * extraColor.g;
+	vec3 reflColor = textureCube(reflectMap, reDirES).rgb;
+	vec3 diffColor = (unitDiffuseLight * nvDOTlv) + unitAmbientLight * 1.25;  //boost light values
+
+	reflColor = mix(diffColor, reflColor, extraColor.g);
+	reflColor += extraColor.r;
+
+	gl_FragColor = basicColor;
+	gl_FragColor.rgb = vec3(mix(gl_FragColor.rgb, gl_Color.rgb, gl_FragColor.a));
+	gl_FragColor.rgb = gl_FragColor.rgb * reflColor + specColor;
+
+	if(haveShadows != 0)
+	{
+	vec2 tc = vec2(gl_TexCoord[3].s, gl_TexCoord[3].t);
+
+	float depth =  texture2D(shadowMap, tc).z;
+	if (depth <  0.05)
+	{
+		gl_FragColor.rgb = gl_FragColor.rgb * vec3(extraColor.r + unitAmbientLight.r + extraColor.g, extraColor.r + unitAmbientLight.g + extraColor.g, extraColor.r + unitAmbientLight.b + extraColor.g);
+
+		if (basicColor.a > 0.0)
+		{
+			gl_FragColor.rgb = vec3(mix(gl_FragColor.rgb, gl_Color.rgb, basicColor.a));
+		}
+	}	
+	}
+	gl_FragColor.a   = extraColor.a;
+	}
+	]],
+
+	uniformInt = {
+	textureS3O1 = 0,
+	textureS3O2 = 1,
+	reflectMap  = 2,
+	normalMap   = 3,
+	shadowMap   = 4,
+	},
+	uniform = {
+	treeMove = 0,
+	shaderTime = 0,
+	unitAmbientLight = {glGetSun("ambient", "unit")},
+	unitDiffuseLight = {glGetSun("diffuse", "unit")},
+	},
+	uniformMatrix = {
+	shadowMatrix = {glGetMatrixData("shadow")},
+	}
+	})
+
+	return s
+end
+
+
+
+function gadget:Initialize()
+	if (glCreateShader == nil) then
+		Spring.Echo("[unit_normalmap_shader:Initialize] no shader support")
+		--gadgetHandler:RemoveGadget()
+		runShader = 0
+		return
+	end
+
+	luaShader = CreateShader1()
+	if (luaShader == nil) then
+		Spring.Echo("[unit_normalmap_shader:Initialize] shader1 compilation failed")
+		Spring.Echo(glGetShaderLog())
+		runShader = 0
+		--gadgetHandler:RemoveGadget()
+		return
+	else
+		Spring.Echo("[unit_normalmap_shader:Initialize] shader1 compilation successful")
+		runShader = 1
+		Spring.Echo(glGetShaderLog())
+	end
+
+	if runShader == 1 then
+	SetShaderUniformLocations(luaShader)
+
+	for unitDefID, unitDef in pairs(UnitDefs) do
+		if (unitDef.customParams.normalmaps == "yes") then
+			normalMapNames[unitDefID] = {"unittextures/" .. unitDef.customParams.normalmap_name, true, true}
+		end
+		if (unitDef.customParams.tree_move == "yes") then
+			treeMoveList[unitDefID] = 1
+		end
+	end
+	local unitNumber = Spring.GetAllUnits()
+	if #unitNumber ~= nil then
+		for i,k in ipairs(unitNumber) do
+			local unitDef = Spring.GetUnitDefID(k)
+			if normalMapNames[unitDef] or treeMoveList[unitDef] then
+				MyUnitCrea(k)
+			end
+		end
+	end
+	end
+end
+
+function gadget:Shutdown()
+	for unitDefID, _ in pairs(UnitDefs) do
+		if (preDisplayLists[unitDefID] ~= nil) then
+			for i = 0, 1024 do
+				if (preDisplayLists[unitDefID][i] ~= nil) then glDeleteList(preDisplayLists[unitDefID][i]) end
+				if (pstDisplayLists[unitDefID][i] ~= nil) then glDeleteList(pstDisplayLists[unitDefID][i]) end
+			end
+		end
+	end
+end
+
+function gadget:RecvFromSynced(fun, unitID)
+	if runShader == 1 then
+		if (fun == "MyUnitCrea") then MyUnitCrea(unitID) return true end
+		if (fun == "MyUnitDest") then MyUnitDest(unitID) return true end
+	end
+	return false
+end
+
+local loaded,dt,diffTime,oldTime = 0,0,0,0
+function gadget:DrawWorld()
+	loaded = 0
+	dt = Spring.GetLastUpdateSeconds()
+	diffTime = oldTime + dt
+	oldTime = diffTime
+end
+
+------------------------------------------------------------DRAW THE UNIT
+function gadget:DrawUnit(unitID, gameDrawMode)	
+	if gameDrawMode == 1 and runShader == 1 then
+	--if runShader == 1 then
+	if loaded == 0 then
+		loaded = 1
+		glUniformMatrix(luaShaderLocs.cameraInvMatrixLoc, glGetMatrixData("caminv")) -- Spring 0.78.2.*
+		glUniformInt(luaShaderLocs.haveShadowsLoc, ((sprHaveShadows() and 1) or 0))
+		glUniform(luaShaderLocs.shaderTime,diffTime)
+
+		if (sprHaveShadows()) then
+			glUniform(luaShaderLocs.shadowParamsLoc, glGetShadowMapParams())
+			glUniform(luaShaderLocs.shadowDensityLoc, glGetSun("shadowDensity", "unit"))
+		end
+	end
+
+	if treeMove[unitID] then
+		glUniform(luaShaderLocs.treeMoveLoc, treeMove[unitID])
+	else
+		glUniform(luaShaderLocs.treeMoveLoc, 0.0)
+	end
+
+	glUnitRaw(unitID, true)
+	return true
+	else
+		return false
+	end
+end
+------------------------------------------------------------END
+end

@@ -1,0 +1,153 @@
+function gadget:GetInfo()
+	return {
+		name = "Buttons_neutral.lua",
+		desc = "Alters UI",
+		author = "aZaremoth",
+		date = "December 10th, 2008",
+		license = "public domain",
+		layer = 1,
+		enabled = true,
+		}
+end
+
+---------------------------------------------------------------------
+local MobileNoOtherButtons = {
+	[UnitDefNames.pig.id] = "pig",	
+	}
+	
+	
+---------------------------------------------------------------------
+if (gadgetHandler:IsSyncedCode()) then
+---------------------------------------------------------------------
+function gadget:UnitCreated(u, ud, team)
+	if MobileNoOtherButtons [Spring.GetUnitDefID(u)] then
+		local cmdID
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.LOAD_UNITS)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.UNLOAD_UNITS)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end		
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.ATTACK)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end	
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.AREA_ATTACK)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.RESURRECT)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end	
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.AUTOREPAIRLEVEL)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.IDLEMODE)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.CAPTURE)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end	
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.CLOAK)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.STOCKPILE)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.GUARD)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end	
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.STOP)
+		if cmdID ~= nil then
+			Spring.EditUnitCmdDesc(u, cmdID, {
+     				onlyTexture=true,		
+				name = "",			
+				texture = "&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/stopp.png",
+			})
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.WAIT)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.PATROL)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.MOVE)
+		if cmdID ~= nil then
+			Spring.EditUnitCmdDesc(u, cmdID, {
+     				onlyTexture=true,		
+				name = "",			
+				texture = "&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/move.png",
+			})
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.FIGHT)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.REPAIR)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.RESTORE)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.RECLAIM)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.MOVE_STATE)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.FIRE_STATE)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.ONOFF)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.TRAJECTORY)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.AISELECT)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end		
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.GROUPSELECT)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.GROUPADD)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.GROUPCLEAR)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.REPEAT)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end		
+		cmdID = Spring.FindUnitCmdDesc(u, CMD.TRAJECTORY)
+		if cmdID ~= nil then
+			Spring.RemoveUnitCmdDesc(u, cmdID)
+		end
+	end
+end
+
+else
+end

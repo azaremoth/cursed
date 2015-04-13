@@ -33,12 +33,14 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 	end
 	
 	if cmdID == 75 then -- LOAD UNITS
-    	local movetype = (Spring.GetUnitMoveTypeData(unitID)).name
+		local MyTeam = Spring.GetUnitTeam(unitID)   	
+		local movetype = (Spring.GetUnitMoveTypeData(unitID)).name
 		local tx, ty, tz = Spring.GetUnitPosition(unitID) -- transport position
 		local loadingradius = UnitDefs[unitDefID].customParams.transportloadingradius
 		if loadingradius == nil then
 			loadingradius = 300
 		end
+--		Spring.Echo(loadingradius)
 		local UnitsAroundTransport = Spring.GetUnitsInSphere(tx,ty,tz,loadingradius)
 		local x = loadcircle[1] -- x position is passenger's unitID if only oneclicked else the x-position of center of the load circle
 		local y = loadcircle[2] -- y-position of center of the load circle
@@ -49,7 +51,8 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 			if (r == nil) then
 				for _,aUnitID in ipairs(UnitsAroundTransport) do -- check if unit is >a<round the transport, if not order it to move to the transport
 					local aUnitDefID = Spring.GetUnitDefID(aUnitID)
-					if (UnitDefs[aUnitDefID].customParams.canbetransported == "true") then
+					local aTeam = Spring.GetUnitTeam(aUnitID)					
+					if ((UnitDefs[aUnitDefID].customParams.canbetransported == "true") and (aTeam == MyTeam)) then
 						if (aUnitID == x) then -- found unit is the passenger
 							Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),aUnitID)
 						else
@@ -60,13 +63,12 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 	-------- load multiple unit			
 			else
 				local UnitsAroundCommand = Spring.GetUnitsInSphere(x,y,z,r)
-				local MyTeam = Spring.GetUnitTeam(unitID)
 				for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up >c<ircle
 					local cTeam = Spring.GetUnitTeam(cUnitID)
-					if (cUnitID ~= unitID) and (cTeam == MyTeam) or (Spring.AreTeamsAllied(eTeam, MyTeam)) then				
-						for _,aUnitID in ipairs(UnitsAroundTransport) do -- check if unit is around the transport, if not order it to move to the transport
-							local aUnitDefID = Spring.GetUnitDefID(aUnitID)
-							if (UnitDefs[aUnitDefID].customParams.canbetransported == "true") then						
+					if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
+						local cUnitDefID = Spring.GetUnitDefID(cUnitID)
+						if (UnitDefs[cUnitDefID].customParams.canbetransported == "true") then	
+							for _,aUnitID in ipairs(UnitsAroundTransport) do -- check if unit is around the transport, if not order it to move to the transport
 								if (aUnitID == cUnitID) then
 									Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),aUnitID)
 								else

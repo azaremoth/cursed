@@ -102,10 +102,6 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 						if (aUnitID == x) then -- found unit is the passenger
 							Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),x)
 						else
---							local px, py, pz = Spring.GetUnitPosition(x) -- passenger position
---							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD_OPT_INTERNAL, x }, {"alt"} )
---							Spring.GiveOrderToUnit(unitID, CMD_MOVE, {px,py,pz}, {"alt"})
---							Spring.GiveOrderToUnit(unitID, CMD_LOAD_ONTO, {x}, {"alt"})
 							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_LOAD_UNITS, CMD_OPT_INTERNAL, x }, {"alt"} )
 						end
 					end
@@ -118,14 +114,12 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 						local cUnitDefID = Spring.GetUnitDefID(cUnitID)
 						if (UnitDefs[cUnitDefID].customParams.canbetransported == "true") then -- if transportable own unit is in command circle...
 							local px, py, pz = Spring.GetUnitPosition(cUnitID) -- transport position							
-							local UnitsAroundPassenger = Spring.GetUnitsInCylinder(px,pz,loadingradius)
-							Spring.Echo(UnitsAroundPassenger)							
+							local UnitsAroundPassenger = Spring.GetUnitsInCylinder(px,pz,loadingradius)						
 							for _,pUnitID in ipairs(UnitsAroundPassenger) do -- check if unit is around the transport, if not order it to move to the transport
 								if (pUnitID == unitID) then -- load unit as it is close to the transport	
 									Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),cUnitID)
 								else
-									Spring.Echo("else")
--- 									return true
+									Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_LOAD_UNITS, CMD_OPT_INTERNAL, cUnitID }, {"alt"} )
 								end
 							end
 						end

@@ -121,18 +121,8 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 									Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),cUnitID)
 								else
 									loadtheseunits[pUnitID] = unitID								
-									local newx = (x + loadingradius*0.4)
-									local newz = (z + loadingradius*0.4)									
-									if (abs(x-px) > loadingradius*0.5) or (abs(z-pz) > loadingradius*0.5) then					
-										if ((x-px) > 0) then
-											newx = (x - loadingradius*0.4)
-										end				
-										if ((z-pz) > 0) then
-											newz = (z - loadingradius*0.4)
-										end
-										Spring.GiveOrderToUnit(pUnitID, CMD_MOVE, {newx,y,newz}, {})
-										passengerstillmoves[pUnitID] = unitID	
-									end							
+									Spring.GiveOrderToUnit(pUnitID, CMD_MOVE, {x,y,z}, {})
+									passengerstillmoves[pUnitID] = unitID					
 								end
 							end
 						end

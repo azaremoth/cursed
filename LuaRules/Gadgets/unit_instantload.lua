@@ -21,6 +21,7 @@ if (gadgetHandler:IsSyncedCode()) then
 local GiveClampedOrderToUnit = Spring.Utilities.GiveClampedOrderToUnit
 local CMD_INSERT 		= CMD.INSERT
 local CMD_MOVE			= CMD.MOVE
+local CMD_STOP			= CMD.STOP
 local CMD_GUARD			= CMD.GUARD
 local CMD_LOAD_ONTO		= CMD.LOAD_ONTO
 local CMD_LOAD_UNITS	= CMD.LOAD_UNITS
@@ -28,6 +29,7 @@ local CMD_OPT_INTERNAL 	= CMD.OPT_INTERNAL
 local CMD_OPT_SHIFT 	= CMD.OPT_SHIFT
 
 local loadtheseunits = {}
+local passengerstillmoves = {}
 
 function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt)
 -- Spring.Echo(cmdID)
@@ -89,7 +91,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 			end
 	------------------------------------MOBILE----------------------------------------------------			
 		else -- it is mobile
-			if (r == nil) then
+			if (r == nil) then -- load single unit
 				local xUnitDefID = Spring.GetUnitDefID(x)
 				local xTeam = Spring.GetUnitTeam(x)	
 				if ((UnitDefs[xUnitDefID].customParams.canbetransported == "true") and (xTeam == MyTeam)) then
@@ -97,17 +99,15 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 						if (aUnitID == x) then -- found unit is the passenger
 							Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),x)
 						else
-							local px, py, pz = Spring.GetUnitPosition(x) -- passenger position	
-							Spring.GiveOrderToUnit(unitID, CMD_MOVE, {px,py,pz}, {})
-							-- Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD.OPT_SHIFT, px,py,pz }, {"alt"} )							
 							loadtheseunits[x] = unitID
-						--	Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_LOAD_UNITS, CMD_OPT_INTERNAL, x }, {"alt"} )
+							passengerstillmoves[x] = unitID
+							local px, py, pz = Spring.GetUnitPosition(x) -- passenger position	
+							Spring.GiveOrderToUnit(unitID, CMD_MOVE, {px,py,pz}, {})				
 						end
 					end
 				end
-			else
-				Spring.GiveOrderToUnit(unitID, CMD_MOVE, {x,y,z}, {})
---				Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD.OPT_SHIFT, x,y,z }, {"alt"} )				
+			else -- load multiple units
+				Spring.GiveOrderToUnit(unitID, CMD_MOVE, {x,y,z}, {})			
 				local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
 				for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up >c<ircle
 					local cTeam = Spring.GetUnitTeam(cUnitID)
@@ -120,8 +120,19 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 								if (pUnitID == unitID) then -- load unit as it is close to the transport	
 									Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),cUnitID)
 								else
-									loadtheseunits[pUnitID] = unitID
-								--	Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_LOAD_UNITS, CMD_OPT_INTERNAL, cUnitID }, {"alt"} )
+									loadtheseunits[pUnitID] = unitID								
+									local newx = (x + loadingradius*0.4)
+									local newz = (z + loadingradius*0.4)									
+									if (abs(x-px) > loadingradius*0.5) or (abs(z-pz) > loadingradius*0.5) then					
+										if ((x-px) > 0) then
+											newx = (x - loadingradius*0.4)
+										end				
+										if ((z-pz) > 0) then
+											newz = (z - loadingradius*0.4)
+										end
+										Spring.GiveOrderToUnit(pUnitID, CMD_MOVE, {newx,y,newz}, {})
+										passengerstillmoves[pUnitID] = unitID	
+									end							
 								end
 							end
 						end
@@ -135,12 +146,18 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 end
 
 function gadget:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag, cmdParams, cmdOpts)
-	if (cmdID == 10 or cmdID == 0) then
-		for pUnitID, tunitID in pairs(loadtheseunits) do
-			if unitID == tunitID then
-				loadtheseunits[pUnitID] = nil
+	if (cmdID == 10 or cmdID == 0) then -- cmdID = MOVE & 0 = STOP
+		for mUnitID, trunitID in pairs(passengerstillmoves) do
+			if (unitID == mUnitID) then
+				passengerstillmoves[mUnitID] = nil	-- passenger arrived at pick-up point
+			else
+				for pUnitID, tunitID in pairs(loadtheseunits) do
+					if (unitID == tunitID) then
+						loadtheseunits[pUnitID] = nil -- transport reached destination or was stopped
+					end
+				end
 			end
-		end
+		end		
 	end
 end
 

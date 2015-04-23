@@ -12,19 +12,14 @@ local unitDef = {
   buildCostMetal     = 400,
   buildTime          = 400,
   
---[[  buildingGroundDecalDecaySpeed = 0.2,
-  buildingGroundDecalSizeX = 15,
-  buildingGroundDecalSizeY = 15,
+  buildingGroundDecalDecaySpeed = 0.2,
+  buildingGroundDecalSizeX = 9,
+  buildingGroundDecalSizeY = 9,
   buildingGroundDecalType = "euf_bunker_aoplane.png",
-  useBuildingGroundDecal = true,  ]]-- doesn't work for some reason - deactivated just to be sure
+  useBuildingGroundDecal = true,
   
   buildPic           = "euf_bunker.png",    
   category           = "EUF LAND HEAVYARMOR",
-
-  collisionVolumeOffsets 	= "0 0 0",
-  collisionVolumeScales 	= "40 30 40",
-  collisionVolumeType 		= "CylY",  
-  
   corpse             = "dead",
   customParams       = {	
 	factionname		 = "imperials",
@@ -58,7 +53,7 @@ local unitDef = {
   yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo",
 ------------- transport ---------  
   isfirePlatform     = true,
-  loadingradius		 = 200,
+  loadingradius		 = 300,
   releaseHeld        = false,
   transportCapacity  = 8,
   transportMass      = 100000000,

@@ -12,14 +12,15 @@ local unitDef = {
   buildCostMetal     = 600,
   buildTime          = 600,
   
---[[  buildingGroundDecalDecaySpeed = 0.2,
-  buildingGroundDecalSizeX = 15,
-  buildingGroundDecalSizeY = 15,
+  buildingGroundDecalDecaySpeed = 0.2,
+  buildingGroundDecalSizeX = 9,
+  buildingGroundDecalSizeY = 9,
   buildingGroundDecalType = "euf_bunker_aoplane.png",
-  useBuildingGroundDecal = true,  ]]-- doesn't work for some reason - deactivated just to be sure
+  useBuildingGroundDecal = true,
   
   buildPic           = "euf_bunker.png",    
   category           = "EUF LAND HEAVYARMOR",
+    
   corpse             = "dead",
   customParams       = {	
 	factionname		 = "imperials",

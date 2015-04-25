@@ -35,17 +35,14 @@ local passengerstillmoves = {}
 function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt)
 -- Spring.Echo(cmdID)
 	if cmdID == 76 then -- LOAD ONTO a TRANSPORT checks for custom parameter
-		local transportID = loadcircle[1]
 		if (UnitDefs[unitDefID].customParams.canbetransported == "true") then
-			Spring.GiveOrderToUnit(unitID, CMD_GUARD, {transportID}, {})
-			loadtheseunits[unitID] = transportID
-			passengerstillmoves[unitID] = transportID			
-			-- return true
+			return true
 		else
 			return false
 		end
 	end
-	if (cmdID == 75 ) then -- LOAD UNITS // check about and Spring.GetUnitTransporter (unitID)
+	
+	if (cmdID == 75 and Spring.GetUnitTransporter (unitID)) then -- LOAD UNITS
 		local MyTeam = Spring.GetUnitTeam(unitID)   	
 		local movetype = (Spring.GetUnitMoveTypeData(unitID)).name
 		local tx, ty, tz = Spring.GetUnitPosition(unitID) -- transport position
@@ -65,10 +62,16 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 				local xUnitDefID = Spring.GetUnitDefID(x)
 				local xTeam = Spring.GetUnitTeam(x)	
 				if ((UnitDefs[xUnitDefID].customParams.canbetransported == "true") and (xTeam == MyTeam)) then
-					loadtheseunits[x] = unitID
-					passengerstillmoves[x] = unitID
-					Spring.GiveOrderToUnit(x, CMD_MOVE, {tx,ty,tz}, {})	
-					Spring.GiveOrderToUnit(unitID, CMD_WAIT, {}, {})					
+					for _,aUnitID in ipairs(UnitsAroundTransport) do -- check if unit is >a<round the transport, if not order it to move to the transport
+						if (aUnitID == x) then -- found unit is the passenger
+							Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),x)
+						else
+--							Spring.GiveOrderToUnit(x, CMD_LOAD_ONTO, {unitID}, {})
+							loadtheseunits[x] = unitID
+							passengerstillmoves[x] = unitID
+							Spring.GiveOrderToUnit(x, CMD_MOVE, {tx,ty,tz}, {})	
+						end
+					end
 				end
 			else -------- load multiple unit	
 				local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
@@ -77,10 +80,17 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 					if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
 						local cUnitDefID = Spring.GetUnitDefID(cUnitID)
 						if (UnitDefs[cUnitDefID].customParams.canbetransported == "true") then	
-							loadtheseunits[cUnitID] = unitID
-							passengerstillmoves[cUnitID] = unitID										
-							Spring.GiveOrderToUnit(cUnitID, CMD_MOVE, {tx,ty,tz}, {})
-							Spring.GiveOrderToUnit(unitID, CMD_WAIT, {}, {})
+							for _,aUnitID in ipairs(UnitsAroundTransport) do -- check if unit is around the transport, if not order it to move to the transport
+								if (aUnitID == cUnitID) then
+									Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),aUnitID)
+								else
+--									Spring.GiveOrderToUnit(cUnitID, CMD_LOAD_ONTO, {unitID}, {})
+									loadtheseunits[cUnitID] = unitID
+									passengerstillmoves[cUnitID] = unitID										
+									Spring.GiveOrderToUnit(cUnitID, CMD_MOVE, {tx,ty,tz}, {})
+									Spring.GiveOrderToUnit(unitID, CMD_WAIT, {}, {})
+								end
+							end
 						end
 					end
 				end
@@ -91,22 +101,38 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 				local xUnitDefID = Spring.GetUnitDefID(x)
 				local xTeam = Spring.GetUnitTeam(x)	
 				if ((UnitDefs[xUnitDefID].customParams.canbetransported == "true") and (xTeam == MyTeam)) then
-					loadtheseunits[x] = unitID
-					passengerstillmoves[x] = unitID
-					local px, py, pz = Spring.GetUnitPosition(x) -- passenger position
-					Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD_OPT_INTERNAL, px,py,pz }, {"alt"} )
+					for _,aUnitID in ipairs(UnitsAroundTransport) do -- check if unit is >a<round the transport, if not order it to move to the transport
+						if (aUnitID == x) then -- found unit is the passenger
+							Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),x)
+						else
+							loadtheseunits[x] = unitID
+							passengerstillmoves[x] = unitID
+							local px, py, pz = Spring.GetUnitPosition(x) -- passenger position
+--							Spring.GiveOrderToUnit(unitID, CMD_MOVE, {px,py,pz}, {})
+							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD_OPT_INTERNAL, px,py,pz }, {"alt"} )
+						end
+					end
 				end
 			else -- load multiple units
+--				Spring.GiveOrderToUnit(unitID, CMD_MOVE, {x,y,z}, {})
+				Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD_OPT_INTERNAL, x,y,z }, {"alt"} )
 				local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
 				for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up >c<ircle
 					local cTeam = Spring.GetUnitTeam(cUnitID)
 					if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
 						local cUnitDefID = Spring.GetUnitDefID(cUnitID)
 						if (UnitDefs[cUnitDefID].customParams.canbetransported == "true") then -- if transportable own unit is in command circle...
-							loadtheseunits[cUnitID] = unitID
-							passengerstillmoves[cUnitID] = unitID
-							Spring.GiveOrderToUnit(cUnitID, CMD_MOVE, {x,y,z}, {})
-							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD_OPT_INTERNAL, x,y,z }, {"alt"} )							
+							local px, py, pz = Spring.GetUnitPosition(cUnitID) -- transport position							
+							local UnitsAroundPassenger = Spring.GetUnitsInCylinder(px,pz,loadingradius)						
+							for _,pUnitID in ipairs(UnitsAroundPassenger) do -- check if unit is around the transport, if not order it to move to the transport
+								if (pUnitID == unitID) then -- load unit as it is close to the transport	
+									Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),cUnitID)
+								else
+									loadtheseunits[pUnitID] = unitID
+									passengerstillmoves[pUnitID] = unitID
+									Spring.GiveOrderToUnit(pUnitID, CMD_MOVE, {x,y,z}, {})
+								end
+							end
 						end
 					end
 				end
@@ -117,8 +143,6 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 	end
 end
 
-
---[[
 function gadget:UnitLoaded(unitID, unitDefID, unitTeam, transportID, transportTeam)
 	for mUnitID, trunitID in pairs(passengerstillmoves) do
 		if (unitID == mUnitID) then
@@ -132,10 +156,11 @@ function gadget:UnitLoaded(unitID, unitDefID, unitTeam, transportID, transportTe
 	end	
 end
 
+
 function gadget:UnitIdle(unitID, unitDefID, unitTeam)
 	for mUnitID, trunitID in pairs(passengerstillmoves) do
 		if (unitID == mUnitID) then
-			passengerstillmoves[mUnitID] = nil	-- passenger arrived at pick-up point or was stopped
+			passengerstillmoves[mUnitID] = nil	-- passenger arrived at pick-up point or was stopped?!
 		else
 			for pUnitID, tunitID in pairs(loadtheseunits) do
 				if (unitID == tunitID) then
@@ -146,7 +171,7 @@ function gadget:UnitIdle(unitID, unitDefID, unitTeam)
 	end		
 end
 
-function gadget:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag, cmdParams, cmdOpts)
+--[[function gadget:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag, cmdParams, cmdOpts)
 	if (cmdID == 10 or cmdID == 0) then -- cmdID = MOVE & 0 = STOP
 		for mUnitID, trunitID in pairs(passengerstillmoves) do
 			if (unitID == mUnitID) then

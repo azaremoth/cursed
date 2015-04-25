@@ -31,30 +31,29 @@ local CMD_OPT_SHIFT 	= CMD.OPT_SHIFT
 
 local loadtheseunits = {}
 local passengerstillmoves = {}
+local currenttransportcapacity = {}
 
 function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt)
--- Spring.Echo(cmdID)
-	if cmdID == 76 then -- LOAD ONTO a TRANSPORT checks for custom parameter
+
+	local ud = UnitDefs[unitDefID]
+	local transportcapacity = ud.transportCapacity
+	local loadingradius = ud.loadingRadius
+		
+	if (cmdID == 76) then -- LOAD ONTO a TRANSPORT checks for custom parameter
 		local transportID = loadcircle[1]
 		if (UnitDefs[unitDefID].customParams.canbetransported == "true") then
 			Spring.GiveOrderToUnit(unitID, CMD_GUARD, {transportID}, {})
 			loadtheseunits[unitID] = transportID
 			passengerstillmoves[unitID] = transportID			
-			-- return true
 		else
 			return false
 		end
 	end
-	if (cmdID == 75 ) then -- LOAD UNITS // check about and Spring.GetUnitTransporter (unitID)
+	
+	if ((cmdID == 75 ) and (transportcapacity > 0)) then -- LOAD UNITS // check about and Spring.GetUnitTransporter (unitID)
 		local MyTeam = Spring.GetUnitTeam(unitID)   	
 		local movetype = (Spring.GetUnitMoveTypeData(unitID)).name
 		local tx, ty, tz = Spring.GetUnitPosition(unitID) -- transport position
-		local loadingradius = UnitDefs[unitDefID].customParams.transportloadingradius
-		if loadingradius == nil then
-			loadingradius = 300
-		end
---		Spring.Echo("called")
-		local UnitsAroundTransport = Spring.GetUnitsInCylinder(tx,tz,loadingradius)
 		local x = loadcircle[1] -- x position is passenger's unitID if only oneclicked else the x-position of center of the load circle
 		local y = loadcircle[2] -- y-position of center of the load circle
 		local z = loadcircle[3] -- z-position of center of the load circle
@@ -117,21 +116,6 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 	end
 end
 
-
---[[
-function gadget:UnitLoaded(unitID, unitDefID, unitTeam, transportID, transportTeam)
-	for mUnitID, trunitID in pairs(passengerstillmoves) do
-		if (unitID == mUnitID) then
-			passengerstillmoves[mUnitID] = nil	-- passenger was loaded
-		end
-	end
-	for pUnitID, tunitID in pairs(loadtheseunits) do
-		if (unitID == pUnitID) then
-			loadtheseunits[pUnitID] = nil -- unit was picked up
-		end
-	end	
-end
-
 function gadget:UnitIdle(unitID, unitDefID, unitTeam)
 	for mUnitID, trunitID in pairs(passengerstillmoves) do
 		if (unitID == mUnitID) then
@@ -146,28 +130,14 @@ function gadget:UnitIdle(unitID, unitDefID, unitTeam)
 	end		
 end
 
-function gadget:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag, cmdParams, cmdOpts)
-	if (cmdID == 10 or cmdID == 0) then -- cmdID = MOVE & 0 = STOP
-		for mUnitID, trunitID in pairs(passengerstillmoves) do
-			if (unitID == mUnitID) then
-				passengerstillmoves[mUnitID] = nil	-- passenger arrived at pick-up point
-			else
-				for pUnitID, tunitID in pairs(loadtheseunits) do
-					if (unitID == tunitID) then
-						loadtheseunits[pUnitID] = nil -- transport reached destination or was stopped
-					end
-				end
-			end
-		end		
-	end
-end]]--
-
 function gadget:GameFrame(f)
 	if f % 32 < .1 then
 		for pUnitID, unitID in pairs(loadtheseunits) do
 			local x, y, z = Spring.GetUnitPosition(unitID) -- transport position
-			local unitDefID = Spring.GetUnitDefID(unitID)			
-			local loadingradius = UnitDefs[unitDefID].customParams.transportloadingradius
+			local unitDefID = Spring.GetUnitDefID(unitID)				
+			local ud = UnitDefs[unitDefID]
+			local transportcapacity = ud.transportCapacity
+			local loadingradius = ud.loadingRadius
 			if loadingradius == nil then
 				loadingradius = 300
 			end
@@ -177,6 +147,12 @@ function gadget:GameFrame(f)
 				if (pUnitID == tUnitID and UnitDefs[tUnitDefID].customParams.canbetransported == "true") then
 					Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),pUnitID)
 					loadtheseunits[pUnitID] = nil
+					local punitDefID = Spring.GetUnitDefID(pUnitID)				
+					local pud = UnitDefs[punitDefID]
+					local prepairSpeed = pud.repairSpeed	
+					if (prepairSpeed > 0) then -- builder units will automatically repair the transport / bunker				
+						Spring.GiveOrderToUnit(cUnitID, CMD_GUARD, {unitID}, {})
+					end
 				end
 			end
 		end

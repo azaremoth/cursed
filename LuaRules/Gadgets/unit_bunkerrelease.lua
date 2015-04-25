@@ -16,10 +16,6 @@ local BunkerPairs = {
 	[UnitDefNames.euf_bunker.id] = 'euf_bunker',
 }
 
-
-local MaxSizeX = Game.mapSizeX
-local MaxSizeZ = Game.mapSizeZ
-
 ---------------------------------------------------------------------
 local CMD_UNLOADBUNKER = 32646
 

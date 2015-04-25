@@ -23,7 +23,6 @@ local unitDef = {
   corpse             = "dead",
   customParams       = {	
 	factionname		 = "imperials",
-	transportloadingradius	 = 300,
 	normaltex = "unittextures/normalmaps/euf_bunker_normal.png",
 	normalmaps = "yes",		
     helptext = "The bunker is a heavily fortified structure that can be used as a firebase for up to 4 soldiers."	
@@ -53,7 +52,7 @@ local unitDef = {
   yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo",
 ------------- transport ---------  
   isfirePlatform     = true,
-  loadingradius		 = 300,
+  loadingRadius 	 = 300,
   releaseHeld        = false,
   transportCapacity  = 8,
   transportMass      = 100000000,

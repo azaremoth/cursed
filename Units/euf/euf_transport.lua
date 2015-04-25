@@ -18,7 +18,6 @@ local unitDef = {
   iconType           = "triangle",
   customParams          = {
 	factionname	= "imperials",
-	transportloadingradius	 = 300,	
 	normaltex = "unittextures/normalmaps/euf_transport_normal.png",
 	normalmaps = "yes",			
 	helptext = "An armored flying troop transporter that can hold up to 6 soldiers."	
@@ -74,7 +73,7 @@ local unitDef = {
 ------------- transport ---------  
   isfirePlatform     = false,
   isTransport        = true, 
-  loadingradius		 = 300,
+  loadingRadius		 = 300,
   releaseHeld        = false,
   transportCapacity  = 12,
   transportMass      = 100000000,

@@ -2,7 +2,7 @@
 
 Features
 - added aggressive space bugs as additional neutral critters (can be switched off in the game options)
-- optimized transporting behavior for bunkers and transporters
+- optimized transporting behavior for bunkers and transporters (floodload)
 
 Balance
 - speed of bombers reduced by 50%, speed of the bombs reduced by 25%
@@ -26,6 +26,7 @@ Bugs
 - fixed faulty behavior of cursed enforcers (necromanced from dead snipers) while burrowed
 - fixed parrying: moved the lua code needed for parrying directly to unit scripts, as several misses were observed due to slow return functions
 - fixed priests not cursing liches (as they are also skeleton type units)
+- optimized bunker collision sphere - should remove non attacking melee units
 
 
 

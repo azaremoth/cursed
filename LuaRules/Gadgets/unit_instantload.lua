@@ -33,14 +33,15 @@ local loadtheseunits = {}
 local passengerstillmoves = {}
 local currenttransportcapacity = {}
 
-function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt)
+
+function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions)
 
 	local ud = UnitDefs[unitDefID]
 	local transportcapacity = ud.transportCapacity
 	local loadingradius = ud.loadingRadius
 		
 	if (cmdID == 76) then -- LOAD ONTO a TRANSPORT checks for custom parameter
-		local transportID = loadcircle[1]
+		local transportID = cmdParams[1]
 		if (UnitDefs[unitDefID].customParams.canbetransported == "true") then
 			Spring.GiveOrderToUnit(unitID, CMD_GUARD, {transportID}, {})
 			loadtheseunits[unitID] = transportID
@@ -54,10 +55,10 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 		local MyTeam = Spring.GetUnitTeam(unitID)   	
 		local movetype = (Spring.GetUnitMoveTypeData(unitID)).name
 		local tx, ty, tz = Spring.GetUnitPosition(unitID) -- transport position
-		local x = loadcircle[1] -- x position is passenger's unitID if only oneclicked else the x-position of center of the load circle
-		local y = loadcircle[2] -- y-position of center of the load circle
-		local z = loadcircle[3] -- z-position of center of the load circle
-		local r = loadcircle[4] -- radius of the load circle
+		local x = cmdParams[1] -- x position is passenger's unitID if only oneclicked else the x-position of center of the load circle
+		local y = cmdParams[2] -- y-position of center of the load circle
+		local z = cmdParams[3] -- z-position of center of the load circle
+		local r = cmdParams[4] -- radius of the load circle
 	------------------------------------BUNKER----------------------------------------------------
 		if (movetype == [[static]]) then --is it a bunker?
 			if (r == nil) then	-------- load a single unit
@@ -67,7 +68,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 					loadtheseunits[x] = unitID
 					passengerstillmoves[x] = unitID
 					Spring.GiveOrderToUnit(x, CMD_MOVE, {tx,ty,tz}, {})	
-					Spring.GiveOrderToUnit(unitID, CMD_WAIT, {}, {})					
+--					Spring.GiveOrderToUnit(unitID, CMD_WAIT, {}, {})					
 				end
 			else -------- load multiple unit	
 				local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
@@ -79,7 +80,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 							loadtheseunits[cUnitID] = unitID
 							passengerstillmoves[cUnitID] = unitID										
 							Spring.GiveOrderToUnit(cUnitID, CMD_MOVE, {tx,ty,tz}, {})
-							Spring.GiveOrderToUnit(unitID, CMD_WAIT, {}, {})
+--							Spring.GiveOrderToUnit(unitID, CMD_WAIT, {}, {})
 						end
 					end
 				end
@@ -93,19 +94,27 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, loadcircle, opt
 					loadtheseunits[x] = unitID
 					passengerstillmoves[x] = unitID
 					local px, py, pz = Spring.GetUnitPosition(x) -- passenger position
-					Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD_OPT_INTERNAL, px,py,pz }, {"alt"} )
+					if cmdOptions.shift then
+						Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD.OPT_INTERNAL, px,py,pz }, {"alt"} )					
+					else
+						Spring.GiveOrderToUnit(unitID, CMD_MOVE, {px,py,pz}, {})
+					end			
 				end
 			else -- load multiple units
 				local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
+				if cmdOptions.shift then				
+					Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD.OPT_INTERNAL, x,y,z }, {"alt"} )
+				else
+					Spring.GiveOrderToUnit(unitID, CMD_MOVE, {x,y,z}, {})
+				end
 				for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up >c<ircle
 					local cTeam = Spring.GetUnitTeam(cUnitID)
 					if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
 						local cUnitDefID = Spring.GetUnitDefID(cUnitID)
-						if (UnitDefs[cUnitDefID].customParams.canbetransported == "true") then -- if transportable own unit is in command circle...
+						if (UnitDefs[cUnitDefID].customParams.canbetransported == "true") then
 							loadtheseunits[cUnitID] = unitID
 							passengerstillmoves[cUnitID] = unitID
 							Spring.GiveOrderToUnit(cUnitID, CMD_MOVE, {x,y,z}, {})
-							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD_OPT_INTERNAL, x,y,z }, {"alt"} )							
 						end
 					end
 				end
@@ -122,8 +131,9 @@ function gadget:UnitIdle(unitID, unitDefID, unitTeam)
 			passengerstillmoves[mUnitID] = nil	-- passenger arrived at pick-up point or was stopped
 		else
 			for pUnitID, tunitID in pairs(loadtheseunits) do
-				if (unitID == tunitID) then
-					loadtheseunits[pUnitID] = nil -- transport reached destination or was stopped
+				local movetype = (Spring.GetUnitMoveTypeData(tunitID)).name
+				if ((unitID == tunitID) and (movetype ~= [[static]])) then
+					loadtheseunits[pUnitID] = nil -- mobile transport reached destination or was stopped
 				end
 			end
 		end
@@ -151,7 +161,7 @@ function gadget:GameFrame(f)
 					local pud = UnitDefs[punitDefID]
 					local prepairSpeed = pud.repairSpeed	
 					if (prepairSpeed > 0) then -- builder units will automatically repair the transport / bunker				
-						Spring.GiveOrderToUnit(cUnitID, CMD_GUARD, {unitID}, {})
+						Spring.GiveOrderToUnit(pUnitID, CMD_GUARD, {unitID}, {})
 					end
 				end
 			end

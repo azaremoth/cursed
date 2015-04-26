@@ -1,4 +1,4 @@
->> Major changes 1.300 => 1.310
+>> Major changes 1.300 => 1.350
 
 Features
 - added aggressive space bugs as additional neutral critters (can be switched off in the game options)
@@ -25,8 +25,8 @@ Polishing
 Bugs
 - fixed faulty behavior of cursed enforcers (necromanced from dead snipers) while burrowed
 - fixed parrying: moved the lua code needed for parrying directly to unit scripts, as several misses were observed due to slow return functions
-- fixed priests not cursing liches (as they are also skeleton type units)
-- optimized bunker collision sphere - should remove non attacking melee units
+- fixed priests not cursing (direct damage) liches (as they are also skeleton type units)
+- optimized bunker collision sphere - should avoid melee units not being able to attack bunkers
 
 
 

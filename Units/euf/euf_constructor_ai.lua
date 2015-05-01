@@ -79,7 +79,7 @@ local unitDef = {
   turnRate           = 1005,
   unitname           = "euf_constructor_ai",
   upright            = true,
-  workerTime         = 25,
+  workerTime         = 30,
   buildoptions = {
     "euf_metalextractor_lvl1",
     "euf_solar",

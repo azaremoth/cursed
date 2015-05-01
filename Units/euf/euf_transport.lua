@@ -80,7 +80,7 @@ local unitDef = {
   transportSize      = 10,
   transmaxunits       = 4,
   transportUnloadMethod = 1, -- was 1
-  unloadSpread       = 50, 
+  unloadSpread       = 0.5, 
   fallSpeed          = 24,
 -------------------------------
   sfxtypes = {

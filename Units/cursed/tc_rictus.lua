@@ -95,11 +95,11 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      badTargetCategory  = "HEAVYARMOR AIR",
+      badTargetCategory  = "HEAVYARMOR",
       def                = "RictusFlamethrower",
       mainDir            = "0 0 1",
       maxAngleDif        = 160,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

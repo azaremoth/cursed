@@ -4,6 +4,7 @@ Balance
 - bombers and artillery units can not target flying units anymore - this should avoid a lot of collateral damage
 - cursed rictus will not attack air targets anymore
 - increased build speed of tier 1 builderoids by 25%
+- costs for artillery towers and tier 2 artillery units were increased to 950
 
 Polishing
 - added normal map for the cursed metal extractor (tier 1)

@@ -6,10 +6,10 @@ local unitName = "tc_hellfire"
 
 local unitDef = {
   armortype          = "HEAVY",
-  buildCostEnergy    = 850,
-  buildCostMetal     = 850,
+  buildCostEnergy    = 950,
+  buildCostMetal     = 950,
   buildPic           = "tc_hellfire.jpg",
-  buildTime          = 850,
+  buildTime          = 950,
   
   buildingGroundDecalDecaySpeed = 0.01,
   buildingGroundDecalSizeX = 16,

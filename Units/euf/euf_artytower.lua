@@ -6,10 +6,10 @@ local unitName = "euf_artytower"
 
 local unitDef = {
   armortype          = "HEAVY",
-  buildCostEnergy    = 850,
-  buildCostMetal     = 850,
+  buildCostEnergy    = 950,
+  buildCostMetal     = 950,
   buildPic           = "euf_artytower.png",
-  buildTime          = 850,
+  buildTime          = 950,
   
   buildingGroundDecalDecaySpeed = 1,
   buildingGroundDecalSizeX = 8,

@@ -99,9 +99,9 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      badTargetCategory  = "LIGHTARMOR FLYER",
+      badTargetCategory  = "LIGHTARMOR",
       def                = "MLRS",
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

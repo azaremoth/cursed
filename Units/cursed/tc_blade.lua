@@ -97,13 +97,13 @@ local unitDef = {
     [1]  = {
       def                = "BLADE_MISSILE",
       mainDir            = "0 0 1",
-      maxAngleDif        = 110,
+      maxAngleDif        = 160,
       onlyTargetCategory = "AIR",	  
     },
     [2]  = {
      	def                = "BLADE_MISSILE",
       mainDir            = "0 0 1",
-      maxAngleDif        = 110,
+      maxAngleDif        = 160,
       onlyTargetCategory = "AIR",	  
     },
   },

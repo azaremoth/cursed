@@ -103,11 +103,11 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      badTargetCategory  = "LIGHTARMOR AIR",	
+      badTargetCategory  = "LIGHTARMOR",	
       def                = "BOMB",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

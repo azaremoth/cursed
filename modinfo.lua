@@ -2,7 +2,7 @@ return {
   name='The Cursed',
   description='',
   shortname='tc',
-  version='1.350',
+  version='$VN',
   mutator='',
   game='',
   shortGame='',

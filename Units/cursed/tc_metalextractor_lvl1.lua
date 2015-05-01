@@ -22,6 +22,8 @@ local unitDef = {
 	factionname	= "cursed",
 	growingcreep = true,	
 	ismex              = 1,	
+	normaltex = "unittextures/normalmaps/tc_metalextractor_lvl1_normal.png",
+	normalmaps = "yes",	
     helptext 	= "Basic metal extractor."
   },
   description        = "Extracts Metal",

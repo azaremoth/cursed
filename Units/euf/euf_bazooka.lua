@@ -113,13 +113,13 @@ local unitDef = {
       def                = "BAZOOKA",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
-      onlyTargetCategory = "LAND AIR",
-      badTargetCategory = "LIGHTARMOR FLYER",	  
+      onlyTargetCategory = "LAND",
+      badTargetCategory = "LIGHTARMOR",	  
     },
     [2]  = {
       def                = "BAZOOKA_BUNKER",
-      onlyTargetCategory = "LAND AIR",
-      badTargetCategory = "LIGHTARMOR FLYER",	
+      onlyTargetCategory = "LAND",
+      badTargetCategory = "LIGHTARMOR",	
     },	
   },
 }

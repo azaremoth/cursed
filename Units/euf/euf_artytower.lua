@@ -96,8 +96,8 @@ local unitDef = {
     [1]  = {
       badTargetCategory  = "HEAVYARMOR FLYER",
       def                = "Artillery",
-      badTargetCategory = "AIR LIGHTARMOR",	  
-      onlyTargetCategory = "LAND AIR",
+      badTargetCategory = "LIGHTARMOR",	  
+      onlyTargetCategory = "LAND",
     },
   },
 }

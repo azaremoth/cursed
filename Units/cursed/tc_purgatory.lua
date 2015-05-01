@@ -107,9 +107,9 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      badTargetCategory  = "LIGHTARMOR FLYER",
+      badTargetCategory  = "LIGHTARMOR",
       def                = "PURGATORY_ARTY",
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

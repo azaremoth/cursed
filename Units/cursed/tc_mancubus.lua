@@ -25,7 +25,7 @@ local unitDef = {
 	factionname	= "cursed",
 	isinfantry = "true",	
 	normaltex = "unittextures/normalmaps/tc_mancubus_normal.png",
-    normalmaps = "yes",
+	normalmaps = "yes",
     helptext 	= "The mancubus is a slow but enduring combat unit with a dual plasma gun."
   },
   defaultmissiontype = "Standby",

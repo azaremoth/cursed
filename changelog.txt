@@ -1,5 +1,12 @@
 >> Major changes 1.350 => 1.351
 
+Polishing
+- loading behaviour improved if ordering multiple transport units
+
+
+
+>> Major changes 1.350 => 1.351
+
 Balance
 - bombers and artillery units can not target flying units anymore - this should avoid a lot of collateral damage
 - cursed rictus will not attack air targets anymore

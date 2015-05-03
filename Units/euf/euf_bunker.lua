@@ -21,11 +21,12 @@ local unitDef = {
   buildPic           = "euf_bunker.png",    
   category           = "EUF LAND HEAVYARMOR",
   corpse             = "dead",
-  customParams       = {	
-	factionname		 = "imperials",
-	normaltex = "unittextures/normalmaps/euf_bunker_normal.png",
-	normalmaps = "yes",		
-    helptext = "The bunker is a heavily fortified structure that can be used as a firebase for up to 4 soldiers."	
+  customParams       = {
+	transportcapa		= 4,  
+	factionname		 	= "imperials",
+	normaltex 			= "unittextures/normalmaps/euf_bunker_normal.png",
+	normalmaps 			= "yes",		
+    helptext 			= "The bunker is a heavily fortified structure that can be used as a firebase for up to 4 soldiers."	
 	},
   description        = "Firebase for soldiers",
   explodeAs          = "SMALL_EXPLOSION_YELLOW",
@@ -57,7 +58,6 @@ local unitDef = {
   transportCapacity  = 8,
   transportMass      = 100000000,
   transportSize      = 10,
-  transmaxunits      = 4,
   transportunloadmethod = 2,
   unloadSpread       = 0,
 -------------------------------

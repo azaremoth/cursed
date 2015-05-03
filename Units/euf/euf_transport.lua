@@ -16,11 +16,12 @@ local unitDef = {
   armortype          = "FLYER",   
   side               = "imperials",
   iconType           = "triangle",
-  customParams          = {
-	factionname	= "imperials",
-	normaltex = "unittextures/normalmaps/euf_transport_normal.png",
-	normalmaps = "yes",			
-	helptext = "An armored flying troop transporter that can hold up to 6 soldiers."	
+  customParams       = {
+	transportcapa		= 6,
+	factionname			= "imperials",
+	normaltex 			= "unittextures/normalmaps/euf_transport_normal.png",
+	normalmaps 			= "yes",			
+	helptext 			= "An armored flying troop transporter that can hold up to 6 soldiers."	
   }, 
 -- Costs and HPs
   buildCostEnergy     = 600,
@@ -78,7 +79,6 @@ local unitDef = {
   transportCapacity  = 12,
   transportMass      = 100000000,
   transportSize      = 10,
-  transmaxunits       = 4,
   transportUnloadMethod = 1, -- was 1
   unloadSpread       = 0.5, 
   fallSpeed          = 24,

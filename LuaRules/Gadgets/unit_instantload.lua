@@ -222,7 +222,11 @@ function gadget:GameFrame(f)
 			for _,tUnitID in ipairs(UnitsAroundTransport) do
 				local tUnitDefID = Spring.GetUnitDefID(tUnitID)
 				if (pUnitID == tUnitID and UnitDefs[tUnitDefID].customParams.canbetransported == "true") then
-					Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),pUnitID)
+					if (Spring.UnitScript.GetScriptEnv(unitID) == nil) then -- cob/bos compatibility
+						Spring.CallCOBScript( unitID, "TransportPickup", pUnitID)
+					else 
+						Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),pUnitID)					
+					end
 					loadtheseunits[pUnitID] = nil
 					local punitDefID = Spring.GetUnitDefID(pUnitID)				
 					local pud = UnitDefs[punitDefID]

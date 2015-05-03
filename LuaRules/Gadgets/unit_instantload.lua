@@ -31,9 +31,11 @@ local CMD_OPT_SHIFT 	= CMD.OPT_SHIFT
 
 local loadtheseunits = {}
 local passengerstillmoves = {}
+local transportstillmoves = {}
 local currenttransportcapacity = {}
 local currentassigablecapacity = {}
 local unitisontransport = {}
+
 
 function gadget:UnitCreated(unitID, unitDefID, team, builderID)
 	local transportcapa = tonumber(UnitDefs[unitDefID].customParams.transportcapa)
@@ -43,13 +45,30 @@ function gadget:UnitCreated(unitID, unitDefID, team, builderID)
 	currenttransportcapacity[unitID] = transportcapa
 	currentassigablecapacity[unitID] = transportcapa
 	unitisontransport[unitID] = false
+	passengerstillmoves[unitID] = false
+	transportstillmoves[unitID] = false
 end	
 
 function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions)
 	local ud = UnitDefs[unitDefID]
 	local transportcapacity = ud.transportCapacity
 	local loadingradius = ud.loadingRadius
-		
+
+	if (cmdID == 0) then -- STOPP
+		for pUnitID, tunitID in pairs(loadtheseunits) do
+			local transporterID = loadtheseunits[pUnitID]
+			if (pUnitID == unitID) then -- passenger received STOPP
+				currentassigablecapacity[transporterID] = (currentassigablecapacity[transporterID] + 1)
+				Spring.Echo(currentassigablecapacity[transporterID])	
+				loadtheseunits[pUnitID] = nil			
+			elseif (loadtheseunits[pUnitID] == unitID) then -- transporter received STOPP
+				currentassigablecapacity[transporterID] = (currentassigablecapacity[transporterID] + 1)
+				Spring.Echo(currentassigablecapacity[transporterID])	
+				loadtheseunits[pUnitID] = nil
+			end
+		end
+	end
+	
 	if (cmdID == 76) then -- LOAD ONTO a TRANSPORT checks for custom parameter
 		local transportID = cmdParams[1]
 		if ((UnitDefs[unitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[transportID] > 0) and (unitisontransport[unitID] == false) and (loadtheseunits[unitID] == nil)) then
@@ -57,7 +76,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 			loadtheseunits[unitID] = transportID
 			currentassigablecapacity[transportID] = (currentassigablecapacity[transportID] - 1)
 			Spring.Echo(currentassigablecapacity[transportID])
-			passengerstillmoves[unitID] = transportID			
+			passengerstillmoves[unitID] = true			
 		else
 			return false
 		end
@@ -81,7 +100,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 						loadtheseunits[x] = unitID
 						currentassigablecapacity[unitID] = (currentassigablecapacity[unitID] - 1)
 						Spring.Echo(currentassigablecapacity[unitID])
-						passengerstillmoves[x] = unitID
+						passengerstillmoves[x] = true
 						Spring.GiveOrderToUnit(x, CMD_MOVE, {tx,ty,tz}, {})						
 					end
 				else -------- load multiple unit	
@@ -94,7 +113,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 								loadtheseunits[cUnitID] = unitID
 								currentassigablecapacity[unitID] = (currentassigablecapacity[unitID] - 1)	
 								Spring.Echo(currentassigablecapacity[unitID])								
-								passengerstillmoves[cUnitID] = unitID										
+								passengerstillmoves[cUnitID] = true										
 								Spring.GiveOrderToUnit(cUnitID, CMD_MOVE, {tx,ty,tz}, {})
 	--							Spring.GiveOrderToUnit(unitID, CMD_WAIT, {}, {})
 							end
@@ -103,6 +122,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 				end
 		------------------------------------MOBILE----------------------------------------------------			
 			else -- it is mobile
+				transportstillmoves[unitID] = true -- the transporter will receive a move order anyway
 				if (r == nil) then -- load single unit
 					local xUnitDefID = Spring.GetUnitDefID(x)
 					local xTeam = Spring.GetUnitTeam(x)	
@@ -110,10 +130,10 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 						loadtheseunits[x] = unitID
 						currentassigablecapacity[unitID] = (currentassigablecapacity[unitID] - 1)
 						Spring.Echo(currentassigablecapacity[unitID])
-						passengerstillmoves[x] = unitID
+						passengerstillmoves[x] = true
 						local px, py, pz = Spring.GetUnitPosition(x) -- passenger position
 						if cmdOptions.shift then
-							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD.OPT_INTERNAL, px,py,pz }, {"alt"} )					
+							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD.OPT_INTERNAL, px,py,pz }, {"alt"} )
 						else
 							Spring.GiveOrderToUnit(unitID, CMD_MOVE, {px,py,pz}, {})
 						end			
@@ -133,7 +153,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 								loadtheseunits[cUnitID] = unitID
 								currentassigablecapacity[unitID] = (currentassigablecapacity[unitID] - 1)
 								Spring.Echo(currentassigablecapacity[unitID])									
-								passengerstillmoves[cUnitID] = unitID
+								passengerstillmoves[cUnitID] = true
 								Spring.GiveOrderToUnit(cUnitID, CMD_MOVE, {x,y,z}, {})
 							end
 						end
@@ -147,21 +167,27 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 end
 
 function gadget:UnitIdle(unitID, unitDefID, unitTeam)
-	for mUnitID, trunitID in pairs(passengerstillmoves) do
-		if (unitID == mUnitID) then
-			passengerstillmoves[mUnitID] = nil	-- passenger arrived at pick-up point or was stopped
-		else
-			for pUnitID, tunitID in pairs(loadtheseunits) do
-				local movetype = (Spring.GetUnitMoveTypeData(tunitID)).name
-				if ((unitID == tunitID) and (movetype ~= [[static]])) then
-					local transporterID = loadtheseunits[pUnitID]
-					currentassigablecapacity[transporterID] = (currentassigablecapacity[transporterID] + 1)	-- remove dead unit from assigned units list
-					Spring.Echo(currentassigablecapacity[transporterID])
-					loadtheseunits[pUnitID] = nil -- mobile transport reached destination or was stopped
-				end
-			end
+	for mpUnitID, _ in pairs(passengerstillmoves) do -- remove arrived passengers 
+		if (unitID == mpUnitID) then
+			passengerstillmoves[mpUnitID] = false	-- passenger arrived at pick-up point or was stopped
+			Spring.Echo("Passenger idle")
 		end
-	end		
+	end
+	for mtUnitID, _ in pairs(transportstillmoves) do -- remove arrived passengers 
+		if (unitID == mtUnitID) then
+			transportstillmoves[mtUnitID] = false	-- transport arrived at pick-up point or was stopped
+			Spring.Echo("Transport idle")
+		end
+	end
+	for pUnitID, tunitID in pairs(loadtheseunits) do -- check if passengers AND transport are still on the run, if not remove from pick-up list
+		local transporterID = loadtheseunits[pUnitID]
+		local movetype = (Spring.GetUnitMoveTypeData(transporterID)).name
+		if ((pUnitID == unitID) and (passengerstillmoves[pUnitID] == false) and (transportstillmoves[transporterID] == false) and (movetype ~= [[static]])) then
+			currentassigablecapacity[transporterID] = (currentassigablecapacity[transporterID] + 1)
+			Spring.Echo(currentassigablecapacity[transporterID])	
+			loadtheseunits[pUnitID] = nil
+		end
+	end
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
@@ -175,6 +201,7 @@ function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
 	for pUnitID, tunitID in pairs(loadtheseunits) do	-- check if transporter was killed
 		if (unitID == tunitID) then
 			loadtheseunits[pUnitID] = nil
+			transportstillmoves[unitID] = nil			
 		end
 	end
 end

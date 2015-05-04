@@ -153,6 +153,26 @@ function script.FireWeapon1()
 		return(1)
 end
 
+--bunker -----------------------------------------------------------------
+function script.setSFXoccupy ( curTerrainType )
+   if (curTerrainType > 0) then
+      inbunker = false
+	  Spring.SetUnitNeutral(unitID, false)	  
+   elseif (curTerrainType == 0) then
+      inbunker = true
+	  Spring.SetUnitNeutral(unitID, true)
+   end
+end
+
+function script.HitByWeapon ( x, z, weaponDefID, damage )
+	if inbunker then
+		return(0)
+	elseif not inbunker then
+		return(damage)
+	end
+end
+
+------------------------------------------------------------------------------------------
 	
 function script.Killed( damage, health )
 	EmitSfx(eye, BOOM)

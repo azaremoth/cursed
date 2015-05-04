@@ -263,6 +263,7 @@ function script.setSFXoccupy ( curTerrainType )
 	  Show (head)
 	  Show (staff)	  
       inbunker = false
+	  Spring.SetUnitNeutral(unitID, false)
    elseif (curTerrainType == 0) then
 	  Hide (chest)
 	  Hide (rshoulder)
@@ -270,6 +271,7 @@ function script.setSFXoccupy ( curTerrainType )
 	  Hide (head)
 	  Hide (staff)
       inbunker = true
+	  Spring.SetUnitNeutral(unitID, true)	  
    end
 end
 

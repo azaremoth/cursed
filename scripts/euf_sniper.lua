@@ -253,9 +253,11 @@ function script.setSFXoccupy ( curTerrainType )
    if (curTerrainType > 0) then
 	  Spring.UnitScript.Show(gun)   
       inbunker = false
+	  Spring.SetUnitNeutral(unitID, false)	  
    elseif (curTerrainType == 0) then
 	  Spring.UnitScript.Hide(gun)   
       inbunker = true
+	  Spring.SetUnitNeutral(unitID, true)	  
    end
 end
 

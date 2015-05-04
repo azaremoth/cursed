@@ -3,8 +3,10 @@
 --- other than that, you can give it any name and access it like before with filenames
 local Sounds = {
    SoundItems = {
+      FailedCommand = {
+		 file = "sounds/FailedCommand.wav",
+      },
       IncomingChat = {
-         --file = "sounds/talk.wav",
 		 file = "sounds/click.wav",
       },
       MultiSelect = {

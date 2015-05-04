@@ -418,11 +418,12 @@ end
 function script.setSFXoccupy ( curTerrainType )
    if (curTerrainType > 0) then
       inbunker = false
+	  Spring.SetUnitNeutral(unitID, false)	  
    elseif (curTerrainType == 0) then
       inbunker = true
+	  Spring.SetUnitNeutral(unitID, true)
    end
 end
-
 
 --Jumps
 function script.preJump()

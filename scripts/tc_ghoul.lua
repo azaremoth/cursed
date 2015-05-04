@@ -438,14 +438,6 @@ function MeleeAnimations()
 	return(1)	
 end	
 
-function script.setSFXoccupy ( curTerrainType )
-   if (curTerrainType > 0) then
-      inbunker = false
-   elseif (curTerrainType == 0) then
-      inbunker = true
-   end
-end
-
 function script.parry()
 	if math.random()>0.33 then
 		parried = true
@@ -481,6 +473,16 @@ function script.endJump()
 	Turn2( rleg, x_axis, 0, 400 )
     Turn2( lleg, x_axis, 0, 400 )
 	jumping = false	
+end
+
+function script.setSFXoccupy ( curTerrainType )
+   if (curTerrainType > 0) then
+      inbunker = false
+	  Spring.SetUnitNeutral(unitID, false)	  
+   elseif (curTerrainType == 0) then
+      inbunker = true
+	  Spring.SetUnitNeutral(unitID, true)
+   end
 end
 
 function script.HitByWeapon ( x, z, weaponDefID, damage )

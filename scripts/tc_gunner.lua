@@ -323,11 +323,13 @@ function script.setSFXoccupy ( curTerrainType )
    if (curTerrainType > 0) then
    	  Show (head)
 	  Show (jaw)
-	  inbunker = false
+      inbunker = false
+	  Spring.SetUnitNeutral(unitID, false)	
    elseif (curTerrainType == 0) then
    	  Hide (head)
 	  Hide (jaw)
       inbunker = true
+	  Spring.SetUnitNeutral(unitID, true)
    end
 end
 

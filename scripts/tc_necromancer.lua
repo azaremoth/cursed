@@ -207,12 +207,14 @@ function script.setSFXoccupy ( curTerrainType )
 	  Show (staff)		  
 	  Show (skull)  
       inbunker = false
+	  Spring.SetUnitNeutral(unitID, false)	
    elseif (curTerrainType == 0) then
 	  Hide (chest)	  
 	  Hide (head)
 	  Hide (staff)	  
 	  Hide (skull)
       inbunker = true
+	  Spring.SetUnitNeutral(unitID, true)
    end
 end
 

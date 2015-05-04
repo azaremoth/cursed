@@ -15,6 +15,7 @@ local lrlleg = piece "lrlleg"
 local x_axis, y_axis, z_axis = 1,2,3
 
 local moving = false
+local inbunker = false
 local MOVEANIMATIONSPEED
 local MOVEANIMATIONSLEEPTIME = 340
 
@@ -24,6 +25,8 @@ local MAGICBOOM = 1024+0
 local MAGICBOOM2 = 1025+0
 local BLOOD = 1026+0
 local echo = Spring.Echo
+
+
 
 local function SpecialTurn(piecenum,axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180
@@ -115,6 +118,24 @@ end
 
 function script.StopMoving()
  	moving = false
+end
+
+function script.setSFXoccupy ( curTerrainType )
+   if (curTerrainType > 0) then
+      inbunker = false
+	  Spring.SetUnitNeutral(unitID, false)	  
+   elseif (curTerrainType == 0) then
+      inbunker = true
+	  Spring.SetUnitNeutral(unitID, true)
+   end
+end
+
+function script.HitByWeapon ( x, z, weaponDefID, damage )
+	if inbunker then
+		return(0)
+	elseif not inbunker then
+		return(damage)
+	end
 end
 	
 function script.Killed(severity)

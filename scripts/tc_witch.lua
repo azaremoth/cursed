@@ -305,9 +305,11 @@ function script.setSFXoccupy ( curTerrainType )
    if (curTerrainType > 0) then
 	  Spring.UnitScript.Show(staff)   
       inbunker = false
+	  Spring.SetUnitNeutral(unitID, false)	  	  
    elseif (curTerrainType == 0) then
 	  Spring.UnitScript.Hide(staff)   
       inbunker = true
+	  Spring.SetUnitNeutral(unitID, true)	  
    end
 end
 

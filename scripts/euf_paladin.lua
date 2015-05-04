@@ -235,6 +235,7 @@ function script.setSFXoccupy ( curTerrainType )
 	  Show (rshoulder)
 	  Show (lshoulder)	  
       inbunker = false
+	  Spring.SetUnitNeutral(unitID, false)	  
    elseif (curTerrainType == 0) then
 	  Hide (blade)
 	  Hide (shield)	 	  
@@ -243,6 +244,7 @@ function script.setSFXoccupy ( curTerrainType )
 	  Hide (rshoulder)
 	  Hide (lshoulder)	  
       inbunker = true
+	  Spring.SetUnitNeutral(unitID, true)	  
    end
 end
 

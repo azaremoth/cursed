@@ -149,6 +149,26 @@ Purpleglow_medium = {
   count       = 1,
   repeatEffect = true,
 }
+Purpleglow_big = {
+  life        = 60,
+  lifeSpread  = 0,
+  size        = 100,
+  sizeSpread  = 2,
+  colormap    = { {0.8, 0.1, 0.8, 0.0015}, {0.4, 0.05, 0.4, 0.0012}, {0.8, 0.1, 0.8, 0.0015},},
+  texture     = 'bitmaps/GPL/smallflare.tga',
+  count       = 1,
+  repeatEffect = true,
+}
+Purpleglow_bigger = {
+  life        = 60,
+  lifeSpread  = 0,
+  size        = 250,
+  sizeSpread  = 3,
+  colormap    = { {0.8, 0.1, 0.8, 0.0015}, {0.4, 0.05, 0.4, 0.0012}, {0.8, 0.1, 0.8, 0.0015},},
+  texture     = 'bitmaps/GPL/smallflare.tga',
+  count       = 1,
+  repeatEffect = true,
+}
 Blackglow_medium = {
   life        = 60,
   lifeSpread  = 0,

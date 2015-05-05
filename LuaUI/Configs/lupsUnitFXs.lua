@@ -123,7 +123,19 @@ effectUnitDefs = {
   tc_storage = {
     {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit1", onActive=false}},
     {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit2", onActive=false}},
-  }
+  },
+  crystals = {
+	{class='StaticParticles', options=MergeTable(Purpleglow_bigger,{piece="biggem"})},  
+	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_01"})},
+	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_02"})},
+	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_03"})},
+	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_04"})},	
+	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_05"})},
+	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_06"})},
+	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_07"})},
+	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_08"})},
+	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_09"})},		
+  }  
 -----------
 }
 

@@ -95,6 +95,14 @@ groundFlashViolett = {
   repeatEffect = true,
 }
 
+groundFlashBigViolett = {
+  life       = 50,
+  size       = 400,
+  texture    = "bitmaps/GPL/Lups/groundflash.png",
+  colormap   = { {0.9, 0.1, 0.9, 0.05},{0.9, 0.1, 0.9, 0.2},{0.9, 0.1, 0.9, 0.2},{0.9, 0.1, 0.9, 0.05}, },
+  repeatEffect = true,
+}
+
 groundFlashCorestor = {
   life       = 50,
   size       = 80,

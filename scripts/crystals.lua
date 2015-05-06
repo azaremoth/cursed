@@ -74,8 +74,8 @@ local function Animation_big()
 end
 
 function script.Create()
-	Spring.SetUnitAlwaysVisible(unitID)
-	Spring.SetUnitNeutral(unitID)
+	Spring.SetUnitAlwaysVisible(unitID, true)
+	Spring.SetUnitNeutral(unitID, true)
 	Spring.UnitScript.Spin ( biggem, y_axis, 0.66) 
 	Spring.UnitScript.Spin ( gem_01, y_axis, 2*math.random()) 
 	Spring.UnitScript.Spin ( gem_02, y_axis, -2*math.random())

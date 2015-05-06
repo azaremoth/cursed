@@ -1,8 +1,11 @@
 >> Major changes 1.350 => 1.351
 
+Balance
+- reduced hitpoints of suicide blobs by 20%
+
 Polishing
 - loading behaviour improved if ordering multiple transport units
-
+- added a crystal swarm indicating the king-of-the-hill spot, also with nice effects
 
 
 >> Major changes 1.350 => 1.351

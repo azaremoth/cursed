@@ -125,6 +125,7 @@ effectUnitDefs = {
     {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit2", onActive=false}},
   },
   crystals = {
+    {class='GroundFlash', options=groundFlashBigViolett},   
 	{class='StaticParticles', options=MergeTable(Purpleglow_bigger,{piece="biggem"})},  
 	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_01"})},
 	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_02"})},

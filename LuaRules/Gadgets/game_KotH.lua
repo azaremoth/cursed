@@ -36,6 +36,7 @@ if (gadgetHandler:IsSyncedCode()) then
 		if Spring.GetModOptions()[mokey]==nil or Spring.GetModOptions()[mokey]=="0" then
 			gadgetHandler:RemoveGadget()
 		else
+			local crystals = Spring.CreateUnit("crystals", MapCenterX,0,MapCenterZ, 0, Spring.GetGaiaTeamID())
 			MaxGauge=60*tonumber(Spring.GetModOptions()[mokey])
 			for _,team in ipairs(Spring.GetTeamList()) do
 				Gauges[team]=0
@@ -48,12 +49,14 @@ if (gadgetHandler:IsSyncedCode()) then
 			local MinSquaredDistance=nil
 			local MostCentralUnit=nil
 			for _,u in ipairs(Spring.GetAllUnits()) do
-				local ux,_,uz=Spring.GetUnitPosition(u)
-				local d=(MapCenterX-ux)^2+(MapCenterZ-uz)^2
-				if not MinSquaredDistance or MinSquaredDistance>d then
-					if isUnitComplete(u) then
-						MinSquaredDistance=d
-						MostCentralUnit=u
+				if (Spring.GetUnitTeam(u) ~= Spring.GetGaiaTeamID()) then
+					local ux,_,uz=Spring.GetUnitPosition(u)
+					local d=(MapCenterX-ux)^2+(MapCenterZ-uz)^2
+					if not MinSquaredDistance or MinSquaredDistance>d then
+						if isUnitComplete(u) then
+							MinSquaredDistance=d
+							MostCentralUnit=u
+						end
 					end
 				end
 			end
@@ -61,6 +64,7 @@ if (gadgetHandler:IsSyncedCode()) then
 				local x,y,z=Spring.GetUnitPosition(MostCentralUnit)
 				local team=Spring.GetUnitTeam(MostCentralUnit)
 				Gauges[team]=Gauges[team]+1
+				Spring.Echo(Gauges[team])
 				_G.KOTH={Started=Started,MaxGauge=MaxGauge,Gauges=Gauges,LastTeam=team,LastX=x,LastY=y,LastZ=z}
 				if Gauges[team]>=MaxGauge then
 					Finished=true

@@ -1,7 +1,9 @@
 >> Major changes 1.350 => 1.351
 
 Features
-- revamped the "King of the Hill" game mode. You win the game by holding (have more units there than your opponents) the centre of the map which is now indicated by a giant purple crystal.
+- revamped the "King of the Hill" (KOTH) game mode. You win the game by holding (have more units there than your opponents) the centre of the map which is now indicated by a giant purple crystal.
+- the radius of the KOTH centre can now be adjusted in the mod options
+- tadded a mod options to give you small bases from the beginning if you play KOTH
 
 Balance
 - reduced hitpoints of suicide blobs by 20%

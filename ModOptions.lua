@@ -216,7 +216,7 @@ local options={
     },
 	{
 		key="koth",
-		name="King Of The Hill Time",
+		name="Hold Time",
 		desc="The one with a unit closest to center for that many minutes win. A zero disables King of the Hill.",
 		type="number",
 		section= 'koth_section',		
@@ -227,7 +227,7 @@ local options={
 	},
 	{
 		key="kothr",
-		name="King Of The Hill Range",
+		name="Centre Radius",
 		desc="This defines the size of the centre area.",
 		type="number",
 		section= 'koth_section',		
@@ -236,6 +236,14 @@ local options={
 		step = 50,
 		def = 0,
 	},
+	{
+		key		= "kothbase",
+		name	= "Start with bases",
+		desc	= "Players start with a small base.",
+		type	= "bool",
+		def		= true,
+		section	= 'koth_section',	
+	}, 	
 }
 
 --// add key-name to the description (so you can easier manage modoptions in springie)

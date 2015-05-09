@@ -35,6 +35,9 @@ end
 
 local Gaia = Spring.GetGaiaTeamID
 local modOptions = Spring.GetModOptions()
+local cheatAItype = "0"
+local kothbase = "1"
+	
 ChickenAIs = 
 {
 	["Zombie Survival: Very Easy"] = true,
@@ -57,8 +60,9 @@ local function GetStartUnit(teamID)
 	local x,y,z = Spring.GetTeamStartPosition(teamID)
 	local type = "std"
 	type = Spring.GetModOptions().comm
-	cheatAItype = "1"
 	cheatAItype = Spring.GetModOptions().cheatingai
+	kothbase = Spring.GetModOptions().kothbase
+	local kothactive = tonumber(Spring.GetModOptions().koth)
 	
 	if (side == "") then
 		-- startscript didn't specify a side for this team
@@ -85,8 +89,8 @@ local function GetStartUnit(teamID)
 			local heading = math.random(3)
 			local marine2 = Spring.CreateUnit("euf_marine", x+40, y, z+40, heading, teamID)			
 			local heading = math.random(3)
-			local hero = Spring.CreateUnit("euf_sarge_lvl1", x-60, y, z-40, heading, teamID)			
-			if ai == true and team ~= Gaia and type ~= "feature" then
+			local hero = Spring.CreateUnit("euf_sarge_lvl1", x-60, y, z-40, heading, teamID)
+			if ((ai == true) and (team ~= Gaia) and (type ~= "feature") and (kothactive == 0)) then
 				local heading = math.random(3)
 				local builder1 = Spring.CreateUnit("euf_constructor_ai", x, y, z, heading, teamID)			
 				if cheatAItype == "1" then
@@ -99,12 +103,21 @@ local function GetStartUnit(teamID)
 					local six= Spring.CreateUnit("euf_aatower", x+200,y,z, heading, teamID)
 					local seven= Spring.CreateUnit("euf_constructor_ai", x,y,z-150, 1, teamID)
 				end
+			elseif ((kothbase == "1") and (kothactive > 0)) then
+					local heading = math.random(3)			
+					local zero = Spring.CreateUnit("euf_techcenter_shield_ai", x,y,z+150, heading, teamID)
+					local one = Spring.CreateUnit("euf_plasmatower", x+250,y,z+250, heading, teamID)
+					local two = Spring.CreateUnit("euf_plasmatower", x-250,y,z-250, heading, teamID)
+					local three= Spring.CreateUnit("euf_plasmatower", x+250,y,z-250, heading, teamID)
+					local four= Spring.CreateUnit("euf_plasmatower", x-250,y,z+250, heading, teamID)
+					local five= Spring.CreateUnit("euf_aatower", x-200,y,z, heading, teamID)
+					local six= Spring.CreateUnit("euf_aatower", x+200,y,z, heading, teamID)
 			else
 				local heading = math.random(3)
 				local builder1 = Spring.CreateUnit("euf_constructor", x, y, z, heading, teamID)
 			end
 		else
-			if ai == true and team ~= Gaia and type ~= "feature" then
+			if ((ai == true) and (team ~= Gaia) and (type ~= "feature") and (kothactive == 0)) then
 				local heading = math.random(3)
 				local hero = Spring.CreateUnit("tc_shade_lvl1", x-60, y, z-60, heading, teamID)					
 				if cheatAItype == "1" then
@@ -128,6 +141,19 @@ local function GetStartUnit(teamID)
 					local three= Spring.CreateUnit("tc_gunner", x,y,z-50, heading, teamID)
 					local four= Spring.CreateUnit("tc_ghoul", x,y,z+50, heading, teamID)
 				end
+			elseif ((kothbase == "1") and (kothactive > 0)) then
+				local heading = math.random(3)
+				local hero = Spring.CreateUnit("tc_shade_lvl1", x-60, y, z-60, heading, teamID)		
+				local zero = Spring.CreateUnit("tc_heart_ai", x,y,z, heading, teamID)
+				local one = Spring.CreateUnit("tc_defender", x+180,y,z+200, heading, teamID)
+				local two = Spring.CreateUnit("tc_defender", x-200,y,z-170, heading, teamID)
+				local three= Spring.CreateUnit("tc_defender", x+200,y,z-210, heading, teamID)
+				local four= Spring.CreateUnit("tc_defender", x-220,y,z+160, heading, teamID)
+				local six= Spring.CreateUnit("tc_enforcer", x-75,y,z, 4, teamID)
+				local seven= Spring.CreateUnit("tc_gunner", x,y,z+75, 1, teamID)
+				local nine= Spring.CreateUnit("tc_skeleton", x,y,z+100, 1, teamID)
+				local ten= Spring.CreateUnit("tc_witch_shield", x+220,y,z, 1, teamID)
+				local eleven= Spring.CreateUnit("tc_witch_shield", x-220,y,z, 1, teamID)
 			else
 				local heading = math.random(3)
 				local obelisk = Spring.CreateUnit("tc_obelisk", x, y, z, heading, teamID)

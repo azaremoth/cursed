@@ -4,7 +4,7 @@ function gadget:GetInfo()
 	return {
 		name = "K.O.T.H.",
 		desc = "Manage KOTH mode",
-		author = "zwzsg",
+		author = "zwzsg, aZaremoth",
 		date = "20 january 2011",
 		license = "Free",
 		layer = 0,
@@ -13,15 +13,21 @@ function gadget:GetInfo()
 end
 
 local mokey="koth" -- Mod Option Key
+local mokeyradius="kothr"
 
 if (gadgetHandler:IsSyncedCode()) then
 --SYNCED
 
 	local Gauges = {}
-	local Started = false
+	local CountsPerTeam = {}
+	local Started = true
 	local Finished = false
 	local MapCenterX,MapCenterZ=Game.mapSizeX/2,Game.mapSizeZ/2
 	local MaxGauge = 0
+	local CenterRadius = 300
+	local GaiaTeamID = Spring.GetGaiaTeamID()
+	local MostCentralUnitsInTeam = nil
+	local TeamsInGameList = Spring.GetTeamList()
 
 	local function isUnitComplete(UnitID)
 		local health,maxHealth,paralyzeDamage,captureProgress,buildProgress=Spring.GetUnitHealth(UnitID)
@@ -36,9 +42,12 @@ if (gadgetHandler:IsSyncedCode()) then
 		if Spring.GetModOptions()[mokey]==nil or Spring.GetModOptions()[mokey]=="0" then
 			gadgetHandler:RemoveGadget()
 		else
-			local crystals = Spring.CreateUnit("crystals", MapCenterX,0,MapCenterZ, 0, Spring.GetGaiaTeamID())
+			local crystals = Spring.CreateUnit("crystals", MapCenterX,0,MapCenterZ, 0, GaiaTeamID)
 			MaxGauge=60*tonumber(Spring.GetModOptions()[mokey])
-			for _,team in ipairs(Spring.GetTeamList()) do
+			if (Spring.GetModOptions()[mokeyradius] ~= nil) then
+				CenterRadius = tonumber(Spring.GetModOptions()[mokeyradius])
+			end
+			for _,team in ipairs(TeamsInGameList) do
 				Gauges[team]=0
 			end
 		end
@@ -46,50 +55,46 @@ if (gadgetHandler:IsSyncedCode()) then
 
 	function gadget:GameFrame(f)
 		if f%30==0 and Started and not Finished then
-			local MinSquaredDistance=nil
-			local MostCentralUnit=nil
-			for _,u in ipairs(Spring.GetAllUnits()) do
-				if (Spring.GetUnitTeam(u) ~= Spring.GetGaiaTeamID()) then
-					local ux,_,uz=Spring.GetUnitPosition(u)
-					local d=(MapCenterX-ux)^2+(MapCenterZ-uz)^2
-					if not MinSquaredDistance or MinSquaredDistance>d then
-						if isUnitComplete(u) then
-							MinSquaredDistance=d
-							MostCentralUnit=u
+			local UnitsAroundCenter = Spring.GetUnitsInCylinder(MapCenterX,MapCenterZ,CenterRadius)
+			for _,team in ipairs(TeamsInGameList) do
+				CountsPerTeam[team] = 0
+			end
+			for _,cUnitID in ipairs(UnitsAroundCenter) do
+				local cUnitTeamID = Spring.GetUnitTeam(cUnitID)
+				CountsPerTeam[cUnitTeamID] = CountsPerTeam[cUnitTeamID]+1
+			end
+			for _,team in ipairs(TeamsInGameList) do
+				if (MostCentralUnitsInTeam == nil) then
+					MostCentralUnitsInTeam = team
+				elseif (CountsPerTeam[team] > CountsPerTeam[MostCentralUnitsInTeam]) then
+					MostCentralUnitsInTeam = team
+				elseif (CountsPerTeam[team] == CountsPerTeam[GaiaTeamID]) and (team ~= GaiaTeamID) then
+					MostCentralUnitsInTeam = team
+				end
+			end
+--			Spring.Echo(MostCentralUnitsInTeam)
+			if MostCentralUnitsInTeam then
+				local team=MostCentralUnitsInTeam
+				if (team ~= GaiaTeamID) then
+					Gauges[team]=Gauges[team]+1
+					_G.KOTH={Started=Started,MaxGauge=MaxGauge,Gauges=Gauges,LastTeam=team,LastX=x,LastY=y,LastZ=z}
+					if Gauges[team]>=MaxGauge then
+						Finished=true
+						local names=nil
+						for _,pid in ipairs(Spring.GetPlayerList(team,true)) do
+							names=(names and names.."," or "").."<PLAYER"..pid..">"
+						end
+						Spring.SendMessage("Team"..team.."("..(names and names or "")..") won King Of The Hill!")
+						for _,u in ipairs(Spring.GetAllUnits()) do
+							if not Spring.AreTeamsAllied(Spring.GetUnitTeam(u),team)  then
+								local x,y,z=Spring.GetUnitPosition(u)
+								Spring.SpawnCEG("SUMMONDRAGON2",x,y,z,0,1,0,900,85000)
+								Spring.DestroyUnit(u,true,false,u)
+							end
 						end
 					end
 				end
 			end
-			if MostCentralUnit then
-				local x,y,z=Spring.GetUnitPosition(MostCentralUnit)
-				local team=Spring.GetUnitTeam(MostCentralUnit)
-				Gauges[team]=Gauges[team]+1
-				Spring.Echo(Gauges[team])
-				_G.KOTH={Started=Started,MaxGauge=MaxGauge,Gauges=Gauges,LastTeam=team,LastX=x,LastY=y,LastZ=z}
-				if Gauges[team]>=MaxGauge then
-					Finished=true
-					local names=nil
-					for _,pid in ipairs(Spring.GetPlayerList(team,true)) do
-						names=(names and names.."," or "").."<PLAYER"..pid..">"
-					end
-					Spring.SendMessage("Team"..team.."("..(names and names or "")..") won King Of The Hill!")
-					for _,u in ipairs(Spring.GetAllUnits()) do
-						if not Spring.AreTeamsAllied(Spring.GetUnitTeam(u),team)  then
-							local x,y,z=Spring.GetUnitPosition(u)
-							Spring.SpawnCEG("SUMMONDRAGON2",x,y,z,0,1,0,900,85000)
-							Spring.DestroyUnit(u,true,false,u)
-						end
-					end
-				end
-			end
-		end
-	end
-
-	function gadget:UnitDestroyed(u,ud,ut,a,ad,at)
-		if ut and at and (not Spring.AreTeamsAllied(ut,at)) and isUnitComplete(u) and not Started then
-			Started=true
-			Spring.Echo("First blood!")
-			gadgetHandler:RemoveCallIn("UnitDestroyed")
 		end
 	end
 
@@ -97,13 +102,14 @@ else
 --UNSYNCED
 
 	local GaugeSY,GaugeSX,GaugeSZ,GaugeX0,GaugeZ0,TeamList=64*8,64,64,0,0,{}
-
+	local GaiaTeamID = Spring.GetGaiaTeamID()
+	
 	function gadget:Initialize()
 		if Spring.GetModOptions()[mokey]==nil or Spring.GetModOptions()[mokey]=="0" then
 			gadgetHandler:RemoveGadget()
 		else
 			for _,team in ipairs(Spring.GetTeamList()) do
-				if team~=Spring.GetGaiaTeamID() then
+				if (team ~= GaiaTeamID) then
 					table.insert(TeamList,team)
 				end
 			end
@@ -124,42 +130,44 @@ else
 			return 0.75*v
 		end
 		for _,team in ipairs(TeamList) do
-			local r,g,b,a=Spring.GetTeamColor(team)
-			local y1=y0+GaugeSY*SYNCED.KOTH.Gauges[team]/SYNCED.KOTH.MaxGauge
-			local x1,x2=x,x+GaugeSX
-			--gl.Color(r,g,b,1)
+			if (team ~= GaiaTeamID) then
+				local r,g,b,a=Spring.GetTeamColor(team)
+				local y1=y0+GaugeSY*SYNCED.KOTH.Gauges[team]/SYNCED.KOTH.MaxGauge
+				local x1,x2=x,x+GaugeSX
+				--gl.Color(r,g,b,1)
 
-			gl.Color(BitDarker(r),BitDarker(g),BitDarker(b),0.5)
-			gl.Vertex(x1,y0,z1)
-			gl.Vertex(x1,y1,z1)
-			gl.Vertex(x1,y1,z2)
-			gl.Vertex(x1,y0,z2)
+				gl.Color(BitDarker(r),BitDarker(g),BitDarker(b),0.5)
+				gl.Vertex(x1,y0,z1)
+				gl.Vertex(x1,y1,z1)
+				gl.Vertex(x1,y1,z2)
+				gl.Vertex(x1,y0,z2)
 
-			gl.Color(BitBrighter(r),BitBrighter(g),BitBrighter(b),0.5)
-			gl.Vertex(x1,y0,z1)
-			gl.Vertex(x1,y1,z1)
-			gl.Vertex(x2,y1,z1)
-			gl.Vertex(x2,y0,z1)
+				gl.Color(BitBrighter(r),BitBrighter(g),BitBrighter(b),0.5)
+				gl.Vertex(x1,y0,z1)
+				gl.Vertex(x1,y1,z1)
+				gl.Vertex(x2,y1,z1)
+				gl.Vertex(x2,y0,z1)
 
-			gl.Color(BitDarker(r),BitDarker(g),BitDarker(b),0.5)
-			gl.Vertex(x2,y0,z1)
-			gl.Vertex(x2,y1,z1)
-			gl.Vertex(x2,y1,z2)
-			gl.Vertex(x2,y0,z2)
+				gl.Color(BitDarker(r),BitDarker(g),BitDarker(b),0.5)
+				gl.Vertex(x2,y0,z1)
+				gl.Vertex(x2,y1,z1)
+				gl.Vertex(x2,y1,z2)
+				gl.Vertex(x2,y0,z2)
 
-			gl.Color(BitBrighter(r),BitBrighter(g),BitBrighter(b),0.5)
-			gl.Vertex(x1,y0,z2)
-			gl.Vertex(x1,y1,z2)
-			gl.Vertex(x2,y1,z2)
-			gl.Vertex(x2,y0,z2)
+				gl.Color(BitBrighter(r),BitBrighter(g),BitBrighter(b),0.5)
+				gl.Vertex(x1,y0,z2)
+				gl.Vertex(x1,y1,z2)
+				gl.Vertex(x2,y1,z2)
+				gl.Vertex(x2,y0,z2)
 
-			gl.Color(MuchBrighter(r),MuchBrighter(g),MuchBrighter(b),0.5)
-			gl.Vertex(x1,y1,z1)
-			gl.Vertex(x1,y1,z2)
-			gl.Vertex(x2,y1,z2)
-			gl.Vertex(x2,y1,z1)
+				gl.Color(MuchBrighter(r),MuchBrighter(g),MuchBrighter(b),0.5)
+				gl.Vertex(x1,y1,z1)
+				gl.Vertex(x1,y1,z2)
+				gl.Vertex(x2,y1,z2)
+				gl.Vertex(x2,y1,z1)
 
-			x=x+GaugeSX
+				x=x+GaugeSX
+			end
 		end
 	end
 
@@ -169,25 +177,27 @@ else
 		local r,g,b,a=Spring.GetTeamColor(SYNCED.KOTH.LastTeam)
 		gl.Color(r,g,b,0.75)
 		for _,team in ipairs(TeamList) do
-			local y1=y0+GaugeSY*SYNCED.KOTH.Gauges[team]/SYNCED.KOTH.MaxGauge
-			local x1,x2=x,x+GaugeSX
-			gl.Vertex(x1,y1,z1)
-			gl.Vertex(x1,y2,z1)
-			gl.Vertex(x1,y1,z2)
-			gl.Vertex(x1,y2,z2)
-			gl.Vertex(x2,y1,z1)
-			gl.Vertex(x2,y2,z1)
-			gl.Vertex(x2,y1,z2)
-			gl.Vertex(x2,y2,z2)
-			gl.Vertex(x1,y2,z1)
-			gl.Vertex(x1,y2,z2)
-			gl.Vertex(x1,y2,z2)
-			gl.Vertex(x2,y2,z2)
-			gl.Vertex(x2,y2,z2)
-			gl.Vertex(x2,y2,z1)
-			gl.Vertex(x2,y2,z1)
-			gl.Vertex(x1,y2,z1)
-			x=x+GaugeSX
+			if (team ~= GaiaTeamID) then
+				local y1=y0+GaugeSY*SYNCED.KOTH.Gauges[team]/SYNCED.KOTH.MaxGauge
+				local x1,x2=x,x+GaugeSX
+				gl.Vertex(x1,y1,z1)
+				gl.Vertex(x1,y2,z1)
+				gl.Vertex(x1,y1,z2)
+				gl.Vertex(x1,y2,z2)
+				gl.Vertex(x2,y1,z1)
+				gl.Vertex(x2,y2,z1)
+				gl.Vertex(x2,y1,z2)
+				gl.Vertex(x2,y2,z2)
+				gl.Vertex(x1,y2,z1)
+				gl.Vertex(x1,y2,z2)
+				gl.Vertex(x1,y2,z2)
+				gl.Vertex(x2,y2,z2)
+				gl.Vertex(x2,y2,z2)
+				gl.Vertex(x2,y2,z1)
+				gl.Vertex(x2,y2,z1)
+				gl.Vertex(x1,y2,z1)
+				x=x+GaugeSX
+			end
 		end
 	end
 

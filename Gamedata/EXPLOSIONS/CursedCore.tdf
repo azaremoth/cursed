@@ -1,4 +1,4 @@
-[SHIELDBEAM_FX]
+[CURSEDSHIELDBEAM_FX]
 {
    [BitmapMuzzleFlame]
    {
@@ -6,7 +6,7 @@
       [properties]
       {
          dir = dir; // don't touch me
-         colorMap=0 1 1 0.005 	0 0.5 1 0.005 	0 0 0 0.005; 
+         colorMap=0.5 1.0 0.15 0.005 	0.5 1.0 0.15 0.005 	0 0 0 0.005; 
          size=200;
          length=200;
          sizeGrowth=0;
@@ -31,7 +31,7 @@
 			length=10;
 			alpha=1;
 			alphadecay=0.18;
-			color=0.0, 1.0, 1.0;
+			color=0.5, 1.0, 0.15;
 		}
 		air=1;
 		water=1;

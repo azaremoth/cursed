@@ -7,8 +7,8 @@ local unitName = "tc_heart_ai"
 
 local unitDef = {
   armortype          = "HEAVY",
-  buildCostEnergy    = 0,
-  buildCostMetal     = 0,
+  buildCostEnergy    = 700,
+  buildCostMetal     = 700,
   buildDistance      = 75,
   builder            = true,
   buildingGroundDecalDecaySpeed = 0.01,
@@ -16,47 +16,48 @@ local unitDef = {
   buildingGroundDecalSizeY = 16,
   buildingGroundDecalType = "tc_groundplate1.png",
   buildPic           = "tc_heart.jpg",
-  buildTime          = 0,
-  canAssist          = true,
+  buildTime          = 700,
+--  canAssist          = true,
   canAttack          = false,
   canBeAssisted      = false,
   canGuard           = false,
   canMove            = false,
   canPatrol          = false,
-  canReclaim         = true,
-  canRepair          = false,
+--  canReclaim         = true,
+--  canRepair          = false,
   canstop            = true,
   captureSpeed       = 0,
   category           = "CURSED LAND HEAVYARMOR",
   corpse             = "dead",
   customParams          = {	
 	factionname	= "cursed",  
-    helptext 	= "The cursed heart stores metal and energy, builds totems and enables advanced units, like liches and advanced obelisks."		
+    helptext 	= "Provides energy and metal income and a base shield."		
   },
-  description        = "Enables advanced units and more",
+  description        = "Provides bonuses",
   energyStorage      = 2000,
   energyMake         = 400,
   explodeAs          = "BIG_EXPLOSION_GREEN_HD",
   footprintX         = 6,
   footprintZ         = 6,
-  iconType           = "bigspuare",
+  iconType           = "bigsquare",
   idleAutoHeal       = 2.5,
   idleTime           = 400,
   levelGround        = true,
   maxDamage          = 8000,
   maxSlope           = 20,
   maxWaterDepth      = 0,
-  metalmake          = 2,
+  metalmake          = 5,
   metalStorage       = 2000,
-  name               = "Heart of Darkness",
+  name               = "Cursed Core",
   nanoColor          = "0.6 1 0.15",
   noAutoFire         = false,
-  objectName         = "TC_Heart.s3o",
+  objectName         = "tc_cursedcore.s3o",
   onoffable          = false,
   radarDistance      = 64,
   reclaimSpeed       = 200,
   repairSpeed        = 0,
   resurrectSpeed     = 0,
+  script             = 'tc_cursedcore.lua',  
   selfDestructAs     = "BIG_EXPLOSION_GREEN_HD",
   showNanoFrame      = false,
   showNanoSpray      = false,
@@ -68,14 +69,11 @@ local unitDef = {
   useBuildingGroundDecal = true,
   workerTime         = 15,
 --  yardMap            = "ooooooooooooooooooooooooooooooooooooooo",
-  buildoptions = {
-    "tc_totem_black",
-    "tc_totem_red",
-    "tc_totem_purple",
-  },
+  buildoptions = {  },
   sfxtypes = {
     explosiongenerators = {
-      "custom:Structurebuilding_Big",
+      "custom:Medium_Explosion_Green",
+	  "custom:CURSEDSHIELDBEAM_FX",	  
     },
   },
   sounds = {
@@ -105,8 +103,41 @@ local unitDef = {
       "heartbeat",
     },
   },
+  weapons = {
+    [1]  = {
+      def = "CursedShield",
+    },
+  },
 }
+--------------------------------------------------------------------------------
 
+local weaponDefs = {
+     CursedShield = {
+      name                    = "CursedShield",
+      craterMult              = 0,
+      impulseFactor           = 0,
+      shieldAlpha             = 0.2,
+      shieldBadColor          = "1 0.0 0.0",
+      shieldForce             = 4,
+	  shieldGoodColor         = "0.5 1.0 0.15",
+      shieldInterceptType     = 1,
+      shieldMaxSpeed          = 400,
+      shieldPower             = 4000,
+      shieldPowerRegen        = 100,
+      shieldPowerRegenEnergy  = 100,
+      shieldRadius            = 650,
+      shieldRepulser          = false,
+      smartShield             = true,
+      texture1                = "wake",
+      visibleShield           = true,
+      visibleShieldRepulse    = true,
+      weaponType              = "Shield",
+    	damage = {
+      default            = 10,
+    },
+  },
+}
+unitDef.weaponDefs = weaponDefs
 
 --------------------------------------------------------------------------------
 

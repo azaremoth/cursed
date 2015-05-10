@@ -31,7 +31,7 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {	
 	factionname	= "cursed",  
-    helptext 	= "The cursed heart stores metal and energy, builds totems and enables advanced units, like liches and advanced obelisks. You will have to morph necromancers to Liches to summon advanced demons."		
+    helptext 	= "Heart of Darkness enables advanced units, like liches and advanced obelisks. You will have to morph necromancers to Liches to summon advanced demons."		
   },
   description        = "Enables advanced units and buildings.",
   -- energyStorage      = 500,

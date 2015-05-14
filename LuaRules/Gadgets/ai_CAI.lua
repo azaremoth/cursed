@@ -44,8 +44,17 @@ local spGetUnitTeam			= Spring.GetUnitTeam
 local spIsPosInRadar		= Spring.IsPosInRadar
 local spGetTeamUnits		= Spring.GetTeamUnits
 
+local MapCenterX,MapCenterZ=Game.mapSizeX/2,Game.mapSizeZ/2
+local koth = false
+local mokey="koth" -- Mod Option Key
+
 local jumpDefNames  = VFS.Include"LuaRules/Configs/jump_defs.lua"
 local jumpDefs = {}
+
+if (tonumber(Spring.GetModOptions()[mokey]) > 0) then
+	koth = true
+end
+
 for name, data in pairs(jumpDefNames) do
 	jumpDefs[UnitDefNames[name].id] = data
 end
@@ -1578,15 +1587,23 @@ local function battleGroupHandler(team, frame, slowUpdate)
 		end
 
 		if data.tempTarget then
-			if spValidUnitID(data.tempTarget) and isUnitVisible(data.tempTarget,at.aTeamOnThisTeam) then
-				local x, y, z = spGetUnitPosition(data.tempTarget)
-				for unitID,_ in pairs(data.unit) do
+			if (koth == true) then
+				for unitID,_ in pairs(data.unit) do			
 					if not data.aa[unitID] then
-						spGiveOrderToUnit(unitID, CMD_FIGHT , {x,y,z}, {})
+						spGiveOrderToUnit(unitID, CMD_FIGHT , {MapCenterX,0,MapCenterZ}, {})
 					end
 				end
 			else
-				data.tempTarget = false
+				if spValidUnitID(data.tempTarget) and isUnitVisible(data.tempTarget,at.aTeamOnThisTeam) then
+					local x, y, z = spGetUnitPosition(data.tempTarget)
+					for unitID,_ in pairs(data.unit) do
+						if not data.aa[unitID] then
+							spGiveOrderToUnit(unitID, CMD_FIGHT , {x,y,z}, {})
+						end
+					end
+				else
+					data.tempTarget = false
+				end
 			end
 		else
 			

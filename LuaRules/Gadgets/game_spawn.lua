@@ -112,8 +112,13 @@ local function GetStartUnit(teamID)
 					local four= Spring.CreateUnit("euf_plasmatower", x-250,y,z+250, heading, teamID)
 					local five= Spring.CreateUnit("euf_aatower", x-200,y,z, heading, teamID)
 					local six= Spring.CreateUnit("euf_aatower", x+200,y,z, heading, teamID)
-					local builder1 = Spring.CreateUnit("euf_constructor", x, y, z-150, heading, teamID)
-					local builder2 = Spring.CreateUnit("euf_constructor", x, y, z+150, heading, teamID)
+					if ((ai == true) and (team ~= Gaia)) then
+						local builder1 = Spring.CreateUnit("euf_constructor_ai", x, y, z-150, heading, teamID)
+						local builder2 = Spring.CreateUnit("euf_constructor_ai", x, y, z+150, heading, teamID)
+					else
+						local builder1 = Spring.CreateUnit("euf_constructor", x, y, z-150, heading, teamID)
+						local builder2 = Spring.CreateUnit("euf_constructor", x, y, z+150, heading, teamID)
+					end	
 			else
 				local heading = math.random(3)
 				local builder1 = Spring.CreateUnit("euf_constructor", x, y, z, heading, teamID)
@@ -155,9 +160,13 @@ local function GetStartUnit(teamID)
 				local six= Spring.CreateUnit("tc_bonebeast", x-75,y,z, 4, teamID)
 				local seven= Spring.CreateUnit("tc_gunner", x,y,z+75, 1, teamID)
 				local nine= Spring.CreateUnit("tc_ghoul", x,y,z+100, 1, teamID)
-				local ten= Spring.CreateUnit("tc_necromancer", x+220,y,z, 1, teamID)
-				local heading = math.random(3)				
-				local eleven= Spring.CreateUnit("tc_necromancer", x-220,y,z, 1, teamID)				
+				if ((ai == true) and (team ~= Gaia)) then
+					local builder1 = Spring.CreateUnit("tc_restless", x+220,y,z, 1, teamID)			
+					local builder2 = Spring.CreateUnit("tc_restless", x-220,y,z, 1, teamID)
+				else
+					local builder1 = Spring.CreateUnit("tc_necromancer", x+220,y,z, 1, teamID)			
+					local builder2 = Spring.CreateUnit("tc_necromancer", x-220,y,z, 1, teamID)
+				end		
 			else
 				local heading = math.random(3)
 				local obelisk = Spring.CreateUnit("tc_obelisk", x, y, z, heading, teamID)

@@ -41,8 +41,7 @@ if (gadgetHandler:IsSyncedCode()) then
 	function gadget:Initialize()
 		if Spring.GetModOptions()[mokey]==nil or Spring.GetModOptions()[mokey]=="0" then
 			gadgetHandler:RemoveGadget()
-		else
-			local crystals = Spring.CreateUnit("crystals", MapCenterX,0,MapCenterZ, 0, GaiaTeamID)
+		else		
 			MaxGauge=60*tonumber(Spring.GetModOptions()[mokey])
 			if (Spring.GetModOptions()[mokeyradius] ~= nil) then
 				CenterRadius = tonumber(Spring.GetModOptions()[mokeyradius])
@@ -50,6 +49,15 @@ if (gadgetHandler:IsSyncedCode()) then
 			for _,team in ipairs(TeamsInGameList) do
 				Gauges[team]=0
 			end
+			local crystals = Spring.CreateUnit("crystals", MapCenterX,0,MapCenterZ, 0, GaiaTeamID)
+			local crystalcircle1 = Spring.CreateFeature("crystal", MapCenterX+CenterRadius,0,MapCenterZ, math.random(3), GaiaTeamID)
+			local crystalcircle2 = Spring.CreateFeature("crystal", MapCenterX-CenterRadius,0,MapCenterZ, math.random(3), GaiaTeamID)
+			local crystalcircle3 = Spring.CreateFeature("crystal", MapCenterX,0,MapCenterZ+CenterRadius, math.random(3), GaiaTeamID)
+			local crystalcircle4 = Spring.CreateFeature("crystal", MapCenterX,0,MapCenterZ-CenterRadius, math.random(3), GaiaTeamID)
+			local crystalcircle5 = Spring.CreateFeature("crystal2", MapCenterX+(CenterRadius*0.71),0,MapCenterZ+(CenterRadius*0.71), math.random(3), GaiaTeamID)
+			local crystalcircle6 = Spring.CreateFeature("crystal2", MapCenterX+(CenterRadius*0.71),0,MapCenterZ-(CenterRadius*0.71), math.random(3), GaiaTeamID)			
+			local crystalcircle7 = Spring.CreateFeature("crystal2", MapCenterX-(CenterRadius*0.71),0,MapCenterZ+(CenterRadius*0.71), math.random(3), GaiaTeamID)			
+			local crystalcircle8 = Spring.CreateFeature("crystal2", MapCenterX-(CenterRadius*0.71),0,MapCenterZ-(CenterRadius*0.71), math.random(3), GaiaTeamID)			
 		end
 	end
 

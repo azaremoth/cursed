@@ -11,7 +11,6 @@ local featureDef  =  {
    description       = "cursed walls",
    energy            = 0,
    flammable         = 0,
-   nodrawundergray   = true,
    footprintX        = 5,
    footprintZ        = 1,
    upright          = true,

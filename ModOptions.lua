@@ -231,10 +231,10 @@ local options={
 		desc="This defines the size of the centre area.",
 		type="number",
 		section= 'koth_section',		
-		min = 300,
+		min = 100,
 		max = 1000,
 		step = 50,
-		def = 0,
+		def = 300,
 	},
 	{
 		key		= "kothbase",

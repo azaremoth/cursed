@@ -1,6 +1,6 @@
-local objectname= "crystal" 
+local objectname= "koth_crystal" 
 local featureDef  =  {
-   name           = "crystal",
+   name           = "koth_crystal",
    blocking       = true,	
    mass			   = 1000000000,
    category         = [[dragonteeth]],

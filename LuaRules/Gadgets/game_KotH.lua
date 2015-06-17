@@ -51,21 +51,21 @@ if (gadgetHandler:IsSyncedCode()) then
 				Gauges[team]=0
 			end
 			local crystals = Spring.CreateUnit("crystals", MapCenterX,0,MapCenterZ, 0, GaiaTeamID)
-			local crystalcircle1 = Spring.CreateFeature("crystal", MapCenterX+CenterRadius,0,MapCenterZ, math.random(-32767, 32767), GaiaTeamID)
-			local crystalcircle2 = Spring.CreateFeature("crystal", MapCenterX-CenterRadius,0,MapCenterZ, math.random(-32767, 32767), GaiaTeamID)
-			local crystalcircle3 = Spring.CreateFeature("crystal", MapCenterX,0,MapCenterZ+CenterRadius, math.random(-32767, 32767), GaiaTeamID)
-			local crystalcircle4 = Spring.CreateFeature("crystal", MapCenterX,0,MapCenterZ-CenterRadius, math.random(-32767, 32767), GaiaTeamID)
-			local crystalcircle5 = Spring.CreateFeature("crystal2", MapCenterX+(CenterRadius*0.71),0,MapCenterZ+(CenterRadius*0.71), math.random(-32767, 32767), GaiaTeamID)
-			local crystalcircle6 = Spring.CreateFeature("crystal2", MapCenterX+(CenterRadius*0.71),0,MapCenterZ-(CenterRadius*0.71), math.random(-32767, 32767), GaiaTeamID)			
-			local crystalcircle7 = Spring.CreateFeature("crystal2", MapCenterX-(CenterRadius*0.71),0,MapCenterZ+(CenterRadius*0.71), math.random(-32767, 32767), GaiaTeamID)			
-			local crystalcircle8 = Spring.CreateFeature("crystal2", MapCenterX-(CenterRadius*0.71),0,MapCenterZ-(CenterRadius*0.71), math.random(-32767, 32767), GaiaTeamID)
+			local crystalcircle1 = Spring.CreateFeature("koth_crystal", MapCenterX+CenterRadius,0,MapCenterZ, math.random(-32767, 32767), GaiaTeamID)
+			local crystalcircle2 = Spring.CreateFeature("koth_crystal", MapCenterX-CenterRadius,0,MapCenterZ, math.random(-32767, 32767), GaiaTeamID)
+			local crystalcircle3 = Spring.CreateFeature("koth_crystal", MapCenterX,0,MapCenterZ+CenterRadius, math.random(-32767, 32767), GaiaTeamID)
+			local crystalcircle4 = Spring.CreateFeature("koth_crystal", MapCenterX,0,MapCenterZ-CenterRadius, math.random(-32767, 32767), GaiaTeamID)
+			local crystalcircle5 = Spring.CreateFeature("koth_crystal2", MapCenterX+(CenterRadius*0.71),0,MapCenterZ+(CenterRadius*0.71), math.random(-32767, 32767), GaiaTeamID)
+			local crystalcircle6 = Spring.CreateFeature("koth_crystal2", MapCenterX+(CenterRadius*0.71),0,MapCenterZ-(CenterRadius*0.71), math.random(-32767, 32767), GaiaTeamID)			
+			local crystalcircle7 = Spring.CreateFeature("koth_crystal2", MapCenterX-(CenterRadius*0.71),0,MapCenterZ+(CenterRadius*0.71), math.random(-32767, 32767), GaiaTeamID)			
+			local crystalcircle8 = Spring.CreateFeature("koth_crystal2", MapCenterX-(CenterRadius*0.71),0,MapCenterZ-(CenterRadius*0.71), math.random(-32767, 32767), GaiaTeamID)
 
 			numberofsmallcrystals = math.floor(CenterRadius/15)
 			for i = 1, numberofsmallcrystals, 1 do
 				if (math.random(0, 1) > 0) then
-					Spring.CreateFeature("crystal_small", MapCenterX+math.sin(i)*CenterRadius+math.random(-50,50),0,MapCenterZ+math.cos(i)*CenterRadius+math.random(-50,50), math.random(-32767, 32767), GaiaTeamID)
+					Spring.CreateFeature("koth_crystal_small", MapCenterX+math.sin(i)*CenterRadius+math.random(-50,50),0,MapCenterZ+math.cos(i)*CenterRadius+math.random(-50,50), math.random(-32767, 32767), GaiaTeamID)
 				else
-					Spring.CreateFeature("crystal_small2", MapCenterX+math.sin(i)*CenterRadius+math.random(-50,50),0,MapCenterZ+math.cos(i)*CenterRadius+math.random(-50,50), math.random(-32767, 32767), GaiaTeamID)
+					Spring.CreateFeature("koth_crystal_small2", MapCenterX+math.sin(i)*CenterRadius+math.random(-50,50),0,MapCenterZ+math.cos(i)*CenterRadius+math.random(-50,50), math.random(-32767, 32767), GaiaTeamID)
 				end
 			end				
 		end

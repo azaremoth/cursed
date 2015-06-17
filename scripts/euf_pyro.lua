@@ -29,7 +29,7 @@ local attacking = false
 local inbunker = false
 local MOVEANIMATIONSPEED
 local MOVEANIMATIONSLEEPTIME = 275
-local gun
+local gun = 1
 
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4
@@ -204,7 +204,7 @@ end
 
 --weapon 1 -----------------------------------------------------------------
 function script.QueryWeapon1 ()
-	if gun>(-1) then
+	if gun >= 0 then
 		return remit
 	else
 		return lemit

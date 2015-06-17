@@ -13,7 +13,7 @@ local emit2 = piece "emit2"
 local emit_groundflash = piece "emit_groundflash"
 
 -- variables
-local gun
+local gun = 1
 local isaiming
 local restore_delay = 8000
 
@@ -95,8 +95,7 @@ end
 function script.QueryWeapon1 ()
 	if gun >= 0 then
 		return emit1
-	end
-	if gun < 0 then
+	else
 		return emit2
 	end
 end
@@ -121,8 +120,7 @@ function script.FireWeapon1()
 		Move(barrel2, z_axis, -5)
 		Move(barrel2, z_axis, 0, 24)
 		EmitSfx( emit1, GUNFLARE )		
-	end
-	if gun < 0 then
+	else
 		Move(barrel1, z_axis, -5)
 		Move(barrel1, z_axis, 0, 24)
 		EmitSfx( emit2, GUNFLARE )				

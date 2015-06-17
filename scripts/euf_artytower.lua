@@ -14,7 +14,7 @@ local emit1 = piece "emit1"
 local emit2 = piece "emit2"
 
 -- varaibles
-local gun
+local gun = 1
 
 --signals
 local SIG_AIM1 = 2
@@ -52,8 +52,7 @@ end
 function script.QueryWeapon1 ()
 	if gun >= 0 then
 		return emit1
-	end
-	if gun < 0 then
+	else
 		return emit2
 	end
 end
@@ -80,8 +79,7 @@ function script.FireWeapon1()
 		Move(barrel1, z_axis, -15)
 		Move(barrel1, z_axis, 0, 12)
 		EmitSfx( emit1, GUNFLARE )		
-	end
-	if gun < 0 then
+	else
 		Move(barrel2, z_axis, -15)
 		Move(barrel2, z_axis, 0, 12)
 		EmitSfx( emit2, GUNFLARE )				

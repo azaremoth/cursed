@@ -1,16 +1,22 @@
 >> Major changes 1.350 => 1.351
 
+Bugs
+- removed all deprecated settings und tags to achieve compatibility with Spring 100
+
 Features
 - revamped the "King of the Hill" (KOTH) game mode. You win the game by holding (have more units there than your opponents) the centre of the map which is now indicated by a giant purple crystal.
 - the radius of the KOTH centre can now be adjusted in the mod options
-- tadded a mod options to give you small bases from the beginning if you play KOTH
+- added a mod options to give you small bases from the beginning if you play KOTH
 
 Balance
 - reduced hitpoints of suicide blobs by 20%
+- neutral bugs can be reclaimed and provide metal to make bug hunting also rewarding for the imperials (the cursed could necromance bugs before, imperials had no benefit)
+- reduced the weapon range for imperial battle tank by 42%. movement speed by 20% and increased damage by 33% and hitpoints by 10%
 
 Polishing
 - loading behaviour improved if ordering multiple transport units
 - added a crystal swarm indicating the king-of-the-hill spot, also with nice effects
+- changed plasma cannons of the imperial tank and walker to "normal" cannons to make them feel "more terran"
 
 
 >> Major changes 1.350 => 1.351

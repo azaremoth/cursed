@@ -172,7 +172,7 @@ local featureDefs = {
     hitdensity         = "100",
     metal              = 200,
     object             = "bug_med_dead.s3o",
-    reclaimable        = false,
+    reclaimable        = true,
 	smoketime 		   = 0,	
   },
 }

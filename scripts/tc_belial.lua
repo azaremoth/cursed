@@ -64,7 +64,7 @@ local function Walkscript()
 			SetMoveAnimationSpeed()
 			if not attacking then
 				Turn( luparm , x_axis, math.rad(75), math.rad(MOVEANIMATIONSPEED*1.2) )
-				end
+			end
 			Turn( rleg1 , x_axis, math.rad(-30), math.rad(MOVEANIMATIONSPEED) )
 			Turn( rleg2 , x_axis, math.rad(40), math.rad(MOVEANIMATIONSPEED*1.6) )
 			Move( pelvis , y_axis, 0.3 , 8 )
@@ -213,7 +213,6 @@ end
 function script.Shot1()
 	EmitSfx( remit,  BIGGUNFLARE )	
 	EmitSfx( emit_groundflash_r,  GROUNDFLASH )
-	Sleep( 300)
 	return (0)
 end
 
@@ -246,7 +245,7 @@ function script.AimWeapon2 (heading, pitch)
     return (1)
 end
 
-function script.Shot1()
+function script.Shot2()
 	EmitSfx( lemit,  SMALLGUNFLARE )	
 	EmitSfx( emit_groundflash_l,  GROUNDFLASH )
 	return (0)

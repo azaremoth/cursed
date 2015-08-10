@@ -1,4 +1,4 @@
-[WALKERGUNFLARE]
+[CANNONGUNFLARE]
 {
    [BitmapMuzzleFlame]
    {
@@ -8,8 +8,8 @@
       	{
          	dir = dir;
          	colorMap=1 1 0.66 0.02	1 1 0.66 0.02	0 0 0 0.01; 
-          	size=10;
-          	length=40;
+          	size=6;
+          	length=30;
           	sizeGrowth=1;
           	ttl=2;
           	frontOffset=0.1;
@@ -37,7 +37,7 @@
 	}
 }
 
-[WALKERGROUNDFLASH]
+[CANNONGROUNDFLASH]
 {
 	[groundflash]
 	{
@@ -54,7 +54,7 @@
 	}
 }
 
-[Walker_Hit_Explosion_blue]
+[Walker_Hit_Explosion]
 {
 	[Nebel1]
 	{

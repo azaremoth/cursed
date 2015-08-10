@@ -131,7 +131,6 @@ local weaponDefs = {
     soundStart         = "battlegun",
     soundStartVolume   = 15,
     soundTrigger       = true,
-    startsmoke         = "1",
     texture1           = "yellowgunshot",
     texture2           = "null_texture",
     texture3           = "null_texture",

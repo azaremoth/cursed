@@ -129,7 +129,6 @@ FLAK_CRAWLER = {
     soundStartVolume   = 40,
     soundTrigger       = true,
 	sweepFire		   = false,
-    startsmoke         = "1",
     tolerance          = 3000,
     turret             = true,
     weaponVelocity     = 1000,

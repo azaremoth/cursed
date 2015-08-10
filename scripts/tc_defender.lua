@@ -13,7 +13,7 @@ local emit2 = piece "emit2"
 local emit_groundflash = piece "emit_groundflash"
 
 -- variables
-local gun
+local gun = 1
 local isaiming
 local restore_delay = 8000
 
@@ -68,7 +68,6 @@ function script.Deactivate ( )
 end
 
 function script.Create()
-	gun = 1
 	isaiming = false
 	local structureheight = ((-50*GetUnitValue(COB.UNIT_HEIGHT))/3080192)
 	Move( turretbase, y_axis, structureheight)

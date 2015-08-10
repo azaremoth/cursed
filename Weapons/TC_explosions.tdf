@@ -26,8 +26,6 @@
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	shakemagnitude=15;
-	shakeduration=1;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:SMALL_EXPLOSION_GREEN;
 	[DAMAGE]
@@ -48,8 +46,6 @@
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	shakemagnitude=15;
-	shakeduration=1;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:MEDIUM_EXPLOSION_GREEN;
 	[DAMAGE]
@@ -70,8 +66,6 @@
 	areaofeffect=300;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	shakemagnitude=24;
-	shakeduration=1.5;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:BIG_EXPLOSION_GREEN;
 	[DAMAGE]
@@ -92,8 +86,6 @@
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	shakemagnitude=15;
-	shakeduration=1;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:SMALL_EXPLOSION_BLUE;
 	[DAMAGE]
@@ -114,8 +106,6 @@
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	shakemagnitude=15;
-	shakeduration=1;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:MEDIUM_EXPLOSION_BLUE;
 	[DAMAGE]
@@ -136,8 +126,6 @@
 	areaofeffect=300;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	shakemagnitude=24;
-	shakeduration=1.5;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:BIG_EXPLOSION_BLUE;
 	[DAMAGE]
@@ -158,8 +146,6 @@
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	shakemagnitude=15;
-	shakeduration=1;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:SMALL_EXPLOSION_YELLOW;
 	[DAMAGE]
@@ -180,8 +166,6 @@
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	shakemagnitude=15;
-	shakeduration=1;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:MEDIUM_EXPLOSION_YELLOW;
 	[DAMAGE]
@@ -202,8 +186,6 @@
 	areaofeffect=300;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	shakemagnitude=24;
-	shakeduration=1.5;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:BIG_EXPLOSION_YELLOW;
 	[DAMAGE]
@@ -224,8 +206,6 @@
 	areaofeffect=300;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	shakemagnitude=24;
-	shakeduration=1.5;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:BIG_EXPLOSION_GREEN;
 	[DAMAGE]
@@ -335,8 +315,6 @@
 	areaofeffect=1;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	shakemagnitude=15;
-	shakeduration=1;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:BLOOD_EXPLOSION;
 	[DAMAGE]
@@ -357,8 +335,6 @@
 	areaofeffect=1;
 //	soundstart=Small_Explosion;
 //	soundhit=Small_Explosion;
-	shakemagnitude=15;
-	shakeduration=1;
 	edgeeffectiveness=0.1;
 	explosiongenerator=custom:Greycloud;
 	[DAMAGE]

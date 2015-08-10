@@ -145,10 +145,8 @@ local weaponDefs = {
     myGravity          = 0.15,
     name               = "Bomb Rocket",
     --noSelfDamage       = true,
-    pitchtolerance     = "1500",
     range              = 300,
     reloadtime         = 5,
-    selfprop           = true,
 --  Sound	------------------------------------------------	
     soundHit           = "bomb_hit",
     soundStart         = "bomb_drop",

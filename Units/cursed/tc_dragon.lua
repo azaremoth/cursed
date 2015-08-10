@@ -129,7 +129,6 @@ local weaponDefs = {
     interceptedByShieldType = 1,
     name               = "Hellfire",
     --noSelfDamage       = true,
-    pitchtolerance     = "500",
     range              = 400,
     reloadtime         = 3,
     soundHit           = "mediumexplosion",

@@ -142,7 +142,6 @@ local weaponDefs = {
     myGravity          = 0.275,
     name               = "Purgatory Artillery",
     --noSelfDamage       = true,
-    pitchtolerance     = "1500",
     range              = 1800,
     reloadtime         = 2,
     soundHit           = "BoneArtiBoom",

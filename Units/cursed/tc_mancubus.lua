@@ -141,7 +141,6 @@ local weaponDefs = {
     soundHit           = "mediumexplosion",
     soundStart         = "mancubus_shot",
     stages             = 0,
-    startsmoke         = "1",
     tolerance          = 500,
     turret             = true,
     weaponType         = "Cannon",

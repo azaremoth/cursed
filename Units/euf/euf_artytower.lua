@@ -123,7 +123,6 @@ local weaponDefs = {
     interceptedByShieldType = 1,
     myGravity          = 0,
     name               = "Artillery Plasma Cannon",
-    pitchtolerance     = "1500",
     range              = 1800,
     reloadtime         = 2.5,
     startVelocity      = 550,
@@ -135,7 +134,6 @@ local weaponDefs = {
     weaponType         = "Cannon",
     weaponVelocity     = 550,  
 	noSelfDamage       = true,
-	minbarrelangle     = "-35",	
 --  Sound	------------------------------------------------	
     soundHit           = "mediumexplosion",
     soundStart         = "CannHvy3Remake",

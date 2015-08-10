@@ -147,7 +147,6 @@ local weaponDefs = {
     soundHit           = "cannon_hit2",
     soundStart         = "tank_cannon",
     stages             = 0,
-    startsmoke         = "1",
     tolerance          = 500,
     turret             = true,
     weaponType         = "Cannon",

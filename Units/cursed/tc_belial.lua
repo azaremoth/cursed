@@ -191,7 +191,6 @@ local weaponDefs = {
     soundStartVolume   = 40,
     soundTrigger       = true,
     sprayAngle         = 1024,
-    startsmoke         = "1",
     sweepfire          = true,
     tolerance          = 3000,
     turret             = true,

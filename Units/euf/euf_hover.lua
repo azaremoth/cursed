@@ -174,7 +174,6 @@ local weaponDefs = {
       interceptedByShieldType = 1,
       model                   = "Rocket.s3o",
       numbounce               = 4,
-      propeller               = "1",
       range                   = 400,
       reloadtime              = 1.75,
       renderType              = 1,

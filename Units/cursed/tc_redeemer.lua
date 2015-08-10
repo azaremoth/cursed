@@ -131,7 +131,6 @@ local weaponDefs = {
     soundHit           = "cannon_hit1",
     soundStart         = "redeemergun",
     stages             = 5,
-    startsmoke         = "1",
     tolerance          = 500,
     turret             = true,
     weaponType         = "Cannon",

@@ -137,7 +137,6 @@ local weaponDefs = {
     explosionSpeed     = 65536,
     fireStarter        = 50,
     flightTime         = 3,
-    guided             = "1",
     impulseBoost       = 0,
     impulseFactor      = 0,
     interceptedByShieldType = 1,

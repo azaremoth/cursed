@@ -138,7 +138,7 @@ local weaponDefs = {
       interceptedByShieldType = 1,
       noSelfDamage            = true,
       range                   = 350,
-      reloadtime              = 3,
+      reloadtime              = 2.8,
     soundHit           = "cannon_hit2",
     soundStart         = "tank_cannon",
     soundStartVolume   = 75,
@@ -154,10 +154,10 @@ local weaponDefs = {
 	weaponType         = "Cannon",
 ------------------------------------------------------------
 		damage = {
-		  default            = 560,
-		  flyer              = 560*0.33,
-		  heavy              = 560,
-		  light              = (560*0.75),
+		  default            = 565,
+		  flyer              = 565*0.33,
+		  heavy              = 565,
+		  light              = (565*0.75),
 		},
    },
 }

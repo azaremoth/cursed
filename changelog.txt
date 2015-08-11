@@ -17,6 +17,7 @@ Polishing
 - loading behaviour improved if ordering multiple transport units
 - added a crystal swarm indicating the king-of-the-hill spot, also with nice effects
 - changed plasma cannons of the imperial tank and walker to "normal" cannons to make them feel "more terran"
+- improved imperial walker animations and increased unit size
 
 
 >> Major changes 1.350 => 1.351

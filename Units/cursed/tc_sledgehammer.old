@@ -136,7 +136,6 @@ local weaponDefs = {
     explosionGenerator = "custom:Enforcer_Rokets_Explosion",
     fixedLauncher      = true,
     flightTime         = 5,
-    guided             = "1",
     interceptedByShieldType = 1,
     impulseBoost       = 0,
     impulseFactor      = 0,

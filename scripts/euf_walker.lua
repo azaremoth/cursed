@@ -53,6 +53,11 @@ local GROUNDFLASH = 1027+0
 local BIGFLARE = 1028+0
 local unfinished = true
 
+local factories = {
+	[UnitDefNames.euf_factory.id] = "euf_factory",
+	[UnitDefNames.euf_factory_ai.id] = "euf_factory_ai",
+	}
+
 local function Turn2(piecenum,axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180
 	if speed then
@@ -64,7 +69,7 @@ local function Turn2(piecenum,axis, degrees, speed)
 end
 
 local function SetMoveAnimationSpeed()
-	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/3500)
+	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/3700)
 	MOVEANIMATIONSLEEPTIME = (35000000/GetUnitValue(COB.MAX_SPEED))
 	--if statements inside walkscript contain wait functions that can take forever if speed is too slow
 	if MOVEANIMATIONSPEED < 5 then 
@@ -84,14 +89,14 @@ local function Walkscript()
 			Turn(rleg2, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
 			Turn(rfoot, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
 
-			Turn(rleg1, x_axis, math.rad(50.000000), math.rad(MOVEANIMATIONSPEED*3)) --Mid
-			Turn(rleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*6)) --Mid
+			Turn(rleg1, x_axis, math.rad(50.000000), math.rad(MOVEANIMATIONSPEED*3))
+			Turn(rleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*6))
 			Turn(rleg3, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*3))
 			Turn(rfoot, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*20)) -- RIGHT FOOT IS REAR	
-			if not attacking then
+			if not attacking then		
 				Turn(chest, y_axis, 0, math.rad(MOVEANIMATIONSPEED)*4)
-				Turn(chest, z_axis, math.rad(-(5)), math.rad(MOVEANIMATIONSPEED*0.4))
-				Turn(chest, x_axis, math.rad(3), math.rad(MOVEANIMATIONSPEED*1))
+				Turn(chest, z_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED*0.5))
+				Turn(chest, x_axis, math.rad(3), math.rad(MOVEANIMATIONSPEED*0.5))
 
 				Turn(turret1, x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED*3))
 				Turn(turret2, x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED*3))			
@@ -102,41 +107,50 @@ local function Walkscript()
 		if moving then 
 			SetMoveAnimationSpeed()
 
-			Turn(rleg1, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*8)) --Back
-			Turn(rleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8)) --Back
+			Turn(rleg1, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*8))
+			Turn(rleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8))
 			Turn(rleg3, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*6))
 			Turn(rfoot, x_axis, math.rad(-10.000000), math.rad(MOVEANIMATIONSPEED*20)) -- FOOT IS MIDDLE MOVING FORWARD
 			
 			if not attacking then
-				Turn(chest, z_axis, math.rad(-(-5)), math.rad(MOVEANIMATIONSPEED*0.4))
-				Turn(chest, x_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED*1))		
+				Move( pelvis, y_axis, 3, MOVEANIMATIONSPEED )
+				Turn(chest, z_axis, math.rad(3), math.rad(MOVEANIMATIONSPEED*1.333))
+				Turn(chest, x_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED*1.333))		
 			end
-						
+			
 			Sleep(MOVEANIMATIONSLEEPTIME*0.75)			
 		end
 		if moving then 
 			SetMoveAnimationSpeed()
-			Turn(rleg1, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*8)) --Up
-			Turn(rleg2, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*8)) --Up
+			Turn(rleg1, x_axis, math.rad(-15.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -20
+			Turn(rleg2, x_axis, math.rad(-35.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -40
 			Turn(rleg3, x_axis, math.rad(40.000000), math.rad(MOVEANIMATIONSPEED*6))
 			Turn(rfoot, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*20)) -- RIGHT FOOT IS FRONT
 			if not attacking then
-				Turn(chest, x_axis, math.rad(3), math.rad(MOVEANIMATIONSPEED*1))	
+				Turn(chest, z_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED))
+				Turn(chest, x_axis, math.rad(3), math.rad(MOVEANIMATIONSPEED))		
 			end
 			
 			Sleep(MOVEANIMATIONSLEEPTIME)			
 		end
 		if moving then 
 			SetMoveAnimationSpeed()
-			Turn(rleg1, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8)) --Up
-			Turn(rleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8)) --Up
-			Turn(rleg3, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*6))
+			Turn(rleg1, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*4)) --Up
+			Turn(rleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*4)) --Up
+			Turn(rleg3, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*2))
 			Turn(rfoot, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*20))
+			
+			if not attacking then
+				Move( pelvis, y_axis, 0, MOVEANIMATIONSPEED )			
+				Turn(chest, z_axis, math.rad(3), math.rad(MOVEANIMATIONSPEED))
+				Turn(chest, x_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED))		
+			end
+			
 			EmitSfx( rfoot,  FOOTDUST )
-			Sleep(MOVEANIMATIONSLEEPTIME*0.5)			
+			Sleep(MOVEANIMATIONSLEEPTIME)			
 		end
 		if not moving then 
---			Move( pelvis, y_axis, 0, MOVEANIMATIONSPEED )	
+			Move( pelvis, y_axis, 0, MOVEANIMATIONSPEED )	
 			
 			Turn2(rleg1, z_axis, 0, MOVEANIMATIONSPEED*4)
 			Turn2(rleg2, z_axis, 0, MOVEANIMATIONSPEED*4)
@@ -151,6 +165,8 @@ local function Walkscript()
 			if not attacking then
 				Turn(turret1, x_axis, math.rad(20), math.rad(MOVEANIMATIONSPEED*3))
 				Turn(turret2, x_axis, math.rad(20), math.rad(MOVEANIMATIONSPEED*3))
+				Turn(chest, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED*2))
+				Turn(chest, x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED*2))				
 			end			
 	end
 		Sleep(100)
@@ -164,33 +180,33 @@ local function Walkscript_leftonly()
 			Turn(lleg2, y_axis, 0, math.rad(MOVEANIMATIONSPEED))
 			Turn(lleg2, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
 			Turn(lfoot, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
-			Turn(lleg1, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*8)) --Up
-			Turn(lleg2, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*8)) --Up
+			Turn(lleg1, x_axis, math.rad(-15.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -20
+			Turn(lleg2, x_axis, math.rad(-35.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -40
 			Turn(lleg3, x_axis, math.rad(40.000000), math.rad(MOVEANIMATIONSPEED*6))
 			Turn(lfoot, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*20)) -- LEFT FOOT IS FRONT
 			Sleep(MOVEANIMATIONSLEEPTIME)			
 		end
 		if moving then 
 			SetMoveAnimationSpeed()	
-			Turn(lleg1, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8)) --Back
-			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8)) --Back
-			Turn(lleg3, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*6))
+			Turn(lleg1, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*4))
+			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*4))
+			Turn(lleg3, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*2))
 			Turn(lfoot, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*20))
 			EmitSfx( lfoot,  FOOTDUST )	
-			Sleep(MOVEANIMATIONSLEEPTIME*0.5)			
+			Sleep(MOVEANIMATIONSLEEPTIME)			
 		end		
 		if moving then 
 			SetMoveAnimationSpeed()
-			Turn(lleg1, x_axis, math.rad(50.000000), math.rad(MOVEANIMATIONSPEED*3)) --Mid
-			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*6)) --Mid
+			Turn(lleg1, x_axis, math.rad(50.000000), math.rad(MOVEANIMATIONSPEED*3))
+			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*6))
 			Turn(lleg3, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*3))
 			Turn(lfoot, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*20)) -- LEFT FOOT IS REAR	
 			Sleep(MOVEANIMATIONSLEEPTIME*2)			
 		end
 		if moving then 
 			SetMoveAnimationSpeed()	
-			Turn(lleg1, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*8)) --Back
-			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8)) --Back
+			Turn(lleg1, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*8))
+			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8))
 			Turn(lleg3, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*6))
 			Turn(lfoot, x_axis, math.rad(-10.000000), math.rad(MOVEANIMATIONSPEED*20)) -- FOOT IS MIDDLE MOVING FORWARD
 			Sleep(MOVEANIMATIONSLEEPTIME*0.75)			
@@ -228,22 +244,44 @@ local function BoredAnimation()
 end
 
 -- Dusters
-local function BoredAnimation()
+local function Dusters()
+-----------------------------------------------------------------	
 	while unfinished do
+		local x, y, z = Spring.GetUnitPosition(unitID)			
+		local UnitsAround = Spring.GetUnitsInSphere(x,y,z, 80)
+		local factorycount = 0
+		for _,eUnitID in ipairs(UnitsAround) do
+			local eUnitDefId = Spring.GetUnitDefID(eUnitID)
+			if factories [eUnitDefId] then
+				factorycount = (factorycount + 1)
+			end
+		end
+		if (factorycount > 0) then
+			unfinished = true
+		else 
+			unfinished = false
+		end
 		EmitSfx( dusters1,  FOOTDUST )	
 		EmitSfx( dusters2,  FOOTDUST )	
 		EmitSfx( dusters3,  FOOTDUST )	
 		EmitSfx( dusters4,  FOOTDUST )			
-		Sleep(50)		
-	end
+		Sleep(150)
+	end	
+-----------------------------------------------------------------	
+	Move( pelvis, y_axis, 0, 40)
+	StartThread( Walkscript )
+	StartThread( Walkscript_leftonly )	
+	StartThread( BoredAnimation )
 end
 
 ------------------------ ACTIVATION
 
 function script.Create()
 	SetMoveAnimationSpeed()
+	
+	unfinished = true
+	attacking = false	
 	restore_delay = 1000
-	attacking = false
 	smallgun = 1	
 
 	Move( pelvis, y_axis, -45)
@@ -266,15 +304,6 @@ function script.Create()
 	end
 	--END BUILD CYCLE
 	StartThread( Dusters )
-	
-	Sleep(4000)
-	Move( pelvis, y_axis, 0, 20)
-	
-	unfinished = false
-	StartThread( Walkscript )
-	StartThread( Walkscript_leftonly )	
-	StartThread( BoredAnimation )
-	
 end
 
 function script.StartMoving()
@@ -340,20 +369,28 @@ end
 
 function script.Shot1()
 	if (smallgun == 1) then
+		Move( gun11, z_axis, -7 )	
 		EmitSfx( emit11,  FLARE )
 		EmitSfx( emit_groundflash1,  GROUNDFLASH )
+		Move( gun11, z_axis, 0, 20 )			
 		smallgun = 2
 	elseif (smallgun == 2) then
+		Move( gun12, z_axis, -7 )	
 		EmitSfx( emit12,  FLARE )
 		EmitSfx( emit_groundflash1,  GROUNDFLASH )
+		Move( gun12, z_axis, 0, 20 )		
 	    smallgun = 3
 	elseif (smallgun == 3) then
+		Move( gun21, z_axis, -7 )	
 		EmitSfx( emit21,  FLARE )
 		EmitSfx( emit_groundflash2,  GROUNDFLASH )
+		Move( gun21, z_axis, 0, 20 )		
 		smallgun = 4
 	else
+		Move( gun22, z_axis, -7 )	
 		EmitSfx( emit22,  FLARE )
 		EmitSfx( emit_groundflash2,  GROUNDFLASH )
+		Move( gun22, z_axis, 0, 20 )		
 		smallgun = 1
 	end
 	return (0)
@@ -387,39 +424,18 @@ function script.AimWeapon2 (heading, pitch)
 end
 
 function script.Shot2()
+	Move( gun3, z_axis, -15 )	
 	EmitSfx( emit3,  BIGFLARE )	
 	EmitSfx( emit_groundflash3,  GROUNDFLASH )
+	Move( gun3, z_axis, 0, 15 )	
 	return (0)
 end
 
 	
 function script.Killed(severity, corpsetype)
---[[
-	local px, py, pz = Spring.GetUnitPosition(unitID)
-	Spring.PlaySoundFile("sounds/demoncry.wav", 10, px, py, pz)
-			
-	Turn( chest , x_axis, math.rad(-43), math.rad(300) )
-	Turn( chest , y_axis, math.rad(15), math.rad(50) )
-	Turn( turret1 , z_axis, math.rad(-(50)), math.rad(200) )
-	Turn( turret2 , z_axis, math.rad(-(-30)), math.rad(200) )
-
-	Turn( rleg2 , y_axis, math.rad(-45), math.rad(500) )
-	Turn( rleg2 , z_axis, math.rad(-(17)), math.rad(500) )
-
-	Turn( base , x_axis, math.rad(-25), math.rad(75) )
-	WaitForTurn(base, x_axis)
-	Turn( base , x_axis, math.rad(-50), math.rad(200) )
-	WaitForTurn(base, x_axis)
-	Turn( base , x_axis, math.rad(-75), math.rad(400) )
-	WaitForTurn(base, x_axis)
-	
-	EmitSfx( chest,  BLOOD )
-	EmitSfx( head,  BLOOD )
-
-	EmitSfx( lfoot,  FOOTDUST )
-	EmitSfx( rfoot,  FOOTDUST )]]--
-	
-	Sleep( 100)
-
+	Turn2( chest, y_axis, 0, 60 )
+	Move( pelvis, y_axis, -45, 100)
+	EmitSfx( pelvis,  BOOM )
+	Sleep( 500)
 	return (0)
 end

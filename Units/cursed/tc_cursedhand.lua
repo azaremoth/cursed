@@ -121,7 +121,6 @@ local weaponDefs = {
     explosionGenerator = "custom:Black_Explosion",
     fixedLauncher      = true,
     flightTime         = 5,
-    guided             = "1",
     impulseBoost       = 0,
     impulseFactor      = 0,
     interceptedByShieldType = 1,

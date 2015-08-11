@@ -14,8 +14,8 @@ local emit2 = piece "emit2"
 local emit_groundflash = piece "emit_groundflash"
 
 -- variables
-local gun
-local isaiming
+local gun = 1
+local isaiming = false
 local restore_delay = 8000
 
 --signals

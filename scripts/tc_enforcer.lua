@@ -29,7 +29,8 @@ local attacking = false
 local inbunker = false
 local burrowed = false
 
-local restore_delay, MOVEANIMATIONSPEED, gun
+local restore_delay, MOVEANIMATIONSPEED, 
+local gun = 1
 
 local SIG_AIM1 = 2
 local SIG_WALK = 4

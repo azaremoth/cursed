@@ -7,8 +7,8 @@ local emit_thrust2 = piece 'emit_thrust2'
 
 local maxhealth = Spring.GetUnitHealth(unitID)
 
-local gun
-local moving
+local gun = 1
+local moving = false
 local GUNFLARE = 1024+0
 local EXPLOSION = 1025+0
 local BLACKSMOKE = 1026+0

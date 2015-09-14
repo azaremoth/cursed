@@ -1,6 +1,16 @@
 >> Major changes 1.350 => 1.400
 
 Bugs
+- fixed theminimap code causing memory overflows during exit
+- fixed helath bars crashing is some rare cases
+
+Balance
+- increased the area of effect for imperial bombers to 128
+
+
+>> Major changes 1.350 => 1.400
+
+Bugs
 - removed all deprecated settings und tags to achieve compatibility with Spring 100
 
 Features

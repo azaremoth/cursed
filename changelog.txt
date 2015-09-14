@@ -1,4 +1,4 @@
->> Major changes 1.350 => 1.351
+>> Major changes 1.350 => 1.400
 
 Bugs
 - removed all deprecated settings und tags to achieve compatibility with Spring 100

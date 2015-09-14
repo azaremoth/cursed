@@ -4,7 +4,7 @@ function widget:GetInfo()
 		desc = "Makes neat team color scheme - you teal, allies blueish, enemies reddish",
 		author = "Licho",
 		date = "February, 2010",
-		license = "GPL v3",
+		license = "GNU GPL v2, or later",
 		layer = -10001,
 		enabled = true,
 	}
@@ -27,13 +27,13 @@ options = {
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-if VFS.FileExists("Luaui/Configs/LocalColors.lua") then -- user override
-	colorCFG = VFS.Include("Luaui/Configs/LocalColors.lua")
+if VFS.FileExists("LuaUI/Configs/LocalColors.lua") then -- user override
+	colorCFG = VFS.Include("LuaUI/Configs/LocalColors.lua")
 	Spring.Echo("Loaded local team color config.")
-elseif VFS.FileExists("Luaui/Configs/ZKTeamColors.lua") then
-	colorCFG = VFS.Include("Luaui/Configs/ZKTeamColors.lua")
+elseif VFS.FileExists("LuaUI/Configs/ZKTeamColors.lua") then
+	colorCFG = VFS.Include("LuaUI/Configs/ZKTeamColors.lua")
 else
-	error("missing file: Luaui/Configs/LocalColors.lua")
+	error("missing file: LuaUI/Configs/LocalColors.lua")
 end
 
 colorCFG.gaiaColor[1] = colorCFG.gaiaColor[1]/255 
@@ -67,6 +67,8 @@ WG.LocalColor.listeners = WG.LocalColor.listeners or {}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local is_speccing
+
 local function SetNewTeamColors() 
 	local gaia = Spring.GetGaiaTeamID()
 	Spring.SetTeamColor(gaia, unpack(gaiaColor))
@@ -85,7 +87,9 @@ local function SetNewTeamColors()
 			Spring.SetTeamColor(teamID, unpack(enemyColors[e]))
 		end
 	end
-	Spring.SetTeamColor(myTeam, unpack(myColor))	-- overrides previously defined color
+	if not is_speccing then
+		Spring.SetTeamColor(myTeam, unpack(myColor))	-- overrides previously defined color
+	end
 end
 
 local function SetNewSimpleTeamColors() 
@@ -103,7 +107,9 @@ local function SetNewSimpleTeamColors()
 			Spring.SetTeamColor(teamID, unpack(enemyColors[1]))
 		end
 	end
-	Spring.SetTeamColor(myTeam, unpack(myColor))	-- overrides previously defined color
+	if not is_speccing then
+		Spring.SetTeamColor(myTeam, unpack(myColor))	-- overrides previously defined color
+	end
 end
 
 local function ResetOldTeamColors()
@@ -139,6 +145,7 @@ end
 --------------------------------------------------------------------------------
 
 function widget:Initialize()
+	is_speccing = Spring.GetSpectatingState()
 	if options.simpleColors.value then
 		SetNewSimpleTeamColors()
 	else

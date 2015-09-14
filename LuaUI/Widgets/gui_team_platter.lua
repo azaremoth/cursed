@@ -22,7 +22,7 @@ function widget:GetInfo()
     date      = "Apr 16, 2007",
     license   = "GNU GPL, v2 or later",
     layer     = 5,
-    enabled   = true,  --  loaded by default?
+    enabled   = false,  --  loaded by default?
   }
 end
 
@@ -63,9 +63,6 @@ local spIsUnitVisible        = Spring.IsUnitVisible
 local spSendCommands         = Spring.SendCommands
 local spGetVisibleUnits      = Spring.GetVisibleUnits
 
-local ScaleCircle = {
-	[UnitDefNames.euf_transport.id] = "euf_transport",
-	}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -278,9 +275,6 @@ if not spIsGUIHidden() then
         if (teamID) then
           local udid = spGetUnitDefID(visUnits[i])
           local radius = GetUnitDefRealRadius(udid)
-		  if ScaleCircle [udid] then
-			radius = radius*5
-		  end		  
           if (radius) then
             if showOutline then
               radius = radius + extraRadius

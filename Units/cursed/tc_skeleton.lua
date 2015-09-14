@@ -104,6 +104,7 @@ local unitDef = {
       def                = "SKELMELEE",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
+      badTargetCategory  = "AIR HEAVYARMOR",	  
       onlyTargetCategory = "LAND AIR",
     },
   },

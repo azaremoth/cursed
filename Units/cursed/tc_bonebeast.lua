@@ -94,7 +94,7 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      badTargetCategory  = "LIGHTARMOR",
+      badTargetCategory  = "AIR LIGHTARMOR",
       def                = "Bone_Artillery",
       onlyTargetCategory = "LAND",
     },

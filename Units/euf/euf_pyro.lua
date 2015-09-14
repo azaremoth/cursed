@@ -109,15 +109,16 @@ local unitDef = {
   },
   weapons = {
    [1]  = {
-      badTargetCategory = "HEAVYARMOR",	  	
+      badTargetCategory = "AIR HEAVYARMOR",	  	
 	  def                = "Flamer",
       mainDir            = "0 0 1",
       maxAngleDif        = 160,
       onlyTargetCategory = "LAND",
     },
     [2]  = {
-      def                = "Flamer_Bunker",
-      onlyTargetCategory = "LAND",
+	  badTargetCategory = "AIR HEAVYARMOR",      
+	  def                = "Flamer_Bunker",
+      onlyTargetCategory = "LAND",	  
     },	
   },
 }

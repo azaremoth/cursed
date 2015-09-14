@@ -105,7 +105,7 @@ local unitDef = {
       def                = "GHOULMELEE",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
-      badTargetCategory  = "HEAVYARMOR",	  
+      badTargetCategory  = "AIR HEAVYARMOR",	  
       onlyTargetCategory = "LAND AIR",
     },
   },

@@ -592,7 +592,11 @@ do
     health,maxHealth,paralyzeDamage = GetUnitHealth(unitID)
 	
     local empHP = ((not paralyzeOnMaxHealth) and health) or maxHealth
-    emp = (paralyzeDamage or 0)/empHP
+    if (empHP ~= nil ) then
+		emp = (paralyzeDamage or 0)/empHP
+	else
+		emp = 0
+	end
     hp  = (health or 0)/maxHealth
     morph = UnitMorphs[unitID]
   

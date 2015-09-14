@@ -1,4 +1,5 @@
 --Chat preprocessor. Provide preprocessed chat message for Chili Chat widget
+--last update: 20 May 2014
 
 local myName = Spring.GetPlayerInfo(Spring.GetMyPlayerID())
 local transmitMagic = "> ["..myName.."]!transmit" -- Lobby is sending to LuaUI
@@ -57,6 +58,7 @@ MessageProcessor.MESSAGE_DEFINITIONS = {
 	{ msgtype = 'label', pattern = '^PLAYERNAME added point: (.+)', discard = true }, -- NOTE : these messages are discarded -- points and labels are provided through MapDrawCmd() callin
 	{ msgtype = 'point', pattern = '^PLAYERNAME added point: ', discard = true },
 	{ msgtype = 'autohost', pattern = '^> (.+)', noplayername = true },
+	{ msgtype = 'game_message', pattern = '^game_message:(.)(.*)', isgamemessage = true },
 	{ msgtype = 'other' } -- no pattern... will match anything else
 }
 
@@ -75,22 +77,55 @@ end
 
 local players = {}
 
+function MessageProcessor:AddPlayer(playerID)
+	local name, active, spec, teamId, allyTeamId, _,_,_,_,customkeys = Spring.GetPlayerInfo(playerID)
+	players[name] = { id = playerID, spec = spec, allyTeamId = allyTeamId, muted = (customkeys and customkeys.muted == 1) }
+end
+
+function MessageProcessor:UpdatePlayer(playerID)
+	local name, active, spec, teamId, allyTeamId = Spring.GetPlayerInfo(playerID)
+	players[name].id = playerID
+	players[name].spec = spec
+	players[name].allyTeamId = allyTeamId
+end
+
 local function SetupPlayers()
 	local playerroster = Spring.GetPlayerList()
+	local spGetPlayerInfo = Spring.GetPlayerInfo
 	
 	for i, id in ipairs(playerroster) do
-		local name, _, spec, teamId, allyTeamId, _,_,_,_,customkeys = Spring.GetPlayerInfo(id)
+		local name,active, spec, teamId, allyTeamId, _,_,_,_,customkeys = spGetPlayerInfo(id)
 		players[name] = { id = id, spec = spec, allyTeamId = allyTeamId, muted = (customkeys and customkeys.muted == 1) }
 	end
+	
+	-- register any AIs
+	-- Copied from gui_chili_crudeplayerlist.lua
+	local teamsSorted = Spring.GetTeamList()
+	local gaiaTeamID = Spring.GetGaiaTeamID()
+	local spGetTeamInfo = Spring.GetTeamInfo
+	local spGetAIInfo = Spring.GetAIInfo
+	for i=1,#teamsSorted do
+		local teamID = teamsSorted[i]
+		if teamID ~= gaiaTeamID then
+			local _,_,_,isAI,_,allyTeamId = spGetTeamInfo(teamID)
+			if isAI then
+				local skirmishAIID, name = spGetAIInfo(teamID)
+				--Note: to make AI appears like its doing an ally chat, do: Spring.Echo("<botname> Allies: bot_say_something")
+				--Note2: <botname> only use name and not shortname. For comparison, crude playerlist botname is: '<'.. name ..'> '.. shortName
+				players[name] = { id = skirmishAIID, allyTeamId = allyTeamId, isAI = true}
+			end
+		end --if teamID ~= Spring.GetGaiaTeamID() 
+	end --for each team
 end
 
 local function getSource(spec, allyTeamId)
 	return (spec and 'spec')
-		or ((Spring.GetMyTeamID() == allyTeamId) and 'ally')
+		or ((Spring.GetMyAllyTeamID() == allyTeamId) and 'ally')
 		or 'enemy'
 end
 
 -- update msg members msgtype, argument, source and playername (when relevant)
+--loop thru all pattern combination (self.MESSAGE_DEFINITIONS) until a match is found
 function MessageProcessor:ParseMessage(msg)
   for _, candidate in ipairs(self.MESSAGE_DEFINITIONS) do
     if candidate.pattern == nil then -- for fallback/other messages
@@ -99,22 +134,32 @@ function MessageProcessor:ParseMessage(msg)
 	  msg.source = 'other'
       return
     end
+	--else
     local capture1, capture2 = msg.text:match(candidate.pattern)
     if capture1 then
       msg.msgtype = candidate.msgtype
       if candidate.noplayername then
         msg.argument = capture1
-	msg.source = 'other'
-	return
+        msg.source = 'other'
+        return
+      elseif candidate.isgamemessage then
+        local message = capture2
+        if (capture1 ~= " ") then --skip any whitespace 1st char after "game_message:" (for display tidyness!)
+            message = capture1 .. message
+        end
+        msg.text = message
+        msg.argument = message
+        msg.source = 'widget/gadget'
+        return
       else
         local playername = capture1
-        if players[playername] then
-	local player = players[playername]
-	  msg.player = player
-	  msg.source = getSource(player.spec, player.allyTeamId)
-	  msg.playername = playername
-	  msg.argument = capture2
-	  return
+		local player = players[playername]
+        if player then
+	      msg.player = player
+	      msg.source = getSource(player.spec, player.allyTeamId)
+	      msg.playername = playername
+	      msg.argument = capture2
+	      return
         end
       end
     end

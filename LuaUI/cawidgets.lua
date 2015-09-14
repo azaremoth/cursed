@@ -46,7 +46,7 @@ local WIDGET_DIRNAME     = LUAUI_DIRNAME .. 'Widgets/'
 local HANDLER_BASENAME = "cawidgets.lua"
 local SELECTOR_BASENAME = 'selector.lua'
 
---[[do
+do
 	local isMission = Game.modDesc:find("Mission Mutator")
 	if isMission then -- all missions will be forced to use a specific name
 		if not VFS.FileExists(ORDER_FILENAME) or not VFS.FileExists(CONFIG_FILENAME) then
@@ -54,7 +54,7 @@ local SELECTOR_BASENAME = 'selector.lua'
 			CONFIG_FILENAME    = LUAUI_DIRNAME .. 'Config/ZK_data.lua'
 		end
 	end
-end]]--
+end
 
 local SAFEWRAP = 1
 -- 0: disabled
@@ -67,25 +67,25 @@ local glPushAttrib = gl.PushAttrib
 local pairs = pairs
 local ipairs = ipairs
 
-do -- create backup for ZK_data.lua and ZK_order.lua to workaround against case of file corruption when OS crash
+--[[do -- create backup for ZK_data.lua and ZK_order.lua to workaround against case of file corruption when OS crash
  	local fileToCheck = {ORDER_FILENAME,CONFIG_FILENAME}
 	local extraText = {'-- Widget Order List  (0 disables a widget)', '-- Widget Custom Data'} --this is a header text that is appended to start of file
 	for i=1, #fileToCheck do
 		CheckLUAFileAndBackup(fileToCheck[i], extraText[i]) --utility_two.lua
 	end
-end
+end]]--
 
 -- read local widgets config
 local localWidgetsFirst = false
 local localWidgets = false
 
-if VFS.FileExists(CONFIG_FILENAME) then --check config file whether user want to use localWidgetsFirst
+--[[if VFS.FileExists(CONFIG_FILENAME) then --check config file whether user want to use localWidgetsFirst
   local cadata = VFS.Include(CONFIG_FILENAME)
   if cadata and cadata["Local Widgets Config"] then
     localWidgetsFirst = cadata["Local Widgets Config"].localWidgetsFirst
     localWidgets = cadata["Local Widgets Config"].localWidgets
   end
-end
+end]]
 
 local VFSMODE
 VFSMODE = localWidgetsFirst and VFS.RAW_FIRST
@@ -164,6 +164,7 @@ local flexCallIns = {
   'UnitFinished',
   'UnitFromFactory',
   'UnitDestroyed',
+  'UnitDestroyedByTeam',
   'UnitExperience',
   'UnitTaken',
   'UnitGiven',
@@ -171,6 +172,7 @@ local flexCallIns = {
   'UnitCommand',
   'UnitCmdDone',
   'UnitDamaged',
+  'UnitStunned',
   'UnitEnteredRadar',
   'UnitEnteredLos',
   'UnitLeftRadar',
@@ -218,6 +220,7 @@ local callInLists = {
   'DrawScreen',
   'KeyPress',
   'KeyRelease',
+  'TextInput',
   'MousePress',
   'MouseWheel',
   'JoyAxis',
@@ -1161,11 +1164,17 @@ end
 --
 
 function widgetHandler:Shutdown()
+  Spring.Echo("Start widgetHandler:Shutdown")
   self:SaveOrderList()
+  Spring.Echo("Shutdown - SaveOrderList Complete")
   self:SaveConfigData()
+  Spring.Echo("Shutdown - SaveConfigData Complete")
   for _,w in ipairs(self.ShutdownList) do
-    w:Shutdown()
+    local name = w.whInfo.name or "UNKNOWN NAME"
+	Spring.Echo("Shutdown Widget - " .. name)
+	w:Shutdown()
   end
+  Spring.Echo("End widgetHandler:Shutdown")
   return
 end
 
@@ -1231,9 +1240,65 @@ function widgetHandler:CommandNotify(id, params, options)
   return false
 end
 
+local MUTE_SPECTATORS = Spring.GetModOptions().mutespec or 'autodetect'
+local MUTE_LOBBY = Spring.GetModOptions().mutelobby or 'autodetect'
+local playerNameToID 
+
+do
+	local teams = Spring.GetTeamList();
+	local humanAlly = {}
+	local humanAllyCount = 0
+	gaiaTeam = Spring.GetGaiaTeamID()
+	for _, teamID in ipairs(teams) do
+		local teamLuaAI = Spring.GetTeamLuaAI(teamID)
+		if ((teamLuaAI == nil or teamLuaAI == "") and teamID ~= gaiaTeam) then
+			local _,_,_,ai,side,ally = Spring.GetTeamInfo(teamID)
+			if (not ai) and (not humanAlly[ally]) then 
+				humanAlly[ally] = true
+				humanAllyCount = humanAllyCount + 1
+			end	
+		end
+	end
+	
+	if MUTE_SPECTATORS == 'autodetect' then
+		if humanAllyCount > 2 then
+			MUTE_SPECTATORS = true
+		else
+			MUTE_SPECTATORS = false
+		end
+	else
+		MUTE_SPECTATORS = (MUTE_SPECTATORS == 'mute')
+	end
+	
+	if MUTE_LOBBY == 'autodetect' then
+		if humanAllyCount > 2 then 
+			MUTE_LOBBY = true
+		else
+			MUTE_LOBBY = false
+		end
+	else
+		MUTE_LOBBY = (MUTE_LOBBY == 'mute')
+	end
+
+	if MUTE_LOBBY then
+		playerNameToID = {}
+		local playerList = Spring.GetPlayerList()
+		for i = 1, #playerList do
+			local playerID = playerList[i]
+			local name, _, spectating = Spring.GetPlayerInfo(playerID)
+			if not spectating then
+				playerNameToID[name] = playerID
+			end
+		end
+	end
+end
+
+
 --NOTE: StringStarts() and MessageProcessor is included in "chat_preprocess.lua"
 function widgetHandler:AddConsoleLine(msg, priority)
-  if StringStarts(msg, transmitLobbyMagic) then -- sending to the lobby
+  if StringStarts(msg, "Error: Invalid command received") or StringStarts(msg, "Error: Dropped command ") then
+	return
+  elseif StringStarts(msg, transmitLobbyMagic) then -- sending to the lobby
     return -- ignore
   elseif StringStarts(msg, transmitMagic) then -- receiving from the lobby
     if StringStarts(msg, voiceMagic) then
@@ -1253,18 +1318,49 @@ function widgetHandler:AddConsoleLine(msg, priority)
 	--censor message for muted player. This is mandatory, everyone is forced to close ears to muted players (ie: if it is optional, then everyone will opt to hear muted player for spec-cheat info. Thus it will defeat the purpose of mute)
 	local newMsg = { text = msg, priority = priority }
 	MessageProcessor:ProcessConsoleLine(newMsg) --chat_preprocess.lua
-	if newMsg.msgtype ~= 'other' and newMsg.msgtype ~= 'autohost' then 
+	if newMsg.msgtype ~= 'other' and newMsg.msgtype ~= 'autohost' and newMsg.msgtype ~= 'game_message' then 
+		if MUTE_SPECTATORS and newMsg.msgtype == 'spec_to_everyone' then
+			local spectating = select(1, Spring.GetSpectatingState())
+			if not spectating then
+				return
+			end
+			newMsg.msgtype = 'spec_to_specs'
+		end
 		local playerID_msg = newMsg.player and newMsg.player.id --retrieve playerID from message.
 		local customkeys = select(10, Spring.GetPlayerInfo(playerID_msg))
 		if customkeys and customkeys.muted then
 			local myPlayerID = Spring.GetLocalPlayerID()
 			if myPlayerID == playerID_msg then --if I am the muted, then:
-				newMsg.argument="<your message was blocked by mute>"	--remind myself that I am muted.		
+				newMsg.argument = "<your message was blocked by mute>"	--remind myself that I am muted.		
 				msg = "<your message was blocked by mute>" 
 			else --if I am NOT the muted, then: delete this message
 				return
 			end
 			--TODO: improve chili_chat2 spam-filter/dedupe-detection too.
+		end
+	end
+	
+	if MUTE_LOBBY and newMsg.msgtype == 'autohost' then
+		local spectating = select(1, Spring.GetSpectatingState())
+		if (not spectating) and newMsg.argument then
+			-- Chat from lobby has format '<PlayerName>message'
+			if string.sub(newMsg.argument, 1, 1) == "<" then
+				local endChar = string.find(newMsg.argument, ">")
+				if endChar then
+					local name = string.sub(newMsg.argument, 2, endChar-1)
+					if playerNameToID[name] then
+						local spectating = select(3, Spring.GetPlayerInfo(playerNameToID[name]))
+						if spectating then
+							playerNameToID[name] = nil
+							return
+						end
+					else
+						return
+					end
+				else
+					return
+				end
+			end
 		end
 	end
   
@@ -1448,6 +1544,19 @@ function widgetHandler:KeyRelease(key, mods, label, unicode)
 
   for _,w in ipairs(self.KeyReleaseList) do
     if (w:KeyRelease(key, mods, label, unicode)) then
+      return true
+    end
+  end
+  return false
+end
+
+function widgetHandler:TextInput(utf8, ...)
+  if (self.tweakMode) then
+    return true
+  end
+
+  for _,w in ipairs(self.TextInputList) do
+    if (w:TextInput(utf8, ...)) then
       return true
     end
   end
@@ -1719,7 +1828,8 @@ function widgetHandler:TeamChanged(teamID)
 end
 
 
-function widgetHandler:PlayerAdded(playerID, reason)
+function widgetHandler:PlayerAdded(playerID, reason) --when player Join Lobby
+  MessageProcessor:AddPlayer(playerID)
   --ListMutedPlayers()
   for _,w in ipairs(self.PlayerAddedList) do
     w:PlayerAdded(playerID, reason)
@@ -1728,7 +1838,8 @@ function widgetHandler:PlayerAdded(playerID, reason)
 end
 
 
-function widgetHandler:PlayerChanged(playerID)
+function widgetHandler:PlayerChanged(playerID) --when player Change from Spectator to Player or Player to Spectator.
+  MessageProcessor:UpdatePlayer(playerID)
   for _,w in ipairs(self.PlayerChangedList) do
     w:PlayerChanged(playerID)
   end
@@ -1736,7 +1847,7 @@ function widgetHandler:PlayerChanged(playerID)
 end
 
 
-function widgetHandler:PlayerRemoved(playerID, reason)
+function widgetHandler:PlayerRemoved(playerID, reason) --when player Left a Running Game.
   for _,w in ipairs(self.PlayerRemovedList) do
     w:PlayerRemoved(playerID, reason)
   end
@@ -1857,6 +1968,14 @@ function widgetHandler:UnitDestroyed(unitID, unitDefID, unitTeam)
 end
 
 
+function widgetHandler:UnitDestroyedByTeam(unitID, unitDefID, unitTeam, attTeamID)
+  for _,w in ipairs(self.UnitDestroyedByTeamList) do
+    w:UnitDestroyedByTeam(unitID, unitDefID, unitTeam, attTeamID)
+  end
+  return
+end
+
+
 function widgetHandler:UnitExperience(unitID,     unitDefID,     unitTeam,
                                       experience, oldExperience)
   for _,w in ipairs(self.UnitExperienceList) do
@@ -1892,18 +2011,18 @@ end
 
 
 function widgetHandler:UnitCommand(unitID, unitDefID, unitTeam,
-                                   cmdId, cmdOpts, cmdParams)
+                                   cmdId, cmdOpts, cmdParams,cmdTag) --cmdTag available in Spring 95
   for _,w in ipairs(self.UnitCommandList) do
     w:UnitCommand(unitID, unitDefID, unitTeam,
-                  cmdId, cmdOpts, cmdParams)
+                  cmdId, cmdOpts, cmdParams,cmdTag)
   end
   return
 end
 
 
-function widgetHandler:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag)
+function widgetHandler:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag, cmdParams, cmdOptions) --cmdParams & cmdOptions available in Spring 95
   for _,w in ipairs(self.UnitCmdDoneList) do
-    w:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag)
+    w:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag, cmdParams, cmdOptions)
   end
   return
 end
@@ -1913,6 +2032,13 @@ function widgetHandler:UnitDamaged(unitID, unitDefID, unitTeam,
                                    damage, paralyzer)
   for _,w in ipairs(self.UnitDamagedList) do
     w:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer)
+  end
+  return
+end
+
+function widgetHandler:UnitStunned(unitID, unitDefID, unitTeam, stunned)
+  for _,w in ipairs(self.UnitStunnedList) do
+    w:UnitStunned(unitID, unitDefID, unitTeam, stunned)
   end
   return
 end

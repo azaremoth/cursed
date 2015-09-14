@@ -1,11 +1,12 @@
->> Major changes 1.350 => 1.400
+>> Major changes 1.400 => 1.402
 
 Bugs
 - fixed theminimap code causing memory overflows during exit
-- fixed helath bars crashing is some rare cases
+- fixed health bars disappearing in some rare cases
 
 Balance
-- increased the area of effect for imperial bombers to 128
+- increased the area of effect for imperial bombers to 128 (same as cursed acranius)
+
 
 
 >> Major changes 1.350 => 1.400
@@ -28,6 +29,7 @@ Polishing
 - added a crystal swarm indicating the king-of-the-hill spot, also with nice effects
 - changed plasma cannons of the imperial tank and walker to "normal" cannons to make them feel "more terran"
 - improved imperial walker animations and increased unit size
+
 
 
 >> Major changes 1.350 => 1.351

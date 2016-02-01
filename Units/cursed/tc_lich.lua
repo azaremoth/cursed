@@ -91,6 +91,7 @@ local unitDef = {
   buildoptions = {
     "tc_obelisk_lvl2",
 	"tc_metalextractor_lvl2",
+	"tc_cacodemon",	
     "tc_rictus",
     "tc_crawler",
     "tc_pestilence",

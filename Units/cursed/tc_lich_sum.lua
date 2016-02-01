@@ -61,7 +61,8 @@ local unitDef = {
   workerTime         = 20,
   yardMap            = "cc cc",
   buildoptions = {
-    "tc_rictus",
+	"tc_cacodemon",    
+	"tc_rictus",
     "tc_crawler",
     "tc_pestilence",
     "tc_mancubus",

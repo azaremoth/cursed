@@ -35,6 +35,8 @@ jumpCategory = {
 		range = 300, height = 100, speed = 50,  reload = 5,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = true},		
 	mage = {
 		range = 450, height = 10, speed = 100,  reload = 15,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = false},
+	warpjump = {
+		range = 100000000, height = 500, speed = 1000,  reload = 30,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = true},	
 }
 
 jumpClassGroups = {
@@ -53,7 +55,9 @@ jumpClassGroups = {
 		"tc_shade_lvl4",
 		"tc_shade_lvl5",},
 	mage = {
-		"tc_mage",},		
+		"tc_mage",},
+	warpjump = {
+		"tc_cacodemon",},			
 }
 
 for name,data in pairs(UnitDefNames) do

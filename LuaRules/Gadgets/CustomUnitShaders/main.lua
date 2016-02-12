@@ -30,39 +30,15 @@ end
 
 
 if (gadgetHandler:IsSyncedCode()) then
-
-  function gadget:UnitFinished(unitID,unitDefID,teamID)
-    SendToUnsynced("unitshaders_finished", unitID, unitDefID,teamID)
-  end
-
-  function gadget:UnitDestroyed(unitID,unitDefID,teamID)
-    SendToUnsynced("unitshaders_destroyed", unitID, unitDefID,teamID)
-  end
-
-  function gadget:UnitReverseBuild(unitID,unitDefID,teamID)
-    SendToUnsynced("unitshaders_reverse", unitID, unitDefID,teamID)
-  end
-
-  function gadget:UnitGiven(unitID,unitDefID,teamID)
-    SendToUnsynced("unitshaders_given", unitID, unitDefID,teamID)
-  end
-
-  function gadget:UnitCloaked(unitID,unitDefID,teamID)
-    SendToUnsynced("unitshaders_cloak", unitID, unitDefID,teamID)
-  end
-
-  function gadget:UnitDecloaked(unitID,unitDefID,teamID)
-    SendToUnsynced("unitshaders_decloak", unitID, unitDefID,teamID)
-  end
-
+  
   --// block first try, so we have enough time to disable the lua UnitRendering
   --// else the model would be invisible for 1 gameframe
   local blockFirst = {}
   function gadget:AllowUnitBuildStep(builderID, builderTeam, unitID, unitDefID, part)
     if (part < 0) then
-      local inbuild = not select(3,Spring.GetUnitIsStunned(unitID))
+      local inbuild = select(3,Spring.GetUnitIsStunned(unitID))
       if (not inbuild) then
-        gadget:UnitReverseBuild(unitID,unitDefID,Spring.GetUnitTeam(unitID))
+	    SendToUnsynced("unitshaders_reverse", unitID,unitDefID,Spring.GetUnitTeam(unitID))
         if (not blockFirst[unitID]) then
           blockFirst[unitID] = true
           return false
@@ -73,16 +49,7 @@ if (gadgetHandler:IsSyncedCode()) then
     end
     return true
   end
-
-  function gadget:GameFrame()
-    for i,uid in ipairs(Spring.GetAllUnits()) do
-      if not select(3,Spring.GetUnitIsStunned(uid)) then --// inbuild?
-        gadget:UnitFinished(uid,Spring.GetUnitDefID(uid),Spring.GetUnitTeam(uid))
-      end
-    end
-    gadgetHandler:RemoveCallIn('GameFrame')
-  end
-
+  
   return
 end
 
@@ -196,13 +163,14 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-function GetUnitMaterial(unitDefID)
-  local mat = bufMaterials[unitDefID]
+function GetUnitMaterial(unitID, unitDefID, matDefOverride)
+  local materialDef = matDefOverride or unitDefID
+  local mat = bufMaterials[materialDef]
   if (mat) then
     return mat
   end
 
-  local matInfo = unitMaterialInfos[unitDefID]
+  local matInfo = unitMaterialInfos[materialDef]
   local mat = materialDefs[matInfo[1]]
 
   matInfo.UNITDEFID = unitDefID
@@ -250,7 +218,7 @@ function GetUnitMaterial(unitDefID)
                    postlist        = mat.postdl,
                  })
 
-  bufMaterials[unitDefID] = luaMat
+  bufMaterials[materialDef] = luaMat
 
   return luaMat
 end
@@ -342,12 +310,13 @@ end
 --------------------------------------------------------------------------------
 
 function gadget:UnitFinished(unitID,unitDefID,teamID)
-  local unitMat = unitMaterialInfos[unitDefID]
+  local matDef = Spring.GetUnitRulesParam(unitID, "comm_texture") or unitDefID
+  local unitMat = unitMaterialInfos[matDef]
   if (unitMat) then
     local mat = materialDefs[unitMat[1]]
     if (normalmapping or mat.force) then
       Spring.UnitRendering.ActivateMaterial(unitID,3)
-      Spring.UnitRendering.SetMaterial(unitID,3,"opaque",GetUnitMaterial(unitDefID))
+      Spring.UnitRendering.SetMaterial(unitID,3,"opaque",GetUnitMaterial(unitID, unitDefID, matDef))
       for pieceID in ipairs(Spring.GetUnitPieceList(unitID) or {}) do
         Spring.UnitRendering.SetPieceList(unitID,3,pieceID)
       end
@@ -388,9 +357,12 @@ gadget.UnitReverseBuild = gadget.UnitDestroyed
 gadget.UnitCloaked   = gadget.UnitDestroyed
 gadget.UnitDecloaked = gadget.UnitFinished
 
-function gadget:UnitGiven(...)
-  gadget:UnitDestroyed(...)
-  gadget:UnitFinished(...)
+function gadget:UnitGiven(unitID, ...)
+  if not select(3, Spring.GetUnitIsStunned(unitID)) then
+    -- Do not do this for nanoframe, causes bug with obj rendering.
+    gadget:UnitDestroyed(unitID, ...)
+    gadget:UnitFinished(unitID, ...)
+  end
 end
 
 --------------------------------------------------------------------------------
@@ -450,24 +422,30 @@ function gadget:Initialize()
     end
 
     CompileMaterialShaders()
-
+	
     for unitName,materialInfo in pairs(unitMaterialDefs) do
       if (type(materialInfo) ~= "table") then
         materialInfo = {materialInfo}
       end
-      unitMaterialInfos[(UnitDefNames[unitName] or {id=-1}).id] = materialInfo
+	  if UnitDefNames[unitName] then
+        unitMaterialInfos[(UnitDefNames[unitName] or {id=-1}).id] = materialInfo
+	  else
+	    unitMaterialInfos[unitName] = materialInfo
+	  end
     end
   end
 
-  --// insert synced actions
-  gadgetHandler:AddSyncAction("unitshaders_finished", UnitFinished)
-  gadgetHandler:AddSyncAction("unitshaders_destroyed", UnitDestroyed)
   gadgetHandler:AddSyncAction("unitshaders_reverse", UnitReverseBuild)
-  gadgetHandler:AddSyncAction("unitshaders_given", UnitGiven)
-  gadgetHandler:AddSyncAction("unitshaders_cloak", UnitCloaked)
-  gadgetHandler:AddSyncAction("unitshaders_decloak", UnitDecloaked)
-
   gadgetHandler:AddChatAction("normalmapping", ToggleNormalmapping)
+end
+
+function gadget:GameFrame()
+  for i,uid in ipairs(Spring.GetAllUnits()) do
+    if not select(3,Spring.GetUnitIsStunned(uid)) then --// inbuild?
+      gadget:UnitFinished(uid,Spring.GetUnitDefID(uid),Spring.GetUnitTeam(uid))
+    end
+  end
+  gadgetHandler:RemoveCallIn('GameFrame')
 end
 
 --------------------------------------------------------------------------------

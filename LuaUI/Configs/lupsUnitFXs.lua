@@ -22,8 +22,8 @@ effectUnitDefs = {
     {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust2", onMoving=true, onActive=false}},
   },
   euf_interceptor = {
-    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust1", onActive=true}},
-    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust2", onActive=true}},
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust1", onMoving=true, onActive=false}},
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust2", onMoving=true, onActive=false}},
     {class='Ribbon', options={width=1, size=20, piece="ribbon1"}},
     {class='Ribbon', options={width=1, size=20, piece="ribbon2"}},	
   },

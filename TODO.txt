@@ -1,2 +1,6 @@
-1) better non-linear level 2 walls
-2) more normal maps man!
+(1 better non-linear level 2 walls)
+2) more normal maps man! BElial next
+3) gunflares for mancubus
+4) update mancubus corpse
+5) explosion and teleport fx for cacodemon
+6) normal shaders also during building and for corpses maybe

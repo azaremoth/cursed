@@ -41,7 +41,7 @@ local unitDef = {
   airHoverFactor     = 0.1,
   brakeRate          = 0.931,
   cruiseAlt          = 220,
-  maxVelocity        = 3.2,
+  maxVelocity        = 2.5,
   turnRate           = 700,
 -- Collision
   collide            = true,
@@ -69,6 +69,7 @@ local unitDef = {
     explosiongenerators = {
       "custom:ARTYAIM",
       "custom:REDGREENBLOOD_EXPLOSION",
+      "custom:zapimpact",	  
     },
   },
   sounds = {
@@ -101,7 +102,7 @@ local unitDef = {
  weapons = {
     [1]  = {
       badTargetCategory = "AIR LIGHTARMOR",
-      def                = "FIREBALL",
+      def                = "CACOBALL",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
       onlyTargetCategory = "LAND AIR",
@@ -113,13 +114,12 @@ local unitDef = {
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  FIREBALL = {
+  CACOBALL = {
     accuracy           = 800,
-    areaOfEffect       = 200,
+    areaOfEffect       = 64,
     avoidFeature       = false,
     avoidFriendly      = false,
     avoidneutral       = "0",
-    cegTag             = "DRAGONFLAME",
     collideFeature     = true,
     collideFriendly    = false,
     collideneutral     = "1",
@@ -127,32 +127,42 @@ local weaponDefs = {
     craterBoost        = 0,
     craterMult         = 0,
     edgeEffectiveness  = 1,
-      energypershot           = 0,
-    explosionGenerator = "custom:DRAGONFLAMEEXPLOSION",
+    energypershot           = 0,
     explosionSpeed     = 65536,
     fireStarter        = 10,
     impulseBoost       = 0,
     impulseFactor      = 0,
     interceptedByShieldType = 1,
-    name               = "Hellfire",
+    name               = "Cacoball",
     --noSelfDamage       = true,
     range              = 400,
-    reloadtime         = 3,
+    reloadtime         = 1.5,
     soundHit           = "mediumexplosion",
     soundStart         = "dragon",
     soundHitVolume     = 25,
     soundStartVolume   = 25,
-    stages             = 0,	
     targetMoveError    = 0.1,
     tolerance          = 500,
     turret             = true,
-    weaponType         = "Cannon",
-    weaponVelocity     = 150,
+    weaponVelocity     = 300,
+--	General visuals ----------------------------------------
+--    cegTag             = "DRAGONFLAME",
+--    model              = "gunshot.s3o",
+    explosionGenerator = "custom:HELLSTORMEXPLOSION",
+	Size               = 10,
+    rgbColor           = [[1 0.3 1]],
+--	Weapon type specific visuals --------------------------- 
+	AlphaDecay         = 0.95,
+	NoGap			   = 0,
+	Stages 			   = 8,
+	SizeDecay          = 0.2,
+	weaponType         = "Cannon",
+------------------------------------------------------------		
     damage = {
-      default            = 350,
-      flyer              = 350,
-      heavy              = 350,
-      light              = (350*0.75),
+      default            = 100,
+      flyer              = 100,
+      heavy              = 100,
+      light              = 100,
     },
   },
 }

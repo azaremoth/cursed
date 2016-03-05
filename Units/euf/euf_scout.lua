@@ -129,9 +129,9 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1000,
 --	Weaponspecial ------------------------------------------
-    model              = "gunshot.s3o",    
-	size               = 5,
-	stages 			   = 0,
+    Model              = "gunshot.s3o",    
+	Size               = 5,
+	Stages 			   = 0,
 	weaponType         = "Cannon",
 ------------------------------------------------------------	  
     damage = {

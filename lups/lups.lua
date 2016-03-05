@@ -76,6 +76,7 @@ local spGetUnitViewPosition  = Spring.GetUnitViewPosition
 local spGetUnitDirection     = Spring.GetUnitDirection
 local spGetHeadingFromVector = Spring.GetHeadingFromVector
 local spGetUnitIsActive      = Spring.GetUnitIsActive
+local spGetUnitRulesParam    = Spring.GetUnitRulesParam
 local spGetGameFrame         = Spring.GetGameFrame
 local spGetFrameTimeOffset   = Spring.GetFrameTimeOffset
 local spGetUnitPieceList     = Spring.GetUnitPieceList
@@ -661,22 +662,26 @@ local DrawScreenEffectsVisibleFx
 local DrawInMiniMapVisibleFx
 
 function IsPosInLos(x,y,z)
-	return Spring.IsPosInLos(x,y,z, LocalAllyTeamID)
+	return LocalAllyTeamID == -2 or Spring.IsPosInLos(x,y,z, LocalAllyTeamID)
 end
 
 function IsPosInRadar(x,y,z)
-	return Spring.IsPosInRadar(x,y,z, LocalAllyTeamID)
+	return LocalAllyTeamID == -2 or Spring.IsPosInRadar(x,y,z, LocalAllyTeamID)
 end
 
 function IsPosInAirLos(x,y,z)
-	return Spring.IsPosInAirLos(x,y,z, LocalAllyTeamID)
+	return LocalAllyTeamID == -2 or Spring.IsPosInAirLos(x,y,z, LocalAllyTeamID)
+end
+
+function GetUnitLosState(unitID)
+	return LocalAllyTeamID == -2 or (Spring.GetUnitLosState(unitID, LocalAllyTeamID) or {}).los or false
 end
 
 local function IsUnitFXVisible(fx)
 	local unitActive = true
-        local unitID = fx.unit
+    local unitID = fx.unit
 	if fx.onActive then
-		unitActive = spGetUnitIsActive(unitID)
+		unitActive = spGetUnitIsActive(unitID) and (spGetUnitRulesParam(unitID, "disarmed") ~= 1) and (spGetUnitRulesParam(unitID, "morphDisable") ~= 1)
 		if (unitActive == nil) then
 			unitActive = true
 		end
@@ -821,7 +826,6 @@ local function GameFrame(_,n)
   else
     LocalAllyTeamID = spGetLocalAllyTeamID()
   end
-
   --// create delayed FXs
   if (effectsInDelay[1]) then
     local remaingFXs,cnt={},1

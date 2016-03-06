@@ -176,7 +176,7 @@ local featureDefs = {
     height             = "5",
     hitdensity         = "100",
     metal              = 0,
-    object             = "TC_Skeleton_dead.s3o",
+    object             = "tc_skeleton_dead.s3o",
     reclaimable        = false,
 	smoketime 		   = 0,	
   },

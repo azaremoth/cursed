@@ -462,5 +462,6 @@ function script.Killed( damage, health )
 		Sleep(500)
 		EmitSfx(pelvis,GREYCLOUD)
 		EmitSfx(head,GREYCLOUD)
+		return (1)		
 	end	
 end	

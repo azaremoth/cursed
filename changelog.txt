@@ -1,3 +1,20 @@
+>> Major changes 1.402 => 1.410
+
+Bugs
+- fixed cursed skeletons not having a corpse
+- fixed tons of incompatibilities with Spring 101
+
+Features
+- Added the flying Cacodemon. It can teleport over the whole map. Be aware!
+
+Infrastructure
+- Removed map-features from the archive that are aldo included in Spring features
+
+Polishing
+- Redid the Mancubus texture and polished the model
+
+
+
 >> Major changes 1.400 => 1.402
 
 Bugs

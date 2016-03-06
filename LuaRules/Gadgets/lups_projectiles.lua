@@ -14,6 +14,7 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 local weapons = include("LuaRules/Configs/lups_projectile_fxs.lua")	--{}
+
 --[[
 for i=1,#WeaponDefs do
 	local wd = WeaponDefs[i]
@@ -57,7 +58,6 @@ end
 
 function gadget:Initialize()
 	for weaponID in pairs(weapons) do
-		Spring.Echo("bla", weaponID)
 		Script.SetWatchWeapon(weaponID, true)
 	end
 end

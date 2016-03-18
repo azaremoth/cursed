@@ -63,7 +63,7 @@ local function Walkscript()
 --			SetSignalMask(SIG_WALK)	
 			SetMoveAnimationSpeed()
 			if not attacking then
-				Turn( luparm , x_axis, math.rad(75), math.rad(MOVEANIMATIONSPEED*1.2) )
+				Turn( luparm , x_axis, math.rad(-25), math.rad(MOVEANIMATIONSPEED*0.8) )
 			end
 			Turn( rleg1 , x_axis, math.rad(-30), math.rad(MOVEANIMATIONSPEED) )
 			Turn( rleg2 , x_axis, math.rad(40), math.rad(MOVEANIMATIONSPEED*1.6) )
@@ -73,7 +73,7 @@ local function Walkscript()
 		end
 		if moving then
 			if not attacking then
-				Turn( ruparm , x_axis, math.rad(15), math.rad(MOVEANIMATIONSPEED*1.2) )
+				Turn( ruparm , x_axis, math.rad(15), math.rad(MOVEANIMATIONSPEED*0.8) )
 				Turn( chest , z_axis, math.rad(-(-2)), math.rad(MOVEANIMATIONSPEED) )
 				Turn( head , z_axis, math.rad(-(5)), math.rad(MOVEANIMATIONSPEED*0.3) )
 			end
@@ -92,7 +92,7 @@ local function Walkscript()
 		end
 		if moving then
 			if not attacking then
-				Turn( ruparm , x_axis, math.rad(75), math.rad(MOVEANIMATIONSPEED*1.2) )
+				Turn( ruparm , x_axis, math.rad(-25), math.rad(MOVEANIMATIONSPEED*0.8) )
 				Turn( chest , z_axis, math.rad(-(2)), math.rad(MOVEANIMATIONSPEED) )
 				Turn( head , z_axis, math.rad(-(-5)), math.rad(MOVEANIMATIONSPEED*0.3) )
 			end
@@ -106,7 +106,7 @@ local function Walkscript()
 		end
 		if moving then
 			if not attacking then
-				Turn( luparm , x_axis, math.rad(15), math.rad(MOVEANIMATIONSPEED*1.2) )
+				Turn( luparm , x_axis, math.rad(15), math.rad(MOVEANIMATIONSPEED*0.8) )
 			end
 			Turn( lleg1 , x_axis, math.rad(-30), math.rad(MOVEANIMATIONSPEED) )
 			Turn( lleg2 , x_axis, math.rad(40), math.rad(MOVEANIMATIONSPEED*1.6) )
@@ -122,10 +122,10 @@ local function Walkscript()
 		end
 		if not moving then 
 			if not attacking then	
-				Turn( luparm , x_axis, math.rad(55), math.rad(MOVEANIMATIONSPEED*1.2) )
-				Turn( ruparm , x_axis, math.rad(55), math.rad(MOVEANIMATIONSPEED*1.2) )
-				Turn( gun , x_axis, math.rad(-45), math.rad(MOVEANIMATIONSPEED*1.2) )
-				Turn( rocketgun , x_axis, math.rad(-45), math.rad(MOVEANIMATIONSPEED*1.2) )		
+				Turn( luparm , x_axis, math.rad(-15), math.rad(MOVEANIMATIONSPEED*1.2) )
+				Turn( ruparm , x_axis, math.rad(-15), math.rad(MOVEANIMATIONSPEED*1.2) )
+				Turn( gun , x_axis, math.rad(60), math.rad(MOVEANIMATIONSPEED*1.2) )
+				Turn( rocketgun , x_axis, math.rad(60), math.rad(MOVEANIMATIONSPEED*1.2) )		
 				Turn( chest , z_axis, math.rad(-(0)), math.rad(MOVEANIMATIONSPEED) )
 				Turn( head , z_axis, math.rad(-(0)), math.rad(MOVEANIMATIONSPEED*0.3) )
 			end					

@@ -27,7 +27,9 @@ local unitDef = {
   -- collisionVolumeTest 		= 1,  
   customParams          = {	
 	factionname		   = "cursed",
-	isinfantry = "true",	
+	isinfantry = "true",
+    normaltex = "unittextures/normalmaps/tc_belial_normal.png",
+	normalmaps = "yes",
     helptext = "This unit is a perfect tank and damage dealer against armored ground units and buildings - it is a little unprecise at distance though."
 	},
   defaultmissiontype = "Standby",

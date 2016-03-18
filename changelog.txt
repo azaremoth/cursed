@@ -12,6 +12,7 @@ Infrastructure
 
 Polishing
 - Redid the Mancubus texture and polished the model
+- Added a normal map for the cursed Belial and polished the model a little
 
 
 

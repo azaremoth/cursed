@@ -1,0 +1,106 @@
+[CACO_TELEPORT]
+{
+	[Runes]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.05, 0;
+        colorMap=0.40 0.00 0.39 0.01 0.60 0.20 0.59 0.01 0.40 0.00 0.39 0.01 0 0 0 0.01; 
+		Texture=flamespark;
+		airdrag=0.93;
+		particleLife=40;
+		particleLifeSpread=25;
+		numParticles=1;
+		particleSpeed=3 i-0.5;
+		particleSpeedSpread=0.25;
+		particleSize=15.0 i0.4;
+		particleSizeSpread=5.0;
+		emitRot=10;
+		emitRotSpread=30;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=12;
+	}
+	[Glowydots]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.05, 0;
+        colorMap=0.60 0.20 0.59 0.01 0.80 0.40 0.79 0.01 0.40 0.00 0.39 0.01 0 0 0 0.01; 
+		Texture=waterdrops;
+		airdrag=0.93;
+		particleLife=80;
+		particleLifeSpread=40;
+		numParticles=1;
+		particleSpeed=3 i-0.5;
+		particleSpeedSpread=0.25;
+		particleSize=20.0 i0.4;
+		particleSizeSpread=5.0;
+		emitRot=10;
+		emitRotSpread=30;
+		directional=0;
+		}
+	air=1;
+	water=1;
+	ground=1;
+	count=12;
+	}	
+}
+
+[CACO_SHELLFLARE]
+{
+	[fire] {
+		class=CSimpleParticleSystem;
+		[properties]{
+			sizeGrowth=4 r3;
+			sizeMod=0.5;
+			pos=0, 0, 0;
+			emitVector=0, 1, 0;
+			gravity=0, 0, 0;
+			colorMap=0.60 0.20 0.59 0.01  0.80 0.40 0.79 0.01  0 0 0 0;
+			Texture=lightningball;
+			airdrag=0.75;
+			particleLife=18;
+			particleLifeSpread=6;
+			numParticles=8;
+			particleSpeed=1;
+			particleSpeedSpread=4;
+			particleSize=1;
+			particleSizeSpread=0;
+			emitRot=0;
+			emitRotSpread=90;
+			directional=0;
+			alwaysVisible=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=1;
+	}
+  	[groundflash]
+	{
+      		flashSize = 30;
+      		flashAlpha = 0.3;
+      		circleGrowth = 1;
+      		circleAlpha = 0.55;
+      		ttl = 10;
+			color = 0.45, 1, 0.1;
+			air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}

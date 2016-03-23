@@ -12,6 +12,9 @@ local larm_spike = piece 'larm_spike'
 local rarm_up = piece 'rarm_up'
 local rarm_low = piece 'rarm_low'
 local rarm_spike = piece 'rarm_spike'
+local emit_gun1 = piece 'emit_gun1'
+local emit_gun2 = piece 'emit_gun2'
+
 
 local moving = false
 local jumping = false
@@ -21,6 +24,7 @@ local restore_delay = 3000
 
 local JUMP	 = 1024+0
 local BOOM	 = 1025+0
+local TELEPORTFX	 = 1026+0
 
 
 --signals
@@ -145,6 +149,7 @@ function script.Shot2 ()
 end
 
 function script.QueryWeapon1()
+	 return emit_gun1
 end
 
 function script.QueryWeapon2()
@@ -184,6 +189,10 @@ end
 
 function script.beginJump()
 	jumping = true
+	EmitSfx(base,TELEPORTFX)	
+	EmitSfx(head,TELEPORTFX)		
+	EmitSfx(tail1,TELEPORTFX)		
+	EmitSfx(tail3,TELEPORTFX)
 end
 
 function script.jumping()
@@ -194,7 +203,11 @@ end
 
 function script.endJump()
 	jumping = false
-end
+	EmitSfx(base,TELEPORTFX)	
+	EmitSfx(head,TELEPORTFX)		
+	EmitSfx(tail1,TELEPORTFX)		
+	EmitSfx(tail3,TELEPORTFX)
+end	
 
 function script.Killed(recentDamage, maxHealth)
 	Explode(tail1, SFX.FALL + SFX.NO_HEATCLOUD)			

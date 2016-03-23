@@ -69,7 +69,7 @@ local unitDef = {
     explosiongenerators = {
       "custom:ARTYAIM",
       "custom:REDGREENBLOOD_EXPLOSION",
-      "custom:zapimpact",	  
+      "custom:CACO_TELEPORT",	  
     },
   },
   sounds = {
@@ -93,10 +93,10 @@ local unitDef = {
       "",
     },
     ok = {
-      "monstergrowl",
+      "cacodemon",
     },
     select = {
-      "monstergrowl",
+      "cacodemon",
     },
   },
  weapons = {
@@ -146,7 +146,7 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 300,
 --	General visuals ----------------------------------------
---    cegTag             = "DRAGONFLAME",
+    cegTag             = "CACO_SHELLFLARE",
 --    model              = "gunshot.s3o",
     explosionGenerator = "custom:HELLSTORMEXPLOSION",
 	Size               = 10,

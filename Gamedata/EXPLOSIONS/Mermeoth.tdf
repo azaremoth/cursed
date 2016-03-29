@@ -144,13 +144,12 @@
       		flashSize = 30;
       		flashAlpha = 0.3;
       		circleGrowth = 1;
-      		circleAlpha = 0.55;
+      		circleAlpha = 0;
       		ttl = 10;
 			color = 0.45, 1, 0.1;
 			air=1;
-     			ground=1;
+     		ground=1;
       		water=1;
-
 	}
 }
 

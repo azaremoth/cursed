@@ -129,6 +129,7 @@ local weaponDefs = {
 Flamer = {
 	  name					= [[Flamer]],
 	  areaOfEffect			= 128,
+	  avoidFeature			= false,	  
 	  avoidFriendly      	= true,
 	  burst					= 8,
 	  burstRate				= 0.05,

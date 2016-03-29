@@ -19,6 +19,7 @@ local emit_gun2 = piece 'emit_gun2'
 local moving = false
 local jumping = false
 local aiming = false
+local shooting = false
 
 local restore_delay = 3000
 
@@ -106,6 +107,39 @@ local function Moveanimation()
 	end
 end
 
+local function AimingShooting()
+	while true do
+		if aiming and not shooting then
+			Turn2( jaws, x_axis, 0, 200 )
+			Turn2( rarm_up, x_axis, 0, 200 )
+			Turn2( larm_up, x_axis, 0, 200 )			
+			Turn2( rarm_up, y_axis, -30, 200 )
+			Turn2( larm_up, y_axis, 30, 200 )
+			Turn2( rarm_low, y_axis, -20, 200 )
+			Turn2( larm_low, y_axis, 20, 200 )
+		elseif aiming and shooting then
+			Turn2( jaws, x_axis, 40, 500 )
+			Turn2( rarm_up, x_axis, 0, 500 )
+			Turn2( larm_up, x_axis, 0, 500 )			
+			Turn2( rarm_up, y_axis, 20, 500 )
+			Turn2( larm_up, y_axis, -20, 500 )
+			Turn2( rarm_low, y_axis, -30, 500 )
+			Turn2( larm_low, y_axis, 30, 500 )
+			Turn2( rarm_spike, y_axis, -30, 500 )
+			Turn2( larm_spike, y_axis, 30, 500 )
+		elseif not aiming and not shooting then
+			Turn2( jaws, x_axis, 0, 100 )	
+			Turn2( rarm_up, y_axis, 0, 100 )
+			Turn2( larm_up, y_axis, 0, 100 )
+			Turn2( rarm_low, y_axis, 0, 100 )
+			Turn2( larm_low, y_axis, 0, 100 )
+			Turn2( rarm_spike, y_axis, 0, 100 )
+			Turn2( larm_spike, y_axis, 0, 100 )
+		end
+		Sleep(50)	
+	end
+end
+
 function script.Activate()
 end
 
@@ -130,19 +164,21 @@ function script.Create()
 			Sleep(300)
 	end
 	StartThread( Moveanimation )
+	StartThread( AimingShooting )	
 end
 
 local function RestoreAfterDelay()
-	Sleep(restore_delay)
+	Sleep(restore_delay*0.25)
+	shooting = false
+	Sleep(restore_delay*0.75)
 	aiming = false
-	Turn2( jaws, x_axis, 0, 20 )
-	Turn2( rarm_up, y_axis, 0, 20 )
-	Turn2( larm_up, y_axis, 0, 20 )	
 	return (0)
 end
 
 
 function script.Shot1 ()
+	shooting = true
+	StartThread( RestoreAfterDelay)
 end
 
 function script.Shot2 ()
@@ -161,13 +197,7 @@ function script.AimFromWeapon1() return base end
 function script.AimFromWeapon2() return base end
 
 function script.AimWeapon1(heading, pitch)
-	Turn2( jaws, x_axis, 60, 100 )
-	Turn2( rarm_up, y_axis, -30, 100 )
-	Turn2( larm_up, y_axis, 30, 100 )
-	Turn2( rarm_low, y_axis, -20, 100 )
-	Turn2( larm_low, y_axis, 20, 100 )
 	aiming = true	
-	StartThread( RestoreAfterDelay) 	
 	return true
 end
 

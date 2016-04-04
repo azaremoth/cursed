@@ -36,11 +36,7 @@ end
 
 function gadget:UnitFinished(unitID, unitDefID, team)
 	local canburrowdef = UnitDefs[unitDefID].customParams.canburrow
-	local canburrow = false
-	if canburrowdef == "true" then
-		canburrow = true
-	end
-	if (canburrow == true) then
+	if (canburrowdef == "true" ) then
 		Spring.InsertUnitCmdDesc(unitID, Burrow)
 		BurrowerUnitList[unitID] = true
 	end

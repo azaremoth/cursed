@@ -96,34 +96,6 @@ local EnemyDecloakEffect      = {
   { class='Sound',options={ file="sounds/cloak.wav",volume=0.9 } },
 }
 
---[[ Units are actually decloaked when damaged so this part is not required
-local function UnitDamaged(_,unitID,unitDefID,teamID)
-  local allyTeamID = Spring.GetUnitAllyTeam(unitID)
-
-  local LocalAllyTeamID
-  local _, specFullView = Spring.GetSpectatingState()
-  if (specFullView) then
-    LocalAllyTeamID = allyTeamID
-  else
-    LocalAllyTeamID = Spring.GetLocalAllyTeamID()
-  end
-
-  if (Spring.GetUnitIsCloaked(unitID))and(allyTeamID~=LocalAllyTeamID) then
-
-    if (particleIDs[unitID]) then
-      for _,fxID in ipairs(particleIDs[unitID]) do
-        Lups.RemoveParticles(fxID)
-      end
-    end
-
-    particleIDs[unitID] = {}
-    CloakedHitEffect.options.unit = unitID
-    CloakedHitEffect.options.team = teamID
-    CloakedHitEffect.options.unitDefID = unitDefID
-    tinsert( particleIDs[unitID],Lups.AddParticles(CloakedHitEffect.class,CloakedHitEffect.options) )
-  end
-end
---]]
 
 function gadget:UnitCloaked(unitID,unitDefID,teamID)
   local allyTeamID = Spring.GetUnitAllyTeam(unitID)

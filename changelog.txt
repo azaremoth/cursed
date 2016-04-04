@@ -5,6 +5,7 @@ Bugs
 - fixed tons of incompatibilities with Spring 101. Here a lot of lua code was updated and some models were fixed.
 
 Features
+- Removed parrying ability from all melee units to reduce complexity
 - Added the flying Cacodemon. It can teleport over the whole map. Be aware!
 
 Infrastructure
@@ -13,8 +14,9 @@ Infrastructure
 Polishing
 - Redid the Mancubus texture and polished the model
 - Added a normal map for the cursed Belial and polished the model a little
-- optimized melee weapons to better hit when obstacles are next to the target
-- added and replaced some sounds for the skeletal units
+- Optimized melee weapons to better hit when obstacles are next to the target
+- Added and replaced some sounds for the skeletal units
+- Jittering "cloaked effect" was removed for burrowed units
 
 
 >> Major changes 1.400 => 1.402

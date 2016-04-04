@@ -98,80 +98,85 @@ local EnemyDecloakEffect      = {
 
 
 function gadget:UnitCloaked(unitID,unitDefID,teamID)
-  local allyTeamID = Spring.GetUnitAllyTeam(unitID)
+  local canburrowdef = UnitDefs[unitDefID].customParams.canburrow
+  if (canburrowdef ~= "true" and canburrowdef ~= "1" ) then
+	  local allyTeamID = Spring.GetUnitAllyTeam(unitID)
 
-  local LocalAllyTeamID
-  local _, specFullView = Spring.GetSpectatingState()
-  if (specFullView) then
-    LocalAllyTeamID = allyTeamID
-  else
-    LocalAllyTeamID = Spring.GetLocalAllyTeamID()
-  end
+	  local LocalAllyTeamID
+	  local _, specFullView = Spring.GetSpectatingState()
+	  if (specFullView) then
+		LocalAllyTeamID = allyTeamID
+	  else
+		LocalAllyTeamID = Spring.GetLocalAllyTeamID()
+	  end
 
-  if (particleIDs[unitID]) then
-    for i=1,#particleIDs[unitID] do
-      Lups.RemoveParticles(particleIDs[unitID][i])
-    end
-  end
-  particleIDs[unitID] = {}
-  if (LocalAllyTeamID==allyTeamID) then
-    for i=1,#CloakEffect do
-      local fx = CloakEffect[i]
-      fx.options.unit      = unitID
-      fx.options.unitDefID = unitDefID
-      fx.options.team      = teamID
-	  fx.options.allyTeam  = allyTeamID
-	  tinsert( particleIDs[unitID],Lups.AddParticles(fx.class,fx.options) )
-    end
-  else
-    for i=1,#EnemyCloakEffect do
-      local fx = EnemyCloakEffect[i]
-      fx.options.unit      = unitID
-      fx.options.unitDefID = unitDefID
-      fx.options.team      = teamID
-	  fx.options.allyTeam  = allyTeamID
-	  tinsert( particleIDs[unitID],Lups.AddParticles(fx.class,fx.options) )
-    end
-  end
-
+	  if (particleIDs[unitID]) then
+		for i=1,#particleIDs[unitID] do
+		  Lups.RemoveParticles(particleIDs[unitID][i])
+		end
+	  end
+	  particleIDs[unitID] = {}
+	  if (LocalAllyTeamID==allyTeamID) then
+		for i=1,#CloakEffect do
+		  local fx = CloakEffect[i]
+		  fx.options.unit      = unitID
+		  fx.options.unitDefID = unitDefID
+		  fx.options.team      = teamID
+		  fx.options.allyTeam  = allyTeamID
+		  tinsert( particleIDs[unitID],Lups.AddParticles(fx.class,fx.options) )
+		end
+	  else
+		for i=1,#EnemyCloakEffect do
+		  local fx = EnemyCloakEffect[i]
+		  fx.options.unit      = unitID
+		  fx.options.unitDefID = unitDefID
+		  fx.options.team      = teamID
+		  fx.options.allyTeam  = allyTeamID
+		  tinsert( particleIDs[unitID],Lups.AddParticles(fx.class,fx.options) )
+		end
+	  end
+	end
 end
 
 function gadget:UnitDecloaked(unitID,unitDefID,teamID)
-  local allyTeamID = Spring.GetUnitAllyTeam(unitID)
+  local canburrowdef = UnitDefs[unitDefID].customParams.canburrow
+  if (canburrowdef ~= "true" and canburrowdef ~= "1" ) then
+	  local allyTeamID = Spring.GetUnitAllyTeam(unitID)
 
-  local LocalAllyTeamID
-  local _, specFullView = Spring.GetSpectatingState()
-  if (specFullView) then
-    LocalAllyTeamID = allyTeamID
-  else
-    LocalAllyTeamID = Spring.GetLocalAllyTeamID()
-  end
+	  local LocalAllyTeamID
+	  local _, specFullView = Spring.GetSpectatingState()
+	  if (specFullView) then
+		LocalAllyTeamID = allyTeamID
+	  else
+		LocalAllyTeamID = Spring.GetLocalAllyTeamID()
+	  end
 
-  if (particleIDs[unitID]) then
-    for i=1,#particleIDs[unitID] do
-      Lups.RemoveParticles(particleIDs[unitID][i])
-    end
-  end
-  particleIDs[unitID] = {}
-  if (LocalAllyTeamID==allyTeamID) then
-    for i=1,#DecloakEffect do
-      local fx = DecloakEffect[i]
-      fx.options.unit      = unitID
-      fx.options.unitDefID = unitDefID
-      fx.options.team      = teamID
-	  fx.options.allyTeam  = allyTeamID
-	  tinsert( particleIDs[unitID],Lups.AddParticles(fx.class,fx.options) )
-    end
-  else
-    for i=1,#EnemyDecloakEffect do
-      local fx = EnemyDecloakEffect[i]
-      fx.options.unit      = unitID
-      fx.options.unitDefID = unitDefID
-      fx.options.team      = teamID
-	  fx.options.allyTeam  = allyTeamID
-	  tinsert( particleIDs[unitID],Lups.AddParticles(fx.class,fx.options) )
-    end
-  end
+	  if (particleIDs[unitID]) then
+		for i=1,#particleIDs[unitID] do
+		  Lups.RemoveParticles(particleIDs[unitID][i])
+		end
+	  end
+	  particleIDs[unitID] = {}
+	  if (LocalAllyTeamID==allyTeamID) then
+		for i=1,#DecloakEffect do
+		  local fx = DecloakEffect[i]
+		  fx.options.unit      = unitID
+		  fx.options.unitDefID = unitDefID
+		  fx.options.team      = teamID
+		  fx.options.allyTeam  = allyTeamID
+		  tinsert( particleIDs[unitID],Lups.AddParticles(fx.class,fx.options) )
+		end
+	  else
+		for i=1,#EnemyDecloakEffect do
+		  local fx = EnemyDecloakEffect[i]
+		  fx.options.unit      = unitID
+		  fx.options.unitDefID = unitDefID
+		  fx.options.team      = teamID
+		  fx.options.allyTeam  = allyTeamID
+		  tinsert( particleIDs[unitID],Lups.AddParticles(fx.class,fx.options) )
+		end
+	  end
+	end
 end
 
 function gadget:UnitGiven(unitID, unitDefID, teamID, oldTeamID)

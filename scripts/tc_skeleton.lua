@@ -429,12 +429,12 @@ function script.HitByWeapon ( x, z, weaponDefID, damage )
 	isparrying = false	
 	if inbunker then
 		return(0)
-	elseif (weaponDefID >= 0) then -- if units are crushed the weaponDefID seems to be smaller 0
+--[[	elseif (weaponDefID >= 0) then -- if units are crushed the weaponDefID seems to be smaller 0
 		if ( WeaponDefs[weaponDefID].description == [[Melee]] and (z>0) and (rndnr < parrychance) ) then
 			isparrying = true
 			StartThread(MeleeAnimations)	
 			return(0)
-		end
+		end]]
 	else
 		return(damage)		
 	end

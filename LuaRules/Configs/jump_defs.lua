@@ -36,7 +36,7 @@ jumpCategory = {
 	mage = {
 		range = 450, height = 10, speed = 100,  reload = 15,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = false},
 	warpjump = {
-		range = 100000000, height = 500, speed = 1000,  reload = 30,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = true},	
+		range = 100000000, height = 500, speed = 1000,  reload = 50,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = false},	
 }
 
 jumpClassGroups = {

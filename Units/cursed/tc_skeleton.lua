@@ -77,12 +77,12 @@ local unitDef = {
   },
   sounds = {
     canceldestruct     = "",
-    underattack        = "skeleton2",
+    underattack        = "skeleton3",
     arrived = {
-      "skeleton1",
+      "skeleton2",
     },
     cant = {
-      "skeleton2",
+      "skeleton3",
     },
     count = {
       "",
@@ -93,7 +93,7 @@ local unitDef = {
       "",
     },
     ok = {
-      "skeleton1",
+      "skeleton2",
     },
     select = {
       "skeleton1",

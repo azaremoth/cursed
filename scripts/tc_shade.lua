@@ -588,12 +588,10 @@ function MeleeAnimations()
 			Sleep(100)
 			Turn2( chest, y_axis, 40, 1000 )						
 			Turn2( pelvis, y_axis, 180, 2000 )
+-----------------------------------------------------------------	
 			local x, y, z = Spring.GetUnitPosition(unitID)
 			Spring.PlaySoundFile("sounds/swoosh.wav", 80, x, y, z)			
-			Sleep(100)
-			
 -----------------------------------------------------------------	
-			local x, y, z = Spring.GetUnitPosition(unitID)			
 			local HitUnits = Spring.GetUnitsInSphere(x,y,z, WeaponRange)
 			local MyTeam = Spring.GetUnitTeam(unitID)
 			for _,eUnitID in ipairs(HitUnits) do
@@ -601,13 +599,14 @@ function MeleeAnimations()
 				if (eUnitID ~= unitID) and (eTeam ~= MyTeam) and not (Spring.AreTeamsAllied(eTeam, MyTeam)) then
 					local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
 					if (WeaponDamage > eUnitIDhealth) then
-						Spring.DestroyUnit(eUnitID,true,false)
+						Spring.DestroyUnit(eUnitID,true,false,unitID)
 					else
 						Spring.SetUnitHealth(eUnitID, (eUnitIDhealth-WeaponDamage))
 					end
 				end
 			end
 -----------------------------------------------------------------			
+			Sleep(100)
 			Turn2( pelvis, y_axis, 270, 2000 )
 			Sleep(100)
 			Turn2( pelvis, y_axis, 0, 1500 )	

@@ -3,10 +3,12 @@
 Bugs
 - fixed cursed skeletons not having a corpse
 - fixed tons of incompatibilities with Spring 101. Here a lot of lua code was updated and some models were fixed.
+- fixed cursed Shade not receiving xp for units killed by the circle sword attack
 
 Features
 - Removed parrying ability from all melee units to reduce complexity
 - Added the flying Cacodemon. It can teleport over the whole map. Be aware!
+- Cursed Shade will receive 25% of the dealt damage as bonus hps
 
 Infrastructure
 - Removed map-features from the archive that are aldo included in Spring features

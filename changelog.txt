@@ -1,8 +1,8 @@
 >> Major changes 1.402 => 1.410
 
 Bugs
+- fixed tons of incompatibilities with Spring 101 (update of lua code, models were fixed, melee weapons were fixed, new shader structure was implemented)
 - fixed cursed skeletons not having a corpse
-- fixed tons of incompatibilities with Spring 101. Here a lot of lua code was updated and some models were fixed.
 - fixed cursed Shade not receiving xp for units killed by the circle sword attack
 
 Features

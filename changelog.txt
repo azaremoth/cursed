@@ -20,6 +20,7 @@ Polishing
 - Optimized melee weapons to better hit when obstacles are next to the target
 - Added and replaced some sounds for the skeletal units
 - Jittering "cloaked effect" was removed for burrowed units
+- implemented a shader that makes trees seesawing
 
 
 >> Major changes 1.400 => 1.402

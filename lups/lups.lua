@@ -30,7 +30,38 @@ end
 
 --// FIXME
 -- 1. add los handling (inRadar,alwaysVisible, etc.)
-
+-- if not Script.IsEngineMinVersion(101, 1, 1) then
+	local origGetUnitLosState     = Spring.GetUnitLosState 
+	local origGetPositionLosState = Spring.GetPositionLosState 
+	local origIsPosInLos          = Spring.IsPosInLos 
+	local origIsPosInRadar        = Spring.IsPosInRadar 
+	local origIsPosInAirLos       = Spring.IsPosInAirLos 
+	 
+	local function CreateUnitWrapper(origFunc) 
+		return function(unitID,allyTeam,raw) 
+			if ((allyTeam or 0) < 0) then 
+				if (raw) then 
+					return 0xFFFFFF 
+				else 
+					return { los = true, radar = true, typed = true } 
+				end 
+			end 
+			return origFunc(unitID,allyTeam,raw) 
+		end 
+	end 
+	local function CreatePosWrapper(origFunc) 
+		return function(x,y,z,allyTeam) 
+			if ((allyTeam or 0) < 0) then return true, true, true, true end 
+			return origFunc(x,y,z) 
+		end 
+	end 
+	 
+	Spring.GetUnitLosState     = CreateUnitWrapper(origGetUnitLosState); 
+	Spring.GetPositionLosState = CreatePosWrapper(origGetPositionLosState); 
+	Spring.IsPosInLos          = CreatePosWrapper(origIsPosInLos); 
+	Spring.IsPosInRadar        = CreatePosWrapper(origIsPosInRadar); 
+	Spring.IsPosInAirLos       = CreatePosWrapper(origIsPosInAirLos); 
+-- end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -70,13 +101,15 @@ local next   = next
 
 local spGetUnitRadius        = Spring.GetUnitRadius
 local spIsUnitVisible        = Spring.IsUnitVisible
+local spIsUnitIcon           = Spring.IsUnitIcon
 local spIsSphereInView       = Spring.IsSphereInView
 local spGetUnitLosState      = Spring.GetUnitLosState
 local spGetUnitViewPosition  = Spring.GetUnitViewPosition
 local spGetUnitDirection     = Spring.GetUnitDirection
 local spGetHeadingFromVector = Spring.GetHeadingFromVector
 local spGetUnitIsActive      = Spring.GetUnitIsActive
-local spGetUnitRulesParam    = Spring.GetUnitRulesParam
+local spGetUnitVelocity      = Spring.GetUnitVelocity 
+local spGetUnitDefID         = Spring.GetUnitDefID
 local spGetGameFrame         = Spring.GetGameFrame
 local spGetFrameTimeOffset   = Spring.GetFrameTimeOffset
 local spGetUnitPieceList     = Spring.GetUnitPieceList
@@ -182,13 +215,15 @@ thisGameFrame   = 0
 frameOffset     = 0
 LupsConfig      = {}
 
+local spActivateMaterial   = (Spring.UnitRendering and Spring.UnitRendering.ActivateMaterial) or function() end
+local spDeactivateMaterial = (Spring.UnitRendering and Spring.UnitRendering.DeactivateMaterial) or function() end
 local noDrawUnits = {}
 function SetUnitLuaDraw(unitID,nodraw)
   if (nodraw) then
     noDrawUnits[unitID] = (noDrawUnits[unitID] or 0) + 1
     if (noDrawUnits[unitID]==1) then
       --if (Game.version=="0.76b1") then
-        Spring.UnitRendering.ActivateMaterial(unitID,1)
+        spActivateMaterial(unitID,1)
         --Spring.UnitRendering.SetLODLength(unitID,1,-1000)
         for pieceID in ipairs(Spring.GetUnitPieceList(unitID) or {}) do
           Spring.UnitRendering.SetPieceList(unitID,1,pieceID,nilDispList)
@@ -201,7 +236,7 @@ function SetUnitLuaDraw(unitID,nodraw)
     noDrawUnits[unitID] = (noDrawUnits[unitID] or 0) - 1
     if (noDrawUnits[unitID]==0) then
       --if (Game.version=="0.76b1") then
-        Spring.UnitRendering.DeactivateMaterial(unitID,1)
+        spDeactivateMaterial(unitID,1)
       --else
       --  Spring.UnitRendering.SetUnitLuaDraw(unitID,false)
       --end
@@ -279,6 +314,7 @@ end
 
 --// the id param is internal don't use it!
 function AddParticles(Class,Options   ,__id)
+	--Spring.Echo('AddParticles(Class,Options   ,__id)',Class,to_string(Options)   ,__id)
   if (not Options) then
     print(PRIO_LESS,'LUPS->AddFX: no options given');
     return -1;
@@ -613,6 +649,7 @@ local function DrawParticles()
 
   --// DrawDistortion()
   if (anyDistortionsVisible)and(DistortionClass) then
+	-- Spring.Echo('if (anyDistortionsVisible)and(DistortionClass) then')
     DistortionClass.BeginDraw()
     gl.ActiveFBO(DistortionClass.fbo,DrawDistortionLayers)
     DistortionClass.EndDraw()
@@ -662,32 +699,43 @@ local DrawScreenEffectsVisibleFx
 local DrawInMiniMapVisibleFx
 
 function IsPosInLos(x,y,z)
-	return LocalAllyTeamID == -2 or Spring.IsPosInLos(x,y,z, LocalAllyTeamID)
+	return Spring.IsPosInLos(x,y,z, LocalAllyTeamID)
 end
 
 function IsPosInRadar(x,y,z)
-	return LocalAllyTeamID == -2 or Spring.IsPosInRadar(x,y,z, LocalAllyTeamID)
+	return Spring.IsPosInRadar(x,y,z, LocalAllyTeamID)
 end
 
 function IsPosInAirLos(x,y,z)
-	return LocalAllyTeamID == -2 or Spring.IsPosInAirLos(x,y,z, LocalAllyTeamID)
-end
-
-function GetUnitLosState(unitID)
-	return LocalAllyTeamID == -2 or (Spring.GetUnitLosState(unitID, LocalAllyTeamID) or {}).los or false
+	return Spring.IsPosInAirLos(x,y,z, LocalAllyTeamID)
 end
 
 local function IsUnitFXVisible(fx)
-	local unitActive = true
+	local unitIcon = false
+    local unitActive = true
     local unitID = fx.unit
+	
 	if fx.onActive then
-		unitActive = spGetUnitIsActive(unitID) and (spGetUnitRulesParam(unitID, "disarmed") ~= 1) and (spGetUnitRulesParam(unitID, "morphDisable") ~= 1)
+		unitActive = spGetUnitIsActive(unitID)
 		if (unitActive == nil) then
-			unitActive = true
+			local unitDefID = spGetUnitDefID(unitID)
+			if UnitDefs[unitDefID].speed > 0 then
+				local vx, vy, vz = spGetUnitVelocity(unitID)
+				-- Spring.Echo('lupsdbgvel',vx,vy,vz) 
+				if (vx~= nil and (vx*vx> 0.01  or vz*vz>0.01)) then  
+					unitActive = true
+				end
+			else
+				unitActive = true
+			end 
 		end
+        unitIcon = spIsUnitIcon(unitID)
+        if (unitIcon == nil) then
+            unitIcon = false
+        end
 	end
 
-	if (not fx.onActive)or(unitActive) then
+	if (not fx.onActive)or(unitActive and not unitIcon) then
 		if fx.alwaysVisible then
 			return true
 		elseif (fx.Visible) then
@@ -695,7 +743,7 @@ local function IsUnitFXVisible(fx)
 		else
 			local unitRadius = (spGetUnitRadius(unitID) + 40)
 			local r = fx.radius or 0
-			return Spring.IsUnitVisible(unitID, unitRadius + r)
+			return spIsUnitVisible(unitID, unitRadius + r)
 		end
 	else
 		return fx.alwaysVisible
@@ -826,6 +874,7 @@ local function GameFrame(_,n)
   else
     LocalAllyTeamID = spGetLocalAllyTeamID()
   end
+
   --// create delayed FXs
   if (effectsInDelay[1]) then
     local remaingFXs,cnt={},1
@@ -1050,3 +1099,48 @@ if gadget then
   this.DrawUnit = DrawUnit
   --this.GameFrame  = GameFrame; // doesn't work for unsynced parts >yet<
 end
+
+
+function to_string(data, indent)
+    local str = ""
+
+    if(indent == nil) then
+        indent = 0
+    end
+
+    -- Check the type
+    if(type(data) == "string") then
+        str = str .. ("	"):rep(indent) .. data .. "\n"
+    elseif(type(data) == "number") then
+        str = str .. ("	"):rep(indent) .. data .. "\n"
+    elseif(type(data) == "boolean") then
+        if(data == true) then
+            str = str .. "true"
+        else
+            str = str .. "false"
+        end
+    elseif(type(data) == "table") then
+        local i, v
+        for i, v in pairs(data) do
+            -- Check for a table in a table
+            if(type(v) == "table") then
+                str = str .. ("	"):rep(indent) .. i .. ":\n"
+                str = str .. to_string(v, indent + 2)
+            else
+                str = str .. ("	"):rep(indent) .. i .. ": " .. to_string(v, 0)
+            end
+        end
+    elseif (data ==nil) then
+		str=str..'nil'
+	else
+        --print_debug(1, "Error: unknown data type: %s", type(data))
+		str=str.. "Error: unknown data type:" .. type(data)
+		Spring.Echo('X data type')
+
+
+    end
+
+    return str
+end
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------

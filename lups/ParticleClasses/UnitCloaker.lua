@@ -26,6 +26,7 @@ function UnitCloaker.GetInfo()
     shader    = true,
     rtt       = false,
     ctt       = true,
+    atiseries = 2,
     intel     = 0,
   }
 end
@@ -258,27 +259,27 @@ function UnitCloaker:ReInitialize()
 end
 
 function UnitCloaker:CreateParticle()
-  local name = UnitDefs[self.unitDefID].model.name
-  self.isS3o = ((name:lower():find("s3o") or name:lower():find("obj")) and true)
+  self.isS3o = (UnitDefs[self.unitDefID].model.name:lower():find("s3o") and true)
   self.firstGameFrame = thisGameFrame
   self.dieGameFrame   = self.firstGameFrame + self.life
 end
 
 function UnitCloaker:Visible()
-  if self.allyTeam == LocalAllyTeamID then
-    return Spring.IsUnitVisible(self.unit)
+  local x,y,z    = Spring.GetUnitPosition(self.unit)
+  if (x==nil) then return false end
+  local _,inLos  = Spring.GetPositionLosState(x,y,z, LocalAllyTeamID)
+  if (self.enemy) then
+    local losState = Spring.GetUnitLosState(self.unit, LocalAllyTeamID) or {}
+    inLos = (inLos)and(not losState.los)
   end
-
-  local _, specFullView = Spring.GetSpectatingState()
-  local losState = Spring.GetUnitLosState(self.unit, LocalAllyTeamID) or {}
-  return specFullView or (losState and losState.los)
+  return (inLos)
 end
 
 -----------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------
 
 function UnitCloaker.Create(Options)
-  SetUnitLuaDraw(Options.unit,true)
+  --SetUnitLuaDraw(Options.unit,true)
   local newObject = MergeTable(Options, UnitCloaker.Default)
   setmetatable(newObject,UnitCloaker)  -- make handle lookup
   newObject:CreateParticle()
@@ -286,7 +287,7 @@ function UnitCloaker.Create(Options)
 end
 
 function UnitCloaker:Destroy()
-  SetUnitLuaDraw(self.unit,false)
+  --SetUnitLuaDraw(self.unit,false)
 end
 
 -----------------------------------------------------------------------------------------------------------------

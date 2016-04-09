@@ -302,26 +302,23 @@ function StaticParticles:Visible()
   local posX,posY,posZ = self.pos[1],self.pos[2],self.pos[3]
   local losState
   if (self.unit and not self.worldspace) then
-    losState = GetUnitLosState(self.unit)
+    losState = (spGetUnitLosState(self.unit, LocalAllyTeamID) or {}).los or false
     local ux,uy,uz = spGetUnitViewPosition(self.unit)
-	if not ux then
-	  return false
-	end
     posX,posY,posZ = posX+ux,posY+uy,posZ+uz
-    radius = radius + (spGetUnitRadius(self.unit) or 0)
+    radius = radius + spGetUnitRadius(self.unit)
   elseif (self.projectile and not self.worldspace) then
     local px,py,pz = spGetProjectilePosition(self.projectile)
     posX,posY,posZ = posX+px,posY+py,posZ+pz
   end
   if (losState==nil) then
     if (self.radar) then
-      losState = IsPosInRadar(posX,posY,posZ)
+      losState = IsPosInRadar(posX,posY,posZ, LocalAllyTeamID)
     end
     if ((not losState) and self.airLos) then
-      losState = IsPosInAirLos(posX,posY,posZ)
+      losState = IsPosInAirLos(posX,posY,posZ, LocalAllyTeamID)
     end
     if ((not losState) and self.los) then
-      losState = IsPosInLos(posX,posY,posZ)
+      losState = IsPosInLos(posX,posY,posZ, LocalAllyTeamID)
     end
   end
   return (losState)and(spIsSphereInView(posX,posY,posZ,radius))

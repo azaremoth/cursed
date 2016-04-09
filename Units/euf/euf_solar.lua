@@ -41,6 +41,7 @@ local unitDef = {
   objectName         = "euf_solar.s3o",
   onoffable          = true,
   radarDistance      = 0,
+  script             = "euf_solar.cob",
   selfDestructAs     = "SMALL_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   side               = "imperials",

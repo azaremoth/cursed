@@ -54,6 +54,7 @@ local unitDef = {
   noAutoFire         = false,
   noChaseCategory    = "AIR",
   objectName         = "euf_mlrs.s3o",
+  script             = "euf_mlrs.cob",  
   selfDestructAs     = "SMALL_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   side               = "imperials",

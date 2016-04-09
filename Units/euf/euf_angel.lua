@@ -52,6 +52,7 @@ local unitDef = {
   objectName         = "euf_angel.s3o",
   onoffable          = false,
   radarDistance      = 1024,
+  script             = "euf_angel.cob",  
   selfDestructAs     = "NULL",
   showNanoFrame      = false,
   side               = "imperials",

@@ -46,6 +46,7 @@ local unitDef = {
   objectName         = "euf_metalextractor_lvl2.s3o",
   onoffable          = true,
   radarDistance      = 0,
+  script             = "euf_metalextractor_lvl2.cob",    
   selfDestructAs     = "MEDIUM_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   side               = "imperials",

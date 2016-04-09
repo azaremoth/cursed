@@ -7,10 +7,10 @@ local unitName = "euf_bomber"
 
 local unitDef = {
   unitname           = "euf_bomber",
-  name               = "'Turtle' Heavy Bomber",  
+  name               = ""Turtle" Heavy Bomber",  
   description        = "Bomber",
   objectName         = "euf_bomber.s3o",
-  script             = 'euf_bomber.lua',   
+  script             = "euf_bomber.lua",   
 --  Flyer/Movement specifics 
   isBomber			 = true,
   isBomberAirUnit     = true,

@@ -56,6 +56,7 @@ local unitDef = {
   noAutoFire         = false,
   noChaseCategory    = "AIR",
   objectName         = "euf_tank.s3o",
+  script             = "euf_tank.cob",
   selfDestructAs     = "SMALL_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   side               = "imperials",

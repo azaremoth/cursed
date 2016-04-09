@@ -43,9 +43,6 @@ local spSetUnitHealth  			= Spring.SetUnitHealth
 
 local spSetUnitMaxHealth  			= Spring.SetUnitMaxHealth
 
-local spGetUnitCOBValue  		= Spring.GetUnitCOBValue
-local spSetUnitCOBValue  		= Spring.SetUnitCOBValue
-
 local spSetUnitWeaponState  = Spring.SetUnitWeaponState
 
 local spGetUnitsInCylinder 	= Spring.GetUnitsInCylinder

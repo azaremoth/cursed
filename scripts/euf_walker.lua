@@ -37,8 +37,10 @@ local dusters2 = piece 'dusters2'
 local dusters3 = piece 'dusters3' 
 local dusters4 = piece 'dusters4' 
 
+local MOVEANIMATIONSPEED
+local MOVEANIMATIONSLEEPTIME
+
 local moving = false
-local MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/1900)
 local attacking = false
 local smallgun = 1
 
@@ -83,12 +85,11 @@ end
 -- Walk Motion
 local function Walkscript()
 	while true do
-		if moving then 
-			SetMoveAnimationSpeed()
+		SetMoveAnimationSpeed()	
+   		if moving then 
 			Turn(rleg2, y_axis, 0, math.rad(MOVEANIMATIONSPEED))
 			Turn(rleg2, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
 			Turn(rfoot, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
-
 			Turn(rleg1, x_axis, math.rad(50.000000), math.rad(MOVEANIMATIONSPEED*3))
 			Turn(rleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*6))
 			Turn(rleg3, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*3))
@@ -97,10 +98,8 @@ local function Walkscript()
 				Turn(chest, y_axis, 0, math.rad(MOVEANIMATIONSPEED)*4)
 				Turn(chest, z_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED*0.5))
 				Turn(chest, x_axis, math.rad(3), math.rad(MOVEANIMATIONSPEED*0.5))
-
 				Turn(turret1, x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED*3))
 				Turn(turret2, x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED*3))			
-					
 			end
 			Sleep(MOVEANIMATIONSLEEPTIME*2)			
 		end
@@ -168,7 +167,7 @@ local function Walkscript()
 				Turn(chest, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED*2))
 				Turn(chest, x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED*2))				
 			end			
-	end
+		end
 		Sleep(100)
 	end
 end
@@ -220,9 +219,8 @@ local function Walkscript_leftonly()
 			Turn2(lleg2, x_axis, 0, MOVEANIMATIONSPEED*4)
 			Turn2(lleg3, x_axis, 0, MOVEANIMATIONSPEED*4)
 			Turn2(lfoot, x_axis, 0, MOVEANIMATIONSPEED*4)
-
-	end
-		Sleep(100)
+		end
+		Sleep(50)
 	end
 end
 

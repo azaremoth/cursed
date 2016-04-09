@@ -53,6 +53,7 @@ local unitDef = {
   noAutoFire         = false,
   objectName         = "euf_barracks.s3o",
   radarDistance      = 64,
+  script             = "euf_barracks.cob",   
   selfDestructAs     = "MEDIUM_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   showNanoSpray      = false,

@@ -33,24 +33,19 @@ if (killstragglers == "1") then
 
 	function gadget:GameStart()
 		local teams = Spring.GetTeamList()
-		local type = "std"
-		type = Spring.GetModOptions().comm
-			
-		if (type == "std") then
-			for i = 1,#teams do
-				local teamID = teams[i]
-				local ai = select(4, Spring.GetTeamInfo(teamID))
-				if ai then
-					AIbuildings[teamID] = 0	
-					AIalive[teamID] = true	
-					local ischickenai = ChickenAIs[Spring.GetTeamLuaAI(teamID)]
-					if not ischickenai then
-						NonChickenAITeams[teamID] = true
---						Spring.Echo("Found an AI player")
-					end
-				end			
-			end	
-		end
+		for i = 1,#teams do
+			local teamID = teams[i]
+			local ai = select(4, Spring.GetTeamInfo(teamID))
+			if ai then
+				AIbuildings[teamID] = 0	
+				AIalive[teamID] = true	
+				local ischickenai = ChickenAIs[Spring.GetTeamLuaAI(teamID)]
+				if not ischickenai then
+					NonChickenAITeams[teamID] = true
+					Spring.Echo("Found an AI player")
+				end
+			end			
+		end	
 	end
 
 	function gadget:UnitCreated(unitID, unitDefID, teamID)

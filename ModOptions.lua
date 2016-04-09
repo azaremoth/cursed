@@ -1,17 +1,5 @@
 local options={
  ---- GAME SETTINGS ----
---[[	{
-		key="comm",
-		name="Game Mode",
-		desc="What Game mode are you in",
-		type="list",
-		def="std",
-		items = {
-			{ key = "std", name = "Skirmish", desc = "Versus mode!"  },
---			{ key = "sandbox", name = "Sandbox mode", desc = "For testing stuff!" },
-			{ key = "feature", name = "Feature Placer mode", desc = "Not for gameplay, used for map development." },
-		},
-	},]]--
   {
     key    = 'StartingResources',
     name   = 'Resources',

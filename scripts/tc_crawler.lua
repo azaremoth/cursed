@@ -32,8 +32,8 @@ local attacking = false
 
 local activegun
 
-local MOVEANIMATIONSPEED = 380
-local MOVEANIMATIONSLEEPTIME = 340
+local MOVEANIMATIONSPEED
+local MOVEANIMATIONSLEEPTIME
 
 local	SIG_AIM1	=	2
 
@@ -75,10 +75,8 @@ end
 -- Walk Motion
 local function Walkscript()
 	while true do
-   		if moving then 
-
 		SetMoveAnimationSpeed()	
-
+   		if moving then 
 		Turn2( tail1, x_axis, 0, MOVEANIMATIONSPEED*0.2 )
 		Turn2( tail2, x_axis, 0, MOVEANIMATIONSPEED*0.1 )				
 		Turn2( tail3, x_axis, 0, MOVEANIMATIONSPEED*0.15 )
@@ -168,7 +166,7 @@ local function Walkscript()
 			
 			Sleep(MOVEANIMATIONSLEEPTIME)
         end
-		Sleep(1)
+		Sleep(50)
 	end
 end
 
@@ -193,7 +191,7 @@ function script.Create()
 			Sleep(300)
 	end
 	--------------------------------/END BUILD CYCLE
-	StartThread( Walkscript)
+	StartThread( Walkscript )
 end
 
 function script.StartMoving()

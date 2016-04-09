@@ -51,6 +51,7 @@ local unitDef = {
   noAutoFire         = false,
   objectName         = "euf_airport.s3o",
   radarDistance      = 64,
+  script             = "euf_airport.cob",  
   selfDestructAs     = "BIG_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   showNanoSpray      = false,

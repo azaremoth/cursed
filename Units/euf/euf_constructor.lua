@@ -64,6 +64,7 @@ local unitDef = {
   reclaimSpeed       = 5,
   repairSpeed        = 6,
   resurrectSpeed     = 0,
+  script             = "euf_constructor.cob",  
   selfDestructAs     = "NULL",
   showNanoFrame      = false,
   showNanoSpray      = true,

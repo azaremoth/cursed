@@ -42,6 +42,7 @@ local unitDef = {
   objectName         = "euf_radar_lvl2.s3o",
   onoffable          = false,
   radarDistance      = 3840, -- was 3072
+  script             = "euf_radar_lvl2.cob",  
   selfDestructAs     = "SMALL_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   side               = "imperials",

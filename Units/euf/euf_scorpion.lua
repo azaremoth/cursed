@@ -48,6 +48,7 @@ local unitDef = {
   noAutoFire         = false,
   noChaseCategory    = "AIR",
   objectName         = "euf_scorpion.s3o",
+  script             = "euf_scorpion.cob",  
   selfDestructAs     = "SMALL_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   side               = "imperials",

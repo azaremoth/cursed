@@ -49,6 +49,7 @@ local unitDef = {
   nanoColor          = "0 0 0",
   noAutoFire         = false,
   objectName         = "euf_aatower.s3o",
+  script             = "euf_aatower.cob",
   selfDestructAs     = "MEDIUM_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   side               = "imperials",

@@ -54,6 +54,7 @@ local unitDef = {
   noAutoFire         = false,
   objectName         = "euf_factory.s3o",
   radarDistance      = 64,
+  script             = "euf_factory.cob",  
   selfDestructAs     = "MEDIUM_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   showNanoSpray      = false,

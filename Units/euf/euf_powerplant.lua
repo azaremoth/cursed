@@ -45,6 +45,7 @@ local unitDef = {
   objectName         = "euf_powerplant.s3o",
   onoffable          = false,
   radarDistance      = 64,
+  script			 = "euf_powerplant.cob",    
   selfDestructAs     = "MEDIUM_EXPLOSION_BLUE",
   showNanoFrame      = false,
   side               = "imperials",

@@ -46,6 +46,7 @@ local unitDef = {
   objectName         = "euf_metalextractor_lvl1.s3o",
   onoffable          = true,
   radarDistance      = 0,
+  script             = "euf_metalextractor_lvl1.cob",  
   selfDestructAs     = "SMALL_EXPLOSION_YELLOW",
   selfDestructCountdown = 0,
   showNanoFrame      = false,

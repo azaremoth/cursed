@@ -43,6 +43,7 @@ local unitDef = {
   objectName         = "euf_sanctum.s3o",
   onoffable          = false,
   radarDistance      = 0,
+  script             = "euf_sanctum.cob",  
   selfDestructAs     = "SMALL_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   side               = "imperials",

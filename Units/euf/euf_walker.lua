@@ -54,7 +54,7 @@ local unitDef = {
   noAutoFire         = false,
   noChaseCategory    = "AIR",
   objectName         = "euf_walker.s3o",
-  script             = 'euf_walker.lua',  
+  script             = "euf_walker.lua",  
   selfDestructAs     = "MEDIUM_EXPLOSION_YELLOW",
   showNanoFrame      = false,
   side               = "cursed",
@@ -103,10 +103,10 @@ local unitDef = {
       "",
     },
     ok = {
-	    { file = 'voices_dark_enemyeng.wav', volume = 4.0 },
+	    { file = "voices_dark_enemyeng.wav", volume = 4.0 },
     },
     select = {
-		{ file = 'voices_dark_sysrdy.wav', volume = 4.0 },
+		{ file = "voices_dark_sysrdy.wav", volume = 4.0 },
     },
   },
   weapons = {

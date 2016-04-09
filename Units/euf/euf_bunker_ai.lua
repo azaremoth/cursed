@@ -46,7 +46,7 @@ local unitDef = {
 --  transportSize      = 2,
 --  transportunloadmethod = 0,
 --  unloadSpread       = 0.5,
-  script             = 'euf_bunker_ai.lua',
+  script             = "euf_bunker_ai.lua",
   
   levelGround        = true,
   

@@ -4,6 +4,7 @@ Bugs
 - fixed tons of incompatibilities with Spring 101 (update of lua code, models were fixed, melee weapons were fixed, new shader structure was implemented)
 - fixed cursed skeletons not having a corpse
 - fixed cursed Shade not receiving xp for units killed by the circle sword attack
+- fixed AI stragglers not being killed after destruction of the AI's last building
 
 Features
 - Removed parrying ability from all melee units to reduce complexity

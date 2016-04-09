@@ -61,6 +61,7 @@ local unitDef = {
   reclaimSpeed       = 5,
   repairSpeed        = 8,
   resurrectSpeed     = 0,
+  script             = "euf_constructor_lvl2.cob",  
   selfDestructAs     = "SMOKE_EXPLOSION",
   showNanoFrame      = false,
   showNanoSpray      = true,

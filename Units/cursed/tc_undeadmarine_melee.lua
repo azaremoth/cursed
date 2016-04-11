@@ -126,9 +126,10 @@ local unitDef = {
 
 local weaponDefs = {
   UNDEADMARINEMELEE = {
+      name                    = [[Melee]],
       areaOfEffect            = 16,
       range                   = 64,
-	  reloadtime         = 2.6, --was 1.5
+      reloadtime              = 2.6,
 	  ----------------------------------------------
 	  avoidFeature			= false,
 	  avoidFriendly      	= false,	  
@@ -157,10 +158,10 @@ local weaponDefs = {
       weaponVelocity          = 10000, 
 	  ----------------------------------------------
     damage = {
-      default            = 160,
-      flyer              = 160,
-      heavy              = (160*0.75),
-      light              = 160,
+      default            = 260,
+      flyer              = 260*0.33,
+      heavy              = (260*0.75),
+      light              = 260,
     },
   },
 }

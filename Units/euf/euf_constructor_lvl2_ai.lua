@@ -148,65 +148,13 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "BIGTAZER",
+      name               = "TAZER_HEAVY",
+      mainDir            = "0 0 1",
+      maxAngleDif        = 360,
       onlyTargetCategory = "LAND",
     },
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  BIGTAZER = {
-    accuracy           = 300,
-    areaOfEffect       = 8,
-    -- beamweapon         = true,
-    burnblow           = true,
-    cegTag             = "LICHBOLT",
-    coreThickness      = 0,
-    craterBoost        = 0,
-    craterMult         = 0,
-    duration           = 0.05,
-      energypershot           = 0,	
-    explosionGenerator = "custom:LICHBOLT_EXPLOSION",
-    impulseBoost       = 0,
-    intensity          = 0.5,
-    -- lineofsight        = true,
-    name               = "Tazer",
-    paralyzer          = 1,
-    paralyzetime       = 15,
-    range              = 300,
-    reloadtime         = 2.0,
-    -- rendertype         = 0,
-    rgbColor           = "1 1 1",
---    soundHit           = "defender_hit",
-    soundStart         = "paralyser",
-    soundStartVolume   = 15,
-    soundTrigger       = true,
-    startVelocity      = 650,
-    texture1           = "darkbolt",
-    texture2           = "null_texture",
-    texture3           = "null_texture",
-    thickness          = 1.8,
-    tolerance          = 3000,
-    tracks             = false,
-    turnRate           = 6000,
-    turret             = true,
-    weaponAcceleration = 1,
-    weaponTimer        = 1,
-    weaponType         = "LaserCannon",
-    weaponVelocity     = 650,
-    damage = {
-      default            = 250,
-      flyer              = 250,
-      heavy              = 250,
-      light              = 250,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
-
 
 --------------------------------------------------------------------------------
 

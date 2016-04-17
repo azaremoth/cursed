@@ -6,21 +6,25 @@ Bugs
 - fixed cursed Shade not receiving xp for units killed by the circle sword attack
 - fixed AI stragglers not being killed after destruction of the AI's last building
 
+Balance
+- increased efficiency of the tazer wepons used by imperial builderoids
+
 Features
-- Removed parrying ability from all melee units to reduce complexity
-- Added the flying Cacodemon. It can teleport over the whole map. Be aware!
+- removed parrying ability from all melee units to reduce complexity
+- added the flying Cacodemon. It can teleport over the whole map. Be aware!
 - Cursed Shade will receive 25% of the dealt damage as bonus hps
 
 Infrastructure
-- Removed map-features from the archive that are aldo included in Spring features
+- removed map-features from the archive that are aldo included in Spring features
 
 Polishing
-- Redid the Mancubus texture and polished the model
-- Added a normal map for the cursed Belial and polished the model a little
-- Optimized melee weapons to better hit when obstacles are next to the target
-- Added and replaced some sounds for the skeletal units
-- Jittering "cloaked effect" was removed for burrowed units
-- implemented a shader that makes trees seesawing
+- redid the Mancubus texture and polished the model
+- added a normal map for the cursed Belial and polished the model a little
+- optimized melee weapons to better hit when obstacles are next to the target
+- optimized melee weapons to better hit large objects
+- added and replaced some sounds for the skeletal units
+- jittering "cloaked effect" was removed for burrowed units
+- implemented a shader that makes trees moving in the wind
 
 
 >> Major changes 1.400 => 1.402

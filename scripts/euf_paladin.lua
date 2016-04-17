@@ -1,5 +1,6 @@
 ------------------------------------
 
+local emit_melee = piece 'emit_melee'
 local base = piece 'base'
 local chest = piece 'chest'
 local pelvis = piece 'pelvis'
@@ -268,11 +269,11 @@ end
 --weapon 1 -----------------------------------------------------------------
 
 function script.QueryWeapon1 ()
-	return emit
+	return emit_melee
 end
 
 function script.AimFromWeapon1 ()
-	return chest
+	return emit_melee
 end
 
 function script.AimWeapon1(heading, pitch)

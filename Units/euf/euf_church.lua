@@ -23,6 +23,8 @@ local unitDef = {
   canPatrol          = true,
   canstop            = "1",
   category           = "EUF LAND HEAVYARMOR",
+  
+  useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {	
 	factionname		   = "imperials",

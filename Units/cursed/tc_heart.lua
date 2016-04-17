@@ -28,6 +28,7 @@ local unitDef = {
   canstop            = true,
 --  captureSpeed       = 0,
   category           = "CURSED LAND HEAVYARMOR",
+  useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {	
 	factionname	= "cursed",  

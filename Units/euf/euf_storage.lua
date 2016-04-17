@@ -17,6 +17,7 @@ local unitDef = {
   buildTime          = 400,
   buildPic           = "euf_storage.png",  
   category           = "EUF LAND HEAVYARMOR",
+  useFootPrintCollisionVolume = true,  
   corpse             = "dead",   
   customParams          = {	
 	factionname		   = "imperials",

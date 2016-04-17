@@ -17,6 +17,7 @@ local unitDef = {
   buildingGroundDecalType = "tc_groundplate1.png",
   buildPic           = "TC_Soulcage.jpg",
   category           = "CURSED LAND HEAVYARMOR",
+  useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {	
 	factionname		   = "cursed",

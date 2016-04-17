@@ -23,6 +23,7 @@ local unitDef = {
   canstop            = "1",
   category           = "CURSED LAND HEAVYARMOR",
   corpse             = "dead",
+  useFootPrintCollisionVolume = true,  
   customParams       = {	
 	factionname	= "cursed",
 	normaltex = "unittextures/normalmaps/tc_damnedportal_normal.png",

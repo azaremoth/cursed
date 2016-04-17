@@ -22,6 +22,7 @@ local unitDef = {
   canstop            = false,
   captureSpeed       = 0,
   category           = "EUF LAND HEAVYARMOR",
+  useFootPrintCollisionVolume = true,  
   customParams		 = {
 		factionname		   = "imperials",
 		helptext = "This is your storage for filled with resources to start with."

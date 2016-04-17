@@ -17,9 +17,11 @@ local unitDef = {
   buildingGroundDecalSizeY = 9,
   buildingGroundDecalType = "euf_bunker_aoplane.png",
   useBuildingGroundDecal = true,
-  
+
   buildPic           = "euf_bunker.png",    
   category           = "EUF LAND HEAVYARMOR",
+  
+  useFootPrintCollisionVolume = true,
   corpse             = "dead",
   customParams       = {
 	transportcapa		= 4,  

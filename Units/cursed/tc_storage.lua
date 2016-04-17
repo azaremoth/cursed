@@ -15,6 +15,7 @@ local unitDef = {
   buildPic           = "tc_storage.jpg",
   buildTime          = 200,
   category           = "CURSED LAND HEAVYARMOR",
+  useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {	
 	factionname		   = "cursed",

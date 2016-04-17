@@ -117,7 +117,6 @@ local weaponDefs = {
   HOVER_LASER = {
     accuracy           = 100,
     areaOfEffect       = 40,
-    beamlaser          = 1,
     beamTime           = 0.75,
     burnblow           = true,
     coreThickness      = 0.3,

@@ -25,7 +25,10 @@ function GetColor(colormap,life)
   local aa = posn - iposn
   local ia = 1-aa
 
-  local col1,col2 = colormap[iposn],colormap[iposn+1]
+  local col1 = { 1, 1, 1, 1 }
+  local col2 = { 1, 1, 1, 1 }
+  
+  col1,col2 = colormap[iposn],colormap[iposn+1]
 
   return col1[1]*ia + col2[1]*aa, col1[2]*ia + col2[2]*aa,
          col1[3]*ia + col2[3]*aa, col1[4]*ia + col2[4]*aa

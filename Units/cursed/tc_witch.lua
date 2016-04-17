@@ -156,7 +156,6 @@ local weaponDefs = {
     collideFriendly    = false,
 	
       areaOfEffect            = 14,
-      beamlaser               = 1,
       beamTime                = 0.4,
       coreThickness           = 0.5,
       craterBoost             = 1,

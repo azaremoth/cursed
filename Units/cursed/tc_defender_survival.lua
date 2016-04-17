@@ -134,7 +134,6 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 900,
 --	Weaponspecial ------------------------------------------
-    beamlaser          = 1,
     beamTime           = 0.05,
     coreThickness      = 0.1,
     largeBeamLaser     = 1,

@@ -109,7 +109,6 @@ local weaponDefs = {
   LASERTOWERGUN = {
     accuracy           = 100,
     areaOfEffect       = 40,
-    beamlaser          = 1,
     beamTime           = 0.33,
     burnblow           = true,
     coreThickness      = 0.66,

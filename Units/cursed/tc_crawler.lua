@@ -133,7 +133,6 @@ FLAK_CRAWLER = {
     turret             = true,
     weaponVelocity     = 1000,
 --	Weaponspecial ------------------------------------------
-    beamlaser          = 1,
     beamTime           = 0.05,
     coreThickness      = 0.1,
     largeBeamLaser     = 1,

@@ -38,7 +38,7 @@ local unitDef = {
   description        = "Produces Soldiers",
   explodeAs          = "MEDIUM_EXPLOSION_YELLOW",
   firestandorders    = "1",
-  footprintX         = 8,
+  footprintX         = 9,
   footprintZ         = 12,
   iconType           = "bigsquare",
   idleAutoHeal       = 0.01,
@@ -66,7 +66,7 @@ local unitDef = {
   unitname           = "euf_barracks_ai",
   useBuildingGroundDecal = true,
   workerTime         = 20,
-  yardMap            = "oooooooo oooooooo oooooooo ooccccoo ooccccoo ooccccoo ooccccoo ooccccoo ooccccoo ooccccoo ooccccoo ooccccoo",
+  yardMap            = "ooooooooo ooooooooo ooooooooo oocccccoo oocccccoo oocccccoo oocccccoo oocccccoo oocccccoo oocccccoo oocccccoo oocccccoo",
   buildoptions = {
     "euf_constructor_ai",
     "euf_scoutdrone",	

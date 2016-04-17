@@ -17,8 +17,6 @@
 [SMALL_EXPLOSION_GREEN]
 {
 	name=Medium Green Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -37,8 +35,6 @@
 [MEDIUM_EXPLOSION_GREEN]
 {
 	name=Medium Green Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -57,8 +53,6 @@
 [BIG_EXPLOSION_GREEN]
 {
 	name=Big Green Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -77,8 +71,6 @@
 [SMALL_EXPLOSION_BLUE]
 {
 	name=Medium Blue Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -97,8 +89,6 @@
 [MEDIUM_EXPLOSION_BLUE]
 {
 	name=Medium Blue Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -117,8 +107,6 @@
 [BIG_EXPLOSION_BLUE]
 {
 	name=Big Blue Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -137,8 +125,6 @@
 [SMALL_EXPLOSION_YELLOW]
 {
 	name=Medium Green Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -157,8 +143,6 @@
 [MEDIUM_EXPLOSION_YELLOW]
 {
 	name=Medium Green Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -177,8 +161,6 @@
 [BIG_EXPLOSION_YELLOW]
 {
 	name=Big Green Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -197,8 +179,6 @@
 [BIG_EXPLOSION_GREEN_HD]
 {
 	name=Big Green Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -217,8 +197,6 @@
 [SUICIDEBALL_BLAST]
 {
 	name=Rolling Bomb;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=350;
 	reloadtime=3.6;
@@ -237,8 +215,6 @@
 [PARALYSE_BLAST]
 {
 	name=Crawling Bomb;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=480;
 	reloadtime=3.6;
@@ -261,8 +237,6 @@
 [PARALYSE_BLAST_BIG]
 {
 	name=Crawling Bomb;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=1000;
 	reloadtime=3.6;
@@ -285,8 +259,6 @@
 [BOMBER_EXPLOSION]
 {
 	name=Bomber Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=1000;
 	reloadtime=3.6;
@@ -306,8 +278,6 @@
 [BLOOD_EXPLOSION]
 {
 	name=Blood Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -326,8 +296,6 @@
 [SMOKE_EXPLOSION]
 {
 	name=Smoke Explosion;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=50;
 	reloadtime=3.6;
@@ -346,8 +314,6 @@
 [BIG_AIRPLANE_BLAST_YELLOW]
 {
 	name=Big Crash;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=350;
 	reloadtime=3.6;
@@ -366,8 +332,6 @@
 [SMALL_AIRPLANE_BLAST_YELLOW]
 {
 	name=Big Crash;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=350;
 	reloadtime=3.6;
@@ -386,8 +350,6 @@
 [BIG_AIRPLANE_BLAST_GREEN]
 {
 	name=Big Crash;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=350;
 	reloadtime=3.6;
@@ -406,8 +368,6 @@
 [SMALL_AIRPLANE_BLAST_GREEN]
 {
 	name=Big Crash;
-	rendertype=4;
-	ballistic=1;
 	turret=1;
 	range=350;
 	reloadtime=3.6;

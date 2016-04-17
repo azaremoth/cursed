@@ -103,59 +103,14 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "SWORD",
-      mainDir            = "0 0 1",
-      maxAngleDif        = 360,
-	  badTargetCategory = "AIR",
-      onlyTargetCategory = "LAND AIR",
+      name                	= "SHADELVL2MELEE",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 360,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND AIR",
     },
   },
 }
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  SWORD = {
-      name                    = [[Shade Swords]],
-      areaOfEffect            = 32,
-      range                   = 64,
-      reloadtime              = 0.85,
-	  ----------------------------------------------
-	  avoidFeature			= false,
-	  avoidFriendly      	= false,	  
-      canattackground       = true,
-      collideFriendly    	= false,
-	  ----------------------------------------------
-      craterBoost             = 0,
-      craterMult              = 0,
-	  cylinderTargeting       = 1,		  
-      explosionGenerator      = [[custom:NONE]],
-      fireStarter             = 90,
-      impactOnly              = true,
-      impulseBoost            = 0,
-      impulseFactor           = 0.4,
-      interceptedByShieldType = 2,
-      minIntensity            = 1,
-      noSelfDamage            = true,
-      renderType              = 0,
-      rgbColor                = [[0 0 0]],
-      targetborder            = 1,
-      targetMoveError         = 0.0,
-      tolerance               = 10000,
-      turret                  = true,
-      waterweapon             = true,
-      weaponType              = [[Melee]],
-      weaponVelocity          = 10000, 
-	  ----------------------------------------------
-    damage = {
-      default            = 155,
-      flyer              = 155,
-      heavy              = 155,
-      light              = 155,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
 
 --------------------------------------------------------------------------------
 

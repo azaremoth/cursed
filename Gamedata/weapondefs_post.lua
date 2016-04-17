@@ -83,18 +83,16 @@ end
 
 --------------------------------------------------------------------------------
 
---[[
 -- see alldefs.lua for documentation
- load the games _Post functions for defs, and find out if saving to custom params is wanted
--- VFS.Include("gamedata/alldefs_post.lua")
- load functionality for saving to custom params
--- VFS.Include("gamedata/post_save_to_customparams.lua")
+-- load the games _Post functions for defs, and find out if saving to custom params is wanted
+VFS.Include("gamedata/alldefs_post.lua")
+-- load functionality for saving to custom params
+VFS.Include("gamedata/post_save_to_customparams.lua")
 
 
 -- handle standalone weapondefs
 for name,wd in pairs(WeaponDefs) do
     WeaponDef_Post(name,wd)
-    
     if SaveDefsToCustomParams then
         SaveDefToCustomParams("WeaponDefs", name, wd)    
     end
@@ -111,4 +109,4 @@ end
 -- apply mod options that need _post 
 ModOptions_Post(UnitDefs, WeaponDefs)
 
-]]--
+

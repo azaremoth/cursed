@@ -102,7 +102,7 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "SWORD",
+      name                = "PALADINMELEE",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
 	  badTargetCategory = "AIR HEAVYARMOR",
@@ -110,54 +110,6 @@ local unitDef = {
     },
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  SWORD = {
-      name                    = [[Melee]],
-	  areaOfEffect            = 16,
-      range                   = 64,
-      reloadtime              = 2,
-	  ----------------------------------------------
-	  avoidFeature			= false,
-	  avoidFriendly      	= false,	  
-      canattackground       = true,
-      collideFriendly    	= false,
-	  ----------------------------------------------
-      craterBoost             = 0,
-      craterMult              = 0,
-	  cylinderTargeting       = 1,		  
-      explosionGenerator      = [[custom:NONE]],
-      fireStarter             = 90,
-      impactOnly              = true,
-      impulseBoost            = 0,
-      impulseFactor           = 0.4,
-      interceptedByShieldType = 2,
-      minIntensity            = 1,
-      noSelfDamage            = true,
-      renderType              = 0,
-      rgbColor                = [[0 0 0]],
-      targetborder            = 1,
-      targetMoveError         = 0.0,
-      tolerance               = 10000,
-      turret                  = true,
-      waterweapon             = true,
-      weaponType              = [[Melee]],
-      weaponVelocity          = 10000, 
-	  ----------------------------------------------
-    damage = {
-      default            = 220,
-      flyer              = 220,
-      heavy              = (220*0.75),
-      light              = 220,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
-
-
 --------------------------------------------------------------------------------
 
 local featureDefs = {

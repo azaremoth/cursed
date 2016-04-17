@@ -113,59 +113,13 @@ local unitDef = {
   },  
   weapons = {
 	[1]  = {
-      def                = "UNDEADMARINEMELEE",
+      name                = "UNDEADMARINEMELEE",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
       onlyTargetCategory = "LAND AIR", 
     },
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  UNDEADMARINEMELEE = {
-      name                    = [[Melee]],
-      areaOfEffect            = 16,
-      range                   = 64,
-      reloadtime              = 2.6,
-	  ----------------------------------------------
-	  avoidFeature			= false,
-	  avoidFriendly      	= false,	  
-      canattackground       = true,
-      collideFriendly    	= false,
-	  ----------------------------------------------
-      craterBoost             = 0,
-      craterMult              = 0,
-	  cylinderTargeting       = 1,		  
-      explosionGenerator      = [[custom:NONE]],
-      fireStarter             = 90,
-      impactOnly              = true,
-      impulseBoost            = 0,
-      impulseFactor           = 0.4,
-      interceptedByShieldType = 2,
-      minIntensity            = 1,
-      noSelfDamage            = true,
-      renderType              = 0,
-      rgbColor                = [[0 0 0]],
-      targetborder            = 1,
-      targetMoveError         = 0.0,
-      tolerance               = 10000,
-      turret                  = true,
-      waterweapon             = true,
-      weaponType              = [[Melee]],
-      weaponVelocity          = 10000, 
-	  ----------------------------------------------
-    damage = {
-      default            = 260,
-      flyer              = 260*0.33,
-      heavy              = (260*0.75),
-      light              = 260,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
 
 --------------------------------------------------------------------------------
 

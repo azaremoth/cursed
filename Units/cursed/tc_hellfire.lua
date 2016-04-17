@@ -130,7 +130,6 @@ local weaponDefs = {
     tolerance          = 550,
     turret             = true,
     weaponAcceleration = 0,
-    weaponType         = "Cannon",
     weaponVelocity     = 550,  
 	noSelfDamage       = true,
 --  Sound	------------------------------------------------	

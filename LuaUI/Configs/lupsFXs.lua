@@ -207,6 +207,16 @@ Greenglow_small = {
   count       = 1,
   repeatEffect = true,
 }
+Greenglow_small_stable = {
+  life        = 50,
+  lifeSpread  = 0,
+  size        = 40,
+  sizeSpread  = 8,
+  colormap    = { {0.5, 1.0, 0.16, 0.03}, },
+  texture     = 'bitmaps/GPL/smallflare.tga',
+  count       = 1,
+  repeatEffect = true,
+}
 Greenglow_medium = {
   life        = 50,
   lifeSpread  = 0,

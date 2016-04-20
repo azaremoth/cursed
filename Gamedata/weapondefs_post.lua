@@ -82,7 +82,6 @@ local function ExtractWeaponDefs(udName, ud)
 end
 
 --------------------------------------------------------------------------------
-
 -- see alldefs.lua for documentation
 -- load the games _Post functions for defs, and find out if saving to custom params is wanted
 VFS.Include("gamedata/alldefs_post.lua")
@@ -105,6 +104,31 @@ for udName,ud in pairs(UnitDefs) do
     ExtractWeaponDefs(udName, ud)
   end
 end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--
+-- Preserve crater sizes for new engine
+-- https://github.com/spring/spring/commit/77c8378b04907417a62c25218d69ff323ba74c8d
+
+if not reverseCompat then
+	for _, weaponDef in pairs(WeaponDefs) do
+		if (not weaponDef.craterareaofeffect) then
+			weaponDef.craterareaofeffect = tonumber(weaponDef.areaofeffect or 0) * 1.5
+		end
+	end
+end
+
+-- https://github.com/spring/spring/commit/dd7d1f79c3a9b579f874c210eb4c2a8ae7b72a16
+for _, weaponDef in pairs(WeaponDefs) do
+	if ((weaponDef.weapontype == "LightningCannon") and (not weaponDef.beamttl)) then
+		weaponDef.beamttl = 10
+	end
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--
 
 -- apply mod options that need _post 
 ModOptions_Post(UnitDefs, WeaponDefs)

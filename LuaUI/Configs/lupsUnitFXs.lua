@@ -97,6 +97,7 @@ effectUnitDefs = {
   {class='StaticParticles', options=MergeTable(Greenglow_small, {piece="emit"})},  
   {class='StaticParticles', options=MergeTable(ThickSmoke, {piece="wirbel02"})},
   },
+  tc_gunner = {{class='StaticParticles', options=MergeTable(Greenglow_small_stable,{piece="glow"})},},  
   crystals = {
     {class='GroundFlash', options=groundFlashBigViolett},   
 	{class='StaticParticles', options=MergeTable(Purpleglow_bigger,{piece="biggem"})},  

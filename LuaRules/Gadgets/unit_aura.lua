@@ -122,7 +122,7 @@ local auraDefs = {
 		},
 		ally = false,
 		enemy = true,	
---		aceg = 'AURA_CURSE_CASTING',
+		aceg = 'AURA_CURSE_CASTING',
 		ceg = 'AURA_CURSE',
 --		req = UnitDefNames['tc_totem_black'].id,
 		encName= 'Pest Aura',
@@ -149,6 +149,7 @@ local function addAura(auraType, auraDef, unitID, unitDefID, teamID)
 		if range then
 			auraUnits[auraType][unitID] = range
 			spSetUnitRulesParam(unitID,'has_'..auraType,1)
+			spSetUnitRulesParam(unitID,auraType..'_range',range)			
 			GG.attUnits[unitID] = true
 			encUnits[unitID] = true
 		end
@@ -159,7 +160,6 @@ end
 local function updateAuraUnits(teamID)
 	for _, unitID in ipairs(Spring.GetTeamUnits(teamID)) do
 		local unitDefID = spGetUnitDefID(unitID)
-		
 		for auraType, auraDef in pairs(auraDefs) do
 			addAura(auraType, auraDef, unitID, unitDefID, teamID)
 		end
@@ -196,7 +196,6 @@ function gadget:UnitFinished(unitID, unitDefID, teamID)
 				updateAuraUnits(teamID)
 			end
 		end
-		
 		addAura(auraType, auraDef, unitID, unitDefID, teamID)
 	end
 end

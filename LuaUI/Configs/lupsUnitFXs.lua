@@ -1,16 +1,4 @@
 effectUnitDefs = { 
-  euf_sarge_lvl1 = {    {class='GroundFlash', options=HeroAura},    }, 
-  euf_sarge_lvl2 = {    {class='GroundFlash', options=HeroAura},    }, 
-  euf_sarge_lvl3 = {    {class='GroundFlash', options=HeroAura},    }, 
-  euf_sarge_lvl4 = {    {class='GroundFlash', options=HeroAura},    },   
-  euf_sarge_lvl5 = {    {class='GroundFlash', options=HeroAura},    },
-  
-  tc_shade_lvl1 = {    {class='GroundFlash', options=HeroAura},    }, 
-  tc_shade_lvl2 = {    {class='GroundFlash', options=HeroAura},    }, 
-  tc_shade_lvl3 = {    {class='GroundFlash', options=HeroAura},    }, 
-  tc_shade_lvl4 = {    {class='GroundFlash', options=HeroAura},    },   
-  tc_shade_lvl5 = {    {class='GroundFlash', options=HeroAura},    }, 
-  
   euf_factory = { 
 	{class='ShieldJitter', options={layer=-16, life=math.huge, pos={0,0,0}, size=50, precision=1, strength=0.010, onActive=true, repeatEffect=true}},
    }, 
@@ -21,9 +9,6 @@ effectUnitDefs = {
     {class='Ribbon', options={width=1, size=20, piece="ribbon1"}},
     {class='Ribbon', options={width=1, size=20, piece="ribbon2"}},	
   },
-  euf_priest = {
-    {class='GroundFlash', options=FocusAura},  
-  },    
    euf_techcenter_shield = {
 	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=710, strength = .001, precision=50, repeatEffect=true, onActive=true}},
   }, 
@@ -34,20 +19,14 @@ effectUnitDefs = {
     {class='Ribbon', options={width=1, size=20, piece="ribbon1"}},
     {class='Ribbon', options={width=1, size=20, piece="ribbon2"}},	
   },
-  tc_witch = {
-    {class='GroundFlash', options=HealAura},  
-  },   
   tc_witch_shield = {
-    {class='GroundFlash', options=HealAura},  
 	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=385, strength = .001, precision=50, repeatEffect=true}},
   }, 
   euf_paladin = {
-    {class='GroundFlash', options=FearAura},
     {class='StaticParticles', options=MergeTable(PalaCorona,{piece="bladeemit1"})},
     {class='StaticParticles', options=MergeTable(PalaCorona,{piece="bladeemit3"})},	
   },
   euf_paladin_ai = {
-    {class='GroundFlash', options=FearAura},
     {class='StaticParticles', options=MergeTable(PalaCorona,{piece="bladeemit1"})},
     {class='StaticParticles', options=MergeTable(PalaCorona,{piece="bladeemit3"})},	
   },  
@@ -77,11 +56,9 @@ effectUnitDefs = {
   tc_necromancer = {{class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit"})},},  
   tc_necromancer_sum = {{class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit"})},},
   tc_lich = {
-  {class='GroundFlash', options=FrenzyAura},  
   {class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit_gun"})},	
   },  
   tc_lich_sum = {
-  {class='GroundFlash', options=FrenzyAura},
   {class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit_gun"})},
   },
   tc_totem_red = {{class='StaticParticles', options=MergeTable(Redglow_medium,{piece="gem"})},},

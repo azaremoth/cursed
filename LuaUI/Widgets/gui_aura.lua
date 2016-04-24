@@ -74,10 +74,17 @@ end
 local teamColors = {}
 
 local trackSlope = true
+local SmallAlpha = 0.20
+local LargeAlpha = 0.25
 
 local circleLines  = 0
 local circlePolys  = 0
-local circleDivs   = 10
+local circleDivs   = 12
+
+local circleLargeLines  = 0
+local circleLargePolys  = 0
+local circleLargeDivs   = 64
+
 local circleOffset = 0
 
 local startTimer = spGetTimer()
@@ -107,6 +114,29 @@ function widget:Initialize()
     end)
   end)
 
+  circleLargeLines = glCreateList(function()
+    glBeginEnd(GL_LINE_LOOP, function()
+      local radstep = (2.0 * math.pi) / circleLargeDivs
+      for i = 1, circleLargeDivs do
+        local a = (i * radstep)
+        glVertex(math.sin(a), circleOffset, math.cos(a))
+      end
+    end)
+  end)
+
+  circleLargePolys = glCreateList(function()
+    glBeginEnd(GL_TRIANGLE_FAN, function()
+      local radstep = (2.0 * math.pi) / circleLargeDivs
+      for i = 1, circleLargeDivs do
+        local a = (i * radstep)
+        glVertex(math.sin(a), circleOffset, math.cos(a))
+      end
+    end)
+  end)  
+  
+  
+  
+  
   SetupCommandColors(false)
 end
 
@@ -114,7 +144,8 @@ end
 function widget:Shutdown()
   glDeleteList(circleLines)
   glDeleteList(circlePolys)
-
+  glDeleteList(circleLargeLines)
+  glDeleteList(circleLargePolys)
   SetupCommandColors(true)
 end
 
@@ -166,8 +197,20 @@ function widget:DrawWorldPreUnit()
       if (teamID and teamID ~= Gaia) then
 	  	local udid = spGetUnitDefID(unitID)
 		if not noDraw [udid] then
+--------------------------------------------
 			if Spring.GetUnitRulesParam(unitID,'Hero Aura') == 1 then
 				local radius = GetUnitDefRealRadius(udid)			
+				if (radius) then
+					local x, y, z = spGetUnitBasePosition(unitID)
+					local gx, gy, gz = spGetGroundNormal(x, z)
+					local degrot = math.acos(gy) * 180 / math.pi
+					glColor({ 1, 1, 0, SmallAlpha })
+					glDrawListAtUnit(unitID, circleLines, true, radius*1.05, 1.0, radius*1.05, degrot, gz, 0, -gx)
+				end
+			end
+-----------		
+			if Spring.GetUnitRulesParam(unitID,'has_Hero Aura') == 1 then
+				local radius = Spring.GetUnitRulesParam(unitID,'Hero Aura_range')			
 				if (radius) then
 					if ScaleCircle [udid] then
 						radius = radius*5
@@ -175,10 +218,11 @@ function widget:DrawWorldPreUnit()
 					local x, y, z = spGetUnitBasePosition(unitID)
 					local gx, gy, gz = spGetGroundNormal(x, z)
 					local degrot = math.acos(gy) * 180 / math.pi
-					glColor({ 1, 1, 0, 0.25 })
-					glDrawListAtUnit(unitID, circleLines, true, radius*1.05, 1.0, radius*1.05, degrot, gz, 0, -gx)
+					glColor({ 1, 1, 0, LargeAlpha })
+					glDrawListAtUnit(unitID, circleLargeLines, true, radius, 1.0, radius, degrot, gz, 0, -gx)
 				end
 			end
+--------------------------------------------
 			if Spring.GetUnitRulesParam(unitID,'Frenzy Aura') == 1 then
 				local radius = GetUnitDefRealRadius(udid)			
 				if (radius) then
@@ -188,10 +232,25 @@ function widget:DrawWorldPreUnit()
 					local x, y, z = spGetUnitBasePosition(unitID)
 					local gx, gy, gz = spGetGroundNormal(x, z)
 					local degrot = math.acos(gy) * 180 / math.pi
-					glColor({ 1, 0.2, 0, 0.25 })
+					glColor({ 1, 0.2, 0, SmallAlpha })
 					glDrawListAtUnit(unitID, circleLines, true, radius*1.1, 1.0, radius*1.1, degrot, gz, 0, -gx)
 				end		
 			end
+-----------		
+			if Spring.GetUnitRulesParam(unitID,'has_Frenzy Aura') == 1 then
+				local radius = Spring.GetUnitRulesParam(unitID,'Frenzy Aura_range')			
+				if (radius) then
+					if ScaleCircle [udid] then
+						radius = radius*5
+					end
+					local x, y, z = spGetUnitBasePosition(unitID)
+					local gx, gy, gz = spGetGroundNormal(x, z)
+					local degrot = math.acos(gy) * 180 / math.pi
+					glColor({ 1, 0.2, 0, LargeAlpha })
+					glDrawListAtUnit(unitID, circleLargeLines, true, radius, 1.0, radius, degrot, gz, 0, -gx)
+				end
+			end
+--------------------------------------------
 			if Spring.GetUnitRulesParam(unitID,'Heal Aura') == 1 then
 				local radius = GetUnitDefRealRadius(udid)			
 				if (radius) then
@@ -201,10 +260,25 @@ function widget:DrawWorldPreUnit()
 					local x, y, z = spGetUnitBasePosition(unitID)
 					local gx, gy, gz = spGetGroundNormal(x, z)
 					local degrot = math.acos(gy) * 180 / math.pi
-					glColor({ 1, 0, 1, 0.25 })
+					glColor({ 1, 0, 1, SmallAlpha })
 					glDrawListAtUnit(unitID, circleLines, true, radius*1.15, 1.0, radius*1.15, degrot, gz, 0, -gx)
 				end		
 			end
+-----------		
+			if Spring.GetUnitRulesParam(unitID,'has_Heal Aura') == 1 then
+				local radius = Spring.GetUnitRulesParam(unitID,'Heal Aura_range')			
+				if (radius) then
+					if ScaleCircle [udid] then
+						radius = radius*5
+					end
+					local x, y, z = spGetUnitBasePosition(unitID)
+					local gx, gy, gz = spGetGroundNormal(x, z)
+					local degrot = math.acos(gy) * 180 / math.pi
+					glColor({ 1, 0.2, 0, LargeAlpha })
+					glDrawListAtUnit(unitID, circleLargeLines, true, radius, 1.0, radius, degrot, gz, 0, -gx)
+				end
+			end
+--------------------------------------------			
 			if Spring.GetUnitRulesParam(unitID,'Focus Aura') == 1 then
 				local radius = GetUnitDefRealRadius(udid)			
 				if (radius) then
@@ -214,11 +288,26 @@ function widget:DrawWorldPreUnit()
 					local x, y, z = spGetUnitBasePosition(unitID)
 					local gx, gy, gz = spGetGroundNormal(x, z)
 					local degrot = math.acos(gy) * 180 / math.pi
-					glColor({ 0, 1, 1, 0.25 })
+					glColor({ 0, 1, 1, SmallAlpha })
 					glDrawListAtUnit(unitID, circleLines, true, radius*1.2, 1.0, radius*1.2, degrot, gz, 0, -gx)
 				end		
 			end
-			if Spring.GetUnitRulesParam(unitID,'Thorns Aura') == 1 then
+-----------		
+			if Spring.GetUnitRulesParam(unitID,'has_Focus Aura') == 1 then
+				local radius = Spring.GetUnitRulesParam(unitID,'Focus Aura_range')			
+				if (radius) then
+					if ScaleCircle [udid] then
+						radius = radius*5
+					end
+					local x, y, z = spGetUnitBasePosition(unitID)
+					local gx, gy, gz = spGetGroundNormal(x, z)
+					local degrot = math.acos(gy) * 180 / math.pi
+					glColor({ 0, 1, 1, LargeAlpha })
+					glDrawListAtUnit(unitID, circleLargeLines, true, radius, 1.0, radius, degrot, gz, 0, -gx)
+				end
+			end
+--------------------------------------------		
+			if Spring.GetUnitRulesParam(unitID,'Fear Aura') == 1 then
 				local radius = GetUnitDefRealRadius(udid)			
 				if (radius) then
 					if ScaleCircle [udid] then
@@ -227,10 +316,25 @@ function widget:DrawWorldPreUnit()
 					local x, y, z = spGetUnitBasePosition(unitID)
 					local gx, gy, gz = spGetGroundNormal(x, z)
 					local degrot = math.acos(gy) * 180 / math.pi
-					glColor({ 1, 0.5, 0.5, 0.25 })
+					glColor({ 1, 0.5, 0.5, SmallAlpha })
 					glDrawListAtUnit(unitID, circleLines, true, radius*1.25, 1.0, radius*1.25, degrot, gz, 0, -gx)
 				end		
 			end
+-----------		
+			if Spring.GetUnitRulesParam(unitID,'has_Fear Aura') == 1 then
+				local radius = Spring.GetUnitRulesParam(unitID,'Fear Aura_range')			
+				if (radius) then
+					if ScaleCircle [udid] then
+						radius = radius*5
+					end
+					local x, y, z = spGetUnitBasePosition(unitID)
+					local gx, gy, gz = spGetGroundNormal(x, z)
+					local degrot = math.acos(gy) * 180 / math.pi
+					glColor({ 1, 0.5, 0.5, LargeAlpha })
+					glDrawListAtUnit(unitID, circleLargeLines, true, radius, 1.0, radius, degrot, gz, 0, -gx)
+				end
+			end
+--------------------------------------------			
 			if Spring.GetUnitRulesParam(unitID,'Curse Aura') == 1 then		
 				local radius = GetUnitDefRealRadius(udid)			
 				if (radius) then
@@ -240,12 +344,27 @@ function widget:DrawWorldPreUnit()
 					local x, y, z = spGetUnitBasePosition(unitID)
 					local gx, gy, gz = spGetGroundNormal(x, z)
 					local degrot = math.acos(gy) * 180 / math.pi
-					glColor({ 1, 1, 1, 0.25 })
+					glColor({ 1, 1, 1, SmallAlpha })
 					glDrawListAtUnit(unitID, circleLines, true, radius*1.3, 1.0, radius*1.3, degrot, gz, 0, -gx)
 				end		
 			end
+-----------		
+			if Spring.GetUnitRulesParam(unitID,'has_Curse Aura') == 1 then
+				local radius = Spring.GetUnitRulesParam(unitID,'Curse Aura_range')			
+				if (radius) then
+					if ScaleCircle [udid] then
+						radius = radius*5
+					end
+					local x, y, z = spGetUnitBasePosition(unitID)
+					local gx, gy, gz = spGetGroundNormal(x, z)
+					local degrot = math.acos(gy) * 180 / math.pi
+					glColor({ 1, 1, 1, LargeAlpha })
+					glDrawListAtUnit(unitID, circleLargeLines, true, radius, 1.0, radius, degrot, gz, 0, -gx)
+				end
+			end
+--------------------------------------------		
 		end
-      end
+     end
   end
 
   glPolygonOffset(false)

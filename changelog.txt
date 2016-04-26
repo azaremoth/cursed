@@ -25,6 +25,7 @@ Polishing
 - added and replaced some sounds for the skeletal units
 - jittering "cloaked effect" was removed for burrowed units
 - implemented a shader that makes trees moving in the wind
+- added simple circles to indicate aura coverage and removed the aura effects that were present before
 
 
 >> Major changes 1.400 => 1.402

@@ -23,12 +23,12 @@ effectUnitDefs = {
 	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=385, strength = .001, precision=50, repeatEffect=true}},
   }, 
   euf_paladin = {
+    {class='AirJet', options={color={0.15, 0.8, 0.8}, width=2, length=30, piece="bladeemit1", emitVector = {0, 0, 1}, onActive=false}},  
     {class='StaticParticles', options=MergeTable(PalaCorona,{piece="bladeemit1"})},
-    {class='StaticParticles', options=MergeTable(PalaCorona,{piece="bladeemit3"})},	
   },
   euf_paladin_ai = {
+    {class='AirJet', options={color={0.15, 0.8, 0.8}, width=2, length=30, piece="bladeemit1", emitVector = {0, 0, 1}, onActive=false}},  
     {class='StaticParticles', options=MergeTable(PalaCorona,{piece="bladeemit1"})},
-    {class='StaticParticles', options=MergeTable(PalaCorona,{piece="bladeemit3"})},	
   },  
   euf_barracks = {
     {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light1"})},
@@ -74,7 +74,11 @@ effectUnitDefs = {
   {class='StaticParticles', options=MergeTable(Greenglow_small, {piece="emit"})},  
   {class='StaticParticles', options=MergeTable(ThickSmoke, {piece="wirbel02"})},
   },
-  tc_gunner = {{class='StaticParticles', options=MergeTable(Greenglow_small_stable,{piece="glow"})},},  
+  tc_gunner = {{class='StaticParticles', options=MergeTable(Greenglow_small_stable,{piece="glow"})},},
+  tc_storage = {
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit1", onActive=false}},
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit2", onActive=false}},
+  },  
   crystals = {
     {class='GroundFlash', options=groundFlashBigViolett},   
 	{class='StaticParticles', options=MergeTable(Purpleglow_bigger,{piece="biggem"})},  

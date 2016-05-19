@@ -196,7 +196,7 @@ function widget:DrawWorldPreUnit()
       local teamID = spGetUnitTeam(unitID)
       if (teamID and teamID ~= Gaia) then
 	  	local udid = spGetUnitDefID(unitID)
-		if not noDraw [udid] then
+		if not noDraw [udid] and Spring.IsUnitSelected(unitID) then
 --------------------------------------------
 			if Spring.GetUnitRulesParam(unitID,'Hero Aura') == 1 then
 				local radius = GetUnitDefRealRadius(udid)			

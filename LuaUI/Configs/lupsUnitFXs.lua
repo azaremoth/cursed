@@ -1,13 +1,43 @@
 effectUnitDefs = { 
+  euf_sarge_lvl1 = {    {class='GroundFlash', options=HeroAura},    }, 
+  euf_sarge_lvl2 = {    {class='GroundFlash', options=HeroAura},    }, 
+  euf_sarge_lvl3 = {    {class='GroundFlash', options=HeroAura},    }, 
+  euf_sarge_lvl4 = {    {class='GroundFlash', options=HeroAura},    },   
+  euf_sarge_lvl5 = {    {class='GroundFlash', options=HeroAura},    },
+  
+  tc_shade_lvl1 = {    {class='GroundFlash', options=HeroAura},    }, 
+  tc_shade_lvl2 = {    {class='GroundFlash', options=HeroAura},    }, 
+  tc_shade_lvl3 = {    {class='GroundFlash', options=HeroAura},    }, 
+  tc_shade_lvl4 = {    {class='GroundFlash', options=HeroAura},    },   
+  tc_shade_lvl5 = {    {class='GroundFlash', options=HeroAura},    }, 
+  
   euf_factory = { 
 	{class='ShieldJitter', options={layer=-16, life=math.huge, pos={0,0,0}, size=50, precision=1, strength=0.010, onActive=true, repeatEffect=true}},
    }, 
   euf_airport = { 
 	{class='ShieldJitter', options={layer=-16, life=math.huge, pos={-20,40,-20}, size=50, precision=1, strength=0.010, onActive=true, repeatEffect=true}},
    },
+  euf_bomber = {
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust1", onMoving=true, onActive=false}},
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust2", onMoving=true, onActive=false}},
+  },
   euf_interceptor = {
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust1", onActive=true}},
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust2", onActive=true}},
     {class='Ribbon', options={width=1, size=20, piece="ribbon1"}},
     {class='Ribbon', options={width=1, size=20, piece="ribbon2"}},	
+  },
+  euf_priest = {
+    {class='GroundFlash', options=FocusAura},  
+  },    
+  euf_transport = {
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, piece="thrust1", onActive=true}},
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, piece="thrust2", onActive=true}},
+	{class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, piece="thrust3", onActive=true}},
+	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, piece="dthrust1", emitVector = {0, 1, 0}, onActive=true}},	
+	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, piece="dthrust2", emitVector = {0, 1, 0}, onActive=true}},	
+	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, piece="dthrust3", emitVector = {0, 1, 0}, onActive=true}},	
+	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, piece="dthrust4", emitVector = {0, 1, 0}, onActive=true}},	
   },
    euf_techcenter_shield = {
 	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=710, strength = .001, precision=50, repeatEffect=true, onActive=true}},
@@ -15,11 +45,23 @@ effectUnitDefs = {
    euf_techcenter_shield_ai = {
 	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=710, strength = .001, precision=50, repeatEffect=true, onActive=true}},
   },   
+  tc_acranius = {
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=35, piece="emit_thrust1", onMoving=true, onActive=false}},
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=35, piece="emit_thrust2", onMoving=true, onActive=false}},
+  },
   tc_blade = {
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=25, piece="trail1", onMoving=true, onActive=false}},
     {class='Ribbon', options={width=1, size=20, piece="ribbon1"}},
     {class='Ribbon', options={width=1, size=20, piece="ribbon2"}},	
   },
+  tc_seeker = {
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=25, piece="trail1", onMoving=true, onActive=false}},
+  }, 
+  tc_witch = {
+    {class='GroundFlash', options=HealAura},  
+  },   
   tc_witch_shield = {
+    {class='GroundFlash', options=HealAura},  
 	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=385, strength = .001, precision=50, repeatEffect=true}},
   }, 
   euf_paladin = {
@@ -56,9 +98,11 @@ effectUnitDefs = {
   tc_necromancer = {{class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit"})},},  
   tc_necromancer_sum = {{class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit"})},},
   tc_lich = {
+  {class='GroundFlash', options=FrenzyAura},  
   {class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit_gun"})},	
   },  
   tc_lich_sum = {
+  {class='GroundFlash', options=FrenzyAura},
   {class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit_gun"})},
   },
   tc_totem_red = {{class='StaticParticles', options=MergeTable(Redglow_medium,{piece="gem"})},},
@@ -74,11 +118,10 @@ effectUnitDefs = {
   {class='StaticParticles', options=MergeTable(Greenglow_small, {piece="emit"})},  
   {class='StaticParticles', options=MergeTable(ThickSmoke, {piece="wirbel02"})},
   },
-  tc_gunner = {{class='StaticParticles', options=MergeTable(Greenglow_small_stable,{piece="glow"})},},
   tc_storage = {
     {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit1", onActive=false}},
     {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit2", onActive=false}},
-  },  
+  },
   crystals = {
     {class='GroundFlash', options=groundFlashBigViolett},   
 	{class='StaticParticles', options=MergeTable(Purpleglow_bigger,{piece="biggem"})},  

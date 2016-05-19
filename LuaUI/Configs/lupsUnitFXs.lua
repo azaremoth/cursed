@@ -105,6 +105,7 @@ effectUnitDefs = {
   {class='GroundFlash', options=FrenzyAura},
   {class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit_gun"})},
   },
+  tc_gunner = {{class='StaticParticles', options=MergeTable(Greenglow_small,{piece="glow"})},},    
   tc_totem_red = {{class='StaticParticles', options=MergeTable(Redglow_medium,{piece="gem"})},},
   tc_totem_purple = {{class='StaticParticles', options=MergeTable(Purpleglow_medium,{piece="gem"})},},  
   tc_totem_black = {{class='StaticParticles', options=MergeTable(Blackglow_medium,{piece="gem"})},},  

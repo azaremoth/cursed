@@ -46,7 +46,7 @@ local unitArray = {
   "tc_ghoul", 
   "euf_paladin",
 -- others  
-  "tc_gunner",
+--[[  "tc_gunner",
   "tc_mage",
   "tc_bonebeast",
   "tc_shade",
@@ -68,7 +68,7 @@ local unitArray = {
   "euf_tank",
   "euf_aatank",
   "euf_mlrs",
-  "euf_scorpion",
+  "euf_scorpion",]]--
 }
 
 

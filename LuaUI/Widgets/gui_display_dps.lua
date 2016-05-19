@@ -20,7 +20,7 @@ function widget:GetInfo()
     date      = "May 27, 2008", --7 May 2013 (colored text fix)
     license   = "GNU GPL, v2 or later",
     layer     = 0,
-    enabled   = true  --  loaded by default?
+    enabled   = false  --  loaded by default?
   }
 end
 

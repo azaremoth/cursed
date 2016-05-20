@@ -674,7 +674,7 @@ function IsPosInAirLos(x,y,z)
 end
 
 function GetUnitLosState(unitID)
-	return LocalAllyTeamID == -2 or (Spring.GetUnitLosState(unitID, LocalAllyTeamID) or {}).los or false
+	return LocalAllyTeamID == -2 or (Spring.GetUnitLosState(unitID) or {}).los or false
 end
 
 local function IsUnitFXVisible(fx)

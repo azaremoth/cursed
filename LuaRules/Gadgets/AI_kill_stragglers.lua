@@ -13,9 +13,19 @@ end
 if gadgetHandler:IsSyncedCode() then
 
 local killstragglers = Spring.GetModOptions().killstragglers
-	
-if (killstragglers == "1") then
+local kothisactive = false
 
+if Spring.GetModOptions()["koth"]~=nil then
+	if (tonumber(Spring.GetModOptions()["koth"])>0) then
+		kothisactive = true
+		Spring.Echo("The Kill Stragglers function is not available for the KOTH game mode.")
+	end
+end	
+
+
+if (killstragglers == "1" and kothisactive == true) then
+
+	
 	local NonChickenAITeams = {}
 	local AIbuildings = {}
 	local AIalive = {}

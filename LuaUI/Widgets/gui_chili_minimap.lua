@@ -172,14 +172,14 @@ options = {
 	radar_fog_color = {
 		name = "Fog Color",
 		type = "colors",
-		value = { 0.25, 0.25, 0.30, 1},
+		value = { 0.15, 0.15, 0.15, 1},
 		OnChange =  function() updateRadarColors() end,
 		path = radar_path,
 	},
 	radar_los_color = {
 		name = "LOS Color",
 		type = "colors",
-		value = { 0.2, 0.2, 0.2, 1},
+		value = { 0.30, 0.30, 0.30, 1},
 		OnChange =  function() updateRadarColors() end,
 		path = radar_path,
 	},

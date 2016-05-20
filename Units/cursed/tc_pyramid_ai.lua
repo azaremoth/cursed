@@ -69,6 +69,7 @@ local unitDef = {
     "tc_gunner",
 	"tc_mage",
 	"tc_ghoul",
+	"tc_shade",	
   },
   sfxtypes = {
     explosiongenerators = {

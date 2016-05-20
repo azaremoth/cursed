@@ -1,13 +1,14 @@
 >> Major changes 1.402 => 1.410
 
 Bugs
-- fixed tons of incompatibilities with Spring 101 (update of lua code, models were fixed, melee weapons were fixed, new shader structure was implemented)
+- fixed tons of incompatibilities with Spring 102 (update of lua code, models were fixed, melee weapons were fixed, new shader structure was implemented)
 - fixed cursed skeletons not having a corpse
 - fixed cursed Shade not receiving xp for units killed by the circle sword attack
 - fixed AI stragglers not being killed after destruction of the AI's last building
 
 Balance
 - increased efficiency of the tazer wepons used by imperial builderoids
+- reverse velocity for imperial tanks was reduced to ~80% of the forward velocity
 
 Features
 - removed parrying ability from all melee units to reduce complexity
@@ -15,7 +16,7 @@ Features
 - Cursed Shade will receive 25% of the dealt damage as bonus hps
 
 Infrastructure
-- removed map-features from the archive that are aldo included in Spring features
+- removed map-features from the archive that are also included in Spring features
 
 Polishing
 - redid the Mancubus texture and polished the model
@@ -25,7 +26,8 @@ Polishing
 - added and replaced some sounds for the skeletal units
 - jittering "cloaked effect" was removed for burrowed units
 - implemented a shader that makes trees moving in the wind
-- added simple circles to indicate aura coverage and removed the aura effects that were present before
+- added simple circles to indicate aura coverage and tweaked the aura effects that were present before
+
 
 
 >> Major changes 1.400 => 1.402

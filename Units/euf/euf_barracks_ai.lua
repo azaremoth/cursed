@@ -74,6 +74,7 @@ local unitDef = {
     "euf_bazooka",
     "euf_pyro",
     "euf_sniper_ai",
+    "euf_sarge",	
   },
   sfxtypes = {
     explosiongenerators = {

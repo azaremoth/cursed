@@ -243,9 +243,9 @@ local function normaliseImportance(array)
 end
 
 -- is the enemy unitID position knowable to an allyteam
-local function isUnitVisible(unitID, allyTeam)
+local function isUnitVisible(unitID)
 	if spValidUnitID(unitID) then
-		local state = Spring.GetUnitLosState(unitID,allyTeam)
+		local state = Spring.GetUnitLosState(unitID)
 		return state and (state.los or state.radar) --(state.radar and state.typed) -- typed for has unit icon
 	else
 		return false
@@ -1594,7 +1594,7 @@ local function battleGroupHandler(team, frame, slowUpdate)
 					end
 				end
 			else
-				if spValidUnitID(data.tempTarget) and isUnitVisible(data.tempTarget,at.aTeamOnThisTeam) then
+				if spValidUnitID(data.tempTarget) and isUnitVisible(data.tempTarget) then
 					local x, y, z = spGetUnitPosition(data.tempTarget)
 					for unitID,_ in pairs(data.unit) do
 						if not data.aa[unitID] then
@@ -2736,10 +2736,7 @@ local function initialiseFaction(team)
 	end
 	
 	local shortname = Game.modShortName
-	if shortname == "ZK" then
-		a.buildDefs = a.buildConfig.robots
-		return true
-	elseif shortname == "tc" then
+	if shortname == "tc" then
 		local units = spGetTeamUnits(team)
 		for i = 1, #units do
 			local ud = UnitDefs[spGetUnitDefID(units[i])]

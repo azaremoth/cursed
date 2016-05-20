@@ -15,8 +15,18 @@ end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+--[[
 
-options_path = 'Game/Selections'
+Note:
+
+The selection actions in this file must match those in luaui/configs/zk_keys.lua
+
+Please keep them up to date.
+
+--]]
+--------------------------------------------------------------------------------
+
+options_path = 'Game/Selection Hotkeys'
 options_order = {
 	'lbl_main',
 	'select_all',
@@ -24,8 +34,6 @@ options_order = {
 	'select_one',
 	
 	'lbl_idle',
-	'select_idleb',
-	'select_idleallb',
 	'select_nonidle',
 	
 	'lbl_same',
@@ -59,16 +67,6 @@ options = {
 		desc = 'Select all units.',
 		action = 'select AllMap++_ClearSelection_SelectAll+',
 	},
-	select_idleb = { type = 'button',
-		name = 'Idle Builder',
-		desc = 'Select the next idle builder.',
-		action = 'select AllMap+_Builder_Idle+_ClearSelection_SelectOne+',
-	},
-	select_idleallb = { type = 'button',
-		name = 'All Idle Builders',
-		desc = 'Select all idle builders.',
-		action = 'select AllMap+_Builder_Not_Building_Not_Transport_Idle+_ClearSelection_SelectAll+',
-	},
 	
 	select_vissame = { type = 'button',
 		name = 'Visible Same',
@@ -83,7 +81,7 @@ options = {
 	select_half = { type = 'button',
 		name = 'Deselect Half',
 		desc = 'Deselect half of the selected units.',
-		action = 'select PrevSelection++_ClearSelection_SelectPart_50+',
+		action = 'select PrevSelection++_ClearSelection_SelectPart_50+',
 	},
 	select_one = { type = 'button',
 		name = 'Deselect Except One',
@@ -115,33 +113,33 @@ options = {
 	
 	
 	----
-	lbl_misc = { type = 'label', name = 'Misc uikeys' },
+	lbl_misc = { type = 'label', name = 'Misc ZK uikeys' },
 	uikey1 = { type = 'button',
-		name = 'Non-trans armed air',
+		name = 'Non-transport non-Hawk armed air',
 		desc = '',
-		action = 'select AllMap+_Not_Builder_Not_Building_Not_Transport_Aircraft_Weapons_Not_NameContain_Vamp_Not_Radar+_ClearSelection_SelectAll+',
+		action = 'select AllMap+_Not_Builder_Not_Building_Not_Transport_Aircraft_Weapons_Not_NameContain_Hawk_Not_Radar+_ClearSelection_SelectAll+',
 	},
---[[	uikey2 = { type = 'button',
-		name = 'Vamps',
-		desc = '',
-		action = 'select AllMap+_NameContain_Vamp+_ClearSelection_SelectAll+',
-	},]]--
 	uikey2 = { type = 'button',
+		name = 'Hawks',
+		desc = '',
+		action = 'select AllMap+_NameContain_Hawk+_ClearSelection_SelectAll+',
+	},
+	uikey3 = { type = 'button',
 		name = 'Mobile non-builders',
 		desc = '',
 		action = 'select AllMap+_Not_Builder_Not_Building+_ClearSelection_SelectAll+',
 	},
---[[	uikey4 = { type = 'button',
+	uikey4 = { type = 'button',
 		name = 'Vultures',
 		desc = '',
 		action = 'select AllMap+_Not_Builder_Not_Building_Not_Transport_Aircraft_Radar+_ClearSelection_SelectAll+',
-	},]]--
-	uikey3 = { type = 'button',
+	},
+	uikey5 = { type = 'button',
 		name = 'Air transports',
 		desc = '',
 		action = 'select AllMap+_Not_Builder_Not_Building_Transport_Aircraft+_ClearSelection_SelectAll+',
 	},
-	uikey4 = { type = 'button',
+	uikey6 = { type = 'button',
 		name = 'Append non-ctrl grouped',
 		desc = '',
 		action = 'select AllMap+_InPrevSel_Not_InHotkeyGroup+_SelectAll+',

@@ -139,22 +139,25 @@ colorConfig["ally"] = colorConfig["enemy"]
 local Chili
 options_path = 'Game/Settings/Defense Ranges'
 
+allynuke = true
+enemynuke = true
+
 options = { 
 	allyground = {name = 'Show Ally Ground Defence', type = 'bool', value = false},
 	allyair = {name = 'Show Ally Air Defence', type = 'bool', value = false},
-	allynuke = {name = 'Show Ally Nuke Defence', type = 'bool', value = true},
+--	allynuke = {name = 'Show Ally Nuke Defence', type = 'bool', value = true},
 	enemyground = {name = 'Show Enemy Ground Defence', type = 'bool', value = true},
 	enemyair = {name = 'Show Enemy Air Defence', type = 'bool', value = true},
-	enemynuke = {name = 'Show Enemy Nuke Defence', type = 'bool', value = true}
+--	enemynuke = {name = 'Show Enemy Nuke Defence', type = 'bool', value = true}
 }
 
 options_order = {
 	'allyground',
 	'allyair',
-	'allynuke',
+--	'allynuke',
 	'enemyground',
 	'enemyair',
-	'enemynuke'
+--	'enemynuke'
 }
 
 --Button display configuration

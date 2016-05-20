@@ -71,7 +71,7 @@ local function Turn2(piecenum,axis, degrees, speed)
 end
 
 local function SetMoveAnimationSpeed()
-	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/3700)
+	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/3400)
 	MOVEANIMATIONSLEEPTIME = (35000000/GetUnitValue(COB.MAX_SPEED))
 	--if statements inside walkscript contain wait functions that can take forever if speed is too slow
 	if MOVEANIMATIONSPEED < 5 then 

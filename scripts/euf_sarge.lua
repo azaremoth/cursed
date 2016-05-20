@@ -290,8 +290,7 @@ end
 --weapon 1 -----------------------------------------------------------------
 
 function script.QueryWeapon1 ()
-	return emit_rgun
-end
+	return emit_rgun end
 
 function script.AimFromWeapon1 ()
 	return head end
@@ -332,8 +331,7 @@ end
 --weapon 2 -----------------------------------------------------------------
 
 function script.QueryWeapon2 ()
-	return emit_lgun
-end
+	return emit_lgun end
 
 function script.AimFromWeapon2 ()
 	return head end

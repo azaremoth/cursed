@@ -74,13 +74,9 @@ local function SetMoveAnimationSpeed()
 	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/3600) --3400
 	MOVEANIMATIONSLEEPTIME = (29000000/GetUnitValue(COB.MAX_SPEED)) --35000000
 	--if statements inside walkscript contain wait functions that can take forever if speed is too slow
-	Spring.Echo(MOVEANIMATIONSPEED)
-	
 	if MOVEANIMATIONSPEED < 5 then 
 		MOVEANIMATIONSPEED = 5
 	end
-	
-	Spring.Echo(MOVEANIMATIONSLEEPTIME)
 	if MOVEANIMATIONSLEEPTIME > 1500 then 
 		MOVEANIMATIONSLEEPTIME = 1500
 	end

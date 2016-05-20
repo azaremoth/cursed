@@ -2,9 +2,8 @@
 2) more normal maps man!
 3) gunflares for mancubus
 4) update mancubus corpse
-5) explosion and teleport fx for cacodemon
 6) normal shaders also during building and for corpses maybe
 
 
 CHECK:
-Spring.GetUnitLosState -> only unitID should be enough to work
+unit_heroes_experience.lua -> line 79 (	Spring.DestroyUnit(unitID, true, true) ) once recursion nor allowed happened?!

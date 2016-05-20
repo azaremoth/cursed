@@ -76,8 +76,6 @@ local function ReplaceHero(unitID, team)
 		local udhero = UnitDefs[heroDefID]
 		local issarge = string.find(udhero.name, "euf_sarge")
 		local isshade = string.find(udhero.name, "tc_shade")
-	--	Spring.Echo('Shade found:' .. issarge)
-	--	Spring.Echo('Shade found:' .. isshade)	
 		Spring.DestroyUnit(unitID, true, true)
 	--	Spring.Echo("Remove unit:" .. unitID)
 		if (issarge) then

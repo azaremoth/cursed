@@ -71,12 +71,16 @@ local function Turn2(piecenum,axis, degrees, speed)
 end
 
 local function SetMoveAnimationSpeed()
-	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/3400)
-	MOVEANIMATIONSLEEPTIME = (35000000/GetUnitValue(COB.MAX_SPEED))
+	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/3600) --3400
+	MOVEANIMATIONSLEEPTIME = (29000000/GetUnitValue(COB.MAX_SPEED)) --35000000
 	--if statements inside walkscript contain wait functions that can take forever if speed is too slow
+	Spring.Echo(MOVEANIMATIONSPEED)
+	
 	if MOVEANIMATIONSPEED < 5 then 
 		MOVEANIMATIONSPEED = 5
 	end
+	
+	Spring.Echo(MOVEANIMATIONSLEEPTIME)
 	if MOVEANIMATIONSLEEPTIME > 1500 then 
 		MOVEANIMATIONSLEEPTIME = 1500
 	end
@@ -87,10 +91,18 @@ local function Walkscript()
 	while true do
 		SetMoveAnimationSpeed()	
    		if moving then 
+			Turn(lleg2, y_axis, 0, math.rad(MOVEANIMATIONSPEED))
+			Turn(lleg2, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
+			Turn(lfoot, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
+			Turn(lleg1, x_axis, math.rad(-10.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -20
+			Turn(lleg2, x_axis, math.rad(-35.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -40
+			Turn(lleg3, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*6))
+			Turn(lfoot, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*20)) -- LEFT FOOT IS FRONT
+		
 			Turn(rleg2, y_axis, 0, math.rad(MOVEANIMATIONSPEED))
 			Turn(rleg2, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
 			Turn(rfoot, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
-			Turn(rleg1, x_axis, math.rad(50.000000), math.rad(MOVEANIMATIONSPEED*3))
+			Turn(rleg1, x_axis, math.rad(70.000000), math.rad(MOVEANIMATIONSPEED*3))
 			Turn(rleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*6))
 			Turn(rleg3, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*3))
 			Turn(rfoot, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*20)) -- RIGHT FOOT IS REAR	
@@ -101,14 +113,20 @@ local function Walkscript()
 				Turn(turret1, x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED*3))
 				Turn(turret2, x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED*3))			
 			end
-			Sleep(MOVEANIMATIONSLEEPTIME*2)			
+			Sleep(MOVEANIMATIONSLEEPTIME)			
 		end
 		if moving then 
 			SetMoveAnimationSpeed()
-
+			
+			Turn(lleg1, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*4))
+			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*4))
+			Turn(lleg3, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*2))
+			Turn(lfoot, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*20))
+			EmitSfx( lfoot,  FOOTDUST )	
+			
 			Turn(rleg1, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*8))
 			Turn(rleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8))
-			Turn(rleg3, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*6))
+			Turn(rleg3, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*6))
 			Turn(rfoot, x_axis, math.rad(-10.000000), math.rad(MOVEANIMATIONSPEED*20)) -- FOOT IS MIDDLE MOVING FORWARD
 			
 			if not attacking then
@@ -117,14 +135,21 @@ local function Walkscript()
 				Turn(chest, x_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED*1.333))		
 			end
 			
-			Sleep(MOVEANIMATIONSLEEPTIME*0.75)			
+			Sleep(MOVEANIMATIONSLEEPTIME)			
 		end
 		if moving then 
 			SetMoveAnimationSpeed()
-			Turn(rleg1, x_axis, math.rad(-15.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -20
+			
+			Turn(lleg1, x_axis, math.rad(70.000000), math.rad(MOVEANIMATIONSPEED*3))
+			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*6))
+			Turn(lleg3, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*3))
+			Turn(lfoot, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*20)) -- LEFT FOOT IS REAR	
+			
+			Turn(rleg1, x_axis, math.rad(-10.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -20
 			Turn(rleg2, x_axis, math.rad(-35.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -40
-			Turn(rleg3, x_axis, math.rad(40.000000), math.rad(MOVEANIMATIONSPEED*6))
+			Turn(rleg3, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*6))
 			Turn(rfoot, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*20)) -- RIGHT FOOT IS FRONT
+			
 			if not attacking then
 				Turn(chest, z_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED))
 				Turn(chest, x_axis, math.rad(3), math.rad(MOVEANIMATIONSPEED))		
@@ -134,10 +159,17 @@ local function Walkscript()
 		end
 		if moving then 
 			SetMoveAnimationSpeed()
+			
+			Turn(lleg1, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*8))
+			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8))
+			Turn(lleg3, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*6))
+			Turn(lfoot, x_axis, math.rad(-10.000000), math.rad(MOVEANIMATIONSPEED*20)) -- FOOT IS MIDDLE MOVING FORWARD
+			
 			Turn(rleg1, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*4)) --Up
 			Turn(rleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*4)) --Up
 			Turn(rleg3, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*2))
 			Turn(rfoot, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*20))
+			EmitSfx( rfoot,  FOOTDUST )
 			
 			if not attacking then
 				Move( pelvis, y_axis, 0, MOVEANIMATIONSPEED )			
@@ -145,17 +177,24 @@ local function Walkscript()
 				Turn(chest, x_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED))		
 			end
 			
-			EmitSfx( rfoot,  FOOTDUST )
 			Sleep(MOVEANIMATIONSLEEPTIME)			
 		end
 		if not moving then 
 			Move( pelvis, y_axis, 0, MOVEANIMATIONSPEED )	
+
+			Turn2(lleg1, z_axis, 0, MOVEANIMATIONSPEED*4)
+			Turn2(lleg2, z_axis, 0, MOVEANIMATIONSPEED*4)
+			Turn2(lleg3, z_axis, 0, MOVEANIMATIONSPEED*4)
+			Turn2(lfoot, z_axis, 0, MOVEANIMATIONSPEED*4)
+			Turn2(lleg1, x_axis, 0, MOVEANIMATIONSPEED*4)
+			Turn2(lleg2, x_axis, 0, MOVEANIMATIONSPEED*4)
+			Turn2(lleg3, x_axis, 0, MOVEANIMATIONSPEED*4)
+			Turn2(lfoot, x_axis, 0, MOVEANIMATIONSPEED*4)
 			
 			Turn2(rleg1, z_axis, 0, MOVEANIMATIONSPEED*4)
 			Turn2(rleg2, z_axis, 0, MOVEANIMATIONSPEED*4)
 			Turn2(rleg3, z_axis, 0, MOVEANIMATIONSPEED*4)
 			Turn2(rfoot, z_axis, 0, MOVEANIMATIONSPEED*4)
-		
 			Turn2(rleg1, x_axis, 0, MOVEANIMATIONSPEED*4)
 			Turn2(rleg2, x_axis, 0, MOVEANIMATIONSPEED*4)
 			Turn2(rleg3, x_axis, 0, MOVEANIMATIONSPEED*4)
@@ -171,59 +210,6 @@ local function Walkscript()
 		Sleep(100)
 	end
 end
-
-local function Walkscript_leftonly()
-	while true do
-		if moving then 
-			SetMoveAnimationSpeed()
-			Turn(lleg2, y_axis, 0, math.rad(MOVEANIMATIONSPEED))
-			Turn(lleg2, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
-			Turn(lfoot, z_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED))
-			Turn(lleg1, x_axis, math.rad(-15.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -20
-			Turn(lleg2, x_axis, math.rad(-35.000000), math.rad(MOVEANIMATIONSPEED*8)) -- -40
-			Turn(lleg3, x_axis, math.rad(40.000000), math.rad(MOVEANIMATIONSPEED*6))
-			Turn(lfoot, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*20)) -- LEFT FOOT IS FRONT
-			Sleep(MOVEANIMATIONSLEEPTIME)			
-		end
-		if moving then 
-			SetMoveAnimationSpeed()	
-			Turn(lleg1, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*4))
-			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*4))
-			Turn(lleg3, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*2))
-			Turn(lfoot, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*20))
-			EmitSfx( lfoot,  FOOTDUST )	
-			Sleep(MOVEANIMATIONSLEEPTIME)			
-		end		
-		if moving then 
-			SetMoveAnimationSpeed()
-			Turn(lleg1, x_axis, math.rad(50.000000), math.rad(MOVEANIMATIONSPEED*3))
-			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*6))
-			Turn(lleg3, x_axis, math.rad(20.000000), math.rad(MOVEANIMATIONSPEED*3))
-			Turn(lfoot, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*20)) -- LEFT FOOT IS REAR	
-			Sleep(MOVEANIMATIONSLEEPTIME*2)			
-		end
-		if moving then 
-			SetMoveAnimationSpeed()	
-			Turn(lleg1, x_axis, math.rad(-20.000000), math.rad(MOVEANIMATIONSPEED*8))
-			Turn(lleg2, x_axis, math.rad(0.000000), math.rad(MOVEANIMATIONSPEED*8))
-			Turn(lleg3, x_axis, math.rad(-40.000000), math.rad(MOVEANIMATIONSPEED*6))
-			Turn(lfoot, x_axis, math.rad(-10.000000), math.rad(MOVEANIMATIONSPEED*20)) -- FOOT IS MIDDLE MOVING FORWARD
-			Sleep(MOVEANIMATIONSLEEPTIME*0.75)			
-		end
-		if not moving then 
-			Turn2(lleg1, z_axis, 0, MOVEANIMATIONSPEED*4)
-			Turn2(lleg2, z_axis, 0, MOVEANIMATIONSPEED*4)
-			Turn2(lleg3, z_axis, 0, MOVEANIMATIONSPEED*4)
-			Turn2(lfoot, z_axis, 0, MOVEANIMATIONSPEED*4)
-			Turn2(lleg1, x_axis, 0, MOVEANIMATIONSPEED*4)
-			Turn2(lleg2, x_axis, 0, MOVEANIMATIONSPEED*4)
-			Turn2(lleg3, x_axis, 0, MOVEANIMATIONSPEED*4)
-			Turn2(lfoot, x_axis, 0, MOVEANIMATIONSPEED*4)
-		end
-		Sleep(50)
-	end
-end
-
 
 -- Bored Animation
 local function BoredAnimation()
@@ -268,7 +254,6 @@ local function Dusters()
 -----------------------------------------------------------------	
 	Move( pelvis, y_axis, 0, 40)
 	StartThread( Walkscript )
-	StartThread( Walkscript_leftonly )	
 	StartThread( BoredAnimation )
 end
 

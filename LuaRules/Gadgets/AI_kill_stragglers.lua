@@ -23,7 +23,7 @@ if Spring.GetModOptions()["koth"]~=nil then
 end	
 
 
-if (killstragglers == "1" and kothisactive == true) then
+if (killstragglers == "1" and kothisactive == false) then
 
 	
 	local NonChickenAITeams = {}

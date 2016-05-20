@@ -227,32 +227,6 @@ local function SpawnStartUnit(teamID)
 	end
 end
 
-local function SpawnFeaturePlacerStartUnit(teamID)
-	local x,y,z = Spring.GetTeamStartPosition(teamID)
-	local teamOptions = select(7, Spring.GetTeamInfo(teamID))
-	local m = 1000000000000
-	local e = 1000000000000
-				local newUnit = Spring.CreateUnit("goldtree",x,y,z,0,teamID)
-				local newUnit = Spring.CreateUnit("euf_constructor",x-80,y,z-80,0,teamID)
-				local newUnit = Spring.CreateUnit("tc_necromancer",x+80,y,z+80,0,teamID)		
-	if (m and tonumber(m) ~= 0) then
-		-- remove the pre-existing storage
-		--   must be done after the start unit is spawned,
-		--   otherwise the starting resources are lost!
-		Spring.SetTeamResource(teamID, "ms", tonumber(m))
-		Spring.SetTeamResource(teamID, "m", 0)
-		Spring.AddTeamResource(teamID, "m", tonumber(m))
-	end
-	if (e and tonumber(e) ~= 0) then
-		-- remove the pre-existing storage
-		--   must be done after the start unit is spawned,
-		--   otherwise the starting resources are lost!
-		Spring.SetTeamResource(teamID, "es", tonumber(e))
-		Spring.SetTeamResource(teamID, "e", 0)
-		Spring.AddTeamResource(teamID, "e", tonumber(e))
-	end
-end
-
 function gadget:GameStart()
 	local gaiaTeamID = Spring.GetGaiaTeamID()
 	local teams = Spring.GetTeamList()
@@ -260,21 +234,11 @@ function gadget:GameStart()
 	local type = "std"
 	type = Spring.GetModOptions().comm
 		
-	if (type == "sandbox" or type == "feature") then
-		for i = 1,#teams do
-			local teamID = teams[i]
-			-- don't spawn a start unit for the Gaia team
-			if (teamID ~= gaiaTeamID) then
-				SpawnFeaturePlacerStartUnit(teamID)
-			end
+	for i = 1,#teams do
+		local teamID = teams[i]
+		-- don't spawn a start unit for the Gaia team
+		if (teamID ~= gaiaTeamID) then
+			SpawnStartUnit(teamID)
 		end
-	else
-		for i = 1,#teams do
-			local teamID = teams[i]
-			-- don't spawn a start unit for the Gaia team
-			if (teamID ~= gaiaTeamID) then
-				SpawnStartUnit(teamID)
-			end
-		end	
-	end
+	end	
 end

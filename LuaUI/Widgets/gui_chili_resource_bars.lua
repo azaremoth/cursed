@@ -21,13 +21,7 @@ include("colors.h.lua")
 VFS.Include("LuaRules/Configs/constants.lua")
 
 WG.energyWasted = 0
-WG.energyForOverdrive = 0
 WG.allies = 1
---[[
-WG.windEnergy = 0 
-WG.highPriorityBP = 0
-WG.lowPriorityBP = 0
---]]
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -247,14 +241,14 @@ function widget:GameFrame(n)
 	end
 	
 	local mexInc = Format(WG.myMexIncome or 0)
-	local odInc = Format((WG.myMetalFromOverdrive or 0))
-	local otherM = Format(mInco - (WG.myMetalFromOverdrive or 0) - (WG.myMexIncome or 0) - mReci)
+	local odInc = Format(0)
+	local otherM = Format(mInco - (WG.myMexIncome or 0) - mReci)
 	local shareM = Format(mReci - mSent)
 	local constuction = Format(-mExpe)
 	
 	local teamMexInc = Format(WG.mexIncome or 0)
-	local teamODInc = Format(WG.metalFromOverdrive or 0)
-	local teamOtherM = Format(teamMInco - (WG.metalFromOverdrive or 0) - (WG.mexIncome or 0))
+	local teamODInc = Format(0)
+	local teamOtherM = Format(teamMInco - (WG.mexIncome or 0))
 	local teamWasteM = Format(math.min(teamFreeStorage - teamMInco - teamMSpent,0))
 	local totalMetalIncome = Format(teamMInco)
 	local totalMetalStored = Format((teamTotalMetalStored or 0), "")
@@ -264,15 +258,12 @@ function widget:GameFrame(n)
 	local otherE = Format(-eExpe - math.min(0, (WG.change or 0)) + mExpe)
 	
 	local teamIncome = Format(WG.teamIncome or 0)
-	local totalODE = Format(-(WG.energyForOverdrive or 0))
-	local totalODM = Format(WG.metalFromOverdrive or 0)
 	local totalWaste = Format(-(WG.energyWasted or 0))
-	local totalOtherE = Format(-totalExpense + (WG.energyForOverdrive or 0) + totalConstruction + (WG.energyWasted or 0))
+	local totalOtherE = Format(-totalExpense + totalConstruction + (WG.energyWasted or 0))
 	local totalConstruction = Format(-totalConstruction)
 	
 	bar_metal.tooltip = "Local Metal Economy" ..
 	"\nBase Extraction: " .. mexInc ..
---	"\nOverdrive: " .. odInc ..
 	"\nReclaim and Cons: " .. otherM ..
 	"\nSharing: " .. shareM .. 
 	"\nConstruction: " .. constuction ..
@@ -281,7 +272,6 @@ function widget:GameFrame(n)
 	"\nTeam Metal Economy" ..
 	"\nTotal Income: " .. totalMetalIncome ..
 	"\nBase Extraction: " .. teamMexInc ..
---	"\nOverdrive: " .. teamODInc ..
 	"\nReclaim and Cons: " .. teamOtherM ..
 	"\nConstruction: " .. totalConstruction ..
 	"\nWaste: " .. teamWasteM ..
@@ -290,14 +280,13 @@ function widget:GameFrame(n)
 	
 	bar_energy.tooltip = "Local Energy Economy" ..
 	"\nIncome: " .. energyInc ..
-	"\nSharing & Overdrive: " .. energyShare .. 
+	"\nSharing: " .. energyShare .. 
 	"\nConstruction: " .. constuction .. 
 	"\nOther: " .. otherE ..
     "\nReserve: " .. math.ceil(WG.energyStorageReserve or 0) ..
 	"\n" .. 
 	"\nTeam Energy Economy" ..
 	"\nIncome: " .. teamIncome .. 
---	"\nOverdrive: " .. totalODE .. " -> " .. totalODM .. " metal" ..
 	"\nConstruction: " .. totalConstruction ..
 	"\nOther: " .. totalOtherE ..
 	"\nWaste: " .. totalWaste
@@ -336,8 +325,6 @@ function widget:GameFrame(n)
 		lbl_energy.font:SetColor(0,1,0,1)
 	elseif (eTotal > 0.1) then
 		lbl_energy.font:SetColor(1,0.7,0,1)
-	--elseif ((eStore - eCurr) < 50) then --// prevents blinking when overdrive is active
-	--	lbl_energy.font:SetColor(0,1,0,1)
 	else		
 		lbl_energy.font:SetColor(1,0,0,1)
 	end
@@ -397,15 +384,9 @@ function widget:Initialize()
 		return
 	end
 
-	widgetHandler:RegisterGlobal("MexEnergyEvent", MexEnergyEvent)
     widgetHandler:RegisterGlobal("ReserveState", ReserveState)
-	--widgetHandler:RegisterGlobal("SendWindProduction", SendWindProduction)
-	--widgetHandler:RegisterGlobal("PriorityStats", PriorityStats)
-
 	time_old = GetTimer()
-
 	Spring.SendCommands("resbar 0")
-
 	CreateWindow()
 
 end
@@ -711,30 +692,7 @@ end
 
 -- 1 second lag as energy update will be included in next resource update, not this one
 local lastChange = 0
-local lastEnergyForOverdrive = 0
 local lastEnergyWasted = 0
-local lastMetalFromOverdrive = 0
-local lastMyMetalFromOverdrive = 0
-
--- note works only in communism mode
-function MexEnergyEvent(teamID, allies, energyWasted, energyForOverdrive, totalIncome, baseMetal, overdriveMetal, myBase, myOverdrive, EnergyChange, teamIncome)
-  if (Spring.GetLocalTeamID() == teamID) then 
-  	WG.energyWasted = lastEnergyWasted
-    lastEnergyWasted = energyWasted
-	WG.energyForOverdrive = lastEnergyForOverdrive
-    lastEnergyForOverdrive = energyForOverdrive
-	WG.change = lastChange
-    lastChange = EnergyChange
-	WG.mexIncome = baseMetal
-	WG.metalFromOverdrive = lastMetalFromOverdrive
-    lastMetalFromOverdrive = overdriveMetal
-	WG.myMexIncome = myBase
-	WG.myMetalFromOverdrive = lastMyMetalFromOverdrive
-	lastMyMetalFromOverdrive = myOverdrive
-	WG.teamIncome = teamIncome
-	WG.allies = allies
-  end
-end
 
 local lastMstor = 0
 local lastEstor = 0
@@ -759,18 +717,6 @@ function ReserveState(teamID, metalStorageReserve, energyStorageReserve)
          WG.energyStorageReserve = energyStorageReserve
     end
 end
-
---[[
-function SendWindProduction(teamID, value)
-	WG.windEnergy = value
-end
-
-
-function PriorityStats(teamID, highPriorityBP, lowPriorityBP)
-	WG.highPriorityBP = highPriorityBP
-	WG.lowPriorityBP = lowPriorityBP
-end
---]]
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

@@ -46,15 +46,6 @@ local WIDGET_DIRNAME     = LUAUI_DIRNAME .. 'Widgets/'
 local HANDLER_BASENAME = "cawidgets.lua"
 local SELECTOR_BASENAME = 'selector.lua'
 
-do
-	local isMission = Game.modDesc:find("Mission Mutator")
-	if isMission then -- all missions will be forced to use a specific name
-		if not VFS.FileExists(ORDER_FILENAME) or not VFS.FileExists(CONFIG_FILENAME) then
-			ORDER_FILENAME     = LUAUI_DIRNAME .. 'Config/ZK_order.lua' --use "ZK" name when running any mission mod (provided that there's no existing config file)
-			CONFIG_FILENAME    = LUAUI_DIRNAME .. 'Config/ZK_data.lua'
-		end
-	end
-end
 
 local SAFEWRAP = 1
 -- 0: disabled

@@ -71,7 +71,7 @@ local function LoadParams(param)
 	WG.RemakeEpicMenu()
 end
 
-options_path = 'Settings/Graphics/Lighting'
+options_path = 'Settings/Graphics/Effects'
 options_order = {'light_projectile_enable', 'light_override', 'light_radius', 'light_brightness', 'light_color', 'light_reload'}
 options = {
 	light_projectile_enable = {

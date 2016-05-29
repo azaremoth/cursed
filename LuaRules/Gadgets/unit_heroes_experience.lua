@@ -71,12 +71,10 @@ local function ReplaceHero(unitID, team)
 			facing = 2
 		end
 		----------------------------
-		
 		local heroDefID = Spring.GetUnitDefID(unitID)
 		local udhero = UnitDefs[heroDefID]
 		local issarge = string.find(udhero.name, "euf_sarge")
 		local isshade = string.find(udhero.name, "tc_shade")
-		Spring.DestroyUnit(unitID, true, true)
 	--	Spring.Echo("Remove unit:" .. unitID)
 		if (issarge) then
 			local newhero = Spring.CreateUnit("euf_sarge_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, team)
@@ -86,6 +84,7 @@ local function ReplaceHero(unitID, team)
 		else
 			Spring.Echo("Fuck Error!")
 		end
+		Spring.DestroyUnit(unitID, true, true)		
 end
 
 local function CheckLeveling(unitID)

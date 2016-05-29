@@ -6,4 +6,8 @@
 
 
 CHECK:
-unit_heroes_experience.lua -> line 79 (	Spring.DestroyUnit(unitID, true, true) ) once recursion nor allowed happened?!
+
+
+
+DONE:
+unit_heroes_experience.lua -> line 79 (	Spring.DestroyUnit(unitID, true, true) ) once "recursion not allowed" happened?! -- UnitID created was identical with destroyed? => Changed to create first and destroy then.

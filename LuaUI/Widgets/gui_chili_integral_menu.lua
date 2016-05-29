@@ -505,7 +505,7 @@ local function MakeButton(container, cmd, insertItem, index)
 				fontSize = 16;
 				fontShadow = true;
 			}
-			local costLabel = Label:New {
+--[[		local costLabel = Label:New {
 				parent = button,
 				right = 0;
 				y = 0;
@@ -517,7 +517,7 @@ local function MakeButton(container, cmd, insertItem, index)
 				caption = string.format("%d m", UnitDefs[-cmd.id].metalCost);
 				fontSize = 11;
 				fontShadow = true;
-			}
+			}]]	
 		end
 		
 
@@ -1258,8 +1258,8 @@ function widget:Initialize()
 		parent = screen0,
 		name   = 'integralwindow';
 		color = {0, 0, 0, 0},
-		width = 550; --450
-		height = 250; -- 180 if you keep an aspect ratio regardless of screen ratio
+		width = 500; --450
+		height = 230; -- 180 if you keep an aspect ratio regardless of screen ratio
 		x = 0; 
 		bottom = 0;
 		dockable = true;

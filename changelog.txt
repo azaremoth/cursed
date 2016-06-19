@@ -20,6 +20,7 @@ Infrastructure
 
 Polishing
 - redid the Mancubus texture and polished the model
+- optimized the ghoul model: it is looking more "undeadcyborg" now and team colors are more obvious
 - added a normal map for the cursed Belial and polished the model a little
 - optimized melee weapons to better hit when obstacles are next to the target
 - optimized melee weapons to better hit large objects

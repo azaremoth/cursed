@@ -12,12 +12,6 @@ local rfoot = piece 'rfoot'
 local lfoot = piece 'lfoot'
 local luparm = piece 'luparm'
 local lloarm = piece 'lloarm'
-local blade1 = piece 'blade1'
-local blade2 = piece 'blade2'
-local blade3 = piece 'blade3'
-local backblade1 = piece 'backblade1'
-local backblade2 = piece 'backblade2'
-local backblade3 = piece 'backblade3'
 local ruparm = piece 'ruparm'
 local rloarm = piece 'rloarm'
 local head = piece 'head'
@@ -166,13 +160,11 @@ local function BoredAnimation()
 			if (borednumber > 45) then
 				Turn2( chest, x_axis, 10, MOVEANIMATIONSPEED*0.75 )
 				Turn2( chest, y_axis, 30, MOVEANIMATIONSPEED*0.75 )
-				Turn2( lloarm, x_axis, -30, MOVEANIMATIONSPEED*0.75 )
 				Turn2( head, y_axis, 70, MOVEANIMATIONSPEED*1.5 )
 				WaitForTurn( chest, y_axis )
 			elseif (borednumber < 5) then
 				Turn2( chest, x_axis, 20, MOVEANIMATIONSPEED*0.75 )
 				Turn2( chest, y_axis, -25, MOVEANIMATIONSPEED*0.75 )
-				Turn2( lloarm, x_axis, -30, MOVEANIMATIONSPEED*0.75 )				
 				Turn2( head, y_axis, -60, MOVEANIMATIONSPEED*1.5 )
 				WaitForTurn( chest, y_axis )
 			elseif (borednumber == 25) and not moving and not inbunker then					
@@ -197,7 +189,6 @@ local function BoredAnimation()
 			else 
 				Turn2( chest, x_axis, 0, MOVEANIMATIONSPEED*0.75 )
 				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*0.75 )
-				Turn2( lloarm, x_axis, 0, MOVEANIMATIONSPEED*0.75 )				
 				Turn2( head, y_axis, 0, MOVEANIMATIONSPEED*1.5 )
 				WaitForTurn( chest, y_axis )		
 			end
@@ -290,36 +281,6 @@ end
 
 function script.Create()
 	SetMoveAnimationSpeed()
-	------ random blade ------
-	local randomnr1 = math.random(100)
-	Hide (blade1)
-	Hide (blade2)
-	Hide (blade3)	
-	if (randomnr1 < 33) then
-		Show (blade1)
-    elseif (randomnr1 > 66) then
-		Show (blade2)
-	else
-		Show (blade3)
-	end
-	------ random back ------
-	local randomnr2 = math.random(100)
-	Hide (backblade1)
-	Hide (backblade2)
-	Hide (backblade3)	
-	if (randomnr2 < 33) then
-		Show (backblade1)
-		Show (backblade2)
-		Show (backblade3)
-    elseif (randomnr2 > 66) then
-		Show (backblade2)
-	else
-		Show (backblade1)
-		Show (backblade3)
-	end
-	------------------------------------------
-	
-	
 	restore_delay = 6000
 	Turn2( emit_summon, x_axis, -90 )
 	
@@ -360,8 +321,8 @@ function script.QueryWeapon1 () return emit_melee end
 function script.AimFromWeapon1 () return emit_melee end
 
 local function Aim(heading, pitch)
---	randomsleeptime = math.random(100)
---	Sleep(randomsleeptime)
+	randomsleeptime = math.random(100)
+	Sleep(randomsleeptime)
 	if burrowed or inbunker or isparrying then
 		return false
 	end

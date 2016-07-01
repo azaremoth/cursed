@@ -100,14 +100,14 @@ local unitDef = {
       def                = "CHAINLIGHTROCKET",
       mainDir            = "0 0 1",
       maxAngleDif        = 120,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
     [2]  = {
       badTargetCategory  = "LIGHTARMOR AIR",	
       def                = "CHAINLIGHTROCKET",
       mainDir            = "0 0 1",
       maxAngleDif        = 120,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

@@ -97,7 +97,7 @@ local unitDef = {
     [1]  = {
       def                = "LASERTOWERGUN",
       badTargetCategory  = "LIGHTARMOR AIR",	  
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
 	},
   },
 }

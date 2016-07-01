@@ -116,7 +116,7 @@ local unitDef = {
       name                = "UNDEADMARINEMELEE",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
-      onlyTargetCategory = "LAND AIR", 
+      onlyTargetCategory = "LAND", 
     },
   },
 }

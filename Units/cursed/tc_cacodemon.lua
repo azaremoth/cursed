@@ -41,7 +41,7 @@ local unitDef = {
   airHoverFactor     = 0.1,
   brakeRate          = 0.931,
   cruiseAlt          = 220,
-  maxVelocity        = 2.5,
+  maxVelocity        = 2.0,
   turnRate           = 700,
 -- Collision
   collide            = true,
@@ -105,7 +105,7 @@ local unitDef = {
       def                = "CACOBALL",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

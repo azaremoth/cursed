@@ -97,7 +97,7 @@ local unitDef = {
       def                = "FIREBALL",
       mainDir            = "0 0 1",
       maxAngleDif        = 220,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

@@ -114,14 +114,14 @@ local unitDef = {
       def                = "WALKERLIGHT",
       mainDir            = "0 0 1",
       maxAngleDif        = 360,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
     [2]  = {
       badTargetCategory  = "LIGHTARMOR AIR",
       def                = "WALKERHEAVY",
       mainDir            = "0 0 1",
       maxAngleDif        = 360,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }
@@ -162,10 +162,10 @@ local weaponDefs = {
 	weaponType         = "Cannon",
 ------------------------------------------------------------
 		damage = {
-		  default            = 38,
-		  flyer              = 38*0.33,
-		  heavy              = 38,
-		  light              = 38,
+		  default            = 39,
+		  flyer              = 39*0.33,
+		  heavy              = 39,
+		  light              = 39,
 		},
 	},
 

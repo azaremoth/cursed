@@ -103,14 +103,14 @@ local unitDef = {
       def                = "Mancubus_Cannon",
       mainDir            = "0 0 1",
       maxAngleDif        = 160,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
     [2]  = {
       badTargetCategory = "LIGHTARMOR",
       def                = "Mancubus_Cannon",
       mainDir            = "0 0 1",
       maxAngleDif        = 160,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

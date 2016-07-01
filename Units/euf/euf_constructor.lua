@@ -133,7 +133,7 @@ local unitDef = {
       name                = "TAZER_LIGHT",
       mainDir            = "0 0 1",
       maxAngleDif        = 160,
-      onlyTargetCategory = "LAND",
+      onlyTargetCategory = "LAND AIR",
     },
   },
 }

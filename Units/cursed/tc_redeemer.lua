@@ -99,7 +99,7 @@ local unitDef = {
       def                = "REDEEMERGUN",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

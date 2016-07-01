@@ -96,7 +96,7 @@ local unitDef = {
       def                = "HOLYBOLT",
       mainDir            = "0 0 1",
       maxAngleDif        = 220, 
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

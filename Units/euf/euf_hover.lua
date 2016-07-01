@@ -100,7 +100,7 @@ local unitDef = {
     [1]  = {
       def                = "HOVER_LASER",
       badTargetCategory  = "LIGHTARMOR AIR",
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
     [2]  = {
       badTargetCategory  = "LIGHTARMOR",

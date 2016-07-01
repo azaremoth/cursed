@@ -151,7 +151,7 @@ local unitDef = {
       name               = "TAZER_HEAVY",
       mainDir            = "0 0 1",
       maxAngleDif        = 360,
-      onlyTargetCategory = "LAND",
+      onlyTargetCategory = "LAND AIR",
     },
   },
 }

@@ -9,6 +9,7 @@ Bugs
 Balance
 - increased efficiency of the tazer wepons used by imperial builderoids
 - reverse velocity for imperial tanks was reduced to ~80% of the forward velocity
+- Anti-air capabilities were changed back to the "old setup" with a limited number units being useful against air
 
 Features
 - removed parrying ability from all melee units to reduce complexity

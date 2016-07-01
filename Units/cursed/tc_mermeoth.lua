@@ -99,7 +99,7 @@ local unitDef = {
     [1]  = {
       badTargetCategory  = "LIGHTARMOR",
       def                = "WAVEGUN",
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
     [2]  = {
       badTargetCategory  = "LIGHTARMOR",

@@ -115,12 +115,12 @@ local unitDef = {
     [1]  = {
       def                = "GUNNER_LIGHTNING",
       badTargetCategory  = "HEAVYARMOR AIR",	  
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
     [2]  = {
       def                = "GUNNER_LIGHTNING_BUNKER",
       badTargetCategory  = "HEAVYARMOR AIR",	  
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },	
   },
 }

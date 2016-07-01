@@ -114,7 +114,7 @@ local unitDef = {
       badTargetCategory  = "LIGHTARMOR",
       def                = "BATTLETANK_GUN",
 	  badTargetCategory = "AIR",
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

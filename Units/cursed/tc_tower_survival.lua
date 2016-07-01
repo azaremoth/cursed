@@ -100,7 +100,7 @@ local unitDef = {
     [1]  = {
       def                = "CURSEDSKULL_SURVIVAL",
       badTargetCategory  = "LIGHTARMOR AIR",
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

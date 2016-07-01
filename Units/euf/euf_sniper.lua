@@ -111,12 +111,12 @@ local unitDef = {
       mainDir            = "0 0 1",
       maxAngleDif        = 120,
       badTargetCategory  = "AIR HEAVYARMOR",
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
 	[2]  = {
       def                = "SNIPER_RIFLE_BUNKER",
       badTargetCategory  = "AIR HEAVYARMOR",
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

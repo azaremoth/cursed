@@ -143,14 +143,14 @@ local unitDef = {
       mainDir            = "0 0 1",
       maxAngleDif        = 120,
 	  badTargetCategory = "AIR",
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
    [4]  = {
 	  def                = "SARGE_PLASMAGUN",
       mainDir            = "0 0 1",
       maxAngleDif        = 120,
 	  badTargetCategory = "AIR",
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

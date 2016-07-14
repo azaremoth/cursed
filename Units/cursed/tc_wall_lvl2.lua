@@ -8,7 +8,7 @@ local unitDef = {
   armortype          = "HEAVY",
   buildCostEnergy    = 30,
   buildCostMetal     = 30,
-  buildPic           = "tc_wall_lvl2.jpg",
+  buildPic           = "tc_wall_lvl2.png",
   buildTime          = 30,
   category           = "CURSED LAND HEAVYARMOR",
   

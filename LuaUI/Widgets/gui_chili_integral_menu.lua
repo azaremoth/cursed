@@ -1,4 +1,5 @@
 -- TODO: commandschanged gets called 2x for some reason, investigate
+-- TODO: commandschanged gets called 2x for some reason, investigate
 -- TODO: proper tooltips for queue buttons
 
 function widget:GetInfo()
@@ -177,12 +178,12 @@ end
 AddHotkeyOptions()
 
 
-local MAX_COLUMNS = 6
+local MAX_COLUMNS = 5
 local MAX_STATE_ROWS = 5
 local MIN_HEIGHT = 80
 local MIN_WIDTH = 200
-local COMMAND_SECTION_WIDTH = 74	-- percent
-local STATE_SECTION_WIDTH = 24	-- percent
+local COMMAND_SECTION_WIDTH = 80	-- percent
+local STATE_SECTION_WIDTH = 20	-- percent
 
 local numRows = 3
 local numStateColumns = 3
@@ -468,6 +469,7 @@ local function MakeButton(container, cmd, insertItem, index)
 		end
 		
 		local image
+		--- Command images in front layer
 		if (texture and texture ~= "") then
 			image= Image:New {
 				width="90%";
@@ -480,9 +482,9 @@ local function MakeButton(container, cmd, insertItem, index)
 				file = texture;
 				parent = button;
 			}
-			if isBuild then 
-				image.file2 = WG.GetBuildIconFrame(UnitDefs[-cmd.id]) 
-			end 
+--			if isBuild then 
+--				image.file2 = WG.GetBuildIconFrame(UnitDefs[-cmd.id]) 
+--			end 
 			
 			if isState then 
 				height = "100%"
@@ -777,7 +779,7 @@ local function ManageBuildRow()
 					x="5%";
 					y="5%";
 					file = '#'..udid,
-					file2 = WG.GetBuildIconFrame(UnitDefs[udid]),
+--					file2 = WG.GetBuildIconFrame(UnitDefs[udid]),
 					keepAspect = false,
 				}
 				buttonArray.label = Label:New {

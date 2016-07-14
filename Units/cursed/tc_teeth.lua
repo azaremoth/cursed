@@ -9,7 +9,7 @@ local unitDef = {
   armortype          = "HEAVY",
   buildCostEnergy    = 10,
   buildCostMetal     = 10,
-  buildPic           = "tc_teeth.jpg",
+  buildPic           = "tc_teeth.png",
   buildTime          = 10,
   category           = "CURSED LAND HEAVYARMOR",
   customParams          = {	factionname		   = "cursed",  },

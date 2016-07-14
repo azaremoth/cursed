@@ -9,7 +9,7 @@ local unitDef = {
   badTargetCategory  = "AIR",
   buildCostEnergy    = 850,
   buildCostMetal     = 850,
-  buildPic           = "tc_tower.jpg",
+  buildPic           = "tc_tower.png",
   buildTime          = 850,
   
   buildingGroundDecalDecaySpeed = 0.01,

@@ -15,7 +15,7 @@ local unitDef = {
   buildingGroundDecalSizeX = 20,
   buildingGroundDecalSizeY = 20,
   buildingGroundDecalType = "tc_groundplate1.png",    
-  buildPic           = "TC_Obelisk_lvl2.jpg",
+  buildPic           = "tc_obelisk_lvl2.png",
   buildTime          = 500,
   canAssist          = true,
   canBeAssisted      = false,
@@ -78,7 +78,7 @@ local unitDef = {
     "tc_hellfire",		
     "tc_seer",
     "tc_altar",
-    "tc_teeth",
+--    "tc_teeth",
 	"tc_wall_lvl2",
   },
   sfxtypes = {

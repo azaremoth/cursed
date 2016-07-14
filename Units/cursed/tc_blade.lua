@@ -9,7 +9,7 @@ local unitDef = {
   unitname           = "tc_blade",
   name               = "Blade",  
   description        = "Interceptor",  
-  buildPic           = "tc_blade.jpg",
+  buildPic           = "tc_blade.png",
   objectName         = "tc_blade.s3o",
   script             = 'tc_blade.lua', 
 

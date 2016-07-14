@@ -9,7 +9,7 @@ local unitDef = {
   armortype          = "HEAVY",
   buildCostEnergy    = 270,
   buildCostMetal     = 270,
-  buildPic           = "TC_Defender.jpg",
+  buildPic           = "tc_defender.png",
   buildTime          = 270,
   
   buildingGroundDecalDecaySpeed = 0.01,

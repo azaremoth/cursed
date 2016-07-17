@@ -243,8 +243,8 @@ function gadget:GameFrame(f)
 					--see again
 					local los = Spring.GetUnitSensorRadius(unitID, 'los')
 					local airlos = Spring.GetUnitSensorRadius(unitID, 'airLos')
-					local los		= ud.losRadius*16
-					local airlos 	= ud.airLosRadius*16 
+					local los		= ud.losRadius -- *16 removed due to Spring 101 Update
+					local airlos 	= ud.airLosRadius -- *16 removed due to Spring 101 Update 
 					Spring.SetUnitSensorRadius(unitID, 'los', los)
 					Spring.SetUnitSensorRadius(unitID, 'airLos', airlos)
 					

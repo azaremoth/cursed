@@ -1,4 +1,4 @@
->> Major changes 1.402 => 1.41
+>> Major changes 1.402 => 1.410
 
 Bugs
 - fixed tons of incompatibilities with Spring 103 (update of lua code, models were fixed, melee weapons were fixed, new shader structure was implemented)

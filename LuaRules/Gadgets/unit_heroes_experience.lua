@@ -128,8 +128,10 @@ end
 --- Kill any hero that is given to another team
 function gadget:UnitGiven(unitID, unitDefID, team, oldteam) 
 	if IsAHero [unitDefID] then
-		Spring.DestroyUnit(unitID, false, false)
-		Spring.Echo("A hero rather goes Harakiri than being given away!!!")
+		if (unitID ~= nil) then
+			Spring.DestroyUnit(unitID, false, false)
+			Spring.Echo("A hero rather goes Harakiri than being given away!!!")
+		end
 	end 
 end
 

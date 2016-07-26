@@ -1,7 +1,7 @@
 >> Major changes 1.402 => 1.410
 
 Bugs
-- fixed tons of incompatibilities with Spring 102 (update of lua code, models were fixed, melee weapons were fixed, new shader structure was implemented)
+- fixed tons of incompatibilities with Spring 103 (update of lua code, models were fixed, melee weapons were fixed, new shader structure was implemented)
 - fixed cursed skeletons not having a corpse
 - fixed cursed Shade not receiving xp for units killed by the circle sword attack
 - fixed AI stragglers not being killed after destruction of the AI's last building
@@ -30,6 +30,7 @@ Polishing
 - jittering "cloaked effect" was removed for burrowed units
 - implemented a shader that makes trees moving in the wind
 - added simple circles to indicate aura coverage and tweaked the aura effects that were present before
+- slightly optimized the build menue
 
 
 

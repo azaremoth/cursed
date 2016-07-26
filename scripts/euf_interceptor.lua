@@ -38,11 +38,15 @@ function script.MoveRate(curRate)
 	if curRate < 1 then
 		Turn(wing1, x_axis, math.rad(-90), 5)
 		Turn(wing2, x_axis, math.rad(-90), 5)
+		Turn(wing1, z_axis, 0, 2)
+		Turn(wing2, z_axis, 0, 2)
 		Move(wing1, y_axis, -4, 10)
 		Move(wing2, y_axis, -4, 10)
 	else
 		Turn(wing1, x_axis, 0, 8)
 		Turn(wing2, x_axis, 0, 8)
+		Turn(wing1, z_axis, 0, 2)
+		Turn(wing2, z_axis, 0, 2)	
 		Move(wing1, y_axis, 0, 15)
 		Move(wing2, y_axis, 0, 15)
 	end

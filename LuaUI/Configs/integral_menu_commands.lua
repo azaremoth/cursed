@@ -14,7 +14,25 @@ local factories = {}
 --all buildings (except facs) need a row or they won't appear!
 --you can put too many things into the same row, but the buttons will be squished
 local econ = {}
-local defense = {}
+local defense = {
+	euf_plasmatower =    {order = 0, row = 1, col = 1},
+	euf_aatower =   {order = 1, row = 1, col = 2},
+	euf_lasertower =   {order = 1, row = 1, col = 3},
+	euf_artytower =  {order = 1, row = 1, col = 4},
+	euf_radar_lvl1  =  {order = 1, row = 2, col = 1},
+	euf_radar_lvl2  =  {order = 1, row = 2, col = 1},
+	euf_wall =  {order = 1, row = 2, col = 2},
+	euf_wall_lvl2 =  {order = 1, row = 2, col = 2},
+	euf_bunker =  {order = 1, row = 2, col = 3},
+
+	tc_defender =    {order = 0, row = 1, col = 1},
+	tc_tower =   {order = 1, row = 1, col = 2},
+	tc_hellfire =   {order = 1, row = 1, col = 3},
+	tc_seer =  {order = 1, row = 2, col = 1},
+	tc_teeth =  {order = 1, row = 2, col = 2},
+	tc_wall_lvl2 =  {order = 1, row = 2, col = 2},
+	
+}
 local aux = {}
 local super = {}
 

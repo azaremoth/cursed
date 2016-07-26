@@ -88,9 +88,9 @@ options = {
 --		type = 'button',
 	},
 	tab_defence = {
---		name = "Defence Tab",
---		desc = "Switches to defence tab, enables grid hotkeys",
---		type = 'button',
+		name = "Defence Tab",
+		desc = "Switches to defence tab, enables grid hotkeys",
+		type = 'button',
 	},
 	tab_special = {
 --		name = "Special Tab",
@@ -925,7 +925,7 @@ local function Update(buttonpush)
 end 
 
 local function MakeMenuTab(i, alpha)
-	if (i==1) or (i>5) then
+	if (i==1) or (i==4) or (i>5) then
 		local button = Button:New{
 			parent = menuTabRow;
 			y = 0,

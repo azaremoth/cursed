@@ -84,7 +84,7 @@ if (killstragglers == "1" and kothisactive == false) then
 			if (AIbuildings[teamID] < 1 and AIalive[teamID] and gamestarted == true) then
 				AIalive[teamID] = false
 				for _,loopunitID in ipairs(Spring.GetTeamUnits(teamID)) do
-					if (loopunitID ~= unitID) then
+					if (loopunitID ~= unitID) and (loopunitID ~= nil) then
 						Spring.DestroyUnit(loopunitID, false, false)
             			Spring.Echo("Remaining units of AI " .. teamID .. " were destroyed!")						
 					end

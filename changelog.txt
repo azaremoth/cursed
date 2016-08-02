@@ -2,7 +2,7 @@
 
 Bugs
 - fixed several buildpics
-
+- fixed rare "recursion not allowed bug" in the (hero's) XP handler gadget
 
 
 

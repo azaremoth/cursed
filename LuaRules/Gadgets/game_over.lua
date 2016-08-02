@@ -198,7 +198,7 @@ function DestroyAlliance(allianceID)
 					if GG.pwUnitsByID and GG.pwUnitsByID[u] then
 						spTransferUnit(u, gaiaTeam, true)		-- don't blow up PW buildings
 					else
-						spDestroyUnit(u, true)
+						spDestroyUnit(u, false, false, u)
 					end
 				end
 				spKillTeam(t)

@@ -29,7 +29,7 @@ gadgetHandler:RegisterGlobal("CreateTeeth", CreateTeeth)
 --////////////////////////////////////////////////////////////////////
 
 function JustKillTheUnit(u, ud, team)
-	Spring.DestroyUnit(u,true,false)
+	Spring.DestroyUnit(u,false,false,u)
 end
 gadgetHandler:RegisterGlobal("JustKillTheUnit", JustKillTheUnit)
 --////////////////////////////////////////////////////////////////////

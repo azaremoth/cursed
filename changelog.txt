@@ -6,6 +6,7 @@ Bugs
 
 Polishing
 - optimized the walking animation for imperial infantry and the cursed shade
+- made team colors more visible for the imperial sniper
 
 
 

@@ -102,7 +102,7 @@ local function Walkscript()
 		if moving then
 --			SetMoveAnimationSpeed()
 			if not attacking then
-				Turn2( chest, x_axis, 15, MOVEANIMATIONSPEED )	
+				Turn2( chest, x_axis, 10, MOVEANIMATIONSPEED )	
 				Turn2( chest, y_axis, 10, MOVEANIMATIONSPEED )	
 				Turn2( chest, z_axis, 3, MOVEANIMATIONSPEED )
 				Turn2( head, z_axis, 5, MOVEANIMATIONSPEED )
@@ -179,7 +179,6 @@ local function Walkscript()
 				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*2 )	
 				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED*2 )
 				Turn2( head, z_axis, 0, MOVEANIMATIONSPEED )
-				WaitForTurn( chest, y_axis )	
 			end
 		end
 		Sleep(30)

@@ -4,6 +4,9 @@ Bugs
 - fixed several buildpics
 - fixed rare "recursion not allowed bug" in the (hero's) XP handler gadget
 
+Polishing
+- optimized the walking animation for imperial infantry and the cursed shade
+
 
 
 >> Major changes 1.402 => 1.410

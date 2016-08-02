@@ -28,7 +28,7 @@ local rshoulder = piece 'rshoulder'
 local lshoulder = piece 'lshoulder'
 
 
-local restore_delay, moving, attacking, MOVEANIMATIONSPEED, inbunker, parried, isparrying
+local restore_delay, moving, attacking, MOVEANIMATIONSPEED, MOVEANIMATIONSLEEPTIME, inbunker, parried, isparrying
 
 local SIG_AIM1 = 2
 local SIG_WALK = 4
@@ -184,7 +184,6 @@ local function Walkscript()
 			Turn2( rleg, x_axis, 0, MOVEANIMATIONSPEED*1.6 )
 			Turn2( lleg, x_axis, 0, MOVEANIMATIONSPEED*1.6 )
 			Turn2( pelvis, z_axis, 0, MOVEANIMATIONSPEED*0.8 )
-			Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED )
 			Turn2( lthigh, z_axis, 0, MOVEANIMATIONSPEED*0.8 )
 			Turn2( rthigh, z_axis, 0, MOVEANIMATIONSPEED*0.8 )
 			Move( pelvis, y_axis, 0, 8 )
@@ -427,7 +426,7 @@ function script.QueryWeapon1 ()
 end
 
 function script.AimFromWeapon1 ()
-	return chest
+	return head
 end
 
 function script.AimWeapon1(heading, pitch)

@@ -30,6 +30,8 @@ local emit_lgun = piece 'emit_lgun'
 local emit_lgroundflash = piece 'emit_lgroundflash'
 local emit_rjetpack = piece 'emit_rjetpack'
 local emit_ljetpack = piece 'emit_ljetpack'
+local emit_rgunflare = piece 'emit_rgunflare'
+local emit_lgunflare = piece 'emit_lgunflare'
 local cigtip = piece 'cigtip'
 
 local restore_delay
@@ -37,7 +39,7 @@ local moving
 local attacking
 local jumping
 local MOVEANIMATIONSPEED
-local MOVEANIMATIONSLEEPTIME = 275
+local MOVEANIMATIONSLEEPTIME
 local chaingunactive
 local flarecount = 0
 
@@ -71,10 +73,11 @@ local function Turn2(piecenum,axis, degrees, speed)
 end
 
 local function SetMoveAnimationSpeed()
-	MOVEANIMATIONSPEED = GetUnitValue(COB.MAX_SPEED)/2750
+	MOVEANIMATIONSPEED = GetUnitValue(COB.MAX_SPEED)/3400
+	MOVEANIMATIONSLEEPTIME = (42000000/GetUnitValue(COB.MAX_SPEED))	
 	--if statements inside walkscript contain wait functions that can take forever if speed is too slow
-	if MOVEANIMATIONSPEED < 50 then 
-		MOVEANIMATIONSPEED = 50
+	if MOVEANIMATIONSPEED < 10 then 
+		MOVEANIMATIONSPEED = 10
 	end
 	if MOVEANIMATIONSLEEPTIME > 500 then 
 		MOVEANIMATIONSLEEPTIME = 500
@@ -148,49 +151,46 @@ local function Walkscript()
 			if moving and not jumping then
 			SetMoveAnimationSpeed()
 			Turn2( rleg, y_axis, 0, MOVEANIMATIONSPEED*2 )
-			Turn2( lleg, y_axis, 0, MOVEANIMATIONSPEED*2 )			
-			Turn2( lthigh, x_axis, -24, MOVEANIMATIONSPEED*2 ) -- -24
-			Turn2( rthigh, x_axis, 23, MOVEANIMATIONSPEED*2 ) -- 33
-			Turn2( lleg, x_axis, 40, MOVEANIMATIONSPEED*1.6 )				--47
-			Turn2( rleg, x_axis, 10, MOVEANIMATIONSPEED*1.6 )
+			Turn2( lleg, y_axis, 0, MOVEANIMATIONSPEED*2 )				
 			if not attacking then
-				Turn2( chest, z_axis, -3, MOVEANIMATIONSPEED*0.25 )
+				Turn2( chest, x_axis, 10, MOVEANIMATIONSPEED )		
+				Turn2( chest, y_axis, -10, MOVEANIMATIONSPEED )	
+				Turn2( chest, z_axis, -3, MOVEANIMATIONSPEED )	
 				Turn2( ruparm, x_axis, -26, MOVEANIMATIONSPEED*2.5 )				
 				Turn2( luparm, x_axis, -20, MOVEANIMATIONSPEED*2.5 )
 				Turn2( rloarm, x_axis, -18, MOVEANIMATIONSPEED*2 )
-				Turn2( lloarm, x_axis, -15, MOVEANIMATIONSPEED*2 )
+				Turn2( lloarm, x_axis, -15, MOVEANIMATIONSPEED*2 )				
 			end
-			Move( pelvis, y_axis, 0.3, 8 )
+			Turn2( lthigh, x_axis, -40, MOVEANIMATIONSPEED*4 )
+			Turn2( rthigh, x_axis, 20, MOVEANIMATIONSPEED*2.7 )
+			Turn2( lleg, x_axis, 50, MOVEANIMATIONSPEED*4 )
+			Turn2( rleg, x_axis, 25, MOVEANIMATIONSPEED*2.5 )			
 			Sleep(MOVEANIMATIONSLEEPTIME)
 			-- WaitForTurn(lleg, x_axis)
 		end
 		if moving and not jumping then
-			Turn2( lthigh, x_axis, -23, MOVEANIMATIONSPEED*2 )  -- -33
-			Turn2( rthigh, x_axis, 15, MOVEANIMATIONSPEED*2 )  -- 25
-			Turn2( lleg, x_axis, -15, MOVEANIMATIONSPEED*1.6)				
-			Turn2( rleg, x_axis, 40, MOVEANIMATIONSPEED*1.6 )        --65
-				Move( pelvis, y_axis, 0, 8 )
+			Turn2( lleg, x_axis, -15, MOVEANIMATIONSPEED*3)
+			Turn2( rleg, x_axis, 40, MOVEANIMATIONSPEED*3 )
+			Move( pelvis, y_axis, 0, 15 )
 			Sleep(MOVEANIMATIONSLEEPTIME)		
 			-- WaitForTurn(lthigh, x_axis)
 		end
-		if moving and not jumping then
-			Turn2( lthigh, x_axis, 15, MOVEANIMATIONSPEED*2 ) -- 24
-			Turn2( rthigh, x_axis, -35, MOVEANIMATIONSPEED*2 )  -- -35
-			Turn2( lleg, x_axis, 0, MOVEANIMATIONSPEED*1.6 )				
-			Turn2( rleg, x_axis, -15, MOVEANIMATIONSPEED*1.6 )
-				Move( pelvis, y_axis, 0.3, 8 )			
+		if moving and not jumping then	
 			if not attacking then
-				Turn2( chest, z_axis, 3, MOVEANIMATIONSPEED*0.5 )
+				Turn2( chest, y_axis, 10, MOVEANIMATIONSPEED )	
+				Turn2( chest, z_axis, 3, MOVEANIMATIONSPEED )	
 			end
+			Turn2( lthigh, x_axis, 20, MOVEANIMATIONSPEED*2.7 )
+			Turn2( rthigh, x_axis, -40, MOVEANIMATIONSPEED*4 )
+			Turn2( lleg, x_axis, 25, MOVEANIMATIONSPEED*2.5 )
+			Turn2( rleg, x_axis, 50, MOVEANIMATIONSPEED*4 )	
 			Sleep(MOVEANIMATIONSLEEPTIME)	
 			-- WaitForTurn(rthigh, x_axis)
 		end
 		if moving and not jumping then
-			Turn2( lthigh, x_axis, 23, MOVEANIMATIONSPEED*2 )   -- 33
-			Turn2( rthigh, x_axis, -25, MOVEANIMATIONSPEED*2 )  -- -25
-			Turn2( lleg, x_axis, 10, MOVEANIMATIONSPEED*1.6 )		-- 64		
-			Turn2( rleg, x_axis, 0, MOVEANIMATIONSPEED*1.6 )
-				Move( pelvis, y_axis, 0, 8 )	
+			Turn2( lleg, x_axis, 40, MOVEANIMATIONSPEED*3)
+			Turn2( rleg, x_axis, -15, MOVEANIMATIONSPEED*3 )
+			Move( pelvis, y_axis, 1, 10 )
 			Sleep(MOVEANIMATIONSLEEPTIME)		
 			-- WaitForTurn(lthigh, x_axis)
 		end
@@ -201,17 +201,17 @@ local function Walkscript()
 			Turn2( rleg, x_axis, 0, MOVEANIMATIONSPEED*1.6 )			
 			Turn2( rthigh, x_axis, 0, MOVEANIMATIONSPEED*1.6 )
 			Turn2( lthigh, x_axis, 0, MOVEANIMATIONSPEED*1.6 )
-			Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED*0.8 )
+			Turn2( chest, x_axis, 0, MOVEANIMATIONSPEED*2 )
 			Turn2( lthigh, z_axis, 0, MOVEANIMATIONSPEED*0.8 )
 			Turn2( rthigh, z_axis, 0, MOVEANIMATIONSPEED*0.8 )
-			Move( pelvis, y_axis, 0, 8 )				
+			Move( pelvis, y_axis, 0, 30 )				
 			if not attacking then 
-				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED )
+				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*2 )			
+				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED*2 )
 				Turn2( ruparm, x_axis, 20, MOVEANIMATIONSPEED*2 )			
 				Turn2( luparm, x_axis, 20, MOVEANIMATIONSPEED*2 )
 				Turn2( rloarm, x_axis, 50, MOVEANIMATIONSPEED*2 )
 				Turn2( lloarm, x_axis, 50, MOVEANIMATIONSPEED*2 )
-				WaitForTurn( chest, y_axis )	
 			end
 		end
 		Sleep(30)			
@@ -318,7 +318,7 @@ function script.AimWeapon1(heading, pitch)
 end
 
 function script.FireWeapon1()
-		EmitSfx( emit_rgun, GUNFLARE )
+		EmitSfx( emit_rgunflare, GUNFLARE )
 		EmitSfx( emit_rgroundflash, GROUNDFLASH )
 --		local unitDef = Spring.GetUnitDefID(unitID)
 --		local team = Spring.GetUnitTeam(unitID)
@@ -359,7 +359,7 @@ function script.AimWeapon2(heading, pitch)
 end
 
 function script.FireWeapon2()
-		EmitSfx( emit_lgun, GUNFLARE )
+		EmitSfx( emit_lgunflare, GUNFLARE )
 		EmitSfx( emit_lgroundflash, GROUNDFLASH )
 --		local unitDef = Spring.GetUnitDefID(unitID)
 --		local team = Spring.GetUnitTeam(unitID)

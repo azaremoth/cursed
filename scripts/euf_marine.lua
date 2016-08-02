@@ -72,18 +72,38 @@ local function Walkscript()
 	while true do
 		if moving then
 			SetMoveAnimationSpeed()
+
+			Turn2( rthigh, z_axis, -3, MOVEANIMATIONSPEED*2 )
+			Turn2( lthigh, z_axis, 3, MOVEANIMATIONSPEED*2 )
+			Turn2( rthigh, y_axis, 10, MOVEANIMATIONSPEED*2 )
+			Turn2( lthigh, y_axis, -10, MOVEANIMATIONSPEED*2 )
 			Turn2( rleg, y_axis, 0, MOVEANIMATIONSPEED*2 )
-			Turn2( lleg, y_axis, 0, MOVEANIMATIONSPEED*2 )		
+			Turn2( lleg, y_axis, 0, MOVEANIMATIONSPEED*2 )
+
+			
 			if not attacking then
-				Turn2( head, y_axis, 50, 55 )			
-				Turn2( chest, y_axis, -50, 55 )
-				Turn2( chest, z_axis, -2, MOVEANIMATIONSPEED )
-				Turn2( chest, x_axis, 5, MOVEANIMATIONSPEED )				
+				Turn2( head, y_axis, 50, MOVEANIMATIONSPEED*0.3 )			
+				Turn2( chest, x_axis, 12, MOVEANIMATIONSPEED )	
+				Turn2( chest, y_axis, -52, MOVEANIMATIONSPEED )
+				Turn2( chest, z_axis, -15, MOVEANIMATIONSPEED )			
 				Turn2( head, z_axis, 5, MOVEANIMATIONSPEED*0.3 )
+				
+				Turn2( luparm, x_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( luparm, y_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( luparm, z_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( ruparm, x_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( ruparm, y_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( ruparm, z_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( lloarm, x_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( lloarm, y_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( lloarm, z_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( rloarm, x_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( rloarm, y_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( rloarm, z_axis, 0, MOVEANIMATIONSPEED*3 )
 			end
 			Turn2( lthigh, x_axis, -25, MOVEANIMATIONSPEED*2 )
 			Turn2( rthigh, x_axis, 30, MOVEANIMATIONSPEED*2 )
-			Turn2( lleg, x_axis, 0, MOVEANIMATIONSPEED*1.4 )
+			Turn2( lleg, x_axis, -30, MOVEANIMATIONSPEED*1.4 )
 			Turn2( rleg, x_axis, 25, MOVEANIMATIONSPEED*1.8 )
 			Sleep(MOVEANIMATIONSLEEPTIME)				
 		end
@@ -99,13 +119,12 @@ local function Walkscript()
 		if moving then
 --			SetMoveAnimationSpeed()
 			if not attacking then
-				Turn2( chest, z_axis, 2, MOVEANIMATIONSPEED )
 				Turn2( head, z_axis, -5, MOVEANIMATIONSPEED*0.3 )
 			end
 			Turn2( lthigh, x_axis, 30, MOVEANIMATIONSPEED*2 )
 			Turn2( rthigh, x_axis, -25, MOVEANIMATIONSPEED*2 )
 			Turn2( lleg, x_axis, 25, MOVEANIMATIONSPEED*1.8 )
-			Turn2( rleg, x_axis, 0, MOVEANIMATIONSPEED*1.4 )
+			Turn2( rleg, x_axis, -30, MOVEANIMATIONSPEED*1.4 )
 			Sleep(MOVEANIMATIONSLEEPTIME)
 		end
 		if moving then
@@ -137,7 +156,7 @@ local function Walkscript()
 					Turn2( lhand, z_axis, -45, 120 )
 					Turn2( rloarm, x_axis, 2*rturn, 120 )
 					Turn2( rloarm, y_axis, 0, 120 )
-					Turn2( rloarm, z_axis, 0, 120 )	
+					Turn2( rloarm, z_axis, 0, 120 )
 				end
 				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED )
 			end

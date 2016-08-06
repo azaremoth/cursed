@@ -1,3 +1,10 @@
+>> Major changes 1.411 => 1.412
+
+Polishing
+- Made central crytstal unit unselectable. This should avoid having faulty attack commands on the unit.
+
+
+
 >> Major changes 1.410 => 1.411 
 
 Bugs

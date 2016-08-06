@@ -53,7 +53,7 @@ skin.imagelistview = {
 
   --DrawControl = DrawBackground,
 
-  colorBK          = {1,1,1,0.3},
+  colorBK          = {1,1,1,0.6},
   colorBK_selected = {1,0.7,0.1,0.8},
 
   colorFG          = {0, 0, 0, 0},

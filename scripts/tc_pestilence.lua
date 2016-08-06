@@ -43,8 +43,8 @@ local function SetMoveAnimationSpeed()
 	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/3300)
 	MOVEANIMATIONSLEEPTIME = (44000000/GetUnitValue(COB.MAX_SPEED))
 	--if statements inside walkscript contain wait functions that can take forever if speed is too slow
-	if MOVEANIMATIONSPEED < 50 then 
-		MOVEANIMATIONSPEED = 50
+	if MOVEANIMATIONSPEED < 10 then 
+		MOVEANIMATIONSPEED = 10
 	end
 	if MOVEANIMATIONSLEEPTIME > 500 then 
 		MOVEANIMATIONSLEEPTIME = 500

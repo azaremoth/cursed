@@ -24,17 +24,17 @@ Bugs
 - fixed cursed skeletons not having a corpse
 - fixed cursed Shade not receiving xp for units killed by the circle sword attack
 - fixed AI stragglers not being killed after destruction of the AI's last building
-- fixed los multipliers as these are not needed for Spring >100 -> burrowed units will not gain hugh los after unburrowing
+- fixed los multipliers as these are not needed for Spring versions 100+. burrowed units will thus not gain huge los after unburrowing anymore.
 
 Balance
 - increased efficiency of the tazer wepons used by imperial builderoids
 - reverse velocity for imperial tanks was reduced to ~80% of the forward velocity
-- Anti-air capabilities were changed back to the "old setup" with a limited number units being useful against air
+- Anti-air capabilities were changed back to the "old setup" with a limited number units being useful against air (before most units could target air units). This makes air more dangerous again.
 
 Features
 - removed parrying ability from all melee units to reduce complexity
 - added the flying Cacodemon. It can teleport over the whole map. Be aware!
-- Cursed Shade will receive 25% of the dealt damage as bonus hps
+- Cursed Shade will receive 25% of the dealt damage as bonus hps (health leach)
 
 Infrastructure
 - removed map-features from the archive that are also included in Spring features
@@ -50,7 +50,8 @@ Polishing
 - implemented a shader that makes trees moving in the wind
 - added simple circles to indicate aura coverage and tweaked the aura effects that were present before
 - slightly optimized the build menue
-
+- optimized the walking animation for imperial infantry and the cursed shade
+- made team colors more visible for the imperial sniper
 
 
 >> Major changes 1.400 => 1.402

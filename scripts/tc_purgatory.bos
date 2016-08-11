@@ -68,9 +68,9 @@ lua_PurgatoryTransformCommandReactivate()
 {
 }
 
-lua_PurgatoryTransformCommand()
-{
-}
+//lua_PurgatoryTransformCommand()
+//{
+//}
 
 TransformPurgatory()
 		{	deployed = deployed*(-1);	}
@@ -186,7 +186,7 @@ Create()
 	start-script Walkscript();
 	start-script Aiminationscript();
 	start-script Deployscript();
-	call-script lua_PurgatoryTransformCommand();
+//	call-script lua_PurgatoryTransformCommand();
 	spin rotator_emitartygun around z-axis speed <200> accelerate <400>;
 }
 

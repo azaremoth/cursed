@@ -17,14 +17,6 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local KamikazePairs = {
-	[UnitDefNames.tc_suicide.id] = "tc_suicide",
-	[UnitDefNames.tc_pestilence.id] = "tc_pestilence",
-	}
-
-local MaxSizeX = Game.mapSizeX
-local MaxSizeZ = Game.mapSizeZ
-
 include("LuaRules/Configs/customcmds.h.lua")
 
 --SYNCED
@@ -63,54 +55,26 @@ local COBRATIO = 1/30*65535
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-KamikazeCommand = {
-		id=CMD_KAMIKAZE,
-		type=CMDTYPE.ICON,
-		name="",
-		texture="&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/kamikaze.png",
-		tooltip="Sacrifice.\r\nHint: Kill this unit.",
-		action="sacrifice"
-		}
+
 		
 local activeUnits = {}
 
 local burrow_crusts = {}
+
+
 -- local currentmaxhp = {}	
 
 function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 	activeUnits[unitID] = true
-	if KamikazePairs [unitDefID] then
-		Spring.InsertUnitCmdDesc(unitID, KamikazeCommand)
-	end	
 end
 
-function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
+--[[function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 	activeUnits[unitID] = nil
-	if (burrow_crusts[unitID] and not KamikazePairs [unitDefID]) then
+	if (burrow_crusts[unitID]) then
 		Spring.DestroyUnit(burrow_crusts[unitID])
 		burrow_crusts[unitID] = nil
 	end	
-end
-
-function gadget:CommandFallback(unitID, unitDefID, unitTeam, cmd, param, opts)
-	if cmd  == CMD_KAMIKAZE then
-		local valid = 1
-		local x,y,z = Spring.GetUnitPosition(unitID)
-		local height = Spring.GetGroundHeight(x,z)
-		local MaxSizeX = Game.mapSizeX
-		local MaxSizeZ = Game.mapSizeZ
-		if x < 0  or  x > MaxSizeX or z < 0 or z > MaxSizeZ or height < -5 then valid = 0 else valid = 1 end
-		if valid == 1 then
-			Spring.DestroyUnit(unitID,false,false)
-			if (burrow_crusts[unitID]) then
-				Spring.DestroyUnit(burrow_crusts[unitID])
-				burrow_crusts[unitID] = nil
-			end		
-		end
-	return true, true;
-	end
-	return false
-end
+end]]--
 
 function gadget:GameFrame(f)
 	

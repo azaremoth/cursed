@@ -78,7 +78,7 @@ ChangeweaponCommand = {
 		name="",
 		texture="&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/sarge-chaingun.png",
 		tooltip="Weapon-change.\r\nHint: Change between chain- and plasmagun",
-		action="change"
+		action="changeweapon"
 		}
 BurrowCommand = {
 		id=CMD_BURROW,
@@ -88,11 +88,6 @@ BurrowCommand = {
 		tooltip="Burrow/Unborrow.\r\nHint: Burrowed units are hidden and unable to move or attack.",
 		action="burrow"
 		}
------------------------------------
-function gadget:Initialize()
-	Spring.SendCommands("unbind b")  
-	Spring.SendCommands("bind b burrow")
-end 
 -----------------------------------	
 function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 	-- defined in this file
@@ -138,12 +133,10 @@ local function CallUnitScript(unitID, funcName, ...)
 end  
 
 function gadget:CommandFallback(unitID, unitDefID, team, cmd, param, opts)
-	if cmd  == CMD_SPECIALSKILL then -- Shade special Skill
-		local SpecialSkiller = SpecialSkillPairs[unitDefID]
-		if not SpecialSkiller then return false end
+	if (cmd  == CMD_SPECIALSKILL and SpecialSkillPairs[unitDefID] ~= nil) then -- Shade special Skill
 		CallUnitScript(unitID, "specialskill")
 		return true, true  --// command was used, remove it
-	elseif cmd  == CMD_TRANSFORM_PURGATORY then -- Purgatory deploy command incl. grey out during deployment
+	elseif (cmd  == CMD_TRANSFORM_PURGATORY and DeployPairs[unitDefID] ~= nil) then -- Purgatory deploy command incl. grey out during deployment
 		local valid = 1
 		local x,y,z = Spring.GetUnitPosition(unitID)
 		local height = Spring.GetGroundHeight(x,z)
@@ -156,9 +149,7 @@ function gadget:CommandFallback(unitID, unitDefID, team, cmd, param, opts)
 			Spring.InsertUnitCmdDesc(unitID, TransformPurgatoryOff)
 		end
 		return true, true  --// command was used, remove it
-	elseif cmd  == CMD_CHANGEWEAPON_LUA then  -- Change weapon command for the sarge
-			local Weaponchangers = WeaponchangersPairs[unitDefID]
-			if not Weaponchangers then return false end
+	elseif (cmd  == CMD_CHANGEWEAPON_LUA and WeaponchangersPairs[unitDefID] ~= nil) then  -- Change weapon command for the sarge
 			local cmdID
 			local changedpic = false
 			cmdID = Spring.FindUnitCmdDesc(unitID, CMD_CHANGEWEAPON_LUA)

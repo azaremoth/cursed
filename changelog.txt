@@ -2,7 +2,8 @@
 
 Polishing
 - Made central crytstal unit unselectable. This should avoid having faulty attack commands on the unit
-- code optimization (merges reduced redundancies
+- Code optimization (merges reduced redundancies
+- Added keyboard short cuts for special commands
 
 
 

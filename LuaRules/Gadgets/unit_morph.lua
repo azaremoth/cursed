@@ -763,7 +763,7 @@ function gadget:Initialize()
       if (useXPMorph) then XpMorphUnits[#XpMorphUnits+1] = {id=unitID,defID=unitDefID,team=teamID} end
     end
   end
-
+  
 end
 
 

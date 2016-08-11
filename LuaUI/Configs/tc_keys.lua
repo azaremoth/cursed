@@ -3,7 +3,7 @@ return {
 	-- yyyymmdd
 	-- if newer than user's, overwrite ALL zir zk_keys
 	-- else just add any that are missing from local config
-	["date"] = 20130220,
+	["date"] = 20160811,
 
 
 	-- all default ZK keybinds. 
@@ -143,9 +143,16 @@ return {
 	{	"track",	"alt+t",},
 	{	"resurrect",	"t",},
 	{	"controlunit",	"alt+v",},
+
 	{	"jump",	"j",},
 	{	"burrow",	"b",},
+	{	"sacrifice",	"d",},
+	{	"deploy",	"y",},	
+	{	"changeweapon",	"c",},	
+	{	"specialstuff",	"i",},	
 	{	"unloadbunker",	"u",},
+	{	"morph",	"x",},
+	
 	{	"select AllMap++_ClearSelection_SelectAll+",	"ctrl+a",},
 	{	"select AllMap+_Builder_Not_Building_Not_Transport_Idle+_ClearSelection_SelectAll+",	"ctrl+b",},
 	{	"select PrevSelection+_Not_RelativeHealth_30+_ClearSelection_SelectAll+",	"ctrl+e",},

@@ -13,14 +13,19 @@ end
 
 include("LuaRules/Configs/customcmds.h.lua")
 
-local KamikazePairs = {
-	[UnitDefNames.tc_suicide.id] = "tc_suicide",
-	[UnitDefNames.tc_pestilence.id] = "tc_pestilence",
+local SpecialSkillPairs = {
+	[UnitDefNames.tc_shade_lvl3.id] = "tc_shade_lvl3",
+	[UnitDefNames.tc_shade_lvl4.id] = "tc_shade_lvl4",
+	[UnitDefNames.tc_shade_lvl5.id] = "tc_shade_lvl5",	
 	}
 local DeployPairs = {
 	[UnitDefNames.tc_purgatory.id] = "tc_purgatory",
 	}	
-	
+local KamikazePairs = {
+	[UnitDefNames.tc_suicide.id] = "tc_suicide",
+	[UnitDefNames.tc_pestilence.id] = "tc_pestilence",
+	}
+
 
 local MaxSizeX = Game.mapSizeX
 local MaxSizeZ = Game.mapSizeZ
@@ -57,13 +62,28 @@ KamikazeCommand = {
 		action="sacrifice"
 		}		
 
+SpecialSkillCommand = {
+		id=CMD_SPECIALSKILL,
+		type=CMDTYPE.ICON,
+		name="",
+		texture="&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/witchray.png",
+		tooltip="Illusions\r\nHint: Create Shade illusions",
+		action="specialstuff"
+		}		
+
+-----------------------------------
+		
 function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 	if KamikazePairs [unitDefID] then
 		Spring.InsertUnitCmdDesc(unitID, KamikazeCommand)
 	elseif DeployPairs [unitDefID] then
-		Spring.InsertUnitCmdDesc(unitID, TransformPurgatory)	
+		Spring.InsertUnitCmdDesc(unitID, TransformPurgatory)
+	elseif SpecialSkillPairs [unitDefID] then
+		Spring.InsertUnitCmdDesc(unitID, SpecialSkillCommand)	
 	end	
 end
+
+-----------------------------------
 
 function PurgatoryTransformCommandReactivate(unitID, ud, team)
 	Spring.RemoveUnitCmdDesc(unitID, TransformPurgatoryOff)
@@ -71,8 +91,14 @@ function PurgatoryTransformCommandReactivate(unitID, ud, team)
 end
 gadgetHandler:RegisterGlobal("PurgatoryTransformCommandReactivate", PurgatoryTransformCommandReactivate)
 
-function gadget:CommandFallback(unitID, ud, team, cmd, param, opts)
-	if cmd  == CMD_TRANSFORM_PURGATORY then
+
+function gadget:CommandFallback(unitID, unitDefID, team, cmd, param, opts)
+	if cmd  == CMD_SPECIALSKILL then
+		local SpecialSkiller = SpecialSkillPairs[unitDefID]
+		if not SpecialSkiller then return false end
+		Spring.UnitScript.CallAsUnit(unitID,Spring.UnitScript.GetScriptEnv(unitID).script.specialskill)
+		return true, true
+	elseif cmd  == CMD_TRANSFORM_PURGATORY then
 		local valid = 1
 		local x,y,z = Spring.GetUnitPosition(unitID)
 		local height = Spring.GetGroundHeight(x,z)
@@ -84,21 +110,13 @@ function gadget:CommandFallback(unitID, ud, team, cmd, param, opts)
 			Spring.RemoveUnitCmdDesc(unitID, TransformPurgatory)
 			Spring.InsertUnitCmdDesc(unitID, TransformPurgatoryOff)
 		end
-		return true, true;
+		return true, true
 	elseif cmd  == CMD_KAMIKAZE then
-		local valid = 1
-		local x,y,z = Spring.GetUnitPosition(unitID)
-		local height = Spring.GetGroundHeight(x,z)
-		local MaxSizeX = Game.mapSizeX
-		local MaxSizeZ = Game.mapSizeZ
-		if x < 0  or  x > MaxSizeX or z < 0 or z > MaxSizeZ or height < -5 then valid = 0 else valid = 1 end
-		if valid == 1 then
-			Spring.DestroyUnit(unitID,false,false)
-		end
-		return true, true;
+		Spring.DestroyUnit(unitID,false,false)
+		return true, true
+	else
+		return false
 	end
-	
-	return false
 end
 
 

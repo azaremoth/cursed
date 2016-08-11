@@ -24,6 +24,7 @@ local unitDef = {
 	factionname		   = "cursed",
 	isinfantry = "true",
 	canbetransported = "true",
+	cankamakazi = "true",	
     helptext = "Caution: explodes spontaneously after a random time",
 	resurrectintounit	= "tc_skeleton"		
 	},

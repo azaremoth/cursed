@@ -21,7 +21,8 @@ local unitDef = {
   customParams          = {
 	isinfantry = "true",  
 	factionname	= "cursed",
-	canburrow      = "true",	
+	canburrow      = "true",
+	cankamakazi = "true",
     helptext 	= "Generates 3 devastating suicide blobs after death."	
   },
   defaultmissiontype = "Standby",

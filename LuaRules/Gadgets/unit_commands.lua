@@ -14,6 +14,8 @@ end
 include("LuaRules/Configs/customcmds.h.lua")
 
 local weaponActive = {}
+local BurrowerUnitList = {}	
+local KamakaziUnitList = {}	
 
 local SpecialSkillPairs = {
 	[UnitDefNames.tc_shade_lvl3.id] = "tc_shade_lvl3",
@@ -23,10 +25,6 @@ local SpecialSkillPairs = {
 local DeployPairs = {
 	[UnitDefNames.tc_purgatory.id] = "tc_purgatory",
 	}	
-local KamikazePairs = {
-	[UnitDefNames.tc_suicide.id] = "tc_suicide",
-	[UnitDefNames.tc_pestilence.id] = "tc_pestilence",
-	}
 local WeaponchangersPairs = {
 	[UnitDefNames.euf_sarge_lvl3.id] = "euf_sarge_lvl3",
 	[UnitDefNames.euf_sarge_lvl4.id] = "euf_sarge_lvl4",	
@@ -82,13 +80,23 @@ ChangeweaponCommand = {
 		tooltip="Weapon-change.\r\nHint: Change between chain- and plasmagun",
 		action="change"
 		}
-
+BurrowCommand = {
+		id=CMD_BURROW,
+		type=CMDTYPE.ICON,
+		name="Burrow",
+		texture="&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/burrow.png",
+		tooltip="Burrow/Unborrow.\r\nHint: Burrowed units are hidden and unable to move or attack.",
+		action="burrow"
+		}
 -----------------------------------
-		
-function gadget:UnitCreated(unitID, unitDefID, unitTeam)
-	if KamikazePairs [unitDefID] then
-		Spring.InsertUnitCmdDesc(unitID, KamikazeCommand)
-	elseif DeployPairs [unitDefID] then
+function gadget:Initialize()
+	Spring.SendCommands("unbind b")  
+	Spring.SendCommands("bind b burrow")
+end 
+-----------------------------------	
+function gadget:UnitFinished(unitID, unitDefID, unitTeam)
+	-- defined in this file
+	if DeployPairs [unitDefID] then
 		Spring.InsertUnitCmdDesc(unitID, TransformPurgatory)
 	elseif SpecialSkillPairs [unitDefID] then
 		Spring.InsertUnitCmdDesc(unitID, SpecialSkillCommand)
@@ -96,8 +104,27 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 		Spring.InsertUnitCmdDesc(unitID, ChangeweaponCommand)
 		weaponActive[unitID] = 1
 	end	
+	-- defined by unit definitions in custom commands section
+	local canburrowdef = UnitDefs[unitDefID].customParams.canburrow
+	if (canburrowdef == "true" ) then
+		Spring.InsertUnitCmdDesc(unitID, BurrowCommand)
+		BurrowerUnitList[unitID] = true
+	end	
+	local cankamakazidef = UnitDefs[unitDefID].customParams.cankamakazi	
+	if (cankamakazidef == "true" ) then
+		Spring.InsertUnitCmdDesc(unitID, KamikazeCommand)
+		KamakaziUnitList[unitID] = true
+	end	
 end
 
+function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
+	if BurrowerUnitList[unitID] ~= nil then
+		BurrowerUnitList[unitID] = nil
+	end
+	if KamakaziUnitList[unitID] ~= nil then
+		KamakaziUnitList[unitID] = nil
+	end
+end
 -----------------------------------
 
 function PurgatoryTransformCommandReactivate(unitID, ud, team)
@@ -111,12 +138,12 @@ local function CallUnitScript(unitID, funcName, ...)
 end  
 
 function gadget:CommandFallback(unitID, unitDefID, team, cmd, param, opts)
-	if cmd  == CMD_SPECIALSKILL then
+	if cmd  == CMD_SPECIALSKILL then -- Shade special Skill
 		local SpecialSkiller = SpecialSkillPairs[unitDefID]
 		if not SpecialSkiller then return false end
 		CallUnitScript(unitID, "specialskill")
-		return true, true
-	elseif cmd  == CMD_TRANSFORM_PURGATORY then
+		return true, true  --// command was used, remove it
+	elseif cmd  == CMD_TRANSFORM_PURGATORY then -- Purgatory deploy command incl. grey out during deployment
 		local valid = 1
 		local x,y,z = Spring.GetUnitPosition(unitID)
 		local height = Spring.GetGroundHeight(x,z)
@@ -128,11 +155,8 @@ function gadget:CommandFallback(unitID, unitDefID, team, cmd, param, opts)
 			Spring.RemoveUnitCmdDesc(unitID, TransformPurgatory)
 			Spring.InsertUnitCmdDesc(unitID, TransformPurgatoryOff)
 		end
-		return true, true
-	elseif cmd  == CMD_KAMIKAZE then
-		Spring.DestroyUnit(unitID,false,false)
-		return true, true
-	elseif cmd  == CMD_CHANGEWEAPON_LUA then
+		return true, true  --// command was used, remove it
+	elseif cmd  == CMD_CHANGEWEAPON_LUA then  -- Change weapon command for the sarge
 			local Weaponchangers = WeaponchangersPairs[unitDefID]
 			if not Weaponchangers then return false end
 			local cmdID
@@ -160,7 +184,13 @@ function gadget:CommandFallback(unitID, unitDefID, team, cmd, param, opts)
 			if changedpic == true then
 				CallUnitScript(unitID, "Changeweapon")
 			end
-		return true, true
+		return true, true  --// command was used, remove it
+	elseif (cmd == CMD_BURROW and BurrowerUnitList[unitID] == true) then  -- Burrowing command
+		CallUnitScript(unitID, "Burrow")
+		return true, true  --// command was used, remove it
+	elseif (cmd  == CMD_KAMIKAZE and KamakaziUnitList[unitID] == true) then  -- Kamakazi command
+		Spring.DestroyUnit(unitID,false,false)
+		return true, true  --// command was used, remove it
 	else
 		return false
 	end

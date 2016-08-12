@@ -4,6 +4,7 @@ Polishing
 - Made central crystal unit unselectable. This should avoid having faulty attack commands on the unit
 - Code optimization (merges and reduced redundancies)
 - Added keyboard short cuts for special commands like weapon change, morph, ...
+- Replaced yellow glow of cursed pestilence with team color
 
 Bugs
 - fixed weapons without aoe not being able to hit burrowed units

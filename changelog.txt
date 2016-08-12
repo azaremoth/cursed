@@ -1,9 +1,13 @@
 >> Major changes 1.411 => 1.412
 
 Polishing
-- Made central crytstal unit unselectable. This should avoid having faulty attack commands on the unit
-- Code optimization (merges reduced redundancies
-- Added keyboard short cuts for special commands
+- Made central crystal unit unselectable. This should avoid having faulty attack commands on the unit
+- Code optimization (merges and reduced redundancies)
+- Added keyboard short cuts for special commands like weapon change, morph, ...
+
+Bugs
+- fixed weapons without aoe not being able to hit burrowed units
+- fixed that you could kill big units after unburrowing by driving over them (crushable status was faulty)
 
 
 

@@ -144,9 +144,9 @@ local function Walkscript()
 			Turn2( lthigh, z_axis, 0, MOVEANIMATIONSPEED*0.8 )
 			Turn2( rthigh, z_axis, 0, MOVEANIMATIONSPEED*0.8 )
 			Move( pelvis, y_axis, 0, 8 )				
-		if not attacking and not aiming then
-					Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED )
-				end
+			if not attacking and not aiming then
+				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED )
+			end
 		end
 		Sleep(30)		
 	end

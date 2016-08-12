@@ -136,7 +136,6 @@ local function Walkscript()
 			if not attacking then
 				Turn2( chest, x_axis, 0, MOVEANIMATIONSPEED )
 				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED )
-				WaitForTurn( chest, y_axis )
 			end
 		end
 		Sleep(30)

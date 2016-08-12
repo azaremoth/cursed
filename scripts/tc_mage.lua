@@ -145,8 +145,7 @@ local function Walkscript()
 				Turn2( ruparm, x_axis, 0, MOVEANIMATIONSPEED*3 )			
 				Turn2( luparm, x_axis, 0, MOVEANIMATIONSPEED*3 )
 				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED )
-				Turn2( head, z_axis, 0, MOVEANIMATIONSPEED*0.3 )
-				WaitForTurn( chest, y_axis )				
+				Turn2( head, z_axis, 0, MOVEANIMATIONSPEED*0.3 )		
 			end
 		end
 		Sleep(30)

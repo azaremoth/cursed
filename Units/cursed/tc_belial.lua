@@ -196,7 +196,7 @@ local weaponDefs = {
     sweepfire          = true,
     tolerance          = 3000,
     turret             = true,
-    weaponVelocity     = 900,
+    weaponVelocity     = 1600,
 --	Weaponspecial ------------------------------------------
     intensity          = 1,
     coreThickness      = 1,	

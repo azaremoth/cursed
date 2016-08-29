@@ -1,3 +1,10 @@
+>> Major changes 1.413 => 1.414
+
+Balance
+- increased velocity of machine-gun like weapons to be more effective against fast targets
+
+
+
 >> Major changes 1.411 => 1.413
 
 Polishing

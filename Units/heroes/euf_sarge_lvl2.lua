@@ -177,7 +177,7 @@ SARGE_CHAINGUN = {
     soundTrigger       = true,
     tolerance          = 3000,
     turret             = true,
-    weaponVelocity     = 900,
+    weaponVelocity     = 1600,
 --	Weaponspecial ------------------------------------------
     model              = "gunshot.s3o",    
 	size               = 5,

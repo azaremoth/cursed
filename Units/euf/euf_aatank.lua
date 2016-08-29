@@ -142,7 +142,7 @@ local weaponDefs = {
     soundTrigger       = true,
     tolerance          = 3000,
     turret             = true,
-    weaponVelocity     = 1000,
+    weaponVelocity     = 1800,
 	sweepFire 		   = true,
 --	burst ------------------------------------------
 	burst = 2,

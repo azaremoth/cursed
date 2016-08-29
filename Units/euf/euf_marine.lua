@@ -147,7 +147,7 @@ local weaponDefs = {
 	sweepFire = true,	
     tolerance          = 3000,
     turret             = true,
-    weaponVelocity     = 1000,
+    weaponVelocity     = 1600,
 --	burst --------------------------------------------------
 	burst = 5,
 	burstrate = 0.075,
@@ -185,7 +185,7 @@ local weaponDefs = {
 	sweepFire = true,	
     tolerance          = 3000,
     turret             = true,
-    weaponVelocity     = 1000,
+    weaponVelocity     = 1600,
 --	burst --------------------------------------------------
 	burst = 5,
 	burstrate = 0.075,

@@ -132,7 +132,7 @@ local weaponDefs = {
 	sweepFire		   = false,
     tolerance          = 3000,
     turret             = true,
-    weaponVelocity     = 900,
+    weaponVelocity     = 1600,
 --	Weaponspecial ------------------------------------------
     beamTime           = 0.05,
     coreThickness      = 0.1,

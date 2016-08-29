@@ -131,7 +131,7 @@ FLAK_CRAWLER = {
 	sweepFire		   = false,
     tolerance          = 3000,
     turret             = true,
-    weaponVelocity     = 1000,
+    weaponVelocity     = 1800,
 --	Weaponspecial ------------------------------------------
     beamTime           = 0.05,
     coreThickness      = 0.1,

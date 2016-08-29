@@ -127,7 +127,7 @@ local weaponDefs = {
 	sweepFire = true,	
     tolerance          = 3000,
     turret             = true,
-    weaponVelocity     = 1000,
+    weaponVelocity     = 1600,
 --	Weaponspecial ------------------------------------------
     Model              = "gunshot.s3o",    
 	Size               = 5,

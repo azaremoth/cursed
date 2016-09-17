@@ -30,7 +30,7 @@ local cloak = {
 local repeater = {}
 
 local wait = {
-	[ UnitDefNames['tc_soulstone'].id ] = true,
+--	[ UnitDefNames['tc_soulstone'].id ] = true,
 }
 
 --------------------------------------------------------------------------------

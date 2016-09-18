@@ -1,0 +1,45 @@
+
+function gadget:GetInfo ()
+    return {
+        name      = "Balanced light",
+        desc      = "Sets light conditions on the map",
+        author    = "aZaremoth,Code_Man",
+        date      = "29/4/2016",
+        license   = "MIT X11",
+        layer     = 1,
+        enabled   = true
+    }
+end
+
+local alpha = 0.5
+local multiplier = 0.75
+local fogmultiplier = 0.5
+local fogalpha = 0.25
+
+if (not gadgetHandler:IsSyncedCode()) then
+    return false
+end
+
+function gadget:Initialize ()
+    local mapOptions = Spring.GetMapOptions ()
+    if mapOptions ~= nil and #mapOptions ~= 0 then
+        if tonumber (mapOptions.weather) == 0 then
+            gadgetHandler:RemoveGadget ()
+        end
+    end
+	Spring.SetSunManualControl (true)
+			
+	Spring.SetSunLighting ({groundAmbientColor = {multiplier*0.8, multiplier*0.8, multiplier*0.8}})
+	Spring.SetSunLighting ({groundDiffuseColor = {multiplier*0.85, multiplier*0.85, multiplier*0.85}})
+	Spring.SetSunLighting ({groundSpecularColor = {multiplier*0.5, multiplier*0.5, multiplier*0.5}})
+			
+	Spring.SetSunLighting ({unitAmbientColor = {multiplier*0.85, multiplier*0.85, multiplier*0.85}})
+	Spring.SetSunLighting ({unitDiffuseColor = {multiplier*0.85, multiplier*0.85, multiplier*0.85}})
+	Spring.SetSunLighting ({unitSpecularColor = {multiplier*0.5,multiplier*0.5, multiplier*0.5}})
+			
+	Spring.SetAtmosphere ({sunColor = {multiplier*0.85, multiplier*0.85, multiplier*0.85, alpha}})
+	Spring.SetAtmosphere ({skyColor = {multiplier*0.70, multiplier*0.70, multiplier*0.70, alpha}})
+	Spring.SetAtmosphere ({cloudColor = {multiplier*0.17, multiplier*0.17, multiplier*0.17, alpha}})
+	
+--	Spring.SetAtmosphere({ fogStart = 0, fogEnd   = 0.25, fogColor = { fogmultiplier*0.5, fogmultiplier*0.5, fogmultiplier*0.5, fogalpha }})
+end

@@ -31,6 +31,8 @@ local unitDef = {
 	factionname	= "cursed",
 	growingcreep = true,
 	noautorepair = true,
+    normaltex = "unittextures/normalmaps/tc_obelisk_normal.png",
+	normalmaps = "yes",	
     helptext 	= "Obelisks are immobile base cunstruction units."
   },
   description        = "Base Construction",

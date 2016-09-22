@@ -22,6 +22,8 @@ local unitDef = {
   customParams          = {	
 	factionname		   = "cursed",
 	growingcreep = true,	
+	normaltex = "unittextures/normalmaps/tc_soulcage_normal.png",
+	normalmaps = "yes",		
     helptext = "This is the advanced energy supply."	
 	},
   description        = "Creates more soul energy",

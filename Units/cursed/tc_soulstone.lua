@@ -21,7 +21,9 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {	
 	factionname		   = "cursed",
-	growingcreep = true,	
+	growingcreep = true,
+	normaltex = "unittextures/normalmaps/tc_soulstone_normal.png",
+	normalmaps = "yes",	
     helptext = "This is the basic energy supply."
 	},
   description        = "Creates soul energy",

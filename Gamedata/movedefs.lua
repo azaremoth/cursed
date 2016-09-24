@@ -159,7 +159,15 @@ local moveDefs = {
 		depthmod = 0.1,		
 		slopemod = 0,		
 		crushStrength = 0,
-	},			
+	},
+	UBOAT = {
+		footprintx = 3,
+		footprintz = 3,
+        minwaterdepth = 10,
+		maxwaterdepth = 100000,
+		crushstrength = 5,
+		subMarine = 1,
+	},
 }
 
 

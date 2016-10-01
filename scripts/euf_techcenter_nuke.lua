@@ -33,6 +33,8 @@ function script.Create()
 	Spring.UnitScript.Spin ( ring2, y_axis, -1)
 	Spring.UnitScript.Spin ( ring3, y_axis, 1)
 	Spring.UnitScript.Spin ( ring4, y_axis, -1)
+	
+--	Spring.SetUnitWeaponState(unitID, 0, "reloadState", 0)
 end
 
 --weapon 1 -----------------------------------------------------------------

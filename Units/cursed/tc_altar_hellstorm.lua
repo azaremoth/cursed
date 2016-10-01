@@ -1,70 +1,77 @@
--- UNITDEF -- euf_techcenter --
+-- UNITDEF -- TC_ALTAR --
 --------------------------------------------------------------------------------
 
-local unitName = "euf_techcenter_nuke"
+local unitName = "tc_altar_hellstorm"
 
 --------------------------------------------------------------------------------
 
 local unitDef = {
-  activateWhenBuilt  = true,
   armortype          = "HEAVY",
-  buildCostEnergy    = 700,
-  buildCostMetal     = 700,
+  buildCostEnergy    = 800,
+  buildCostMetal     = 800,
   buildingGroundDecalDecaySpeed = 0.01,
-  buildingGroundDecalSizeX = 9,
-  buildingGroundDecalSizeY = 9,
-  buildingGroundDecalType = "euf_groundplate.png",  
-  buildTime          = 700,
-  buildPic           = "euf_techcenter.png",  
-  category           = "EUF LAND HEAVYARMOR",
+  buildingGroundDecalSizeX = 20,
+  buildingGroundDecalSizeY = 20,
+  buildingGroundDecalType = "tc_groundplate1.png",
+  buildPic           = "tc_altar.png",
+  buildTime          = 800,
+  canMove            = true,
+  canPatrol          = true,
+  canstop            = "1",
+  category           = "CURSED LAND HEAVYARMOR",
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",
-  customParams          = {
-	factionname		   = "imperials",
-	ProvideTech         = "Advanced Technology",
-	normaltex = "unittextures/normalmaps/euf_techcenter_normal.png",
-	normalmaps = "yes",				
-    helptext = "Enables diggers, walkers and MLRS. Was upgraded with a nuke launcher."
-  },
-  description        = "Enables advanced Technology for diggers, walkers and MLRS",
-  --  energyMake         = 0,
-  energyStorage      = 0,
-  explodeAs          = "SMALL_EXPLOSION_YELLOW",
-  footprintX         = 8,
-  footprintZ         = 8,
-  iconType           = "square",
-  idleAutoHeal       = 0.01,
+  customParams          = {	
+	factionname		   = "cursed",
+	normaltex = "unittextures/normalmaps/tc_altar_normal.png",
+	normalmaps = "yes",
+	ProvideTech         = "Cursed Technology",	
+    helptext 	= "Skeleton Dragons can be summoned here. The altar enables the witch's shield spell."
+	},
+  description        = "Mighty bonedragons can be summoned here",
+  explodeAs          = "BIG_EXPLOSION_GREEN_HD",
+  firestandorders    = "1",
+  footprintX         = 7,
+  footprintZ         = 7,
+  iconType           = "bigsquare",
+  idleAutoHeal       = 2.5,
   idleTime           = 400,
   levelGround        = true,
-  maxDamage          = 5000,
-  maxSlope           = 25,
+  maxDamage          = 3600,
+  maxSlope           = 20,
   maxWaterDepth      = 0,
-  name               = "Technology Center",
-  nanoColor          = "0 0 0",
+  mobilestandorders  = "1",
+  name               = "Altar of Evil",
+  nanoColor          = "0.6 1 0.15",
   noAutoFire         = false,
-  objectName         = "euf_techcenter.s3o",
-  onoffable          = false,
-  radarDistance      = 1500,
-  script             = "euf_techcenter_nuke.lua",  
-  selfDestructAs     = "BIG_EXPLOSION_YELLOW",
+  objectName         = "tc_altar.s3o",
+  radarDistance      = 64,
+  script             = "tc_altar_hellstorm.lua",    
+  selfDestructAs     = "BIG_EXPLOSION_GREEN_HD",
   showNanoFrame      = false,
-  side               = "imperials",
+  showNanoSpray      = false,
+  side               = "cursed",
   sightDistance      = 256,
   smoothAnim         = false,
-  unitname           = "euf_techcenter_nuke",
-  useBuildingGroundDecal = true,  
-  yardMap            = "oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo oooooooo",
+  standingfireorder  = "2",
+  standingmoveorder  = "2",
+  TEDClass           = "PLANT",
+  unitname           = "tc_altar_hellstorm",
+  useBuildingGroundDecal = true,
+  yardMap            = "ooooooo ooooooo oocccoo oocccoo oocccoo ooooooo ooooooo",
+
   sfxtypes = {
-  explosiongenerators = {
-      "custom:Big_Explosion_YELLOW",
-      "custom:EUF_Structurebuilding_Medium",
+    explosiongenerators = {
+      "custom:SPIKES_MAGE",
+      "custom:Medium_Explosion_Green",
+      "custom:Structurebuilding_Big",
     },
-  },  
+  },
   sounds = {
     build              = "",
     canceldestruct     = "",
     repair             = "",
-    underattack        = "voices_baseattacked",
+    underattack        = "bell",
     working            = "",
     arrived = {
       "",
@@ -84,23 +91,23 @@ local unitDef = {
       "",
     },
     select = {
-      "solar_select",
+      "building",
     },
   },
   weapons = {
     [1]  = {
       badTargetCategory  = "LIGHTARMOR AIR",
-      def                = "EUF_NUKE",
+      def                = "TC_HELLSTORM",
       mainDir            = "0 0 1",
       maxAngleDif        = 360,
       onlyTargetCategory = "LAND",
     },
-  },	
+  },	  
 }
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  EUF_NUKE = {
+  TC_HELLSTORM = {
       name                    = [[Strategic Nuclear Missile]],
       areaOfEffect            = 1500,
       cegTag                  = [[NUCKLEARMINI]],
@@ -123,7 +130,7 @@ local weaponDefs = {
       model                   = [[nuke.s3o]],
       noSelfDamage            = false,
       range                   = 72000,
-      reloadtime              = 400,
+      reloadtime              = 1, --400
       smokeTrail              = false,
       soundHit                = [[explosion\ex_ultra8]],
       startVelocity           = 100,
@@ -158,17 +165,17 @@ local featureDefs = {
     blocking           = true,
 	customParams          = {
 		featuredecaytime		= "300"
-	},  		
-    damage             = 1000,
-    description        = "Wrecked Technology Center",
-    footprintX         = 8,
-    footprintZ         = 8,
+	},  	
+    damage             = 9000,
+    description        = "Wrecked altar",
+    footprintX         = 7,
+    footprintZ         = 7,
     height             = "30",
     hitdensity         = "100",
-    metal              = 300,
-    object             = "euf_techcenter_dead.s3o",
+    metal              = 500,
+    object             = "TC_altar_dead.s3o",
     reclaimable        = true,
-    reclaimTime        = 40,
+    reclaimTime        = 325,
   },
 }
 unitDef.featureDefs = featureDefs

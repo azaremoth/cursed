@@ -24,7 +24,7 @@ local unitDef = {
 	ProvideTech         = "Advanced Technology",
 	normaltex = "unittextures/normalmaps/euf_techcenter_normal.png",
 	normalmaps = "yes",				
-    helptext = "Enables diggers, walkers and MLRS. Can be upgraded with a shield generator."
+    helptext = "Enables diggers, walkers and MLRS. Was upgraded with a nuke launcher."
   },
   description        = "Enables advanced Technology for diggers, walkers and MLRS",
   --  energyMake         = 0,
@@ -102,8 +102,8 @@ local unitDef = {
 local weaponDefs = {
   EUF_NUKE = {
       name                    = [[Strategic Nuclear Missile]],
-      areaOfEffect            = 1920,
---      cegTag                  = [[NUCKLEARMINI]],
+      areaOfEffect            = 1500,
+      cegTag                  = [[NUCKLEARMINI]],
       collideFriendly         = false,
       collideFeature          = false,
       commandfire             = true,
@@ -120,29 +120,28 @@ local weaponDefs = {
       impulseBoost            = 0.5,
       impulseFactor           = 0.2,
       interceptedByShieldType = 65,
-      model                   = [[Bomb.s3o]],
+      model                   = [[nuke.s3o]],
       noSelfDamage            = false,
       range                   = 72000,
       reloadtime              = 5,
       smokeTrail              = false,
       soundHit                = [[explosion\ex_ultra8]],
-      startVelocity           = 800,
+      startVelocity           = 100,
       stockpile               = true,
- --     stockpileTime           = 10^5,
-      stockpileTime           = 1, 
+      stockpileTime           = 10^4,
       targetable              = 1,
       texture1                = [[null]], --flare
       tolerance               = 4000,
-      weaponAcceleration      = 0,
+      weaponAcceleration      = 100,
       weaponTimer             = 10,
       weaponType              = [[StarburstLauncher]],
       weaponVelocity          = 800,
 ------------------------------------------------------------
 		damage = {
-		  default            = 10000,
-		  flyer              = 10000,
-		  heavy              = 10000,
-		  light              = 10000,
+		  default            = 3000,
+		  flyer              = 3000,
+		  heavy              = 3000,
+		  light              = 3000,
 		},
 	},
  }

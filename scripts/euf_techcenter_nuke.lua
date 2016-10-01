@@ -1,13 +1,22 @@
 local base = piece 'base'
 local building = piece 'building'
 local radar = piece 'radar'
-local pont = piece 'pont'
+local pont_dark = piece 'pont_dark'
+local pont_glow = piece 'pont_glow'
+local emit_beam = piece 'emit_beam'
+local top_nuke = piece 'top_nuke'
+local ring1 = piece 'ring1'
+local ring2 = piece 'ring2'
+local ring3 = piece 'ring3'
+local ring4 = piece 'ring4'
 
 
 local BOOM	 = 1024+0
 local BUILDINGFX	 = 1025+0
 
 function script.Create()
+	Hide (pont_glow)
+
 	local structureheight = ((-50*GetUnitValue(COB.UNIT_HEIGHT))/3080192)
 	Move( building, y_axis, structureheight)
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
@@ -19,7 +28,11 @@ function script.Create()
 	end
 	Move( building, y_axis, 0, 1000 )
 	Sleep(500)
-	Spring.UnitScript.Spin ( radar, y_axis, 2) 
+	Spring.UnitScript.Spin ( radar, y_axis, 2)
+	Spring.UnitScript.Spin ( ring1, y_axis, 1)
+	Spring.UnitScript.Spin ( ring2, y_axis, -1)
+	Spring.UnitScript.Spin ( ring3, y_axis, 1)
+	Spring.UnitScript.Spin ( ring4, y_axis, -1)
 end
 
 --weapon 1 -----------------------------------------------------------------

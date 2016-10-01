@@ -2,6 +2,10 @@
 
 Balance
 - increased velocity of machine-gun like weapons to be more effective against fast targets
+- increased costs for techcenters to be upgraded with shields to 500 (vs. 300)
+
+Features
+- added nuke launcher (as upgrade for the tech center) as super weapon for the imperials
 
 
 

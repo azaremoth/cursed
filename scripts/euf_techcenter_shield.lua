@@ -1,8 +1,14 @@
 local base = piece 'base'
 local building = piece 'building'
 local radar = piece 'radar'
-local pont = piece 'pont'
+local pont_dark = piece 'pont_dark'
+local pont_glow = piece 'pont_glow'
 local emit_beam = piece 'emit_beam'
+local top_nuke = piece 'top_nuke'
+local ring1 = piece 'ring1'
+local ring2 = piece 'ring2'
+local ring3 = piece 'ring3'
+local ring4 = piece 'ring4'
 
 local BOOM	 = 1024+0
 local BEAM	 = 1025+0
@@ -32,6 +38,13 @@ local function BeamFX()
 end
 
 function script.Create()
+	Hide (top_nuke)
+	Hide (pont_dark)
+	Hide (ring1)
+	Hide (ring2)
+	Hide (ring3)
+	Hide (ring4)
+	
 	isactive = false
 	Turn2( emit_beam, x_axis, -90 )
 	while GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0 do

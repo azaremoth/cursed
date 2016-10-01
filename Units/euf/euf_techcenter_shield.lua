@@ -24,7 +24,7 @@ local unitDef = {
 	ProvideTech         = "Advanced Technology",
 	normaltex = "unittextures/normalmaps/euf_techcenter_normal.png",
 	normalmaps = "yes",					
-    helptext = "Enables diggers, walkers and MLRS. Can be upgraded with a shield generator."
+    helptext = "Enables diggers, walkers and MLRS. Was upgraded with a shield generator."
   },
   description        = "Enables advanced Technology",
   --  energyMake         = 0,

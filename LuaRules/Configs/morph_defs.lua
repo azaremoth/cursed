@@ -200,14 +200,24 @@ local morphDefs = {
     euf_techcenter = {
     {
     into = 'euf_techcenter_shield',
-	metal = 300,
-	energy = 300,
+	metal = 500,
+	energy = 500,
 	time = 100,
     tech = 0,
     xp = 0,
 	texture = 'upgrade_shield.png',
 	text = 'Upgrade with shield generator',
     },
+    {
+    into = 'euf_techcenter_nuke',
+	metal = 1500,
+	energy = 1500,
+	time = 300,
+    tech = 0,
+    xp = 0,
+	texture = 'upgrade_nuke.png',
+	text = 'Upgrade with nuke launcher',
+    },	
   },  
 }
 

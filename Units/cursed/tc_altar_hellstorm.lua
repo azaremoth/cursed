@@ -97,7 +97,7 @@ local unitDef = {
   weapons = {
     [1]  = {
       badTargetCategory  = "LIGHTARMOR AIR",
-      def                = "TC_HELLSTORM",
+      def                = "EPIC_HELLSTORM",
       mainDir            = "0 0 1",
       maxAngleDif        = 360,
       onlyTargetCategory = "LAND",
@@ -107,48 +107,51 @@ local unitDef = {
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  TC_HELLSTORM = {
-      name                    = [[Strategic Nuclear Missile]],
-      areaOfEffect            = 1500,
-      cegTag                  = [[NUCKLEARMINI]],
-      collideFriendly         = false,
-      collideFeature          = false,
-      commandfire             = true,
-      craterBoost             = 6,
-      craterMult              = 6,
-	  customParams        	  = {
-		light_color = [[2.92 2.64 1.76]],
-		light_radius = 3000,
-	  },
-      edgeEffectiveness       = 0.3,
-      explosionGenerator      = [[custom:LONDON]],
-      fireStarter             = 0,
-      flightTime              = 180,
-      impulseBoost            = 0.5,
-      impulseFactor           = 0.2,
-      interceptedByShieldType = 65,
-      model                   = [[nuke.s3o]],
-      noSelfDamage            = false,
-      range                   = 72000,
-      reloadtime              = 1, --400
-      smokeTrail              = false,
-      soundHit                = [[explosion\ex_ultra8]],
-      startVelocity           = 100,
---      stockpile               = true,
---      stockpileTime           = 10^4,
---      targetable              = 1,
-      texture1                = [[null]], --flare
-      tolerance               = 4000,
-      weaponAcceleration      = 100,
-      weaponTimer             = 10,
-      weaponType              = [[StarburstLauncher]],
-      weaponVelocity          = 800,
+  EPIC_HELLSTORM = {
+    name                    = [[Epic Hellstorm]],
+
+    burst              = 30,
+    burstrate          = 0.5,
+	projectiles        = 20,
+	dance = 3000, 
+    sprayAngle = 50,
+	
+    commandfire             = true,
+	
+	weapontype		=	"MissileLauncher",
+	turret		=	1,
+	tolerance		=	2000,
+    gravityAffected          = true,
+	CanAttackGround = true,
+    energypershot           = 0,	
+	firestarter		=	0,
+	range			=	9999999,
+	flighttime		=	0,
+    reloadtime              = 400,
+	startvelocity	=	2000,
+	weaponvelocity	=	2000,
+	areaofeffect	=	350,
+	edgeeffectiveness	=	0.1,
+	targetmoveerror	=	0.075,
+	soundtrigger	=	0,
+	explosionspeed	=	100,
+	cratermult		=	0.5,
+	craterboost		=	0,
+	impulsefactor	=	0,
+	impulseboost	=	0,
+	interceptedByShieldType = 1,
+	
+--	cegTag                  = [[HELLSTORM]],	  
+	explosionGenerator = "custom:HELLSTORMEXPLOSION",
+	soundHit           = "hellstorm_hit",
+	soundHitVolume     = 160,
+
 ------------------------------------------------------------
 		damage = {
-		  default            = 3000,
-		  flyer              = 3000,
-		  heavy              = 3000,
-		  light              = 3000,
+		  default            = 100,
+		  flyer              = 100,
+		  heavy              = 100,
+		  light              = 100,
 		},
 	},
  }

@@ -29,7 +29,18 @@ local morphDefs = {
 
 --]]
 
-
+   tc_altar = {
+    {
+    into = 'tc_altar_hellstorm',
+	metal = 1500,
+	energy = 1500,
+	time = 300,
+    tech = 0,
+    xp = 0,
+	texture = 'upgrade_hellstorm.png',
+	text = 'Call hellstorms for complete annihilation',
+    },	
+  },  
   tc_necromancer = {
     {
       into = 'tc_lich',

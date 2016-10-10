@@ -19,6 +19,7 @@ function script.Create()
 		Sleep(100)
 	end
 	Move( altar, y_axis, 0, 1000 )
+	Move( buildpoint, y_axis, 10000, 10000 )	
 	Sleep(500)
 end
 
@@ -34,12 +35,6 @@ function script.AimFromWeapon1 ()
 end
 
 function script.AimWeapon1(heading, pitch)
-	local _,_,target = Spring.GetUnitWeaponTarget(unitID, 1)
-	local tx = target[1]
-	local tz = target[3]
-	Move( buildpoint, x_axis, tx, 2000 )
-	Move( buildpoint, z_axis, tz, 2000 )
-	Sleep(500)
 	EmitSfx(base, SPIKES)
 	EmitSfx(buildpoint, SPIKES)
     return (1)

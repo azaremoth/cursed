@@ -35,8 +35,6 @@ function script.AimFromWeapon1 ()
 end
 
 function script.AimWeapon1(heading, pitch)
-	EmitSfx(base, SPIKES)
-	EmitSfx(buildpoint, SPIKES)
     return (1)
 end
 

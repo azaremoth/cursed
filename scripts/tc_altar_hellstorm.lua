@@ -21,6 +21,10 @@ function script.Create()
 	Move( altar, y_axis, 0, 1000 )
 	Move( buildpoint, y_axis, 10000, 10000 )	
 	Sleep(500)
+	local frame = Spring.GetGameFrame()
+	local reloadtime = Spring.GetUnitWeaponState(unitID, 1 , 'reloadTime')
+--	Spring.Echo(frame .. " ".. reloadtime)
+	Spring.SetUnitWeaponState(unitID, 1 , {reloadFrame = (frame+(reloadtime*30))})
 end
 
 

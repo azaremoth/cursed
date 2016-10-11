@@ -34,7 +34,10 @@ function script.Create()
 	Spring.UnitScript.Spin ( ring3, y_axis, 1)
 	Spring.UnitScript.Spin ( ring4, y_axis, -1)
 	
---	Spring.SetUnitWeaponState(unitID, 0, "reloadState", 0)
+	local frame = Spring.GetGameFrame()
+	local reloadtime = Spring.GetUnitWeaponState(unitID, 1 , 'reloadTime')
+--	Spring.Echo(frame .. " ".. reloadtime)
+	Spring.SetUnitWeaponState(unitID, 1 , {reloadFrame = (frame+(reloadtime*30))})
 end
 
 --weapon 1 -----------------------------------------------------------------

@@ -95,6 +95,10 @@ effectUnitDefs = {
   euf_powerplant = {
     {class='GroundFlash', options=groundFlashBluePowerplant},
   },
+  tc_altar_hellstorm = {
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=20, length=2000, piece="rotator", emitVector = {0, -1, 0}, onActive=false}},
+    {class='StaticParticles', options=MergeTable(Greenglow_big,{piece="rotator"})},	
+  },  
   tc_necromancer = {{class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit"})},},  
   tc_necromancer_sum = {{class='StaticParticles', options=MergeTable(Greenglow_small,{piece="emit"})},},
   tc_lich = {

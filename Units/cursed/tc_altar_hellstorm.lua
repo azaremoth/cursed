@@ -113,8 +113,8 @@ local weaponDefs = {
     burst              = 30,
     burstrate          = 0.5,
 	projectiles        = 20,
-	dance = 3000, 
-    sprayAngle = 50,
+	dance = 2500, -- 3000
+    sprayAngle = 45, --50
 	
     commandfire             = true,
 	
@@ -142,7 +142,7 @@ local weaponDefs = {
 	interceptedByShieldType = 1,
 	
 --	cegTag                  = [[HELLSTORM]],	  
-	explosionGenerator = "custom:HELLSTORMEXPLOSION",
+	explosionGenerator = "custom:napalm_green",
 	soundHit           = "hellstorm_hit",
 	soundHitVolume     = 160,
 

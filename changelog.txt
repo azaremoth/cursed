@@ -2,10 +2,11 @@
 
 Balance
 - increased velocity of machine-gun like weapons to be more effective against fast targets
-- increased costs for techcenters to be upgraded with shields to 500 (vs. 300)
+- increased costs for the imperial techcenter to be upgraded with shields to 500 (vs. 300)
 
 Features
-- added nuke launcher (as upgrade for the tech center) as super weapon for the imperials
+- added nuke launcher (as upgrade for the tech center) as super-weapon for the imperials
+- added hellstorm (as upgrade for the cursed altar) as super-weapon for the cursed
 
 
 

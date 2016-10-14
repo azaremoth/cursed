@@ -130,6 +130,7 @@ local weaponDefs = {
       coreThickness           = 0.5,
       craterBoost             = 1,
       craterMult              = 2,
+	cylinderTargeting = 128,			  
       duration                = 0.02,
 		energypershot           = 0,
       explosionGenerator      = [[custom:RaiderLaserImpact]],

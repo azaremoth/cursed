@@ -59,6 +59,7 @@ function gadget:GameFrame(f)
 				local MyTeam = Spring.GetUnitTeam(unitID)		
 				for _,eUnitID in ipairs(HealUnits) do
 					local eTeam = Spring.GetUnitTeam(eUnitID)
+					local areAllied = Spring.AreTeamsAllied(eTeam, MyTeam)
 					local eunitDefID = Spring.GetUnitDefID(eUnitID)
 					if (UnitDefs[eunitDefID].customParams.isinfantry and eUnitID ~= unitID and eTeam == MyTeam) then
 						local eUnitIDhealth, eUnitIDmaxhealth, _ ,_ , eUnitBuildProgress = Spring.GetUnitHealth(eUnitID)
@@ -72,7 +73,7 @@ function gadget:GameFrame(f)
 							hashealed = true
 						end
 					-- hurt units made of bones						
-					elseif (UnitDefs[eunitDefID].customParams.isbones and eUnitID ~= unitID and eTeam ~= MyTeam and hashealed == false and manahurtamount ~= nil and manahurtcost ~= nil) then
+					elseif (UnitDefs[eunitDefID].customParams.isbones and eUnitID ~= unitID and eTeam ~= MyTeam and hashealed == false and manahurtamount ~= nil and manahurtcost ~= nil and areAllied ~= true) then
 						local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
 						if loopmana >= manahurtcost then
 							if (manahurtamount > eUnitIDhealth) then

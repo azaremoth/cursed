@@ -369,7 +369,7 @@ local function ProcessAwardData()
 				elseif awardType == 'reclaim' then
 					message = 'Reclaimed value: ' .. maxValWrite
 				elseif awardType == 'friend' then
-					message = 'Damage inflicted on allies: '.. floor(maxVal * 100) ..'%'
+					message = 'Damage to allies: '.. floor(maxVal * 100) ..'%'
 				elseif awardType == 'mex' then
 					message = 'Mexes built: '.. maxVal
 				elseif awardType == 'mexkill' then

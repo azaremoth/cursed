@@ -597,7 +597,7 @@ do
 	else
 		emp = 0
 	end
-    hp  = (health or 0)/maxHealth
+    hp  = (health or 0)/(maxHealth or 1)
     morph = UnitMorphs[unitID]
   
     if (drawUnitsOnFire)and(GetUnitRulesParam(unitID,"on_fire")==1) then

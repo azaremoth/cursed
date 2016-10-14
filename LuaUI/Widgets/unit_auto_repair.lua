@@ -87,7 +87,7 @@ local function repairNearestDamagedUnit(repairUnitID)
 	local closestDamagedUnit = nil
 	for damagedUnitID, val in pairs(unitsToRepair) do
 		-- can't repair self
-		if(repairUnitID ~= damagedUnitID) then
+		if((repairUnitID ~= damagedUnitID) and (damagedUnitID ~= nil)) then
 			-- check they're still damaged
 			local hp, maxhp, paradam, cap, build = spGetUnitHealth(damagedUnitID)
 			if((hp and maxhp) and hp >= maxhp) then

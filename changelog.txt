@@ -8,6 +8,12 @@ Features
 - added nuke launcher (as upgrade for the tech center) as super-weapon for the imperials
 - added hellstorm (as upgrade for the cursed altar) as super-weapon for the cursed
 
+Bugs
+- imperial priests will no longer hurt allied skeletal units
+
+Polishing
+- Added normal maps for: imperial solar,
+
 
 
 >> Major changes 1.411 => 1.413

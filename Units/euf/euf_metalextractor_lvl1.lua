@@ -23,6 +23,8 @@ local unitDef = {
   corpse             = "dead",   
   customParams          = {
 	factionname	= "imperials",
+	normaltex = "unittextures/normalmaps/euf_metalextractor_lvl1_normal.png",
+	normalmaps = "yes",			
     helptext 	= "Basic metal extractor."
   },
   description        = "Extracts Metal",

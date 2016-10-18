@@ -12,7 +12,7 @@ Bugs
 - imperial priests will no longer hurt allied skeletal units
 
 Polishing
-- Added normal maps for: imperial solar,
+- Added normal maps for: imperial solar and metal extractor lvl1, cursed soulstone and soulcage
 
 
 

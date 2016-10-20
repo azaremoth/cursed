@@ -152,7 +152,7 @@ local function addAura(auraType, auraDef, unitID, unitDefID, teamID)
 			auraUnits[auraType][unitID] = range
 			spSetUnitRulesParam(unitID,'has_'..auraType,1)
 			spSetUnitRulesParam(unitID,auraType..'_range',range)			
-			GG.UpdateUnitAttributes(unitID) -- attribute change by unit_attributes
+			GG.UpdateUnitAttributes(unitID) -- attribute change by unit_attributes, needed here? The aura caster does not need that update?
 			encUnits[unitID] = true
 		end
 	end
@@ -215,7 +215,6 @@ function gadget:UnitDestroyed(unitID, unitDefID, teamID)
 		GG.UpdateUnitAttributes(unitID) -- attribute change by unit_attributes
 	end
 	encUnits[unitID] = nil
-
 end
 
 function gadget:UnitTaken(unitID, unitDefID, oldTeamID, teamID)
@@ -237,6 +236,7 @@ function gadget:GameFrame(f)
 		for eUnitID, _ in pairs(encUnits) do 
 			for auraType, _ in pairs(auraUnits) do
 				spSetUnitRulesParam(eUnitID,auraType,0)
+				GG.UpdateUnitAttributes(eUnitID)				
 			end
 		end
 	
@@ -303,7 +303,7 @@ function gadget:GameFrame(f)
 					end
 					--- Heal --
 					if (burrowed ~= 1 and spGetUnitRulesParam(unitID,"Hero Aura") == 1 or spGetUnitRulesParam(unitID,"Heal Aura") == 1) then
-							spSetUnitHealth(unitID, spGetUnitHealth(unitID)+AURAHEAL ) 					
+						spSetUnitHealth(unitID, spGetUnitHealth(unitID)+AURAHEAL ) 					
 					end	
 					-- Pest --
 					if burrowed ~= 1 and  spGetUnitRulesParam(unitID,"Pest Aura") == 1 then

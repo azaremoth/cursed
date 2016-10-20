@@ -4,6 +4,7 @@ Balance
 - increased velocity of machine-gun like weapons to be more effective against fast targets
 - increased costs for the imperial techcenter to be upgraded with shields to 500 (vs. 300)
 - heal aura of heroes and witches will not add up anymore
+- reduced accuracy loss and increased reload speed gain a little for units in a frenzy aura
 
 Features
 - added nuke launcher (as upgrade for the tech center) as super-weapon for the imperials

@@ -39,10 +39,10 @@ local spGetUnitPosition 	= Spring.GetUnitPosition
 
 local spSpawnCEG 				= Spring.SpawnCEG
 
-local UPDATE_PERIOD = 10
+local UPDATE_PERIOD = 15
 
-local AURAHEAL = 5
-local PESTAURADAMAGE = 6
+local AURAHEAL = 8
+local PESTAURADAMAGE = 10
 
 local random	= math.random
 local echo = Spring.Echo
@@ -233,7 +233,7 @@ function gadget:GameFrame(f)
 	
 	if f % UPDATE_PERIOD == 1 then -- 1/s
 	
-		for eUnitID, _ in pairs(encUnits) do 
+		for eUnitID, _ in pairs(encUnits) do  -- deleted any aura at first?
 			for auraType, _ in pairs(auraUnits) do
 				spSetUnitRulesParam(eUnitID,auraType,0)
 				GG.UpdateUnitAttributes(eUnitID)				
@@ -271,21 +271,20 @@ function gadget:GameFrame(f)
 			end
 		end
 
-		for unitID, _ in pairs(encUnits) do
-			local eud = spGetUnitDefID(unitID) and UnitDefs[spGetUnitDefID(unitID)]
+		for eunitID, _ in pairs(encUnits) do
+			local eud = spGetUnitDefID(eunitID) and UnitDefs[spGetUnitDefID(eunitID)]
 			if eud then
 				local tooltip = eud.tooltip
 				for auraType, _ in pairs(auraUnits) do
-					if spGetUnitRulesParam(unitID,'has_'..auraType) == 1 then
+					if spGetUnitRulesParam(eunitID,'has_'..auraType) == 1 then
 						tooltip = tooltip ..' ('.. auraType ..')'
 					end
-					if spGetUnitRulesParam(unitID,auraType) == 1 then
+					if spGetUnitRulesParam(eunitID,auraType) == 1 then
 						tooltip = tooltip ..' *'..auraDefs[auraType].encName ..'*'
 					end
 				end
-				Spring.SetUnitTooltip(unitID,eud.humanName .. " - " .. tooltip)	
+				Spring.SetUnitTooltip(eunitID,eud.humanName .. " - " .. tooltip)	
 			end
-			
 		end
 		
     end

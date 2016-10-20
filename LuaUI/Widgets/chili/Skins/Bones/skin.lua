@@ -19,7 +19,7 @@ skin.general = {
   textColor   = {0.9,1,1,1},
 
   --padding         = {5, 5, 5, 5}, --// padding: left, top, right, bottom
-  backgroundColor = {0.1, 0.1, 0.1, 0.7},
+  backgroundColor = {0.1, 0.1, 0.1, 0.9},
 }
 
 
@@ -33,7 +33,7 @@ skin.button = {
   tiles = {22, 22, 22, 22}, --// tile widths: left,top,right,bottom
   padding = {10, 10, 10, 10},
 
-  backgroundColor = {1, 1, 1, 0.7},
+  backgroundColor = {1, 1, 1, 0.9},
 
   DrawControl = DrawButton,
 }
@@ -54,7 +54,7 @@ skin.imagelistview = {
   --DrawControl = DrawBackground,
 
   colorBK          = {1,1,1,0.6},
-  colorBK_selected = {1,0.7,0.1,0.8},
+  colorBK_selected = {1,0.7,0.1,0.9},
 
   colorFG          = {0, 0, 0, 0},
   colorFG_selected = {1,1,1,1},
@@ -87,7 +87,7 @@ skin.panel = {
   TileImageFG = ":cl:empty.png",
   tiles = {22, 22, 22, 22},
 
-  backgroundColor = {1, 1, 1, 0.6},
+  backgroundColor = {1, 1, 1, 0.8},
 
   DrawControl = DrawPanel,
 }

@@ -977,7 +977,7 @@ if (gadgetHandler:IsSyncedCode()) then
 
 
 	function gadget:GameFrame(frame)
-		if frame%19==17 then
+		if frame%30==17 then -- was:   if frame%19==17 then
 			if RecheckTeams then
 				for _,team in pairs(RecheckTeams) do
 					for _,u in ipairs(Spring.GetTeamUnits(team)) do

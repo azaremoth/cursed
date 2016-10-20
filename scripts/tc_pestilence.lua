@@ -119,6 +119,7 @@ local function BurrowAnim()
 	Move( emit_summon, y_axis, 10, 50 )
 	Sleep(100)
 	Spring.SetUnitRulesParam(unitID,'burrowed',1)
+	GG.UpdateUnitAttributes(unitID) -- attribute change by unit_attributes	
 	burrowed = true
 	return(1)
 end
@@ -136,6 +137,7 @@ local function UnBurrowAnim()
 	GG.UnFreeze(unitID,UnitDefs,teamID)		
 	Sleep(100)
 	Spring.SetUnitRulesParam(unitID,'burrowed',0)
+	GG.UpdateUnitAttributes(unitID) -- attribute change by unit_attributes		
 	burrowed = false
 	Spring.SetUnitBlocking(unitID, true, true, true, true, false, true, false)		 -- overwrite crushable
 	SetMoveAnimationSpeed()

@@ -13,6 +13,7 @@ function gadget:GetInfo()
    }
 end
 
+-- Updated 1/s
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -38,12 +39,13 @@ local spGetUnitPosition 	= Spring.GetUnitPosition
 
 local spSpawnCEG 				= Spring.SpawnCEG
 
+local UPDATE_PERIOD = 10
+
+local AURAHEAL = 5
+local PESTAURADAMAGE = 6
+
 local random	= math.random
 local echo = Spring.Echo
-
-if not GG.attUnits then
-	GG.attUnits = {}
-end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -150,11 +152,10 @@ local function addAura(auraType, auraDef, unitID, unitDefID, teamID)
 			auraUnits[auraType][unitID] = range
 			spSetUnitRulesParam(unitID,'has_'..auraType,1)
 			spSetUnitRulesParam(unitID,auraType..'_range',range)			
-			GG.attUnits[unitID] = true
+			GG.UpdateUnitAttributes(unitID) -- attribute change by unit_attributes
 			encUnits[unitID] = true
 		end
 	end
-	
 end
 			
 local function updateAuraUnits(teamID)
@@ -211,7 +212,7 @@ function gadget:UnitDestroyed(unitID, unitDefID, teamID)
 		
 		auraUnits[auraType][unitID] = nil
 		spSetUnitRulesParam(unitID,'has_'..auraType,0)
-		GG.attUnits[unitID] = true
+		GG.UpdateUnitAttributes(unitID) -- attribute change by unit_attributes
 	end
 	encUnits[unitID] = nil
 
@@ -229,9 +230,11 @@ end
 
 function gadget:GameFrame(f)
 	
-	if f % 32 < .1 then
+	-- encUnits
 	
-		for eUnitID, _ in pairs(encUnits) do
+	if f % UPDATE_PERIOD == 1 then -- 1/s
+	
+		for eUnitID, _ in pairs(encUnits) do 
 			for auraType, _ in pairs(auraUnits) do
 				spSetUnitRulesParam(eUnitID,auraType,0)
 			end
@@ -251,15 +254,15 @@ function gadget:GameFrame(f)
 							local eTeam = Spring.GetUnitTeam(eUnitID)
 							if (enemyAura and (eTeam ~= auraUnitTeam) and not (Spring.AreTeamsAllied(eTeam, auraUnitTeam))) then
 								spSetUnitRulesParam(eUnitID,auraType,1)
-								GG.attUnits[eUnitID] = true
+								GG.UpdateUnitAttributes(eUnitID) -- attribute change by unit_attributes
 								encUnits[eUnitID] = auraType
 							elseif (alliedAura and (eTeam ~= auraUnitTeam) and (Spring.AreTeamsAllied(eTeam, auraUnitTeam))) then
 								spSetUnitRulesParam(eUnitID,auraType,1)
-								GG.attUnits[eUnitID] = true
+								GG.UpdateUnitAttributes(eUnitID) -- attribute change by unit_attributes
 								encUnits[eUnitID] = auraType
 							elseif (not enemyAura and (eTeam == auraUnitTeam)) then
 								spSetUnitRulesParam(eUnitID,auraType,1)
-								GG.attUnits[eUnitID] = true
+								GG.UpdateUnitAttributes(eUnitID) -- attribute change by unit_attributes
 								encUnits[eUnitID] = auraType
 							end						
 						end
@@ -268,7 +271,6 @@ function gadget:GameFrame(f)
 			end
 		end
 
-		--todo: move this into Attributes gadget
 		for unitID, _ in pairs(encUnits) do
 			local eud = spGetUnitDefID(unitID) and UnitDefs[spGetUnitDefID(unitID)]
 			if eud then
@@ -285,30 +287,32 @@ function gadget:GameFrame(f)
 			end
 			
 		end
-
 		
     end
-	if f % 16 < .1 then
+	
+	if f % UPDATE_PERIOD == 2 then-- 1/s
 		local cx, cy, cz = -10+20*random(), -10+30*random(), -10+20*random()
 		for unitID, _ in pairs(encUnits) do
 			for auraType, _ in pairs(auraUnits) do
 				if spGetUnitRulesParam(unitID,auraType) == 1 then
 					local states = spGetUnitStates(unitID)
+					local burrowed = spGetUnitRulesParam(unitID,"burrowed")					
 					if not states.cloak then
 						local x, y, z = spGetUnitPosition(unitID)
 						spSpawnCEG(auraDefs[auraType].ceg, x+cx, y+cy, z+cz)
 					end
+					--- Heal --
+					if (burrowed ~= 1 and spGetUnitRulesParam(unitID,"Hero Aura") == 1 or spGetUnitRulesParam(unitID,"Heal Aura") == 1) then
+							spSetUnitHealth(unitID, spGetUnitHealth(unitID)+AURAHEAL ) 					
+					end	
+					-- Pest --
+					if burrowed ~= 1 and  spGetUnitRulesParam(unitID,"Pest Aura") == 1 then
+						spSetUnitHealth(unitID, spGetUnitHealth(unitID)-PESTAURADAMAGE )
+					end					
 				end
 			end
 		end
---[[		for auraType, units in pairs(auraUnits) do
-			for unitID, range in pairs(units) do
-				local x, y, z = spGetUnitPosition(unitID)
-				spSpawnCEG(auraDefs[auraType].aceg, x, y, z)
-			end
-		end]]--
-	end
-
+	end	
 end
 
 --------------------------------------------------------------------------------

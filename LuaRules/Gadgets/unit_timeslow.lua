@@ -42,6 +42,7 @@ local CMD_REMOVE = CMD.REMOVE
 local CMD_MOVE   = CMD.MOVE
 local CMD_FIGHT  = CMD.FIGHT
 local CMD_SET_WANTED_MAX_SPEED = CMD.SET_WANTED_MAX_SPEED
+local LOS_ACCESS = {inlos = true}
 
 local gaiaTeamID			= Spring.GetGaiaTeamID()
 
@@ -71,10 +72,20 @@ local function updateSlow(unitID, state)
 
 		local percentSlow = state.slowDamage/health
 
-		spSetUnitRulesParam(unitID,"slowState",percentSlow, {inlos = true})
+		spSetUnitRulesParam(unitID,"slowState",percentSlow, LOS_ACCESS)
+		GG.UpdateUnitAttributes(unitID)
 	end
 end
 
+function gadget:UnitPreDamaged_GetWantedWeaponDef()
+	local wantedWeaponList = {}
+	for wdid = 1, #WeaponDefs do
+		if attritionWeaponDefs[wdid] then
+			wantedWeaponList[#wantedWeaponList + 1] = wdid
+		end
+	end 
+	return wantedWeaponList
+end
 
 function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponID,
                             attackerID, attackerDefID, attackerTeam)
@@ -89,14 +100,14 @@ function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, w
 		slowedUnits[unitID] = {
 			slowDamage = 0,
 			degradeTimer = DEGRADE_TIMER,
+			perma = false,
 		}
-		GG.attUnits[unitID] = true -- unit with attribute change to be handled by unit_attributes
 	end
 
 	-- add slow damage
 	local slowdown = attritionWeaponDefs[weaponID].slowDamage
 	if attritionWeaponDefs[weaponID].scaleSlow then
-		slowdown = slowdown * (damage/WeaponDefs[weaponID].damages[0])
+		slowdown = slowdown * (damage/WeaponDefs[weaponID].customParams.raw_damage)
 	end	--scale slow damage based on real damage (i.e. take into account armortypes etc.)
 
 	slowedUnits[unitID].slowDamage = slowedUnits[unitID].slowDamage + slowdown
@@ -177,13 +188,15 @@ local function addSlowDamage(unitID, damage)
 		slowedUnits[unitID] = {
 			slowDamage = 0,
 			degradeTimer = DEGRADE_TIMER,
+			perma = false,
 		}
-		GG.attUnits[unitID] = true -- unit with attribute change to be handled by unit_attributes
 	end
 
 	-- add slow damage
 	slowedUnits[unitID].slowDamage = slowedUnits[unitID].slowDamage + damage
 	slowedUnits[unitID].degradeTimer = DEGRADE_TIMER
+	
+	updateSlow( unitID, slowedUnits[unitID]) -- without this unit does not fire slower, only moves slower
 end
 
 local function getSlowDamage(unitID)
@@ -193,9 +206,16 @@ local function getSlowDamage(unitID)
 	return false
 end
 
+local function permaSlowDamage(unitID, perma)
+	if slowedUnits[unitID] then
+		slowedUnits[unitID].perma = perma
+	end
+end
+
 -- morph uses this
 GG.getSlowDamage = getSlowDamage
 GG.addSlowDamage = addSlowDamage
+GG.permaSlowDamage = permaSlowDamage -- true/false whether unit is permaslowed, used by unit_zombies.lua
 
 local function removeUnit(unitID)
 	slowedUnits[unitID] = nil
@@ -204,7 +224,7 @@ end
 function gadget:GameFrame(f)
     if (f-1) % UPDATE_PERIOD == 0 then
         for unitID, state in pairs(slowedUnits) do
-
+		if not(state.perma) then
 			if state.degradeTimer <= 0 then
 
 				local health = spGetUnitHealth(unitID) or 0
@@ -220,7 +240,7 @@ function gadget:GameFrame(f)
 			else
 				state.degradeTimer = state.degradeTimer-1
 			end
-
+		end
         end
     end
 end

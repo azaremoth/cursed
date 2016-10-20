@@ -3,6 +3,7 @@
 Balance
 - increased velocity of machine-gun like weapons to be more effective against fast targets
 - increased costs for the imperial techcenter to be upgraded with shields to 500 (vs. 300)
+- heal aura of heroes and witches will not add up anymore
 
 Features
 - added nuke launcher (as upgrade for the tech center) as super-weapon for the imperials
@@ -13,6 +14,7 @@ Bugs
 
 Polishing
 - Added normal maps for: imperial solar and metal extractor lvl1, cursed soulstone and soulcage
+- optimized lua code to avoid performance issues when lots of units were effected by auras
 
 
 

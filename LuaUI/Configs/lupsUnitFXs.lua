@@ -39,11 +39,20 @@ effectUnitDefs = {
 	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, piece="dthrust3", emitVector = {0, 1, 0}, onActive=true}},	
 	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, piece="dthrust4", emitVector = {0, 1, 0}, onActive=true}},	
   },
+   tc_heart_ai = {
+	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=710, strength = .001, precision=50, repeatEffect=true}},
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=15, length=300, piece="base", emitVector = {0, -1, 0}, onActive=false}},
+    {class='StaticParticles', options=MergeTable(Greenglow_big,{piece="base"})},			
+  }, 
    euf_techcenter_shield = {
 	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=710, strength = .001, precision=50, repeatEffect=true, onActive=true}},
+    {class='AirJet', options={color={0.15, 0.8, 0.8}, width=12, length=300, piece="emit_beam", emitVector = {0, 0, 1}, onActive=false}},
+    {class='StaticParticles', options=MergeTable(Blueglow_big,{piece="emit_beam"})},		
   }, 
    euf_techcenter_shield_ai = {
 	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=710, strength = .001, precision=50, repeatEffect=true, onActive=true}},
+    {class='AirJet', options={color={0.15, 0.8, 0.8}, width=12, length=300, piece="emit_beam", emitVector = {0, 0, 1}, onActive=false}},
+    {class='StaticParticles', options=MergeTable(Blueglow_big,{piece="emit_beam"})},	
   },   
   tc_acranius = {
     {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=35, piece="emit_thrust1", onMoving=true, onActive=false}},

@@ -237,6 +237,16 @@ Greenglow_big = {
   count       = 1,
   repeatEffect = true,
 }
+Blueglow_big = {
+  life        = 50,
+  lifeSpread  = 0,
+  size        = 150,
+  sizeSpread  = 33,
+  colormap    = { {0.15, 0.8, 0.8, 0.015}, {0.07, 0.4, 0.4, 0.012}, },
+  texture     = 'bitmaps/GPL/smallflare.tga',
+  count       = 1,
+  repeatEffect = true,
+}
 Smoke = {
   pos	      = {0,0,0},
   life        = 100,

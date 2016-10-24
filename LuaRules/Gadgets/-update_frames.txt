@@ -1,0 +1,32 @@
+frame:
+0
+1	updatePausedReload		unit_attributes.lua	(f%3)
+2	healing burrowed units 		unit_attributes.lua	(f%30)
+3	aura check			unit_aura.lua 		(f%30)
+4	updatePausedReload		unit_attributes.lua	(f%3)	
+5	aura impact on hps		unit_aura.lua 		(f%30)
+6	draw aura ceg			unit_aura.lua 		(f%30)
+7	updatePausedReload		unit_attributes.lua	(f%3)	
+8
+9
+10	updatePausedReload		unit_attributes.lua	(f%3)	
+11
+12
+13	updatePausedReload		unit_attributes.lua	(f%3)	
+14	update progressive mining	unit_progmines.lua 	(f%15)
+15
+16	updatePausedReload		unit_attributes.lua	(f%3)	
+17
+18
+19	updatePausedReload		unit_attributes.lua	(f%3)	
+20
+21
+22	updatePausedReload		unit_attributes.lua	(f%3)	
+23
+24
+25	updatePausedReload		unit_attributes.lua	(f%3)	
+26
+27
+28	updatePausedReload		unit_attributes.lua	(f%3)	
+29	update progressive mining	unit_progmines.lua 	(f%15)
+---

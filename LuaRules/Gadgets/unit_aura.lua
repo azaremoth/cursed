@@ -39,10 +39,10 @@ local spGetUnitPosition 	= Spring.GetUnitPosition
 
 local spSpawnCEG 				= Spring.SpawnCEG
 
-local UPDATE_PERIOD = 15
+local UPDATE_PERIOD = 30
 
-local AURAHEAL = 8
-local PESTAURADAMAGE = 10
+local AURAHEAL = 16
+local PESTAURADAMAGE = 20
 
 local random	= math.random
 local echo = Spring.Echo
@@ -231,9 +231,9 @@ function gadget:GameFrame(f)
 	
 	-- encUnits
 	
-	if f % UPDATE_PERIOD == 1 then -- 1/s
+	if f % UPDATE_PERIOD == 3 then 
 	
-		for eUnitID, _ in pairs(encUnits) do  -- deleted any aura at first?
+		for eUnitID, _ in pairs(encUnits) do  -- clear all influenced units
 			for auraType, _ in pairs(auraUnits) do
 				spSetUnitRulesParam(eUnitID,auraType,0)
 				GG.UpdateUnitAttributes(eUnitID)				
@@ -270,7 +270,9 @@ function gadget:GameFrame(f)
 				end
 			end
 		end
-
+	end
+	
+	if f % UPDATE_PERIOD == 5 then 
 		for eunitID, _ in pairs(encUnits) do
 			local eud = spGetUnitDefID(eunitID) and UnitDefs[spGetUnitDefID(eunitID)]
 			if eud then
@@ -285,11 +287,11 @@ function gadget:GameFrame(f)
 				end
 				Spring.SetUnitTooltip(eunitID,eud.humanName .. " - " .. tooltip)	
 			end
-		end
-		
+		end	
     end
 	
-	if f % UPDATE_PERIOD == 2 then-- 1/s
+	
+	if f % UPDATE_PERIOD == 6 then-- 1/s
 		local cx, cy, cz = -10+20*random(), -10+30*random(), -10+20*random()
 		for unitID, _ in pairs(encUnits) do
 			for auraType, _ in pairs(auraUnits) do

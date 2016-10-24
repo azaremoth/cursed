@@ -45,22 +45,22 @@ if (gadgetHandler:IsSyncedCode()) then
 	end
 
 	function gadget:GameFrame(n)
-	  if ((n % 17) > 0) then return false end
-	  for unitID, defs in pairs(mexList) do
-		if defs.extracts < defs.maxExtracts and (select(1,Spring.GetUnitResources(unitID)) > 0) then
-		  defs.extracts = math.min(defs.extracts + defs.step, defs.maxExtracts)
-		  if (n < 10000) then
-			local bonusStep = defs.step * (1-(n/10000))
-			defs.extracts = math.min(defs.extracts + bonusStep, defs.maxExtracts)
-		  end
-		  SetUnitMetalExtraction(unitID, defs.extracts)
-		  SendToUnsynced("UpdateMine", unitID, defs.extracts, defs.maxExtracts)
-		elseif (defs.extracts == defs.maxExtracts) then
-		  
-		  SendToUnsynced("UpdateMine", unitID, defs.extracts, defs.maxExtracts, defs.radius-3)
-		  mexList[unitID] = nil
+		if ((n % 15) == 14) then -- 2/s
+			for unitID, defs in pairs(mexList) do
+				if defs.extracts < defs.maxExtracts and (select(1,Spring.GetUnitResources(unitID)) > 0) then
+					  defs.extracts = math.min(defs.extracts + defs.step, defs.maxExtracts)
+					  if (n < 10000) then
+							local bonusStep = defs.step * (1-(n/10000))
+							defs.extracts = math.min(defs.extracts + bonusStep, defs.maxExtracts)
+					  end
+					  SetUnitMetalExtraction(unitID, defs.extracts)
+					  SendToUnsynced("UpdateMine", unitID, defs.extracts, defs.maxExtracts)
+				elseif (defs.extracts == defs.maxExtracts) then
+					  SendToUnsynced("UpdateMine", unitID, defs.extracts, defs.maxExtracts, defs.radius-3)
+					  mexList[unitID] = nil
+				end
+			end
 		end
-	  end
 	end
 	
 	function gadget:GameStart()

@@ -476,11 +476,11 @@ function gadget:Initialize()
 end
 
 function gadget:GameFrame(f)
-	if f % UPDATE_PERIOD == 1 then
+	if (f % UPDATE_PERIOD) == 1 then
 		for unitID, unitDefID in pairs(unitReloadPaused) do
 			updatePausedReload(unitID, unitDefID, f)
 		end
-	end	if f % (UPDATE_PERIOD*2) == 2 then		for _, unitID in ipairs(Spring.GetAllUnits()) do			local burrowed = spGetUnitRulesParam(unitID,"burrowed")			if burrowed == 1 then				spSetUnitHealth(unitID, spGetUnitHealth(unitID)+BURROWEDHEAL ) 					end		end	end	
+	end	if (f % 30) == 2 then		for _, unitID in ipairs(Spring.GetAllUnits()) do			local burrowed = spGetUnitRulesParam(unitID,"burrowed")			if burrowed == 1 then				spSetUnitHealth(unitID, spGetUnitHealth(unitID)+BURROWEDHEAL ) 					end		end	end	
 end
 
 function gadget:UnitDestroyed(unitID)	if burrow_crusts[unitID] then		Spring.DestroyUnit(burrow_crusts[unitID])		burrow_crusts[unitID] = nil	end

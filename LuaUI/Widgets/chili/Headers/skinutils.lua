@@ -303,11 +303,13 @@ function DrawButton(obj)
   local skLeft,skTop,skRight,skBottom = unpack4(obj.tiles)
 
   local bgcolor = obj.backgroundColor
-  if (obj.state.pressed) then
-    bgcolor = mulColor(bgcolor, 0.4)
-  elseif (obj.state.hovered) --[[ or (obj.state.focused)]] then
-    bgcolor = obj.focusColor
-    --bgcolor = mixColors(bgcolor, obj.focusColor, 0.5)
+  if not obj.supressButtonReaction then
+    if (obj.state.pressed) then
+      bgcolor = mulColor(bgcolor, 0.4)
+    elseif (obj.state.hovered) --[[ or (obj.state.focused)]] then
+      bgcolor = obj.focusColor
+      --bgcolor = mixColors(bgcolor, obj.focusColor, 0.5)
+    end
   end
   gl.Color(bgcolor)
 
@@ -319,10 +321,12 @@ function DrawButton(obj)
   --gl.Texture(0,false)
 
   local fgcolor = obj.borderColor
-  if (obj.state.pressed) then
-    fgcolor = mulColor(fgcolor, 0.4)
-  elseif (obj.state.hovered) --[[ or (obj.state.focused)]] then
-    fgcolor = obj.focusColor
+  if not obj.supressButtonReaction then
+    if (obj.state.pressed) then
+      fgcolor = mulColor(fgcolor, 0.4)
+    elseif (obj.state.hovered) --[[ or (obj.state.focused)]] then
+      fgcolor = obj.focusColor
+    end
   end
   gl.Color(fgcolor)
 
@@ -683,7 +687,7 @@ function DrawProgressbar(obj)
   local y = obj.y
   local w = obj.width
   local h = obj.height
-
+  
   local percent = (obj.value-obj.min)/(obj.max-obj.min)
 
   local skLeft,skTop,skRight,skBottom = unpack4(obj.tiles)
@@ -706,7 +710,17 @@ function DrawProgressbar(obj)
     -- workaround for catalyst >12.6 drivers: do the "clipping" by multiplying width by percentage in glBeginEnd instead of using glClipPlane
     -- fuck AMD
     --gl.ClipPlane(1, -1,0,0, x+w*percent)
-    gl.BeginEnd(GL.TRIANGLE_STRIP, _DrawTiledTexture, x,y,w*percent,h, skLeft,skTop,skRight,skBottom, tw,th, 0)
+	if obj.fillPadding then
+		x, y = x + obj.fillPadding[1], y + obj.fillPadding[2]
+		w, h = w - (obj.fillPadding[1] + obj.fillPadding[3]), h - (obj.fillPadding[2] + obj.fillPadding[4])
+	end
+	
+    if (obj.orientation == "horizontal") then
+      gl.BeginEnd(GL.TRIANGLE_STRIP, _DrawTiledTexture, x,y,w*percent,h, skLeft,skTop,skRight,skBottom, tw,th, 0)
+    else
+      gl.BeginEnd(GL.TRIANGLE_STRIP, _DrawTiledTexture, x,y + (h - h*percent),w,h*percent, skLeft,skTop,skRight,skBottom, tw,th, 0)
+    end
+
     --gl.ClipPlane(1, false)
   gl.Texture(0,false)
 

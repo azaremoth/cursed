@@ -7,7 +7,11 @@ end
 --//=============================================================================
 
 function unpack4(t)
-  return t[1], t[2], t[3], t[4]
+  if t then
+    return t[1], t[2], t[3], t[4]
+  else
+    return 1, 2, 3, 4
+  end
 end
 
 function clamp(min,max,num)
@@ -109,7 +113,7 @@ end
 
 --//=============================================================================
 
-local curScissor = {1,1,1e9,1e9}
+local curScissor = {0,0,1e9,1e9}
 local stack = {curScissor}
 local stackN = 1
 
@@ -143,7 +147,11 @@ function PopScissor()
     gl.Scissor(false)
   else
     local x,y, right,bottom = unpack4(curScissor)
-    gl.Scissor(x,y,right - x,bottom - y)
+	local w = right  - x
+	local h = bottom - y
+	if w >= 0 and h >= 0 then
+      gl.Scissor(x,y,w,h)
+	end
   end
 end
 

@@ -4,8 +4,8 @@
 local skin = {
   info = {
     name    = "Imperial",
-    version = "0.2",
-    author  = "jK",
+    version = "0.1",
+    author  = "luckywaldo7",
   }
 }
 
@@ -16,10 +16,10 @@ skin.general = {
   --font        = "FreeSansBold.ttf",
   fontOutline = false,
   fontsize    = 13,
-  textColor   = {0.9,1,1,1},
+  textColor   = {1,1,1,1},
 
   --padding         = {5, 5, 5, 5}, --// padding: left, top, right, bottom
-  backgroundColor = {0.1, 0.1, 0.1, 0.9},
+  backgroundColor = {0.1, 0.1, 0.1, 0.7},
 }
 
 
@@ -33,14 +33,26 @@ skin.button = {
   tiles = {22, 22, 22, 22}, --// tile widths: left,top,right,bottom
   padding = {10, 10, 10, 10},
 
-  backgroundColor = {1, 1, 1, 0.9},
+  backgroundColor = {1, 1, 1, 0.7},
+
+  DrawControl = DrawButton,
+}
+
+skin.button_disabled = {
+  TileImageBK = ":cl:tech_button.png",
+  TileImageFG = ":cl:empty.png",
+  tiles = {22, 22, 22, 22}, --// tile widths: left,top,right,bottom
+  padding = {10, 10, 10, 10},
+
+  color = {0.3,.3,.3,1},
+  backgroundColor = {0.1,0.1,0.1,0.8},
 
   DrawControl = DrawButton,
 }
 
 skin.checkbox = {
-  TileImageFG = ":cl:node_selected.png",
-  TileImageBK = ":cl:node_selected_bw.png",
+  TileImageFG = ":cl:tech_checkbox_checked.png",
+  TileImageBK = ":cl:tech_checkbox_unchecked.png",
   tiles       = {3,3,3,3},
   boxsize     = 13,
 
@@ -53,7 +65,7 @@ skin.imagelistview = {
 
   --DrawControl = DrawBackground,
 
-  colorBK          = {1,1,1,0.6},
+  colorBK          = {1,1,1,0.3},
   colorBK_selected = {1,0.7,0.1,0.8},
 
   colorFG          = {0, 0, 0, 0},
@@ -87,7 +99,7 @@ skin.panel = {
   TileImageFG = ":cl:empty.png",
   tiles = {22, 22, 22, 22},
 
-  backgroundColor = {1, 1, 1, 0.8},
+  backgroundColor = {1, 1, 1, 0.6},
 
   DrawControl = DrawPanel,
 }
@@ -121,7 +133,7 @@ skin.scrollpanel = {
   HKnobTileImage = ":cl:tech_scrollbar_knob.png",
   HKnobTiles     = {6,8,6,8},
 
-  KnobColorSelected = {1,0.7,0.1,0.9},
+  KnobColorSelected = {1,0.7,0.1,0.8},
 
   scrollbarSize = 11,
   DrawControl = DrawScrollPanel,
@@ -154,13 +166,15 @@ skin.treeview = {
 }
 
 skin.window = {
-  TileImage = ":cl:tech_dragwindow.png", --tech_window.png",
+  TileImage = ":cl:tech_dragwindow.png",
+  --TileImage = ":cl:tech_window.png",
+  --TileImage = ":cl:window_tooltip.png",
   --tiles = {25, 25, 25, 25}, --// tile widths: left,top,right,bottom
   tiles = {62, 62, 62, 62}, --// tile widths: left,top,right,bottom
   padding = {13, 13, 13, 13},
   hitpadding = {4, 4, 4, 4},
 
-  captionColor = {0.9, 1, 1, 1},
+  captionColor = {1, 1, 1, 0.45},
 
   boxes = {
     resize = {-21, -21, -10, -10},

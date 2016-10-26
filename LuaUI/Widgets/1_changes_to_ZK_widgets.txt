@@ -24,10 +24,15 @@ local function MakeButton(container, cmd, insertItem, index)
 	local te = overrides[cmd.id]  -- command overrides 
 -- REPLACE:
 	local te
+	local te
 	local myTeamID = Spring.GetMyTeamID()
 	local side = select(5, Spring.GetTeamInfo(myTeamID))
-	local myTeamID = Spring.GetMyTeamID()
-	local side = select(5, Spring.GetTeamInfo(myTeamID))
+	
+	if (side == 'imperials') then
+		te = overrides_faction_two[cmd.id]  -- command overrides imperials		
+	else
+		te = overrides[cmd.id]  -- command overrides cursed
+	end
 
 
 --------------------------------------------------------

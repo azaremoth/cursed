@@ -15,7 +15,7 @@ local factories = {}
 --you can put too many things into the same row, but the buttons will be squished
 local econ = {}
 local defense = {
-	euf_plasmatower =    {order = 0, row = 1, col = 1},
+--[[	euf_plasmatower =    {order = 0, row = 1, col = 1},
 	euf_aatower =   {order = 1, row = 1, col = 2},
 	euf_lasertower =   {order = 1, row = 1, col = 3},
 	euf_artytower =  {order = 1, row = 1, col = 4},
@@ -30,9 +30,9 @@ local defense = {
 	tc_hellfire =   {order = 1, row = 1, col = 3},
 	tc_seer =  {order = 1, row = 2, col = 1},
 	tc_teeth =  {order = 1, row = 2, col = 2},
-	tc_wall_lvl2 =  {order = 1, row = 2, col = 2},
-	
+	tc_wall_lvl2 =  {order = 1, row = 2, col = 2}, ]]--
 }
+
 local aux = {}
 local super = {}
 
@@ -147,6 +147,11 @@ local overrides_faction_two = {
 }
 
 
+-- Commands that only exist in LuaUI cannot have a hidden param. Therefore those that should be hidden are placed in this table.
+local widgetSpaceHidden = {
+	[60] = true, -- CMD.PAGES
+}
+
 -- noone really knows what this table does but it's needed for epic menu to get the hotkey
 local custom_cmd_actions = {
 	-- states are 2, targeted commands (e.g. attack) are 1, instant commands (e.g. selfd) are 3
@@ -183,4 +188,4 @@ local custom_cmd_actions = {
 }
 
 
-return common_commands, states_commands, factory_commands, econ_commands, defense_commands, special_commands, globalCommands, overrides, overrides_faction_two, custom_cmd_actions
+return common_commands, states_commands, factory_commands, econ_commands, defense_commands, special_commands, globalCommands, overrides, overrides_faction_two, custom_cmd_actions, widgetSpaceHidden

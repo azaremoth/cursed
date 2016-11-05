@@ -23,6 +23,7 @@ local diffTex    = ":n:bitmaps/icons/frame_diff.png"
 local frameTex   = ":n:bitmaps/icons/frame_slate.png"
 
 Spring.Utilities = Spring.Utilities or {}
+VFS.Include("LuaRules/Utilities/unitDefReplacements.lua")
 VFS.Include("LuaRules/Utilities/tablefunctions.lua")
 
 local function GetBuildIconFrame(udef) 
@@ -160,9 +161,10 @@ end
 
 WG.WriteTable = WriteTable
 
-function WG.SaveTable(tab, fileName, tabName, params)
+function WG.SaveTable(tab, dir, fileName, tabName, params)
+	Spring.CreateDir(dir)
 	params = params or {}
-	local file,err = io.open(fileName, "w")
+	local file,err = io.open(dir .. fileName, "w")
 	if (err) then
 		Spring.Log(widget:GetInfo().name, LOG.WARNING, err)
 		return
@@ -174,15 +176,16 @@ end
 
 -- raw = print table key-value pairs straight to file (i.e. not as a table)
 -- if you use it make sure your keys are valid variable names!
-local function WritePythonDict(dict, dictName, params)
+local function WritePythonOrJSONDict(dict, dictName, params)
 	params = params or {}
 	params.numIndents = params.numIndents or 0
+	local isJSON = params.json
 	local comma = params.raw and "" or ", "
 	local endLine = comma .. "\n"
-	local separator = params.raw and " = " or  " : "
+	local separator = (params.raw and (not isJSON)) and " = " or  " : "
 	local str = ""
 	if (not params.raw) then
-		if params.endOfFile then
+		if params.endOfFile and dictName and (dictName ~= '') then
 			str = dictName .. " = "	--WriteIndents(numIndents)
 		end
 		str = str .. "{\n"
@@ -201,13 +204,21 @@ local function WritePythonDict(dict, dictName, params)
 			local arg = {numIndents =  params.numIndents + 1, endOfFile = false}
 			str = str .. WritePythonDict(v, nil, arg)
 		elseif type(v) == "boolean" then
-			str = str .. ((v and "True") or "False") .. endLine
+			local arg = (v and (isJSON and "true" or "True")) or (isJSON and "false") or "False"
+			str = str .. arg .. endLine
 		elseif type(v) == "string" then
 			str = str .. string.format("%q", v) .. endLine
 		else
 			str = str .. v .. endLine
 		end
 	end
+	
+	-- get rid of trailing commma
+	local strEnd  = string.sub(str,-3)
+	if strEnd == endLine then -- , \n
+		str = string.sub(str, 1, -4) .. "\n"
+	end
+	
 	if not params.raw then
 		str = str ..WriteIndents(params.numIndents) .. "}"
 	end
@@ -218,22 +229,47 @@ local function WritePythonDict(dict, dictName, params)
 	return str
 end
 
-WG.WritePythonDict = WritePythonDict
-
-function WG.SavePythonDict(fileName, dict, dictName, params)
+local function SavePythonOrJSONDict(dict, dir, fileName, dictName, params)
+	Spring.CreateDir(dir)
 	params = params or {}
-	local file,err = io.open (fileName, "w")
+	local file,err = io.open (dir .. fileName, "w")
 	if (err) then
 		Spring.Log(widget:GetInfo().name, LOG.WARNING, err)
 		return
 	end
-	file:write(WritePythonDict(dict, dictName, params))
+	file:write(WritePythonOrJSONDict(dict, dictName, params))
 	file:flush()
 	file:close()
 end
+
+WG.SavePythonDict = SavePythonOrJSONDict
+WG.SavePythonOrJSONDict = SavePythonOrJSONDict
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 function widget:Initialize()
   WG.GetBuildIconFrame = GetBuildIconFrame
+end
+
+local builderDefs = {}
+--[[for udid, ud in ipairs(UnitDefs) do 
+	for i, option in ipairs(ud.buildOptions) do 
+		if UnitDefNames.cormex.id == option then
+			builderDefs[udid] = true
+		end
+	end
+end]]--
+
+function widget:SelectionChanged(units)
+	if not units then
+		WG.selectionEntirelyCons = false
+		return
+	end
+	for i = 1, #units do
+		if not builderDefs[Spring.GetUnitDefID(units[i])] then
+			WG.selectionEntirelyCons = false
+			return
+		end
+	end
+	WG.selectionEntirelyCons = true
 end

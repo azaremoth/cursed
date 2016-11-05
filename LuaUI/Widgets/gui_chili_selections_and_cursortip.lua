@@ -687,7 +687,7 @@ local function AddSelectionIcon(barGrid,unitid,defid,unitids,counts)
 		name    = (counts==1 and unitids[1]) or defid; --identify button by UnitID if not grouped, else identify by UnitDefID
 		parent  = barGrid;
 		width   = 50;
-		height  = 62;
+		height  = 50 * (5/7);
 		columns = 1;
 		padding     = {0,0,0,0};
 		itemPadding = {0,0,0,0};
@@ -703,7 +703,7 @@ local function AddSelectionIcon(barGrid,unitid,defid,unitids,counts)
 		file2   = (WG.GetBuildIconFrame)and(WG.GetBuildIconFrame(UnitDefs[defid]));
 		file    = "#" .. defid;
 		keepAspect = false;
-		height  = 50 * (options.squarepics.value and 1 or (4/5));
+		height  = 50 * (options.squarepics.value and 1 or (5/7));
 		--height  = 50;
 		width   = 50;
 		padding = {0,0,0,0}; --FIXME something overrides the default in image.lua!!!!

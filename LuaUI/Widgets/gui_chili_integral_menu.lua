@@ -293,7 +293,7 @@ AddHotkeyOptions()
 local MAX_COLUMNS = 6
 local MAX_STATE_ROWS = 5
 local MIN_HEIGHT = 80
-local MIN_WIDTH = 200
+local MIN_WIDTH = 300
 local COMMAND_SECTION_WIDTH = 85	-- percent
 local STATE_SECTION_WIDTH = 15	-- percent
 
@@ -564,9 +564,9 @@ local function MakeButton(container, cmd, insertItem, index)
 				file = texture;
 				parent = button;
 			}
-			if isBuild then 
-				image.file2 = WG.GetBuildIconFrame(UnitDefs[-cmd.id]) 
-			end 
+--			if isBuild then 
+--				image.file2 = WG.GetBuildIconFrame(UnitDefs[-cmd.id]) 
+-- 			end 
 			
 			if isState then 
 				height = "100%"
@@ -907,7 +907,7 @@ local function ManageBuildRow()
 					x="5%";
 					y="5%";
 					file = '#'..udid,
-					file2 = WG.GetBuildIconFrame(UnitDefs[udid]),
+--					file2 = WG.GetBuildIconFrame(UnitDefs[udid]),
 					keepAspect = false,
 				}
 				buttonArray.label = Label:New {
@@ -1631,7 +1631,7 @@ function widget:DrawScreen()
 			local size = buildRow_dragDrop[4]
 			local udid = buildRow_dragDrop[2]
 			gl.Color(1,1,1,0.5)
-			gl.Texture(WG.GetBuildIconFrame(UnitDefs[udid])) --draw build icon on screen. Copied from gui_chili_gesture_menu.lua
+--			gl.Texture(WG.GetBuildIconFrame(UnitDefs[udid])) --draw build icon on screen. Copied from gui_chili_gesture_menu.lua
 			gl.TexRect(mx-size*0.2, my-size, mx+size*1.8, my+size)
 			gl.Texture("#"..udid)
 			gl.TexRect(mx-size*0.2, my-size, mx+size*1.8, my+size)

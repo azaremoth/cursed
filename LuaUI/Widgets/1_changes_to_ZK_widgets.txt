@@ -20,6 +20,8 @@ local common_commands, states_commands, factory_commands, econ_commands, defense
 -- REPLACE:
 local common_commands, states_commands, factory_commands, econ_commands, defense_commands, special_commands, globalCommands, overrides, overrides_faction_two, ustom_cmd_actions = include("Configs/integral_menu_commands.lua")
 
+
+
 local function MakeButton(container, cmd, insertItem, index) 
 	local te = overrides[cmd.id]  -- command overrides 
 -- REPLACE:

@@ -29,7 +29,7 @@ local unitDef = {
 	normaltex = "unittextures/normalmaps/tc_altar_normal.png",
 	normalmaps = "yes",
 	ProvideTech         = "Cursed Technology",	
-    helptext 	= "Skeleton Dragons can be summoned here. The altar enables the witch's shield spell."
+    helptext 	= "Skeleton Dragons can be summoned here. The altar enables the witch's shield spell. It can be improved to be able to spawn hell storms."
 	},
   description        = "Mighty bonedragons can be summoned here",
   explodeAs          = "BIG_EXPLOSION_GREEN_HD",
@@ -117,7 +117,7 @@ local featureDefs = {
     footprintZ         = 7,
     height             = "30",
     hitdensity         = "100",
-    metal              = 500,
+    metal              = 400,
     object             = "TC_altar_dead.s3o",
     reclaimable        = true,
     reclaimTime        = 325,

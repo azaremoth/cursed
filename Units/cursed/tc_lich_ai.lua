@@ -99,6 +99,7 @@ local unitDef = {
     "tc_hellfire",	
     "tc_seer",
     "tc_altar",
+	"tc_altar_hellstorm",
   },
   sfxtypes = {
     explosiongenerators = {

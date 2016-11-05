@@ -1411,8 +1411,8 @@ function widget:Initialize()
 	
 	-- Set the size for the default settings.
 	local screenWidth, screenHeight = Spring.GetWindowGeometry()
-	local width = math.max(350, math.min(450, screenWidth*screenHeight*0.0004))
-	local height = math.min(screenHeight/4.5, 200*width/450)
+	local width = 0.33*screenWidth -- math.max(350, math.min(450, screenWidth*screenHeight*0.0004))
+	local height = width*4/9 -- math.min(screenHeight/4.5, 200*width/450)
 	
 	--create main Chili elements
 	window = Window:New{

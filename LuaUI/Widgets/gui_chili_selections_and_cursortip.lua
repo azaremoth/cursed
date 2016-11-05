@@ -2259,6 +2259,7 @@ function widget:Initialize()
 		width=10, -- needed for initial tooltip
 	}
 	
+	
 	window_tooltip2 = Window:New{
 		useDList = false,
 		resizable = false,

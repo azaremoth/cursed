@@ -814,7 +814,7 @@ function widget:Initialize()
 		name = "Player List",
 		color = {0,0,0,0},
 		right = 0,  
-		bottom = 400,
+		bottom = 300,
 		width  = x_bound,
 		height = 150,
 		padding = {8, 2, 8, 2};

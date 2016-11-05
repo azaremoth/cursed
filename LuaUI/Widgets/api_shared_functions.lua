@@ -162,16 +162,18 @@ end
 WG.WriteTable = WriteTable
 
 function WG.SaveTable(tab, dir, fileName, tabName, params)
-	Spring.CreateDir(dir)
-	params = params or {}
-	local file,err = io.open(dir .. fileName, "w")
-	if (err) then
-		Spring.Log(widget:GetInfo().name, LOG.WARNING, err)
-		return
+	if (dir ~= nil and fileName ~= nil) then
+		Spring.CreateDir(dir)
+		params = params or {}
+		local file,err = io.open(dir .. fileName, "w")
+		if (err) then
+			Spring.Log(widget:GetInfo().name, LOG.WARNING, err)
+			return
+		end
+		file:write(WriteTable(tab, tabName, params))
+		file:flush()
+		file:close()
 	end
-	file:write(WriteTable(tab, tabName, params))
-	file:flush()
-	file:close()
 end
 
 -- raw = print table key-value pairs straight to file (i.e. not as a table)

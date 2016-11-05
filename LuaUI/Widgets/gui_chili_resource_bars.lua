@@ -529,7 +529,7 @@ function CreateWindow()
 	-- Set the size for the default settings.
 	local screenWidth,screenHeight = Spring.GetWindowGeometry()
 	local width = 430
---	local x = math.min(screenWidth/2 - width/2, screenWidth - 400 - width)
+	local x = math.min(screenWidth/2 - width/2, screenWidth - 400 - width)
 	
 	--// WINDOW
 	window = Chili.Window:New{
@@ -538,7 +538,7 @@ function CreateWindow()
 		dockable = true,
 		name="ResourceBars",
 		padding = {0,0,0,0},
-		right = 0,
+		x = x,
 		y = 0,
 		width  = 430,
 		height = 50,

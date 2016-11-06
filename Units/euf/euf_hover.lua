@@ -149,10 +149,10 @@ local weaponDefs = {
     weaponType         = "BeamLaser",
     weaponVelocity     = 1500,
     damage = {
-      default            = 260,
-      flyer              = 260*0.33,
-      heavy              = 260,
-      light              = (260*0.75),
+      default            = 300,
+      flyer              = 300*0.33,
+      heavy              = 300,
+      light              = (300*0.75),
     },
   },
    TORPEDO = {

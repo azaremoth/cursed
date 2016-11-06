@@ -29,7 +29,7 @@ local unitDef = {
     helptext 	= "The altar enables the witch's shield spell. It was improved to be able to spawn hell storms."
 	},
   description        = "Mighty bonedragons can be summoned here",
-  explodeAs          = "BIG_EXPLOSION_GREEN_HD",
+  explodeAs          = "HELLSTORM_DEATH",
   firestandorders    = "1",
   footprintX         = 7,
   footprintZ         = 7,

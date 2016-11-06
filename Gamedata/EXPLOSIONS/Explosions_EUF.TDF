@@ -346,13 +346,13 @@
 	}
 	[groundflash]
 	{
-      		flashSize = 200;
+      		flashSize = 500;
       		flashAlpha = 0.33;
       		circleGrowth = 1;
       		circleAlpha = 0.55;
       		ttl = 20;
-		color = 0.6, 0.91, 0.91;
-		air=1;
+			color = 0.6, 0.91, 0.91;
+			air=1;
      		ground=1;
       		water=1;
 

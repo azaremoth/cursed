@@ -20,11 +20,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:SMALL_EXPLOSION_GREEN;
 	[DAMAGE]
 	{
@@ -38,11 +38,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:MEDIUM_EXPLOSION_GREEN;
 	[DAMAGE]
 	{
@@ -56,11 +56,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=300;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:BIG_EXPLOSION_GREEN;
 	[DAMAGE]
 	{
@@ -74,11 +74,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:SMALL_EXPLOSION_BLUE;
 	[DAMAGE]
 	{
@@ -92,11 +92,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:MEDIUM_EXPLOSION_BLUE;
 	[DAMAGE]
 	{
@@ -110,15 +110,33 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=300;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:BIG_EXPLOSION_BLUE;
 	[DAMAGE]
 	{
 		default=50;
+	}
+}
+
+[BIG_EXPLOSION_BLUE_HURTS]
+{
+	name=Big Blue Explosion that hurts;
+	turret=1;
+	range=50;
+	reloadtime=3.6;	
+	weaponvelocity=1000;
+	areaofeffect=750;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	edgeeffectiveness=0.25;
+	explosiongenerator=custom:BIG_EXPLOSION_BLUE;
+	[DAMAGE]
+	{
+		default=750;
 	}
 }
 
@@ -128,11 +146,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:SMALL_EXPLOSION_YELLOW;
 	[DAMAGE]
 	{
@@ -146,11 +164,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=150;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:MEDIUM_EXPLOSION_YELLOW;
 	[DAMAGE]
 	{
@@ -164,11 +182,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=300;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:BIG_EXPLOSION_YELLOW;
 	[DAMAGE]
 	{
@@ -182,11 +200,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=300;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:BIG_EXPLOSION_GREEN;
 	[DAMAGE]
 	{
@@ -200,11 +218,11 @@
 	turret=1;
 	range=350;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=556;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:REDGREENBLOOD_EXPLOSION;
 	[DAMAGE]
 	{
@@ -218,12 +236,12 @@
 	turret=1;
 	range=480;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=556;
 	noselfdamage=1;
 //	soundstart=Big_Explosion;
 //	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:electric_explosion;
 	NoSelfDamage=1;
 	Paralyzer=1;
@@ -240,12 +258,12 @@
 	turret=1;
 	range=1000;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=556;
 	noselfdamage=1;
 //	soundstart=Big_Explosion;
 //	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:electric_explosion;
 	NoSelfDamage=1;
 	Paralyzer=1;
@@ -262,11 +280,11 @@
 	turret=1;
 	range=1000;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=300;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:MEDIUM_EXPLOSION_BLUE;
 	Impulsefactor=0;
 	[DAMAGE]
@@ -281,11 +299,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=1;
 	soundstart=Small_Explosion;
 	soundhit=Small_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:BLOOD_EXPLOSION;
 	[DAMAGE]
 	{
@@ -299,11 +317,11 @@
 	turret=1;
 	range=50;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=1;
 //	soundstart=Small_Explosion;
 //	soundhit=Small_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:Greycloud;
 	[DAMAGE]
 	{
@@ -317,11 +335,11 @@
 	turret=1;
 	range=350;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=256;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:MEDIUM_EXPLOSION_YELLOW;
 	[DAMAGE]
 	{
@@ -335,11 +353,11 @@
 	turret=1;
 	range=350;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=128;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:SMALL_EXPLOSION_YELLOW;
 	[DAMAGE]
 	{
@@ -353,11 +371,11 @@
 	turret=1;
 	range=350;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=256;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:MEDIUM_EXPLOSION_GREEN;
 	[DAMAGE]
 	{
@@ -371,14 +389,54 @@
 	turret=1;
 	range=350;
 	reloadtime=3.6;
-	weaponvelocity=250;
+	weaponvelocity=1000;
 	areaofeffect=128;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
-	edgeeffectiveness=0.1;
+	edgeeffectiveness=0.25;
 	explosiongenerator=custom:SMALL_EXPLOSION_GREEN;
 	[DAMAGE]
 	{
 		default=200;
+	}
+}
+
+[NUKELAUNCHER_DEATH]
+{
+	name=Big Blue Explosion that hurts;
+	craterboost=0.1;
+	cratermult=0.1;	
+	turret=1;
+	range=50;
+	reloadtime=3.6;	
+	weaponvelocity=1000;
+	areaofeffect=2000;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:LONDON_REDUCED;
+	[DAMAGE]
+	{
+		default=1750;
+	}
+}
+
+[HELLSTORM_DEATH]
+{
+	name=Big Blue Explosion that hurts;
+	craterboost=0.1;
+	cratermult=0.1;	
+	turret=1;
+	range=50;
+	reloadtime=3.6;	
+	weaponvelocity=1000;
+	areaofeffect=2000;
+	soundstart=Big_Explosion;
+	soundhit=Big_Explosion;
+	edgeeffectiveness=0.1;
+	explosiongenerator=custom:LONDON_REDUCED_GREEN;
+	[DAMAGE]
+	{
+		default=1750;
 	}
 }

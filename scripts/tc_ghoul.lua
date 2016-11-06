@@ -515,6 +515,7 @@ function script.endJump()
 	Turn2( rleg, x_axis, 0, 400 )
     Turn2( lleg, x_axis, 0, 400 )
 	jumping = false	
+	moving = false	
 end
 
 function script.setSFXoccupy ( curTerrainType )

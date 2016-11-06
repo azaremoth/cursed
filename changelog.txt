@@ -5,10 +5,14 @@ Balance
 - increased costs for the imperial techcenter to be upgraded with shields to 500 (vs. 300)
 - heal aura of heroes and witches will not add up anymore
 - reduced accuracy loss and increased reload speed gain a little for units in a frenzy aura
+- imperial hover tanks do 10% more damage
+- upgraded techcenters will leave more reclaimable metal
+- reduced repair speed of tier 1 mobile units by 17%
 
 Features
 - added nuke launcher (as upgrade for the tech center) as super-weapon for the imperials
 - added hellstorm (as upgrade for the cursed altar) as super-weapon for the cursed
+- imperial powerplants will cause damage to all close units and buildings after being killed
 
 Bugs
 - imperial priests will no longer hurt allied skeletal units
@@ -16,6 +20,7 @@ Bugs
 Polishing
 - Added normal maps for: imperial solar and metal extractor lvl1, cursed soulstone and soulcage
 - optimized lua code to avoid performance issues when lots of units were effected by auras
+- optimized the UI
 
 
 

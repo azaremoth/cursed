@@ -496,6 +496,7 @@ function script.endJump()
 	EmitSfx(rfoot,FIREFX)		
 	EmitSfx(lfoot,FIREFX)	
 	jumping = false	
+	moving = false	
 end
 	
 function script.HitByWeapon ( x, z, weaponDefID, damage )

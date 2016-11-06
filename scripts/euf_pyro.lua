@@ -308,6 +308,7 @@ function script.endJump()
     Turn2( lleg, x_axis, 0, 400 )
 	EmitSfx(base, DUST)	
 	jumping = false
+	moving = false	
 end
 
 function script.HitByWeapon ( x, z, weaponDefID, damage )

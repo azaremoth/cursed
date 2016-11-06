@@ -141,6 +141,7 @@ function script.endJump()
     Turn2( lleg, x_axis, 0, 400 )
 	EmitSfx(base, GREY)	
 	jumping = false
+	moving = false	
 end
 
 

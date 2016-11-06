@@ -52,6 +52,114 @@ return {
     },
   },
 
+  ["london_reduced"] = {
+    dustring = {
+      air                = true,
+      class              = [[CExpGenSpawner]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      underwater         = true,
+      properties = {
+        delay              = 100,
+        explosiongenerator = [[custom:LONDON_FLAMES]],
+        pos                = [[0, 0, 0]],
+      },
+    },
+    gflash = {
+      air                = true,
+      class              = [[CExpGenSpawner]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        delay              = 50,
+        explosiongenerator = [[custom:LONDON_GFLASH]],
+        pos                = [[0, 0, 0]],
+      },
+    },
+    glow = {
+      air                = true,
+      class              = [[CExpGenSpawner]],
+      count              = 10,
+      ground             = true,
+      water              = true,
+      underwater         = true,
+      properties = {
+        delay              = [[0 i10]],
+        explosiongenerator = [[custom:LONDON_GLOW]],
+        pos                = [[0, 0, 0]],
+      },
+    },
+    sphere = {
+      air                = true,
+      class              = [[CExpGenSpawner]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      underwater         = true,
+      properties = {
+        delay              = 50,
+        explosiongenerator = [[custom:LONDON_SPHERE]],
+        pos                = [[0, 5, 0]],
+      },
+    },
+  },
+  
+  ["london_reduced_green"] = {
+    dustring = {
+      air                = true,
+      class              = [[CExpGenSpawner]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      underwater         = true,
+      properties = {
+        delay              = 100,
+        explosiongenerator = [[custom:BIG_EXPLOSION_GREEN]],
+        pos                = [[0, 0, 0]],
+      },
+    },
+    gflash = {
+      air                = true,
+      class              = [[CExpGenSpawner]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      properties = {
+        delay              = 50,
+        explosiongenerator = [[custom:LONDON_GFLASH]],
+        pos                = [[0, 0, 0]],
+      },
+    },
+    glow = {
+      air                = true,
+      class              = [[CExpGenSpawner]],
+      count              = 10,
+      ground             = true,
+      water              = true,
+      underwater         = true,
+      properties = {
+        delay              = [[0 i10]],
+        explosiongenerator = [[custom:LONDON_GLOW]],
+        pos                = [[0, 0, 0]],
+      },
+    },
+    sphere = {
+      air                = true,
+      class              = [[CExpGenSpawner]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      underwater         = true,
+      properties = {
+        delay              = 50,
+        explosiongenerator = [[custom:LONDON_SPHERE_GREEN]],
+        pos                = [[0, 5, 0]],
+      },
+    },
+  },
+  
   ["london"] = {
     dustring = {
       air                = true,
@@ -119,6 +227,52 @@ return {
     },
   },
 
+  ["london_sphere_green"] = {
+    groundflash = {
+      circlealpha        = 1,
+      circlegrowth       = 0,
+      flashalpha         = 1,
+      flashsize          = 1600,
+      ttl                = 500,
+      color = {
+        [1]  = 0.7,
+        [2]  = 0.9,
+        [3]  = 0.2,
+      },
+    },
+    pikez = {
+      air                = true,
+      class              = [[explspike]],
+      count              = 0,
+      ground             = true,
+      water              = true,
+      underwater         = true,
+      properties = {
+        alpha              = 0.8,
+        alphadecay         = 0.03,
+        color              = [[0.7,0.9,0.2]],
+        dir                = [[-15 r30,-15 r30,-15 r30]],
+        length             = 4000,
+        width              = 15,
+      },
+    },
+    sphere = {
+      air                = true,
+      class              = [[CSpherePartSpawner]],
+      count              = 1,
+      ground             = true,
+      water              = true,
+      underwater         = true,
+      properties = {
+        alpha              = 0.8,
+        color              = [[0.7,0.9,0.2]],
+        expansionspeed     = 30,
+        ttl                = 100,
+      },
+    },
+  },
+
+  
   ["london_sphere"] = {
     groundflash = {
       circlealpha        = 1,

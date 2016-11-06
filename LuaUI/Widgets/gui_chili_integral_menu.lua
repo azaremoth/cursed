@@ -330,12 +330,12 @@ local n_states = {}
 
 --shortcuts
 local menuChoices = {
-	[1] = { array = n_common, name = "Order", hotkeyName = "Order" },
+	[1] = { array = n_common, name = "Orders", hotkeyName = "Orders" },
 	[2] = { array = n_factories, name = "Factory", hotkeyName = "Factory", config = factory_commands, actionName = "epic_chili_integral_menu_tab_factory" },
 	[3] = { array = n_econ, name = "Econ", hotkeyName = "Econ", config = econ_commands, actionName = "epic_chili_integral_menu_tab_economy" },
 	[4] = { array = n_defense, name = "Defense", hotkeyName = "Defense", config = defense_commands, actionName = "epic_chili_integral_menu_tab_defence" },
 	[5] = { array = n_special, name = "Special", hotkeyName = "Special", config = special_commands, actionName = "epic_chili_integral_menu_tab_special" },
-	[6] = { array = n_units, name = "Build", hotkeyName = "Units" },
+	[6] = { array = n_units, name = "Build", hotkeyName = "Build" },
 }
 
 local menuChoice = 1

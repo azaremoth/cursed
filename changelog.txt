@@ -16,9 +16,11 @@ Features
 
 Bugs
 - imperial priests will no longer hurt allied skeletal units
+- aura related particles will no longer spawn for burrowed units (they are not impacted by auras)
 
 Polishing
-- Added normal maps for: imperial solar and metal extractor lvl1, cursed blade, soulstone and soulcage
+- added normal maps for: imperial solar and metal extractor lvl1, cursed blade, soulstone and soulcage
+- improved the visibility of the build ranges for the cursed obelisks massively
 - optimized lua code to avoid performance issues when lots of units were effected by auras
 - optimized the UI
 

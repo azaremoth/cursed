@@ -246,25 +246,27 @@ function gadget:GameFrame(f)
 			
 			for unitID, range in pairs(units) do
 				local x, y, z = spGetUnitPosition(unitID)
-				local auraUnitTeam = Spring.GetUnitTeam(unitID)
-				local eUnits = spGetUnitsInCylinder(x,z, range)
-				if (x and auraUnitTeam and eUnits) then
-					for _,eUnitID in ipairs(eUnits) do
-						if eUnitID ~= unitID then
-							local eTeam = Spring.GetUnitTeam(eUnitID)
-							if (enemyAura and (eTeam ~= auraUnitTeam) and not (Spring.AreTeamsAllied(eTeam, auraUnitTeam))) then
-								spSetUnitRulesParam(eUnitID,auraType,1)
-								GG.UpdateUnitAttributes(eUnitID) -- attribute change by unit_attributes
-								encUnits[eUnitID] = auraType
-							elseif (alliedAura and (eTeam ~= auraUnitTeam) and (Spring.AreTeamsAllied(eTeam, auraUnitTeam))) then
-								spSetUnitRulesParam(eUnitID,auraType,1)
-								GG.UpdateUnitAttributes(eUnitID) -- attribute change by unit_attributes
-								encUnits[eUnitID] = auraType
-							elseif (not enemyAura and (eTeam == auraUnitTeam)) then
-								spSetUnitRulesParam(eUnitID,auraType,1)
-								GG.UpdateUnitAttributes(eUnitID) -- attribute change by unit_attributes
-								encUnits[eUnitID] = auraType
-							end						
+				if (x and z and range) then
+					local auraUnitTeam = Spring.GetUnitTeam(unitID)
+					local eUnits = spGetUnitsInCylinder(x, z, range)
+					if (auraUnitTeam and eUnits) then
+						for _,eUnitID in ipairs(eUnits) do
+							if eUnitID ~= unitID then
+								local eTeam = Spring.GetUnitTeam(eUnitID)
+								if (enemyAura and (eTeam ~= auraUnitTeam) and not (Spring.AreTeamsAllied(eTeam, auraUnitTeam))) then
+									spSetUnitRulesParam(eUnitID,auraType,1)
+									GG.UpdateUnitAttributes(eUnitID) -- attribute change by unit_attributes
+									encUnits[eUnitID] = auraType
+								elseif (alliedAura and (eTeam ~= auraUnitTeam) and (Spring.AreTeamsAllied(eTeam, auraUnitTeam))) then
+									spSetUnitRulesParam(eUnitID,auraType,1)
+									GG.UpdateUnitAttributes(eUnitID) -- attribute change by unit_attributes
+									encUnits[eUnitID] = auraType
+								elseif (not enemyAura and (eTeam == auraUnitTeam)) then
+									spSetUnitRulesParam(eUnitID,auraType,1)
+									GG.UpdateUnitAttributes(eUnitID) -- attribute change by unit_attributes
+									encUnits[eUnitID] = auraType
+								end						
+							end
 						end
 					end
 				end
@@ -296,20 +298,28 @@ function gadget:GameFrame(f)
 		for unitID, _ in pairs(encUnits) do
 			for auraType, _ in pairs(auraUnits) do
 				if spGetUnitRulesParam(unitID,auraType) == 1 then
-					local states = spGetUnitStates(unitID)
-					local burrowed = spGetUnitRulesParam(unitID,"burrowed")					
-					if not states.cloak then
-						local x, y, z = spGetUnitPosition(unitID)
-						spSpawnCEG(auraDefs[auraType].ceg, x+cx, y+cy, z+cz)
+					local burrowed = spGetUnitRulesParam(unitID,"burrowed")	
+					if (burrowed == 1 or burrowed == 2) then
+--						Spring.Echo("Do nothing!")
+					else
+						local states = spGetUnitStates(unitID)
+						if (not states.cloak) then
+							local x, y, z = spGetUnitPosition(unitID)
+							spSpawnCEG(auraDefs[auraType].ceg, x+cx, y+cy, z+cz)
+						end
+						--- Heal --
+						if (spGetUnitRulesParam(unitID,"Hero Aura") == 1 or spGetUnitRulesParam(unitID,"Heal Aura") == 1) then
+							spSetUnitHealth(unitID, spGetUnitHealth(unitID)+AURAHEAL ) 					
+						end	
+						-- Pest --
+						if (spGetUnitRulesParam(unitID,"Pest Aura") == 1) then
+							if ((spGetUnitHealth(unitID)-PESTAURADAMAGE) > 0 ) then 
+								spSetUnitHealth(unitID, spGetUnitHealth(unitID)-PESTAURADAMAGE )
+							else
+								Spring.DestroyUnit(unitID,true,false,unitID) -- fix some time: killer should be the aura caster
+							end
+						end
 					end
-					--- Heal --
-					if (burrowed ~= 1 and spGetUnitRulesParam(unitID,"Hero Aura") == 1 or spGetUnitRulesParam(unitID,"Heal Aura") == 1) then
-						spSetUnitHealth(unitID, spGetUnitHealth(unitID)+AURAHEAL ) 					
-					end	
-					-- Pest --
-					if burrowed ~= 1 and  spGetUnitRulesParam(unitID,"Pest Aura") == 1 then
-						spSetUnitHealth(unitID, spGetUnitHealth(unitID)-PESTAURADAMAGE )
-					end					
 				end
 			end
 		end

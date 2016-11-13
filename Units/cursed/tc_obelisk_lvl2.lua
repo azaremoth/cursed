@@ -29,6 +29,7 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {
 	factionname	= "cursed",
+	isimmobilebuilder = true,	
 	noautorepair = true,	
     helptext 	= "Obelisks are immobile base cunstruction units."
   },

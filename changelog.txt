@@ -18,7 +18,7 @@ Bugs
 - imperial priests will no longer hurt allied skeletal units
 
 Polishing
-- Added normal maps for: imperial solar and metal extractor lvl1, cursed soulstone and soulcage
+- Added normal maps for: imperial solar and metal extractor lvl1, cursed blade, soulstone and soulcage
 - optimized lua code to avoid performance issues when lots of units were effected by auras
 - optimized the UI
 

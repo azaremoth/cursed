@@ -41,6 +41,8 @@ local unitDef = {
   collisionSphereScale = 1.0,
   customParams       = {	
 	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/tc_blade_normal.png",
+	normalmaps = "yes",	
     helptext	= "The Interceptor is the ideal choice against airborne targets."	
 	},
   --  energyMake         = "-1",

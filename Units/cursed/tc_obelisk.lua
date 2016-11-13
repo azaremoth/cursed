@@ -29,6 +29,7 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {
 	factionname	= "cursed",
+	isimmobilebuilder = true,
 	growingcreep = true,
 	noautorepair = true,
     normaltex = "unittextures/normalmaps/tc_obelisk_normal.png",

@@ -3,8 +3,8 @@
 
 function widget:GetInfo()
   return {
-    name      = "Indicates auras",
-    desc      = "Draws a circle around units under aura influence",
+    name      = "Indicates auras and immobile builder ranges",
+    desc      = "Draws a circle around units under aura influence and immobile builders",
     author    = "trepan, aZaremoth",
     date      = "Apr 16, 2007",
     license   = "GNU GPL, v2 or later",
@@ -197,6 +197,18 @@ function widget:DrawWorldPreUnit()
       if (teamID and teamID ~= Gaia) then
 	  	local udid = spGetUnitDefID(unitID)
 		if not noDraw [udid] and Spring.IsUnitSelected(unitID) then
+			local ud = UnitDefs[udid]
+------------------------------------------- Immobile builders need to be defined in customParams to be shown
+			if (ud.customParams.isimmobilebuilder) then
+				local builddist = ud.buildDistance
+				local x, y, z = spGetUnitBasePosition(unitID)
+				local gx, gy, gz = spGetGroundNormal(x, z)
+				local degrot = math.acos(gy) * 180 / math.pi
+				glLineWidth(5.0)
+				glColor({ 0, 1, 0, 0.8 })
+				glDrawListAtUnit(unitID, circleLargeLines, true, builddist, 1.0, builddist, degrot, gz, 0, -gx)
+			end
+		
 --------------------------------------------
 			if Spring.GetUnitRulesParam(unitID,'Hero Aura') == 1 then
 				local radius = GetUnitDefRealRadius(udid)			

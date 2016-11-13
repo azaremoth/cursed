@@ -299,7 +299,8 @@ function gadget:GameFrame(f)
 			for auraType, _ in pairs(auraUnits) do
 				if spGetUnitRulesParam(unitID,auraType) == 1 then
 					local burrowed = spGetUnitRulesParam(unitID,"burrowed")	
-					if (burrowed == 1 or burrowed == 2) then
+					local iscrust = spGetUnitRulesParam(unitID,"iscrust")	
+					if (burrowed == 1 or iscrust == 1) then
 --						Spring.Echo("Do nothing!")
 					else
 						local states = spGetUnitStates(unitID)

@@ -201,7 +201,7 @@ function gadget:CommandFallback(unitID, unitDefID, team, cmd, param, opts)
 		CallUnitScript(unitID, "Burrow")
 		return true, true  --// command was used, remove it
 	elseif (cmd  == CMD_KAMIKAZE and KamakaziUnitList[unitID] == true) then  -- Kamakazi command
-		Spring.DestroyUnit(unitID,false,false)
+		Spring.DestroyUnit(unitID,true,false,unitID)
 		return true, true  --// command was used, remove it
 	elseif (cmd  == CMD_UNLOADBUNKER and BunkerPairs [unitDefID]) then
 		CallUnitScript(unitID, "bunkerdrop")

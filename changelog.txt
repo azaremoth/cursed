@@ -17,6 +17,7 @@ Features
 Bugs
 - imperial priests will no longer hurt allied skeletal units
 - aura related particles will no longer spawn for burrowed units (they are not impacted by auras)
+- fixed recursion errors when burrowed units are killed (there was no real recursion but Spring is more picky about it now)
 
 Polishing
 - added normal maps for: imperial solar and metal extractor lvl1, cursed blade, soulstone and soulcage

@@ -159,10 +159,10 @@ local weaponDefs = {
 	weaponType         = "Cannon",
 ------------------------------------------------------------	  
     damage = {
-      default            = 28,
-      flyer              = (28*0.75),
-      heavy              = (28*0.75),
-      light              = 28,
+      default            = 30,
+      flyer              = (30*0.75),
+      heavy              = (30*0.75),
+      light              = 30,
     },
   },
   ASSAULT_RIFLE_BUNKER = {
@@ -197,10 +197,10 @@ local weaponDefs = {
 	weaponType         = "Cannon",
 ------------------------------------------------------------	  
     damage = {
-      default            = 28,
-      flyer              = (28*0.75),
-      heavy              = (28*0.75),
-      light              = 28,
+      default            = 30,
+      flyer              = (30*0.75),
+      heavy              = (30*0.75),
+      light              = 30,
     },
   },
 }

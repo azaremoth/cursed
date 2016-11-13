@@ -219,7 +219,7 @@
 	range=350;
 	reloadtime=3.6;
 	weaponvelocity=1000;
-	areaofeffect=556;
+	areaofeffect=496;
 	soundstart=Big_Explosion;
 	soundhit=Big_Explosion;
 	edgeeffectiveness=0.25;
@@ -237,7 +237,7 @@
 	range=480;
 	reloadtime=3.6;
 	weaponvelocity=1000;
-	areaofeffect=556;
+	areaofeffect=496;
 	noselfdamage=1;
 //	soundstart=Big_Explosion;
 //	soundhit=Big_Explosion;

@@ -30,6 +30,12 @@ local IsAHero = {
 	[UnitDefNames.euf_sarge_lvl4.id] = "euf_sarge_lvl4",	
 	[UnitDefNames.euf_sarge_lvl5.id] = "euf_sarge_lvl5",	
 	}
+
+local IsAHeroBlank = {
+	[UnitDefNames.tc_shade.id] = "tc_shade",
+	[UnitDefNames.euf_sarge.id] = "euf_sarge",
+	}
+	
 	
 ----------- Experience Range -----------
 	local expRange = 500
@@ -55,6 +61,19 @@ function gadget:Initialize()
 	for _,team in ipairs(allTeams) do
 		HeroLevelList[team] = 1
 		HeroXPList[team] = 0
+	end
+end
+
+function gadget:UnitFinished(unitID, unitDefID, team)
+	if IsAHeroBlank [unitDefID] then
+      local x, y, z = Spring.GetUnitPosition(unitID)
+	  local dx, dy, dz = Spring.GetUnitDirection(unitID)
+	  local nx = (x+dx*80)
+	  local nz = z 
+	  if (dz > -2) then
+		nz = (z+dz*80)
+	  end
+      Spring.SetUnitPosition(unitID, nx, y, nz)
 	end
 end
 

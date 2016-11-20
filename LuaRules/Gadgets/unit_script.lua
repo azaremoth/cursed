@@ -25,7 +25,7 @@ To do:
 
 function gadget:GetInfo()
 	return {
-		name      = "Lua unit script framework",
+		name      = "LUS",
 		desc      = "Manages Lua unit scripts",
 		author    = "Tobi Vollebregt",
 		date      = "2 September 2009",
@@ -39,8 +39,6 @@ end
 if (not gadgetHandler:IsSyncedCode()) then
 	return false
 end
-
-local reverseCompat = ((Game.version:find('91.0') == 1)) and 1 or 0
 
 -- This lists all callins which may be wrapped in a coroutine (thread).
 -- The ones which should not be thread-wrapped are commented out.
@@ -127,7 +125,7 @@ local sp_WaitForTurn = Spring.UnitScript.WaitForTurn
 local sp_SetPieceVisibility = Spring.UnitScript.SetPieceVisibility
 local sp_SetDeathScriptFinished = Spring.UnitScript.SetDeathScriptFinished
 
-local LUA_WEAPON_MIN_INDEX = 1 - reverseCompat
+local LUA_WEAPON_MIN_INDEX = 1
 local LUA_WEAPON_MAX_INDEX = LUA_WEAPON_MIN_INDEX + 31
 
 local UNITSCRIPT_DIR = (UNITSCRIPT_DIR or "scripts/"):lower()
@@ -360,11 +358,13 @@ function Spring.UnitScript.Sleep(milliseconds)
 	local activeUnit = GetActiveUnit() or error("[Sleep] no active unit on stack?", 2)
 	local activeThread = activeUnit.threads[co_running() or error("[Sleep] not in a thread?", 2)]
 
-	zzz[#zzz+1] = activeThread
-	activeThread.container = zzz
-	-- yield the running thread:
-	-- it will be resumed in frame #n (in gadget:GameFrame).
-	co_yield()
+	if (activeThread ~= nil) then
+		zzz[#zzz+1] = activeThread
+		activeThread.container = zzz
+		-- yield the running thread:
+		-- it will be resumed in frame #n (in gadget:GameFrame).
+		co_yield()
+	end
 end
 
 

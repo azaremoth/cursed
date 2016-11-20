@@ -494,8 +494,8 @@ function gadget:GameFrame(f)
 	for unitID, gameframe in pairs(GG.delayeddeathlist) do
 		if ((gameframe < Spring.GetGameFrame()) and (unitID ~= nil)) then
 			GG.delayeddeathlist[unitID] = nil
-			-- Spring.DestroyUnit(unitID, false, true)			
-			Spring.DestroyUnit(unitID, false, false, unitID)
+			Spring.DestroyUnit(unitID, false, true)			
+			-- Spring.DestroyUnit(unitID, false, false, unitID)
 		end
 	end
 end

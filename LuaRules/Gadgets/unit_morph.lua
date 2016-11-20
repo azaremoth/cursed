@@ -671,7 +671,8 @@ local function FinishMorph(unitID, morphData)
   SendToUnsynced("unit_morph_finished", unitID, newUnit)
 
   Spring.SetUnitBlocking(newUnit, true)
-  Spring.DestroyUnit(unitID, false, true) -- selfd = false, reclaim = true
+  GG.delayeddeathlist[unitID] = Spring.GetGameFrame()  
+  -- Spring.DestroyUnit(unitID, false, true) -- selfd = false, reclaim = true
 end
 
 
@@ -695,6 +696,7 @@ end
 
 
 function gadget:Initialize()
+  GG.delayeddeathlist = GG.delayeddeathlist or {}
   --// RankApi linking
   if (GG.rankHandler) then
     GetUnitRank = GG.rankHandler.GetUnitRank

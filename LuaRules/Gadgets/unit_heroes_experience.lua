@@ -50,11 +50,32 @@ Spring.SetGameRulesParam("xps",1)
 ----------------------------------------------------------------
 
 function gadget:Initialize()
+	GG.delayeddeathlist = GG.delayeddeathlist or {}
 	local allTeams = Spring.GetTeamList()
 	for _,team in ipairs(allTeams) do
 		HeroLevelList[team] = 1
 		HeroXPList[team] = 0
 	end
+end
+
+local function ReAssignAssists(newUnit,oldUnit)
+  local ally = Spring.GetUnitAllyTeam(newUnit)
+  local alliedTeams = Spring.GetTeamList(ally)
+  for n=1,#alliedTeams do
+    local teamID = alliedTeams[n]
+    local alliedUnits = Spring.GetTeamUnits(teamID)
+    for i=1,#alliedUnits do
+      local unitID = alliedUnits[i]
+      local cmds = Spring.GetCommandQueue(unitID, 20)
+      for j=1,#cmds do
+        local cmd = cmds[j]
+        if (cmd.id == CMD.GUARD)and(cmd.params[1] == oldUnit) then
+          Spring.GiveOrderToUnit(unitID,CMD.INSERT,{cmd.tag,CMD.GUARD,0,newUnit},{})
+          Spring.GiveOrderToUnit(unitID,CMD.REMOVE,{cmd.tag},{})
+        end
+      end
+    end
+  end
 end
 
 local function ReplaceHero(unitID, team)
@@ -73,20 +94,47 @@ local function ReplaceHero(unitID, team)
 			facing = 2
 		end
 		----------------------------
+		local newhero = nil
 		local heroDefID = Spring.GetUnitDefID(unitID)
 		local udhero = UnitDefs[heroDefID]
 		local issarge = string.find(udhero.name, "euf_sarge")
 		local isshade = string.find(udhero.name, "tc_shade")
-	--	Spring.Echo("Remove unit:" .. unitID)
 		if (issarge) then
-			local newhero = Spring.CreateUnit("euf_sarge_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, team)
-	--		Spring.Echo("Added unit:" .. newhero)
+			newhero = Spring.CreateUnit("euf_sarge_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, team)
 		elseif (isshade) then
-			local newhero = Spring.CreateUnit("tc_shade_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, team)
+			newhero = Spring.CreateUnit("tc_shade_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, team)
 		else
 			Spring.Echo("Fuck Error!")
 		end
-		Spring.DestroyUnit(unitID, false, false, unitID)
+		if (newhero ~= nil) then
+			--//copy command queue
+			local cmds = Spring.GetUnitCommands(unitID, 20)
+			for i = 1, #cmds do
+				local cmd = cmds[i]
+				if i == 1 and cmd.id < 0 then -- repair case for construction
+					local units = Spring.GetUnitsInRectangle(cmd.params[1]-32, cmd.params[3]-32,cmd.params[1]+32, cmd.params[3]+32)
+					local allyTeam = Spring.GetUnitAllyTeam(unitID)
+					local notFound = true
+					for j = 1, #units do
+						local areaUnitID = units[j]
+						if allyTeam == Spring.GetUnitAllyTeam(areaUnitID) and Spring.GetUnitDefID(areaUnitID) == -cmd.id then
+							Spring.GiveOrderToUnit(newhero, CMD.REPAIR, {areaUnitID}, cmd.options.coded)
+							notFound = false
+							break
+						end
+					end
+					if notFound then
+						Spring.GiveOrderToUnit(newhero, cmd.id, cmd.params, cmd.options.coded)
+					end
+				else
+					Spring.GiveOrderToUnit(newhero, cmd.id, cmd.params, cmd.options.coded)
+				end
+			end
+			--//reassign assist commands to new unit
+			ReAssignAssists(newhero,unitID)
+			--//kill old hero next game frame
+			GG.delayeddeathlist[unitID] = Spring.GetGameFrame()
+		end
 end
 
 local function CheckLeveling(unitID)

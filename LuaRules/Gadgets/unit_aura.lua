@@ -167,8 +167,9 @@ local function updateAuraUnits(teamID)
 	end
 end
 
-
 function gadget:Initialize()
+	GG.delayeddeathlist = GG.delayeddeathlist or {}
+	
 	local allTeams = Spring.GetTeamList()
 	for _,team in ipairs(allTeams) do
 		reqs[team] = reqs[team] or {}
@@ -317,7 +318,8 @@ function gadget:GameFrame(f)
 							if ((spGetUnitHealth(unitID)-PESTAURADAMAGE) > 0 ) then 
 								spSetUnitHealth(unitID, spGetUnitHealth(unitID)-PESTAURADAMAGE )
 							else
-								Spring.DestroyUnit(unitID,true,false,unitID) -- fix some time: killer should be the aura caster
+								GG.delayeddeathlist[unitID] = Spring.GetGameFrame()
+								-- Spring.DestroyUnit(unitID,true,false,unitID) -- fix some time: killer should be the aura caster
 							end
 						end
 					end

@@ -41,6 +41,11 @@ if (killstragglers == "1" and kothisactive == false) then
 		["Zombie Survival: Custom"] = true,
 	}
 
+	function gadget:Initialize()
+		GG.delayeddeathlist = GG.delayeddeathlist or {}
+	end
+
+	
 	function gadget:GameStart()
 		local teams = Spring.GetTeamList()
 		for i = 1,#teams do
@@ -69,7 +74,7 @@ if (killstragglers == "1" and kothisactive == false) then
 	end
 
 	function gadget:GameFrame(f)
-		if (f > 3600) then
+		if (gamestarted == false and f > 3600) then
 			gamestarted = true
 		end
 	end
@@ -85,10 +90,11 @@ if (killstragglers == "1" and kothisactive == false) then
 				AIalive[teamID] = false
 				for _,loopunitID in ipairs(Spring.GetTeamUnits(teamID)) do
 					if (loopunitID ~= unitID) and (loopunitID ~= nil) then
-						Spring.DestroyUnit(loopunitID, false, false, loopunitID) -- recursion?! Maybe just because of cheating?
-            			Spring.Echo("Remaining units of AI " .. teamID .. " were destroyed!")						
+						GG.delayeddeathlist[loopunitID] = Spring.GetGameFrame()+math.random(30)
+						-- Spring.DestroyUnit(loopunitID, false, false, loopunitID) -- recursion?! Maybe just because of cheating?  				
 					end
-				end			
+				end
+				Spring.Echo("Remaining units of AI " .. teamID .. " were destroyed!")						
 			end
 		end
 	end

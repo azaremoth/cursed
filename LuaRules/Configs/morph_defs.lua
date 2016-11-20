@@ -6,29 +6,6 @@ local devolution = false
 
 
 local morphDefs = {
-
-  --[[ // sample definition1 with multiple possible morphs... you nest arrays inside the definition
-  armcom = {
-    {
-      into = 'armmoho',
-      time = 20,
-      metal = 10,
-      energy = 10,
-      tech = 1,
-      xp = 0,
-    },
-    {
-      into = 'corcom',
-      time = 20,
-      metal = 10,
-      energy = 10,
-      tech = 1,
-      xp = 0,
-    },
-  },
-
---]]
-
    tc_altar = {
     {
     into = 'tc_altar_hellstorm',
@@ -122,18 +99,6 @@ local morphDefs = {
 	texture = 'tc_obelisk_lvl2.png',
     },
   },
---[[  tc_darkassembler = {
-    {
-      into = 'tc_darkassembler_lvl2',
-	metal = 500,
-	energy = 500,
-	time = 40,
-	require = 'tc_heart',
-      tech = 0,
-      xp = 0,
-	texture = 'tc_darkassembler_lvl2.png',
-    },
-  },]]--
   tc_witch = {
     {
       into = 'tc_witch_shield',

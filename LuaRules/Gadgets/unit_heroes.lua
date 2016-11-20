@@ -1,6 +1,6 @@
 function gadget:GetInfo()
 	return {
-		name = "Experience System for Cursed",
+		name = "Handler Heros & Experience System for Cursed",
 		desc = "Handles XP",
 		author = "aZaremoth",
 		date = "2011-11-03",
@@ -31,22 +31,28 @@ local IsAHero = {
 	[UnitDefNames.euf_sarge_lvl5.id] = "euf_sarge_lvl5",	
 	}
 
-local IsAHeroBlank = {
-	[UnitDefNames.tc_shade.id] = "tc_shade",
-	[UnitDefNames.euf_sarge.id] = "euf_sarge",
-	}
-	
-	
+----------------------
+local ChickenAIs = 
+	{
+		["Zombie Survival: Very Easy"] = true,
+		["Zombie Survival: Easy"] = true,	
+		["Zombie Survival: Normal"] = true,	
+		["Zombie Survival: Hard"] = true,
+		["Zombie Survival: Suicidal"] = true,
+		["Zombie Survival: Custom"] = true,
+	}	
 ----------- Experience Range -----------
 	local expRange = 500
 	local DeathPenalty = 0.5
 	local GainForKilledHero = 0.5	
 	local LevelXPMultiplier = 0.7
 	local MaxLevel = 5
-
+-----------
+	local AIRespawnDelay = 3600 -- 120s x 30 frames 
+-----------	
 	local HeroXPList = {}	
 	local HeroLevelList = {}
-
+	local AIRespawnList = {}	
 	
 if (gadgetHandler:IsSyncedCode()) then
 --SYNCED
@@ -122,8 +128,6 @@ local function ReplaceHero(unitID, team)
 			newhero = Spring.CreateUnit("euf_sarge_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, team)
 		elseif (isshade) then
 			newhero = Spring.CreateUnit("tc_shade_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, team)
-		else
-			Spring.Echo("Fuck Error!")
 		end
 		if (newhero ~= nil) then
 			--//copy command queue
@@ -231,10 +235,20 @@ end
 function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
 	if (attacker ~= nil) then
 		if (attacker ~= unitID) then
-			local XPGain
+			local XPGain = 0
 			if (IsAHero[unitDefID]) then
 				DecreaseHeroXP(unitID)
 				XPGain = GainForKilledHero -- XP for a killed hero
+				---- Replace a hero unit that was lost by an AI. CAI can not handle units that are not always allowed to build
+				local ai = select(4, Spring.GetTeamInfo(team))
+				if ai then
+					-- Spring.Echo("AI hero died!")
+					if not (ChickenAIs[Spring.GetTeamLuaAI(team)]) then
+						local respawnframe = Spring.GetGameFrame()+AIRespawnDelay
+						local teamplusone = team+1
+						AIRespawnList[teamplusone] = respawnframe
+					end
+				end	
 	--			Spring.Echo('Well done! An enemy hero was killed. You receive a XP bonus!')
 			else 
 				local ud = UnitDefs[unitDefID]
@@ -277,6 +291,25 @@ function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
 		end
 	end
 end
+
+function gadget:GameFrame(f)
+	if (f % 30) == 8 then
+		for teamID, gameframe in ipairs(AIRespawnList) do
+			local heroteam = (teamID-1) -- spring does not like tables with 0
+			if (gameframe < Spring.GetGameFrame()) then
+				local side = select(5, Spring.GetTeamInfo(heroteam))
+				local x,y,z = Spring.GetTeamStartPosition(heroteam)
+				if (side == "imperials") then
+					local newAIhero = Spring.CreateUnit("euf_sarge_lvl".. HeroLevelList[heroteam], x,y,z, 0, heroteam)
+				else
+					local newAIhero = Spring.CreateUnit("tc_shade_lvl".. HeroLevelList[heroteam], x,y,z, 0, heroteam)
+				end
+				AIRespawnList[teamID]=nil
+			end
+		end
+	end
+end
+
 
 else
 --UNSYNCED

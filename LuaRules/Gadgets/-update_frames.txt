@@ -7,7 +7,7 @@ frame:
 5	aura impact on hps		unit_aura.lua 		(f%30)
 6	draw aura ceg			unit_aura.lua 		(f%30)
 7	updatePausedReload		unit_attributes.lua	(f%3)	
-8
+8	Check for hero respawn		unit_heroes.lua         (f%30)
 9
 10	updatePausedReload		unit_attributes.lua	(f%3)	
 11

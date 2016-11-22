@@ -3,7 +3,7 @@ local array = {}
 ------------------------
 -- Config
 
-local MAX_SLOW_FACTOR = 0.5
+local MAX_SLOW_FACTOR = 1.0
 -- Max slow damage on a unit = MAX_SLOW_FACTOR * current health
 -- Slowdown of unit = slow damage / current health
 -- So MAX_SLOW_FACTOR is the limit for how much units can be slowed

@@ -176,6 +176,7 @@ local function CheckLeveling(unitID)
 	end
 -------- Needed for health bars widget to show leveling progress
 	if (HeroLevelList[HeroTeam] < MaxLevel) then
+		-- local currentlevelXPs = HeroXPList[HeroTeam]/((HeroLevelList[HeroTeam]^1.5)*LevelXPMultiplier^1.5)
 		local currentlevelXPs = (HeroXPList[HeroTeam]-(HeroLevelList[HeroTeam]-1)^1.5*LevelXPMultiplier^1.5)/(HeroLevelList[HeroTeam]^1.5*LevelXPMultiplier^1.5)
 		Spring.SetUnitRulesParam(unitID,'xps',currentlevelXPs)
 	else
@@ -298,13 +299,29 @@ function gadget:GameFrame(f)
 			local heroteam = (teamID-1) -- spring does not like tables with 0
 			if (gameframe < Spring.GetGameFrame()) then
 				local side = select(5, Spring.GetTeamInfo(heroteam))
-				local x,y,z = Spring.GetTeamStartPosition(heroteam)
-				if (side == "imperials") then
-					local newAIhero = Spring.CreateUnit("euf_sarge_lvl".. HeroLevelList[heroteam], x,y,z, 0, heroteam)
-				else
-					local newAIhero = Spring.CreateUnit("tc_shade_lvl".. HeroLevelList[heroteam], x,y,z, 0, heroteam)
+				local herotype = nil
+				local x,y,z = nil,nil,nil
+				local AIBarracks = Spring.GetTeamUnitsByDefs (heroteam, {UnitDefNames["euf_barracks_ai"].id})
+				local AIPyramids = Spring.GetTeamUnitsByDefs (heroteam, {UnitDefNames["tc_pyramid_ai"].id})
+				
+				if (side == "imperials" and AIBarracks ~= nil) then
+					for _,unitID in ipairs(AIBarracks) do
+						x,y,z = Spring.GetUnitPosition(unitID)
+					end
+					herotype = "euf_sarge_lvl".. HeroLevelList[heroteam]
+				elseif (AIPyramids ~= nil) then
+					for _,unitID in ipairs(AIPyramids) do
+						x,y,z = Spring.GetUnitPosition(unitID)
+					end
+					herotype = "tc_shade_lvl".. HeroLevelList[heroteam]
 				end
-				AIRespawnList[teamID]=nil
+
+				if (herotype ~= nil and x ~= nil and y ~= nil and z~= nil) then
+					local newAIhero = Spring.CreateUnit(herotype, x+80,y,z+80, 0, heroteam)	
+					AIRespawnList[teamID]=nil
+				else
+					AIRespawnList[teamID]=(AIRespawnList[teamID]+300)
+				end
 			end
 		end
 	end

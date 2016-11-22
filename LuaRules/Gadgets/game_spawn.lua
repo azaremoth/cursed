@@ -124,9 +124,9 @@ local function GetStartUnit(teamID)
 				local builder1 = Spring.CreateUnit("euf_constructor", x, y, z, heading, teamID)
 			end
 		else
-			if ((ai == true) and (team ~= Gaia) and (type ~= "feature") and (kothactive == 0)) then
-				local heading = math.random(3)
-				local hero = Spring.CreateUnit("tc_shade_lvl1", x-60, y, z-60, heading, teamID)					
+			local heading = math.random(3)
+			local hero = Spring.CreateUnit("tc_shade_lvl1", x-60, y, z-60, heading, teamID)		
+			if ((ai == true) and (team ~= Gaia) and (type ~= "feature") and (kothactive == 0)) then			
 				if cheatAItype == "1" then
 					local heading = math.random(3)		
 					local zero = Spring.CreateUnit("tc_heart_ai", x,y,z, heading, teamID)
@@ -150,7 +150,6 @@ local function GetStartUnit(teamID)
 				end
 			elseif ((kothbase == "1") and (kothactive > 0)) then
 				local heading = math.random(3)
-				local hero = Spring.CreateUnit("tc_shade_lvl1", x-60, y, z-60, heading, teamID)		
 				local zero = Spring.CreateUnit("tc_heart_ai", x,y,z, heading, teamID)
 				local one = Spring.CreateUnit("tc_defender", x+180,y,z+200, heading, teamID)
 				local two = Spring.CreateUnit("tc_defender", x-200,y,z-170, heading, teamID)
@@ -175,9 +174,7 @@ local function GetStartUnit(teamID)
 				local heading = math.random(3)
 				local gunner = Spring.CreateUnit("tc_gunner", x, y, z+60, heading, teamID)
 				local heading = math.random(3)
-				local hero = Spring.CreateUnit("tc_shade_lvl1", x-50, y, z-40, heading, teamID)
-				local heading = math.random(3)
-				local necrmancer = Spring.CreateUnit("tc_necromancer", x+40, y, z+60, heading, teamID)
+				local necromancer = Spring.CreateUnit("tc_necromancer", x+40, y, z+60, heading, teamID)
 				local heading = math.random(3)				
 				local witch = Spring.CreateUnit("tc_witch", x, y, z-50, heading, teamID)				
 			end

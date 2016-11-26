@@ -609,7 +609,9 @@ local function SpawnTurret(burrowID, turret, number, force)
 		local burrowTarget  = Spring.GetUnitNearestEnemy(burrowID, 20000, false)
 		if (burrowTarget) then
 			local tloc = ChooseTarget(burrowTarget)
-			spGiveOrderToUnit(unitID, CMD_FIGHT, tloc, emptyTable)
+			if (tloc ~= nil) then
+				spGiveOrderToUnit(unitID, CMD_FIGHT, tloc, emptyTable)
+			end
 		end
 	else
 		Spring.SetUnitBlocking(unitID, false)

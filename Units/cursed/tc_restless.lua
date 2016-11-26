@@ -29,6 +29,7 @@ local unitDef = {
   canRepair          = true,
   canResurrect       = false,
   canstop            = "1",
+  capturable         = false,    
   captureSpeed       = 0,
   category           = "CURSED LAND LIGHTARMOR",
 --  collisionVolumeOffsets = "0 0 0",

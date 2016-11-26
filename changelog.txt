@@ -1,9 +1,16 @@
+>> Major changes 1.415 => 1.416
+
+Balance
+- made heroes, AI builder and AI factories not capturable to avoid exploits
+
+
+
 >> Major changes 1.414 => 1.415
 
 Balance
 - reduced explosion range of suicide blobs and rigor mortis by 10%
 - increased damage done by imperial marines by 7%
-- maximum slow amount is 100% now
+- maximum slow amount for witches is 100% now
 - killed AI heroes will be rebuild after 120s
 
 Bugs

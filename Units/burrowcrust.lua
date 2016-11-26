@@ -20,6 +20,7 @@ local unitDef = {
   canMove            = false,
   canPatrol          = false,
   canstop            = false,
+  capturable         = false, 
   category           = "CANTATTACK",
   corpse             = "",
     customParams          = {	

@@ -19,6 +19,7 @@ local unitDef = {
   canMove            = true,
   canPatrol          = true,
   canstop            = "1",
+  capturable         = false, 
   category           = "CURSED LAND HEAVYARMOR",
   collisionVolumeType 		= "Box",
   collisionVolumeScales 	= "55 40 70",

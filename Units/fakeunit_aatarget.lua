@@ -23,6 +23,7 @@ local unitDef = {
   canMove             = true,
   canPatrol           = true,
   canstop            = "1",
+  capturable         = false,  
   canSubmerge         = false,
   category           = "CURSED AIR LAND",
   collide             = false,

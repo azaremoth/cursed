@@ -22,6 +22,7 @@ local unitDef = {
   canReclaim         = false,
   canRepair          = false,
   canstop            = "1",
+  capturable         = false, 
   category           = "EUF LAND LIGHTARMOR",
   collisionVolumeOffsets 	= "0 2 0",
   collisionVolumeScales 	= "28 52 28",

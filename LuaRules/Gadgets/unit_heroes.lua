@@ -47,6 +47,8 @@ local ChickenAIs =
 	local GainForKilledHero = 0.5	
 	local LevelXPMultiplier = 0.7
 	local MaxLevel = 5
+	local AILevelIncreaseInterval = 5400 -- 3*60*30 means 3 minutes in gameframes
+	local AILevelIncreaseNext = 7200 -- first enforced level increase after 4 minutes
 -----------
 	local AIRespawnDelay = 3600 -- 120s x 30 frames 
 -----------	
@@ -304,6 +306,12 @@ function gadget:GameFrame(f)
 				local AIBarracks = Spring.GetTeamUnitsByDefs (heroteam, {UnitDefNames["euf_barracks_ai"].id})
 				local AIPyramids = Spring.GetTeamUnitsByDefs (heroteam, {UnitDefNames["tc_pyramid_ai"].id})
 				
+				-- AI heroes will gain a level after death if the game has advanced enough
+				if ((HeroLevelList[heroteam] < MaxLevel) and (gameframe > AILevelIncreaseInterval)) then
+					HeroLevelList[heroteam] = (HeroLevelList[heroteam]+1)
+					AILevelIncreaseNext = (AILevelIncreaseNext + AILevelIncreaseInterval)
+				end
+				
 				if (side == "imperials" and AIBarracks ~= nil) then
 					for _,unitID in ipairs(AIBarracks) do
 						x,y,z = Spring.GetUnitPosition(unitID)
@@ -315,7 +323,7 @@ function gadget:GameFrame(f)
 					end
 					herotype = "tc_shade_lvl".. HeroLevelList[heroteam]
 				end
-
+				
 				if (herotype ~= nil and x ~= nil and y ~= nil and z~= nil) then
 					local newAIhero = Spring.CreateUnit(herotype, x+80,y,z+80, 0, heroteam)	
 					AIRespawnList[teamID]=nil

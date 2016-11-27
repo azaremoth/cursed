@@ -2,6 +2,8 @@
 
 Balance
 - made heroes, AI builder and AI factories not capturable to avoid exploits
+- Agares should no longer shoot if allied units are in the line of fire
+- AI heroes will gain levels more robustly now
 
 Polishing
 - added normal maps for: cursed hellfire tower

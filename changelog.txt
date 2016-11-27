@@ -3,6 +3,10 @@
 Balance
 - made heroes, AI builder and AI factories not capturable to avoid exploits
 
+Polishing
+- added normal maps for: cursed hellfire tower
+- updated the mancubus corpse to fit the polished model
+
 
 
 >> Major changes 1.414 => 1.415

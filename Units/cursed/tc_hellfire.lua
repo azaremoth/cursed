@@ -28,6 +28,8 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {
 	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/tc_hellfire_normal.png",
+	normalmaps = "yes",		
     helptext 	= "Defense Tower. Perfect for area control."
   },
   defaultmissiontype = "GUARD_NOMOVE",

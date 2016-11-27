@@ -12,6 +12,7 @@ local emit_gun1 = piece 'emit_gun1'
 local emit_gun2 = piece 'emit_gun2'
 local emit_thrust1 = piece 'emit_thrust1'
 local emit_thrust2 = piece 'emit_thrust2'
+local sleeve = piece 'sleeve'
 
 local light_1 = piece 'light_1'
 local light_2 = piece 'light_2'
@@ -52,61 +53,61 @@ end
 
 local function Blinking()
 	while true do
-		Show( light_2)
-		Hide( light_1)
-		Hide( light_3)
-		Hide( light_4)
-		Hide( light_5)
-		Sleep( 200)
+		Show( light_2 )
+		Hide( light_1 )
+		Hide( light_3 )
+		Hide( light_4 )
+		Hide( light_5 )
+		Sleep( 200 )
 		
-		Show( light_3)
-		Hide( light_1)
-		Hide( light_2)
-		Hide( light_4)
-		Hide( light_5)
-		Sleep( 200)
+		Show( light_3 )
+		Hide( light_1 )
+		Hide( light_2 )
+		Hide( light_4 )
+		Hide( light_5 )
+		Sleep( 200 )
 		
-		Show( light_4)
-		Hide( light_1)
-		Hide( light_2)
-		Hide( light_3)
-		Hide( light_5)
-		Sleep( 200)
+		Show( light_4 )
+		Hide( light_1 )
+		Hide( light_2 )
+		Hide( light_3 )
+		Hide( light_5 )
+		Sleep( 200 )
 		
-		Show( light_5)
-		Hide( light_1)
-		Hide( light_2)
-		Hide( light_3)
-		Hide( light_4)
-		Sleep( 200)
+		Show( light_5 )
+		Hide( light_1 )
+		Hide( light_2 )
+		Hide( light_3 )
+		Hide( light_4 )
+		Sleep( 200 )
 		
-		Show( light_4)
-		Hide( light_1)
-		Hide( light_2)
-		Hide( light_3)
-		Hide( light_5)
-		Sleep( 200)
+		Show( light_4 )
+		Hide( light_1 )
+		Hide( light_2 )
+		Hide( light_3 )
+		Hide( light_5 )
+		Sleep( 200 )
 		
-		Show( light_3)
-		Hide( light_1)
-		Hide( light_2)
-		Hide( light_4)
-		Hide( light_5)
-		Sleep( 200)
+		Show( light_3 )
+		Hide( light_1 )
+		Hide( light_2 )
+		Hide( light_4 )
+		Hide( light_5 )
+		Sleep( 200 )
 		
-		Show( light_2)
-		Hide( light_1)
-		Hide( light_3)
-		Hide( light_4)
-		Hide( light_5)
-		Sleep( 200)
+		Show( light_2 )
+		Hide( light_1 )
+		Hide( light_3 )
+		Hide( light_4 )
+		Hide( light_5 )
+		Sleep( 200 )
 		
-		Show( light_1)
-		Hide( light_2)
-		Hide( light_3)
-		Hide( light_4)
-		Hide( light_5)
-		Sleep( 200)
+		Show( light_1 )
+		Hide( light_2 )
+		Hide( light_3 )
+		Hide( light_4 )
+		Hide( light_5 )
+		Sleep( 200 )
 	end
 end
 
@@ -115,6 +116,7 @@ function script.HitByWeapon ( x, z, weaponDefID, damage )
 end
 
 function script.Create()
+	Hide( sleeve )
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
 		Sleep(100)
 	end

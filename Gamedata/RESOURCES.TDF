@@ -87,6 +87,8 @@
 			flashside2=GPL/flashside2.tga;
 			flash1=cursed/flash1.tga;
 			greenflare=cursed/greenflare.tga;
+			greenfireflame=cursed/greenfireflame.png;
+			greenfiretrail=cursed/greenfiretrail.tga;
 			greengunflare=cursed/greengunflare.tga;
 			blueflare=cursed/blueflare.tga;
 			bluegunflare=cursed/bluegunflare.tga;

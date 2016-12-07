@@ -17,11 +17,11 @@ local unitDef = {
   side               = "imperials",
   iconType           = "triangle",
   customParams       = {
-	transportcapa		= 6,
+	transportcapa		= 8,
 	factionname			= "imperials",
 	normaltex 			= "unittextures/normalmaps/euf_transport_normal.png",
 	normalmaps 			= "yes",			
-	helptext 			= "An armored flying troop transporter that can hold up to 6 soldiers."	
+	helptext 			= "An armored flying troop transporter that can hold up to 8 soldiers."	
   }, 
 -- Costs and HPs
   buildCostEnergy     = 600,

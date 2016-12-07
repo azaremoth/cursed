@@ -5,7 +5,7 @@ local unitName = "euf_hover"
 --------------------------------------------------------------------------------
 
 local unitDef = {
-  acceleration       = 0.6,
+  acceleration       = 1.0,
   armortype          = "HEAVY",
   badTargetCategory  = "AIR",
   brakeRate          = 0.9,
@@ -43,7 +43,7 @@ local unitDef = {
   
   maxDamage          = 2500,
   maxSlope           = 16,
-  maxVelocity        = 2.8,
+  maxVelocity        = 3.4,
   maxWaterDepth      = 0,
   mobilestandorders  = "1",
   movementClass      = "TANKHOVER3x3",
@@ -60,7 +60,7 @@ local unitDef = {
   smoothAnim         = false,
   standingfireorder  = "2",
   standingmoveorder  = "1",
-  turnRate           = 1000,
+  turnRate           = 1024,
   unitname           = "euf_hover",
   sfxtypes = {
     explosiongenerators = {

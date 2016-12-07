@@ -63,6 +63,9 @@ local spIsUnitVisible        = Spring.IsUnitVisible
 local spSendCommands         = Spring.SendCommands
 local spGetVisibleUnits      = Spring.GetVisibleUnits
 
+local ScaleCircle = {
+	[UnitDefNames.euf_transport.id] = "euf_transport",
+	}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -276,6 +279,9 @@ if not spIsGUIHidden() then
           local udid = spGetUnitDefID(visUnits[i])
           local radius = GetUnitDefRealRadius(udid)
           if (radius) then
+			if ScaleCircle [udid] then
+				radius = radius*5
+			end
             if showOutline then
               radius = radius + extraRadius
             else
@@ -333,6 +339,9 @@ if not spIsGUIHidden() then
       local udid = spGetUnitDefID(unitID)
       local radius = GetUnitDefRealRadius(udid)
       if (radius) then
+		if ScaleCircle [udid] then
+			radius = radius*5
+		end	  
         radius = radius + extraRadius
         if (trackSlope and (not UnitDefs[udid].canFly)) then
           local x, y, z = spGetUnitPosition(unitID)

@@ -149,7 +149,7 @@
 	flashAlpha = 0.05;
 	circleGrowth = 0;
 	circleAlpha = 0;
-    color = 0.2, 1.0, 0.2;
+    color = 0.78, 0.92, 0.35;
 	air=1;
     ground=1;
     water=1;
@@ -206,7 +206,7 @@
 		circlegrowth=10;
 		circlealpha=0;
 		ttl=48;
-		color = 0.2, 1.0, 0.2;
+		color = 0.78, 0.92, 0.35;
 	}
 }
 
@@ -277,7 +277,7 @@
 	flashAlpha = 0.05;
 	circleGrowth = 0;
 	circleAlpha = 0;
-    color = 0.2, 1.0, 0.2;
+    color = 0.78, 0.92, 0.35;
 	air=1;
     ground=1;
     water=1;
@@ -296,7 +296,7 @@
 		}
 		unit=1;
 		ground=1;
-		count=8;
+		count=12;
 	}
 	
 	[fire] {
@@ -325,7 +325,7 @@
 		air=1;
 		water=1;
 		ground=1;
-		count=4;
+		count=6;
 	}
 	
 	[groundflash] {
@@ -334,7 +334,7 @@
 		circlegrowth=10;
 		circlealpha=0;
 		ttl=48;
-		color = 0.2, 1.0, 0.2;
+		color = 0.78, 0.92, 0.35;
 	}
 }
 

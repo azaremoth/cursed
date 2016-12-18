@@ -1,10 +1,10 @@
 >> Major changes 1.416 => 1.417
 
 Balance
-- reduced repairspeed of necromancers, liches, obelisks (tier 1 & 2) and builderoids (tier 1 & 2) by 50%. 
+- reduced repairspeed of necromancers, liches, obelisks (tier 1 & 2) and builderoids (tier 1 & 2) by 50%. Imperial bunkers with a loaded builderoid were almost impossible to kill.
 
 Polishing
-- added normal maps for: imperial laser tower, artillery tower
+- added normal maps for: cursed seer, imperial laser tower, artillery tower
 
 
 

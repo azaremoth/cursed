@@ -28,6 +28,8 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {
 	factionname	= "imperials",
+	normaltex 			= "unittextures/normalmaps/euf_lasertower_normal.png",
+	normalmaps 			= "yes",		
     helptext 	= "Defense Tower. Perfect for area control."
   },
   defaultmissiontype = "GUARD_NOMOVE",

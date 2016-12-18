@@ -29,6 +29,8 @@ local unitDef = {
   -- collisionVolumeTest 		= 1,  
   customParams          = {
 	factionname	= "imperials",
+	normaltex 			= "unittextures/normalmaps/euf_lasertower_normal.png",
+	normalmaps 			= "yes",		
     helptext 	= "Heavy Defense Tower. Perfect against all sorts of ground targets."
   },
   defaultmissiontype = "GUARD_NOMOVE",

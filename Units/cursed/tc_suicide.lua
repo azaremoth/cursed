@@ -25,8 +25,10 @@ local unitDef = {
 	isinfantry = "true",
 	canbetransported = "true",
 	cankamakazi = "true",	
+	normaltex = "unittextures/normalmaps/tc_suicide_normal.png",
+	normalmaps = "yes",	
     helptext = "Caution: explodes spontaneously after a random time",
-	resurrectintounit	= "tc_skeleton"		
+--	resurrectintounit	= "tc_skeleton"		
 	},
   defaultmissiontype = "Standby",
   description        = "suicide blob",

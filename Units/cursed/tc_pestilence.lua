@@ -23,7 +23,9 @@ local unitDef = {
 	factionname	= "cursed",
 	canburrow      = "true",
 	cankamakazi = "true",
-    helptext 	= "Generates 3 devastating suicide blobs after death."	
+	normaltex = "unittextures/normalmaps/tc_pestilence_normal.png",
+	normalmaps = "yes",	
+    helptext 	= "Generates 3 devastating suicide blobs after death and has a decaying aura."	
   },
   defaultmissiontype = "Standby",
   description        = "Generates suicide blobs after death",

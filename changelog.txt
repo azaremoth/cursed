@@ -5,7 +5,8 @@ Balance
 - increased damage dealt by imperial hovertanks by 20%
 
 Polishing
-- added normal maps for: imperial laser tower, artillery tower
+- added normal maps for: imperial laser tower, artillery tower and cursed pestilence, suicide blobs
+- added idle buidlers widget (indication builders that do not have something to do)
 
 
 

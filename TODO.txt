@@ -1,13 +1,76 @@
-(1 better non-linear level 2 walls)
-2) more normal maps man!
-3) gunflares for mancubus
-4) update mancubus corpse
-6) normal shaders also during building and for corpses maybe
+1) Normal maps:
+
+UNIT						NORMAL MAP DONE
+bug_library					X
+
+IMPERIALS
+euf_aatank					X
+euf_airport					X
+euf_artytower				X
+euf_barracks				X
+euf_bomber					X
+euf_bunker					X
+euf_church
+euf_constructor
+euf_constructor_lvl2
+euf_factory					X
+euf_hover					X
+euf_interceptor
+euf_lasertower				X
+euf_metalextractor_lvl1		X
+euf_metalextractor_lvl2
+euf_mlrs					X
+euf_paladin					X
+euf_plasmatower
+euf_powerplant
+euf_radar_lvl1
+euf_radar_lvl2
+euf_raider					X
+euf_sarge					X
+euf_scorpion
+euf_scout
+euf_scoutdrone
+euf_sensorbot
+euf_solar					X
+euf_storage					X
+euf_tank					X
+euf_techcenter				X
+euf_transport				X
+euf_walker					X
+
+CURSED
+tc_acranius
+tc_agares
+tc_altar					X
+tc_belial					X
+tc_blade					X
+tc_cacodemon				X
+tc_crawler
+tc_damnedportal				X
+tc_darkassembler			X
+tc_defender
+tc_heart
+tc_hellfire					X
+tc_kaboom
+tc_mancubus					X
+tc_mermeoth
+tc_metalextractor_lvl1		X
+tc_metalextractor_lvl2
+tc_obelisk					X
+tc_obelisk_lvl2
+tc_pestilence				X
+tc_purgatory
+tc_pyramid					X
+tc_redeemer
+tc_seeker
+tc_seer						X
+tc_shade					X
+tc_soulcage					X
+tc_soulstone				X
+tc_storage					X
+tc_suicide					X
+
+TOTAL FINISHED: 			38 / 65 = 58%
 
 
-CHECK:
-
-
-
-DONE:
-unit_heroes_experience.lua -> line 79 (	Spring.DestroyUnit(unitID, true, true) ) once "recursion not allowed" happened?! -- UnitID created was identical with destroyed? => Changed to create first and destroy then.
+tc_ghoul			not visible thus deactivated

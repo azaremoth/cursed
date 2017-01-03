@@ -20,7 +20,9 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {
 	factionname	= "cursed",
-	growingcreep = true,	
+	growingcreep = true,
+	normaltex = "unittextures/normalmaps/tc_metalextractor_lvl2_normal.png",
+	normalmaps = "yes",	
     helptext 	= "Advanced metal extractor."
   },
   description        = "Extracts Metal",

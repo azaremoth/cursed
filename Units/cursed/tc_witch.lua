@@ -196,10 +196,10 @@ local weaponDefs = {
       weaponType              = "BeamLaser",
       weaponVelocity          = 2250,
     damage = {
-	default            = 90,
-	flyer              = 90,
-	heavy              = 90,
-	light              = 90,
+	default            = 10,
+	flyer              = 10,
+	heavy              = 10,
+	light              = 10,
     },
   },
   HELLSTORM = {

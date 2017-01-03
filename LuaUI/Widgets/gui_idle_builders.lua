@@ -15,6 +15,11 @@ end
 -------------------------------------------------------------------------------
 include("colors.h.lua")
 
+local UnitsExcluded = {
+	[UnitDefNames.tc_witch.id] = "tc_witch",
+	[UnitDefNames.euf_priest.id] = "euf_priest",
+	}
+
 local enabledAsSpec = false
 
 local MAX_ICONS = 10
@@ -157,7 +162,7 @@ local function IsIdleBuilder(unitID)
   local udef = GetUnitDefID(unitID)
   local ud = UnitDefs[udef] 
 	local qCount = 0
-  if ud.buildSpeed > 0 then  --- can build
+  if (ud.buildSpeed > 0 and not UnitsExcluded[udef]) then  --- can build and not excluded
     local bQueue = GetFullBuildQueue(unitID)
     if not bQueue[1] then  --- has no build queue
       local _, _, _, _, buildProg = GetUnitHealth(unitID)

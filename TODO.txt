@@ -6,8 +6,8 @@ bug_library					X
 IMPERIALS
 euf_aatank					X
 euf_airport					X
-euf_artytower				X
-euf_barracks				X
+euf_artytower					X
+euf_barracks					X
 euf_bomber					X
 euf_bunker					X
 euf_church
@@ -16,9 +16,9 @@ euf_constructor_lvl2
 euf_factory					X
 euf_hover					X
 euf_interceptor
-euf_lasertower				X
-euf_metalextractor_lvl1		X
-euf_metalextractor_lvl2
+euf_lasertower					X
+euf_metalextractor_lvl1				X
+euf_metalextractor_lvl2				X
 euf_mlrs					X
 euf_paladin					X
 euf_plasmatower
@@ -34,8 +34,8 @@ euf_sensorbot
 euf_solar					X
 euf_storage					X
 euf_tank					X
-euf_techcenter				X
-euf_transport				X
+euf_techcenter					X
+euf_transport					X
 euf_walker					X
 
 CURSED
@@ -44,21 +44,21 @@ tc_agares
 tc_altar					X
 tc_belial					X
 tc_blade					X
-tc_cacodemon				X
+tc_cacodemon					X
 tc_crawler
-tc_damnedportal				X
-tc_darkassembler			X
+tc_damnedportal					X
+tc_darkassembler				X
 tc_defender
 tc_heart
 tc_hellfire					X
 tc_kaboom
 tc_mancubus					X
 tc_mermeoth
-tc_metalextractor_lvl1		X
-tc_metalextractor_lvl2		X
+tc_metalextractor_lvl1				X
+tc_metalextractor_lvl2				X
 tc_obelisk					X
 tc_obelisk_lvl2
-tc_pestilence				X
+tc_pestilence					X
 tc_purgatory
 tc_pyramid					X
 tc_redeemer
@@ -66,11 +66,11 @@ tc_seeker
 tc_seer						X
 tc_shade					X
 tc_soulcage					X
-tc_soulstone				X
+tc_soulstone					X
 tc_storage					X
 tc_suicide					X
 
-TOTAL FINISHED: 			38 / 65 = 58%
+TOTAL FINISHED: 			40 / 65 = 61%
 
 
 tc_ghoul			not visible thus deactivated

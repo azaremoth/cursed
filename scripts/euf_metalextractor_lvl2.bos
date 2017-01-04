@@ -50,7 +50,7 @@ Animation()
 				turn leg_1u to z-axis <-20.000000> speed <60.000000>;
 				turn leg_2u to z-axis <-20.000000> speed <60.000000>;
 				turn leg_3u to z-axis <-20.000000> speed <60.000000>;
-				move center to y-axis [6.300000] speed [17.300000];
+				move center to y-axis [5.700000] speed [17.300000];
 				wait-for-turn leg_1u around z-axis;
 				wait-for-turn leg_2u around z-axis;
 				wait-for-turn leg_3u around z-axis;

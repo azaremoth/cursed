@@ -36,6 +36,8 @@ local unitDef = {
   customParams       = {
   	noautorepair	 = true,
 	factionname		 = "imperials",
+	normaltex = "unittextures/normalmaps/euf_constructor_normal.png",
+	normalmaps = "yes",			
     helptext = "This hovering robot can build basic structures. It has a weak stun-gun but can not shoot out of bunkers."	
 	},
   defaultmissiontype = "Standby",

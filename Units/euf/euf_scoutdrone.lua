@@ -28,6 +28,8 @@ local unitDef = {
 --  corpse             = "dead",
   customParams          = {
 	factionname	= "imperials",
+	normaltex = "unittextures/normalmaps/euf_constructor_normal.png",
+	normalmaps = "yes",			
     helptext 	= "Basic scouting unit."
   },
   defaultmissiontype = "Standby",

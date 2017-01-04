@@ -11,7 +11,7 @@ euf_barracks					X
 euf_bomber					X
 euf_bunker					X
 euf_church
-euf_constructor
+euf_constructor					X
 euf_constructor_lvl2
 euf_factory					X
 euf_hover					X
@@ -29,7 +29,7 @@ euf_raider					X
 euf_sarge					X
 euf_scorpion
 euf_scout
-euf_scoutdrone
+euf_scoutdrone					X
 euf_sensorbot
 euf_solar					X
 euf_storage					X
@@ -70,7 +70,7 @@ tc_soulstone					X
 tc_storage					X
 tc_suicide					X
 
-TOTAL FINISHED: 			40 / 65 = 61%
+TOTAL FINISHED: 			42 / 65 = 65%
 
 
 tc_ghoul			not visible thus deactivated

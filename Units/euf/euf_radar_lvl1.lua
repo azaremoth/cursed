@@ -23,6 +23,8 @@ local unitDef = {
   corpse             = "dead",  
   customParams          = {	
 	factionname		   = "imperials",
+	normaltex = "unittextures/normalmaps/euf_radar_normal.png",
+	normalmaps = "yes",	
     helptext = "Basic radar."	
 	},
   description        = "Detektion Technology",

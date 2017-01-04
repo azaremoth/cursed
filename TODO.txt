@@ -23,8 +23,8 @@ euf_mlrs					X
 euf_paladin					X
 euf_plasmatower
 euf_powerplant
-euf_radar_lvl1
-euf_radar_lvl2
+euf_radar_lvl1					X
+euf_radar_lvl2					X
 euf_raider					X
 euf_sarge					X
 euf_scorpion
@@ -70,7 +70,7 @@ tc_soulstone					X
 tc_storage					X
 tc_suicide					X
 
-TOTAL FINISHED: 			42 / 65 = 65%
+TOTAL FINISHED: 			44 / 65 = 68%
 
 
 tc_ghoul			not visible thus deactivated

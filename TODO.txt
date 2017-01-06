@@ -48,7 +48,7 @@ tc_cacodemon					X
 tc_crawler
 tc_damnedportal					X
 tc_darkassembler				X
-tc_defender
+tc_defender					X
 tc_heart
 tc_hellfire					X
 tc_kaboom
@@ -70,7 +70,7 @@ tc_soulstone					X
 tc_storage					X
 tc_suicide					X
 
-TOTAL FINISHED: 			44 / 65 = 68%
+TOTAL FINISHED: 			45 / 65 = 69%
 
 
 tc_ghoul			not visible thus deactivated

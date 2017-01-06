@@ -3,10 +3,11 @@
 Balance
 - reduced repairspeed of necromancers, liches, obelisks (tier 1 & 2) and builderoids (tier 1 & 2) by 50%. 
 - increased damage dealt by imperial hovertanks by 20%
+- imperial pyros will do 50% damage against heavy armor (vs. 75% as before)
 
 Polishing
 - added normal maps for imperials: laser tower, artillery tower, radar towers, builderoid and scout drone
-- added normal maps for the cursed: pestilence, suicide blobs and mex lvl2
+- added normal maps for the cursed: pestilence, suicide blobs, defender tower and mex lvl2
 - added idle buidlers widget (indication builders that do not have something to do)
 
 

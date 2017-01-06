@@ -159,7 +159,7 @@ Flamer = {
 	 damage = {
 				default            = 45, --56
 				flyer              = (45*0.75),
-				heavy              = (45*0.75),
+				heavy              = (45*0.50),
 				light              = 45,
 		},
 	},
@@ -194,7 +194,7 @@ Flamer_Bunker = {
 	 damage = {
 				default            = 45,
 				flyer              = (45*0.75),
-				heavy              = (45*0.75),
+				heavy              = (45*0.50),
 				light              = 45,
 		},
 	},

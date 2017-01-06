@@ -29,6 +29,8 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {
 	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/tc_defender_normal.png",
+	normalmaps = "yes",
     helptext 	= "Defense Tower. Perfect against air targets and light armored ground units."
   },
   defaultmissiontype = "GUARD_NOMOVE",

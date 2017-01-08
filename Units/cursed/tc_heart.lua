@@ -31,7 +31,9 @@ local unitDef = {
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {	
-	factionname	= "cursed",  
+	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/tc_heart_normal.png",
+	normalmaps = "yes",	
     helptext 	= "Heart of Darkness enables advanced units, like liches and advanced obelisks. You will have to morph necromancers to Liches to summon advanced demons."		
   },
   description        = "Enables advanced units and buildings.",

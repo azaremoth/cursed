@@ -30,7 +30,7 @@ euf_sarge					X
 euf_scorpion
 euf_scout
 euf_scoutdrone					X
-euf_sensorbot
+euf_sensorbot					X
 euf_solar					X
 euf_storage					X
 euf_tank					X
@@ -49,7 +49,7 @@ tc_crawler
 tc_damnedportal					X
 tc_darkassembler				X
 tc_defender					X
-tc_heart
+tc_heart					X
 tc_hellfire					X
 tc_kaboom
 tc_mancubus					X
@@ -70,7 +70,7 @@ tc_soulstone					X
 tc_storage					X
 tc_suicide					X
 
-TOTAL FINISHED: 			45 / 65 = 69%
+TOTAL FINISHED: 			47 / 65 = 72%
 
 
 tc_ghoul			not visible thus deactivated

@@ -32,7 +32,9 @@ local unitDef = {
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {	
-	factionname	= "cursed",  
+	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/tc_heart_normal.png",
+	normalmaps = "yes",		
     helptext 	= "Provides energy and metal income and a base shield."		
   },
   description        = "Provides bonuses",

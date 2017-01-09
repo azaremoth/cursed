@@ -24,6 +24,8 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {	
 	factionname		   = "imperials",
+	normaltex 			= "unittextures/normalmaps/euf_powerplant_normal.png",
+	normalmaps 			= "yes",		
     helptext = "This is the advanced energy supply."	
 	},
   description        = "Creates energy",

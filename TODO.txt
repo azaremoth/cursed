@@ -22,7 +22,7 @@ euf_metalextractor_lvl2				X
 euf_mlrs					X
 euf_paladin					X
 euf_plasmatower
-euf_powerplant
+euf_powerplant					X
 euf_radar_lvl1					X
 euf_radar_lvl2					X
 euf_raider					X
@@ -70,7 +70,7 @@ tc_soulstone					X
 tc_storage					X
 tc_suicide					X
 
-TOTAL FINISHED: 			47 / 65 = 72%
+TOTAL FINISHED: 			48 / 65 = 74%
 
 
 tc_ghoul			not visible thus deactivated

@@ -8,11 +8,10 @@ local wing1_down = piece 'wing1_down'
 local wing2_down = piece 'wing2_down'
 local wing1_up = piece 'wing1_up'
 local wing2_up = piece 'wing2_up'
-local emit_gun1 = piece 'emit_gun1'
-local emit_gun2 = piece 'emit_gun2'
+local gun = piece 'gun'
+local emit_gun = piece 'emit_gun'
 local emit_thrust1 = piece 'emit_thrust1'
 local emit_thrust2 = piece 'emit_thrust2'
-local sleeve = piece 'sleeve'
 
 local light_1 = piece 'light_1'
 local light_2 = piece 'light_2'
@@ -116,7 +115,6 @@ function script.HitByWeapon ( x, z, weaponDefID, damage )
 end
 
 function script.Create()
-	Hide( sleeve )
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
 		Sleep(100)
 	end
@@ -137,7 +135,7 @@ function script.Shot1 ()
 end
 
 function script.QueryWeapon1()
-	 return emit_gun1
+	 return emit_gun
 end
 
 function script.AimFromWeapon1() return base end

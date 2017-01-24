@@ -16,6 +16,8 @@ local unitDef = {
   side               = "cursed",  
   customParams          = {
 	factionname		   = "cursed",
+	normaltex = "unittextures/normalmaps/atlas_tc_mechanics_normal.png",
+	normalmaps = "yes",	
     helptext = "The redeemer gunship is perfect against any ground target. You should stay away from AA though."			
   },
   description        = "Good against ground targets",

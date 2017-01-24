@@ -23,6 +23,8 @@ local unitDef = {
   corpse             = "dead",
   customParams       = {	
 	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/atlas_tc_mechanics_normal.png",
+	normalmaps = "yes",	
     helptext	= "With the precise long-range laserguns the Agares is the perfect choice against all ground targets. It isn't very stable though."	
 	},
   defaultmissiontype = "Standby",

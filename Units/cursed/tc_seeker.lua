@@ -18,6 +18,8 @@ local unitDef = {
   iconType           = "triangle", 
   customParams          = {	
 	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/atlas_tc_mechanics_normal.png",
+	normalmaps = "yes",	
     helptext 	= "The Seeker is a very fast airborne scout."
 	},
 -- Costs

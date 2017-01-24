@@ -17,7 +17,9 @@ local unitDef = {
   side               = "cursed",
   iconType           = "bigtriangle",  
   customParams          = {	
-	factionname		   = "cursed",
+	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/atlas_tc_mechanics_normal.png",
+	normalmaps = "yes",	
     helptext 	= "The 'acranius' bomber is very effective against static ground targets and slow armoured units."
 	},
 -- Costs

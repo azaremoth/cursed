@@ -24,6 +24,8 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {
 	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/atlas_tc_mechanics_normal.png",
+	normalmaps = "yes",
     helptext 	= "The mermeoth hover tank can travel across water and is a good choice against heavily armored targets. In addition, it is equipped with a torpedo launcher."
   },
   defaultmissiontype = "Standby",

@@ -14,8 +14,9 @@ local unitDef = {
   armortype          = "FLYER",
   side               = "cursed",  
   customParams          = {  
-	factionname		   = "cursed",
---	RequireTech     = "Cursed Technology",	
+	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/atlas_tc_mechanics_normal.png",
+	normalmaps = "yes",	
     helptext = "The sledgehammer gunship is perfect against groups of ground targets."
 	},
   description        = "Good against ground swarms.",

@@ -21,7 +21,10 @@ local unitDef = {
   canstop            = "1",
   category           = "CURSED LAND HEAVYARMOR",
   customParams          = {	
-	factionname	= "cursed",  
+	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/atlas_tc_mechanics_normal.png",
+	normalmaps = "yes",	
+	cankamakazi = "true",
     helptext 	= "The water proof rigor mortis has radar distortion, will create and EMP wave when being destroyed and is the only unit that can attack burrowed scorpions."		
   },
   defaultmissiontype = "Standby",

@@ -24,7 +24,8 @@ local unitDef = {
   cruiseAlt          = 200,
   customParams          = {
 	factionname	= "cursed",
-	normaltex 			= "unittextures/normalmaps/tc_seer_normal.png",
+	normaltex = "unittextures/normalmaps/atlas_tc_mechanics_normal.png",
+	normalmaps = "yes",	
 	normalmaps 			= "yes",			
     helptext 	= "Mobile radar and detection device. It can see everything, even cloaked and borrowed units."
   },

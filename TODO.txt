@@ -39,30 +39,30 @@ euf_transport					X
 euf_walker					X
 
 CURSED
-tc_acranius
-tc_agares
+tc_acranius					X
+tc_agares					X
 tc_altar					X
 tc_belial					X
 tc_blade					X
 tc_cacodemon					X
-tc_crawler
+tc_crawler					
 tc_damnedportal					X
 tc_darkassembler				X
 tc_defender					X
 tc_heart					X
 tc_hellfire					X
-tc_kaboom
+tc_kaboom					X
 tc_mancubus					X
-tc_mermeoth
+tc_mermeoth					X
 tc_metalextractor_lvl1				X
 tc_metalextractor_lvl2				X
 tc_obelisk					X
 tc_obelisk_lvl2
 tc_pestilence					X
-tc_purgatory
+tc_purgatory					X
 tc_pyramid					X
-tc_redeemer
-tc_seeker
+tc_redeemer					X
+tc_seeker					X
 tc_seer						X
 tc_shade					X
 tc_soulcage					X
@@ -70,10 +70,11 @@ tc_soulstone					X
 tc_storage					X
 tc_suicide					X
 
-TOTAL FINISHED: 			48 / 65 = 74%
+TOTAL FINISHED: 			55 / 65 = 85%
 
 
 tc_ghoul			not visible thus deactivated
 
 2) normal mapped creep
 3) growing creep
+4) feature conversion on creep

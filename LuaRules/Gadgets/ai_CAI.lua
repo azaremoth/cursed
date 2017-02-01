@@ -113,7 +113,7 @@ end
 -- *** Config
 
 include "LuaRules/Configs/cai/general.lua"
-include "LuaRules/Gadgets/mex_spot_finder.lua"
+include "LuaRules/Gadgets/ai_CAI_mex_spot_finder.lua"
 
 -- *** 'Globals'
 

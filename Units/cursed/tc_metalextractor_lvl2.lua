@@ -21,6 +21,7 @@ local unitDef = {
   customParams          = {
 	factionname	= "cursed",
 	growingcreep = true,
+	metal_extractor = true,	
 	normaltex = "unittextures/normalmaps/tc_metalextractor_lvl2_normal.png",
 	normalmaps = "yes",	
     helptext 	= "Advanced metal extractor."

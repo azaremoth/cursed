@@ -13,10 +13,14 @@ end
 if gadgetHandler:IsSyncedCode() then
 
 local killstragglers = Spring.GetModOptions().killstragglers
+if (killstragglers == nil) then -- set active by default if no modoptions are available
+	killstragglers = "1"
+end
+	
 local kothisactive = false
 
-if Spring.GetModOptions()["koth"]~=nil then
-	if (tonumber(Spring.GetModOptions()["koth"])>0) then
+if Spring.GetModOptions()["koth"] ~=nil then
+	if (tonumber(Spring.GetModOptions()["koth"]) > 0) then
 		kothisactive = true
 		Spring.Echo("The Kill Stragglers function is not available for the KOTH game mode.")
 	end

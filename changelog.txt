@@ -4,6 +4,7 @@ Balance
 - reduced repairspeed of necromancers, liches, obelisks (tier 1 & 2) and builderoids (tier 1 & 2) by 50%. 
 - increased damage dealt by imperial hovertanks by 20%
 - imperial pyros will do 50% damage against heavy armor (vs. 75% as before)
+- Cursed Agares will not cause selfdamage anymore 
 
 Polishing
 - added normal maps for imperials: powerplant, laser tower, artillery tower, radar towers, builderoid and scout drone

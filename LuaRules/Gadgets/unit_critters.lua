@@ -13,8 +13,11 @@ end
 
 local modOptions = Spring.GetModOptions()
 local cittersenabled = modOptions.critters
-Spring.Echo("Critters loading: " .. cittersenabled)
-
+if (cittersenabled ~= nil) then
+	Spring.Echo("Critters loading: " .. cittersenabled)
+else 
+	cittersenabled = "0"
+end
 
 if (gadgetHandler:IsSyncedCode() and cittersenabled == "1") then
 -------------------------------------

@@ -38,6 +38,10 @@ local function SetTheme()
 	local myTeamID = Spring.GetMyTeamID()
 	local side = select(5, Spring.GetTeamInfo(myTeamID))
 	
+	if (side == "" or side == nil) then -- startscript didn't specify a side
+		side = GG.teamside
+	end
+	
 	if not Chili then
 		Chili = WG.Chili
 	end

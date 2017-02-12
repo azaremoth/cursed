@@ -15,7 +15,7 @@ function gadget:GetInfo()
 	return {
 		name      = "Spawn",
 		desc      = "spawns start unit and sets storage levels",
-		author    = "Tobi Vollebregt",
+		author    = "azaremoth",
 		date      = "January, 2010",
 		license   = "GNU GPL, v2 or later",
 		layer     = 0,
@@ -37,6 +37,8 @@ local Gaia = Spring.GetGaiaTeamID
 local modOptions = Spring.GetModOptions()
 local cheatAItype = "0"
 local kothbase = "1"
+local type = "std"
+local kothactive = 10
 	
 ChickenAIs = 
 {
@@ -48,6 +50,11 @@ ChickenAIs =
 	["Zombie Survival: Custom"] = true,
 }
 
+function gadget:Initialize()
+	GG.teamside = GG.teamside or {}
+end
+
+
 local function GetStartUnit(teamID)
 	-- get the team startup info
 	local side = select(5, Spring.GetTeamInfo(teamID))
@@ -58,13 +65,28 @@ local function GetStartUnit(teamID)
 	end
 	local startUnit
 	local x,y,z = Spring.GetTeamStartPosition(teamID)
-	local type = "std"
-	type = Spring.GetModOptions().comm
-	cheatAItype = Spring.GetModOptions().cheatingai
-	kothbase = Spring.GetModOptions().kothbase
-	local kothactive = tonumber(Spring.GetModOptions().koth)
+	if Spring.GetModOptions().comm ~= nil then
+		type = Spring.GetModOptions().comm
+	end
+	if Spring.GetModOptions().cheatingai ~= nil then
+		cheatAItype = Spring.GetModOptions().cheatingai
+	end 
+	if Spring.GetModOptions().kothbase ~= nil then
+		kothbase = Spring.GetModOptions().kothbase
+	end
+	if Spring.GetModOptions().koth ~= nil then
+		kothactive = tonumber(Spring.GetModOptions().koth)
+	end
 	
-	if (side == "") then
+	if (side == "" or side == nil) then -- startscript didn't specify a side for this team, ramdomly pick one
+		if (math.random() > 0.5) then
+			side = "imperials"
+		else
+			side = "cursed"
+		end
+	end
+	GG.teamside = side
+--[[	if (side == "") then
 		-- startscript didn't specify a side for this team
 		local sidedata = Spring.GetSideData()
 		if (sidedata and #sidedata > 0) then
@@ -72,7 +94,7 @@ local function GetStartUnit(teamID)
 		end
 	else
 		startUnit = Spring.GetSideData(side)
-	end
+	end ]]
 	if (IsChickenAI) then
 		local heading = math.random(3)
 		local zero = Spring.CreateUnit("tc_cursedhand_survival", x-50,y,z+50, heading, teamID)
@@ -201,8 +223,8 @@ local function SpawnStartUnit(teamID)
 
 	-- set start resources, either from mod options or custom team keys
 	local teamOptions = select(7, Spring.GetTeamInfo(teamID))
-	local m = teamOptions.startmetal  or modOptions.startmetal  or 1000
-	local e = teamOptions.startenergy or modOptions.startenergy or 1000
+	local m = teamOptions.StartMetal  or modOptions.StartMetal  or 1000
+	local e = teamOptions.StartEnergy or modOptions.StartEnergy or 1000
 
 	-- using SetTeamResource to get rid of any existing resource without affecting stats
 	-- using AddTeamResource to add starting resource and counting it as income
@@ -228,8 +250,8 @@ function gadget:GameStart()
 	local gaiaTeamID = Spring.GetGaiaTeamID()
 	local teams = Spring.GetTeamList()
 	
-	local type = "std"
-	type = Spring.GetModOptions().comm
+--	local type = "std"
+--	type = Spring.GetModOptions().comm
 		
 	for i = 1,#teams do
 		local teamID = teams[i]

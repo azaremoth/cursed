@@ -51,7 +51,10 @@ local mokey="koth" -- Mod Option Key
 local jumpDefNames  = VFS.Include"LuaRules/Configs/jump_defs.lua"
 local jumpDefs = {}
 
-if (tonumber(Spring.GetModOptions()[mokey]) > 0) then
+local metalSpots = {}
+local mexCount = 0
+
+if (tonumber(Spring.GetModOptions()[mokey]) ~= nil) and (tonumber(Spring.GetModOptions()[mokey])> 0) then
 	koth = true
 end
 
@@ -113,7 +116,7 @@ end
 -- *** Config
 
 include "LuaRules/Configs/cai/general.lua"
-include "LuaRules/Gadgets/ai_CAI_mex_spot_finder.lua"
+-- include "LuaRules/Gadgets/ai_CAI_mex_spot_finder.lua"
 
 -- *** 'Globals'
 
@@ -3879,13 +3882,16 @@ function gadget:Initialize()
 	
 	SetupCmdChangeAIDebug()
 	
-	--// mex spot detection
-	mexSpot = GetMetalMap()
-	if not mexSpot then
-		Spring.Echo("Mex spot detection failed, AI failed to initalise")
-		gadgetHandler:RemoveGadget()
-		return 
-	end
+
+------------------------------------------------------------
+-- Get global mex list
+------------------------------------------------------------
+-- 	metalSpots = GG.metalSpots
+	mexSpot = GG.metalSpots
+	Spring.Echo ("AAAAAAAAAAAAHHH: " .. #mexSpot)
+	mexSpot.count = #mexSpot
+------------------------------------
+
 
 	--local x,z
 	-- get team units

@@ -1,48 +1,48 @@
 local options={
  ---- GAME SETTINGS ----
   {
-    key    = 'StartingResources',
+    key    = 'a_startingresources',
     name   = 'Resources',
     desc   = 'Sets storage and amount of resources that players will start with',
     type   = 'section',
   },
+  
+  {
+    key    = 'metalmult',
+    name   = 'Metal Extraction Multiplier',
+    desc   = 'Multiplies metal extraction rate. For use in large team games when there are fewer mexes per player.',
+    type   = 'number',
+    section= 'a_startingresources',
+    def    = 1,
+    min    = 0.1,
+    max    = 100,
+    step   = 0.05, 
+  },
+  
   {
    key    = 'StartMetal',
    scope  = 'team',
    name   = 'Team Starting metal',
    desc   = 'Determines amount of metal and metal storage this team will start with',
    type   = 'number',
-   section= 'StartingResources',
+   section= 'a_startingresources',
    def    = 1000,
    min    = 500,
    max    = 10000,
-   step   = 1,  -- quantization is aligned to the def value
-   -- (step <= 0) means that there is no quantization
+   step   = 1,  -- quantization is aligned to the def value   -- (step <= 0) means that there is no quantization
   },
   {
     key    = 'StartEnergy',
     name   = 'Starting energy',
     desc   = 'Determines amount of energy and energy storage that each player will start with',
     type   = 'number',
-    section= 'StartingResources',
+    section= 'a_startingresources',
     def    = 2000,
     min    = 500,
     max    = 10000,
-    step   = 1,  -- quantization is aligned to the def value
-                    -- (step <= 0) means that there is no quantization
+    step   = 1, 
   },
-  --[[{
-    key    = 'metalmult',
-    name   = 'Metal Extraction Multiplier',
-    desc   = 'Multiplies metal extraction rate. For use in large team games when there are fewer mexes per player.',
-    type   = 'number',
-    section= 'StartingResources',
-    def    = 1,
-    min    = 0,
-    max    = 100,
-    step   = 0.05,  -- quantization is aligned to the def value
-                    -- (step <= 0) means that there is no quantization
-  },]]--
+
   ---- GAME OPTIONS ----
      {
     key    = 'corpsetime',
@@ -53,8 +53,7 @@ local options={
     def    = 2,
     min    = 0,
     max    = 20,
-    step   = 1,  -- quantization is aligned to the def value
-                    -- (step <= 0) means that there is no quantization
+    step   = 1,  
   }, 
       
   {
@@ -235,9 +234,9 @@ local options={
 }
 
 --// add key-name to the description (so you can easier manage modoptions in springie)
-for i=1,#options do
+--[[for i=1,#options do
   local opt = options[i]
   opt.desc = opt.desc .. '\nkey: ' .. opt.key
-end
+end]]
 
 return options

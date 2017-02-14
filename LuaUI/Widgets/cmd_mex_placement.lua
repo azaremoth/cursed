@@ -1,5 +1,4 @@
 
-
 function widget:GetInfo()
 	return {
 		name      = "Mex Placement Handler",
@@ -98,9 +97,9 @@ local MAP_SIZE_X_SCALED = MAP_SIZE_X / METAL_MAP_SQUARE_SIZE
 local MAP_SIZE_Z = Game.mapSizeZ
 local MAP_SIZE_Z_SCALED = MAP_SIZE_Z / METAL_MAP_SQUARE_SIZE
 
-local allyMexColor = {[1] = {0, 1, 1, 0.3}, [2] = {0, 1, 1, 0.3}}
-local neutralMexColor = {[1] = {1.0, 1.0, 1.0, 0.3}, [2] = {1.0, 1.0, 1.0, 0.3}}
-local enemyMexColor = {[1] = {1, 0, 0, 0.3}, [2] = {1, 0, 0, 0.3}}
+local allyMexColor = {[1] = {0, 1, 1, 0.7}, [2] = {0, 1, 1, 1}}
+local neutralMexColor = {[1] = {1.0, 1.0, 1.0, 0.7}, [2] = {1.0, 1.0, 1.0, 1}}
+local enemyMexColor = {[1] = {1, 0, 0, 0.7}, [2] = {1, 0, 0, 1}}
 
 local allyTeams = {}	-- [id] = {team1, team2, ...}
 
@@ -120,8 +119,8 @@ options_order = { 'drawicons', 'size', 'specPlayerColours', 'rounding'}
 VFS.Include("LuaUI/Configs/LuaMex/options.lua")
 
 local circleOptions = {
-	enabled							= false,
-	animating						= false,	-- its only rotation, but will cost more performance
+	enabled							= true,
+	animating						= true,	-- its only rotation, but will cost more performance
 	alwaysshow					= false,
 	innersize						= 40,		-- outersize-innersize = circle width
 	outersize						= 43,		-- outersize-innersize = circle width

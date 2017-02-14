@@ -3888,7 +3888,7 @@ function gadget:Initialize()
 ------------------------------------------------------------
 -- 	metalSpots = GG.metalSpots
 	mexSpot = GG.metalSpots
-	Spring.Echo ("AAAAAAAAAAAAHHH: " .. #mexSpot)
+--	Spring.Echo ("AAAAAAAAAAAAHHH: " .. #mexSpot)
 	mexSpot.count = #mexSpot
 ------------------------------------
 

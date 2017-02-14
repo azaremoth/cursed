@@ -58,7 +58,7 @@ local spotData = {}
 local metalSpots = {}
 local metalSpotsByPos = {}
 
-local MEX_DISTANCE = 500
+local MEX_DISTANCE = 50
 
 --------------------------------------------------------------------------------
 -- Command Handling

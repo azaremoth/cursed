@@ -8,12 +8,13 @@ Balance
 
 Polishing
 - added normal maps for imperials: powerplant, laser tower, artillery tower, radar towers, builderoid and scout drone
-- added normal maps for the cursed: acranius, agares, rigor mortis, purgatory, redeemer, seeker, blade, mermeoth, pestilence, suicide blobs, cursed heart, defender tower and mex lvl2
+- added normal maps for the cursed: acranius, agares, crawler, rigor mortis, purgatory, redeemer, seeker, blade, mermeoth, pestilence, suicide blobs, cursed heart, defender tower and mex lvl2, obelisk lvl2
 - added idle buidlers widget (indication builders and factories that do not have something to do)
 - added a suicide button for the cursed rigor mortis (radar jammer & paralyse bomb)
 
 Infrastructure
 - atlased all textures for cursed flyers and mechanodemons for simplified maintenance (e.g. adding dirty layers to textures)
+- added support for lua controled metal maps (thanks to Forb)
 
 
 >> Major changes 1.415 => 1.416

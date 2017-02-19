@@ -30,7 +30,9 @@ local unitDef = {
   customParams          = {
 	factionname	= "cursed",
 	isimmobilebuilder = true,	
-	noautorepair = true,	
+	noautorepair = true,
+    normaltex = "unittextures/normalmaps/tc_obelisk_lvl2_normal.png",
+	normalmaps = "yes",		
     helptext 	= "Obelisks are immobile base cunstruction units."
   },
   description        = "Advanced base construction",

@@ -23,6 +23,8 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {	
 	factionname		   = "cursed",
+    normaltex = "unittextures/normalmaps/tc_crawler_normal.png",
+	normalmaps = "yes",		
     helptext 	= "The Crawler is the perfect choice against air targets and light armored units. It also can climp ANYWHERE."
 	},
   defaultmissiontype = "Standby",

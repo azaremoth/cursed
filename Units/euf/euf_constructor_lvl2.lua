@@ -33,6 +33,8 @@ local unitDef = {
   customParams       = {
   	noautorepair	 = true,
 	factionname		 = "imperials",
+	normaltex = "unittextures/normalmaps/euf_constructor_lvl2_normal.png",
+	normalmaps = "yes",	
     helptext = "This robot can build advanced structures and has a stun-gun."	
 	},
   defaultmissiontype = "Standby",

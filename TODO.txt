@@ -18,7 +18,7 @@ euf_constructor					X
 euf_constructor_lvl2				X
 euf_factory					X
 euf_hover					X
-euf_interceptor
+euf_interceptor					X
 euf_lasertower					X
 euf_metalextractor_lvl1				X
 euf_metalextractor_lvl2				X
@@ -31,7 +31,7 @@ euf_radar_lvl2					X
 euf_raider					X
 euf_sarge					X
 euf_scorpion					X
-euf_scout
+euf_scout					X
 euf_scoutdrone					X
 euf_sensorbot					X
 euf_solar					X
@@ -73,8 +73,6 @@ tc_soulcage					X
 tc_soulstone					X
 tc_storage					X
 tc_suicide					X
-
-TOTAL FINISHED: 			59 / 65 = 91%
 
 
 tc_ghoul			not visible thus deactivated

@@ -26,6 +26,8 @@ local unitDef = {
   collisionSphereScale = 1.0,
   customParams          = {	
 	factionname		   = "imperials",
+	normaltex = "unittextures/normalmaps/euf_scout_normal.png",
+	normalmaps = "yes",			
 	helptext = "A quick gunship that is useful against lightly armoured targets."	
 	},
   cruiseAlt          = 150,

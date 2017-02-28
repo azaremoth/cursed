@@ -31,6 +31,8 @@ local unitDef = {
   collisionSphereScale = 1.0,
   customParams          = {	
 	factionname		   = "imperials",
+	normaltex = "unittextures/normalmaps/euf_interceptor_normal.png",
+	normalmaps = "yes",			
     helptext = "The Interceptor is the ideal choice against airborne targets."	
 	},
   cruiseAlt          = 200,

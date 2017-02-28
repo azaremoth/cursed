@@ -7,8 +7,9 @@ Balance
 - Cursed Agares will not cause selfdamage anymore 
 
 Polishing
-- added normal maps for imperials: powerplant, laser tower, artillery tower, radar towers, builderoid and scout drone
+- added normal maps for imperials: powerplant, laser tower, artillery tower, radar towers, scorpion, church, builderoid and scout drone
 - added normal maps for the cursed: acranius, agares, crawler, rigor mortis, purgatory, redeemer, seeker, blade, mermeoth, pestilence, suicide blobs, cursed heart, defender tower and mex lvl2, obelisk lvl2
+- polished textures fot the imperial church
 - added idle buidlers widget (indication builders and factories that do not have something to do)
 - added a suicide button for the cursed rigor mortis (radar jammer & paralyse bomb)
 

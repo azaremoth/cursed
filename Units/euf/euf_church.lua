@@ -28,6 +28,8 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {	
 	factionname		   = "imperials",
+	normaltex = "unittextures/normalmaps/euf_church_normal.png",
+	normalmaps = "yes",		
     helptext = "Priests and paladins can be build here."	
 	},
   description        = "Produces priests and paladins",

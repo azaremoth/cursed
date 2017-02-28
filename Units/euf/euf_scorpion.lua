@@ -22,6 +22,8 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {	
 	factionname		   = "imperials",
+	normaltex = "unittextures/normalmaps/euf_scorpion_normal.png",
+	normalmaps = "yes",		
 	RequireTech         = "Advanced Technology",
 	helptext = "This unit can dig into the ground and move very slowly but hidden from the enemy. The Gauss Gun can pass through obstacles."	
 	},

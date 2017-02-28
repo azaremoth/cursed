@@ -13,7 +13,7 @@ euf_artytower					X
 euf_barracks					X
 euf_bomber					X
 euf_bunker					X
-euf_church
+euf_church					X
 euf_constructor					X
 euf_constructor_lvl2				X
 euf_factory					X
@@ -30,7 +30,7 @@ euf_radar_lvl1					X
 euf_radar_lvl2					X
 euf_raider					X
 euf_sarge					X
-euf_scorpion
+euf_scorpion					X
 euf_scout
 euf_scoutdrone					X
 euf_sensorbot					X

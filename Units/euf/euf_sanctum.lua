@@ -23,6 +23,8 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {
 	ProvideTech         = "Divine Help",
+	normaltex = "unittextures/normalmaps/euf_sanctum_normal.png",
+	normalmaps = "yes",		
 	factionname		   = "imperials",
     helptext = "This statue will ensure divine support. Enables angels."
   },

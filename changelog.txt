@@ -4,10 +4,10 @@ Balance
 - reduced repairspeed of necromancers, liches, obelisks (tier 1 & 2) and builderoids (tier 1 & 2) by 50%. 
 - increased damage dealt by imperial hovertanks by 20%
 - imperial pyros will do 50% damage against heavy armor (vs. 75% as before)
-- Cursed Agares will not cause selfdamage anymore 
+- the cursed Agares will not cause selfdamage anymore 
 
 Polishing
-- added normal maps for imperials: powerplant, laser tower, interceptor, scout aircraft, artillery tower, radar towers, scorpion, church, builderoid and scout drone
+- added normal maps for imperials: powerplant, laser tower, interceptor, scout aircraft, artillery tower, radar towers, scorpion, church, sanctum, builderoid and scout drone
 - added normal maps for the cursed: acranius, agares, crawler, rigor mortis, purgatory, redeemer, seeker, blade, mermeoth, pestilence, suicide blobs, cursed heart, defender tower and mex lvl2, obelisk lvl2
 - polished textures for the imperial church
 - polished several existing normal maps
@@ -15,8 +15,9 @@ Polishing
 - added a suicide button for the cursed rigor mortis (radar jammer & paralyse bomb)
 
 Infrastructure
-- atlased all textures for cursed flyers and mechanodemons for simplified maintenance (e.g. adding dirty layers to textures)
-- added support for lua controled metal maps (thanks to Forb)
+- atlased all textures for cursed flyers and mechanodemons for simplified maintenance
+- added support for lua controled metal maps (Forb will like it)
+
 
 
 >> Major changes 1.415 => 1.416

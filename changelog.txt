@@ -1,4 +1,4 @@
->> Major changes 1.416 => 1.417
+>> Major changes 1.416 => 1.420
 
 Balance
 - reduced repairspeed of necromancers, liches, obelisks (tier 1 & 2) and builderoids (tier 1 & 2) by 50%. 

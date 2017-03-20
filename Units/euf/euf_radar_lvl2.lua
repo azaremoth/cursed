@@ -12,7 +12,7 @@ local unitDef = {
   buildCostMetal     = 350,
   buildTime          = 350,
 
-  buildingGroundDecalDecaySpeed = 1,
+  buildingGroundDecalDecaySpeed = 0.2,
   buildingGroundDecalSizeX = 3,
   buildingGroundDecalSizeY = 3,
   buildingGroundDecalType = "euf_radar_lvl1_aoplane.dds",

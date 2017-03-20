@@ -11,7 +11,7 @@ local unitDef = {
   buildPic           = "euf_artytower.png",
   buildTime          = 950,
   
-  buildingGroundDecalDecaySpeed = 1,
+  buildingGroundDecalDecaySpeed = 0.2,
   buildingGroundDecalSizeX = 8,
   buildingGroundDecalSizeY = 8,
   buildingGroundDecalType = "euf_lasertower_aoplane.dds",
@@ -133,7 +133,7 @@ local weaponDefs = {
     tolerance          = 500,
     turret             = true,
     weaponAcceleration = 0,
-    weaponVelocity     = 550,  
+    weaponVelocity     = 575,  
 	noSelfDamage       = true,
 --  Sound	------------------------------------------------	
     soundHit           = "mediumexplosion",
@@ -143,13 +143,13 @@ local weaponDefs = {
     soundTrigger       = true,
 --  Standard Visuals	------------------------------------
 --    cegtag			   = "MLRSRocketTrail",	
-	RGBColor		   = "1.0 1.0 0.35",	
+	RGBColor		   = "0.95 0.90 0.72",	
 --	Weaponspecial ------------------------------------------ 
 --    model              = "plasma_yellow.s3o",
 	alphaDecay 		   = 1.0,
     heightBoostFactor  = 1.2,
-	size               = 12,
-	stages 			   = 5,
+	size               = 8,
+	stages 			   = 4,
 	weaponType         = "Cannon",
 ------------------------------------------------------------
     damage = {

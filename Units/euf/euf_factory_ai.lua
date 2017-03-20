@@ -27,7 +27,7 @@ local unitDef = {
 --  collisionVolumeScales 	= "165 100 160",
 --  collisionVolumeOffsets 	= "0 0 0",
   useFootPrintCollisionVolume = true,
---  corpse             = "dead",
+    corpse             = "dead",
     customParams          = {
 		blinking = 0.8,		
 		factionname		   = "imperials",
@@ -119,12 +119,12 @@ local unitDef = {
 
 --------------------------------------------------------------------------------
 
---[[local featureDefs = {
+local featureDefs = {
   dead = {	
 	resurrectable	   = 0,  
     blocking           = true,
 	customParams          = {
-		featuredecaytime		= "20"
+		featuredecaytime		= "300"
 	},  		
     damage             = 40000,
     description        = "Wrecked Factory",
@@ -138,7 +138,8 @@ local unitDef = {
     reclaimTime        = 375,
   },
 }
-unitDef.featureDefs = featureDefs]]--
+unitDef.featureDefs = featureDefs
+
 
 
 --------------------------------------------------------------------------------

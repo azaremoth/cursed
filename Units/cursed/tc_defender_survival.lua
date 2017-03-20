@@ -12,7 +12,7 @@ local unitDef = {
   buildPic           = "tc_defender.png",
   buildTime          = 270,
   
-  buildingGroundDecalDecaySpeed = 0.01,
+  buildingGroundDecalDecaySpeed = 0.001,
   buildingGroundDecalSizeX = 12,
   buildingGroundDecalSizeY = 12,
   buildingGroundDecalType = "tc_groundplatesm.png",

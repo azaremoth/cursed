@@ -12,7 +12,7 @@ local unitDef = {
   buildCostMetal     = 700,
   buildTime          = 700,
 
-  buildingGroundDecalDecaySpeed = 1,
+  buildingGroundDecalDecaySpeed = 0.2,
   buildingGroundDecalSizeX = 8,
   buildingGroundDecalSizeY = 8,
   buildingGroundDecalType = "euf_metalextractor_lvl2_aoplane.dds",

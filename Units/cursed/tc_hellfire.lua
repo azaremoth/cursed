@@ -11,7 +11,7 @@ local unitDef = {
   buildPic           = "tc_hellfire.png",
   buildTime          = 950,
   
-  buildingGroundDecalDecaySpeed = 0.01,
+  buildingGroundDecalDecaySpeed = 0.001,
   buildingGroundDecalSizeX = 16,
   buildingGroundDecalSizeY = 16,
   buildingGroundDecalType = "tc_groundplate1.png",
@@ -109,7 +109,7 @@ local unitDef = {
 local weaponDefs = {
   Hellfire_Artillery = {
 	accuracy           = 1250,
-    areaOfEffect       = 192,
+    areaOfEffect       = 224,
     avoidFeature       = false,
     avoidFriendly      = true,
     burnblow           = false,

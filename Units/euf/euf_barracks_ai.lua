@@ -27,7 +27,7 @@ local unitDef = {
 --  collisionVolumeScales 	= "120 100 160",
 --  collisionVolumeOffsets 	= "0 0 0",
   useFootPrintCollisionVolume = true,
---  corpse             = "dead",
+    corpse             = "dead",
     customParams          = {	
 		blinking = 0.8,		
 		factionname		   = "imperials",
@@ -116,7 +116,7 @@ local unitDef = {
 
 --------------------------------------------------------------------------------
 
---[[local featureDefs = {
+local featureDefs = {
   dead = {	
 	resurrectable	   = 0,  
     blocking           = true,
@@ -125,7 +125,7 @@ local unitDef = {
 	},  		
     damage             = 40000,
     description        = "Wrecked Barracks",
-    footprintX         = 8,
+    footprintX         = 9,
     footprintZ         = 12,
     height             = "50",
     hitdensity         = "100",
@@ -135,7 +135,7 @@ local unitDef = {
     reclaimTime        = 88,
   },
 }
-unitDef.featureDefs = featureDefs]]--
+unitDef.featureDefs = featureDefs
 
 
 --------------------------------------------------------------------------------

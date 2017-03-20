@@ -13,7 +13,7 @@ local unitDef = {
   buildPic           = "tc_cursedhand.png",
   buildTime          = 850,
   
-  buildingGroundDecalDecaySpeed = 0.01,
+  buildingGroundDecalDecaySpeed = 0.001,
   buildingGroundDecalSizeX = 14,
   buildingGroundDecalSizeY = 14,
   buildingGroundDecalType = "tc_groundplatesm.png",

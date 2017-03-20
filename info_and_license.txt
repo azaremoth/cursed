@@ -1,0 +1,39 @@
+The art content of the "The Cursed" is under CC BY-NC-SA 3.0 license.
+
+
+Suggestions, critics, etc. go to azaremoth@web.de
+I hope you will have some fun with my work
+
+aZaremoth
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+The team: --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+aZaremoth: Project leader, game design, modeling, graphics, FX
+CarRepairer: LUA-wizard, coding
+Pwnedbyryan: sound effects
+Maneater: Gameplay testing
+
+
+Special thanks to:
+- Licho
+- Smoth
+- the Complete Annihilation devs and participants
+- the http://www.freesound.org community
+- all Spring developers
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Credits: ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- Music:	Denny Schneidemesser - Awakening the Warrior Within (CC BY-NC-ND)
+		PlayOnLoop - Battlemarch (CC BY)
+		Mathew Pablo - Dark Descent (GPL 3.0)
+		Mark Neil - strANGE Ls (CC BY-NC-SA)
+		RiverK - Chaos Becomes You (CC BY-NC-SA)
+		RiverK - Safe In Here (CC BY-NC-SA)
+		RiverK - HRT Defeated (CC BY-NC-SA)
+		RiverK - Zombies 3 Themes (CC BY-NC-SA)
+
+- Sounds:	all game sounds were created either by Pwnedbyryan or artist from the freesound.org community and thus are a mix of CC and GPL

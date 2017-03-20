@@ -29,7 +29,7 @@ local unitDef = {
   customParams          = {
 	factionname		   = "cursed",
 	normaltex = "unittextures/normalmaps/tc_pyramid_normal.png",
-	normalmaps = "yes",	
+	normalmaps = "yes",
     helptext = "Necromancers, witches and skeletons can be produced here."			
   },
   description        = "Produces Undead",

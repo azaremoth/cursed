@@ -35,6 +35,7 @@ local unitDef = {
   -- collisionVolumeTest 		= 1,
   customParams          = {
 	noautorepair = "true",
+	area_mex_def = "true",	
 	isinfantry = "true",
 	canbetransported = "true",
 	factionname		   = "cursed",

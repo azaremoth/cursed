@@ -32,6 +32,7 @@ local unitDef = {
   customParams       = {	
 	noautorepair	 = true,
 	canbetransported = "true",	
+	area_mex_def = "true",		
 	factionname		 = "imperials",
 	normaltex = "unittextures/normalmaps/euf_constructor_normal.png",
 	normalmaps = "yes",		

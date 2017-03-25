@@ -1,10 +1,12 @@
->> Major changes 1.421 => 1.421
+>> Major changes 1.420 => 1.421
 
 Polishing
 - resorted options menu in lobby
 
 Bugs
+- added mssing metal multiplier modoption
 - added missing debris for imperials barracks and war factory if build by AI players
+- added/fixed support for minimap button activating the metal map
 
 
 

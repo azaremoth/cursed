@@ -37,6 +37,7 @@ local unitDef = {
 --  collisionVolumeType = "CylY",
   customParams          = {
 	factionname		   = "cursed",
+	area_mex_def = "true",	
 	isinfantry = "true",
 	canbetransported = "true",
 	isbones = "true",

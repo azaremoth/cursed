@@ -31,6 +31,7 @@ local unitDef = {
 	factionname	= "cursed",
 	isimmobilebuilder = true,
 	growingcreep = true,
+	area_mex_def = "true",	
 	noautorepair = true,
     normaltex = "unittextures/normalmaps/tc_obelisk_normal.png",
 	normalmaps = "yes",	

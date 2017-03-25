@@ -17,22 +17,29 @@ if (gadgetHandler:IsSyncedCode()) then
 
 	local mexList = {}
 	
-	local SetUnitMetalExtraction = Spring.SetUnitMetalExtraction
+	--local SetUnitMetalExtraction = Spring.SetUnitMetalExtraction
 
 	function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 	  if (UnitDefs[unitDefID].extractsMetal > 0) then
-		local extracts = (UnitDefs[unitDefID].extractsMetal * 0.25)
-		local maxExtracts = (UnitDefs[unitDefID].extractsMetal * 1.25)
-		SetUnitMetalExtraction(unitID, extracts)
+
+		local maxExtracts = (Spring.GetUnitRulesParam(unitID, "mexIncome"))
+		local extracts = maxExtracts * 0.25
+		
+		if (maxExtracts == nil) then
+			maxExtracts = (UnitDefs[unitDefID].extractsMetal * 1.25)
+			extracts = maxExtracts * 0.25
+		end
+		Spring.SetUnitResourcing(unitID, "cmm", extracts)
+		--SetUnitMetalExtraction(unitID, extracts)
 		local radius = 33
 		if (UnitDefs[unitDefID].extractsMetal > 0.001) then
 		  radius = 49
 		end
 		mexList[unitID] = { 
-			extracts = extracts, 
+			extracts = extracts,
 			frame = Spring.GetGameFrame(), 
 			maxExtracts = maxExtracts,
-			step = (UnitDefs[unitDefID].extractsMetal * 0.0035),
+			step = ((maxExtracts-extracts)/60),
 			radius = radius
 		  }
 		SendToUnsynced("UpdateMine", unitID, extracts, maxExtracts, radius)
@@ -48,14 +55,11 @@ if (gadgetHandler:IsSyncedCode()) then
 		if ((n % 15) == 14) then -- 2/s
 			for unitID, defs in pairs(mexList) do
 				if defs.extracts < defs.maxExtracts and (select(1,Spring.GetUnitResources(unitID)) > 0) then
-					  defs.extracts = math.min(defs.extracts + defs.step, defs.maxExtracts)
-					  if (n < 10000) then
-							local bonusStep = defs.step * (1-(n/10000))
-							defs.extracts = math.min(defs.extracts + bonusStep, defs.maxExtracts)
-					  end
-					  SetUnitMetalExtraction(unitID, defs.extracts)
+					  defs.extracts = defs.extracts + defs.step 
+					  -- SetUnitMetalExtraction(unitID, defs.extracts)
+					  Spring.SetUnitResourcing(unitID, "cmm", defs.extracts)
 					  SendToUnsynced("UpdateMine", unitID, defs.extracts, defs.maxExtracts)
-				elseif (defs.extracts == defs.maxExtracts) then
+				elseif (defs.extracts == defs.maxExtracts or defs.extracts > defs.maxExtracts) then
 					  SendToUnsynced("UpdateMine", unitID, defs.extracts, defs.maxExtracts, defs.radius-3)
 					  mexList[unitID] = nil
 				end

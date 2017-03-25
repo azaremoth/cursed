@@ -70,6 +70,7 @@ local imageDirSpecials = 'LuaUI/Images/commands/specials/'
 
 local overrides = {
 --	[CMD_AUTOMEX] = { texture = imageDir .. 'upgrade.png',  text= ' '},
+	[CMD_AREA_MEX] = { texture = imageDir .. 'amex.png',  text= ' '},
 --	[CMD_UPGRADEMEX] = { texture = imageDir .. 'upgrade.png',  text= '\255\0\255\0U'},
 	[CMD.ATTACK] = { texture = imageDir .. 'attack.png',  text= '\255\0\255\0A'},
 	[CMD.CAPTURE] = { texture = imageDir .. 'capture.png',  text= '\255\0\255\0A'},	
@@ -109,6 +110,7 @@ local overrides = {
 
 local overrides_faction_two = {
 --	[CMD_AUTOMEX] = { texture = imageDirTwo .. 'upgrade.png',  text= ' '},
+	[CMD_AREA_MEX] = { texture = imageDirTwo .. 'amex.png',  text= ' '},
 --	[CMD_UPGRADEMEX] = { texture = imageDirTwo .. 'upgrade.png',  text= '\255\0\255\0U'},
 
 	[CMD.ATTACK] = { texture = imageDirTwo .. 'attack.png',  text= '\255\0\255\0A'},

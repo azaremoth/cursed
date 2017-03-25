@@ -4,9 +4,13 @@ Polishing
 - resorted options menu in lobby
 
 Bugs
-- added mssing metal multiplier modoption
+- added missing metal multiplier modoption
 - added missing debris for imperials barracks and war factory if build by AI players
 - added/fixed support for minimap button activating the metal map
+- fixed metal income being too high after introduction of Lua Mex function
+
+Features
+- added area MEX funtion
 
 
 

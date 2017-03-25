@@ -147,7 +147,7 @@ local mexBuilder = {}
 local mexBuilderDefs = {}
 for udid, ud in ipairs(UnitDefs) do 
 	if ud.customParams.area_mex_def then
-		-- mexBuilderDefs[udid] = UnitDefNames[ud.customParams.area_mex_def].id
+		mexBuilderDefs[udid] = UnitDefNames[ud.customParams.area_mex_def].id
 	end
 end
 

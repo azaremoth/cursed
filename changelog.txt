@@ -1,16 +1,16 @@
 >> Major changes 1.420 => 1.421
 
 Polishing
-- resorted options menu in lobby
+- resorted game options menu for lobbies
 
 Bugs
 - added missing metal multiplier modoption
 - added missing debris for imperials barracks and war factory if build by AI players
-- added/fixed support for minimap button activating the metal map
-- fixed metal income being too high after introduction of Lua Mex function
+- fixed minimap button activating the metal map
+- fixed metal income being too high after introduction of Lua Mex functionality
 
 Features
-- added area MEX funtion
+- added area MEX buttons/functions
 
 
 

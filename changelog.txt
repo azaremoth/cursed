@@ -1,17 +1,14 @@
->> Major changes 1.421 => 1.422
+>> Major changes 1.420 => 1.422
 
 Balance
 - increased teleport range for cursed mages by 10%
-
-Polishing
-- optimized jumping behavior for CAI controlled units
-- improved cacodemon's weapon visuals
-
-
->> Major changes 1.420 => 1.421
+- Xenosect Goliaths will not spawn before 5 minutes of game time. These critters realy can ruin bases early on
 
 Polishing
 - resorted game options menu for lobbies
+- optimized jumping behavior for CAI controlled units
+- improved cacodemon's weapon visuals
+- added scaffolds for imperials barracks, bunkers and war factories being built by AI
 
 Bugs
 - added missing metal multiplier modoption

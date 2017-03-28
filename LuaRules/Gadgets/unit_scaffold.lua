@@ -30,6 +30,7 @@ local scaffoldunit_4x4 = {
 
 local scaffoldunit_6x6 = {
 	[UnitDefNames['euf_bunker'].id] = true,
+	[UnitDefNames['euf_bunker_ai'].id] = true,	
 	[UnitDefNames['euf_metalextractor_lvl2'].id] = true,	
 	[UnitDefNames['euf_sanctum'].id] = true,			
 	[UnitDefNames['euf_solar'].id] = true,			
@@ -53,14 +54,17 @@ local scaffoldunit_10x10_high = {
 
 local scaffoldunit_11x11 = {
 	[UnitDefNames['euf_church'].id] = true,
+	[UnitDefNames['euf_church_ai'].id] = true,	
 }
 
 local scaffoldunit_8x12 = {
 	[UnitDefNames['euf_barracks'].id] = true,
+	[UnitDefNames['euf_barracks_ai'].id] = true,
 }
 
 local scaffoldunit_12x12 = {
 	[UnitDefNames['euf_factory'].id] = true,
+	[UnitDefNames['euf_factory_ai'].id] = true,	
 }
 
 local scaffoldunit_12x5 = {

@@ -33,22 +33,32 @@ local CMD_MOVE = CMD.MOVE
 
 local MAXSPAWN = 35
 local SPAWNPERIOD = 30
+local SPAWNDELAYLATE = 9000 -- = 30 frames x 60s x 5 minutes
 local MOVEPERIOD = 15
 
 
-local critterdefs_i = {
+local critterdefs_early = {
+	UnitDefNames['pig'].id,
+	UnitDefNames['bug_larva'].id,	
+	UnitDefNames['bug_med'].id,	
+}
+
+local critterdefs_late = {
 	UnitDefNames['pig'].id,
 	UnitDefNames['bug_larva'].id,	
 	UnitDefNames['bug_med'].id,	
 	UnitDefNames['bug_big'].id,
 }
+
+
 local critterdefs = {}
 for _,udid in ipairs(critterdefs) do
 	critterdefs[udid] = true
 end
 
 
-local critter_type_count = #critterdefs_i
+local critter_type_count = #critterdefs_early
+local critter_type_count_late = #critterdefs_late
 local critters = {}
 local crittercount = 0
 
@@ -71,7 +81,7 @@ local function SpawnCritter()
 			tries = 0
 
 			local crit_type = math.ceil(critter_type_count * math.random())
-			local critID = Spring.CreateUnit(critterdefs_i[crit_type], x,y,z, 0, Spring.GetGaiaTeamID())
+			local critID = Spring.CreateUnit(critterdefs_early[crit_type], x,y,z, 0, Spring.GetGaiaTeamID())
 			-- Spring.SetUnitNeutral(critID, true)
 			critters[critID] = true
 			crittercount = crittercount + 1			
@@ -88,6 +98,10 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 end
 
 function gadget:GameFrame(f)
+	if (f > SPAWNDELAYLATE and critterdefs_early ~= critterdefs_late) then
+		critter_type_count = critter_type_count_late
+		critterdefs_early = critterdefs_late
+	end
 	if f % (32 * SPAWNPERIOD) < 0.1 then
 		SpawnCritter()
 	end

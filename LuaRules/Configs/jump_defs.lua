@@ -43,7 +43,9 @@ jumpClassGroups = {
 	baseclass = { 
 		"euf_pyro",},
 	ghoul = {
-		"tc_ghoul",},
+		"tc_ghoul",
+		"bug_med",
+		},
 	hero = {
 		"euf_sarge_lvl2",
 		"euf_sarge_lvl3",

@@ -2618,20 +2618,44 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 			local ud = UnitDefs[attackerDefID]
 			if not ud.canFly then
 				local jump = spGetUnitRulesParam(unitID, "jumpReload")
-				if ((not jump) or jump == 1) and spGetUnitSeparation(unitID, attackerID, true) < jumpDefs[unitDefID].range + 100 then
+				-- if ((not jump) or jump == 1) and spGetUnitSeparation(unitID, attackerID, true) < jumpDefs[unitDefID].range + 100 then
+				if ((not jump) or jump == 1) then
 					local cQueue = spGetCommandQueue(unitID, 1)
 					if #cQueue == 0 or cQueue[1].id ~= CMD_JUMP then
-							local x,y,z = Spring.GetUnitPosition(attackerID)
-							local randomx
-							local randomy
-							if (math.random(-1,1) > 0) then
-								randomx = math.random(-50,50)
-								randomz = math.random(30,50)*(-1)
-							else 
-								randomx = math.random(-50,50)						
-								randomz = math.random(30,50)						
+						local randomx
+						local randomy
+						if (math.random(-1,1) > 0) then
+							randomx = math.random(-50,50)
+							randomz = math.random(30,50)*(-1)
+						else 
+							randomx = math.random(-50,50)						
+							randomz = math.random(30,50)						
+						end				
+						local x,y,z = Spring.GetUnitPosition(unitID)
+						local ax,ay,az = Spring.GetUnitPosition(attackerID)
+						local dist = math.sqrt((ax-x)^2+(az-z)^2)
+
+						local jumpdist = 0
+						if (UnitDefs[unitDefID].weapons ~= nil) then
+							for i,w in ipairs(UnitDefs[unitDefID].weapons) do
+								jumpdist = (dist - (WeaponDefs[w.weaponDef].range))
 							end
-							Spring.GiveOrderToUnit(unitID, CMD_JUMP, {x+randomx,y,z+randomz}, {"alt"} )
+						else 
+							jumpdist = (-jumpDefs[unitDefID])
+						end
+						local jx = x+randomx
+						local jz = z+randomz
+						if ( jumpdist < (jumpDefs[unitDefID].range + 100)) then
+							jx = x+((ax-x)*(jumpdist/dist))
+							jz = z+((az-z)*(jumpdist/dist))
+						else
+							jx = x+((ax-x)*(-jumpDefs[unitDefID].range/dist))
+							jz = z+((az-z)*(-jumpDefs[unitDefID].range/dist))
+						end
+						local burrowed = Spring.GetUnitRulesParam(unitID,"burrowed")						
+						if (burrowed ~= 1 ) then
+							Spring.GiveOrderToUnit(unitID, CMD_JUMP, {jx,y,jz}, {"alt"} )
+						end
 					end
 				end
 			end

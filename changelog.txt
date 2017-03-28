@@ -1,3 +1,13 @@
+>> Major changes 1.421 => 1.422
+
+Balance
+- increased teleport range for cursed mages by 10%
+
+Polishing
+- optimized jumping behavior for CAI controlled units
+- improved cacodemon's weapon visuals
+
+
 >> Major changes 1.420 => 1.421
 
 Polishing

@@ -115,8 +115,61 @@ local unitDef = {
 
 local weaponDefs = {
   CACOBALL = {
+ 	  name					= [[Cacodemon Blast]],
+	  areaOfEffect			= 32,
+	  accuracy              = 64,	  
+	  avoidFeature			= false,	  
+	  avoidFriendly      	= true,
+	  cegTag				= [[CACO_SHELLFLARE]],
+	  CollideFriendly		= true,   
+	  edgeEffectiveness		= 0.5,
+	  energypershot         = 0,	  
+	  explosionGenerator	= [[custom:CACOEXPLOSION]],
+	  explosionSpeed		= 5,
+	  fireStarter			= 100,
+	  groundBounce			= false,
+	  impulseFactor			= 1e-06,
+      noSelfDamage          = true,	  
+	  range					= 600,
+	  reloadTime			= 3,
+	  tolerance				= 200,
+	  turret				= 1,
+	  weaponTimer			= 2,
+	  weaponVelocity		= 128,  
+--  Sound	------------------------------------------------	
+    soundHit           = "cannon_hit1",
+    soundStart         = "roar",
+    soundHitVolume     = 50,
+    soundStartVolume   = 50,
+    soundTrigger       = true,
+--  Standard Visuals	------------------------------------
+    cegtag			   = "CACO_SHELLFLARE",	
+	rgbColor		   = "0.5 0 1",			
+--	Weaponspecial ------------------------------------------ 
+--    model              = "plasma_green.s3o",
+	alphaDecay 		   = 1.0,
+    heightBoostFactor  = 1.2,
+	size               = 5,
+	stages 			   = 3,
+	weaponType         = "Cannon",
+------------------------------------------------------------
+    damage = {
+      default            = 100,
+      flyer              = 100,
+      heavy              = 100,
+      light              = 100,
+    },
+  },
+}
+unitDef.weaponDefs = weaponDefs
+
+
+
+
+--[[ local weaponDefs = {
+  CACOBALL = {
     accuracy           = 4,
-    areaOfEffect       = 16,
+    areaOfEffect       = 32,
     -- beamweapon         = true,
     cegTag             = "CACO_SHELLFLARE",
     collisionSize      = 1,
@@ -163,7 +216,7 @@ local weaponDefs = {
     },
   },
 }
-unitDef.weaponDefs = weaponDefs
+unitDef.weaponDefs = weaponDefs ]]
 
 
 --------------------------------------------------------------------------------

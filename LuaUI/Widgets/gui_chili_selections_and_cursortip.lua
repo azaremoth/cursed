@@ -1622,7 +1622,7 @@ local function MakeToolTip_Unit(data, tooltip)
 	local tt_structure = {
 		leftbar = {
 			{ name= 'bp', directcontrol = 'buildpic_unit' },
-			{ name= 'cost', icon = 'LuaUI/images/ibeam.png', text = cyan .. numformat((tt_ud and tt_ud.metalCost) or '0') },
+			{ name= 'cost', icon = 'LuaUI/images/cost.png', text = cyan .. numformat((tt_ud and tt_ud.metalCost) or '0') },
 			
 			{ name='res_m', icon = 'LuaUI/images/metalplus.png', text = m },
 			{ name='res_e', icon = 'LuaUI/images/energy.png', text = e },
@@ -1672,7 +1672,7 @@ local function MakeToolTip_SelUnit(data, tooltip)
 	local tt_structure = {
 		leftbar = {
 			{ name= 'bp', directcontrol = 'buildpic_selunit' },
-			{ name= 'cost', icon = 'LuaUI/images/ibeam.png', text = cyan .. numformat((stt_ud and stt_ud.metalCost) or '0') },
+			{ name= 'cost', icon = 'LuaUI/images/cost.png', text = cyan .. numformat((stt_ud and stt_ud.metalCost) or '0') },
 			
 			{ name='res_m', icon = 'LuaUI/images/metalplus.png', text = m },
 			{ name='res_e', icon = 'LuaUI/images/energy.png', text = e },

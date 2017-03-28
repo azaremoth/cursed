@@ -62,38 +62,223 @@
 
 [CACO_SHELLFLARE]
 {
-	[spikes_bluepurple]
+	[spikes]
 	{
 		class=CExploSpikeProjectile;
 		[properties]
 		{
-			dir=-4 r8,-4 r8,-4 r8;
-			width=1.2 r0.5;
-			length=3.4 r0.25;
-			alpha=0.4 r0.1;
-			alphadecay=0.1 r 0.25;
-			color=0.68, 0.31, 0.70;
+			dir=-15 r30,-15 r30,-15 r30;
+			width=4 r0.5;
+			length=6 r0.25;
+			alpha=0.5 r0.1;
+			alphadecay=0.1 r 0.05;
+			color= 0.60, 0.20, 0.59;
 		}
 		air=1;
 		water=1;
 		ground=1;
-  		count=5; 
+  		count=10; 
 	}
-	[spikes_purples]
+  	[groundflash]
+	{
+      		flashSize = 30;
+      		flashAlpha = 0.3;
+      		circleGrowth = 1;
+      		circleAlpha = 0;
+      		ttl = 10;
+			color = 0.60, 0.20, 0.59;
+			air=1;
+     		ground=1;
+      		water=1;
+	}
+}
+
+[CACOEXPLOSION]
+{
+[particlesystem_flash01_MED_EXPLOSION_FX01]
 	{
 		class=CExploSpikeProjectile;
 		[properties]
 		{
-			dir=-4 r8,-4 r8,-4 r8;
-			width=0.8 r0.5;
-			length=3.0 r0.5;
-			alpha=0.4 r0.1;
-			alphadecay=0.1 r 0.25;
-			color=0.4, 0.0, 0.39;
+		dir=-25 r50,-25 r50,-25 r50;
+		width=1 r3;
+		length=1 r0.25;
+		alpha=0.8;
+		alphadecay=0.05 r 0.05;
+		color=0.68, 0.31, 0.70;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=15;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=0;
+	}
+	[groundflash_MED_EXPLOSION_FX01]
+	{
+		class=CSimpleGroundFlash;
+		[properties]
+		{
+			texture=BrightFlashScar;
+      		size=50;
+			sizeGrowth=-6;
+      		ttl=23;
+      		colorMap=1.0 1.0 1.0 1.0   1.0 1.0 0.1 1.0  1.0 0.51 0.95 1.0     0 0 0 0.01;
 		}
 		air=1;
-		water=1;
-		ground=1;
-  		count=5; 
+     	ground=1;
+      	water=0;
+		count=2;
+		underwater=0;
+		useAirLos=1;
+		alwaysVisible=0;
+	}
+	[groundflash_MED_EXPLOSION_FX02]
+	{
+		class=CSimpleGroundFlash;
+		[properties]
+		{
+			texture=BrightFlashScar;
+      		size=40;
+			sizeGrowth=-0.5;
+      		ttl=90;
+      		colorMap=1.0 1.0 1.0 1.0   1.0 0.51 0.95 1.0   1.0 0.51 0.95 1.0     0 0 0 0.01;
+		}
+		air=1;
+     	ground=1;
+      	water=0;
+		count=1;
+		underwater=0;
+		useAirLos=1;
+		alwaysVisible=0;
+	}
+	[particlesystem_flame_slow_MED_EXPLOSION_FX01]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0.05;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0.1, 0;
+      	colorMap=1.0 1.0 1.0 0.02   1.0 0.51 0.95 0.02  1.0 0.51 0.95 0.02     0 0 0 0.01;
+		Texture=lightningball;
+		airdrag=0.91;
+		particleLife=68;
+		particleLifeSpread=23;
+		numParticles=30;
+		particleSpeed=2.5;
+		particleSpeedSpread=2.5;
+		particleSize=6;
+		particleSizeSpread=8;
+		emitRot=45;
+		emitRotSpread=180;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=0;
+	}
+	[particlesystem_flame_fast_MED_EXPLOSION_FX01]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.15;
+		sizeMod=1.0;
+		pos=0, 1.0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, 0.01, 0;
+      	colorMap=1.0 0.51 0.95 0.01   1.0 0.51 0.95 0.05     0 0 0 0.01;
+		Texture=firecloud2;
+		airdrag=0.91;
+		particleLife=23;
+		particleLifeSpread=23;
+		numParticles=15;
+		particleSpeed=2.5;
+		particleSpeedSpread=5;
+		particleSize=2.0;
+		particleSizeSpread=1.0;
+		emitRot=0;
+		emitRotSpread=90;
+		directional=0;
+		}
+	air=1;
+	water=0;
+	ground=1;
+	count=1;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=0;
+	}
+	[particlesystem_watersplash_MED_EXPLOSION_FX01]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=-0.1;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.05, 0;
+      	colorMap=1.0 0.51 0.95 0.1   1.0 0.51 0.95 0.01 1.0 0.51 0.95 0.01     0 0 0 0.01;
+		Texture=randdots;
+		airdrag=0.93;
+		particleLife=34;
+		particleLifeSpread=13;
+		numParticles=80 r40;
+		particleSpeed=3;
+		particleSpeedSpread=4;
+		particleSize=1;
+		particleSizeSpread=1;
+		emitRot=0;
+		emitRotSpread=45;
+		directional=0;
+		}
+	air=0;
+	water=1;
+	ground=0;
+	count=1;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=0;
+	}
+	[particlesystem_watersplash_MED_EXPLOSION_FX02]
+	{
+		class=CSphereParticleSpawner;
+		[properties]
+		{
+		sizeGrowth=0;
+		sizeMod=1.0;
+		pos=0, 0, 0;
+		emitVector=0, 1, 0;
+		gravity=0, -0.05, 0;
+      	colorMap=1.0 0.51 0.95 0.1   1.0 0.51 0.95 0.01 1.0 0.51 0.95 0.01     0 0 0 0.01;
+		Texture=firecloud2;
+		airdrag=0.93;
+		particleLife=34;
+		particleLifeSpread=13;
+		numParticles=1;
+		particleSpeed=20 i-0.5;
+		particleSpeedSpread=0.25;
+		particleSize=1 i0.5;
+		particleSizeSpread=0.125;
+		emitRot=5;
+		emitRotSpread=0;
+		directional=0;
+		}
+	air=0;
+	water=1;
+	ground=0;
+	count=40;
+	underwater=0;
+	useAirLos=1;
+	alwaysVisible=0;
 	}
 }

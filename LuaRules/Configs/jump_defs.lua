@@ -34,7 +34,7 @@ jumpCategory = {
 	fasthero = {
 		range = 300, height = 100, speed = 50,  reload = 5,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = true},		
 	mage = {
-		range = 450, height = 10, speed = 100,  reload = 15,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = false},
+		range = 500, height = 10, speed = 100,  reload = 15,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = false},
 	warpjump = {
 		range = 100000000, height = 500, speed = 1000,  reload = 50,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = false},	
 }

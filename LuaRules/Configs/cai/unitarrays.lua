@@ -37,11 +37,20 @@ local raider = {
 	"euf_paladin_ai",
 }
 
-
 local jumper = { -- uses jump for offense. IE do not put commander or AA here.
 	"euf_pyro",
 	"tc_ghoul",
 	"tc_mage",	
+	"tc_cacodemon",	
+	"euf_sarge_lvl2",
+	"euf_sarge_lvl3",
+	"euf_sarge_lvl4",
+	"euf_sarge_lvl5",	
+	"tc_shade_lvl2",
+	"tc_shade_lvl3",
+	"tc_shade_lvl4",
+	"tc_shade_lvl5",
+	"bug_med",		
 }
 
 local arty = {

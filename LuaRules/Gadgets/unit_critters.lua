@@ -10,14 +10,25 @@ function gadget:GetInfo()
   }
 end
 
+include("LuaRules/Configs/customcmds.h.lua")
+
 
 local modOptions = Spring.GetModOptions()
 local cittersenabled = modOptions.critters
+
 if (cittersenabled ~= nil) then
 	Spring.Echo("Critters loading: " .. cittersenabled)
 else 
 	cittersenabled = "0"
 end
+
+local jumpDefNames  = VFS.Include"LuaRules/Configs/jump_defs.lua"
+local jumpDefs = {}
+
+for name, data in pairs(jumpDefNames) do
+	jumpDefs[UnitDefNames[name].id] = data
+end
+
 
 if (gadgetHandler:IsSyncedCode() and cittersenabled == "1") then
 -------------------------------------
@@ -36,6 +47,9 @@ local SPAWNPERIOD = 30
 local SPAWNDELAYLATE = 9000 -- = 30 frames x 60s x 5 minutes
 local MOVEPERIOD = 15
 
+local JumperPairs = {
+	[UnitDefNames.bug_med.id] = "bug_med",
+	}	
 
 local critterdefs_early = {
 	UnitDefNames['pig'].id,
@@ -125,7 +139,61 @@ function gadget:GameFrame(f)
 	end
 end
 
+function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponID, attackerID, attackerDefID, attackerTeam)
 
+	if (not (Spring.GetGaiaTeamID() == unitTeam)) then
+		return
+	end
+	
+	if attackerID then
+		if JumperPairs [unitDefID] then
+			local ud = UnitDefs[attackerDefID]
+			if not ud.canFly then
+				local jump = Spring.GetUnitRulesParam(unitID, "jumpReload")
+				-- if ((not jump) or jump == 1) and Spring.GetUnitSeparation(unitID, attackerID, true) < jumpDefs[unitDefID].range + 100 then
+				if ((not jump) or jump == 1) then
+					local cQueue = Spring.GetCommandQueue(unitID, 1)
+					if #cQueue == 0 or cQueue[1].id ~= CMD_JUMP then
+						local randomx
+						local randomy
+						if (math.random(-1,1) > 0) then
+							randomx = math.random(-50,50)
+							randomz = math.random(30,50)*(-1)
+						else 
+							randomx = math.random(-50,50)						
+							randomz = math.random(30,50)						
+						end				
+						local x,y,z = Spring.GetUnitPosition(unitID)
+						local ax,ay,az = Spring.GetUnitPosition(attackerID)
+						local dist = math.sqrt((ax-x)^2+(az-z)^2)
+
+						local jumpdist = 0
+						if (UnitDefs[unitDefID].weapons ~= nil) then
+							for i,w in ipairs(UnitDefs[unitDefID].weapons) do
+								jumpdist = (dist - (WeaponDefs[w.weaponDef].range))
+							end
+						else 
+							jumpdist = (-jumpDefs[unitDefID])
+						end
+						local jx = x+randomx
+						local jz = z+randomz
+						if ( jumpdist < (jumpDefs[unitDefID].range + 100)) then
+							jx = x+((ax-x)*(jumpdist/dist))
+							jz = z+((az-z)*(jumpdist/dist))
+						else
+							jx = x+((ax-x)*(-jumpDefs[unitDefID].range/dist))
+							jz = z+((az-z)*(-jumpDefs[unitDefID].range/dist))
+						end
+						local burrowed = Spring.GetUnitRulesParam(unitID,"burrowed")						
+						if (burrowed ~= 1 and (math.sqrt(jumpdist^2) > 50 )) then
+							Spring.GiveOrderToUnit(unitID, CMD_JUMP, {jx,y,jz}, {"alt"} )
+						end
+					end
+				end
+			end
+		end
+	end
+end
 
 ----- SYNCED -----
 -------------------------------------

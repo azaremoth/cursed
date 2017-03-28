@@ -2653,7 +2653,7 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 							jz = z+((az-z)*(-jumpDefs[unitDefID].range/dist))
 						end
 						local burrowed = Spring.GetUnitRulesParam(unitID,"burrowed")						
-						if (burrowed ~= 1 ) then
+						if (burrowed ~= 1 and (math.sqrt(jumpdist^2) > 50 )) then
 							Spring.GiveOrderToUnit(unitID, CMD_JUMP, {jx,y,jz}, {"alt"} )
 						end
 					end

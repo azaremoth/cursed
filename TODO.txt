@@ -1,5 +1,5 @@
-1) GAIA and AI units burrowing
-2) simplify jumping control for AI/GAIA -> simplification into one gadget
-3) normal mapped creep
-4) growing creep
-5) feature conversion on creep
+- GAIA and AI units burrowing
+- normal mapped creep
+- growing creep
+- feature conversion on creep
+- fixing strange shader effect for derefered lights on terrain/maps with normals applied and normal mapped units

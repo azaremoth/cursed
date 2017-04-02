@@ -140,9 +140,9 @@
 		[properties]
 		{
 			texture=BrightFlashScar;
-      		size=40;
+      		size=30;
 			sizeGrowth=-0.5;
-      		ttl=90;
+      		ttl=60;
       		colorMap=1.0 1.0 1.0 1.0   1.0 0.51 0.95 1.0   1.0 0.51 0.95 1.0     0 0 0 0.01;
 		}
 		air=1;
@@ -158,23 +158,23 @@
 		class=CSphereParticleSpawner;
 		[properties]
 		{
-		sizeGrowth=0.05;
+		sizeGrowth=-0.05;
 		sizeMod=1.0;
 		pos=0, 1.0, 0;
-		emitVector=0, 1, 0;
-		gravity=0, 0.1, 0;
+		emitVector=0 r0.25, 1 r0.25, 0 r0.25;
+		gravity=0, 0.03, 0;
       	colorMap=1.0 1.0 1.0 0.02   1.0 0.51 0.95 0.02  1.0 0.51 0.95 0.02     0 0 0 0.01;
 		Texture=lightningball;
 		airdrag=0.91;
-		particleLife=68;
-		particleLifeSpread=23;
-		numParticles=30;
-		particleSpeed=2.5;
-		particleSpeedSpread=2.5;
+		particleLife=30;
+		particleLifeSpread=10;
+		numParticles=10;
+		particleSpeed=0.5;
+		particleSpeedSpread=0.5;
 		particleSize=6;
 		particleSizeSpread=8;
-		emitRot=45;
-		emitRotSpread=180;
+		emitRot=45 r90;
+		emitRotSpread=45 r20;
 		directional=0;
 		}
 	air=1;

@@ -55,7 +55,7 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 	local firestate = Spring.GetUnitStates(unitID)["firestate"] -- needs to be 2 for aggressive jumping
 	local areallied = false
 	
-	if ((unitTeam ~= nil) and (attackerTeam ~=nil))) then
+	if ((unitTeam ~= nil) and (attackerTeam ~=nil)) then
 		if (unitTeam == attackerTeam) then
 			areallied = true
 		elseif ((unitTeam > 0) and (attackerTeam > 0)) then

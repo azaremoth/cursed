@@ -12,7 +12,7 @@ local unitDef = {
   buildPic           = "euf_plasmatower.png",
   buildTime          = 260,
   
-  buildingGroundDecalDecaySpeed = 0.2,
+  buildingGroundDecalDecaySpeed = 0.0,
   buildingGroundDecalSizeX = 5,
   buildingGroundDecalSizeY = 5,
   buildingGroundDecalType = "euf_plasmatower_aoplane.dds",

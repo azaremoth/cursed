@@ -2,6 +2,9 @@
 
 Balance
 - increased teleport range for cursed mages by 10%
+- increased weapon range for imperial marines by 10%
+- reduced weapon range for cursed belial by 13%
+- increased velocity of imperial walkers ans cursed belials by 9%
 - Xenosect Goliaths will not spawn before 5 minutes of game time. These critters realy can ruin bases early on
 
 Polishing

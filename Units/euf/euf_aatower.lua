@@ -10,7 +10,7 @@ local unitDef = {
   buildCostEnergy    = 220,
   buildCostMetal     = 220,
   
-  buildingGroundDecalDecaySpeed = 0.2,
+  buildingGroundDecalDecaySpeed = 0.0,
   buildingGroundDecalSizeX = 5,
   buildingGroundDecalSizeY = 5,
   buildingGroundDecalType = "euf_aatower_aoplane.dds",

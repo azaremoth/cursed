@@ -11,7 +11,7 @@ local unitDef = {
   buildPic           = "euf_artytower.png",
   buildTime          = 950,
   
-  buildingGroundDecalDecaySpeed = 0.2,
+  buildingGroundDecalDecaySpeed = 0.0,
   buildingGroundDecalSizeX = 8,
   buildingGroundDecalSizeY = 8,
   buildingGroundDecalType = "euf_lasertower_aoplane.dds",

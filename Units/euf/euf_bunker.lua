@@ -12,7 +12,7 @@ local unitDef = {
   buildCostMetal     = 400,
   buildTime          = 400,
   
-  buildingGroundDecalDecaySpeed = 0.2,
+  buildingGroundDecalDecaySpeed = 0.0,
   buildingGroundDecalSizeX = 9,
   buildingGroundDecalSizeY = 9,
   buildingGroundDecalType = "euf_bunker_aoplane.png",

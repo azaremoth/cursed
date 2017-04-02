@@ -321,7 +321,9 @@ local function WaitForAnim(threads, waitingForAnim, piece, axis)
 	end
 	local thread = threads[co_running() or error("not in a thread", 2)]
 	wthreads[#wthreads+1] = thread
-	thread.container = wthreads
+	if (thread ~= nil) then
+		thread.container = wthreads
+	end
 	-- yield the running thread:
 	-- it will be resumed once the wait finished (in AnimFinished).
 	co_yield()

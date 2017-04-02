@@ -11,7 +11,7 @@ local unitDef = {
   buildCostMetal     = 1000,
   buildTime          = 1000,
   
-  buildingGroundDecalDecaySpeed = 0.2,
+  buildingGroundDecalDecaySpeed = 0.0,
   buildingGroundDecalSizeX = 15,
   buildingGroundDecalSizeY = 15,
   buildingGroundDecalType = "euf_powerplant_aoplane.dds",

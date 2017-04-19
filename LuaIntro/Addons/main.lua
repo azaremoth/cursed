@@ -42,17 +42,17 @@ local toolsettings = {
 
 function addon.Initialize()
 
-	Spring.Echo(os.time())
+	-- Spring.Echo(os.time())
 	local waffles = math.fmod (os.time(),100)
 	for i=0, waffles do 
 		currentSelection = math.random(1,loadScreenCount)
 
-		Spring.Echo(waffles, "currentSelection", currentSelection)
+	--	Spring.Echo(waffles, "currentSelection", currentSelection)
 	end
 	
 	for k,v in pairs(loadscreens[currentSelection])do
 		toolsettings[k] = v
-		Spring.Echo(k,v)
+	-- 	Spring.Echo(k,v)
 	end
 	
 	local Chili = SG.Chili

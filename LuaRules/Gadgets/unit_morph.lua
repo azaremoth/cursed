@@ -468,7 +468,7 @@ end
 
 local function StopMorph(unitID, morphData)
   morphUnits[unitID] = nil
-Spring.Echo( morphData.combatMorph)
+-- Spring.Echo( morphData.combatMorph)
   if not morphData.combatMorph then 
     Spring.SetUnitHealth(unitID, { paralyze = -1})
     Spring.SetUnitRulesParam(unitID, "morphing", 0)
@@ -956,7 +956,6 @@ end
 
 
 function gadget:GameFrame(n)
-
   -- start pending morphs
   for unitid, data in pairs(morphToStart) do
     StartMorph(unitid, unpack(data))

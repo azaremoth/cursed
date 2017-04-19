@@ -95,7 +95,7 @@ local MELEEBASE = {
     turret                  = true,
     waterweapon             = true,
     weaponType              = [[Cannon]],
-    weaponVelocity          = 750,
+    weaponVelocity          = 400,
 }
 
 local MELEEBASE_OLD = {

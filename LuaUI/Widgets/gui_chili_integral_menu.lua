@@ -661,10 +661,11 @@ local function ProcessCommand(cmd)
 			n_special[#n_special+1] = cmd
 		elseif (cmd.id and UnitDefs[-(cmd.id)]) then
 			n_units[#n_units+1] = cmd
+		elseif (cmd.id == 37003 or  cmd.id == 37004 or cmd.id == 37005 or cmd.id == 37006 or cmd.id == 37011 or cmd.id == 37012 or cmd.id == 37013 or cmd.id == 37016 or
+				cmd.id == 37503 or  cmd.id == 37504 or cmd.id == 37505 or cmd.id == 37506 or cmd.id == 37511 or cmd.id == 37512 or cmd.id == 37513 or cmd.id == 37516) then -- CURSED morph commands for builders
+			n_units[#n_units+1] = cmd
 		elseif builder_commands[cmd.id] then -- CURSED special definition
-			n_units[#n_units+1] = cmd
-		elseif (cmd.id > 39000) then -- CURSED morph commands
-			n_units[#n_units+1] = cmd
+			n_units[#n_units+1] = cmd			
 		else
 			n_common[#n_common+1] = cmd	--shove unclassified stuff in common
 		end
@@ -1067,7 +1068,6 @@ local function Update(buttonpush)
 	table.sort(n_econ, function(a,b) return econ_commands[a.id].order < econ_commands[b.id].order end)
 	table.sort(n_defense, function(a,b) return defense_commands[a.id].order < defense_commands[b.id].order end)
 	table.sort(n_special, function(a,b) return special_commands[a.id].order < special_commands[b.id].order end)
---	table.sort(n_units, function(a,b) return builder_commands[a.id].order < builder_commands[b.id].order end) -- CURSED
 
 	ManageStateIcons()
 	ManageCommandIcons(useRowSort)

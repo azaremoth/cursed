@@ -7,7 +7,7 @@ Balance
 Polishing
 - impacting melee weapons now will cause an particle effect
 - moved relevant commands for builders to the tab with build icons (like morph). This will make it more obvious if a cursed unit can be morphed to next level
-
+- updated shade's attack animation to be a little smoother 
 
 
 >> Major changes 1.420 => 1.424

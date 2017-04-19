@@ -4,7 +4,7 @@ local AA_MISSILE_TOWER = {
 	collideFriendly    = false,
     areaOfEffect       		= 32,	
 	range                   = 1000,
-    reloadtime 				= 1.70,
+    reloadtime 				= 1.80,
     damage 					= { default = 400, flyer = 400, heavy = 400, light = 400, },
 }
 

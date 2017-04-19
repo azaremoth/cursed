@@ -194,8 +194,9 @@ local function GetLightsFromUnitDefs()
 		local weaponData = {r = r, g = g, b = b, radius = 100}
 		
 		if (weaponDef.type == 'Cannon') then
-			Spring.Echo(weaponDef.name)
-			if (weaponDef.name == 'Melee') then
+--			Spring.Echo(weaponDef.name)
+			if (weaponDef.description == 'Melee') then
+--			Spring.Echo("EDITED")
 				weaponData.beamOffset = 0
 				weaponData.beam = false
 				r = 0

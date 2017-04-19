@@ -1067,6 +1067,7 @@ local function Update(buttonpush)
 	table.sort(n_econ, function(a,b) return econ_commands[a.id].order < econ_commands[b.id].order end)
 	table.sort(n_defense, function(a,b) return defense_commands[a.id].order < defense_commands[b.id].order end)
 	table.sort(n_special, function(a,b) return special_commands[a.id].order < special_commands[b.id].order end)
+--	table.sort(n_units, function(a,b) return builder_commands[a.id].order < builder_commands[b.id].order end) -- CURSED
 
 	ManageStateIcons()
 	ManageCommandIcons(useRowSort)

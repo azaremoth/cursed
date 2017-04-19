@@ -7,8 +7,8 @@ local unitName = "euf_aatower_survival"
 
 local unitDef = {
   armortype          = "HEAVY",
-  buildCostEnergy    = 220,
-  buildCostMetal     = 220,
+  buildCostEnergy    = 350,
+  buildCostMetal     = 350,
   
   buildingGroundDecalDecaySpeed = 0.0,
   buildingGroundDecalSizeX = 5,
@@ -17,7 +17,7 @@ local unitDef = {
   useBuildingGroundDecal = true,  
   
   buildPic           = "euf_aatower.png",
-  buildTime          = 220,
+  buildTime          = 350,
   canAttack          = true,
   canGuard           = true,
   canstop            = "1",
@@ -96,64 +96,11 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "AA_MISSILE",
+      name                = "AA_MISSILE_TOWER",
       onlyTargetCategory = "AIR",
     },
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  AA_MISSILE = {
-      name                    = "Rockets",
-      areaOfEffect            = 24,
-      canattackground         = false,
-      cegTag                  = "MLRSRocketTrail",
-      craterBoost             = 0,
-      craterMult              = 0,
-      cylinderTargeting      = 128,
-		energypershot           = 0,
-      explosionGenerator      = "custom:FLAKImpact",
-      fireStarter             = 20,
-      flightTime              = 4,
-      impactOnly              = true,
-      impulseBoost            = 0.123,
-      impulseFactor           = 0.0492,
-      interceptedByShieldType = 2,
-      -- lineofsight             = true,
-      metalpershot            = 0,
-      model                   = "ROCKET.s3o",
-      --noSelfDamage            = true,
-      range                   = 900,
-      reloadtime              = 1.4,
-      -- rendertype              = 1,
-      smokeTrail              = false,
-      soundHit                = "mediumexplosion",
-      soundStart              = "launchrocket",
-      soundTrigger            = true,
-      startVelocity           = 550,
-      texture2                = "none",
-      tolerance               = 16000,
-      tracks                  = true,
-      turnRate                = 55000,
-      turret                  = true,
-      waterweapon             = true,
-      weaponAcceleration      = 550,
-      weaponTimer             = 3,
-      weaponType              = "MissileLauncher",
-      weaponVelocity          = 800,
-    damage = {
-      default            = 400,
-      flyer              = 400,
-      heavy              = 400,
-      light              = 400,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
-
 
 --------------------------------------------------------------------------------
 

@@ -9,30 +9,9 @@ local tooltips = {
 }
 
 local factories = {}
-
---Integral menu is NON-ROBUST
---all buildings (except facs) need a row or they won't appear!
---you can put too many things into the same row, but the buttons will be squished
+local builder = {}
 local econ = {}
-local defense = {
---[[	euf_plasmatower =    {order = 0, row = 1, col = 1},
-	euf_aatower =   {order = 1, row = 1, col = 2},
-	euf_lasertower =   {order = 1, row = 1, col = 3},
-	euf_artytower =  {order = 1, row = 1, col = 4},
-	euf_radar_lvl1  =  {order = 1, row = 2, col = 1},
-	euf_radar_lvl2  =  {order = 1, row = 2, col = 1},
-	euf_wall =  {order = 1, row = 2, col = 2},
-	euf_wall_lvl2 =  {order = 1, row = 2, col = 2},
-	euf_bunker =  {order = 1, row = 2, col = 3},
-
-	tc_defender =    {order = 0, row = 1, col = 1},
-	tc_tower =   {order = 1, row = 1, col = 2},
-	tc_hellfire =   {order = 1, row = 1, col = 3},
-	tc_seer =  {order = 1, row = 2, col = 1},
-	tc_teeth =  {order = 1, row = 2, col = 2},
-	tc_wall_lvl2 =  {order = 1, row = 2, col = 2}, ]]--
-}
-
+local defense = {}
 local aux = {}
 local super = {}
 
@@ -43,6 +22,10 @@ local factory_commands = {}
 local econ_commands = {}
 local defense_commands = {}
 local special_commands = {}
+local builder_commands = {
+	[CMD_AREA_MEX] 		=    {order = 13, row = 3, col = 1},
+}
+
 
 local function CopyBuildArray(source, target)
 	for name, value in pairs(source) do
@@ -190,4 +173,4 @@ local custom_cmd_actions = {
 }
 
 
-return common_commands, states_commands, factory_commands, econ_commands, defense_commands, special_commands, globalCommands, overrides, overrides_faction_two, custom_cmd_actions, widgetSpaceHidden
+return common_commands, states_commands, factory_commands, econ_commands, defense_commands, special_commands, builder_commands, globalCommands, overrides, overrides_faction_two, custom_cmd_actions, widgetSpaceHidden

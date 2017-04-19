@@ -114,7 +114,7 @@ options = {
 	light_brightness = {
 		name = 'Light Brightness',
 		type = 'number',
-		value = 3,
+		value = 2,
 		min = 0.05, max = 5, step = 0.05,
 		OnChange = function (self) 
 			colorBrightness = self.value
@@ -194,14 +194,24 @@ local function GetLightsFromUnitDefs()
 		local weaponData = {r = r, g = g, b = b, radius = 100}
 		
 		if (weaponDef.type == 'Cannon') then
-			if customParams.single_hit then
-				weaponData.beamOffset = 1
-				weaponData.beam = true
-				r = 1
-				g = 2
-				b = 2
+			Spring.Echo(weaponDef.name)
+			if (weaponDef.name == 'Melee') then
+				weaponData.beamOffset = 0
+				weaponData.beam = false
+				r = 0
+				g = 0
+				b = 0
+				weaponData.radius = 0
 			else
-				weaponData.radius = 10 + 90 * weaponDef.size
+				if customParams.single_hit then
+					weaponData.beamOffset = 1
+					weaponData.beam = true
+					r = 1
+					g = 2
+					b = 2
+				else
+					weaponData.radius = 10 + 90 * weaponDef.size
+				end
 			end
 		elseif (weaponDef.type == 'LaserCannon') then
 			weaponData.radius = 150 * weaponDef.size

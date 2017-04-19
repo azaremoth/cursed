@@ -128,27 +128,27 @@ local unitDef = {
     [1]  = {
 	  def                = "SARGE_CHAINGUN",
       mainDir            = "0 0 1",
-      maxAngleDif        = 120,
+      maxAngleDif        = 180,
       onlyTargetCategory = "LAND AIR",
       badTargetCategory = "HEAVYARMOR",	
     },
    [2]  = {
 	  def                = "SARGE_CHAINGUN",
       mainDir            = "0 0 1",
-      maxAngleDif        = 120,
+      maxAngleDif        = 180,
       onlyTargetCategory = "LAND AIR",
       badTargetCategory = "HEAVYARMOR",		  
     },
  --[[  [3]  = {
 	  def                = "SARGE_PLASMAGUN",
       mainDir            = "0 0 1",
-      maxAngleDif        = 120,
+      maxAngleDif        = 180,
       onlyTargetCategory = "LAND",
     },
    [4]  = {
 	  def                = "SARGE_PLASMAGUN",
       mainDir            = "0 0 1",
-      maxAngleDif        = 120,
+      maxAngleDif        = 180,
       onlyTargetCategory = "LAND",
     },	]]--
   },

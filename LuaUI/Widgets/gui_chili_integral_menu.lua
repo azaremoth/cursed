@@ -223,7 +223,7 @@ local spGetSpectatingState = Spring.GetSpectatingState
 
 local push        = table.insert
 
-local common_commands, states_commands, factory_commands, econ_commands, defense_commands, special_commands, globalCommands, overrides, overrides_faction_two, custom_cmd_actions, widgetSpaceHidden = include("Configs/integral_menu_commands.lua")
+local common_commands, states_commands, factory_commands, econ_commands, defense_commands, special_commands, builder_commands, globalCommands, overrides, overrides_faction_two, custom_cmd_actions, widgetSpaceHidden = include("Configs/integral_menu_commands.lua")
 
 local function CapCase(str)
 	local str = str:lower()
@@ -659,7 +659,11 @@ local function ProcessCommand(cmd)
 			n_defense[#n_defense+1] = cmd
 		elseif special_commands[cmd.id] then
 			n_special[#n_special+1] = cmd
-		elseif cmd.id and UnitDefs[-(cmd.id)] then
+		elseif (cmd.id and UnitDefs[-(cmd.id)]) then
+			n_units[#n_units+1] = cmd
+		elseif builder_commands[cmd.id] then -- CURSED special definition
+			n_units[#n_units+1] = cmd
+		elseif (cmd.id > 39000) then -- CURSED morph commands
 			n_units[#n_units+1] = cmd
 		else
 			n_common[#n_common+1] = cmd	--shove unclassified stuff in common
@@ -1068,7 +1072,7 @@ local function Update(buttonpush)
 	ManageCommandIcons(useRowSort)
 end 
 
-local function MakeMenuTab(i, alpha)
+local function MakeMenuTab(i, alpha) -- Adapted to THE CURSED
 	if (i==1) or (i>5) then
 		local button = Button:New{
 			parent = menuTabRow;
@@ -1110,7 +1114,7 @@ function ColorTabs(arg)
 	end
 end
 
-local function SmartTabSelect()
+local function SmartTabSelect() -- Here tabs are auto selected - CURSED
 	Update()
 	if options.hidetabs.value then
 		menuChoice = 1

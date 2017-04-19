@@ -1,3 +1,15 @@
+>> Major changes 1.424 => 1.425
+
+Balance
+- imperial AA towers massively nerfed (increasing costs by 60%, range by 10% and reload time by 20% while decreasing the damage by 20%)
+- increased effectiveness of Sarge's machine guns against flying targets (Sarge can now hit anyting in a 180° angle in front and above him)
+
+Polishing
+- impacting melee weapons now will cause an particle effect
+- moved relevant commands for builders to the tab with build icons (like morph). This will make it more obvious if a cursed unit can be morphed to next level
+
+
+
 >> Major changes 1.420 => 1.424
 
 Balance

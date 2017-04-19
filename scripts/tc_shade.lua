@@ -8,6 +8,7 @@ local rthigh = piece 'rthigh'
 local lthigh = piece 'lthigh'
 local lleg = piece 'lleg'
 local rleg = piece 'rleg'
+local rleg = piece 'rleg'
 local rfoot = piece 'rfoot'
 local lfoot = piece 'lfoot'
 local luparm = piece 'luparm'
@@ -29,10 +30,9 @@ local scabbard1 = piece 'scabbard1'
 local scabbard2 = piece 'scabbard2'
 
 local moving = false
+local attackdone = false
 local attacking = false
 local inbunker = false
-local parried = false
-local isparrying = false
 
 local restore_delay, MOVEANIMATIONSPEED, MOVEANIMATIONSLEEPTIME
 
@@ -52,8 +52,6 @@ local WeaponRange = 0
 local WeaponDamage = 0
 local udid = Spring.GetUnitDefID(unitID)
 local ud = UnitDefs[udid]
-
-local parrychance = 0.90 --90% parry chance
 
 for i,w in ipairs(ud.weapons) do
 	WeaponRange = WeaponDefs[w.weaponDef].range
@@ -199,7 +197,7 @@ local function Walkscript()
 			SetMoveAnimationSpeed()
 			Turn2( rleg, y_axis, 0, MOVEANIMATIONSPEED*2 )
 			Turn2( lleg, y_axis, 0, MOVEANIMATIONSPEED*2 )	
-			if not attacking then
+			if not attacking then 
 				Turn2( ruparm, x_axis, 15, MOVEANIMATIONSPEED )
 				Turn2( chest, x_axis, 20, MOVEANIMATIONSPEED)
 			end
@@ -211,7 +209,7 @@ local function Walkscript()
 		end
 		if moving then
 --			SetMoveAnimationSpeed()
-			if not attacking then
+			if not attacking then 
 				Turn2( luparm, x_axis, -15, MOVEANIMATIONSPEED )
 				Turn2( chest, y_axis, 10, MOVEANIMATIONSPEED )	
 				Turn2( chest, z_axis, 3, MOVEANIMATIONSPEED )	
@@ -224,7 +222,7 @@ local function Walkscript()
 		end
 		if moving then
 --			SetMoveAnimationSpeed()
-			if not attacking then
+			if not attacking then 
 				Turn2( luparm, x_axis, 15, MOVEANIMATIONSPEED )
 			end
 			Turn2( lthigh, x_axis, 20, MOVEANIMATIONSPEED*2.7 )
@@ -235,7 +233,7 @@ local function Walkscript()
 		end
 		if moving then
 --			SetMoveAnimationSpeed()
-			if not attacking then
+			if not attacking then 
 				Turn2( ruparm, x_axis, -15, MOVEANIMATIONSPEED )
 				Turn2( chest, y_axis, -10, MOVEANIMATIONSPEED )	
 				Turn2( chest, z_axis, -3, MOVEANIMATIONSPEED )	
@@ -257,18 +255,91 @@ local function Walkscript()
 				Turn2( lleg, y_axis, lturn, MOVEANIMATIONSPEED*2 )
 				Turn2( lleg, x_axis, 0, MOVEANIMATIONSPEED*1.6 )
 				Turn2( rleg, x_axis, 0, MOVEANIMATIONSPEED*1.6 )
-				Turn2( chest, x_axis, 0, MOVEANIMATIONSPEED*2 )
-				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*2 )	
 				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED*2 )	
 				Turn2( ruparm, x_axis, (30*rturn), MOVEANIMATIONSPEED*2 )			
 				Turn2( luparm, x_axis, (30*lturn), MOVEANIMATIONSPEED*2 )
 				Turn2( rloarm, x_axis, (-60*rturn), MOVEANIMATIONSPEED*2 )
 				Turn2( lloarm, x_axis, (-60*lturn), MOVEANIMATIONSPEED*2 )
 				Turn2( rhand, y_axis, (45*rturn), MOVEANIMATIONSPEED*2 )
-				Turn2( lhand, y_axis, (-45*lturn), MOVEANIMATIONSPEED*2 )				
+				Turn2( lhand, y_axis, (-45*lturn), MOVEANIMATIONSPEED*2 )							
 			end
 		end
 		Sleep(30)			
+	end
+end
+
+-- Attacking Animation
+local function MeleeAnimations()
+	while true do
+		if attacking then
+				if not moving then 
+					Turn2( lthigh, x_axis, -20, 600 )			
+					Turn2( lleg, x_axis, 50, 600 )
+				end
+				
+				Spring.UnitScript.Spin ( pelvis, y_axis, 20, 10) 
+				
+				Turn2( head, y_axis, 30, 200 )					
+				
+				Turn2( ruparm, x_axis, 0, 300 )
+				Turn2( ruparm, y_axis, 0, 300 )
+				Turn2( ruparm, z_axis, 50, 300 )			
+				Turn2( rloarm, x_axis, 0, 300 )
+				Turn2( rloarm, y_axis, 60, 300 )
+				Turn2( rloarm, z_axis, 0, 300 )			
+				Turn2( rhand, x_axis, 35, 300 )
+				Turn2( rhand, y_axis, 0, 300 )
+				Turn2( rhand, z_axis, 0, 300 )	
+				
+				Turn2( luparm, x_axis, 0, 300 )
+				Turn2( luparm, y_axis, 0, 300 )
+				Turn2( luparm, z_axis, -45, 300 )			
+				Turn2( lloarm, x_axis, -25, 300 )
+				Turn2( lloarm, y_axis, 0, 300 )
+				Turn2( lloarm, z_axis, 0, 300 )			
+				Turn2( lhand, x_axis, 25, 300 )
+				Turn2( lhand, y_axis, -30, 300 )
+				Turn2( lhand, z_axis, 15, 300 )
+				
+	-----------------------------------------------------------------	
+				local x, y, z = Spring.GetUnitPosition(unitID)
+				Spring.PlaySoundFile("sounds/swoosh.wav", 80, x, y, z)			
+	-----------------------------------------------------------------	
+				local HitUnits = Spring.GetUnitsInSphere(x,y,z, WeaponRange)
+				local MyTeam = Spring.GetUnitTeam(unitID)
+				for _,eUnitID in ipairs(HitUnits) do
+					local eTeam = Spring.GetUnitTeam(eUnitID)
+					if (eUnitID ~= unitID) and (eTeam ~= MyTeam) and not (Spring.AreTeamsAllied(eTeam, MyTeam)) then
+						local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
+						if (WeaponDamage > eUnitIDhealth) then
+							Spring.DestroyUnit(eUnitID,true,false,unitID)
+						else
+							Spring.SetUnitHealth(eUnitID, (eUnitIDhealth-WeaponDamage))
+						end
+					end
+				end
+	-----------------------------------------------------------------			
+				attackdone = true
+		end
+		
+		if not attacking then
+			Spring.UnitScript.StopSpin ( pelvis, y_axis)
+			Turn2( pelvis, y_axis, 0, 500 )	
+				Turn2( ruparm, y_axis, 0, 400 )
+				Turn2( ruparm, z_axis, 0, 400 )
+				Turn2( rloarm, y_axis, 0, 400 )
+				Turn2( rloarm, z_axis, 0, 400 )
+				Turn2( rhand, x_axis, 0, 400 )
+				Turn2( rhand, z_axis, 0, 400 )	
+				
+				Turn2( luparm, y_axis, 0, 400 )
+				Turn2( luparm, z_axis, 0, 400 )
+				Turn2( lloarm, y_axis, 0, 400 )
+				Turn2( lloarm, z_axis, 0, 400 )
+				Turn2( lhand, x_axis, 0, 400 )
+				Turn2( lhand, z_axis, 0, 400 )
+		end
+		Sleep(100)	
 	end
 end
 
@@ -313,6 +384,7 @@ function script.Create()
 	--END BUILD CYCLE
 	EmitSfx(base, LEVELING)	
 	StartThread( Walkscript )
+	StartThread( MeleeAnimations )	
 	StartThread( BoredAnimation )	
 	StartThread( RestoreAfterDelay)	
 	
@@ -341,32 +413,21 @@ function script.setSFXoccupy ( curTerrainType )
    end
 end
 
-function script.parry()
-	if math.random()>0.33 then
-		parried = true
-	end
-end
-
 function script.HitByWeapon ( x, z, weaponDefID, damage )
 	local rndnr = math.random()
-	isparrying = false
 	if inbunker or jumping then
 		return(0)
-	end -- added this line for non-parrying
---	elseif (weaponDefID >= 0) then -- if units are crushed the weaponDefID seems to be smaller 0
---		if ( WeaponDefs[weaponDefID].description == [[Melee]] and (z>0) and (rndnr < parrychance) ) then
---			isparrying = true		
---			StartThread(MeleeAnimations)
---			return(0)
---		end
---	else
+	end
 	return(damage)		
---	end
 end
   
 function RestoreAfterDelay()
-	Sleep(2000)
-	if not moving then	
+	Sleep(750)
+	if attackdone then
+		attacking = false
+	end
+	Sleep(1250)
+	if (not moving and not attacking) then	
 		Spring.SetUnitCloak(unitID, 2, 50)
 		Spring.SetUnitStealth(unitID, true)
 	end
@@ -385,7 +446,7 @@ end
 function script.AimWeapon1(heading, pitch)
 	randomsleeptime = math.random(100)
 	Sleep(randomsleeptime)
-	if inbunker or isparrying then
+	if inbunker then
 		return false
 	end
 	
@@ -398,338 +459,8 @@ function script.AimWeapon1(heading, pitch)
 end
 
 function script.Shot1()
-	attacking=true
-	StartThread(MeleeAnimations)
-end
-
-function MeleeAnimations()
-	local randomnumber = math.random()
-	if attacking then
---[[		if (randomnumber > 0.66) then
-			if not moving then
-				Turn2( pelvis, x_axis, 5, 600 )
-				Turn2( lthigh, x_axis, -5, 600 )
-				Turn2( rthigh, x_axis, -5, 600 )		
-				Turn2( lleg, x_axis, 5, 600 )
-				Turn2( rleg, x_axis, -5, 600 )				
-			end		
-		
-			Turn2( chest, x_axis, 0, 400 )
-			Turn2( chest, y_axis, 0, 400 )
-			Turn2( chest, z_axis, 0, 400 )
-			Turn2( ruparm, y_axis, 0, 400 )
-			Turn2( ruparm, z_axis, 0, 400 )
-			Turn2( rloarm, z_axis, 0, 400 )
-			Turn2( rloarm, x_axis, -25, 450*2 )
-			Turn2( rloarm, y_axis, -45, 450*2 )		
-			Turn2( rhand, x_axis, 25, 400*2 )		
-			Turn2( rhand, y_axis, 0, 400*2 )		
-			Turn2( rhand, z_axis, 90, 400*2 )
-			Turn2( ruparm, x_axis, 0, MOVEANIMATIONSPEED*4 )
-
-			Turn2( luparm, y_axis, 0, 400 )
-			Turn2( luparm, z_axis, 0, 400 )
-			Turn2( lloarm, z_axis, 0, 400 )
-			Turn2( lloarm, x_axis, -25, 450*2 )
-			Turn2( lloarm, y_axis, -45, 450*2 )		
-			Turn2( lhand, x_axis, 25, 400*2 )		
-			Turn2( lhand, y_axis, 0, 400*2 )		
-			Turn2( lhand, z_axis, 90, 400*2 )
-			Turn2( luparm, x_axis, 0, MOVEANIMATIONSPEED*4 )			
-			
-			Turn2( chest, x_axis, -5, 300*2 )		
-			Turn2( joint, y_axis, 0, 450*2 )
-			WaitForTurn(rloarm, y_axis)			
-			Turn2( chest, x_axis, 5, 300 )		
-			Turn2( joint, y_axis, 120, 1000 )
-			local x, y, z = Spring.GetUnitPosition(unitID)
-			Spring.PlaySoundFile("sounds/swoosh.wav", 80, x, y, z)
-			WaitForTurn(chest, x_axis)
-			WaitForTurn(joint, y_axis)
-			Turn2( joint, y_axis, 0, 450)
-			Turn2( chest, x_axis, 0, 400 )
-			Turn2( chest, y_axis, 0, 400 )
-			Turn2( chest, z_axis, 0, 400 )
-			Turn2( ruparm, x_axis, 0, 400 )
-			Turn2( ruparm, y_axis, 0, 400 )
-			Turn2( ruparm, z_axis, 0, 400 )
-			Turn2( rloarm, x_axis, 0, 400 )
-			Turn2( rloarm, y_axis, 0, 400 )
-			Turn2( rloarm, z_axis, 0, 400 )
-			Turn2( rhand, x_axis, 0, 400 )
-			Turn2( rhand, y_axis, 0, 400 )
-			Turn2( rhand, z_axis, 0, 400 )
-			Turn2( joint, y_axis, 0, 400 )			
-
-			Turn2( luparm, x_axis, 0, 400 )
-			Turn2( luparm, y_axis, 0, 400 )
-			Turn2( luparm, z_axis, 0, 400 )
-			Turn2( lloarm, x_axis, 0, 400 )
-			Turn2( lloarm, y_axis, 0, 400 )
-			Turn2( lloarm, z_axis, 0, 400 )
-			Turn2( lhand, x_axis, 0, 400 )
-			Turn2( lhand, y_axis, 0, 400 )
-			Turn2( lhand, z_axis, 0, 400 )
-
-			Turn2( pelvis, x_axis, 0, 600 )			
-
-			WaitForTurn(chest, x_axis)
-			WaitForTurn(chest, y_axis)
-			WaitForTurn(chest, z_axis)
-			WaitForTurn(ruparm, x_axis)
-			WaitForTurn(ruparm, y_axis)
-			WaitForTurn(ruparm, z_axis)
-			WaitForTurn(rloarm, x_axis)
-			WaitForTurn(rloarm, y_axis)
-			WaitForTurn(rloarm, z_axis)
-			WaitForTurn(rhand, x_axis)
-			WaitForTurn(rhand, y_axis)
-			WaitForTurn(rhand, z_axis)
-			
-		elseif (randomnumber < 0.33) then	
-		
-			Turn2( chest, x_axis, -25, 300 )
-			Turn2( chest, y_axis, 20, 300 )		
-			Turn2( ruparm, x_axis, -10, 300 )
-			Turn2( rloarm, x_axis, -80, 300 )
-			Turn2( rhand, x_axis, -20, 300 )
-		
-			Turn2( luparm, x_axis, -10, 300 )
-			Turn2( lloarm, x_axis, -80, 300 )
-			Turn2( lhand, x_axis, -20, 300 )	
-
-			WaitForTurn(rhand, x_axis)
-			WaitForTurn(rloarm, x_axis)
-			Turn2( chest, x_axis, 22.5, 500 )
-			Turn2( chest, y_axis, -30, 500 )			
-			Turn2( ruparm, x_axis, 10, 500 )
-			Turn2( rloarm, x_axis, 30, 500 )
-			Turn2( rhand, x_axis, 20, 800 )
-			
-			Turn2( luparm, x_axis, 10, 500 )
-			Turn2( lloarm, x_axis, 30, 500 )
-			Turn2( lhand, x_axis, 20, 800 )			
-			
-			local x, y, z = Spring.GetUnitPosition(unitID)
-			Spring.PlaySoundFile("sounds/swoosh.wav", 80, x, y, z)
-			WaitForTurn(ruparm, x_axis)
-			WaitForTurn(rloarm, x_axis)
-			WaitForTurn(rhand, x_axis)
-			Sleep(300)
-			Turn2( chest, x_axis, 0, 400 )
-			Turn2( chest, y_axis, 0, 400 )
-			Turn2( chest, z_axis, 0, 400 )
-			Turn2( ruparm, x_axis, 0, 400 )
-			Turn2( ruparm, y_axis, 0, 400 )
-			Turn2( ruparm, z_axis, 0, 400 )
-			Turn2( rloarm, x_axis, 0, 400 )
-			Turn2( rloarm, y_axis, 0, 400 )
-			Turn2( rloarm, z_axis, 0, 400 )
-			Turn2( rhand, x_axis, 0, 400 )
-			Turn2( rhand, y_axis, 0, 400 )
-			Turn2( rhand, z_axis, 0, 400 )	
-			
-			Turn2( luparm, x_axis, 0, 400 )
-			Turn2( luparm, y_axis, 0, 400 )
-			Turn2( luparm, z_axis, 0, 400 )
-			Turn2( lloarm, x_axis, 0, 400 )
-			Turn2( lloarm, y_axis, 0, 400 )
-			Turn2( lloarm, z_axis, 0, 400 )
-			Turn2( lhand, x_axis, 0, 400 )
-			Turn2( lhand, y_axis, 0, 400 )
-			Turn2( lhand, z_axis, 0, 400 )				
-			
-			WaitForTurn(chest, x_axis)
-			WaitForTurn(chest, y_axis)
-			WaitForTurn(chest, z_axis)
-			WaitForTurn(ruparm, x_axis)
-			WaitForTurn(ruparm, y_axis)
-			WaitForTurn(ruparm, z_axis)
-			WaitForTurn(rloarm, x_axis)
-			WaitForTurn(rloarm, y_axis)
-			WaitForTurn(rloarm, z_axis)
-			WaitForTurn(rhand, x_axis)
-			WaitForTurn(rhand, y_axis)
-			WaitForTurn(rhand, z_axis)
-		else]]--
-			if not moving then 
-				Turn2( lthigh, x_axis, -20, 600 )			
-				Turn2( lleg, x_axis, 50, 600 )
-			end
-			
-			Turn2( head, y_axis, 30, 200 )					
-			
-			Turn2( ruparm, x_axis, 0, 300 )
-			Turn2( ruparm, y_axis, 0, 300 )
-			Turn2( ruparm, z_axis, 50, 300 )			
-			Turn2( rloarm, x_axis, 0, 300 )
-			Turn2( rloarm, y_axis, 60, 300 )
-			Turn2( rloarm, z_axis, 0, 300 )			
-			Turn2( rhand, x_axis, 35, 300 )
-			Turn2( rhand, y_axis, 0, 300 )
-			Turn2( rhand, z_axis, 0, 300 )	
-			
-			Turn2( luparm, x_axis, 0, 300 )
-			Turn2( luparm, y_axis, 0, 300 )
-			Turn2( luparm, z_axis, -45, 300 )			
-			Turn2( lloarm, x_axis, -25, 300 )
-			Turn2( lloarm, y_axis, 0, 300 )
-			Turn2( lloarm, z_axis, 0, 300 )			
-			Turn2( lhand, x_axis, 25, 300 )
-			Turn2( lhand, y_axis, -30, 300 )
-			Turn2( lhand, z_axis, 15, 300 )
-			
-			Turn2( chest, y_axis, 20, 1000 )	
-			Turn2( pelvis, y_axis, 90, 1500 )		
-			Sleep(100)
-			Turn2( chest, y_axis, 40, 1000 )						
-			Turn2( pelvis, y_axis, 180, 2000 )
------------------------------------------------------------------	
-			local x, y, z = Spring.GetUnitPosition(unitID)
-			Spring.PlaySoundFile("sounds/swoosh.wav", 80, x, y, z)			
------------------------------------------------------------------	
-			local HitUnits = Spring.GetUnitsInSphere(x,y,z, WeaponRange)
-			local MyTeam = Spring.GetUnitTeam(unitID)
-			for _,eUnitID in ipairs(HitUnits) do
-				local eTeam = Spring.GetUnitTeam(eUnitID)
-				if (eUnitID ~= unitID) and (eTeam ~= MyTeam) and not (Spring.AreTeamsAllied(eTeam, MyTeam)) then
-					local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
-					if (WeaponDamage > eUnitIDhealth) then
-						Spring.DestroyUnit(eUnitID,true,false,unitID)
-					else
-						Spring.SetUnitHealth(eUnitID, (eUnitIDhealth-WeaponDamage))
-					end
-				end
-			end
------------------------------------------------------------------			
-			Sleep(100)
-			Turn2( pelvis, y_axis, 270, 2000 )
-			Sleep(100)
-			Turn2( pelvis, y_axis, 0, 1500 )	
-			Sleep(100)
-
-			Turn2( head, y_axis, 0, 200 )			
-			Turn2( rleg, x_axis, 0, 400 )
-			Turn2( chest, x_axis, 0, 400 )
-			Turn2( chest, y_axis, 0, 400 )
-			Turn2( chest, z_axis, 0, 400 )
-			Turn2( ruparm, x_axis, 0, 400 )
-			Turn2( ruparm, y_axis, 0, 400 )
-			Turn2( ruparm, z_axis, 0, 400 )
-			Turn2( rloarm, x_axis, 0, 400 )
-			Turn2( rloarm, y_axis, 0, 400 )
-			Turn2( rloarm, z_axis, 0, 400 )
-			Turn2( rhand, x_axis, 0, 400 )
-			Turn2( rhand, y_axis, 0, 400 )
-			Turn2( rhand, z_axis, 0, 400 )	
-			
-			Turn2( luparm, x_axis, 0, 400 )
-			Turn2( luparm, y_axis, 0, 400 )
-			Turn2( luparm, z_axis, 0, 400 )
-			Turn2( lloarm, x_axis, 0, 400 )
-			Turn2( lloarm, y_axis, 0, 400 )
-			Turn2( lloarm, z_axis, 0, 400 )
-			Turn2( lhand, x_axis, 0, 400 )
-			Turn2( lhand, y_axis, 0, 400 )
-			Turn2( lhand, z_axis, 0, 400 )				
-			
-			WaitForTurn(chest, x_axis)
-			WaitForTurn(chest, y_axis)
-			WaitForTurn(chest, z_axis)
-			WaitForTurn(ruparm, x_axis)
-			WaitForTurn(ruparm, y_axis)
-			WaitForTurn(ruparm, z_axis)
-			WaitForTurn(rloarm, x_axis)
-			WaitForTurn(rloarm, y_axis)
-			WaitForTurn(rloarm, z_axis)
-			WaitForTurn(rhand, x_axis)
-			WaitForTurn(rhand, y_axis)
-			WaitForTurn(rhand, z_axis)
-
-			
---		end
-	end
-	if isparrying then
-		Turn2( rloarm, x_axis, 0, 400 )
-		Turn2( rloarm, y_axis, 0, 400 )
-		Turn2( rloarm, z_axis, 0, 400 )
-		Turn2( rhand, x_axis, 0, 400 )
-		Turn2( rhand, y_axis, 0, 400 )
-		Turn2( rhand, z_axis, 0, 400 )
-		Turn2( joint, y_axis, 0, 400 )			
-		Turn2( ruparm, x_axis, -30, 500 )
-		Turn2( ruparm, y_axis, -55, 450 )
-		Turn2( ruparm, z_axis, 55, 500 )
-
-		Turn2( lloarm, x_axis, 0, 400 )
-		Turn2( lloarm, y_axis, 0, 400 )
-		Turn2( lloarm, z_axis, 0, 400 )
-		Turn2( lhand, x_axis, 0, 400 )
-		Turn2( lhand, y_axis, 0, 400 )
-		Turn2( lhand, z_axis, 0, 400 )
-		Turn2( luparm, x_axis, -30, 500 )
-		Turn2( luparm, y_axis, 80, 450 )
-		Turn2( luparm, z_axis, -55, 500 )		
-
-
-		Sleep(300)
-		EmitSfx(emit_r,SPARKLES)		
-		EmitSfx(emit_l,SPARKLES)				
-		Sleep(200)
-			Turn2( chest, x_axis, 0, 400 )
-			Turn2( chest, y_axis, 0, 400 )
-			Turn2( chest, z_axis, 0, 400 )
-			Turn2( ruparm, x_axis, 0, 400 )
-			Turn2( ruparm, y_axis, 0, 400 )
-			Turn2( ruparm, z_axis, 0, 400 )
-			Turn2( rloarm, x_axis, 0, 400 )
-			Turn2( rloarm, y_axis, 0, 400 )
-			Turn2( rloarm, z_axis, 0, 400 )
-			Turn2( rhand, x_axis, 0, 400 )
-			Turn2( rhand, y_axis, 0, 400 )
-			Turn2( rhand, z_axis, 0, 400 )	
-			
-			Turn2( luparm, x_axis, 0, 400 )
-			Turn2( luparm, y_axis, 0, 400 )
-			Turn2( luparm, z_axis, 0, 400 )
-			Turn2( lloarm, x_axis, 0, 400 )
-			Turn2( lloarm, y_axis, 0, 400 )
-			Turn2( lloarm, z_axis, 0, 400 )
-			Turn2( lhand, x_axis, 0, 400 )
-			Turn2( lhand, y_axis, 0, 400 )
-			Turn2( lhand, z_axis, 0, 400 )				
-			
-			WaitForTurn(chest, x_axis)
-			WaitForTurn(chest, y_axis)
-			WaitForTurn(chest, z_axis)
-			WaitForTurn(ruparm, x_axis)
-			WaitForTurn(ruparm, y_axis)
-			WaitForTurn(ruparm, z_axis)
-			WaitForTurn(rloarm, x_axis)
-			WaitForTurn(rloarm, y_axis)
-			WaitForTurn(rloarm, z_axis)
-			WaitForTurn(rhand, x_axis)
-			WaitForTurn(rhand, y_axis)
-			WaitForTurn(rhand, z_axis)
-			Sleep(200)			
-	end
-	Sleep(100)	
-	attacking=false
-	isparrying = false
-	return(1)	
-end
-
-function script.StopBuilding()
-	SetUnitValue(COB.INBUILDSTANCE, 0)
-end
-
-function script.StartBuilding(heading, pitch) 
-	SetUnitValue(COB.INBUILDSTANCE, 1)
-end
-
-function script.QueryNanoPiece()
---	GG.LUPS.QueryNanoPiece(unitID,unitDefID,Spring.GetUnitTeam(unitID),nanospray)
-	return base
+	attacking = true
+	attackdone = false
 end
 
 function script.Killed( damage, health )

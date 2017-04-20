@@ -106,6 +106,7 @@ local function ReAssignAssists(newUnit,oldUnit)
 end
 
 local function ReplaceHero(unitID, team)
+	if (unitID ~= nil) then
 		local HeroTeam = Spring.GetUnitTeam(unitID)		
 		local x, y, z = Spring.GetUnitPosition(unitID)
 
@@ -160,6 +161,7 @@ local function ReplaceHero(unitID, team)
 			--//kill old hero next game frame
 			GG.delayeddeathlist[unitID] = Spring.GetGameFrame()
 		end
+	end
 end
 
 local function CheckLeveling(unitID)

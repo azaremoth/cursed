@@ -116,7 +116,7 @@ function script.beginJump()
 	if inbunker then
 		return false
 	end
-
+	
 	Spring.SetUnitCloak(unitID, false)
 	Spring.SetUnitStealth(unitID, false)	
 
@@ -268,76 +268,60 @@ local function Walkscript()
 	end
 end
 
+
+
 -- Attacking Animation
 local function MeleeAnimations()
 	while true do
 		if attacking then
-				if not moving then 
-					Turn2( lthigh, x_axis, -20, 600 )			
-					Turn2( lleg, x_axis, 50, 600 )
-				end
-				
-				Spring.UnitScript.Spin ( pelvis, y_axis, 20, 10) 
-				
-				Turn2( head, y_axis, 30, 200 )					
-				
-				Turn2( ruparm, x_axis, 0, 300 )
-				Turn2( ruparm, y_axis, 0, 300 )
-				Turn2( ruparm, z_axis, 50, 300 )			
-				Turn2( rloarm, x_axis, 0, 300 )
-				Turn2( rloarm, y_axis, 60, 300 )
-				Turn2( rloarm, z_axis, 0, 300 )			
-				Turn2( rhand, x_axis, 35, 300 )
-				Turn2( rhand, y_axis, 0, 300 )
-				Turn2( rhand, z_axis, 0, 300 )	
-				
-				Turn2( luparm, x_axis, 0, 300 )
-				Turn2( luparm, y_axis, 0, 300 )
-				Turn2( luparm, z_axis, -45, 300 )			
-				Turn2( lloarm, x_axis, -25, 300 )
-				Turn2( lloarm, y_axis, 0, 300 )
-				Turn2( lloarm, z_axis, 0, 300 )			
-				Turn2( lhand, x_axis, 25, 300 )
-				Turn2( lhand, y_axis, -30, 300 )
-				Turn2( lhand, z_axis, 15, 300 )
-				
-	-----------------------------------------------------------------	
-				local x, y, z = Spring.GetUnitPosition(unitID)
-				Spring.PlaySoundFile("sounds/swoosh.wav", 80, x, y, z)			
-	-----------------------------------------------------------------	
-				local HitUnits = Spring.GetUnitsInSphere(x,y,z, WeaponRange)
-				local MyTeam = Spring.GetUnitTeam(unitID)
-				for _,eUnitID in ipairs(HitUnits) do
-					local eTeam = Spring.GetUnitTeam(eUnitID)
-					if (eUnitID ~= unitID) and (eTeam ~= MyTeam) and not (Spring.AreTeamsAllied(eTeam, MyTeam)) then
-						local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
-						if (WeaponDamage > eUnitIDhealth) then
-							Spring.DestroyUnit(eUnitID,true,false,unitID)
-						else
-							Spring.SetUnitHealth(eUnitID, (eUnitIDhealth-WeaponDamage))
-						end
-					end
-				end
-	-----------------------------------------------------------------			
-				attackdone = true
+			if not moving then 
+				Turn2( lthigh, x_axis, -20, 600 )			
+				Turn2( lleg, x_axis, 50, 600 )
+			end
+			
+			Spring.UnitScript.Spin ( pelvis, y_axis, 20, 10) 
+			
+			Turn2( head, y_axis, 30, 200 )					
+			
+			Turn2( ruparm, x_axis, 0, 300 )
+			Turn2( ruparm, y_axis, 0, 300 )
+			Turn2( ruparm, z_axis, 50, 300 )			
+			Turn2( rloarm, x_axis, 0, 300 )
+			Turn2( rloarm, y_axis, 60, 300 )
+			Turn2( rloarm, z_axis, 0, 300 )			
+			Turn2( rhand, x_axis, 35, 300 )
+			Turn2( rhand, y_axis, 0, 300 )
+			Turn2( rhand, z_axis, 0, 300 )	
+			
+			Turn2( luparm, x_axis, 0, 300 )
+			Turn2( luparm, y_axis, 0, 300 )
+			Turn2( luparm, z_axis, -45, 300 )			
+			Turn2( lloarm, x_axis, -25, 300 )
+			Turn2( lloarm, y_axis, 0, 300 )
+			Turn2( lloarm, z_axis, 0, 300 )			
+			Turn2( lhand, x_axis, 25, 300 )
+			Turn2( lhand, y_axis, -30, 300 )
+			Turn2( lhand, z_axis, 15, 300 )
+					
+			attackdone = true
 		end
 		
 		if not attacking then
 			Spring.UnitScript.StopSpin ( pelvis, y_axis)
 			Turn2( pelvis, y_axis, 0, 500 )	
-				Turn2( ruparm, y_axis, 0, 400 )
-				Turn2( ruparm, z_axis, 0, 400 )
-				Turn2( rloarm, y_axis, 0, 400 )
-				Turn2( rloarm, z_axis, 0, 400 )
-				Turn2( rhand, x_axis, 0, 400 )
-				Turn2( rhand, z_axis, 0, 400 )	
-				
-				Turn2( luparm, y_axis, 0, 400 )
-				Turn2( luparm, z_axis, 0, 400 )
-				Turn2( lloarm, y_axis, 0, 400 )
-				Turn2( lloarm, z_axis, 0, 400 )
-				Turn2( lhand, x_axis, 0, 400 )
-				Turn2( lhand, z_axis, 0, 400 )
+			Turn2( ruparm, y_axis, 0, 400 )
+			Turn2( ruparm, z_axis, 0, 400 )
+			Turn2( rloarm, y_axis, 0, 400 )
+			Turn2( rloarm, z_axis, 0, 400 )
+			Turn2( rhand, x_axis, 0, 400 )
+			Turn2( rhand, z_axis, 0, 400 )	
+			
+			Turn2( luparm, y_axis, 0, 400 )
+			Turn2( luparm, z_axis, 0, 400 )
+			Turn2( lloarm, y_axis, 0, 400 )
+			Turn2( lloarm, z_axis, 0, 400 )
+			Turn2( lhand, x_axis, 0, 400 )
+			Turn2( lhand, z_axis, 0, 400 )
 		end
 		Sleep(100)	
 	end
@@ -369,8 +353,21 @@ local function BoredAnimation()
 	end
 end
 
------------------------- ACTIVATION
+--make illusions die -----------------------------------------------------------------
+local function LoseHP()
+	local hploss = tonumber(ud.customParams.hploss)
+	while true do
+		local health = Spring.GetUnitHealth(unitID)
+		if (hploss > health) then
+			Spring.DestroyUnit(unitID,true,false,unitID)
+		else
+			Spring.SetUnitHealth(unitID, (health-hploss))
+		end
+		Sleep(500)	
+	end
+end
 
+------------------------ ACTIVATION
 function script.Create()
 	SetMoveAnimationSpeed()
 	
@@ -387,15 +384,20 @@ function script.Create()
 	StartThread( MeleeAnimations )	
 	StartThread( BoredAnimation )	
 	StartThread( RestoreAfterDelay)	
-	
+	if (ud.customParams.hploss ~= nil) then
+		StartThread( LoseHP )	
+	end
 	EmitSfx(pelvis, JUMPDUST)
 	EmitSfx(head, JUMPDUST)		
 	
 end
 
+--move control -----------------------------------------------------------------
 function script.StartMoving()
-	Spring.SetUnitCloak(unitID, false)
-	Spring.SetUnitStealth(unitID, false)
+	if (ud.customParams.cloakedduring ~= "moving") then
+		Spring.SetUnitCloak(unitID, false)
+		Spring.SetUnitStealth(unitID, false)
+	end
 	moving = true
 end
 
@@ -427,10 +429,34 @@ function RestoreAfterDelay()
 		attacking = false
 	end
 	Sleep(1250)
-	if (not moving and not attacking) then	
+	if ((ud.customParams.cloakedduring == "standing") and not moving and not attacking) then	
 		Spring.SetUnitCloak(unitID, 2, 50)
-		Spring.SetUnitStealth(unitID, true)
+		Spring.SetUnitStealth(unitID, true)	
+	elseif ((ud.customParams.cloakedduring == "moving") and not attacking) then
+		Spring.SetUnitCloak(unitID, 2, 50)
+		Spring.SetUnitStealth(unitID, true)		
 	end
+end
+
+function CircleAttack()
+	-----------------------------------------------------------------	
+	local x, y, z = Spring.GetUnitPosition(unitID)
+	Spring.PlaySoundFile("sounds/swoosh.wav", 80, x, y, z)			
+	-----------------------------------------------------------------	
+	local HitUnits = Spring.GetUnitsInSphere(x,y,z, WeaponRange)
+	local MyTeam = Spring.GetUnitTeam(unitID)
+	for _,eUnitID in ipairs(HitUnits) do
+		local eTeam = Spring.GetUnitTeam(eUnitID)
+		if (eUnitID ~= unitID) and (eTeam ~= MyTeam) and not (Spring.AreTeamsAllied(eTeam, MyTeam)) then
+			local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
+			if (WeaponDamage > eUnitIDhealth) then
+				Spring.DestroyUnit(eUnitID,true,false,unitID)
+			else
+				Spring.SetUnitHealth(eUnitID, (eUnitIDhealth-WeaponDamage))
+			end
+		end
+	end
+	-----------------------------------------------------------------		
 end
 
 --weapon 1 -----------------------------------------------------------------
@@ -453,14 +479,14 @@ function script.AimWeapon1(heading, pitch)
 	local SIG_Aim = 2^1
 	Signal(SIG_Aim)
 	SetSignalMask(SIG_Aim)
-	
-	StartThread( RestoreAfterDelay) 
 	return true
 end
 
 function script.Shot1()
 	attacking = true
 	attackdone = false
+	StartThread( CircleAttack ) 
+	StartThread( RestoreAfterDelay ) 
 end
 
 function script.Killed( damage, health )

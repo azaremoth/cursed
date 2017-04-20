@@ -27,7 +27,8 @@ local unitDef = {
   customParams          = {
   	factionname		   = "cursed",
 	isinfantry = "true",
-	illusions = 1,	
+	illusions = 1,
+	cloakedduring	= "standing",
     canjump        = "1",
 	jumpclass = "hero",
 	ProvideTech = "-Hero", --was ProvideTech = "-Hero, 1 Decoy",	

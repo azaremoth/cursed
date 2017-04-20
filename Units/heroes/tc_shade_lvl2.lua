@@ -28,6 +28,7 @@ local unitDef = {
   	factionname		   = "cursed",
 	isinfantry = "true",	
     canjump        = "1",
+	cloakedduring	= "standing",
 	jumpclass = "hero",
 	ProvideTech = "-Hero",		
 	normaltex = "unittextures/normalmaps/tc_shade_normal.png",

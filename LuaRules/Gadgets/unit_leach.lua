@@ -25,8 +25,10 @@ if (gadgetHandler:IsSyncedCode()) then
 --SYNCED
 
 function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponID, attackerID, attackerDefID, attackerTeam)
-	if IsALeach [attackerDefID] then
-		Spring.SetUnitHealth(attackerID, (Spring.GetUnitHealth(attackerID))+(damage*0.2))
+	if (IsALeach [attackerDefID] and attackerID ~= nil) then
+		if (Spring.GetUnitHealth(attackerID) > 0) then
+			Spring.SetUnitHealth(attackerID, (Spring.GetUnitHealth(attackerID))+(damage*0.2))
+		end
 	end 
 end
 

@@ -12,11 +12,12 @@ local unitDef = {
   buildCostMetal     = 600,
   buildTime          = 600,
   
-  buildingGroundDecalDecaySpeed = 0.0,
-  buildingGroundDecalSizeX = 9,
-  buildingGroundDecalSizeY = 9,
-  buildingGroundDecalType = "euf_bunker_aoplane.png",
-  useBuildingGroundDecal = true,
+--  buildingGroundDecalDecaySpeed = 0.0,
+--  buildingGroundDecalSizeX = 9,
+--  buildingGroundDecalSizeY = 9,
+--  buildingGroundDecalType = "euf_bunker_aoplane.png",
+--  useBuildingGroundDecal = true,
+
   
   buildPic           = "euf_bunker.png",    
   category           = "EUF LAND HEAVYARMOR",

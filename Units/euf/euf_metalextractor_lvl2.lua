@@ -15,7 +15,7 @@ local unitDef = {
   buildingGroundDecalDecaySpeed = 0.0,
   buildingGroundDecalSizeX = 8,
   buildingGroundDecalSizeY = 8,
-  buildingGroundDecalType = "euf_metalextractor_lvl2_aoplane.dds",
+  buildingGroundDecalType = "euf_groundplate3.png",
   useBuildingGroundDecal = true,    
   
   buildPic           = "euf_metalextractor_lvl2.png",    

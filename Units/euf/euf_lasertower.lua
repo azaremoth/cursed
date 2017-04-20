@@ -15,7 +15,7 @@ local unitDef = {
   buildingGroundDecalDecaySpeed = 0.0,
   buildingGroundDecalSizeX = 8,
   buildingGroundDecalSizeY = 8,
-  buildingGroundDecalType = "euf_lasertower_aoplane.dds",
+  buildingGroundDecalType = "euf_groundplate3.png",
   useBuildingGroundDecal = true,  
   
   canAttack          = true,

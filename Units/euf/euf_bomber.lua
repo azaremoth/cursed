@@ -37,8 +37,8 @@ local unitDef = {
   acceleration       = 0.30,
   airHoverFactor     = 0,
   brakeRate          = 0.15,
-  cruiseAlt          = 250,
-  maxVelocity        = 4,
+  cruiseAlt          = 300,
+  maxVelocity        = 6,
   turnRate           = 512,
 -- Collision
   collisionVolumeType 		= "Box",

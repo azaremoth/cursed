@@ -12,11 +12,11 @@ local unitDef = {
   buildCostMetal     = 100,
   buildTime          = 100,
   
-  buildingGroundDecalDecaySpeed = 0.0,
-  buildingGroundDecalSizeX = 3,
-  buildingGroundDecalSizeY = 3,
-  buildingGroundDecalType = "euf_radar_lvl1_aoplane.dds",
-  useBuildingGroundDecal = true,    
+--  buildingGroundDecalDecaySpeed = 0.0,
+--  buildingGroundDecalSizeX = 3,
+--  buildingGroundDecalSizeY = 3,
+--  buildingGroundDecalType = "euf_radar_lvl1_aoplane.dds",
+--  useBuildingGroundDecal = true,    
   
   buildPic           = "euf_radar_lvl1.png",    
   category           = "EUF LAND HEAVYARMOR",

@@ -33,8 +33,6 @@ local aiming = false
 local inbunker = false
 local burrowed = false
 local jumping = false
-local parried = false
-local isparrying = false
 local indeepwater = false
 
 local restore_delay, MOVEANIMATIONSPEED
@@ -307,7 +305,7 @@ function script.AimFromWeapon1 () return chest end
 local function Aim(heading, pitch)
 	randomsleeptime = math.random(100)
 	Sleep(randomsleeptime)
-	if burrowed or inbunker or isparrying then
+	if burrowed or inbunker then
 		return false
 	end
    	local SIG_AIM = 2

@@ -155,7 +155,12 @@ Flamer = {
 	  turret				= 1,
 	  weaponTimer			= 2,
 	  weaponVelocity		= 240,
-	  weaponType         = "Cannon",	  
+	  weaponType         = "Cannon",
+
+	  customParams            = {
+				flamethrower = "1",
+      },
+	  
 	 damage = {
 				default            = 45, --56
 				flyer              = (45*0.75),
@@ -191,6 +196,11 @@ Flamer_Bunker = {
 	  turret				= 1,
 	  weaponTimer			= 2,
 	  weaponVelocity		= 240,
+	  
+      customParams            = {
+        flamethrower = "1",
+      },
+	  
 	 damage = {
 				default            = 45,
 				flyer              = (45*0.75),

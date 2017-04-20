@@ -27,7 +27,7 @@ local joint = piece 'joint'
 local rshoulder = piece 'rshoulder'
 local lshoulder = piece 'lshoulder'
 
-local restore_delay, moving, attacking, MOVEANIMATIONSPEED, inbunker, parried, isparrying
+local restore_delay, moving, attacking, MOVEANIMATIONSPEED, inbunker
 
 local SIG_AIM1 = 2
 local SIG_WALK = 4
@@ -52,8 +52,6 @@ local unitteamID = Spring.GetUnitTeam(unitID)
 
 local rturn = (math.random()*50)
 local lturn = (math.random()*(-50))
-
-local parrychance = 0.4 --40% parry chance
 
 local function Turn2(piecenum,axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180
@@ -85,7 +83,7 @@ local function Walkscript()
 	while true do
 		if moving then
 			SetMoveAnimationSpeed()
-			if not attacking and not isparrying then
+			if not attacking then
 				Turn2( ruparm, x_axis, -30, MOVEANIMATIONSPEED )
 				Turn2( rloarm, x_axis, -50, MOVEANIMATIONSPEED )
 				Turn2( rhand, y_axis, -30, MOVEANIMATIONSPEED*3 )
@@ -101,7 +99,7 @@ local function Walkscript()
 		end
 		if moving then
 --			SetMoveAnimationSpeed()
-			if not attacking and not isparrying then
+			if not attacking then
 				Turn2( luparm, x_axis, -10, MOVEANIMATIONSPEED )
 				Turn2( chest, x_axis, 20, MOVEANIMATIONSPEED*3 )
 				Turn2( chest, y_axis, -10, MOVEANIMATIONSPEED )	
@@ -115,7 +113,7 @@ local function Walkscript()
 		end
 		if moving then
 --			SetMoveAnimationSpeed()
-			if not attacking and not isparrying then
+			if not attacking then
 				Turn2( luparm, x_axis, -30, MOVEANIMATIONSPEED )
 				Turn2( chest, y_axis, 10, MOVEANIMATIONSPEED )	
 				Turn2( chest, z_axis, 3, MOVEANIMATIONSPEED )
@@ -129,7 +127,7 @@ local function Walkscript()
 		end
 		if moving then
 --			SetMoveAnimationSpeed()
-			if not attacking and not isparrying then
+			if not attacking then
 				Turn2( ruparm, x_axis, -10, MOVEANIMATIONSPEED*2 )
 			end
 			Turn2( lleg, x_axis, 40, MOVEANIMATIONSPEED*3)
@@ -149,7 +147,7 @@ local function Walkscript()
 			Turn2( rthigh, z_axis, 0, MOVEANIMATIONSPEED*0.8 )
 			Move( pelvis, y_axis, 0, 8 )
 			Turn2( head, z_axis, 0, MOVEANIMATIONSPEED*0.3 )	
-			if not attacking and not isparrying then 
+			if not attacking then 
 				Turn2( lloarm, x_axis, 0, MOVEANIMATIONSPEED*2 )
 				Turn2( rloarm, x_axis, 0, MOVEANIMATIONSPEED )				
 				Turn2( luparm, x_axis, 0, MOVEANIMATIONSPEED*3 )
@@ -192,9 +190,7 @@ end
 function script.Create()
 	SetMoveAnimationSpeed()
 	moving = false
-	parried = false
 	attacking=false
-	isparrying = false
 	
 	restore_delay = 1000
 	
@@ -255,19 +251,10 @@ end
 
 function script.HitByWeapon ( x, z, weaponDefID, damage )
 	local rndnr = math.random()
-	isparrying = false
 	if inbunker then
 		return(0)
-	end -- added this line for non-parrying
---	elseif (weaponDefID >= 0) then -- if units are crushed the weaponDefID seems to be smaller 0
---		if ( WeaponDefs[weaponDefID].description == [[Melee]] and (z>0) and (rndnr < parrychance) ) then
---			isparrying = true		
---			StartThread(MeleeAnimations)
---			return(0)
---		end
---	else
+	end
 	return(damage)		
---	end
 end
 
 --weapon 1 -----------------------------------------------------------------
@@ -283,7 +270,7 @@ end
 function script.AimWeapon1(heading, pitch)
 	randomsleeptime = math.random(100)
 	Sleep(randomsleeptime)
-	if inbunker or isparrying then
+	if inbunker then
 		return false
 	end
 	Sleep(50)
@@ -403,43 +390,12 @@ function MeleeAnimations()
 			WaitForTurn(rhand, z_axis)
 		end
 	end
-	if isparrying then
-		Turn2( lshoulder, x_axis, 25, 400 )		
-		Turn2( luparm, x_axis, 20, 500 )
-		Turn2( lloarm, x_axis, -20, 400 )	
-		Turn2( chest, x_axis, -25, 300 )	
-		Turn2( rloarm, x_axis, 0, 400 )
-		Turn2( rloarm, y_axis, 0, 400 )
-		Turn2( rloarm, z_axis, 0, 400 )
-		Turn2( rhand, x_axis, 0, 400 )
-		Turn2( rhand, y_axis, 0, 400 )
-		Turn2( rhand, z_axis, 0, 400 )
-		Turn2( joint, y_axis, 0, 400 )			
-		Turn2( ruparm, x_axis, 30, 500 )
-		Turn2( ruparm, y_axis, -55, 450 )
-		Turn2( ruparm, z_axis, 55, 500 )
-		Turn2( rshoulder, x_axis, -17, 400 )
-		Turn2( rshoulder, y_axis, 0, 400 )
-		Turn2( rshoulder, z_axis, 45, 400 )
-		Sleep(300)
-		EmitSfx(blade,SPARKLES)
-		local x, y, z = Spring.GetUnitPosition(unitID)		
-		Spring.PlaySoundFile("sounds/parry.ogg", 80, x, y, z)		
-		Sleep(200)
-		Turn2( ruparm, x_axis,0, 400 )
-		Turn2( ruparm, y_axis, 0, 400 )
-		Turn2( ruparm, z_axis, 0, 400 )
-		Turn2( rshoulder, x_axis, 0, 500 )
-		Turn2( rshoulder, y_axis, 0, 500 )
-		Turn2( rshoulder, z_axis, 0, 500 )	
-	end
 	Turn2( lshoulder, x_axis, 0, 400 )	
 	Turn2( luparm, x_axis, 0, 500 )
 	Turn2( lloarm, x_axis, 0, 400 )	
 	Turn2( chest, x_axis, 0, 300 )	
 	Sleep(300)
 	attacking=false
-	isparrying = false
 	return(1)	
 end
 

@@ -135,7 +135,12 @@ local weaponDefs = {
 	  turret				= 1,
 	  weaponTimer			= 2,
 	  weaponVelocity		= 240,
-	  weaponType         = "Cannon",	  
+	  weaponType         = "Cannon",	
+
+	customParams            = {
+				flamethrower = "1",
+    },	
+	  
     damage = {
       default            = 80,
       flyer              = 80,

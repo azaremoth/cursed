@@ -23,7 +23,7 @@ local staff = piece 'staff'
 local emit = piece 'emit'
 local skull = piece 'skull'
 local emit_pentagram = piece 'emit_pentagram'
-local restore_delay, moving, attacking, MOVEANIMATIONSPEED, inbunker, parried, isparrying, ISBUILDING
+local restore_delay, moving, attacking, MOVEANIMATIONSPEED, inbunker, ISBUILDING
 
 local SIG_AIM1 = 2
 local SIG_WALK = 4
@@ -52,7 +52,6 @@ local BUILD_SPEED    = 65
 local rturn = (math.random()*50)
 local lturn = (math.random()*(-50))
 
-local parrychance = 0.4 --40% parry chance
 
 local function Turn2(piecenum,axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180
@@ -219,16 +218,8 @@ function script.setSFXoccupy ( curTerrainType )
 end
 
 function script.HitByWeapon ( x, z, weaponDefID, damage )
-	local rndnr = math.random()
-	isparrying = false	
 	if inbunker then
 		return(0)
-	elseif (weaponDefID >= 0) then -- if units are crushed the weaponDefID seems to be smaller 0
-		if ( WeaponDefs[weaponDefID].description == [[Melee]] and (z>0) and (rndnr < parrychance) ) then
-			isparrying = true
-			StartThread(MeleeAnimations)	
-			return(0)
-		end
 	else
 		return(damage)		
 	end
@@ -318,9 +309,7 @@ end
 function script.Create()
 	SetMoveAnimationSpeed()
 	moving = false
-	parried = false
 	attacking=false
-	isparrying = false
 	restore_delay = 1000
     ISBUILDING = false
 
@@ -380,7 +369,7 @@ end
 function script.AimWeapon1(heading, pitch)
 	randomsleeptime = math.random(100)
 	Sleep(randomsleeptime)
-	if inbunker or isparrying then
+	if inbunker then
 		return false
 	end
 	Sleep(50)
@@ -495,25 +484,8 @@ function MeleeAnimations()
 			WaitForTurn(rhand, z_axis)
 		end
 	end]]--
-	if isparrying then
-		Turn2( lloarm, x_axis, 0, 400 )
-		Turn2( lloarm, y_axis, 0, 400 )
-		Turn2( lloarm, z_axis, 0, 400 )
-		Turn2( lhand, x_axis, 0, 400 )
-		Turn2( lhand, y_axis, 0, 400 )
-		Turn2( lhand, z_axis, 90, 400 )
-		Turn2( luparm, x_axis, 30, 500 )
-		Turn2( luparm, y_axis, 0, 450 )
-		Turn2( luparm, z_axis, 0, 500 )
-		Sleep(300)
-		EmitSfx(lhand, SPIKES_NECROMANCER)		
-		Sleep(200)
-		Turn2( luparm, x_axis,0, 400 )
-		Turn2( lhand, z_axis, 0, 400 )
-	end
 	Sleep(300)	
 	attacking=false
-	isparrying = false
 	return(1)	
 end
 

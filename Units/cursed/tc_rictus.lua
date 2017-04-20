@@ -144,6 +144,11 @@ local weaponDefs = {
     weaponTimer        = 1,
     weaponType         = "LaserCannon",
     weaponVelocity     = 200,
+
+	customParams            = {
+				flamethrower = "1",
+    },	
+	
     damage = {
       default            = 44,
       flyer              = 44*0.33,

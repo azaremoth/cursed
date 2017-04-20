@@ -27,11 +27,7 @@ local aiming = false
 local inbunker = false
 local burrowed = false
 local jumping = false
-local parried = false
-local isparrying = false
 local indeepwater = false
-
-local parrychance = 0.40 --40% parry chance
 
 -- local jumpingdamage = 0
 -- local prejumpinghealth = 0
@@ -134,7 +130,7 @@ local function Walkscript()
 			Sleep(MOVEANIMATIONSLEEPTIME)	
 		end	
 		
-		if not moving and not isparrying then	
+		if not moving then	
 			Turn2( rfoot, y_axis, rturn, MOVEANIMATIONSPEED*2 )
 			Turn2( lfoot, y_axis, lturn, MOVEANIMATIONSPEED*2 )			
 			Turn2( rthigh, x_axis, 0, MOVEANIMATIONSPEED*1.6 )
@@ -155,7 +151,7 @@ end
 -- Bored Animation ------------------------
 local function BoredAnimation()
 	while true do
-		if not attacking and not jumping and not burrowed and not isparrying then			
+		if not attacking and not jumping and not burrowed then			
 			borednumber = math.random(50)
 			if (borednumber > 45) then
 				Turn2( chest, x_axis, 10, MOVEANIMATIONSPEED*0.75 )
@@ -325,7 +321,7 @@ function script.AimFromWeapon1 () return emit_melee end
 local function Aim(heading, pitch)
 	randomsleeptime = math.random(100)
 	Sleep(randomsleeptime)
-	if burrowed or inbunker or isparrying then
+	if burrowed or inbunker then
 		return false
 	end
    	local SIG_AIM = 2
@@ -357,23 +353,7 @@ function script.Shot1()
 end
 	
 function MeleeAnimations()
-	if isparrying then
-		Turn2( chest, x_axis, 30, 300 )		
-		Turn2( luparm, x_axis, 0, 800 )
-		Turn2( luparm, y_axis, 50, 800 )
-		Turn2( ruparm, y_axis, -40, 200 )
-		Turn2( ruparm, z_axis, -50, 200 )
-		WaitForTurn(ruparm, y_axis)
-		WaitForTurn(ruparm, x_axis)
-		Turn2( chest, x_axis, 0, 300 )		
-		Turn2( luparm, x_axis, 0, 800 )
-		Turn2( luparm, y_axis, 0, 800 )
-		Turn2( ruparm, y_axis, 0, 200 )
-		Turn2( ruparm, z_axis, 0, 200 )
-		WaitForTurn(ruparm, y_axis)
-		WaitForTurn(ruparm, x_axis)
-		isparrying = false
-	elseif attacking then
+	if attacking then
 		Turn2( luparm, x_axis, 0, 400 )		
 		Turn2( luparm, y_axis, 0, 400 )
 		Turn2( luparm, z_axis, 0, 400 )
@@ -441,12 +421,6 @@ function MeleeAnimations()
 	return(1)	
 end	
 
-function script.parry()
-	if math.random()>0.33 then
-		parried = true
-	end
-end
-
 --Jumps
 function script.preJump(turn, distance)
 end
@@ -490,19 +464,10 @@ end
 
 function script.HitByWeapon ( x, z, weaponDefID, damage )
 	local rndnr = math.random()
-	isparrying = false
 	if inbunker or jumping then
 		return(0)
-	end -- added this line for non-parrying
---	elseif (weaponDefID >= 0) then -- if units are crushed the weaponDefID seems to be smaller 0
---		if ( WeaponDefs[weaponDefID].description == [[Melee]] and (z>0) and (rndnr < parrychance) ) then
---			isparrying = true		
---			StartThread(MeleeAnimations)
---			return(0)
---		end
---	else
+	end
 	return(damage)		
---	end
 end
 
 function script.Killed( damage, health )

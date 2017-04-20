@@ -22,6 +22,7 @@ local echo = Spring.Echo
 local totalTeamList = {}
 
 local awardDescs = VFS.Include("LuaRules/Configs/award_names.lua")
+local IsAHero = VFS.Include("LuaRules/Configs/hero_list.lua")	
 
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
@@ -51,8 +52,6 @@ local mexDefID = {
 local shareListTemp1 = {}
 local shareListTemp2 = {}
 
-local cappedComs = {}
-
 local awardData = {}
 
 local basicEasyFactor = 0.5
@@ -67,7 +66,6 @@ local minReclaimRatio = 0.15
 local awardAbsolutes = {
 	cap         = 1000,
 	share       = 5000,
-	terra       = 1000,
 	rezz        = 3000,
 	mex         = 15,
 	mexkill     = 15,
@@ -354,8 +352,6 @@ local function ProcessAwardData()
 					message = 'Captured value: ' .. maxValWrite
 				elseif awardType == 'share' then
 					message = 'Shared value: ' .. maxValWrite
-				elseif awardType == 'terra' then
-					message = 'Terraform: ' .. maxValWrite
 				elseif awardType == 'rezz' then
 					message = 'Resurrected value: ' .. maxValWrite
 				elseif awardType == 'fire' then
@@ -482,10 +478,10 @@ function gadget:UnitTaken(unitID, unitDefID, oldTeam, newTeam)
 			local mCost = GetUnitCost(unitID, unitDefID)
 			AddAwardPoints( 'cap', newTeam, mCost )
 			if (ud.customParams.dynamic_comm) then
-				if (not cappedComs[unitID]) then
-					cappedComs[unitID] = select(6, spGetTeamInfo(oldTeam))
-				elseif (cappedComs[unitID] == select(6, spGetTeamInfo(newTeam))) then
-					cappedComs[unitID] = nil
+				if (not IsAHero[unitID]) then
+					IsAHero[unitID] = select(6, spGetTeamInfo(oldTeam))
+				elseif (IsAHero[unitID] == select(6, spGetTeamInfo(newTeam))) then
+					IsAHero[unitID] = nil
 				end
 			end
 		end
@@ -512,8 +508,8 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, _, _, killerTeam)
 		expUnitDefID = unitDefID
 	end
 
-	if (cappedComs[unitID]) then
-		cappedComs[unitID] = nil
+	if (IsAHero[unitID]) then
+		IsAHero[unitID] = nil
 		if (unitTeam ~= gaiaTeamID) then
 			AddAwardPoints( 'head', unitTeam, 1 )
 		end
@@ -530,13 +526,13 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, _, _, killerTeam)
 		local ud = UnitDefs[unitDefID]
 		if (ud.customParams.dynamic_comm and (not spAreTeamsAllied(killerTeam, unitTeam))) then
 			AddAwardPoints( 'head', killerTeam, 1 )
-		elseif ud.name == "chicken_dragon" then
+		elseif ud.name == "tc_dragon" then
 			AddAwardPoints( 'dragon', killerTeam, 1 )
-		elseif ud.name == "chickenflyerqueen" or ud.name == "chickenlandqueen" then
+		elseif ud.name == "tc_dragonqueen" then
 			for killerFrienz, _ in pairs(awardData['heart']) do --give +1000000000 points for all frienz that kill queen and won
 				AddAwardPoints( 'heart', killerFrienz, awardAbsolutes['heart']) --the extra points is for id purpose. Will deduct later
 			end
-		elseif ud.name == "roost" then
+		elseif ud.name == "tc_pitt" then
 			AddAwardPoints( 'sweeper', killerTeam, 1 )
 		else
 			--
@@ -659,7 +655,6 @@ else -- UNSYNCED
 local spSendCommands  = Spring.SendCommands
 
 local gameOver = false
-local sentToPlanetWars = false
 
 local teamNames     = {}
 local awardList
@@ -787,16 +782,6 @@ function gadget:Update()
 	if (not awardList) and SYNCED.awardList then
 		awardList = ConvertToRegularTable( SYNCED.awardList )
 		Script.LuaUI.SetAwardList( awardList )
-	end
-	if awardList and not sentToPlanetWars then
-		for team,awards in pairs(awardList) do
-			for awardType, record in pairs(awards) do
-				local planetWarsData = (teamNames[team] or "no_name") ..' '.. awardType ..' '.. awardDescs[awardType] ..', '.. record
-				Spring.SendCommands("wbynum 255 SPRINGIE:award,".. planetWarsData)
-				--Spring.Echo(planetWarsData)
-			end
-		end
-		sentToPlanetWars = true
 	end
 end
 

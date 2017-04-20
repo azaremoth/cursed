@@ -52,35 +52,7 @@ local awardPanelHeight = 50
 local white_table 	= {1,1,1, 1}
 local magenta_table = {0.8, 0, 0, 1}
 
-local awardDescs =
-{
-	pwn     = 'Complete Annihilation Award',
-	navy    = 'Fleet Admiral',
-	air     = 'Airforce General',
-	nux     = 'Apocalyptic Award',
-	friend  = 'Friendly Fire Award',
-	shell   = 'Turtle Shell Award',
-	fire    = 'Master Grill-Chef',
-	emp     = 'Stunning',
-	slow    = 'Traffic Cop',
-	t3      = 'Angels & Dragons',
-	cap     = 'Mind Mage Award',
-	share   = 'Share Bear',
---	terra   = 'Legendary Landscaper',
-	reclaim = 'Spoils of War',
-	rezz    = 'Necromancer',
-	vet     = 'Decorated Veteran',
-	ouch    = 'Big Purple Heart',
-	kam     = 'Kamikaze Award',
---	comm    = 'Master and Commander',
-	mex     = 'Mineral Prospector',
-	mexkill = 'Loot & Pillage',
-	rage    = 'Rage Inducer',
-	head    = 'Head Hunter',
-	dragon  = 'Dragon Slayer',
---	heart   = 'Queen Heart Breaker',
---	sweeper = 'Land Sweeper',
-}
+local awardDescs = VFS.Include("LuaRules/Configs/award_names.lua")
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

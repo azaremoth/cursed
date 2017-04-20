@@ -1,5 +1,14 @@
 >> Major changes 1.425 => 1.426
 
+Balance
+- shade's illusions will slowly lose hp over time instead of just disappearing (you can prolong the life time by healing now)
+- necromancers will not parry melee attacks anymore (this was also removed from all other units)
+
+Bugs
+- fixed game freeze introduced by new shade animation
+
+Polishing
+- replaced several groud plates for imperial buildings to avoid strange optical effects under debris
 
 
 

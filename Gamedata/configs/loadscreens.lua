@@ -37,7 +37,7 @@ local loadscreens = {
 		tipTextColor 	= {1.0,1.0,1.0,1.0},
 		fontShadow		= false,
 		backgroundImage1	= "Bitmaps/Loadpictures/backgrnd.jpg",
-		tipImage	= "cursedbuildtree.jpg",
+		tipImage	= "Bitmaps/Loadpictures/cursedbuildtree.jpg",
 		backgroundColor	= {0,0,0,0},
 	},	
 	{
@@ -45,7 +45,7 @@ local loadscreens = {
 		tipTextColor 	= {1.0,1.0,1.0,1.0},
 		fontShadow		= false,
 		backgroundImage1	= "Bitmaps/Loadpictures/backgrnd.jpg",
-		tipImage	= "imperialbuildtree.jpg",
+		tipImage	= "Bitmaps/Loadpictures/imperialbuildtree.jpg",
 		backgroundColor	= {0,0,0,0},
 	},	
 }

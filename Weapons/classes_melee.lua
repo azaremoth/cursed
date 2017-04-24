@@ -27,27 +27,27 @@ local WEREWOLFMELEE = {
 local DECOYSHADEMELEE = {
 	range                   = 70,
     reloadtime              = 0.70,
-    damage 					= { default = 40, flyer = 40, heavy = (40*0.75), light = 40, },
+    damage 					= { default = 50, flyer = 50, heavy = 50 light = 50, },
 }
 local SHADELVL1MELEE = {
 	range                   = 70,
-    reloadtime              = 0.90,
-    damage 					= { default = 120, flyer = 120, heavy = 120, light = 120, },
+    reloadtime              = 0.70,
+    damage 					= { default = 95, flyer = 95, heavy = 95, light = 95, },
 }
 local SHADELVL2MELEE = {
 	range                   = 70,
-    reloadtime              = 0.85,
-    damage 					= { default = 155, flyer = 155, heavy = 155, light = 155, },
+    reloadtime              = 0.70,
+    damage 					= { default = 128, flyer = 128, heavy = 128, light = 128, },
 }
 local SHADELVL3MELEE = {
 	range                   = 70,
-    reloadtime              = 0.80,
-    damage 					= { default = 200, flyer = 200, heavy = 200, light = 200, },
+    reloadtime              = 0.70,
+    damage 					= { default = 175, flyer = 175, heavy = 175, light = 200, },
 }
 local SHADELVL4MELEE = {
 	range                   = 70,
-    reloadtime              = 0.75,
-    damage 					= { default = 390, flyer = 390, heavy = 390, light = 390, },
+    reloadtime              = 0.70,
+    damage 					= { default = 360, flyer = 360, heavy = 360, light = 360, },
 }
 local SHADELVL5MELEE = {
 	range                   = 70,

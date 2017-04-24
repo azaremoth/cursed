@@ -40,6 +40,8 @@ local spGetUnitExperience   = Spring.GetUnitExperience
 local spGetTeamResources    = Spring.GetTeamResources
 local GetUnitCost           = Spring.Utilities.GetUnitCost
 
+local CURSED_AWARDMARKER    = [[\180]]
+
 local floor = math.floor
 
 local mexDefID = {
@@ -67,8 +69,8 @@ local awardAbsolutes = {
 	rezz        = 30,
 	mex         = 15,
 	mexkill     = 15,
-	head        = 3,
-	dragon      = 3,
+	herokill    = 3,
+	drankill    = 3,
 	sweeper     = 20,
 	heart       = 1*10^9, --we should not exceed 2*10^9 because math.floor-ing the value will return integer -2147483648. Reference: https://code.google.com/p/zero-k/source/detail?r=9681
 }
@@ -79,14 +81,14 @@ local expUnitTeam, expUnitDefID, expUnitExp = 0,0,0
 local awardList = {}
 local sentAwards = false
 
-local boats = { -- WORKS
+local hoverunits = { -- WORKS
 	[UnitDefNames.tc_mermeoth.id] = "tc_mermeoth",
 	[UnitDefNames.tc_rictus.id] = "tc_rictus",
 	[UnitDefNames.euf_mlrs.id] = "euf_mlrs",
 	[UnitDefNames.euf_hover.id] = "euf_hover",
 }
 
-local t3Units = {
+local dranUnits = {
 	[UnitDefNames.tc_dragon.id] = "tc_dragon",
 	[UnitDefNames.euf_angel.id] = "euf_angel",
 }
@@ -271,9 +273,9 @@ local function ProcessAwardData()
 					message = 'Mexes built: '.. maxVal
 				elseif awardType == 'mexkill' then
 					message = 'Mexes destroyed: '.. maxVal
-				elseif awardType == 'head' then
+				elseif awardType == 'herokill' then
 					message = maxVal .. ' Heroes eliminated'
-				elseif awardType == 'dragon' then
+				elseif awardType == 'drankill' then
 					message = maxVal .. ' Dragons or Angels killed'
 				elseif awardType == 'heart' then
 					local maxQueenKillDamage = maxVal - absolute --remove the queen kill signature: +1000000000 from the total damage
@@ -377,9 +379,9 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, _, _, killerTeam)
 			AddAwardPoints( 'mexkill', killerTeam, 1 )
 		elseif (IsAHero[unitDefID] and (not spAreTeamsAllied(killerTeam, unitTeam))) then
 --			Spring.Echo("Hero killed award point")
-			AddAwardPoints( 'head', killerTeam, 1 )
+			AddAwardPoints( 'herokill', killerTeam, 1 )
 		elseif (SuperUnitDefID[unitDefID] and (not spAreTeamsAllied(killerTeam, unitTeam))) then
-			AddAwardPoints( 'dragon', killerTeam, 1 )
+			AddAwardPoints( 'drankill', killerTeam, 1 )
 		elseif ud.name == "tc_dragonqueen" then
 			for killerFrienz, _ in pairs(awardData['heart']) do --give +1000000000 points for all frienz that kill queen and won
 				AddAwardPoints( 'heart', killerFrienz, awardAbsolutes['heart']) --the extra points is for id purpose. Will deduct later
@@ -433,14 +435,14 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 			elseif kamikaze[attackerDefID] then
 				AddAwardPoints( 'kam', attackerTeam, costdamage )
 
-			elseif boats[attackerDefID] then
-				AddAwardPoints( 'navy', attackerTeam, costdamage )
+			elseif hoverunits[attackerDefID] then
+				AddAwardPoints( 'hover', attackerTeam, costdamage )
 
-			elseif t3Units[attackerDefID] then
-				AddAwardPoints( 't3', attackerTeam, costdamage )
+			elseif dranUnits[attackerDefID] then
+				AddAwardPoints( 'dran', attackerTeam, costdamage )
 
 			elseif IsAHero[attackerDefID] then
-				AddAwardPoints( 'comm', attackerTeam, costdamage )
+				AddAwardPoints( 'hero', attackerTeam, costdamage )
 
 			elseif ad.canFly and not (ad.customParams.dontcount or ad.customParams.is_drone) then
 				AddAwardPoints( 'air', attackerTeam, costdamage )				
@@ -472,6 +474,25 @@ function gadget:GameFrame(n)
 		ProcessAwardData()
 
 		_G.awardList = awardList
+		
+		---- GENERATE MESSAGE FOR REPLAYS
+		for teamID,awards in pairs(awardList) do
+			-- local _,leader,isDead,isAI,_,allyTeamID = Spring.GetTeamInfo(teamID)
+			local SendToReplay = table.concat({CURSED_AWARDMARKER,":",teamID})
+
+			local playerHasAward = false
+			for awardType, record in pairs(awards) do
+				playerHasAward = true
+			end
+			if playerHasAward then
+				for awardType, record in pairs(awards) do
+					SendToReplay = table.concat({SendToReplay,":",awardType,"(",record,")"})
+				end
+			end
+			Spring.Echo(SendToReplay)
+			Spring.SendLuaRulesMsg(SendToReplay)
+		end
+		
 		sentAwards = true
 	end
 end --GameFrame
@@ -482,10 +503,7 @@ else -- UNSYNCED
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
 
-local spSendCommands  = Spring.SendCommands
-
 local gameOver = false
-
 local teamNames     = {}
 local awardList
 

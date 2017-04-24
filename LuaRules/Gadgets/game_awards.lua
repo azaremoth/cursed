@@ -54,11 +54,9 @@ local shareListTemp2 = {}
 
 local awardData = {}
 
-local basicEasyFactor = 0.5
-local veryEasyFactor = 0.3
 
-local empFactor     = veryEasyFactor*4
-local reclaimFactor = veryEasyFactor*0.2 -- wrecks aren't guaranteed to leave more than 0.2 of value
+local empFactor     = 4
+local reclaimFactor = 0.2 -- wrecks aren't guaranteed to leave more than 0.2 of value
 
 local minFriendRatio = 0.25
 local minReclaimRatio = 0.15
@@ -66,7 +64,7 @@ local minReclaimRatio = 0.15
 local awardAbsolutes = {
 	cap         = 1000,
 	share       = 5000,
-	rezz        = 3000,
+	rezz        = 20,
 	mex         = 15,
 	mexkill     = 15,
 	head        = 3,
@@ -76,17 +74,6 @@ local awardAbsolutes = {
 	vet         = 3,
 }
 
-local awardEasyFactors = {
-	shell     = basicEasyFactor,
-	fire      = basicEasyFactor,
-
-	nux       = veryEasyFactor,
-	kam       = veryEasyFactor,
-	comm      = veryEasyFactor,
-
-	reclaim   = reclaimFactor,
-	emp       = empFactor,
-}
 
 local expUnitTeam, expUnitDefID, expUnitExp = 0,0,0
 
@@ -306,7 +293,6 @@ local function ProcessAwardData()
 	for awardType, data in pairs(awardData) do
 		local winningTeam
 		local maxVal
-		local easyFactor = awardEasyFactors[awardType] or 1
 		local absolute = awardAbsolutes[awardType]
 		local message
 
@@ -340,7 +326,7 @@ local function ProcessAwardData()
 				compare = absolute
 
 			else
-				compare = getMeanDamageExcept(winningTeam) * easyFactor
+				compare = getMeanDamageExcept(winningTeam)
 			end
 
 			--if reclaimTeam and maxReclaim > getMeanMetalIncome() * minReclaimRatio then
@@ -496,6 +482,27 @@ function gadget:UnitTaken(unitID, unitDefID, oldTeam, newTeam)
 			AddAwardPoints( 'share', oldTeam, mCost )
 			AddAwardPoints( 'share', newTeam, 0-mCost )
 			--]]
+		end
+	end
+end
+
+function gadget:FeatureDestroyed(featureID, allyTeamID)
+--	Spring.Echo("Feature destroyed:" .. featureID)
+	local UnitDefName, buildFacing = Spring.GetFeatureResurrect(featureID)
+	if (UnitDefName ~= nil) then
+--		Spring.Echo("Rezzed")
+		local fx,fy,fz = Spring.GetFeaturePosition(featureID)
+--		Spring.Echo(fx .. " " .. fz)
+		local UnitsClose = Spring.GetUnitsInCylinder(fx, fz, 10)
+		for _,eUnitID in ipairs(UnitsClose) do
+			local eUnitDefID = Spring.GetUnitDefID(eUnitID)
+			local eUnitDefName = UnitDefs[eUnitDefID].name
+--			Spring.Echo("udname:" .. eUnitDefName)
+			if (UnitDefName == eUnitDefName) then
+				local eUnitTeam = Spring.GetUnitTeam(eUnitID)
+				Spring.Echo("Rezz point given to:" .. eUnitTeam)
+				AddAwardPoints( 'rezz', eUnitTeam, 1 )
+			end
 		end
 	end
 end

@@ -47,10 +47,6 @@ local SPAWNPERIOD = 30
 local SPAWNDELAYLATE = 9000 -- = 30 frames x 60s x 5 minutes
 local MOVEPERIOD = 15
 
-local JumperPairs = {
-	[UnitDefNames.bug_med.id] = "bug_med",
-	}	
-
 local critterdefs_early = {
 	UnitDefNames['pig'].id,
 	UnitDefNames['bug_larva'].id,	

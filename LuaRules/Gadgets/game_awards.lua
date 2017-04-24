@@ -43,11 +43,17 @@ local GetUnitCost           = Spring.Utilities.GetUnitCost
 local floor = math.floor
 
 local mexDefID = {
-	UnitDefNames['tc_metalextractor_lvl1'].id,
-	UnitDefNames['tc_metalextractor_lvl2'].id,	
-	UnitDefNames['euf_metalextractor_lvl1'].id,
-	UnitDefNames['euf_metalextractor_lvl2'].id,	
+	[UnitDefNames.tc_metalextractor_lvl1.id] = "tc_metalextractor_lvl1",
+	[UnitDefNames.tc_metalextractor_lvl2.id] = "tc_metalextractor_lvl2",
+	[UnitDefNames.euf_metalextractor_lvl1.id] = "euf_metalextractor_lvl1",
+	[UnitDefNames.euf_metalextractor_lvl2.id] = "euf_metalextractor_lvl2",
 }
+
+local SuperUnitDefID = {
+	[UnitDefNames.tc_dragon.id] = "tc_dragon",
+	[UnitDefNames.euf_angel.id] = "euf_angel",
+}
+
 
 local shareListTemp1 = {}
 local shareListTemp2 = {}
@@ -71,7 +77,6 @@ local awardAbsolutes = {
 	dragon      = 3,
 	sweeper     = 20,
 	heart       = 1*10^9, --we should not exceed 2*10^9 because math.floor-ing the value will return integer -2147483648. Reference: https://code.google.com/p/zero-k/source/detail?r=9681
-	vet         = 3,
 }
 
 
@@ -82,15 +87,34 @@ local sentAwards = false
 
 local shareList_update = TEAM_SLOWUPDATE_RATE*60*5 -- five minute frames
 
-local boats, t3Units, comms = {}, {}, {}
+local boats = {
+	[UnitDefNames.tc_mermeoth.id] = "tc_mermeoth",
+	[UnitDefNames.tc_rictus.id] = "tc_rictus",
+	[UnitDefNames.euf_mlrs.id] = "euf_mlrs",
+	[UnitDefNames.euf_hover.id] = "euf_hover",
+}
 
-local staticO_small = {}
+local t3Units = {
+	[UnitDefNames.tc_dragon.id] = "tc_dragon",
+	[UnitDefNames.euf_angel.id] = "euf_angel",
+}
 
-local staticO_big = {}
+local staticO_small = {
+	[UnitDefNames.tc_defender.id] = "tc_defender",
+	[UnitDefNames.tc_hellfire.id] = "tc_hellfire",
+	[UnitDefNames.euf_plasmatower.id] = "euf_plasmatower",
+	[UnitDefNames.euf_aatower.id] = "euf_aatower",	
+	[UnitDefNames.euf_artytower.id] = "euf_artytower",		
+}
 
-local kamikaze = {
-	tc_kaboom=1,
-	tc_suicide=1,
+local staticO_big = {
+	[UnitDefNames.tc_tower.id] = "tc_tower",
+	[UnitDefNames.euf_lasertower.id] = "euf_lasertower",
+}
+
+local kamikaze = { -- CHECK THOSE!
+	[UnitDefNames.tc_kaboom.id] = "tc_kaboom",
+	[UnitDefNames.tc_suicide.id] = "tc_suicide",	
 }
 
 local flamerWeaponDefs = {}
@@ -163,14 +187,6 @@ local function getMaxVal(valList)
 	return winTeam, maxVal
 end
 
-local function getMeanMetalIncome()
-	local num, sum = 0, 0
-	for _,team in pairs(totalTeamList) do
-		sum = sum + select(2, Spring.GetTeamResourceStats(team, "metal"))
-		num = num + 1
-	end
-	return (sum/num)
-end
 
 local function awardAward(team, awardType, record)
 	if not awardList[team] then --random check for devving.
@@ -197,90 +213,7 @@ local function UpdateShareList()
 	shareListTemp2 = CopyTable(shareListTemp1)
 end
 
-local function UpdateResourceStats(t)
 
-	resourceInfo.count = resourceInfo.count + 1
-	resourceInfo.data[resourceInfo.count] = {allyRes = {}, teamRes = {}, t = t}
-
-	for allyTeamID, allyTeamData in pairs(allyTeamInfo) do
-		local teams = allyTeamData.teams
-		local team = allyTeamData.team
-
-
-		resourceInfo.data[resourceInfo.count].allyRes[allyTeamID] = {
-			metal_income_total = 0,
-			metal_income_base = 0,
-			metal_income_other = 0,
-
-			metal_spend_total = 0,
-			metal_spend_construction = 0,
-			metal_spend_waste = 0,
-
-			metal_storage_current = 0,
-			metal_storage_free = 0,
-
-			energy_income_total = 0,
-
-			energy_spend_total = 0,
-			energy_spend_construction = 0,
-			energy_spend_other = 0,
-			energy_spend_waste = 0,
-
-			energy_storage_current = 0,
-		}
-
-		local aRes = resourceInfo.data[resourceInfo.count].allyRes[allyTeamID]
-
-		for i = 1, teams do
-			local teamID = team[i]
-			local mCurr, mStor, mPull, mInco, mExpe, mShar, mSent, mReci = spGetTeamResources(teamID, "metal")
-			aRes.metal_spend_construction = aRes.metal_spend_construction + mExpe
-			aRes.metal_income_total = aRes.metal_income_total + mInco
-			aRes.metal_spend_total = aRes.metal_spend_total + mExpe
-			aRes.metal_storage_free = aRes.metal_storage_free + mStor - mCurr
-			aRes.metal_storage_current = aRes.metal_storage_current + mCurr
-
-			local eCurr, eStor, ePull, eInco, eExpe, eShar, eSent, eReci = spGetTeamResources(teamID, "energy")
-			aRes.energy_spend_total = aRes.energy_spend_total + eExpe
-			aRes.energy_storage_current = aRes.energy_storage_current + eCurr
-
-
-			resourceInfo.data[resourceInfo.count].teamRes[teamID] = {
-				metal_income_total = mInco + mReci,
-				metal_income_base = 0,
-				metal_income_other = 0,
-
-				metal_spend_total = mExpe + mSent,
-				metal_spend_construction = mExpe,
-
-				metal_share_net = mReci - mSent,
-
-				metal_storage_current = mCurr,
-
-				energy_income_total = eInco,
-
-				energy_spend_total = eExpe,
-				energy_spend_construction = mExpe,
-				energy_spend_other = 0,
-
-				energy_share_net = 0,
-
-				energy_storage_current = eCurr,
-			}
-
-			local tRes = resourceInfo.data[resourceInfo.count].teamRes[teamID]
-
-			tRes.metal_income_other = tRes.metal_income_total - tRes.metal_income_base - mReci
-			tRes.energy_spend_other = tRes.energy_spend_total - tRes.energy_spend_construction + math.min(0, tRes.energy_share_net)
-		end
-
-		aRes.metal_income_other = aRes.metal_income_total - aRes.metal_income_base
-		aRes.metal_spend_waste = math.min(aRes.metal_storage_free - aRes.metal_income_total - aRes.metal_spend_total,0)
-
-		aRes.energy_spend_construction = aRes.metal_spend_construction
-		aRes.energy_spend_other = aRes.energy_spend_total - (aRes.energy_spend_construction + aRes.energy_spend_waste)
-	end
-end
 
 local function AddAwardPoints( awardType, teamID, amount )
 	if (teamID and (teamID ~= gaiaTeamID)) then
@@ -296,10 +229,7 @@ local function ProcessAwardData()
 		local absolute = awardAbsolutes[awardType]
 		local message
 
-		if awardType == 'vet' then
-			maxVal = expUnitExp
-			winningTeam = expUnitTeam
-		elseif awardType == 'friend' then
+		if awardType == 'friend' then
 
 			maxVal = 0
 			for team,dmg in pairs(data) do
@@ -329,7 +259,6 @@ local function ProcessAwardData()
 				compare = getMeanDamageExcept(winningTeam)
 			end
 
-			--if reclaimTeam and maxReclaim > getMeanMetalIncome() * minReclaimRatio then
 			if maxVal > compare then
 				maxVal = floor(maxVal)
 				maxValWrite = comma_value(maxVal)
@@ -365,11 +294,6 @@ local function ProcessAwardData()
 					message = 'Damage: '.. comma_value(maxQueenKillDamage)
 				elseif awardType == 'sweeper' then
 					message = maxVal .. ' Nests wiped out'
-
-				elseif awardType == 'vet' then
-					local vetName = UnitDefs[expUnitDefID] and UnitDefs[expUnitDefID].humanName
-					local expUnitExpRounded = floor(expUnitExp * 100)
-					message = vetName ..', '.. expUnitExpRounded .. "% cost made"
 				else
 					message = 'Damaged value: '.. maxValWrite
 				end
@@ -416,41 +340,6 @@ function gadget:Initialize()
 		end
 
 	end
-
-	local boatFacs = {'factoryship', 'striderhub'}
-	for _, boatFac in pairs(boatFacs) do
-		local udBoatFac = UnitDefNames[boatFac]
-		if udBoatFac then
-			for _, boatDefID in pairs(udBoatFac.buildOptions) do
-				if (UnitDefs[boatDefID].minWaterDepth > 0) then -- because striderhub
-					boats[boatDefID] = true
-				end
-			end
-		end
-	end
-
-	--[[
-	local t3Facs = {'armshltx', 'corgant', }
-	for _, t3Fac in pairs(t3Facs) do
-		local udT3Fac = UnitDefNames[t3Fac]
-		for _, t3DefID in pairs(udT3Fac.buildOptions) do
-			t3Units[t3DefID] = true
-		end
-	end
-	--]]
-
-	for i=1,#WeaponDefs do
-		local wcp = WeaponDefs[i].customParams or {}
-		if (wcp.setunitsonfire) then
-			flamerWeaponDefs[i] = true
-		end
-	end
-
-	for i=1,#UnitDefs do
-		if(UnitDefs[i].customParams.dynamic_comm) then comms[i] = true
-	end
- end
-
 end --Initialize
 
 function gadget:UnitTaken(unitID, unitDefID, oldTeam, newTeam)
@@ -463,13 +352,6 @@ function gadget:UnitTaken(unitID, unitDefID, oldTeam, newTeam)
 			local ud = UnitDefs[unitDefID]
 			local mCost = GetUnitCost(unitID, unitDefID)
 			AddAwardPoints( 'cap', newTeam, mCost )
-			if (ud.customParams.dynamic_comm) then
-				if (not IsAHero[unitID]) then
-					IsAHero[unitID] = select(6, spGetTeamInfo(oldTeam))
-				elseif (IsAHero[unitID] == select(6, spGetTeamInfo(newTeam))) then
-					IsAHero[unitID] = nil
-				end
-			end
 		end
 	else -- teams are allied
 		if shareListTemp1[oldTeam] and shareListTemp1[newTeam] then
@@ -486,21 +368,16 @@ function gadget:UnitTaken(unitID, unitDefID, oldTeam, newTeam)
 	end
 end
 
-function gadget:FeatureDestroyed(featureID, allyTeamID)
---	Spring.Echo("Feature destroyed:" .. featureID)
+function gadget:FeatureDestroyed(featureID, allyTeamID) -- REZZ COUNTER
 	local UnitDefName, buildFacing = Spring.GetFeatureResurrect(featureID)
 	if (UnitDefName ~= nil) then
---		Spring.Echo("Rezzed")
 		local fx,fy,fz = Spring.GetFeaturePosition(featureID)
---		Spring.Echo(fx .. " " .. fz)
 		local UnitsClose = Spring.GetUnitsInCylinder(fx, fz, 10)
 		for _,eUnitID in ipairs(UnitsClose) do
 			local eUnitDefID = Spring.GetUnitDefID(eUnitID)
 			local eUnitDefName = UnitDefs[eUnitDefID].name
---			Spring.Echo("udname:" .. eUnitDefName)
 			if (UnitDefName == eUnitDefName) then
 				local eUnitTeam = Spring.GetUnitTeam(eUnitID)
-				Spring.Echo("Rezz point given to:" .. eUnitTeam)
 				AddAwardPoints( 'rezz', eUnitTeam, 1 )
 			end
 		end
@@ -508,32 +385,18 @@ function gadget:FeatureDestroyed(featureID, allyTeamID)
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, _, _, killerTeam)
-	local experience = spGetUnitExperience(unitID)
-	if experience > expUnitExp and (experience*UnitDefs[unitDefID].metalCost > 1000) then
-		expUnitExp = experience
-		expUnitTeam = unitTeam
-		expUnitDefID = unitDefID
-	end
-
-	if (IsAHero[unitID]) then
-		IsAHero[unitID] = nil
-		if (unitTeam ~= gaiaTeamID) then
-			AddAwardPoints( 'head', unitTeam, 1 )
-		end
+	if (killerTeam == unitTeam) or (killerTeam == gaiaTeamID) or (unitTeam == gaiaTeamID) or (killerTeam == nil) or (spIsGameOver()) then
 		return
-	end
-
-	if (killerTeam == unitTeam) or (killerTeam == gaiaTeamID) or (unitTeam == gaiaTeamID) or (killerTeam == nil) then
-		return
-	elseif (unitDefID == mexDefID) then
-		if ((not spIsGameOver()) and (select(5, spGetUnitHealth(unitID)) > 0.9) and (not spAreTeamsAllied(killerTeam, unitTeam))) then
-			AddAwardPoints( 'mexkill', killerTeam, 1 )
-		end
-	else
+	else 
 		local ud = UnitDefs[unitDefID]
-		if (ud.customParams.dynamic_comm and (not spAreTeamsAllied(killerTeam, unitTeam))) then
+	
+		if ((mexDefID[unitDefID]) and (not spAreTeamsAllied(killerTeam, unitTeam))) then
+--			Spring.Echo("MEX killed award point")		
+			AddAwardPoints( 'mexkill', killerTeam, 1 )
+		elseif (IsAHero[unitDefID] and (not spAreTeamsAllied(killerTeam, unitTeam))) then
+--			Spring.Echo("Hero killed award point")
 			AddAwardPoints( 'head', killerTeam, 1 )
-		elseif ud.name == "tc_dragon" then
+		elseif (SuperUnitDefID[unitDefID] and (not spAreTeamsAllied(killerTeam, unitTeam))) then
 			AddAwardPoints( 'dragon', killerTeam, 1 )
 		elseif ud.name == "tc_dragonqueen" then
 			for killerFrienz, _ in pairs(awardData['heart']) do --give +1000000000 points for all frienz that kill queen and won
@@ -572,7 +435,7 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 		if paralyzer then
 			AddAwardPoints( 'emp', attackerTeam, costdamage )
 		else
-			if ud.name == "chickenflyerqueen" or ud.name == "chickenlandqueen" then
+			if ud.name == "tc_dragonqueen" then
 				AddAwardPoints( 'heart', attackerTeam, damage )
 			end
 			local ad = UnitDefs[attackerDefID]
@@ -605,7 +468,7 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 			elseif t3Units[attackerDefID] then
 				AddAwardPoints( 't3', attackerTeam, costdamage )
 
-			elseif comms[attackerDefID] then
+			elseif IsAHero[attackerDefID] then
 				AddAwardPoints( 'comm', attackerTeam, costdamage )
 
 			end
@@ -689,84 +552,9 @@ function gadget:Initialize()
 	end
 end
 
-local function SendEconomyDataToWidget()
-
-	if (Script.LuaUI('WriteResourceStatsToFile')) then
-		Spring.Echo("Awards: Writing resource data to widget")
-		local resourceInfo = SYNCED.resourceInfo
-		local count = resourceInfo.count
-		local data = resourceInfo.data
-		local reallyBigString = ""
-
-		for i = 1, count do
-			if data[i] then
-				local toSend = data[i].t .. " "
-				for allyTeamID, allyData in spairs(data[i].allyRes) do
-					toSend = toSend .. " " .. allyTeamID .. " " ..
-					allyData.metal_income_total .. " " ..
-					allyData.metal_income_base .. " " ..
-					allyData.metal_income_other .. " " ..
-
-					allyData.metal_spend_total .. " " ..
-					allyData.metal_spend_construction .. " " ..
-					allyData.metal_spend_waste .. " " ..
-
-					allyData.metal_storage_current .. " " ..
-					allyData.metal_storage_free .. " " ..
-
-					allyData.energy_income_total .. " " ..
-
-					allyData.energy_spend_total .. " " ..
-					allyData.energy_spend_construction .. " " ..
-					allyData.energy_spend_other .. " " ..
-					allyData.energy_spend_waste .. " " ..
-
-					allyData.energy_storage_current
-				end
-				--Spring.SendCommands("wbynum 255 SPRINGIE: allyResourceData " .. toSend)
-				reallyBigString = reallyBigString .. toSend .. "\n"
-
-				toSend = data[i].t .. " "
-
-				for teamID, teamData in spairs(data[i].teamRes) do
-					toSend = toSend .. " " .. teamID .. " " ..
-					teamData.metal_income_total .. " " ..
-					teamData.metal_income_base .. " " ..
-					teamData.metal_income_other .. " " ..
-
-					teamData.metal_spend_total .. " " ..
-					teamData.metal_spend_construction .. " " ..
-
-					teamData.metal_share_net .. " " ..
-
-					teamData.metal_storage_current .. " " ..
-
-					teamData.energy_income_total .. " " ..
-
-					teamData.energy_spend_total .. " " ..
-					teamData.energy_spend_construction .. " " ..
-					teamData.energy_spend_other .. " " ..
-
-					teamData.energy_share_net .. " " ..
-
-					teamData.energy_storage_current
-				end
-
-				reallyBigString = reallyBigString .. toSend .. "\n"
-			end
-		end
-
-		Script.LuaUI.WriteResourceStatsToFile(reallyBigString, teamNames)
-	end
-
-end
-
 function gadget:GameOver()
 	gameOver = true
 	--Spring.Echo("Game over (awards unsynced)")
-		
-	--// Resources
-	--SendEconomyDataToWidget()
 end
 
 -- function to convert SYNCED table to regular table. assumes no self referential loops

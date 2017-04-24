@@ -22,7 +22,7 @@ if (gadgetHandler:IsSyncedCode()) then
 	function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 	  if (UnitDefs[unitDefID].extractsMetal > 0) then
 
-		local maxExtracts = (Spring.GetUnitRulesParam(unitID, "mexIncome"))
+		local maxExtracts = (Spring.GetUnitRulesParam(unitID, "mexIncome")) or 0
 		local extracts = maxExtracts * 0.25
 		
 		if (maxExtracts == nil) then

@@ -27,7 +27,7 @@ local WEREWOLFMELEE = {
 local DECOYSHADEMELEE = {
 	range                   = 70,
     reloadtime              = 0.70,
-    damage 					= { default = 50, flyer = 50, heavy = 50 light = 50, },
+    damage 					= { default = 50, flyer = 50, heavy = 50, light = 50, },
 }
 local SHADELVL1MELEE = {
 	range                   = 70,

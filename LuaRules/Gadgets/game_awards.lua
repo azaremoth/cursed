@@ -62,10 +62,9 @@ local awardData = {}
 
 
 local empFactor     = 4
-local reclaimFactor = 0.2 -- wrecks aren't guaranteed to leave more than 0.2 of value
 
 local minFriendRatio = 0.25
-local minReclaimRatio = 0.15
+
 
 local awardAbsolutes = {
 	cap         = 10,
@@ -105,11 +104,13 @@ local staticO_small = {
 	[UnitDefNames.euf_plasmatower.id] = "euf_plasmatower",
 	[UnitDefNames.euf_aatower.id] = "euf_aatower",	
 	[UnitDefNames.euf_artytower.id] = "euf_artytower",		
+	[UnitDefNames.tc_tower.id] = "tc_tower",
+	[UnitDefNames.euf_lasertower.id] = "euf_lasertower",	
 }
 
 local staticO_big = {
-	[UnitDefNames.tc_tower.id] = "tc_tower",
-	[UnitDefNames.euf_lasertower.id] = "euf_lasertower",
+	[UnitDefNames.euf_techcenter_nuke.id] = "euf_techcenter_nuke",
+	[UnitDefNames.tc_altar_hellstorm.id] = "tc_altar_hellstorm",	
 }
 
 local kamikaze = { -- CHECK THOSE!
@@ -268,7 +269,7 @@ local function ProcessAwardData()
 				elseif awardType == 'share' then
 					message = 'Shared value: ' .. maxValWrite
 				elseif awardType == 'rezz' then
-					message = 'Resurrected value: ' .. maxValWrite
+					message = 'Necromanced: ' .. maxValWrite
 				elseif awardType == 'fire' then
 					message = 'Burnt value: ' .. maxValWrite
 				elseif awardType == 'emp' then
@@ -277,8 +278,6 @@ local function ProcessAwardData()
 					message = 'Slowed value: ' .. maxValWrite
 				elseif awardType == 'ouch' then
 					message = 'Damage received: ' .. maxValWrite
-				elseif awardType == 'reclaim' then
-					message = 'Reclaimed value: ' .. maxValWrite
 				elseif awardType == 'friend' then
 					message = 'Damage to allies: '.. floor(maxVal * 100) ..'%'
 				elseif awardType == 'mex' then
@@ -286,14 +285,14 @@ local function ProcessAwardData()
 				elseif awardType == 'mexkill' then
 					message = 'Mexes destroyed: '.. maxVal
 				elseif awardType == 'head' then
-					message = maxVal .. ' Commanders eliminated'
+					message = maxVal .. ' Heroes eliminated'
 				elseif awardType == 'dragon' then
-					message = maxVal .. ' White Dragons annihilated'
+					message = maxVal .. ' Dragons or Angels killed'
 				elseif awardType == 'heart' then
 					local maxQueenKillDamage = maxVal - absolute --remove the queen kill signature: +1000000000 from the total damage
 					message = 'Damage: '.. comma_value(maxQueenKillDamage)
 				elseif awardType == 'sweeper' then
-					message = maxVal .. ' Nests wiped out'
+					message = maxVal .. ' Pitts wiped out'
 				else
 					message = 'Damaged value: '.. maxValWrite
 				end
@@ -444,19 +443,15 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 				AddAwardPoints( 'fire', attackerTeam, costdamage )
 			end
 
-			-- Static Weapons
-			if (not ad.canMove) then
 
-				-- bignukes, zenith, starlight
-				if staticO_big[ad.name] then
+			-- bignukes
+			if staticO_big[attackerDefID] then
 					AddAwardPoints( 'nux', attackerTeam, costdamage )
-
 				-- not lrpc, tacnuke, emp missile
-				elseif not staticO_small[ad.name] then
-					AddAwardPoints( 'shell', attackerTeam, costdamage )
-				end
+			elseif staticO_small[attackerDefID] then
+				AddAwardPoints( 'shell', attackerTeam, costdamage )
 
-			elseif kamikaze[ad.name] then
+			elseif kamikaze[attackerDefID] then
 				AddAwardPoints( 'kam', attackerTeam, costdamage )
 
 			elseif ad.canFly and not (ad.customParams.dontcount or ad.customParams.is_drone) then
@@ -497,16 +492,6 @@ function gadget:GameFrame(n)
 			local teamID = spGetUnitTeam(unitID)
 			local unitDefID = spGetUnitDefID(unitID)
 			gadget:UnitDestroyed(unitID, unitDefID, teamID)
-		end
-
-		-- read externally tracked values
-		local teams = Spring.GetTeamList()
-		for i = 1, #teams do
-			local team = teams[i]
-			if team ~= gaiaTeamID then
-				AddAwardPoints('reclaim', team, Spring.GetTeamRulesParam(team, "stats_history_metal_reclaim_current") or 0)
-				AddAwardPoints('pwn', team, Spring.GetTeamRulesParam(team, "stats_history_damage_dealt_current") or 0)
-			end
 		end
 
 		ProcessAwardData()

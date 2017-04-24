@@ -1,5 +1,6 @@
 local options={
  ---- GAME SETTINGS ----
+ -- make keys alwas lower case and adjust the widgest/gadgets accordingly
   {
     key    = 'b_resources',
     name   = 'Resources',
@@ -7,7 +8,7 @@ local options={
     type   = 'section',
   },  
   {
-   key    = 'StartMetal',
+   key    = 'startmetal',
    scope  = 'team',
    name   = 'Team Starting metal',
    desc   = 'Determines amount of metal and metal storage this team will start with',
@@ -19,7 +20,7 @@ local options={
    step   = 1,  -- quantization is aligned to the def value   -- (step <= 0) means that there is no quantization
   },
   {
-    key    = 'StartEnergy',
+    key    = 'startenergy',
     name   = 'Starting energy',
     desc   = 'Determines amount of energy and energy storage that each player will start with',
     type   = 'number',

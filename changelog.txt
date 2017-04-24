@@ -2,6 +2,7 @@
 
 Bugs
 - fixed faulty links for load screens (build trees did not show up)
+- fixed adjustments to starting metal and energy not being respected by the game
 
 Polishing
 - CEG for units in healing aura will only spawn if units are actually healed

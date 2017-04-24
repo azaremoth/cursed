@@ -30,7 +30,7 @@ local unitDef = {
 	},
   description        = "Mighty bonedragons can be summoned here",
   explodeAs          = "HELLSTORM_DEATH",
-  firestandorders    = "1",
+  fireState          = 0,
   footprintX         = 7,
   footprintZ         = 7,
   iconType           = "bigsquare",

@@ -41,6 +41,7 @@ local unitDef = {
   maxWaterDepth      = 0,
   name               = "Technology Center",
   nanoColor          = "0 0 0",
+  fireState          = 0,
   noAutoFire         = false,
   objectName         = "euf_techcenter.s3o",
   onoffable          = false,

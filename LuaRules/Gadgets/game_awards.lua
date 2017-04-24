@@ -54,12 +54,7 @@ local SuperUnitDefID = {
 	[UnitDefNames.euf_angel.id] = "euf_angel",
 }
 
-
-local shareListTemp1 = {}
-local shareListTemp2 = {}
-
 local awardData = {}
-
 
 local empFactor     = 4
 
@@ -68,7 +63,7 @@ local minFriendRatio = 0.25
 
 local awardAbsolutes = {
 	cap         = 10,
-	share       = 5000,
+	share       = 30,
 	rezz        = 30,
 	mex         = 15,
 	mexkill     = 15,
@@ -84,9 +79,7 @@ local expUnitTeam, expUnitDefID, expUnitExp = 0,0,0
 local awardList = {}
 local sentAwards = false
 
-local shareList_update = TEAM_SLOWUPDATE_RATE*60*5 -- five minute frames
-
-local boats = {
+local boats = { -- WORKS
 	[UnitDefNames.tc_mermeoth.id] = "tc_mermeoth",
 	[UnitDefNames.tc_rictus.id] = "tc_rictus",
 	[UnitDefNames.euf_mlrs.id] = "euf_mlrs",
@@ -98,7 +91,7 @@ local t3Units = {
 	[UnitDefNames.euf_angel.id] = "euf_angel",
 }
 
-local staticO_small = {
+local staticO_small = { -- WORKS
 	[UnitDefNames.tc_defender.id] = "tc_defender",
 	[UnitDefNames.tc_hellfire.id] = "tc_hellfire",
 	[UnitDefNames.euf_plasmatower.id] = "euf_plasmatower",
@@ -108,12 +101,12 @@ local staticO_small = {
 	[UnitDefNames.euf_lasertower.id] = "euf_lasertower",	
 }
 
-local staticO_big = {
+local staticO_big = { -- WORKS
 	[UnitDefNames.euf_techcenter_nuke.id] = "euf_techcenter_nuke",
 	[UnitDefNames.tc_altar_hellstorm.id] = "tc_altar_hellstorm",	
 }
 
-local kamikaze = { -- CHECK THOSE!
+local kamikaze = { -- WORKS
 	[UnitDefNames.tc_kaboom.id] = "tc_kaboom",
 	[UnitDefNames.tc_suicide.id] = "tc_suicide",	
 }
@@ -209,12 +202,6 @@ local function CopyTable(original) -- Warning: circular table references lead to
 	return copy
 end
 
-local function UpdateShareList()
-	awardData.share = CopyTable(shareListTemp2)
-	shareListTemp2 = CopyTable(shareListTemp1)
-end
-
-
 
 local function AddAwardPoints( awardType, teamID, amount )
 	if (teamID and (teamID ~= gaiaTeamID)) then
@@ -267,7 +254,7 @@ local function ProcessAwardData()
 				if awardType == 'cap' then
 					message = 'Captured value: ' .. maxValWrite
 				elseif awardType == 'share' then
-					message = 'Shared value: ' .. maxValWrite
+					message = 'Units shared: ' .. maxValWrite
 				elseif awardType == 'rezz' then
 					message = 'Necromanced: ' .. maxValWrite
 				elseif awardType == 'fire' then
@@ -331,14 +318,20 @@ function gadget:Initialize()
 	for _,team in pairs(totalTeamList) do
 		awardList[team] = {}
 
-		shareListTemp1[team] = 0
-		shareListTemp2[team] = 0
-
 		for awardType, _ in pairs(awardDescs) do
 			awardData[awardType][team] = 0
 		end
 
 	end
+	
+	for i=1,#WeaponDefs do
+		local wcp = WeaponDefs[i].customParams or {}
+		if (wcp.flamethrower == "1") then
+			-- Spring.Echo("Pyro found")
+			flamerWeaponDefs[i] = true
+		end
+	end
+	
 end --Initialize
 
 function gadget:UnitTaken(unitID, unitDefID, oldTeam, newTeam)
@@ -352,18 +345,8 @@ function gadget:UnitTaken(unitID, unitDefID, oldTeam, newTeam)
 			local mCost = GetUnitCost(unitID, unitDefID)
 			AddAwardPoints( 'cap', newTeam, mCost )
 		end
-	else -- teams are allied
-		if shareListTemp1[oldTeam] and shareListTemp1[newTeam] then
-			local mCost = GetUnitCost(unitID, unitDefID)
-
-			shareListTemp1[oldTeam] = shareListTemp1[oldTeam] + mCost
-			shareListTemp1[newTeam] = shareListTemp1[newTeam] - mCost
-
-			--[[
-			AddAwardPoints( 'share', oldTeam, mCost )
-			AddAwardPoints( 'share', newTeam, 0-mCost )
-			--]]
-		end
+	else 
+		AddAwardPoints( 'share', oldTeam, 1 )
 	end
 end
 
@@ -411,6 +394,7 @@ end
 
 function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponID,
 		attackerID, attackerDefID, attackerTeam)
+		
 	if (unitTeam == gaiaTeamID) then return end
 	local hp, maxHP = spGetUnitHealth(unitID)
 	if (hp < 0) then
@@ -418,10 +402,7 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 	end
 	AddAwardPoints( 'ouch', unitTeam, damage )
 
-	if (not attackerTeam)
-		or (attackerTeam == unitTeam)
-		or (attackerTeam == gaiaTeamID)
-		then return end
+	if (not attackerTeam) or (attackerTeam == unitTeam) or (attackerTeam == gaiaTeamID) then return end
 
 	local ud = UnitDefs[unitDefID]
 	local costdamage = (damage / maxHP) * GetUnitCost(unitID, unitDefID)
@@ -443,19 +424,14 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 				AddAwardPoints( 'fire', attackerTeam, costdamage )
 			end
 
-
-			-- bignukes
 			if staticO_big[attackerDefID] then
 					AddAwardPoints( 'nux', attackerTeam, costdamage )
-				-- not lrpc, tacnuke, emp missile
+
 			elseif staticO_small[attackerDefID] then
 				AddAwardPoints( 'shell', attackerTeam, costdamage )
 
 			elseif kamikaze[attackerDefID] then
 				AddAwardPoints( 'kam', attackerTeam, costdamage )
-
-			elseif ad.canFly and not (ad.customParams.dontcount or ad.customParams.is_drone) then
-				AddAwardPoints( 'air', attackerTeam, costdamage )
 
 			elseif boats[attackerDefID] then
 				AddAwardPoints( 'navy', attackerTeam, costdamage )
@@ -466,6 +442,9 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 			elseif IsAHero[attackerDefID] then
 				AddAwardPoints( 'comm', attackerTeam, costdamage )
 
+			elseif ad.canFly and not (ad.customParams.dontcount or ad.customParams.is_drone) then
+				AddAwardPoints( 'air', attackerTeam, costdamage )				
+				
 			end
 		end
 	end
@@ -478,10 +457,6 @@ function gadget:UnitFinished(unitID, unitDefID, teamID)
 end
 
 function gadget:GameFrame(n)
-
-	if n % shareList_update == 1 and not spIsGameOver() then
-		UpdateShareList()
-	end
 
 	if not spIsGameOver() then return end
 
@@ -535,6 +510,7 @@ function gadget:Initialize()
 		end
 		teamNames[team] = name
 	end
+	
 end
 
 function gadget:GameOver()

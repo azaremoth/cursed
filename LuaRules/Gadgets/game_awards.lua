@@ -62,9 +62,9 @@ local minFriendRatio = 0.25
 local minReclaimRatio = 0.15
 
 local awardAbsolutes = {
-	cap         = 1000,
+	cap         = 10,
 	share       = 5000,
-	rezz        = 20,
+	rezz        = 30,
 	mex         = 15,
 	mexkill     = 15,
 	head        = 3,

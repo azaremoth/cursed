@@ -68,7 +68,7 @@ local auraDefs = {
 		ally = true,
 		enemy = false,
 --		aceg = 'AURA_HERO_CASTING',
-		ceg = 'AURA_HERO',
+--		ceg = 'AURA_HERO',
 		encName= 'Hero Aura',
 	},
 	['Frenzy Aura'] = {
@@ -102,7 +102,7 @@ local auraDefs = {
 		ally = true,
 		enemy = false,		
 --		aceg = 'AURA_FOCUS_CASTING',
-		ceg = 'NULL',	
+--		ceg = 'NULL',	
 --		req = UnitDefNames['euf_church'].id,
 		encName= 'Focus Aura',
 	},
@@ -114,7 +114,7 @@ local auraDefs = {
 		ally = false,
 		enemy = true,		
 --		aceg = 'AURA_CURSE_CASTING',
-		ceg = 'NULL',
+--		ceg = 'NULL',
 --		req = UnitDefNames['euf_sanctum'].id,
 		encName= 'Cursed Aura',
 	},
@@ -305,13 +305,18 @@ function gadget:GameFrame(f)
 --						Spring.Echo("Do nothing!")
 					else
 						local states = spGetUnitStates(unitID)
-						if (not states.cloak) then
+						if (auraDefs[auraType].ceg ~= nil and (not states.cloak) and (not spGetUnitRulesParam(unitID,"Heal Aura") == 1)) then
 							local x, y, z = spGetUnitPosition(unitID)
 							spSpawnCEG(auraDefs[auraType].ceg, x+cx, y+cy, z+cz)
 						end
 						--- Heal --
 						if (spGetUnitRulesParam(unitID,"Hero Aura") == 1 or spGetUnitRulesParam(unitID,"Heal Aura") == 1) then
-							spSetUnitHealth(unitID, spGetUnitHealth(unitID)+AURAHEAL ) 					
+							local UnitHealth, UnitMaxHealth = Spring.GetUnitHealth(unitID)
+							if (UnitHealth < UnitMaxHealth) then
+								local x, y, z = spGetUnitPosition(unitID)
+								spSetUnitHealth(unitID, UnitHealth+AURAHEAL ) 
+								spSpawnCEG('AURA_HEAL', x+cx, y+cy, z+cz)
+							end
 						end	
 						-- Pest --
 						if (spGetUnitRulesParam(unitID,"Pest Aura") == 1) then

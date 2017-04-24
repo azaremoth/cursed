@@ -20,7 +20,7 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local UPDATE_PERIOD = 3local BURROWEDHEAL = 1
+local UPDATE_PERIOD = 3local BURROWEDHEAL = 3
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 local floor = math.floor
@@ -489,7 +489,11 @@ function gadget:GameFrame(f)
 	---- heal burrowed units 	if (f % 30) == 2 then
 		for _, unitID in ipairs(Spring.GetAllUnits()) do
 			local burrowed = spGetUnitRulesParam(unitID,"burrowed")
-			if burrowed == 1 then				spSetUnitHealth(unitID, spGetUnitHealth(unitID)+BURROWEDHEAL ) 					end		end	end
+			if burrowed == 1 then
+				local UnitHealth, UnitMaxHealth = Spring.GetUnitHealth(unitID)
+				if (UnitHealth < UnitMaxHealth) then
+					spSetUnitHealth(unitID, UnitHealth+BURROWEDHEAL)
+				end			end		end	end
 	---- remove marked units with at least one game frame delay (to avoid Spring complaining about non-existing recursions)
 	for unitID, gameframe in pairs(GG.delayeddeathlist) do
 		if ((gameframe < Spring.GetGameFrame()) and (unitID ~= nil)) then

@@ -3,6 +3,13 @@
 Bugs
 - fixed faulty links for load screens (build trees did not show up)
 
+Polishing
+- CEG for units in healing aura will only spawn if units are actually healed
+- Vile Necromancer award was implemented
+
+Balance
+- burrowed units will regenerate hp faster
+
 
 
 >> Major changes 1.425 => 1.426

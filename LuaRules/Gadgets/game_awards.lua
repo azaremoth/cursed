@@ -2,7 +2,7 @@ function gadget:GetInfo()
 	return {
 		name    = "Awards",
 		desc    = "v1.002 Awards players at end of battle with shiny trophies.",
-		author  = "CarRepairer",
+		author  = "CarRepairer, aZaremoth",
 		date    = "2008-10-15", --2013-09-05
 		license = "GNU GPL, v2 or later",
 		layer   = 1000000, -- Must be after all other build steps and before unit_spawner.lua for queen kill award.
@@ -79,6 +79,7 @@ local awardAbsolutes = {
 local expUnitTeam, expUnitDefID, expUnitExp = 0,0,0
 
 local awardList = {}
+local awardListForReplay = {}
 local sentAwards = false
 
 local hoverunits = { -- WORKS
@@ -184,12 +185,13 @@ local function getMaxVal(valList)
 end
 
 
-local function awardAward(team, awardType, record)
+local function awardAward(team, awardType, record, maxval)
 	if not awardList[team] then --random check for devving.
 		echo('<Award Error> Missing award list for team ' .. team)
 		return
 	end
 	awardList[team][awardType] = record
+	awardListForReplay[team][awardType] = maxval	
 end
 
 local function CopyTable(original) -- Warning: circular table references lead to
@@ -218,6 +220,7 @@ local function ProcessAwardData()
 		local maxVal
 		local absolute = awardAbsolutes[awardType]
 		local message
+		local recordVal = 0
 
 		if awardType == 'friend' then
 
@@ -254,41 +257,56 @@ local function ProcessAwardData()
 				maxValWrite = comma_value(maxVal)
 
 				if awardType == 'cap' then
-					message = 'Captured value: ' .. maxValWrite
+					message = 'Units captured: ' .. maxValWrite
+					recordVal = maxValWrite
 				elseif awardType == 'share' then
 					message = 'Units shared: ' .. maxValWrite
+					recordVal = maxValWrite
 				elseif awardType == 'rezz' then
 					message = 'Necromanced: ' .. maxValWrite
+					recordVal = maxValWrite
 				elseif awardType == 'fire' then
 					message = 'Burnt value: ' .. maxValWrite
+					recordVal = maxValWrite
 				elseif awardType == 'emp' then
 					message = 'Stunned value: ' .. maxValWrite
+					recordVal = maxValWrite
 				elseif awardType == 'slow' then
 					message = 'Slowed value: ' .. maxValWrite
+					recordVal = maxValWrite
 				elseif awardType == 'ouch' then
 					message = 'Damage received: ' .. maxValWrite
+					recordVal = maxValWrite
 				elseif awardType == 'friend' then
 					message = 'Damage to allies: '.. floor(maxVal * 100) ..'%'
+					recordVal = floor(maxVal * 100)
 				elseif awardType == 'mex' then
 					message = 'Mexes built: '.. maxVal
+					recordVal = maxVal
 				elseif awardType == 'mexkill' then
 					message = 'Mexes destroyed: '.. maxVal
+					recordVal = maxVal
 				elseif awardType == 'herokill' then
 					message = maxVal .. ' Heroes eliminated'
+					recordVal = maxVal
 				elseif awardType == 'drankill' then
 					message = maxVal .. ' Dragons or Angels killed'
+					recordVal = maxVal
 				elseif awardType == 'heart' then
 					local maxQueenKillDamage = maxVal - absolute --remove the queen kill signature: +1000000000 from the total damage
 					message = 'Damage: '.. comma_value(maxQueenKillDamage)
+					recordVal = comma_value(maxQueenKillDamage)
 				elseif awardType == 'sweeper' then
 					message = maxVal .. ' Pitts wiped out'
+					recordVal = maxVal
 				else
 					message = 'Damaged value: '.. maxValWrite
+					recordVal = maxValWrite
 				end
 			end
 		end --if winningTeam
 		if message then
-			awardAward(winningTeam, awardType, message)
+			awardAward(winningTeam, awardType, message, recordVal)
 		end
 
 	end
@@ -319,7 +337,7 @@ function gadget:Initialize()
 	end
 	for _,team in pairs(totalTeamList) do
 		awardList[team] = {}
-
+		awardListForReplay[team] = {}
 		for awardType, _ in pairs(awardDescs) do
 			awardData[awardType][team] = 0
 		end
@@ -476,7 +494,7 @@ function gadget:GameFrame(n)
 		_G.awardList = awardList
 		
 		---- GENERATE MESSAGE FOR REPLAYS
-		for teamID,awards in pairs(awardList) do
+		for teamID,awards in pairs(awardListForReplay) do
 			-- local _,leader,isDead,isAI,_,allyTeamID = Spring.GetTeamInfo(teamID)
 			local SendToReplay = table.concat({CURSED_AWARDMARKER,":",teamID})
 
@@ -506,6 +524,7 @@ else -- UNSYNCED
 local gameOver = false
 local teamNames     = {}
 local awardList
+local awardListForReplay
 
 function gadget:Initialize()
 	local tempTeamList = Spring.GetTeamList()

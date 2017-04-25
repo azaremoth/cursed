@@ -1,5 +1,5 @@
 return {
-	pwn     = 'Complete Annihilation',
+	pwn     = 'Total Pain',
 	hover    = 'Hover Admiral',
 	air     = 'Airforce General',
 	nux     = 'Apocalyptic Achievement Award',

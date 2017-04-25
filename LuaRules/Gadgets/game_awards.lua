@@ -43,6 +43,7 @@ local GetUnitCost           = Spring.Utilities.GetUnitCost
 local CURSED_AWARDMARKER    = [[\180]]
 
 local floor = math.floor
+local totalDamage = 0
 
 local mexDefID = {
 	[UnitDefNames.tc_metalextractor_lvl1.id] = "tc_metalextractor_lvl1",
@@ -144,18 +145,6 @@ end
 ------------------------------------------------
 -- functions
 
-local function comma_value(amount)
-	local formatted = amount .. ''
-	local k
-	while true do
-		formatted, k = formatted:gsub("^(-?%d+)(%d%d%d)", '%1,%2')
-		if (k==0) then
-			break
-		end
-	end
-	return formatted
-end
-
 local function getMeanDamageExcept(excludeTeam)
 	local mean = 0
 	local count = 0
@@ -223,7 +212,6 @@ local function ProcessAwardData()
 		local recordVal = 0
 
 		if awardType == 'friend' then
-
 			maxVal = 0
 			for team,dmg in pairs(data) do
 
@@ -247,36 +235,38 @@ local function ProcessAwardData()
 			local compare
 			if absolute then
 				compare = absolute
-
 			else
 				compare = getMeanDamageExcept(winningTeam)
 			end
 
 			if maxVal > compare then
 				maxVal = floor(maxVal)
-				maxValWrite = comma_value(maxVal)
 
-				if awardType == 'cap' then
-					message = 'Units captured: ' .. maxValWrite
-					recordVal = maxValWrite
+				if awardType == 'pwn' then
+					local relativeDamage = (maxVal/totalDamage)
+					message = 'Damage dealt: ' .. floor(relativeDamage * 100) ..'%'
+					recordVal = floor(relativeDamage * 100)			
+				elseif awardType == 'cap' then
+					message = 'Units captured: ' .. maxVal
+					recordVal = maxVal
 				elseif awardType == 'share' then
-					message = 'Units shared: ' .. maxValWrite
-					recordVal = maxValWrite
+					message = 'Units shared: ' .. maxVal
+					recordVal = maxVal
 				elseif awardType == 'rezz' then
-					message = 'Necromanced: ' .. maxValWrite
-					recordVal = maxValWrite
+					message = 'Necromanced: ' .. maxVal
+					recordVal = maxVal
 				elseif awardType == 'fire' then
-					message = 'Burnt value: ' .. maxValWrite
-					recordVal = maxValWrite
+					message = 'Burnt value: ' .. maxVal
+					recordVal = maxVal
 				elseif awardType == 'emp' then
-					message = 'Stunned value: ' .. maxValWrite
-					recordVal = maxValWrite
+					message = 'Stunned value: ' .. maxVal
+					recordVal = maxVal
 				elseif awardType == 'slow' then
-					message = 'Slowed value: ' .. maxValWrite
-					recordVal = maxValWrite
+					message = 'Slowed value: ' .. maxVal
+					recordVal = maxVal
 				elseif awardType == 'ouch' then
-					message = 'Damage received: ' .. maxValWrite
-					recordVal = maxValWrite
+					message = 'Damage received: ' .. maxVal
+					recordVal = maxVal
 				elseif awardType == 'friend' then
 					message = 'Damage to allies: '.. floor(maxVal * 100) ..'%'
 					recordVal = floor(maxVal * 100)
@@ -294,14 +284,14 @@ local function ProcessAwardData()
 					recordVal = maxVal
 				elseif awardType == 'heart' then
 					local maxQueenKillDamage = maxVal - absolute --remove the queen kill signature: +1000000000 from the total damage
-					message = 'Damage: '.. comma_value(maxQueenKillDamage)
-					recordVal = comma_value(maxQueenKillDamage)
+					message = 'Damage: '.. maxQueenKillDamage
+					recordVal = maxQueenKillDamage
 				elseif awardType == 'sweeper' then
 					message = maxVal .. ' Pitts wiped out'
 					recordVal = maxVal
 				else
-					message = 'Damaged value: '.. maxValWrite
-					recordVal = maxValWrite
+					message = 'Damaged value: '.. maxVal
+					recordVal = maxVal
 				end
 			end
 		end --if winningTeam
@@ -421,7 +411,8 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 		damage = damage + hp
 	end
 	AddAwardPoints( 'ouch', unitTeam, damage )
-
+	totalDamage = (totalDamage + damage) or 0
+	
 	if (not attackerTeam) or (attackerTeam == unitTeam) or (attackerTeam == gaiaTeamID) then return end
 
 	local ud = UnitDefs[unitDefID]
@@ -435,6 +426,9 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 		if paralyzer then
 			AddAwardPoints( 'emp', attackerTeam, costdamage )
 		else
+			
+			AddAwardPoints( 'pwn', attackerTeam, damage )
+			
 			if ud.name == "tc_dragonqueen" then
 				AddAwardPoints( 'heart', attackerTeam, damage )
 			end

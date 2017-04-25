@@ -40,7 +40,7 @@ local spGetUnitExperience   = Spring.GetUnitExperience
 local spGetTeamResources    = Spring.GetTeamResources
 local GetUnitCost           = Spring.Utilities.GetUnitCost
 
-local CURSED_AWARDMARKER    = [[\180]]
+local CURSED_AWARDMARKER    = [[180]]
 
 local floor = math.floor
 local totalDamage = 0
@@ -490,7 +490,7 @@ function gadget:GameFrame(n)
 		---- GENERATE MESSAGE FOR REPLAYS
 		for teamID,awards in pairs(awardListForReplay) do
 			-- local _,leader,isDead,isAI,_,allyTeamID = Spring.GetTeamInfo(teamID)
-			local SendToReplay = table.concat({CURSED_AWARDMARKER,":",teamID})
+			local SendToReplay = table.concat({CURSED_AWARDMARKER,"-",teamID})
 
 			local playerHasAward = false
 			for awardType, record in pairs(awards) do
@@ -498,7 +498,7 @@ function gadget:GameFrame(n)
 			end
 			if playerHasAward then
 				for awardType, record in pairs(awards) do
-					SendToReplay = table.concat({SendToReplay,":",awardType,"(",record,")"})
+					SendToReplay = table.concat({SendToReplay,":",awardType,"/",record})
 				end
 			end
 			Spring.Echo(SendToReplay)

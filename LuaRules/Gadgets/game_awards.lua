@@ -291,9 +291,15 @@ local function ProcessAwardData()
 				elseif awardType == 'fire' then
 					message = 'Burnt value: ' .. maxVal
 					recordVal = maxVal
+				elseif awardType == 'hero' then
+					message = 'Damage by hero: ' .. maxVal
+					recordVal = maxVal
 				elseif awardType == 'emp' then
 					message = 'Stunned value: ' .. maxVal
 					recordVal = maxVal
+				elseif awardType == 'shell' then
+					message = 'Damage by defenses: ' .. maxVal
+					recordVal = maxVal					
 				elseif awardType == 'slow' then
 					message = 'Slowed value: ' .. maxVal
 					recordVal = maxVal

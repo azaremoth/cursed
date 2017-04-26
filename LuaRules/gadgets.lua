@@ -78,7 +78,7 @@ VFS.Include(SCRIPT_DIR .. 'utilities.lua', nil, VFSMODE)
 
 local actionHandler = VFS.Include(HANDLER_DIR .. 'actions.lua', nil, VFSMODE)
 
-local reverseCompat = (Game.version:find('91.0') == 1)
+local reverseCompatAllowStartPosition = not Spring.Utilities.IsCurrentVersionNewerThan(103, 629)
 --------------------------------------------------------------------------------
 
 function pgl() -- (print gadget list)  FIXME: move this into a gadget
@@ -133,6 +133,10 @@ local callInLists = {
 	"GameOver",
 	"GameID",
 	"TeamDied",
+
+	"PlayerAdded",
+	"PlayerChanged",
+	"PlayerRemoved",
 
 	"GameFrame",
 
@@ -208,6 +212,7 @@ local callInLists = {
 	"DrawUnit",
 	"DrawFeature",
 	"DrawShield",
+	"DrawProjectile",
 	"RecvSkirmishAIMessage",
 
 	-- COB CallIn  (FIXME?)
@@ -223,6 +228,7 @@ local callInLists = {
 	"DrawWorldReflection",
 	"DrawWorldRefraction",
 	"DrawScreenEffects",
+	"DrawScreenPost",
 	"DrawScreen",
 	"DrawInMiniMap",
 	"RecvFromSynced",
@@ -1056,10 +1062,6 @@ end
 --    end
 --  end
 --
---  if (reverseCompat and IsSyncedCode()) then
---    SendToUnsynced(player, msg)
---  end
---
 --  return false
 --end
 
@@ -1105,9 +1107,9 @@ end
 --  Game call-ins
 --
 
-function gadgetHandler:GameOver()
+function gadgetHandler:GameOver(winners)
   for _,g in ipairs(self.GameOverList) do
-    g:GameOver()
+    g:GameOver(winners)
   end
   return
 end
@@ -1123,6 +1125,27 @@ end
 function gadgetHandler:TeamDied(teamID)
   for _,g in ipairs(self.TeamDiedList) do
     g:TeamDied(teamID)
+  end
+  return
+end
+
+function gadgetHandler:PlayerAdded(playerID)
+  for _,g in ipairs(self.PlayerAddedList) do
+    g:PlayerAdded(playerID)
+  end
+  return
+end
+
+function gadgetHandler:PlayerChanged(playerID)
+  for _,g in ipairs(self.PlayerChangedList) do
+    g:PlayerChanged(playerID)
+  end
+  return
+end
+
+function gadgetHandler:PlayerRemoved(playerID, reason)
+  for _,g in ipairs(self.PlayerRemovedList) do
+    g:PlayerRemoved(playerID, reason)
   end
   return
 end
@@ -1154,6 +1177,15 @@ end
 function gadgetHandler:DrawShield(unitID, weaponID, drawMode)
   for _,g in ipairs(self.DrawShieldList) do
     if (g:DrawShield(unitID, weaponID, drawMode)) then
+      return true
+    end
+  end
+  return false
+end
+
+function gadgetHandler:DrawProjectile(projectileID, drawMode)
+  for _,g in ipairs(self.DrawProjectileList) do
+    if (g:DrawProjectile(projectileID, drawMode)) then
       return true
     end
   end
@@ -1195,9 +1227,12 @@ function gadgetHandler:AllowCommand(unitID, unitDefID, unitTeam,
   return true
 end
 
-function gadgetHandler:AllowStartPosition(cx, cy, cz, playerID, readyState, rx, ry, rz)
+function gadgetHandler:AllowStartPosition(playerID, teamID, readyState, cx, cy, cz, rx, ry, rz)
+  if reverseCompatAllowStartPosition then
+    cx, cy, cz, playerID, readyState, rx, ry, rz = playerID, teamID, readyState, cx, cy, cz, rx, ry
+  end
   for _,g in ipairs(self.AllowStartPositionList) do
-    if (not g:AllowStartPosition(cx, cy, cz, playerID, readyState, rx, ry, rz)) then
+    if (not g:AllowStartPosition(playerID, teamID, readyState, cx, cy, cz, rx, ry, rz)) then
       return false
     end
   end
@@ -1445,9 +1480,9 @@ function gadgetHandler:UnitIdle(unitID, unitDefID, unitTeam)
 end
 
 
-function gadgetHandler:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag)
+function gadgetHandler:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions, cmdTag)
   for _,g in ipairs(self.UnitCmdDoneList) do
-    g:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag)
+    g:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions, cmdTag)
   end
   return
 end
@@ -1739,11 +1774,11 @@ end
 --  Shield call-ins
 --
 
-function gadgetHandler:ShieldPreDamaged(proID, proOwnerID, shieldEmitterWeaponNum, shieldCarrierUnitID, bounceProjectile)
+function gadgetHandler:ShieldPreDamaged(proID, proOwnerID, shieldEmitterWeaponNum, shieldCarrierUnitID, bounceProjectile, beamEmitter, beamCarrierID)
 
   for _,g in ipairs(self.ShieldPreDamagedList) do
     -- first gadget to handle this consumes the event
-    if (g:ShieldPreDamaged(proID, proOwnerID, shieldEmitterWeaponNum, shieldCarrierUnitID, bounceProjectile)) then
+    if (g:ShieldPreDamaged(proID, proOwnerID, shieldEmitterWeaponNum, shieldCarrierUnitID, bounceProjectile, beamEmitter, beamCarrierID)) then
       return true
     end
   end
@@ -1762,7 +1797,7 @@ local Explosion_GadgetSingle = {}
 
 local Explosion_first = true
 
-function gadgetHandler:Explosion(weaponID, px, py, pz, ownerID)
+function gadgetHandler:Explosion(weaponID, px, py, pz, ownerID, proID)
 	if Explosion_first then
 		for _,g in ipairs(self.ExplosionList) do
 			local weaponDefs = (g.Explosion_GetWantedWeaponDef and g:Explosion_GetWantedWeaponDef()) or allWeaponDefs
@@ -1790,14 +1825,14 @@ function gadgetHandler:Explosion(weaponID, px, py, pz, ownerID)
 	local single = Explosion_GadgetSingle[weaponID]
 	local map = Explosion_GadgetMap[weaponID]
 	if single then
-		noGfx = single:Explosion(weaponID, px, py, pz, ownerID)
+		noGfx = single:Explosion(weaponID, px, py, pz, ownerID, proID)
 	elseif map then
 		local gadgets = map
 		local data = gadgets.data
 		local g
 		for i = 1, gadgets.count do
 			g = data[i]
-			noGfx = noGfx or g:Explosion(weaponID, px, py, pz, ownerID)
+			noGfx = noGfx or g:Explosion(weaponID, px, py, pz, ownerID, proID)
 		end
 	end
 	return noGfx or false
@@ -1888,6 +1923,13 @@ end
 function gadgetHandler:DrawScreenEffects(vsx, vsy)
   for _,g in ipairs(self.DrawScreenEffectsList) do
     g:DrawScreenEffects(vsx, vsy)
+  end
+  return
+end
+
+function gadgetHandler:DrawScreenPost(vsx, vsy)
+  for _,g in ipairs(self.DrawScreenPostList) do
+    g:DrawScreenPost(vsx, vsy)
   end
   return
 end
@@ -2134,10 +2176,6 @@ function gadgetHandler:GotChatMsg(msg, player)
     end
   end
 
-  if (reverseCompat and IsSyncedCode()) then
-    SendToUnsynced("proxy_ChatMsg", msg, player)	-- ours
-    --SendToUnsynced(player, msg)	-- base
-  end
   return false
 end
 

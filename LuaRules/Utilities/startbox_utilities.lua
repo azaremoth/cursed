@@ -82,13 +82,15 @@ local function SanitizeBoxes (boxes)
 	end
 end
 
-function ParseBoxes ()
+function ParseBoxes (backupSeed)
 	local mapsideBoxes = "mapconfig/map_startboxes.lua"
 	local modsideBoxes = "LuaRules/Configs/StartBoxes/" .. (Game.mapName or "") .. ".lua"
+	backupSeed = backupSeed or 0
 
 	local startBoxConfig
 
-	math.randomseed(Spring.GetGameRulesParam("public_random_seed"))
+	math.randomseed(Spring.GetGameRulesParam("public_random_seed") or backupSeed)
+	Spring.Echo("read public_random_seed", Spring.GetGameRulesParam("public_random_seed"), backupSeed)
 
 	if VFS.FileExists (modsideBoxes) then
 		startBoxConfig = VFS.Include (modsideBoxes)
@@ -218,12 +220,13 @@ function ParseBoxes ()
 	return startBoxConfig
 end
 
-function GetRawBoxes ()
+function GetRawBoxes(backupSeed)
 	local mapsideBoxes = "mapconfig/map_startboxes.lua"
 	local modsideBoxes = "LuaRules/Configs/StartBoxes/" .. (Game.mapName or "") .. ".lua"
+	backupSeed = backupSeed or 0
 
 	local startBoxConfig
-	math.randomseed(Spring.GetGameRulesParam("public_random_seed"))
+	math.randomseed(Spring.GetGameRulesParam("public_random_seed") or backupSeed)
 
 	if VFS.FileExists (modsideBoxes) then
 		startBoxConfig = VFS.Include (modsideBoxes)
@@ -301,6 +304,17 @@ function GetRawBoxes ()
 		end
 	end
 
+	-- fix rendering z-fighting
+	for boxid, box in pairs(startBoxConfig) do
+		for i = 1, #box.boxes do
+			for j = 1, #box.boxes[i] do
+				if box.boxes[i][j][2] > Game.mapSizeZ - 1 then
+					box.boxes[i][j][2] = Game.mapSizeZ - 1
+				end
+			end
+		end
+	end
+
 	return startBoxConfig
 end
 
@@ -311,8 +325,18 @@ function GetTeamCount()
 	for i = 1, #allyTeamList do
 		local teamList = Spring.GetTeamList(allyTeamList[i]) or {}
 		if ((#teamList > 0) and (allyTeamList[i] ~= gaiaAllyTeamID)) then
-			actualAllyTeamList[#actualAllyTeamList+1] = allyTeamList[i]
+			local isTeamValid = true
+			for j = 1, #teamList do
+				local luaAI = Spring.GetTeamLuaAI(teamList[j])
+				if luaAI and luaAI:find("Chicken") then
+					isTeamValid = false
+				end
+			end
+			if isTeamValid then
+				actualAllyTeamList[#actualAllyTeamList+1] = allyTeamList[i]
+			end
 		end
 	end
 	return #actualAllyTeamList
 end
+

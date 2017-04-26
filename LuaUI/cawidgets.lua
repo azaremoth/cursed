@@ -36,7 +36,16 @@ includeZIPFirst("cache.lua") --contain cached override for Spring.GetVisibleUnit
 include("callins.lua")
 include("savetable.lua")
 include("utility_two.lua") --contain file backup function: CheckLUAFileAndBackup()
+
+Spring.Utilities = {}
+VFS.Include("LuaRules/Utilities/tablefunctions.lua")
+VFS.Include("LuaRules/Utilities/versionCompare.lua")
+VFS.Include("LuaRules/Utilities/function_override.lua")
+
+local reverseCompat = not Spring.Utilities.IsCurrentVersionNewerThan(100, 0)
+
 local myName, transmitMagic, voiceMagic, transmitLobbyMagic, MessageProcessor = include("chat_preprocess.lua") -- contain stuff that preprocess chat message for Chili Chat widgets
+
 
 local modShortUpper = Game.modShortName:upper()
 local ORDER_FILENAME     = LUAUI_DIRNAME .. 'Config/' .. modShortUpper .. '_order.lua'
@@ -1481,6 +1490,12 @@ function widgetHandler:DrawScreenEffects(vsx, vsy)
   return
 end
 
+function widgetHandler:DrawScreenPost(vsx, vsy)
+  for _,w in ripairs(self.DrawScreenPostList) do
+    w:DrawScreenPost(vsx, vsy)
+  end
+  return
+end
 
 function widgetHandler:DrawInMiniMap(xSize, ySize)
   for _,w in ripairs(self.DrawInMiniMapList) do
@@ -1787,9 +1802,9 @@ function widgetHandler:GameStart()
   return
 end
 
-function widgetHandler:GameOver()
+function widgetHandler:GameOver(winners)
   for _,w in ipairs(self.GameOverList) do
-    w:GameOver()
+    w:GameOver(winners)
   end
   return
 end
@@ -1940,6 +1955,12 @@ function widgetHandler:UnitFinished(unitID, unitDefID, unitTeam)
   return
 end
 
+function widgetHandler:UnitReverseBuilt(unitID, unitDefID, unitTeam)
+  for _,w in ipairs(self.UnitReverseBuiltList) do
+    w:UnitReverseBuilt(unitID, unitDefID, unitTeam)
+  end
+  return
+end
 
 function widgetHandler:UnitFromFactory(unitID, unitDefID, unitTeam,
                                        factID, factDefID, userOrders)
@@ -1951,7 +1972,8 @@ function widgetHandler:UnitFromFactory(unitID, unitDefID, unitTeam,
 end
 
 
-function widgetHandler:UnitDestroyed(unitID, unitDefID, unitTeam)
+function widgetHandler:UnitDestroyed(unitID, unitDefID, unitTeam, pre)
+  if pre == false then return end
   for _,w in ipairs(self.UnitDestroyedList) do
     w:UnitDestroyed(unitID, unitDefID, unitTeam)
   end
@@ -2002,21 +2024,28 @@ end
 
 
 function widgetHandler:UnitCommand(unitID, unitDefID, unitTeam,
-                                   cmdId, cmdOpts, cmdParams,cmdTag) --cmdTag available in Spring 95
+                                   cmdId, cmdParams, cmdOpts, cmdTag) --cmdTag available in Spring 95
+  if reverseCompat then
+    cmdOpts, cmdParams = cmdParams, cmdOpts
+  end
   for _,w in ipairs(self.UnitCommandList) do
     w:UnitCommand(unitID, unitDefID, unitTeam,
-                  cmdId, cmdOpts, cmdParams,cmdTag)
+                  cmdId, cmdParams, cmdOpts, cmdTag)
   end
   return
 end
 
 
-function widgetHandler:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag, cmdParams, cmdOptions) --cmdParams & cmdOptions available in Spring 95
+function widgetHandler:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions, cmdTag) --cmdParams & cmdOptions available in Spring 95
+  if reverseCompat then
+    cmdOptions, cmdParams = cmdParams, cmdOptions
+  end
   for _,w in ipairs(self.UnitCmdDoneList) do
-    w:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdTag, cmdParams, cmdOptions)
+    w:UnitCmdDone(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions, cmdTag)
   end
   return
 end
+
 
 
 function widgetHandler:UnitDamaged(unitID, unitDefID, unitTeam,
@@ -2175,36 +2204,55 @@ end
 -- local helper (not a real call-in)
 local oldSelection = {}
 function widgetHandler:UpdateSelection()
-  local changed
-  local newSelection = Spring.GetSelectedUnits()
-  if (#newSelection == #oldSelection) then
-    for i=1, #newSelection do
-      if (newSelection[i] ~= oldSelection[i]) then -- it seems the order stays
-        changed = true
-        break
-      end                                          
-    end
-  else
-    changed = true
-  end
-  if (changed) then
-    widgetHandler:SelectionChanged(newSelection)
-  end
-  oldSelection = newSelection
+	local changed
+	local newSelection = Spring.GetSelectedUnits()
+	if (#newSelection == #oldSelection) then
+		for i = 1, #oldSelection do
+			if (newSelection[i] ~= oldSelection[i]) then -- it seems the order stays
+				changed = true
+				break
+			end                                          
+		end
+	else
+		changed = true
+	end
+	if (changed) then
+		local subselection = true
+		if #newSelection > #oldSelection then
+			subselection = false
+		else
+			local newSeen = 0
+			local oldSelectionMap = {}
+			for i = 1, #oldSelection do
+				oldSelectionMap[oldSelection[i]] = true
+			end
+			for i = 1, #newSelection do
+				if not oldSelectionMap[newSelection[i]] then
+					subselection = false
+					break
+				end
+			end
+		end
+		if widgetHandler:SelectionChanged(newSelection, subselection) then
+			-- selection changed, don't set old selection to new selection as it is soon to change.
+			return true
+		end
+	end
+	oldSelection = newSelection
+	return false
 end
 
 
-function widgetHandler:SelectionChanged(selectedUnits)
+function widgetHandler:SelectionChanged(selectedUnits, subselection)
   for _,w in ipairs(self.SelectionChangedList) do
-    local unitArray = w:SelectionChanged(selectedUnits)
+    local unitArray = w:SelectionChanged(selectedUnits, subselection)
     if (unitArray) then
       Spring.SelectUnitArray(unitArray)
-      break
+      return true
     end
   end
-  return
+  return false
 end
-
 
 function widgetHandler:GameProgress(frame)
   for _,w in ipairs(self.GameProgressList) do

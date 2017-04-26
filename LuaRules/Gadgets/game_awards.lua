@@ -90,6 +90,17 @@ local hoverunits = { -- WORKS
 	[UnitDefNames.euf_hover.id] = "euf_hover",
 }
 
+local lycanunits = { -- WORKS
+	[UnitDefNames.euf_wolf.id] = "euf_wolf",
+	[UnitDefNames.euf_werewolf.id] = "euf_werewolf",
+}
+
+local bugunits = { -- WORKS
+	[UnitDefNames.bug_larva.id] = "bug_larva",
+	[UnitDefNames.bug_med.id] = "bug_med",
+	[UnitDefNames.bug_big.id] = "bug_big",	
+}
+
 local dranUnits = {
 	[UnitDefNames.tc_dragon.id] = "tc_dragon",
 	[UnitDefNames.euf_angel.id] = "euf_angel",
@@ -249,6 +260,12 @@ local function ProcessAwardData()
 				elseif awardType == 'cap' then
 					message = 'Units captured: ' .. maxVal
 					recordVal = maxVal
+				elseif awardType == 'bug' then
+					message = 'Bugs killed: ' .. maxVal
+					recordVal = maxVal
+				elseif awardType == 'lycan' then
+					message = 'Werewolfs killed: ' .. maxVal
+					recordVal = maxVal
 				elseif awardType == 'share' then
 					message = 'Units shared: ' .. maxVal
 					recordVal = maxVal
@@ -383,11 +400,13 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam, _, _, killerTeam)
 		local ud = UnitDefs[unitDefID]
 	
 		if ((mexDefID[unitDefID]) and (not spAreTeamsAllied(killerTeam, unitTeam))) then
---			Spring.Echo("MEX killed award point")		
 			AddAwardPoints( 'mexkill', killerTeam, 1 )
 		elseif (IsAHero[unitDefID] and (not spAreTeamsAllied(killerTeam, unitTeam))) then
---			Spring.Echo("Hero killed award point")
 			AddAwardPoints( 'herokill', killerTeam, 1 )
+		elseif (lycanunits[unitDefID] and (not spAreTeamsAllied(killerTeam, unitTeam))) then
+			AddAwardPoints( 'lycan', killerTeam, 1 )
+		elseif (bugunits[unitDefID] and (not spAreTeamsAllied(killerTeam, unitTeam))) then
+			AddAwardPoints( 'bug', killerTeam, 1 )
 		elseif (SuperUnitDefID[unitDefID] and (not spAreTeamsAllied(killerTeam, unitTeam))) then
 			AddAwardPoints( 'drankill', killerTeam, 1 )
 		elseif ud.name == "tc_dragonqueen" then

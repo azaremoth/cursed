@@ -1,6 +1,8 @@
 return {
 	pwn     = 'Total Pain',
-	hover    = 'Hover Admiral',
+	bug     = 'Bug Hunter',
+	lycan   = 'Werewolf Hunter',
+	hover   = 'Hover Admiral',
 	air     = 'Airforce General',
 	nux     = 'Apocalyptic Achievement Award',
 	friend  = 'Friendly Fire Award',

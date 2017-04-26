@@ -10,7 +10,7 @@ local unitDef = {
   buildCostEnergy    = 350,
   buildCostMetal     = 350,
   
-  buildingGroundDecalDecaySpeed = 0.0,
+buildingGroundDecalDecaySpeed = 0.2,
   buildingGroundDecalSizeX = 5,
   buildingGroundDecalSizeY = 5,
   buildingGroundDecalType = "euf_groundplate3.png",

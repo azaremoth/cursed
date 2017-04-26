@@ -1,3 +1,10 @@
+>> Major changes 1.427 => 1.428
+
+Bugs
+- fixed ground plates never to disappear
+
+
+
 >> Major changes 1.426 => 1.427
 
 Bugs
@@ -1126,4 +1133,3 @@ Music:
 - assistance: only Necromancers and Liches can assist each other, factories can`t be assisted as well as obelisks. Obelisks can't assist either. The Altar of Darkness MUST be assisted by Necromancers and Liches
 - few small fixes and balance changes
 - reduced the particle count of the building effects massively
-

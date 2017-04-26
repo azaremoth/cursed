@@ -11,7 +11,7 @@ local unitDef = {
   buildCostMetal     = 1000,
   buildTime          = 1000,
   
-  buildingGroundDecalDecaySpeed = 0.001,
+  buildingGroundDecalDecaySpeed = 0.005,
   buildingGroundDecalSizeX = 16,
   buildingGroundDecalSizeY = 16,
   buildingGroundDecalType = "tc_groundplate1.png",

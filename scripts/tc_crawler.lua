@@ -275,7 +275,8 @@ function script.Killed(recentDamage,maxHealth )
 
 	local severity = recentDamage/maxHealth
 
-	Explode(gun, math.bit_or(SFX.FALL, SFX.EXPLODE_ON_HIT ) )
+	Explode(rfleg1, math.bit_or(SFX.FALL, SFX.EXPLODE_ON_HIT ) )
+	Explode(rfleg2, math.bit_or(SFX.FALL, SFX.EXPLODE_ON_HIT ) )	
 	Explode(tail1, math.bit_or(SFX.FALL , SFX.SMOKE , SFX.EXPLODE_ON_HIT ) )
 	Explode(tail2, math.bit_or(SFX.FALL , SFX.SMOKE , SFX.EXPLODE_ON_HIT ) )
 	EmitSfx(body, BLOODSPRAY)

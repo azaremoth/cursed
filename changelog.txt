@@ -1,15 +1,17 @@
->> Major changes 1.427 => 1.428
+>> Major changes 1.428 => 1.429
 
-Bugs
-- fixed ground plates never to disappear
+Balance
+- flight height of all flyers was readjusted (gunships 150, bomber 225, intercetor 250, seeker 80)
+- removed AA capabilities from the imperial raider
+- increased hp of the imperial bunker by 12.5%
 
 
-
->> Major changes 1.426 => 1.427
+>> Major changes 1.426 => 1.428
 
 Bugs
 - fixed faulty links for load screens (build trees did not show up)
 - fixed adjustments to starting metal and energy not being respected by the game
+- fixed ground plates never to disappear
 
 Polishing
 - CEG for units in healing aura will only spawn if units are actually healed

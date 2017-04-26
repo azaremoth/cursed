@@ -661,21 +661,23 @@ local function makeWantedDefence(team,unitID,searchRange, maxDistance, priorityD
 	z = z + math.random(-searchRange,searchRange)
 	
 	for i = 1, wantedDefence.count do
-		if spTestBuildOrder(wantedDefence[i].ID, wantedDefence[i].x, 0 ,wantedDefence[i].z, 1) ~= 0 then
-			local dis = disSQ(wantedDefence[i].x,wantedDefence[i].z,x,z)
-			if ((not maxDistance) or maxDistance^2 < dis) and minPriority == wantedDefence[i].priority then
-				if ((not minDefDisSQ) or dis < minDefDisSQ) then
+		if (wantedDefence[i].ID ~= nil and wantedDefence[i].x ~= nil and wantedDefence[i].z ~= nil) then
+			if spTestBuildOrder(wantedDefence[i].ID, wantedDefence[i].x, 0 ,wantedDefence[i].z, 1) ~= 0 then
+				local dis = disSQ(wantedDefence[i].x,wantedDefence[i].z,x,z)
+				if ((not maxDistance) or maxDistance^2 < dis) and minPriority == wantedDefence[i].priority then
+					if ((not minDefDisSQ) or dis < minDefDisSQ) then
+						minDefDisSQ = dis
+						minDeftID = i
+					end
+				elseif ((not priorityDistance) or dis < priorityDistance^2) and minPriority < wantedDefence[i].priority then
 					minDefDisSQ = dis
 					minDeftID = i
+					minPriority = wantedDefence[i].priority
 				end
-			elseif ((not priorityDistance) or dis < priorityDistance^2) and minPriority < wantedDefence[i].priority then
-				minDefDisSQ = dis
-				minDeftID = i
-				minPriority = wantedDefence[i].priority
+			else
+				removeIndexFromArray(wantedDefence,i)
+				break
 			end
-		else
-			removeIndexFromArray(wantedDefence,i)
-			break
 		end
 	end
 	

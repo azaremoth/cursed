@@ -35,7 +35,7 @@ local unitDef = {
 	normalmaps = "yes",			
     helptext = "The Interceptor is the ideal choice against airborne targets."	
 	},
-  cruiseAlt          = 400,
+  cruiseAlt          = 250,
   dontland           = "1",
   --  energyMake         = "-1",
   explodeAs          = "SMALL_EXPLOSION_YELLOW",

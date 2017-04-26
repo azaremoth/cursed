@@ -275,7 +275,8 @@ if not spIsGUIHidden() then
       --if (spIsUnitVisible(visUnits[i])) then
       if (not spGetUnitNoDraw(visUnits[i])) then
         local teamID = spGetUnitTeam(visUnits[i])
-        if (teamID) then
+		local gaiaTeamID = Spring.GetGaiaTeamID()
+        if (teamID and (gaiaTeamID ~= teamID)) then
           local udid = spGetUnitDefID(visUnits[i])
           local radius = GetUnitDefRealRadius(udid)
           if (radius) then

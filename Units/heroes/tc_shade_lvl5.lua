@@ -117,7 +117,7 @@ local unitDef = {
       mainDir            	= "0 0 1",
       maxAngleDif        	= 360,
 	  badTargetCategory 	= "AIR",
-      onlyTargetCategory 	= "LAND AIR",
+      onlyTargetCategory 	= "LAND",
     },
   },
 }

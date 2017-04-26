@@ -1,5 +1,8 @@
+- undead units summoned from hell strom
+- undead bugs
 - GAIA and AI units burrowing
 - normal mapped creep
 - growing creep
 - feature conversion on creep
 - fixing strange shader effect for derefered lights on terrain/maps with normals applied and normal mapped units
+- allied KOTH support

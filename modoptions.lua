@@ -63,7 +63,7 @@ local options={
 	{
 		key="cheatingai",
 		name="Should the AI cheat?",
-		desc="A cheating AI starts with some defense buildings, base shields and an energy and metal producing central building.",
+		desc="A cheating AI starts in skirmishes with some defense buildings, base shields and an energy and metal producing central building.",
 		type = "bool",
 		def = false,
 		section= "e_aioptions",	

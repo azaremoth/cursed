@@ -23,7 +23,7 @@ local unitDef = {
   acceleration       = 0.5,
   airHoverFactor     = 0,
   brakeRate          = 1.0,
-  cruiseAlt          = 400,
+  cruiseAlt          = 250,
   maxVelocity        = 13,
   turnRate           = 1024,
 --

@@ -36,7 +36,7 @@ local unitDef = {
   acceleration       = 1.0,
   airHoverFactor     = 0.1,
   brakeRate          = 0.66,
-  cruiseAlt          = 180,
+  cruiseAlt          = 150,
   maxVelocity        = 6.0,
   turnRate           = 500,
 -- Collision

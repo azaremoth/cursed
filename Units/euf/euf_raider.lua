@@ -114,7 +114,7 @@ local unitDef = {
       badTargetCategory  = "HEAVYARMOR",
       def                = "RAIDER_LASER",
       badTargetCategory = "AIR",	  
-      onlyTargetCategory = "LAND AIR",
+      onlyTargetCategory = "LAND",
     },
   },
 }

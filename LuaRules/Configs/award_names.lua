@@ -19,7 +19,6 @@ return {
 	hero    = 'Heros do the job',
 	mex     = 'Mineral Prospector',
 	mexkill = 'Loot & Pillage',
-	rage    = 'Rage Inducer',
 	herokill = 'Hero Hunter',
 	drankill = 'Dragon & Angel Slayer',
 	heart   = 'Queen Heart Breaker',

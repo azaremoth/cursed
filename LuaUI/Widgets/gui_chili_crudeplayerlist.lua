@@ -64,7 +64,7 @@ local function IsFFA()
 	return numAllyTeams > 2
 end
 	
-local cf = IsFFA()
+-- local cf = IsFFA()
 
 if not WG.rzones then
 	WG.rzones = {
@@ -219,7 +219,7 @@ end
 ]]--
 
 -- ceasefire button tooltip
-local function CfTooltip(allyTeam)
+--[[local function CfTooltip(allyTeam)
 	local tooltip = ''
 	
 	if Spring.GetGameRulesParam('cf_' .. localAlliance .. '_' .. allyTeam) == 1 then
@@ -256,7 +256,7 @@ local function CfTooltip(allyTeam)
 		..'unchecking the box will break it.'
 	
 	return tooltip
-end
+end]]
 
 -- spectator tooltip
 -- not shown if they're in playerlist as well
@@ -344,15 +344,15 @@ local function UpdatePlayerInfo()
 	end	-- for entities
 	MakeSpecTooltip()
 	
-	for allyTeam, cb in pairs(cfCheckBoxes) do
-		cb.tooltip = CfTooltip(allyTeam)
-	end
+--	for allyTeam, cb in pairs(cfCheckBoxes) do
+--		cb.tooltip = CfTooltip(allyTeam)
+--	end
 end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local function AddCfCheckbox(allyTeam)
+--[[local function AddCfCheckbox(allyTeam)
 	local fontsize = options.text_height.value
 	if cf and allyTeam ~= -1 and allyTeam ~= localAlliance then
 		local cfCheck = Checkbox:New{
@@ -368,7 +368,7 @@ local function AddCfCheckbox(allyTeam)
 		scroll_cpl:AddChild(cfCheck)
 		cfCheckBoxes[allyTeam] = cfCheck
 	end
-end
+end]]
 
 
 local function	WriteAllyTeamNumbers(allyTeam)
@@ -378,10 +378,10 @@ local function	WriteAllyTeamNumbers(allyTeam)
 		aCol = {1,1,1,1}
 	elseif allyTeam == localAlliance then
 		aCol = {0,1,1,1}
-	elseif Spring.GetGameRulesParam('cf_' .. localAlliance .. '_' .. allyTeam) == 1 then
-		aCol = {0,1,0,1}
-	elseif Spring.GetGameRulesParam('cf_offer_' .. localAlliance .. '_' .. allyTeam) == 1 then
-		aCol = {1,0.5,0,1}
+--	elseif Spring.GetGameRulesParam('cf_' .. localAlliance .. '_' .. allyTeam) == 1 then
+--		aCol = {0,1,0,1}
+--	elseif Spring.GetGameRulesParam('cf_offer_' .. localAlliance .. '_' .. allyTeam) == 1 then
+--		aCol = {1,0.5,0,1}
 	end
 	
 	-- allyteam number
@@ -600,7 +600,7 @@ local function AddAllyTeam(allyTeamID)
 	if not options.allyTeamPerTeam.value then
 		WriteAllyTeamNumbers(allyTeamID)
 	end
-	AddCfCheckbox(allyTeamID)
+--	AddCfCheckbox(allyTeamID)
 	
 	-- add each team in the allyteam
 	for i=1,#allyTeams[allyTeamID] do
@@ -633,9 +633,9 @@ SetupPlayerNames = function()
 	scroll_cpl:ClearChildren()
 	
 	scroll_cpl:AddChild( Label:New{ x=x_team, 		caption = 'T', 		fontShadow = true, 	fontsize = fontsize, } )
-	if cf then
-		scroll_cpl:AddChild( Label:New{ x=x_cf,		caption = 'CF',		fontShadow = true, 	fontsize = fontsize, } )
-	end
+--	if cf then
+--		scroll_cpl:AddChild( Label:New{ x=x_cf,		caption = 'CF',		fontShadow = true, 	fontsize = fontsize, } )
+--	end
 	scroll_cpl:AddChild( Label:New{ x=x_name, 	caption = 'Name', 	fontShadow = true,  fontsize = fontsize,} )
 	scroll_cpl:AddChild( Label:New{ x=x_cpu, 	caption = 'C', 	fontShadow = true,  fontsize = fontsize,} )
 	scroll_cpl:AddChild( Label:New{ x=x_ping, 	caption = 'P', 	fontShadow = true,  fontsize = fontsize,} )
@@ -715,7 +715,7 @@ SetupPlayerNames = function()
 	]]--
 	
 	-- ceasefire: restricted zones button
-	if cf then
+--[[	if cf then
 		scroll_cpl:AddChild( Checkbox:New{
 			x=5, y=(fontsize+1) * (row + 0.5),
 			height=fontsize * 1.5, width=160,
@@ -724,7 +724,7 @@ SetupPlayerNames = function()
 			OnChange = { function(self) WG.rzones.rZonePlaceMode = not WG.rzones.rZonePlaceMode; end },
 		} )
 		row = row + 1.5
-	end
+	end]]
 	
 	AlignScrollPanel()
 end

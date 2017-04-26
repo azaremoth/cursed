@@ -65,6 +65,8 @@ local minFriendRatio = 0.25
 
 
 local awardAbsolutes = {
+	bug         = 5,
+	lycan 		= 1,
 	cap         = 10,
 	share       = 30,
 	rezz        = 30,
@@ -74,8 +76,18 @@ local awardAbsolutes = {
 	drankill    = 3,
 	sweeper     = 20,
 	heart       = 1*10^9, --we should not exceed 2*10^9 because math.floor-ing the value will return integer -2147483648. Reference: https://code.google.com/p/zero-k/source/detail?r=9681
+	hover       = 2000,
+	air         = 2000, 
+	nux         = 2000,
+	friend       = 2000,
+	shell        = 2000,
+	fire          = 2000,
+	emp         = 500,
+	slow         = 500,
+	dran        = 2000,
+	kam        = 2000,
+	hero          = 2000, 
 }
-
 
 local expUnitTeam, expUnitDefID, expUnitExp = 0,0,0
 
@@ -254,9 +266,13 @@ local function ProcessAwardData()
 				maxVal = floor(maxVal)
 
 				if awardType == 'pwn' then
-					local relativeDamage = (maxVal/totalDamage)
-					message = 'Damage dealt: ' .. floor(relativeDamage * 100) ..'%'
-					recordVal = floor(relativeDamage * 100)			
+					local relativeDamageGiven = (maxVal/totalDamage)
+					message = 'Damage dealt: ' .. floor(relativeDamageGiven * 100) ..'%'
+					recordVal = floor(relativeDamageGiven * 100)							
+				elseif awardType == 'ouch' then
+					local relativeDamageTaken = (maxVal/totalDamage)
+					message = 'Damage taken: ' .. floor(relativeDamageTaken * 100) ..'%'
+					recordVal = floor(relativeDamageTaken * 100)		
 				elseif awardType == 'cap' then
 					message = 'Units captured: ' .. maxVal
 					recordVal = maxVal
@@ -280,9 +296,6 @@ local function ProcessAwardData()
 					recordVal = maxVal
 				elseif awardType == 'slow' then
 					message = 'Slowed value: ' .. maxVal
-					recordVal = maxVal
-				elseif awardType == 'ouch' then
-					message = 'Damage received: ' .. maxVal
 					recordVal = maxVal
 				elseif awardType == 'friend' then
 					message = 'Damage to allies: '.. floor(maxVal * 100) ..'%'
@@ -451,30 +464,26 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 			if ud.name == "tc_dragonqueen" then
 				AddAwardPoints( 'heart', attackerTeam, damage )
 			end
-			local ad = UnitDefs[attackerDefID]
+			
 
 			if (flamerWeaponDefs[weaponID]) then
 				AddAwardPoints( 'fire', attackerTeam, costdamage )
 			end
 
-			if staticO_big[attackerDefID] then
-					AddAwardPoints( 'nux', attackerTeam, costdamage )
 
+			local ad = UnitDefs[attackerDefID]		
+			if IsAHero[attackerDefID] then
+				AddAwardPoints( 'hero', attackerTeam, costdamage )
+			elseif staticO_big[attackerDefID] then
+					AddAwardPoints( 'nux', attackerTeam, costdamage )
 			elseif staticO_small[attackerDefID] then
 				AddAwardPoints( 'shell', attackerTeam, costdamage )
-
 			elseif kamikaze[attackerDefID] then
 				AddAwardPoints( 'kam', attackerTeam, costdamage )
-
 			elseif hoverunits[attackerDefID] then
 				AddAwardPoints( 'hover', attackerTeam, costdamage )
-
 			elseif dranUnits[attackerDefID] then
 				AddAwardPoints( 'dran', attackerTeam, costdamage )
-
-			elseif IsAHero[attackerDefID] then
-				AddAwardPoints( 'hero', attackerTeam, costdamage )
-
 			elseif ad.canFly and not (ad.customParams.dontcount or ad.customParams.is_drone) then
 				AddAwardPoints( 'air', attackerTeam, costdamage )				
 				
@@ -520,7 +529,7 @@ function gadget:GameFrame(n)
 					SendToReplay = table.concat({SendToReplay,":",awardType,"/",record})
 				end
 			end
-			Spring.Echo(SendToReplay)
+			-- Spring.Echo(SendToReplay)
 			Spring.SendLuaRulesMsg(SendToReplay)
 		end
 		

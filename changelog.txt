@@ -6,11 +6,12 @@ Bugs
 
 Polishing
 - CEG for units in healing aura will only spawn if units are actually healed
-- Vile Necromancer award was implemented
+- Awards were fully implemented includung a new set of trophies
 
 Balance
 - burrowed units will regenerate hp faster
 - hps of the cursed Altar of Evil was increased to be balanced against the imperial tech center. One nuke was sufficient to eliminate the altar.
+- hps of the imperial aa tower were reduced by 17%
 
 
 

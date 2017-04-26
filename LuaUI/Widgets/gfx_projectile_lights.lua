@@ -114,7 +114,7 @@ options = {
 	light_brightness = {
 		name = 'Light Brightness',
 		type = 'number',
-		value = 2,
+		value = 1,
 		min = 0.05, max = 5, step = 0.05,
 		OnChange = function (self) 
 			colorBrightness = self.value

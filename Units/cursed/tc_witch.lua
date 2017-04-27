@@ -30,7 +30,6 @@ local unitDef = {
   canRestore	     = false,
   canResurrect       = false,
   canstop            = "1",
-  captureSpeed       = 10,
   category           = "CURSED LAND LIGHTARMOR",
   cloakCost          = 0, --was 40
   cloakCostMoving    = 0, --was 80
@@ -72,10 +71,7 @@ local unitDef = {
   objectName         = "tc_witch.s3o",
   onoffable          = false,
   radarDistance      = 768,
-  reclaimSpeed       = 0,
-  repairSpeed        = 0,
   repairable         = false,     
-  resurrectSpeed     = 0,
   script             = 'tc_witch.lua',   
   selfDestructAs     = "BLOOD_EXPLOSION",
   showNanoFrame      = false,
@@ -90,8 +86,15 @@ local unitDef = {
   turnRate           = 1500,
   unitname           = "tc_witch",
   upright            = true,
-  workerTime         = 10,
 
+  -- remark: will be overwriten by unit_attriutes.lua based on factors multiplied with workertime
+  resurrectSpeed     = 0,
+  captureSpeed       = 6,
+  repairSpeed        = 0,
+  reclaimSpeed       = 0,
+  workerTime         = 6,
+  terraformSpeed     = 0,
+  
   sfxtypes = {
     explosiongenerators = {
       "custom:BLOOD_EXPLOSION",

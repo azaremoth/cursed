@@ -24,7 +24,6 @@ local unitDef = {
   canReclaim         = true,
   canRepair          = true,
   canstop            = "1",
-  captureSpeed       = 0,
   category           = "CURSED LAND HEAVYARMOR",
   corpse             = "dead",
   customParams          = {
@@ -55,19 +54,23 @@ local unitDef = {
   nanoColor          = "0.6 1 0.15",
   objectName         = "TC_Obelisk_lvl2.s3o",
   radarDistance      = 1024,
-  reclaimSpeed       = 5,
-  repairSpeed        = 5,
-  resurrectSpeed     = 0,
   selfDestructAs     = "SMALL_EXPLOSION_GREEN",
   showNanoFrame      = false,
   showNanoSpray      = false,
   side               = "cursed",
   sightDistance      = 1024,
   smoothAnim         = false,
-  terraformSpeed     = 1500,
   unitname           = "tc_obelisk_lvl2",
-  useBuildingGroundDecal = true,  
-  workerTime         = 20,
+  useBuildingGroundDecal = true, 
+
+  -- remark: will be overwriten by unit_attriutes.lua based on factors multiplied with workertime  
+  resurrectSpeed     = 0,
+  captureSpeed       = 0,   
+  repairSpeed        = 12,
+  reclaimSpeed       = 24,
+  workerTime         = 24,
+  terraformSpeed     = 96,
+ 
   buildoptions = {
     "tc_obelisk_lvl2",
     "tc_obelisk",

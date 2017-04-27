@@ -150,10 +150,10 @@ local weaponDefs = {
     weaponType         = "BeamLaser",
 ------------------------------------------------------------		
 	damage = {
-      default            = 22,
-      flyer              = (22*1.5),
-      heavy              = (22*0.75),
-      light              = 22,
+      default            = 23,
+      flyer              = (23*1.5),
+      heavy              = (23*0.75),
+      light              = 23,
     },
   },
 }

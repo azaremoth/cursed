@@ -51,7 +51,7 @@ local unitDef = {
   mass               = 5000,
   maxDamage          = 800,
   maxSlope           = 14,
-  maxVelocity        = 1.5,
+  maxVelocity        = 1.8,
   maxWaterDepth      = 500,
   metalMake          = 1.0,
   metalStorage       = 0,
@@ -61,9 +61,6 @@ local unitDef = {
   noChaseCategory    = "AIR",
   objectName         = "euf_constructor_lvl2.s3o",
   radarDistance      = 768,
-  reclaimSpeed       = 5,
-  repairSpeed        = 5,
-  resurrectSpeed     = 0,
   script             = "euf_constructor_lvl2.cob",  
   selfDestructAs     = "SMOKE_EXPLOSION",
   showNanoFrame      = false,
@@ -81,21 +78,19 @@ local unitDef = {
   trackStretch           = 1,
   trackType              = [[StdTank]],
   trackWidth             = 30,  
-  
-  
-  terraformSpeed     = 1200,
- 
-  leavetracks            = 1,
-  trackOffset            = 0,
-  trackStrength          = 10,
-  trackStretch           = 1,
-  trackType              = [[StdTank]],
-  trackWidth             = 30, 
  
   turnRate           = 500,
   unitname           = "euf_constructor_lvl2",
   upright            = false,
-  workerTime         = 20,
+
+  -- remark: will be overwriten by unit_attriutes.lua based on factors multiplied with workertime  
+  resurrectSpeed     = 0,
+  captureSpeed       = 0,  
+  repairSpeed        = 12,
+  reclaimSpeed       = 24,
+  workerTime         = 24,
+  terraformSpeed     = 96,
+  
   buildoptions = {
     "euf_metalextractor_lvl2",
     "euf_powerplant",

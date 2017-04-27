@@ -7,11 +7,11 @@ local unitName = "tc_necromancer_sum"
 
 local unitDef = {
   armortype          = "LIGHT",
-  buildCostEnergy    = 100,
-  buildCostMetal     = 100,
+  buildCostEnergy    = 120,
+  buildCostMetal     = 120,
   builder            = true,
   buildPic           = "tc_necromancer.png",
-  buildTime          = 100,
+  buildTime          = 120,
   canAssist          = false,
   canBeAssisted      = false,
   canMove            = true,
@@ -56,7 +56,16 @@ local unitDef = {
   standingmoveorder  = "2",
   TEDClass           = "PLANT",
   unitname           = "tc_necromancer_sum",
+  
+  -- remark: will be overwriten by unit_attriutes.lua based on factors multiplied with workertime
+  resurrectSpeed     = 12,
+  captureSpeed       = 0,
+  repairSpeed        = 6,
+  reclaimSpeed       = 12,
   workerTime         = 12,
+  terraformSpeed     = 48,
+  
+  
   yardMap            = "cc cc",
   buildoptions = {
     "tc_ghoul",

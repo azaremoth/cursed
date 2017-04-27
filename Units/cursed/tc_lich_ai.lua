@@ -61,7 +61,7 @@ local unitDef = {
   
   maxDamage          = 800,
   maxSlope           = 14,
-  maxVelocity        = 2,
+  maxVelocity        = 2.2,
   maxWaterDepth      = 35,
   metalMake          = 1,
   metalStorage       = 50,
@@ -72,10 +72,7 @@ local unitDef = {
   noChaseCategory    = "AIR",
   objectName         = "tc_lich.s3o",
   radarDistance      = 768,
-  reclaimSpeed       = 5,
-  repairSpeed        = 5,
   repairable         = false,     
-  resurrectSpeed     = 0,
   selfDestructAs     = "SMOKE_EXPLOSION",
   showNanoFrame      = false,
   showNanoSpray      = false,
@@ -89,7 +86,15 @@ local unitDef = {
   turnRate           = 1005,
   unitname           = "tc_lich_ai",
   upright            = true,
+
+  -- remark: will be overwriten by unit_attriutes.lua based on factors multiplied with workertime  
+  resurrectSpeed     = 0,
+  captureSpeed       = 0,   
+  repairSpeed        = 12,
+  reclaimSpeed       = 24,
   workerTime         = 24,
+  terraformSpeed     = 96,
+ 
   buildoptions = {
     "tc_metalextractor_lvl2",
     "tc_soulcage",

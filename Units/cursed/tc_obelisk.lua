@@ -56,19 +56,24 @@ local unitDef = {
   nanoColor          = "0.6 1 0.15",
   objectName         = "TC_Obelisk.s3o",
   radarDistance      = 1024,
-  reclaimSpeed       = 10,
-  repairSpeed        = 3,
-  resurrectSpeed     = 0,
   selfDestructAs     = "SMALL_EXPLOSION_GREEN",
   showNanoFrame      = false,
   showNanoSpray      = false,
   side               = "cursed",
   sightDistance      = 1024,
   smoothAnim         = false,
-  terraformSpeed     = 1500,
   unitname           = "tc_obelisk",
-  useBuildingGroundDecal = true,  
-  workerTime         = 15,
+  useBuildingGroundDecal = true,
+
+  -- remark: will be overwriten by unit_attriutes.lua based on factors multiplied with workertime  
+  resurrectSpeed     = 0,
+  captureSpeed       = 0,
+  repairSpeed        = 6,
+  reclaimSpeed       = 12,
+  workerTime         = 12,
+  terraformSpeed     = 48,
+  
+  
   buildoptions = {
     "tc_obelisk",
     "tc_metalextractor_lvl1",

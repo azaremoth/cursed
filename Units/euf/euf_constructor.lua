@@ -49,13 +49,11 @@ local unitDef = {
   idleAutoHeal       = 0.01,
   idleTime           = 400,
   levelGround        = true,  
-
   crushResistance    = 2000,
   mass               = 1100,
-  
   maxDamage          = 800,
   maxSlope           = 14,
-  maxVelocity        = 2,
+  maxVelocity        = 2.2,
   maxWaterDepth      = 255,
   metalMake          = 0.5,
   metalStorage       = 0,
@@ -64,9 +62,6 @@ local unitDef = {
   nanoColor          = "0.16 1 1",
   noChaseCategory    = "AIR",
   objectName         = "euf_constructor.s3o",
-  reclaimSpeed       = 5,
-  repairSpeed        = 3,
-  resurrectSpeed     = 0,
   script             = "euf_constructor.cob",  
   selfDestructAs     = "NULL",
   showNanoFrame      = false,
@@ -81,7 +76,16 @@ local unitDef = {
   turnRate           = 1005,
   unitname           = "euf_constructor",
   upright            = true,
-  workerTime         = 25,
+  
+  -- remark: will be overwriten by unit_attriutes.lua based on factors multiplied with workertime
+  resurrectSpeed     = 15,
+  captureSpeed       = 0,
+  repairSpeed        = 8,
+  reclaimSpeed       = 15,
+  workerTime         = 15,
+  terraformSpeed     = 60,
+  
+  
   buildoptions = {
     "euf_metalextractor_lvl1",
     "euf_solar",

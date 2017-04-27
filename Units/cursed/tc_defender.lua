@@ -44,7 +44,7 @@ local unitDef = {
   idleAutoHeal       = 2.5,
   idleTime           = 400,
   levelGround        = true,
-  maxDamage          = 1800,
+  maxDamage          = 1700,
   maxSlope           = 25,
   maxWaterDepth      = 0,
   name               = "Defender",
@@ -150,10 +150,10 @@ local weaponDefs = {
     weaponType         = "BeamLaser",
 ------------------------------------------------------------		
 	damage = {
-      default            = 22,
-      flyer              = (22*1.5),
-      heavy              = (22*0.75),
-      light              = 22,
+      default            = 23,
+      flyer              = (23*1.5),
+      heavy              = (23*0.75),
+      light              = 23,
     },
   },
 }

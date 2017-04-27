@@ -51,13 +51,11 @@ local unitDef = {
   iconType           = "spanner",
   idleAutoHeal       = 0.01,
   idleTime           = 400,
-
   crushResistance    = 2000,
   mass               = 1100,
-  
   maxDamage          = 800,
   maxSlope           = 14,
-  maxVelocity        = 2,
+  maxVelocity        = 2.2,
   maxWaterDepth      = 255,
   metalMake          = 1,
   metalStorage       = 0,
@@ -66,9 +64,6 @@ local unitDef = {
   nanoColor          = "0.16 1 1",
   noChaseCategory    = "AIR",
   objectName         = "euf_constructor.s3o",
-  reclaimSpeed       = 5,
-  repairSpeed        = 3,
-  resurrectSpeed     = 0,
   script             = "euf_constructor.cob",
   selfDestructAs     = "NULL",
   showNanoFrame      = false,
@@ -79,11 +74,18 @@ local unitDef = {
   sonarDistance      = 768,
   standingfireorder  = "1",
   standingmoveorder  = "0",
-  terraformSpeed     = 1200,
   turnRate           = 1005,
   unitname           = "euf_constructor_ai",
   upright            = true,
-  workerTime         = 30,
+  
+  -- remark: will be overwriten by unit_attriutes.lua based on factors multiplied with workertime
+  resurrectSpeed     = 15,
+  captureSpeed       = 0,
+  repairSpeed        = 8,
+  reclaimSpeed       = 15,
+  workerTime         = 15,
+  terraformSpeed     = 60,
+  
   buildoptions = {
     "euf_metalextractor_lvl1",
     "euf_solar",

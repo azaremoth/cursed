@@ -97,10 +97,12 @@ end
 --------------------------------------------------------------------------------
 -- Build Speed Handling
 
+
+
 local origUnitBuildSpeed = {}
 
 local function updateBuildSpeed(unitID, ud, speedFactor)	
-
+	
     if ud.buildSpeed == 0 then
         return
     end
@@ -110,7 +112,7 @@ local function updateBuildSpeed(unitID, ud, speedFactor)
     if not origUnitBuildSpeed[unitDefID] then
     
         origUnitBuildSpeed[unitDefID] = {
-            buildSpeed = ud.buildSpeed,
+            buildSpeed = ud.buildSpeed,		
         }
     end
 
@@ -120,11 +122,17 @@ local function updateBuildSpeed(unitID, ud, speedFactor)
 	
     spSetUnitBuildSpeed(unitID, 
         state.buildSpeed*speedFactor, -- build
-        2*state.buildSpeed*speedFactor, -- repair
+        0.5*state.buildSpeed*speedFactor, -- repair
         state.buildSpeed*speedFactor, -- reclaim
-        0.5*state.buildSpeed*speedFactor) -- rezz
+        state.buildSpeed*speedFactor, -- rezz
+		state.buildSpeed*speedFactor, -- capture
+		4*state.buildSpeed*speedFactor --terraform
+		)
     
+	Spring.Echo ("Repair Speed " .. 0.5*state.buildSpeed*speedFactor)
+
 end
+
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

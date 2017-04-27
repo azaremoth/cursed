@@ -387,9 +387,7 @@ function gadget:UnitTaken(unitID, unitDefID, oldTeam, newTeam)
 	end
 	if not spAreTeamsAllied(oldTeam,newTeam) then
 		if awardData['cap'][newTeam] then --if team exist, then:
-			local ud = UnitDefs[unitDefID]
-			local mCost = GetUnitCost(unitID, unitDefID)
-			AddAwardPoints( 'cap', newTeam, mCost )
+			AddAwardPoints( 'cap', newTeam, 1 )
 		end
 	else 
 		AddAwardPoints( 'share', oldTeam, 1 )

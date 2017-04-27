@@ -1,9 +1,20 @@
 >> Major changes 1.428 => 1.429
 
 Balance
-- flight height of all flyers was readjusted (gunships 150, bomber 225, intercetor 250, seeker 80)
+- flight height of all flyers was readjusted (gunships 150, bomber 175, intercetor 200, seeker 80)
 - removed AA capabilities from the imperial raider
 - increased hp of the imperial bunker by 12.5%
+- capture speed of the witch was reduced by 50%
+- movement speed increased for cursed necromancer (+10%) and imperial advanced builders (+20%)
+- costs of necromancers increased +10% and reduced for imperial scout drones (-20%) and plasmatowers (-7%)
+- cursed defender toweres do 5% more damage now
+- reduced build speed of tier 1 imperial builders
+
+Bugs
+- fixed freeze after game was finished (cuased by luaui)
+- fixed capture award showing capture value/damage instead of number of captured units
+- fixed repair speed being to fast for imperial builders
+
 
 
 >> Major changes 1.426 => 1.428

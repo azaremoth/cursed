@@ -7,10 +7,10 @@ local unitName = "euf_plasmatower"
 
 local unitDef = {
   armortype          = "HEAVY",
-  buildCostEnergy    = 300,
-  buildCostMetal     = 300,
+  buildCostEnergy    = 280,
+  buildCostMetal     = 280,
   buildPic           = "euf_plasmatower.png",
-  buildTime          = 300,
+  buildTime          = 280,
   
 buildingGroundDecalDecaySpeed = 0.2,
   buildingGroundDecalSizeX = 5,
@@ -44,7 +44,7 @@ buildingGroundDecalDecaySpeed = 0.2,
   idleAutoHeal       = 0.01,
   idleTime           = 400,
   levelGround        = true,
-  maxDamage          = 1700,
+  maxDamage          = 1800,
   maxSlope           = 25,
   maxVelocity        = 0,  
   maxWaterDepth      = 0,

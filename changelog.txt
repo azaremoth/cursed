@@ -15,6 +15,9 @@ Bugs
 - fixed capture award showing capture value/damage instead of number of captured units
 - fixed repair speed being to fast for imperial builders
 
+Polishing
+- collision volumes of corpses were optimized to avoid "phantom obstacles" on the battle field
+
 
 
 >> Major changes 1.426 => 1.428

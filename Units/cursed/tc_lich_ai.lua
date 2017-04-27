@@ -93,7 +93,7 @@ local unitDef = {
   repairSpeed        = 12,
   reclaimSpeed       = 24,
   workerTime         = 24,
-  terraformSpeed     = 96,
+  terraformSpeed     = 240,
  
   buildoptions = {
     "tc_metalextractor_lvl2",

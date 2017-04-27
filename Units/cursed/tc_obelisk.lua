@@ -71,7 +71,7 @@ local unitDef = {
   repairSpeed        = 6,
   reclaimSpeed       = 12,
   workerTime         = 12,
-  terraformSpeed     = 48,
+  terraformSpeed     = 120,
   
   
   buildoptions = {

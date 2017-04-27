@@ -347,7 +347,7 @@ function widgetHandler:LoadConfigData()
 end
 
 
-function widgetHandler:SaveConfigData()
+function widgetHandler:SaveConfigData() -- might cause issues?
   resetWidgetDetailLevel = false
   self:LoadConfigData()
   for _,w in ipairs(self.widgets) do
@@ -1166,9 +1166,9 @@ end
 function widgetHandler:Shutdown()
   Spring.Echo("Start widgetHandler:Shutdown")
   self:SaveOrderList()
-  Spring.Echo("Shutdown - SaveOrderList Complete")
-  self:SaveConfigData()
-  Spring.Echo("Shutdown - SaveConfigData Complete")
+  Spring.Echo("Shutdown - SaveOrderList Complete") -- LAST ONE IN LOG that worked
+  -- self:SaveConfigData() -- disabled for now as it causes game freezes
+  -- Spring.Echo("Shutdown - SaveConfigData Complete")
   for _,w in ipairs(self.ShutdownList) do
     local name = w.whInfo.name or "UNKNOWN NAME"
 	Spring.Echo("Shutdown Widget - " .. name)

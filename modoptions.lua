@@ -231,10 +231,11 @@ local options={
 		def="7",
 		section= "controlvictoryoptions",
 		items={
-			{key="7", name="7", desc=""},
-			{key="13", name="13", desc=""},
-			{key="19", name="19", desc=""},
-			{key="25", name="25", desc=""},
+			{key="1", name="1", desc="King of the Hill Mode"},		
+			{key="7", name="7", desc="Capture 7 points"},
+			{key="13", name="13", desc="Capture 13 points"},
+			{key="19", name="19", desc="Capture 19 points"},
+			{key="25", name="25", desc="Capture 25 points"},
 		}
     },
 --[[	{
@@ -255,7 +256,7 @@ local options={
 		desc   = 'Radius around a point in which to capture it.',
 		type   = 'number',
 		section= 'controlvictoryoptions',
-		def    = 500,
+		def    = 300,
 		min    = 250,
 		max    = 1000,
 		step   = 25,  -- quantization is aligned to the def value

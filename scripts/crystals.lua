@@ -16,7 +16,7 @@ local rotator3 = piece 'rotator3'
 local x = 0
 local y = 0
 local z = 0
-local mokeyradius="kothr"
+local mokeyradius="captureradius"
 local CenterRadius = tonumber(Spring.GetModOptions()[mokeyradius])
 
 local GLOW	 = 1024+0

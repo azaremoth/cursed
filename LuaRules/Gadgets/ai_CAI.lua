@@ -45,8 +45,7 @@ local spIsPosInRadar		= Spring.IsPosInRadar
 local spGetTeamUnits		= Spring.GetTeamUnits
 
 local MapCenterX,MapCenterZ=Game.mapSizeX/2,Game.mapSizeZ/2
-local koth = false
-local mokey="koth" -- Mod Option Key
+local cvmode = false
 
 local jumpDefNames  = VFS.Include"LuaRules/Configs/jump_defs.lua"
 local jumpDefs = {}
@@ -54,8 +53,10 @@ local jumpDefs = {}
 local metalSpots = {}
 local mexCount = 0
 
-if (tonumber(Spring.GetModOptions()[mokey]) ~= nil) and (tonumber(Spring.GetModOptions()[mokey])> 0) then
-	koth = true
+if (Spring.GetModOptions().scoremode ~= nil) then
+	if (Spring.GetModOptions().scoremode ~= "disabled") then
+		cvmode = true
+	end
 end
 
 for name, data in pairs(jumpDefNames) do
@@ -1595,7 +1596,7 @@ local function battleGroupHandler(team, frame, slowUpdate)
 		end
 
 		if data.tempTarget then
-			if (koth == true) then
+			if (cvmode == true) then
 				for unitID,_ in pairs(data.unit) do			
 					if not data.aa[unitID] then
 						spGiveOrderToUnit(unitID, CMD_FIGHT , {MapCenterX,0,MapCenterZ}, {})
@@ -3857,10 +3858,8 @@ function gadget:Initialize()
 		end
 		if (ai and (not IsGaiaAI) and (not IsChickenAI) and (not IsSupportedAI)) then
 			local _,_,_,_,_,allyTeam = spGetTeamInfo(team)
-			if (aiConfigByName[spGetTeamLuaAI(team)] ~= nil) then
-				if (aiConfigByName[spGetTeamLuaAI(team)] ~= "Skirmish AI") then 
-					Spring.Echo("Warning: chosen AI is not supported by the game and is replaced with the game's own LuaAI")
-				end
+			if (aiConfigByName[spGetTeamLuaAI(team)] == nil) then
+				Spring.Echo("Warning: chosen AI is not supported by the game and is replaced with the game's own LuaAI")
 			end
 			initialiseAiTeam(team, allyTeam, aiConfigByName["Skirmish AI"])
 			aiOnTeam[allyTeam] = true

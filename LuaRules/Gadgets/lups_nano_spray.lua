@@ -379,7 +379,9 @@ local builders = {}
 							local fxType  = nanoSettings.fxtype
 							if (not nanoParticles[unitID]) then nanoParticles[unitID] = {} end
 							local unitFxs = nanoParticles[unitID]
-							unitFxs[#unitFxs+1] = Lups.AddParticles(nanoSettings.fxtype,nanoSettings)
+							if ( Lups ~= nil ) then
+								unitFxs[#unitFxs+1] = Lups.AddParticles(nanoSettings.fxtype,nanoSettings)
+							end
 						end
 					end
 				end

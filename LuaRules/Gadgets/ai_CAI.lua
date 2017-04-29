@@ -13,7 +13,7 @@ function gadget:GetInfo()
   }
 end
 
-local IsSkirmishAI
+-- local IsSkirmishAI
 
 local spGetAllUnits			= Spring.GetAllUnits
 local spGetTeamInfo 		= Spring.GetTeamInfo
@@ -62,6 +62,9 @@ for name, data in pairs(jumpDefNames) do
 	jumpDefs[UnitDefNames[name].id] = data
 end
 
+local ChickenAIs = VFS.Include("LuaRules/Configs/ai_chickenlist.lua")	
+local SupportedAIs = VFS.Include("LuaRules/Configs/ai_supported.lua")
+local GaiaAITeam = Spring.GetGaiaTeamID
 
 -- commands
 include("LuaRules/Configs/customcmds.h.lua")
@@ -3836,17 +3839,32 @@ function gadget:Initialize()
 	-- Initialise AI for all team that are set to use it
 	local aiOnTeam = {}
 	usingAI = false
-	
 	for _,team in ipairs(spGetTeamList()) do
-		--local _,_,_,isAI,side = spGetTeamInfo(team)
-		if aiConfigByName[spGetTeamLuaAI(team)] then
-			local _,_,_,_,_,_,CustomTeamOptions = spGetTeamInfo(team)
-			if (not CustomTeamOptions) or (not CustomTeamOptions["aioverride"]) then -- what is this for?
-				local _,_,_,_,_,allyTeam = spGetTeamInfo(team)
-				initialiseAiTeam(team, allyTeam, aiConfigByName[spGetTeamLuaAI(team)])
-				aiOnTeam[allyTeam] = true
-				usingAI = true
+	
+		local ai = select(4, Spring.GetTeamInfo(team))
+		local IsChickenAI = false
+		local IsGaiaAI = false
+		local IsSupportedAI = false
+		if (ai and ChickenAIs[Spring.GetTeamLuaAI(team)]) then
+			IsChickenAI = true
+			Spring.Echo("Skirmish AI: Chicken AI detected")
+		elseif (team == GaiaAITeam) then
+			IsGaiaAI = true
+			Spring.Echo("GAIA AI: Chicken AI detected")
+		elseif (ai and SupportedAIs[Spring.GetTeamLuaAI(team)]) then
+			IsChickenAI = true
+			Spring.Echo("Skirmish AI: Chicken AI detected")			
+		end
+		if (ai and (not IsGaiaAI) and (not IsChickenAI) and (not IsSupportedAI)) then
+			local _,_,_,_,_,allyTeam = spGetTeamInfo(team)
+			if (aiConfigByName[spGetTeamLuaAI(team)] ~= nil) then
+				if (aiConfigByName[spGetTeamLuaAI(team)] ~= "Skirmish AI") then 
+					Spring.Echo("Warning: chosen AI is not supported by the game and is replaced with the game's own LuaAI")
+				end
 			end
+			initialiseAiTeam(team, allyTeam, aiConfigByName["Skirmish AI"])
+			aiOnTeam[allyTeam] = true
+			usingAI = true
 		end
 	end
 	

@@ -33,7 +33,7 @@ return {
     desc = 'A survival experience customizable using modoptions'
   },
   {
-	-- to be recognised as a CAI there must be an entry with this name in -> need changes to be renamed to ZK AI ?
+	-- to be recognised as a CAI there must be an entry with this name in
 	-- LuaRules\Configs\cai\configCoordinator.lua
     name = 'Skirmish AI',
     desc = 'AI that plays regular skirmish games'

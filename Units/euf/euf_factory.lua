@@ -66,7 +66,7 @@ buildingGroundDecalDecaySpeed = 0.2,
   TEDClass           = "PLANT",
   unitname           = "euf_factory",
   useBuildingGroundDecal = true,
-  workerTime         = 25,
+  workerTime         = 28,
   yardMap            = "oooooooooooo oooooooooooo oooccccccooo oooccccccooo oooccccccooo oooccccccooo oooccccccooo oooccccccooo oooccccccooo oooccccccooo oooccccccooo oooccccccooo",
   buildoptions = {
     "euf_constructor_lvl2", 

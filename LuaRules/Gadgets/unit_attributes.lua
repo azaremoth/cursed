@@ -126,7 +126,7 @@ local function updateBuildSpeed(unitID, ud, speedFactor)
         state.buildSpeed*speedFactor, -- reclaim
         state.buildSpeed*speedFactor, -- rezz
 		state.buildSpeed*speedFactor, -- capture
-		10*state.buildSpeed*speedFactor --terraform
+		30*state.buildSpeed*speedFactor --terraform
 		)
     
 --	Spring.Echo ("Repair Speed " .. 0.5*state.buildSpeed*speedFactor)

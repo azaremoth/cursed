@@ -1,3 +1,15 @@
+>> Major changes 1.429 => 1.430
+
+Features
+- Skirmish AI will take control of any chosen non-supported AI
+- Control victory mode was implemented to replace and expand the current King of the Hill mode
+
+Balance
+- imperial Barracks do cost 5% less and build units 20% faster now
+- imperial War Factories do build units 12% faster now
+
+
+
 >> Major changes 1.428 => 1.429
 
 Balance

@@ -52,7 +52,7 @@ local iconsize = 20
 local bgColor_panel = {nil, nil, nil, 1}
 local final_opacity = 0
 local last_alpha = 1 --Last set alpha value for the actual clickable minimap image
-local default_fog_brightness = 0.25
+local default_fog_brightness = 0.4
 
 local tabbedMode = false
 

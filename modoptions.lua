@@ -52,14 +52,7 @@ local options={
     max    = 20,
     step   = 1,  
   }, 
-	{
-	key		= "startbase",
-	name	= "Start with bases",
-	desc	= "Players start with a small base.",
-	type	= "bool",
-	def		= true,
-	section	= 'b_resources',	
-  },	
+
   ---- AI OPTIONS ----
 	{
 		key    = 'e_aioptions',
@@ -250,6 +243,15 @@ local options={
 			{key="enabled", name="Enabled", desc="This will tell the game to use preset map control points (Set via map config)."},
 		}
     }, ]]
+	{
+		key		= "startbase",
+		name	= "Start with bases",
+		desc	= "Players start with a small base.",
+		type	= "bool",
+		def		= true,
+		section	= 'controlvictoryoptions',	
+	 },	
+	
 	{
 		key    = 'captureradius',
 		name   = 'Capture Radius',

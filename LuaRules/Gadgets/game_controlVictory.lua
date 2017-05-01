@@ -61,7 +61,7 @@ end
 
 --End Mitigation of wonky options settings
 
-
+local maxpoints = 25
 local allyTeamColorSets={}
 
 local scoreModes = {
@@ -152,7 +152,10 @@ if (gadgetHandler:IsSyncedCode()) then
 		if cvDisabled then
 			gadgetHandler:RemoveGadget()
 		else	]]
-		
+			GG.capturepointsx = GG.capturepointsx or {}
+			GG.capturepointsz = GG.capturepointsz or {}			
+			GG.capturepointowner = GG.capturepointowner or {}
+			
 			gadgetHandler:RegisterGlobal('ControlPoints', gControlPoints)
 			gadgetHandler:RegisterGlobal('NonCapturingUnits', gNonCapturingUnits)
 			gadgetHandler:RegisterGlobal('BuildableUnits', gBuildableUnits)
@@ -411,9 +414,18 @@ if (gadgetHandler:IsSyncedCode()) then
 					capture=0,
 				}
 			end
+
 			_G.points = points
 			_G.score = score
 			_G.dom = dom
+			
+
+			for i = 1, maxpoints do
+				if (points[i] ~= nil) then
+					GG.capturepointsx[i] = points[i].x
+					GG.capturepointsz[i] = points[i].z					
+				end
+			end
 			
 			
 			-- Set building masks for control points
@@ -466,9 +478,13 @@ if (gadgetHandler:IsSyncedCode()) then
 			for _, allyTeamID in ipairs(Spring.GetAllyTeamList()) do
 				owned[allyTeamID] = 0
 			end
-			for _, capturePoint in pairs(points) do
+			for pointcount, capturePoint in pairs(points) do
+--				Spring.Echo("CV: point owned? " .. count)
 				local aggressor = nil
+				local aggressorteamID = nil
 				local owner = capturePoint.owner
+--				Spring.Echo("CV: point owner ")
+--				Spring.Echo(owner)
 				local count = 0
 				for _, u in ipairs(Spring.GetUnitsInCylinder(capturePoint.x, capturePoint.z, captureRadius)) do
 					local validUnit = true
@@ -479,6 +495,7 @@ if (gadgetHandler:IsSyncedCode()) then
 					end
 					if validUnit then
 						local unitOwner = Spring.GetUnitAllyTeam(u)
+						local unitOwnerTeamID = Spring.GetUnitTeam(u)
 						if unitOwner ~= gaia then
 							--Spring.Echo(unitOwner)
 							if owner then
@@ -492,6 +509,7 @@ if (gadgetHandler:IsSyncedCode()) then
 								if aggressor then
 									if aggressor == unitOwner then
 										count = count + 1
+										aggressorteamID = unitOwnerTeamID
 									else
 										aggressor = nil
 										break
@@ -499,6 +517,7 @@ if (gadgetHandler:IsSyncedCode()) then
 								else
 									aggressor = unitOwner
 									count = count + 1
+									aggressorteamID = unitOwnerTeamID
 								end
 							end
 						end
@@ -526,6 +545,10 @@ if (gadgetHandler:IsSyncedCode()) then
 				if capturePoint.capture > captureTime then
 					capturePoint.owner = capturePoint.aggressor
 					capturePoint.capture = 0
+					GG.capturepointowner[pointcount] = aggressorteamID
+					GG.capturepointsx[pointcount] = points[pointcount].x
+					GG.capturepointsz[pointcount] = points[pointcount].z		
+					-- Spring.Echo("CV: new owner " .. GG.capturepointowner[pointcount] .. " for point " .. pointcount)
 				end
 				if capturePoint.owner then
 					--Spring.Echo(capturePoint.owner)
@@ -611,6 +634,15 @@ if (gadgetHandler:IsSyncedCode()) then
 				end
 			end
 		end
+--[[	if f % 300 == 0 then
+		for i = 1, maxpoints do
+				if (points[i] ~= nil) then
+					Spring.Echo("CV: Owner of point " .. i)
+					Spring.Echo(points[i].owner)
+					GG.capturepointowner[i] = (points[i].owner)
+				end
+			end
+		end]]
 	end
 
 -- Allow units listed in the buildableUnits config to be built in control points
@@ -869,6 +901,7 @@ else -- UNSYNCED
 		  
 			scoreboardX = (vsx * scoreboardRelX) - (((vsx/2) * (scoreboardRelX-0.5)) * (uiScale-1))	-- not acurate :(
 			scoreboardY = (vsy * scoreboardRelY) - (((vsy/2) * (scoreboardRelY-0.5)) * (uiScale-1))	-- not acurate :(
+
 			
 		  if infoList then gl.DeleteList(infoList) end
 		  infoList = CreateList(drawGameModeInfo)

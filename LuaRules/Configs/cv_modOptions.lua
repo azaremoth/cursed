@@ -52,7 +52,7 @@ end
 
 limitScore = tonumber(Spring.GetModOptions().limitscore)
 if limitScore == nil then
-	limitScore = 3500
+	limitScore = 3000
 end
 
 -- These are together because they cover the same area (resourcing)

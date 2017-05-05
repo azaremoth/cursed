@@ -73,6 +73,7 @@ local awardAbsolutes = {
 	mex         = 15,
 	mexkill     = 15,
 	herokill    = 3,
+	point 		= 5,
 	drankill    = 3,
 	sweeper     = 20,
 	heart       = 1*10^9, --we should not exceed 2*10^9 because math.floor-ing the value will return integer -2147483648. Reference: https://code.google.com/p/zero-k/source/detail?r=9681
@@ -227,6 +228,14 @@ end
 
 local function ProcessAwardData()
 
+	local tempTeamList = Spring.GetTeamList()
+	for i=1, #tempTeamList do
+		local team = tempTeamList[i]
+		awardData['point'][team] = GG.teamcapturedpoints[team] 
+	end
+
+
+
 	for awardType, data in pairs(awardData) do
 		local winningTeam
 		local maxVal
@@ -325,6 +334,9 @@ local function ProcessAwardData()
 				elseif awardType == 'sweeper' then
 					message = maxVal .. ' Pitts wiped out'
 					recordVal = maxVal
+				elseif awardType == 'point' then
+					message = maxVal .. ' Points captured'
+					recordVal = maxVal	
 				else
 					message = 'Damaged value: '.. maxVal
 					recordVal = maxVal
@@ -345,6 +357,7 @@ function gadget:Initialize()
 
 	GG.Awards = GG.Awards or {}
 	GG.Awards.AddAwardPoints = AddAwardPoints
+	GG.teamcapturedpoints = GG.teamcapturedpoints or {}
 	
 	--_G.resourceInfo = resourceInfo
 

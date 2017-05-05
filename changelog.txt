@@ -3,6 +3,8 @@
 Features
 - Skirmish AI will take control of any chosen non-supported AI
 - Control victory mode was implemented to replace and expand the current King of the Hill mode
+- CAI was adapted to be able to play Control Point Mode
+- Added new award for captured control points
 
 Balance
 - imperial Barracks do cost 5% less and build units 20% faster now

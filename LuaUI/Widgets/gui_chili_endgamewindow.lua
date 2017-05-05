@@ -18,7 +18,7 @@ end
 local spSendCommands			= Spring.SendCommands
 
 local echo = Spring.Echo
-
+local spec
 local Chili
 local Image
 local Button
@@ -35,6 +35,7 @@ local incolor2color
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local showEndgameWindowTimer
 local window_endgame
 local awardPanel
 local awardSubPanel
@@ -276,6 +277,7 @@ function widget:Initialize()
 		return
 	end
 	
+	spec = Spring.GetSpectatingState()	
 
 	Chili = WG.Chili
 	Image = Chili.Image
@@ -297,10 +299,74 @@ function widget:Initialize()
 	widgetHandler:RegisterGlobal("SetAwardList", SetAwardList)
 	
 	SetTeamNamesAndColors()
+	
+	if Spring.IsGameOver() then
+		showEndgameWindowTimer = 1
+	end	
 end
 
-function widget:GameOver()
+function widget:GameOver (winners)
+	local gaiaAllyTeamID = select(6, Spring.GetTeamInfo(Spring.GetGaiaTeamID()))
+	if #winners > 1 then
+		if spec then
+			window_endgame.caption = "Game over!"
+			window_endgame.font.color = {1,1,1,1}
+		else
+			local i_win = false
+			for i = 1, #winners do
+				if (winners[i] == Spring.GetMyAllyTeamID()) then
+					i_win = true
+				end
+			end
+
+			if i_win then
+				window_endgame.caption = "Victory!"
+				window_endgame.font.color = {0,1,0,1}
+			else
+				window_endgame.caption = "Defeat!"
+				window_endgame.font.color = {1,0,0,1}
+			end
+		end
+	elseif #winners == 1 then
+		local winnerTeamName = Spring.GetGameRulesParam("allyteam_long_name_"  .. winners[1]) or "Team " .. winners[1]
+		if string.len(winnerTeamName) > 10 then
+			winnerTeamName = Spring.GetGameRulesParam("allyteam_short_name_" .. winners[1]) or "Team " .. winners[1]
+		end
+		if spec then
+			if (winners[1] == gaiaAllyTeamID) then
+				window_endgame.caption = "Draw!"
+				window_endgame.font.color = {1,1,1,1}
+			else
+				window_endgame.caption = (winnerTeamName .. " wins!")
+				window_endgame.font.color = {1,1,1,1}
+			end
+		elseif (winners[1] == Spring.GetMyAllyTeamID()) then
+			window_endgame.caption = "Victory!"
+			window_endgame.font.color = {0,1,0,1}
+		elseif (winners[1] == gaiaAllyTeamID) then
+			window_endgame.caption = "Draw!"
+			window_endgame.font.color = {1,1,0,1}
+		else
+			window_endgame.caption = "Defeat!" -- could somehow add info on who won (eg. for FFA) but as-is it won't fit
+			window_endgame.font.color = {1,0,0,1}
+		end
+	end
+	window_endgame.tooltip = ""
+	window_endgame:Invalidate()
+	showEndgameWindowTimer = 2
+end
+
+function widget:Update(dt)
+	if not showEndgameWindowTimer then
+		return
+	end
+	showEndgameWindowTimer = showEndgameWindowTimer - dt
+	if showEndgameWindowTimer > 0 then
+		return
+	end
+	
 	ShowEndGameWindow()
+	showEndgameWindowTimer = nil
 end
 
 function widget:Shutdown()

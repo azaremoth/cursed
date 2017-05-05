@@ -30,6 +30,7 @@ for _,team in ipairs(Spring.GetTeamList()) do
 	end
 	if (team == gaia) then
 		gaiaAllyTeam = loopallyteamID
+		-- Spring.Echo("Gaia ally team is " .. gaiaAllyTeam)
 	end	
 end
 
@@ -107,19 +108,18 @@ if (gadgetHandler:IsSyncedCode()) then
 	}
 
 	local function Loser(team)
-		if team == gaia then
-			return
-		end
-		for _, u in ipairs(Spring.GetAllUnits()) do
-			if team == Spring.GetUnitAllyTeam(u) then
-				Spring.DestroyUnit(u)
+		if team ~= gaiaAllyTeam then
+			for _, u in ipairs(Spring.GetAllUnits()) do
+				if team == Spring.GetUnitAllyTeam(u) then
+					Spring.DestroyUnit(u)
+				end
 			end
 		end
 	end
 
 	local function Winner(team)
 		for _, a in ipairs(Spring.GetAllyTeamList()) do
-			if a ~= team and a ~= gaiaAllyTeam then
+			if (a ~= team) then
 				Loser(a)
 			end
 		end
@@ -160,6 +160,7 @@ if (gadgetHandler:IsSyncedCode()) then
 			GG.capturepointsx = GG.capturepointsx or {}
 			GG.capturepointsz = GG.capturepointsz or {}			
 			GG.capturepointowner = GG.capturepointowner or {}
+			GG.teamcapturedpoints = GG.teamcapturedpoints or {}
 			
 			gadgetHandler:RegisterGlobal('ControlPoints', gControlPoints)
 			gadgetHandler:RegisterGlobal('NonCapturingUnits', gNonCapturingUnits)
@@ -171,6 +172,11 @@ if (gadgetHandler:IsSyncedCode()) then
 				else
 					score[a] = 0
 				end
+			end
+			local tempTeamList = Spring.GetTeamList()
+			for i=1, #tempTeamList do
+				local team = tempTeamList[i]
+				GG.teamcapturedpoints[team] = 0
 			end
 			score[gaiaAllyTeam] = 0
 	----------------------------------
@@ -551,6 +557,11 @@ if (gadgetHandler:IsSyncedCode()) then
 					capturePoint.owner = capturePoint.aggressor
 					capturePoint.capture = 0
 					GG.capturepointowner[pointcount] = aggressorteamID
+					if (GG.teamcapturedpoints[aggressorteamID] ~= nil) then
+						GG.teamcapturedpoints[aggressorteamID] = (GG.teamcapturedpoints[aggressorteamID] + 1)
+						-- Spring.Echo("Counted")
+					end
+					
 					GG.capturepointsx[pointcount] = points[pointcount].x
 					GG.capturepointsz[pointcount] = points[pointcount].z		
 					-- Spring.Echo("CV: new owner " .. GG.capturepointowner[pointcount] .. " for point " .. pointcount)

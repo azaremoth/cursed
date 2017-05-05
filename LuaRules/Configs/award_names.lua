@@ -4,6 +4,7 @@ return {
 	lycan   = 'Werewolf Hunter',
 	hover   = 'Hover Admiral',
 	air     = 'Airforce General',
+	point   = 'This is my Land',
 	nux     = 'Apocalyptic Achievement Award',
 	friend  = 'Friendly Fire Award',
 	shell   = 'Turtle Shell',

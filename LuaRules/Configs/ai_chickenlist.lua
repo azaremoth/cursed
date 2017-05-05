@@ -4,5 +4,5 @@ return {
 	["Zombie Survival: Normal"] = true,	
 	["Zombie Survival: Hard"] = true,
 	["Zombie Survival: Suicidal"] = true,
-	["Zombie Survival: Custom"] = true,
+--	["Zombie Survival: Custom"] = true,
 }

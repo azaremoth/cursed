@@ -27,7 +27,7 @@
 
 local options =
 {
-  {
+ --[[ {
     key    = 'GameMode',
     name   = 'Game end condition',
     desc   = 'Determines what condition triggers the defeat of a player',
@@ -46,7 +46,7 @@ local options =
         desc = 'Game will never end',
       },
     },
-  },
+  }, ]]--
 
   {
     key    = 'GhostedBuildings',

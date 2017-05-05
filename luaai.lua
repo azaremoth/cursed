@@ -28,10 +28,10 @@ return {
     name = 'Zombie Survival: Suicidal',
     desc = 'Flaming hell!'
   },
-  {
-    name = 'Zombie Survival: Custom',
-    desc = 'A survival experience customizable using modoptions'
-  },
+--  {
+--    name = 'Zombie Survival: Custom',
+--    desc = 'A survival experience customizable using modoptions'
+--  },
   {
 	-- to be recognised as a CAI there must be an entry with this name in
 	-- LuaRules\Configs\cai\configCoordinator.lua

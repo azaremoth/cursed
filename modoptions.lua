@@ -86,7 +86,7 @@ local options={
   },   
 	
  ---- CHICKEN/SURVIAL MODE STUFF ----
- {
+ --[[{
     key    = 'd_chicken',
     name   = 'Survival Mode',
     desc   = 'Settings for Survival: Custom',
@@ -158,7 +158,6 @@ local options={
     max    = 5,
     step   = 0.05,
   },
---[[  
   {
 	key    = 'burrowtechtime',
 	name   = 'Burrow Tech Time',
@@ -170,7 +169,6 @@ local options={
 	max    = 60,
 	step   = 1,  
   },
-]]--  
   {
 	key    = 'burrowqueentime',
 	name   = 'Burrow Boss Time',
@@ -181,7 +179,7 @@ local options={
 	min    = 0,
 	max    = 1200,
 	step   = 1,  
-  },
+  }, ]]--
 -- Control Victory Options	
 	{
 		key    = 'controlvictoryoptions',

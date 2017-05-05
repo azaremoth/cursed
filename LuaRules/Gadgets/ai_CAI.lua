@@ -66,7 +66,7 @@ end
 
 local ChickenAIs = VFS.Include("LuaRules/Configs/ai_chickenlist.lua")	
 local SupportedAIs = VFS.Include("LuaRules/Configs/ai_supported.lua")
-local GaiaAITeam = Spring.GetGaiaTeamID
+local GaiaAITeam = Spring.GetGaiaTeamID()
 
 -- commands
 include("LuaRules/Configs/customcmds.h.lua")
@@ -111,7 +111,7 @@ local function updateCvTarget()
 		end
 		if (ai and (not IsGaiaAI)) then
 			local sx,_,sz = Spring.GetTeamStartPosition(teamID)
-			Spring.Echo("CAI: Startpos for team " .. teamID .. " x: " .. sx .. " z: " .. sz)
+			-- Spring.Echo("CAI: Startpos for team " .. teamID .. " x: " .. sx .. " z: " .. sz)
 			if ((GG.capturepointsx ~= nil) and ((GG.capturepointsz ~= nil))) then
 				local pointsx = GG.capturepointsx
 				local pointsz = GG.capturepointsz				
@@ -121,26 +121,26 @@ local function updateCvTarget()
 					if ((pointsx[i] == nil) and (pointsx[(i-1)] ~= nil)) then
 							numCapPoints = (i-1)
 					elseif (pointsx[i] ~= nil) then
-						Spring.Echo("CAI: Current point checked: " .. i .. " X: " .. pointsx[i] .. " Z: " .. pointsz[i])
+						-- Spring.Echo("CAI: Current point checked: " .. i .. " X: " .. pointsx[i] .. " Z: " .. pointsz[i])
 						local owner = GG.capturepointowner[i]
 						local validtarget = false
 						
 						if (owner ~= nil ) then
-							Spring.Echo("CAI: Owner of point " .. i .. " is " .. owner )
-						else 
-							Spring.Echo("CAI: Owner of point " .. i .. " is nobody" )
-							Spring.SpawnCEG('AURA_HEAL', pointsx[i], 100, pointsz[i])
+							-- Spring.Echo("CAI: Owner of point " .. i .. " is " .. owner )
+						-- else 
+							-- Spring.Echo("CAI: Owner of point " .. i .. " is nobody" )
+							-- Spring.SpawnCEG('AURA_HEAL', pointsx[i], 100, pointsz[i])
 						end
 						
 						if (owner == nil) then
 							validtarget = true
-							Spring.Echo("CAI: Point can be taken as not occupied")
+							-- Spring.Echo("CAI: Point can be taken as not occupied")
 						elseif ((owner ~= teamID) and (not Spring.AreTeamsAllied(owner, teamID))) then
 							validtarget = true
-							Spring.Echo("CAI: Point can be taken as it belongs to an enemy") 
+							-- Spring.Echo("CAI: Point can be taken as it belongs to an enemy") 
 						elseif ((owner == teamID) or Spring.AreTeamsAllied(owner, teamID)) then
 							validtarget = false
-							Spring.Echo("CAI: Point " .. i .. " already is mine. Team " .. teamID) 
+							-- Spring.Echo("CAI: Point " .. i .. " already is mine. Team " .. teamID) 
 						end
 						
 						if (validtarget == true) then
@@ -148,11 +148,11 @@ local function updateCvTarget()
 							pz = pointsz[i]
 							local distStartCP = math.sqrt((sx-px)*(sx-px)+(sz-pz)*(sz-pz))
 						--	Spring.Echo("CAI: Current valid point checked for coords: " .. px .. " " .. pz )
-							Spring.Echo("CAI: CP vs. Startpos distance is: " .. distStartCP)
+							-- Spring.Echo("CAI: CP vs. Startpos distance is: " .. distStartCP)
 							if ((shortestDist == 0) or (distStartCP < shortestDist)) then
 								shortestDist = distStartCP
 								activepoint = i
-								Spring.Echo("CAI: current active shortest distance point in loop: " .. activepoint)
+								-- Spring.Echo("CAI: current active shortest distance point in loop: " .. activepoint)
 							end
 						end
 					end
@@ -160,7 +160,7 @@ local function updateCvTarget()
 				if (pointsx[activepoint] ~= nil) then
 					cvActiveX[teamID] = pointsx[activepoint]
 					cvActiveZ[teamID] = pointsz[activepoint]
-					Spring.Echo("CAI: Active X and Z value for team " .. teamID .. " is " .. pointsx[activepoint] .. " " .. pointsz[activepoint] .. " (".. activepoint .. ")")
+					--  Spring.Echo("CAI: Active X and Z value for team " .. teamID .. " is " .. pointsx[activepoint] .. " " .. pointsz[activepoint] .. " (".. activepoint .. ")")
 				end
 			end
 		end
@@ -1676,7 +1676,7 @@ local function battleGroupHandler(team, frame, slowUpdate)
 				-- Spring.Echo("CAI: cvmode passed command")
 				for unitID,_ in pairs(data.unit) do			
 					if not data.aa[unitID] then
-						Spring.Echo("CAI: Team " .. team .. " attacks X " .. cvActiveX[team] .. " and Z " .. cvActiveZ[team])
+						-- Spring.Echo("CAI: Team " .. team .. " attacks X " .. cvActiveX[team] .. " and Z " .. cvActiveZ[team])
 						spGiveOrderToUnit(unitID, CMD_FIGHT , {cvActiveX[team],0,cvActiveZ[team]}, {})
 					end
 				end
@@ -2406,7 +2406,7 @@ local function diluteEnemyForceComposition(allyTeam)
 end
 
 local function addValueToHeatmap(indexer,heatmap, value, aX, aZ)
-	if value > 0 then
+	if (value > 0) and (heatmap ~= nil) then
 		if heatmap[aX][aZ].cost == 0 then
 			indexer.count = indexer.count + 1
 			indexer[indexer.count] = {x = heatmapPosition[aX][aZ].x, y = heatmapPosition[aX][aZ].y, z = heatmapPosition[aX][aZ].z, aX = aX, aZ = aZ}

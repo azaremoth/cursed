@@ -18,13 +18,19 @@ local MapCenterX,MapCenterZ=Game.mapSizeX/2,Game.mapSizeZ/2
 
 --Make controlvictory exit if chickens are present
 local ChickenAIs = VFS.Include("LuaRules/Configs/ai_chickenlist.lua")	
+local gaia = Spring.GetGaiaTeamID()
+-- local gaiaAllyTeam = nil
 
 for _,team in ipairs(Spring.GetTeamList()) do
 	local ai = select(4, Spring.GetTeamInfo(team))
+	local loopallyteamID = select(6, Spring.GetTeamInfo(team))
 	local IsChickenAI = false
 	if (ai and ChickenAIs[Spring.GetTeamLuaAI(team)]) then
 		chickensEnabled = true
 	end
+	if (team == gaia) then
+		gaiaAllyTeam = loopallyteamID
+	end	
 end
 
 if chickensEnabled == true then
@@ -83,7 +89,6 @@ if scoreMode == 3 then scoreModeAsString = "Domination" end
 
 Spring.Echo("[ControlVictory] Control Victory Scoring Mode: " .. (Spring.GetModOptions().scoremode or "Countdown"))
 
-local gaia = Spring.GetGaiaTeamID()
 local mapx, mapz = Game.mapSizeX, Game.mapSizeZ
 
 Spring.Echo("SCORE MODE: " .. scoreModeAsString)
@@ -114,7 +119,7 @@ if (gadgetHandler:IsSyncedCode()) then
 
 	local function Winner(team)
 		for _, a in ipairs(Spring.GetAllyTeamList()) do
-			if a ~= team and a ~= gaia then
+			if a ~= team and a ~= gaiaAllyTeam then
 				Loser(a)
 			end
 		end
@@ -167,7 +172,7 @@ if (gadgetHandler:IsSyncedCode()) then
 					score[a] = 0
 				end
 			end
-			score[gaia] = 0
+			score[gaiaAllyTeam] = 0
 	----------------------------------
 
 
@@ -496,7 +501,7 @@ if (gadgetHandler:IsSyncedCode()) then
 					if validUnit then
 						local unitOwner = Spring.GetUnitAllyTeam(u)
 						local unitOwnerTeamID = Spring.GetUnitTeam(u)
-						if unitOwner ~= gaia then
+						if unitOwner ~= gaiaAllyTeam then
 							--Spring.Echo(unitOwner)
 							if owner then
 								if owner == unitOwner then
@@ -737,7 +742,7 @@ else -- UNSYNCED
 		local playerEntries = {}
 		for allyTeamID, teamScore in spairs(SYNCED.score) do
 			-- note to self, allyTeamID +1 = ally team number	
-			if allyTeamID ~= gaia then					
+			if allyTeamID ~= gaiaAllyTeam then					
 				--does this allyteam have a table? if not, make one
 				if playerEntries[allyTeamID] == nil then 
 					playerEntries[allyTeamID] = {}
@@ -927,12 +932,12 @@ else -- UNSYNCED
 				capturePoints[i].y = Spring.GetGroundHeight(capturePoint.x, capturePoint.z) + 2
 				capturePoints[i].z = capturePoint.z
 			end
-			if capturePoint.owner and capturePoint.owner ~= gaia then
+			if capturePoint.owner and capturePoint.owner ~= gaiaAllyTeam then
 				capturePoints[i].color[1],capturePoints[i].color[2],capturePoints[i].color[3] = Spring.GetTeamColor(Spring.GetTeamList(capturePoint.owner)[1])
 			else
 				capturePoints[i].color = {1,1,1}
 			end
-			if capturePoint.aggressor and capturePoint.aggressor ~= gaia then
+			if capturePoint.aggressor and capturePoint.aggressor ~= gaiaAllyTeam then
 				capturePoints[i].aggressorColor[1],capturePoints[i].aggressorColor[2],capturePoints[i].aggressorColor[3] = Spring.GetTeamColor(Spring.GetTeamList(capturePoint.aggressor)[1])
 			else
 				capturePoints[i].aggressorColor = {1,1,1}
@@ -977,12 +982,12 @@ else -- UNSYNCED
 				capturePoints[i].y = Spring.GetGroundHeight(capturePoint.x, capturePoint.z) + 2
 				capturePoints[i].z = capturePoint.z
 			end
-			if capturePoint.owner and capturePoint.owner ~= gaia then
+			if capturePoint.owner and capturePoint.owner ~= gaiaAllyTeam then
 				capturePoints[i].color[1],capturePoints[i].color[2],capturePoints[i].color[3] = Spring.GetTeamColor(Spring.GetTeamList(capturePoint.owner)[1])
 			else
 				capturePoints[i].color = {1,1,1}
 			end
-			if capturePoint.aggressor and capturePoint.aggressor ~= gaia then
+			if capturePoint.aggressor and capturePoint.aggressor ~= gaiaAllyTeam then
 				capturePoints[i].aggressorColor[1],capturePoints[i].aggressorColor[2],capturePoints[i].aggressorColor[3] = Spring.GetTeamColor(Spring.GetTeamList(capturePoint.aggressor)[1])
 			else
 				capturePoints[i].aggressorColor = {1,1,1}
@@ -1185,7 +1190,7 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
 				--Spring.Echo("at allied team ID", allyTeamID)
 				-- note to self, allyTeamID +1 = ally team number	
 				local allyTeamMembers = Spring.GetTeamList(allyTeamID)
-				if allyTeamID ~= gaia and allyTeamMembers and (#allyTeamMembers > 0) then
+				if allyTeamID ~= gaiaAllyTeam and allyTeamMembers and (#allyTeamMembers > 0) then
 					local allyFound = false
 					local name = "Some Bot"
 					local team = allyTeamMembers[1]

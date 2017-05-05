@@ -126,7 +126,7 @@ function constructionAndEconomyHandler(a, at, frame)
 	
 	conJob.reclaim.importance = 0
 	if at.units.mex.count*3 > mexSpot.count or frame > 14400 then
-		conJob.reclaim.importance = 4
+		conJob.reclaim.importance = 2
 	end
 	
 	if at.enemyEconomy.totalCost > 300 then

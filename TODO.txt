@@ -5,4 +5,3 @@
 - growing creep
 - feature conversion on creep
 - fixing strange shader effect for derefered lights on terrain/maps with normals applied and normal mapped units
-- allied KOTH support

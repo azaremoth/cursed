@@ -123,7 +123,7 @@ local function updateBuildSpeed(unitID, ud, speedFactor)
     spSetUnitBuildSpeed(unitID, 
         state.buildSpeed*speedFactor, -- build
         0.5*state.buildSpeed*speedFactor, -- repair
-        state.buildSpeed*speedFactor, -- reclaim
+        3*state.buildSpeed*speedFactor, -- reclaim
         state.buildSpeed*speedFactor, -- rezz
 		state.buildSpeed*speedFactor, -- capture
 		30*state.buildSpeed*speedFactor --terraform

@@ -91,7 +91,7 @@ local function GetStartUnit(teamID)
 		local heading = math.random(3)
 		local zero = Spring.CreateUnit("tc_cursedhand_survival", x-50,y,z+50, heading, teamID)
 		local heading = math.random(3)		
-		local one = Spring.CreateUnit("tc_defender_survival", x+50,y,z-50, heading, teamID)					
+		local one = Spring.CreateUnit("tc_cursedhand_survival", x+100,y,z-100, heading, teamID)					
 	else
 		if (side == "imperials") then	
 			local heading = math.random(3)

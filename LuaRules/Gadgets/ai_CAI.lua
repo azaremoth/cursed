@@ -103,6 +103,8 @@ local function updateCvTarget()
 		local px = MapCenterX
 		local pz = MapCenterZ
 		local activepoint = 1
+		local freepoint = nil
+		
 		local teamID = teams[i]
 		local ai = select(4, Spring.GetTeamInfo(teamID))
 		local IsGaiaAI = false
@@ -152,15 +154,23 @@ local function updateCvTarget()
 							if ((shortestDist == 0) or (distStartCP < shortestDist)) then
 								shortestDist = distStartCP
 								activepoint = i
+								if (owner == nil) then
+									freepoint = i
+								end
 								-- Spring.Echo("CAI: current active shortest distance point in loop: " .. activepoint)
 							end
 						end
 					end
 				end
-				if (pointsx[activepoint] ~= nil) then
+				
+				if (pointsx[freepoint] ~= nil) then
+					cvActiveX[teamID] = pointsx[freepoint]
+					cvActiveZ[teamID] = pointsz[freepoint]
+					-- Spring.Echo("CAI: Active free X and Z value for team " .. teamID .. " is " .. pointsx[freepoint] .. " " .. pointsz[freepoint] .. " (".. freepoint .. ")")
+				elseif (pointsx[activepoint] ~= nil) then
 					cvActiveX[teamID] = pointsx[activepoint]
 					cvActiveZ[teamID] = pointsz[activepoint]
-					--  Spring.Echo("CAI: Active X and Z value for team " .. teamID .. " is " .. pointsx[activepoint] .. " " .. pointsz[activepoint] .. " (".. activepoint .. ")")
+					--  Spring.Echo("CAI: Active occupied X and Z value for team " .. teamID .. " is " .. pointsx[activepoint] .. " " .. pointsz[activepoint] .. " (".. activepoint .. ")")
 				end
 			end
 		end

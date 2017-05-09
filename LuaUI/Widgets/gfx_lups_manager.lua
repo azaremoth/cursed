@@ -110,6 +110,11 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 local abs = math.abs
 local min = math.min
 local max = math.max
@@ -179,6 +184,7 @@ local function UnitFinished(_,unitID,unitDefID)
   end
   registeredUnits[unitID] = true
 
+
   local effects = UnitEffects[unitDefID]
   if (effects) then
     for i=1,#effects do
@@ -217,13 +223,7 @@ local function UnitEnteredLos(_,unitID)
   if (spec and fullSpec) then 
     return 
   end
-  
-  --[[
-  if registeredUnits[unitID] then
-    return
-  end
-  registeredUnits[unitID] = true
-  ]]
+
   local unitDefID = spGetUnitDefID(unitID)
   local effects   = UnitEffects[unitDefID]
   if (effects) then
@@ -243,8 +243,12 @@ end
 local function UnitLeftLos(_,unitID)
   local spec, fullSpec = spGetSpectatingState()
   if (spec and fullSpec) then return end
+
   ClearFxs(unitID)
 end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

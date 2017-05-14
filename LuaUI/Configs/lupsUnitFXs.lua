@@ -12,10 +12,10 @@ effectUnitDefs = {
   tc_shade_lvl5 = {    {class='GroundFlash', options=HeroAura},    }, 
   
   euf_factory = { 
-	{class='ShieldJitter', options={layer=-16, life=math.huge, pos={0,0,0}, size=50, precision=1, strength=0.010, onActive=true, repeatEffect=true}},
+	{class='ShieldJitter', options={layer=-16, life=math.huge, pos={0,0,0}, size=50, precision=1, strength=0.010, onActive=true, repeatEffect=true, noIconDraw = true}},
    }, 
   euf_airport = { 
-	{class='ShieldJitter', options={layer=-16, life=math.huge, pos={-20,40,-20}, size=50, precision=1, strength=0.010, onActive=true, repeatEffect=true}},
+	{class='ShieldJitter', options={layer=-16, life=math.huge, pos={-20,40,-20}, size=50, precision=1, strength=0.010, onActive=true, repeatEffect=true, noIconDraw = true}},
    },
   euf_bomber = {
    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust1", onActive=true, noIconDraw = true}},
@@ -24,8 +24,8 @@ effectUnitDefs = {
   euf_interceptor = {
     {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust1", onActive=true, noIconDraw = true}},
     {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, piece="emit_thrust2", onActive=true, noIconDraw = true}},
-    {class='Ribbon', options={width=1, size=20, piece="ribbon1"}},
-    {class='Ribbon', options={width=1, size=20, piece="ribbon2"}},	
+    {class='Ribbon', options={width=1, size=20, piece="ribbon1", noIconDraw = true}},
+    {class='Ribbon', options={width=1, size=20, piece="ribbon2", noIconDraw = true}},	
   },
   euf_priest = {
     {class='GroundFlash', options=FocusAura},  
@@ -60,8 +60,8 @@ effectUnitDefs = {
   },
   tc_blade = {
     {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=25, piece="trail1", onActive=true, noIconDraw = true}},
-    {class='Ribbon', options={width=1, size=20, piece="ribbon1"}},
-    {class='Ribbon', options={width=1, size=20, piece="ribbon2"}},	
+    {class='Ribbon', options={width=1, size=20, piece="ribbon1", noIconDraw = true}},
+    {class='Ribbon', options={width=1, size=20, piece="ribbon2", noIconDraw = true}},	
   },
   tc_seeker = {
     {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=25, piece="trail1", onActive=true, noIconDraw = true}},
@@ -74,11 +74,11 @@ effectUnitDefs = {
 	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=385, strength = .001, precision=50, repeatEffect=true}},
   }, 
   euf_paladin = {
-    {class='AirJet', options={color={0.15, 0.8, 0.8}, width=2, length=30, piece="bladeemit1", emitVector = {0, 0, 1}, onActive=false}},  
+    {class='AirJet', options={color={0.15, 0.8, 0.8}, width=2, length=30, piece="bladeemit1", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}},
     {class='StaticParticles', options=MergeTable(PalaCorona,{piece="bladeemit1"})},
   },
   euf_paladin_ai = {
-    {class='AirJet', options={color={0.15, 0.8, 0.8}, width=2, length=30, piece="bladeemit1", emitVector = {0, 0, 1}, onActive=false}},  
+    {class='AirJet', options={color={0.15, 0.8, 0.8}, width=2, length=30, piece="bladeemit1", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}},
     {class='StaticParticles', options=MergeTable(PalaCorona,{piece="bladeemit1"})},
   },  
   euf_barracks = {
@@ -133,8 +133,8 @@ effectUnitDefs = {
   {class='StaticParticles', options=MergeTable(ThickSmoke, {piece="wirbel02"})},
   },
   tc_storage = {
-    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit1", onActive=false}},
-    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit2", onActive=false}},
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit1", onActive=false, noIconDraw = true}},
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit2", onActive=false, noIconDraw = true}},
   },
   crystals = {
     {class='GroundFlash', options=groundFlashBigViolett},   

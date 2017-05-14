@@ -27,7 +27,7 @@ local inbunker = false
 
 local restore_delay, MOVEANIMATIONSPEED
 
-local SIG_WALK = 4
+local SIG_WALK = 1
 
 
 local ATK_CHEST_SPEED_B = 150

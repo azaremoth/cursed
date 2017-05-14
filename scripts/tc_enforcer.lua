@@ -34,7 +34,7 @@ local MOVEANIMATIONSPEED
 local gun = 1
 
 local SIG_AIM1 = 2
-local SIG_WALK = 4
+local SIG_WALK = 1
 
 local SUMMONING	 = 1024+0
 local GREYCLOUD	 = 1025+0

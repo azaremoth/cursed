@@ -35,7 +35,7 @@ local indeepwater = false
 local restore_delay, MOVEANIMATIONSPEED
 local MOVEANIMATIONSLEEPTIME = 340
 
-local SIG_WALK = 4
+local SIG_WALK = 1
 
 local SUMMONING	 = 1024+0
 local GREYCLOUD	 = 1025+0

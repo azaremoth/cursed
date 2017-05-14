@@ -46,7 +46,7 @@ local smallgun = 1
 
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4
-local SIG_WALK = 4
+local SIG_WALK = 1
 
 local FOOTDUST = 1024+0
 local BOOM = 1025+0

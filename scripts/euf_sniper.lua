@@ -34,7 +34,7 @@ local MOVEANIMATIONSLEEPTIME = 340
 
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4
-local SIG_WALK = 4
+local SIG_WALK = 1
 
 local GUNFLARE	 = 1024+0
 local GROUNDFLASH	 = 1025+0

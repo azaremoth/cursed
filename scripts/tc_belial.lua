@@ -25,7 +25,7 @@ local RandomNumber2, moving, attacking, MOVEANIMATIONSPEED
 
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4
-local SIG_WALK = 4
+local SIG_WALK = 1
 
 local SUMMONING = 1024+0
 local FOOTDUST = 1025+0

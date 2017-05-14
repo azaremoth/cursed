@@ -31,7 +31,7 @@ local lshoulder = piece 'lshoulder'
 local restore_delay, moving, attacking, MOVEANIMATIONSPEED, MOVEANIMATIONSLEEPTIME, inbunker
 
 local SIG_AIM1 = 2
-local SIG_WALK = 4
+local SIG_WALK = 1
 
 local buildheading = 0
 

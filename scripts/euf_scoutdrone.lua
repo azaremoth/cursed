@@ -13,7 +13,7 @@ local restore_delay, MOVEANIMATIONSPEED
 local MOVEANIMATIONSLEEPTIME = 340
 
 local SIG_AIM1 = 2
-local SIG_WALK = 4
+local SIG_WALK = 1
 
 local BOOM	 = 1024+0
 

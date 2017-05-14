@@ -34,7 +34,7 @@ local gun = 1
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4
 local SIG_AIM3 = 8
-local SIG_WALK = 4
+local SIG_WALK = 1
 
 local BLOODSPLASH = 1024+0
 local JUMP = 1025+0

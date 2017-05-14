@@ -11,7 +11,6 @@ local SMOKE	 = 1025+0
 
 include "common.lua"
 
-
 local function Open()
 	Signal(SIG_OPEN)
 	SetSignalMask(SIG_OPEN)
@@ -19,10 +18,15 @@ local function Open()
 	Move (center, y_axis, 15, 10)
 	WaitForMove (center, y_axis)
 
+	local height = 20
+
 	while true do
 		local income = select(1,Spring.GetUnitResources(unitID))
 		if income > 0 then
 			Spring.UnitScript.Spin (tamper, y_axis, income, math.rad(1))
+			Move (center, y_axis, height, income*10)
+			WaitForMove (center, y_axis)
+			height = 25 - height
 		else
 			Spring.UnitScript.StopSpin (tamper, y_axis, math.rad(5))
 		end

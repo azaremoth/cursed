@@ -1,5 +1,10 @@
 >> Major changes 1.430 => 1.431
 
+Bugs
+- fixed metal extractors barely turning since integration of lua metal spots
+
+Balance
+- costs for flyer factories reduced by 200
 
 
 

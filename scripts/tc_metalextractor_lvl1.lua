@@ -3,8 +3,6 @@ local base = piece 'base'
 local bottom = piece 'bottom'
 local tamper = piece 'tamper'
 local center = piece 'center'
-local door_l = piece 'door_l' 
-local door_r = piece 'door_r'
 
 local SIG_OPEN = 1
 
@@ -18,21 +16,13 @@ local function Open()
 	Signal(SIG_OPEN)
 	SetSignalMask(SIG_OPEN)
 	
-	Turn (door_r, z_axis, math.rad(-120), math.rad(120))
-	Turn (door_l, z_axis, math.rad(120), math.rad(120))
-	WaitForTurn (door_r, z_axis)
-	Move (center, y_axis, 35, 10)
+	Move (center, y_axis, 15, 10)
 	WaitForMove (center, y_axis)
-
-	local height = 20
 
 	while true do
 		local income = select(1,Spring.GetUnitResources(unitID))
 		if income > 0 then
 			Spring.UnitScript.Spin (tamper, y_axis, income, math.rad(1))
-			Move (tamper, y_axis, height, income*10)
-			WaitForMove (tamper, y_axis)
-			height = 25 - height
 		else
 			Spring.UnitScript.StopSpin (tamper, y_axis, math.rad(5))
 		end
@@ -44,12 +34,8 @@ local function Close()
 	Signal(SIG_OPEN)
 	SetSignalMask(SIG_OPEN)
 	Spring.UnitScript.Spin (tamper, y_axis, income, math.rad(1))	
-	Move (center, y_axis, 0, 100)
-	Move (tamper, y_axis, 0, 100)	
+	Move (center, y_axis, 0, 50)
 	WaitForMove (center, y_axis)
-	Turn (door_r, z_axis, math.rad(0), math.rad(180))
-	Turn (door_l, z_axis, math.rad(0), math.rad(180))
-	WaitForTurn (door_r, z_axis)
 end
 
 function script.Activate()
@@ -81,8 +67,8 @@ function script.Create()
 	end
 end
 
-local explodables = {door_l, door_r}
-local shatters = {bottom, tamper}
+local explodables = {tamper}
+local shatters = {bottom}
 
 function script.Killed(recentDamage, maxHealth)
 	local severity = recentDamage/maxHealth

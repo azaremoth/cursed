@@ -2995,8 +2995,10 @@ local function ProcessUnitDestroyed(unitID, unitDefID, unitTeam, changeAlly)
 				controlledUnit.mexByID[unitID] = nil
 				removeIndexFromArray(controlledUnit.mex,index)
 			elseif ud.isFactory then -- factory
-				if controlledUnit.factoryByID[unitID].onDefenceHeatmap then
-					editDefenceHeatmap(unitTeam,unitID,buildDefs.factoryByDefId[unitDefID].defenceQuota,buildDefs.factoryByDefId[unitDefID].airDefenceQuota,buildDefs.factoryByDefId[unitDefID].defenceRange,-1,0)
+				if (controlledUnit.factoryByID[unitID].onDefenceHeatmap ~= nil) then
+					if controlledUnit.factoryByID[unitID].onDefenceHeatmap then
+						editDefenceHeatmap(unitTeam,unitID,buildDefs.factoryByDefId[unitDefID].defenceQuota,buildDefs.factoryByDefId[unitDefID].airDefenceQuota,buildDefs.factoryByDefId[unitDefID].defenceRange,-1,0)
+					end
 				end
 				controlledUnit.factory.cost = controlledUnit.factory.cost - ud.metalCost
 				if controlledUnit.factoryByID[unitID].finished then
@@ -3014,16 +3016,18 @@ local function ProcessUnitDestroyed(unitID, unitDefID, unitTeam, changeAlly)
 			elseif ud.buildSpeed > 0 then
 				if ud.speed > 0 then -- constructor
 					if controlledUnit.conByID[unitID].finished then
-						a.totalBP = a.totalBP - controlledUnit.conByID[unitID].bp
-						local jobIndex = controlledUnit.conByID[unitID].currentJob
-						if jobIndex > 0 then
-							a.conJobByIndex[jobIndex].assignedBP = a.conJobByIndex[jobIndex].assignedBP - controlledUnit.conByID[unitID].bp
-							a.conJobByIndex[jobIndex].con[unitID] = nil
-						end
-						for i = 1, a.unassignedCons.count do
-							if a.unassignedCons[i] == unitID then
-								removeIndexFromArray(a.unassignedCons,i)
-								break
+						if (a.totalBP ~= nil and controlledUnit.conByID[unitID].bp ~= nil) then
+							a.totalBP = a.totalBP - controlledUnit.conByID[unitID].bp
+							local jobIndex = controlledUnit.conByID[unitID].currentJob
+							if jobIndex > 0 then
+								a.conJobByIndex[jobIndex].assignedBP = a.conJobByIndex[jobIndex].assignedBP - controlledUnit.conByID[unitID].bp
+								a.conJobByIndex[jobIndex].con[unitID] = nil
+							end
+							for i = 1, a.unassignedCons.count do
+								if a.unassignedCons[i] == unitID then
+									removeIndexFromArray(a.unassignedCons,i)
+									break
+								end
 							end
 						end
 					end
@@ -3399,10 +3403,12 @@ function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 			elseif ud.extractsMetal > 0 then
 				controlledUnit.mexByID[unitID].finished = true
 			elseif ud.isFactory then -- factory
-				a.conJob.factory.assignedBP = a.conJob.factory.assignedBP + ud.buildSpeed
-				a.totalBP = a.totalBP + controlledUnit.factoryByID[unitID].bp
-				a.uncompletedFactory = false
-				controlledUnit.factoryByID[unitID].finished = true
+				if (a.totalBP ~= nil and a.conJob.factory.assignedBP ~= nil and controlledUnit.factoryByID[unitID].bp ~= nil) then
+					a.conJob.factory.assignedBP = a.conJob.factory.assignedBP + ud.buildSpeed
+					a.totalBP = a.totalBP + controlledUnit.factoryByID[unitID].bp
+					a.uncompletedFactory = false
+					controlledUnit.factoryByID[unitID].finished = true
+				end
 			elseif ud.buildSpeed > 0 then
 				if ud.speed > 0 then -- constructor
 					a.totalBP = a.totalBP + controlledUnit.conByID[unitID].bp

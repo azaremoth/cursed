@@ -61,7 +61,6 @@ buildingGroundDecalDecaySpeed = 0.2,
   yardMap            = "ooooooooo",
   sfxtypes = {
     explosiongenerators = {
-      "custom:Small_Explosion_YELLOW",
       "custom:EUF_Structurebuilding_Small",
       "custom:MLRSRocketTrail",	  
     },

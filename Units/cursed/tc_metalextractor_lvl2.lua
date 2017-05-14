@@ -46,6 +46,7 @@ local unitDef = {
   noAutoFire         = false,
   objectName         = "TC_metalextractor_lvl2.s3o",
   onoffable          = true,
+  script             = "tc_metalextractor_lvl2.lua",   
   selfDestructAs     = "MEDIUM_EXPLOSION_GREEN",
   showNanoFrame      = false,
   side               = "cursed",
@@ -58,6 +59,7 @@ local unitDef = {
   sfxtypes = {
     explosiongenerators = {
       "custom:Structurebuilding_Medium",
+      "custom:MLRSRocketTrail",		  
     },
   },
   sounds = {

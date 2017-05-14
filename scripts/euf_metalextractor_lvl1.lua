@@ -43,7 +43,7 @@ end
 local function Close()
 	Signal(SIG_OPEN)
 	SetSignalMask(SIG_OPEN)
-	Spring.UnitScript.Spin (tamper, y_axis, income, math.rad(1))	
+	Spring.UnitScript.StopSpin (tamper, y_axis, math.rad(5))	
 	Move (center, y_axis, 0, 100)
 	Move (tamper, y_axis, 0, 100)	
 	WaitForMove (center, y_axis)

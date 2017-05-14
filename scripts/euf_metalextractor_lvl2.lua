@@ -1,8 +1,16 @@
-
 local base = piece 'base' 
 local bottom = piece 'bottom'
 local tamper = piece 'tamper'
 local center = piece 'center'
+local leg_1 = piece 'leg_1' 
+local leg_1d = piece 'leg_1d' 
+local leg_1u = piece 'leg_1u' 
+local leg_2 = piece 'leg_2' 
+local leg_2d = piece 'leg_2d' 
+local leg_2u = piece 'leg_2u' 
+local leg_3 = piece 'leg_3' 
+local leg_3d = piece 'leg_3d' 
+local leg_3u = piece 'leg_3u' 
 
 local SIG_OPEN = 1
 
@@ -16,13 +24,31 @@ local function Open()
 	Signal(SIG_OPEN)
 	SetSignalMask(SIG_OPEN)
 	
-	Move (center, y_axis, 15, 10)
-	WaitForMove (center, y_axis)
+	local statenr = 1
 
 	while true do
 		local income = select(1,Spring.GetUnitResources(unitID))
 		if income > 0 then
 			Spring.UnitScript.Spin (tamper, y_axis, income, math.rad(1))
+			if (statenr > 0) then
+				Turn (leg_1d, z_axis, math.rad(10), math.rad(income*16))
+				Turn (leg_2d, z_axis, math.rad(10), math.rad(income*16))
+				Turn (leg_3d, z_axis, math.rad(10), math.rad(income*16))			
+				Turn (leg_1u, z_axis, math.rad(20), math.rad(income*16))				
+				Turn (leg_2u, z_axis, math.rad(20), math.rad(income*16))	
+				Turn (leg_3u, z_axis, math.rad(20), math.rad(income*16))			
+				Move (center, y_axis, 14, income*10)
+			else
+				Turn (leg_1d, z_axis, math.rad(5), math.rad(income*14))
+				Turn (leg_2d, z_axis, math.rad(5), math.rad(income*14))
+				Turn (leg_3d, z_axis, math.rad(5), math.rad(income*14))			
+				Turn (leg_1u, z_axis, math.rad(0), math.rad(income*14))				
+				Turn (leg_2u, z_axis, math.rad(0), math.rad(income*14))	
+				Turn (leg_3u, z_axis, math.rad(0), math.rad(income*14))			
+				Move (center, y_axis, 1, income*10)
+			end
+			WaitForMove (center, y_axis)
+			statenr = (statenr*(-1))
 		else
 			Spring.UnitScript.StopSpin (tamper, y_axis, math.rad(5))
 		end
@@ -33,8 +59,8 @@ end
 local function Close()
 	Signal(SIG_OPEN)
 	SetSignalMask(SIG_OPEN)
-	Spring.UnitScript.StopSpin (tamper, y_axis, math.rad(5))	
-	Move (center, y_axis, 0, 50)
+	Spring.UnitScript.StopSpin (tamper, y_axis, math.rad(5))
+	Move (center, y_axis, 0, 100)
 	WaitForMove (center, y_axis)
 end
 
@@ -48,6 +74,9 @@ end
 
 
 function script.Create()
+	Turn (leg_2, y_axis, math.rad(120), math.rad(500))
+	Turn (leg_3, y_axis, math.rad(240), math.rad(500))
+
 	----------------------------------START BUILD CYCLE
 	local structureheight = ((-40*GetUnitValue(COB.UNIT_HEIGHT))/3080192)
 	Move( bottom, y_axis, structureheight)
@@ -67,8 +96,8 @@ function script.Create()
 	end
 end
 
-local explodables = {tamper}
-local shatters = {bottom}
+local explodables = {leg_1, leg_2, leg_3}
+local shatters = {bottom, tamper}
 
 function script.Killed(recentDamage, maxHealth)
 	local severity = recentDamage/maxHealth

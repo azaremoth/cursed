@@ -6,6 +6,8 @@ Bugs
 Balance
 - costs for flyer factories reduced by 200
 
+Polishing
+- loadscreens were updated
 
 
 >> Major changes 1.429 => 1.430

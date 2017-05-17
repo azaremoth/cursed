@@ -136,6 +136,9 @@ effectUnitDefs = {
     {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit1", onActive=false, noIconDraw = true}},
     {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit2", onActive=false, noIconDraw = true}},
   },
+  tc_metalextractor_lvl2 = {
+    {class='AirJet', options={color={0.6,1.0,0.15}, emitVector = {0, 1, 0}, width=3, length=50, piece="tamper", onActive=false, noIconDraw = true}},
+  },  
   crystals = {
     {class='GroundFlash', options=groundFlashBigViolett},   
 	{class='StaticParticles', options=MergeTable(Purpleglow_bigger,{piece="biggem"})},  

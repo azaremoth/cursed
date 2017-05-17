@@ -12,6 +12,9 @@ function constructionAndEconomyHandler(a, at, frame)
 	local facJobAir = a.facJobAir
 	local controlledUnit = a.controlledUnit
 	
+	local modOptions = Spring.GetModOptions()
+	local startenergy = modOptions.startenergy or 800
+	
 	a.unitHording = 0.7 -- WAS 0.3
 --[[	if averagedEcon.aveMInc < 50 then
 		a.wantedNanoCount = math.floor(averagedEcon.aveMInc/24)
@@ -138,9 +141,9 @@ function constructionAndEconomyHandler(a, at, frame)
 	--conJob.mex.importance = conJob.mex.importance + 14*(1 - at.units.mex.count/mexSpot.count)
 	conJob.energy.interruptable = false
 	
-	if averagedEcon.eCur < 600 then --was 500
+	if averagedEcon.eCur < (0.6*startenergy) then --was 500
 		conJob.energy.importance = 18
-	elseif averagedEcon.energyToMetalRatio > 5.0 then
+	elseif averagedEcon.energyToMetalRatio > 7.0 then -- was 5.0
 		conJob.energy.interruptable = true
 		conJob.energy.importance = 0.5
 		conJob.mex.importance = 8
@@ -149,7 +152,7 @@ function constructionAndEconomyHandler(a, at, frame)
 				Spring.GiveOrderToUnit(unitID,CMD_PRIORITY,{2},{})
 			end
 		end
-	elseif averagedEcon.energyToMetalRatio > 5.13 then -- x1.35
+	elseif averagedEcon.energyToMetalRatio > 7.2 then -- was 5.13
 		conJob.energy.importance = 1
 		conJob.mex.importance = 8
 		if averagedEcon.mCur < 30 then
@@ -157,10 +160,10 @@ function constructionAndEconomyHandler(a, at, frame)
 				Spring.GiveOrderToUnit(unitID,CMD_PRIORITY,{2},{})
 			end
 		end
-	elseif averagedEcon.energyToMetalRatio > 2.57 then -- x1.35
+	elseif averagedEcon.energyToMetalRatio > 5.0 then -- was 2.57
 		conJob.energy.importance = 3
 		conJob.mex.importance = 2.5
-	elseif averagedEcon.energyToMetalRatio > 1.09 then -- x1.35
+	elseif averagedEcon.energyToMetalRatio > 1.5 then -- was 1.09
 		conJob.energy.importance = 5
 		conJob.mex.importance = 1.2
 	else
@@ -195,7 +198,7 @@ function constructionAndEconomyHandler(a, at, frame)
 		conJob.factory.importance = 20
 	end 
 	
-	if averagedEcon.eCur < 30 and averagedEcon.energyToMetalRatio < 1.25 then
+	if averagedEcon.eCur < 40 and averagedEcon.energyToMetalRatio < 1.25 then -- was < 30
 		conJob.defence.interruptable = true
 		conJob.energy.importance = 18
 		for unitID,_ in pairs(controlledUnit.econByID) do

@@ -2,12 +2,14 @@
 
 Bugs
 - fixed metal extractors barely turning since integration of lua metal spots
+- updated lups code to avoid rare errors
 
 Balance
 - costs for flyer factories reduced by 200
 
 Polishing
 - loadscreens were updated
+
 
 
 >> Major changes 1.429 => 1.430

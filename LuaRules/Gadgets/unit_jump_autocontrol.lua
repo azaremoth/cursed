@@ -34,6 +34,7 @@ local JumperPairs = {
 	[UnitDefNames.tc_shade_lvl4.id] = "tc_shade_lvl4",
 	[UnitDefNames.tc_shade_lvl5.id] = "tc_shade_lvl5",
 	[UnitDefNames.bug_med.id] = "bug_med",
+	[UnitDefNames.bug_med.id] = "bug_med_undead",	
 }	
 
 local AggressiveJumpersPairs = {

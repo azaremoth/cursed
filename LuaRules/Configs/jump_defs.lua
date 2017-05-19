@@ -45,6 +45,7 @@ jumpClassGroups = {
 	ghoul = {
 		"tc_ghoul",
 		"bug_med",
+		"bug_med_undead",		
 		},
 	hero = {
 		"euf_sarge_lvl2",

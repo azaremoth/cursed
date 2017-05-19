@@ -111,7 +111,7 @@ local featureDefs = {
 	resurrectable	   = 1,  
     blocking           = true,
 	customParams          = {
-		resurrectintounit	= "bug_big",
+		resurrectintounit	= "bug_big_undead",
 		featuredecaytime	= "180"
 	},  
     damage             = 2000,

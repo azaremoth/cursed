@@ -154,7 +154,7 @@ local featureDefs = {
 	resurrectable	   = 1,  
     blocking           = false,
 	customParams          = {
-		resurrectintounit	= "bug_larva",
+		resurrectintounit	= "bug_larva_undead",
 		featuredecaytime	= "150"
 	},  
     damage             = 500,

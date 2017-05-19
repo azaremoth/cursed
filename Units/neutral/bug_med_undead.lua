@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 
-local unitName = "bug_med"
+local unitName = "bug_med_undead"
 
 --------------------------------------------------------------------------------
 
@@ -10,7 +10,7 @@ local unitDef = {
   brakeRate          = 1.5,
   buildCostEnergy    = 500,
   buildCostMetal     = 500,
-  buildPic           = "bug_med.png",
+  buildPic           = "bug_med_undead.png",
   buildTime          = 500,
   canAttack          = true,
   canGuard           = true,
@@ -38,17 +38,17 @@ local unitDef = {
   idleAutoHeal       = 2.5,
   idleTime           = 400,
   mass               = 1100,
-  maxDamage          = 1000,
+  maxDamage          = 1200,
   maxSlope           = 14,
-  maxVelocity        = 3.5,
+  maxVelocity        = 3.1,
   maxWaterDepth      = 15,
   mobilestandorders  = "1",
   movementClass      = "WALKER3X3",
-  name               = "Xenosect",
+  name               = "Undead Xenosect",
   nanoColor          = "0.3 0.3 0.0",
   noAutoFire         = false,
   noChaseCategory    = "AIR",
-  objectName         = "bug_med.s3o",
+  objectName         = "bug_med_undead.s3o",
   radarDistance      = 0,
   repairable         = false,  
   script             = 'bug_melee.lua',
@@ -60,7 +60,7 @@ local unitDef = {
   fireState = "2",
   moveState = "2",
   turnRate           = 2500,
-  unitname           = "bug_med",
+  unitname           = "bug_med_undead",
   upright            = false,
   sfxtypes = {
     explosiongenerators = {
@@ -113,7 +113,7 @@ local featureDefs = {
 	resurrectable	   = 1,  
     blocking           = true,
 	customParams          = {
-		resurrectintounit	= "bug_med_undead",
+		resurrectintounit	= "bug_med",
 		featuredecaytime	= "150"
 	},  
     damage             = 500,

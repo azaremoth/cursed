@@ -44,35 +44,35 @@ function addon.DrawLoadScreen()
 			gl.Vertex(0.2, 0.15)
 
 		--progress
-		gl.Color(0,0.7,1,0.3)
+		gl.Color(0.6,0.6,0.6,0.3)
 			gl.Vertex(0.2, 0.1)
 			gl.Vertex(0.2 + math.max(0, loadProgress-0.01) * 0.6, 0.1)
 			gl.Vertex(0.2 + math.max(0, loadProgress-0.01) * 0.6, 0.15)
 			gl.Vertex(0.2, 0.15)
-		gl.Color(0,0.6,0.8,0.1)
+		gl.Color(0.7,0.7,0.7,0.1)
 			gl.Vertex(0.2 + math.max(0, loadProgress-0.01) * 0.6, 0.1)
 			gl.Vertex(0.2 + math.max(0, loadProgress-0.01) * 0.6, 0.15)
-		gl.Color(0,0.5,0.6,0)
+		gl.Color(0.4,0.4,0.4,0)
 			gl.Vertex(0.2 + math.min(1, math.max(0, loadProgress+0.01)) * 0.6, 0.15)
 			gl.Vertex(0.2 + math.min(1, math.max(0, loadProgress+0.01)) * 0.6, 0.1)
 
 		--bar borders
-		gl.Color(0,0.2,1,0.2) --Top Bar
+		gl.Color(1,1,1,1) --Top Bar
 			gl.Vertex(0.2, 0.15)
 			gl.Vertex(0.8, 0.15)
 			gl.Vertex(0.8, 0.15-vbw)
 			gl.Vertex(0.2, 0.15-vbw)
-		gl.Color(0,0.2,1,0.2) --Bottom Bar
+		gl.Color(1,1,1,1) --Bottom Bar
 			gl.Vertex(0.2, 0.10)
 			gl.Vertex(0.8, 0.10)
 			gl.Vertex(0.8, 0.10+vbw)
 			gl.Vertex(0.2, 0.10+vbw)
-		gl.Color(0,0.2,1,0.2) --Left Side Bar
+		gl.Color(1,1,1,1) --Left Side Bar
 			gl.Vertex(0.2, 0.1)
 			gl.Vertex(0.2, 0.15)
 			gl.Vertex(0.2+hbw, 0.15)
 			gl.Vertex(0.2+hbw, 0.1)
-		gl.Color(0,0.2,1,0.2) --Right Side Bar
+		gl.Color(1,1,1,1) --Right Side Bar
 			gl.Vertex(0.8, 0.1)
 			gl.Vertex(0.8, 0.15)
 			gl.Vertex(0.8-hbw, 0.15)

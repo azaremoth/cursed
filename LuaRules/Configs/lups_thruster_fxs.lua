@@ -1,31 +1,31 @@
 local tbl = {
---[[  euf_bomber = {
-    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, baseLength = 8, piece="emit_thrust1", onActive=true}},
-    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, baseLength = 8, piece="emit_thrust2", onActive=true}},
+  euf_bomber = {
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=30, baseLength = 5, piece="emit_thrust1", onActive=true, noIconDraw = true}},
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=30, baseLength = 5, piece="emit_thrust2", onActive=true, noIconDraw = true}},
   },
   euf_transport = {
-    {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, baseLength = 6, piece="thrust1", onActive=true}},
-    {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, baseLength = 6, piece="thrust2", onActive=true}},
-	{class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, baseLength = 6, piece="thrust3", onActive=true}},
-	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, baseLength = 2, piece="dthrust1", emitVector = {0, 1, 0}, onActive=true}},	
-	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, baseLength = 2, piece="dthrust2", emitVector = {0, 1, 0}, onActive=true}},	
-	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, baseLength = 2, piece="dthrust3", emitVector = {0, 1, 0}, onActive=true}},	
-	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, baseLength = 2, piece="dthrust4", emitVector = {0, 1, 0}, onActive=true}},	
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=25, baseLength = 5, piece="thrust1", onActive=true, noIconDraw = true}},
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=25, baseLength = 5, piece="thrust2", onActive=true, noIconDraw = true}},
+	{class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=25, baseLength = 5, piece="thrust3", onActive=true, noIconDraw = true}},
+	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, baseLength = 5, piece="dthrust1", emitVector = {0, 1, 0}, onActive=true, noIconDraw = true}},	
+	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, baseLength = 5, piece="dthrust2", emitVector = {0, 1, 0}, onActive=true, noIconDraw = true}},	
+	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, baseLength = 5, piece="dthrust3", emitVector = {0, 1, 0}, onActive=true, noIconDraw = true}},	
+	{class='AirJet', options={color={0.1,0.4,0.6}, width=6, length=8, baseLength = 5, piece="dthrust4", emitVector = {0, 1, 0}, onActive=true, noIconDraw = true}},	
   },  
   euf_interceptor = {
-    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, baseLength = 2, piece="emit_thrust1", onMoving=true, onActive=false}},
-    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=35, baseLength = 2, piece="emit_thrust2", onMoving=true, onActive=false}},
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=45, baseLength = 5, piece="emit_thrust1", onActive=true, noIconDraw = true}},
+    {class='AirJet', options={color={0.1,0.4,0.6}, width=5, length=45, baseLength = 5, piece="emit_thrust2", onActive=true, noIconDraw = true}},
   },    
   tc_acranius = {
-    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=35, baseLength = 2, piece="emit_thrust1", onMoving=true, onActive=false}},
-    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=35, baseLength = 2, piece="emit_thrust2", onMoving=true, onActive=false}},
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=30, baseLength = 5, piece="emit_thrust1", onActive=true, noIconDraw = true}},
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=30, baseLength = 5, piece="emit_thrust2", onActive=true, noIconDraw = true}},
   },
   tc_blade = {
-    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=25, baseLength = 2, piece="trail1", onMoving=true, onActive=false}},	
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=45, baseLength = 5, piece="trail1", onActive=true, noIconDraw = true}},	
   },
   tc_seeker = {
-    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=25, baseLength = 2, piece="trail1", onMoving=true, onActive=false}},
-  },]]
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=45, baseLength = 5, piece="trail1", onActive=true, noIconDraw = true}},
+  },
 }
 local tbl2 = {}
 

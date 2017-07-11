@@ -316,10 +316,10 @@ local function ProcessAwardData()
 					message = 'Damage to allies: '.. floor(maxVal * 100) ..'%'
 					recordVal = floor(maxVal * 100)
 				elseif awardType == 'mex' then
-					message = 'Mexes built: '.. maxVal
+					message = 'Mexes built: ' .. maxVal
 					recordVal = maxVal
 				elseif awardType == 'mexkill' then
-					message = 'Mexes destroyed: '.. maxVal
+					message = 'Mexes destroyed: ' .. maxVal
 					recordVal = maxVal
 				elseif awardType == 'herokill' then
 					message = maxVal .. ' Heroes eliminated'

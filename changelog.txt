@@ -1,3 +1,8 @@
+>> Major changes 1.433 => 1.434
+
+
+
+
 >> Major changes 1.430 => 1.433
 
 Bugs
@@ -10,6 +15,7 @@ Balance
 Polishing
 - loadscreens were updated
 - added undead bug variants
+- readded trusters of airplanes changing size during acceleration
 
 
 

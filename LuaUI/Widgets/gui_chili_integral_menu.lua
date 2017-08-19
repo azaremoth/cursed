@@ -311,7 +311,6 @@ local wasPlaying = false
 
 -- DGun button progressbar, for listening to special-weapon reload progress
 --VFS.Include("LuaRules/Configs/customcmds.h.lua") --already included in "include("Configs/integral_menu_commands.lua")"
-local reverseCompat = (Game.version:find('91.0') == 1) and 1 or 0
 local turnOffReloadableWeaponChecks = false
 local reloadableButton = {
 --	[CMD.MANUALFIRE] = {progress=0,status=nil},
@@ -412,10 +411,10 @@ local function MakeButton(container, cmd, insertItem, index)
 	local myTeamID = Spring.GetMyTeamID()
 	local side = select(5, Spring.GetTeamInfo(myTeamID))
 	
-	if (side == 'imperials') then
-		te = overrides_faction_two[cmd.id]  -- command overrides imperials		
+	if (side == 'cursed') then
+		te = overrides[cmd.id]  -- command overrides imperials		
 	else
-		te = overrides[cmd.id]  -- command overrides cursed
+		te = overrides_faction_two[cmd.id]  -- command overrides cursed
 	end
 	
 	-- text 
@@ -1696,7 +1695,7 @@ function widget:GameFrame(n)
 		for i=1, #selectedUnitList do
 			local unitID = selectedUnitList[i]
 			if not manualfireweapon.status then
-				local _,_, weaponReloadFrame, _, _ = spGetUnitWeaponState(unitID, 3-reverseCompat) --Note: weapon no.3 is by ZK convention is usually used for user controlled weapon
+				local _,_, weaponReloadFrame, _, _ = spGetUnitWeaponState(unitID, 3) --Note: weapon no.3 is by ZK convention is usually used for user controlled weapon
 				local isManualFire, reloadTime = IsWeaponManualFire(unitID, 3)
 				if isManualFire and weaponReloadFrame then
 					if weaponReloadFrame > currentFrame then

@@ -38,19 +38,28 @@ local function SetTheme()
 	local myTeamID = Spring.GetMyTeamID()
 	local side = select(5, Spring.GetTeamInfo(myTeamID))
 	
-	if (side == "" or side == nil) then -- startscript didn't specify a side
-		side = GG.teamside
-	end
+--	if ((side == "" or side == nil) and GG.teamside ~= nil) then -- startscript didn't specify a side
+--		side = GG.teamside
+--	end
 	
 	if not Chili then
 		Chili = WG.Chili
 	end
 	
 	if Chili then
-		Chili.theme.skin.general.skinName = themes[side] or 'Bones'
+		if (themes[side] ~= nil) then
+			Chili.theme.skin.general.skinName = themes[side]
+		else
+			Chili.theme.skin.general.skinName = 'Imperial'
+		end
 	end
+	
 	if WG.crude and WG.crude.SetCursor then
-		WG.crude.SetCursor( cursors[side] )
+		if (cursors[side] ~= nil) then
+			WG.crude.SetCursor( cursors[side] )
+		else
+			WG.crude.SetCursor( 'imperial' )
+		end
 	end
 end
 

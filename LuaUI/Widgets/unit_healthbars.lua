@@ -25,7 +25,6 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --//for backward compatibility with old weapon indexes
-local reverseCompat = (Game.version:find('91.')) and 1 or 0
 
 local barHeight = 3
 local barWidth  = 14  --// (barWidth)x2 total width!!!
@@ -811,10 +810,10 @@ do
 	  
       --// RELOAD
       if (ci.reloadTime>=options.minReloadTime.value) then
-        _,reloaded,reloadFrame = GetUnitWeaponState(unitID,ci.primaryWeapon - reverseCompat)
+        _,reloaded,reloadFrame = GetUnitWeaponState(unitID,ci.primaryWeapon)
         if (reloaded==false) then
 		  local slowState = 1-(GetUnitRulesParam(unitID,"slowState") or 0)
-		  local reloadTime = Spring.GetUnitWeaponState(unitID, ci.primaryWeapon - reverseCompat , 'reloadTime')
+		  local reloadTime = Spring.GetUnitWeaponState(unitID, ci.primaryWeapon, 'reloadTime')
 		  ci.reloadTime = reloadTime
 		  -- When weapon is disabled the reload time is constantly set to be almost complete. 
 		  -- It results in a bunch of units walking around with 99% reload bars.

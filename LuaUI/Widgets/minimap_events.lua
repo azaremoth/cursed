@@ -90,7 +90,9 @@ local spIsUnitAllied         = Spring.IsUnitAllied
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local stockpileExceptions = {}
+local stockpileExceptions = {
+--	[UnitDefNames["turretaaheavy"].id] = true,
+}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -273,16 +275,15 @@ end
 
 
 --------------------------------------------------------------------------------
--- local terraunitDefID = UnitDefNames["terraunit"].id
 
 local function AddEvent(unitID, unitDefID, color, cost)
   if (not spIsUnitAllied(unitID)) then
     return
   end
   local ud = UnitDefs[unitDefID]
---[[  if ((ud == nil) or ud.isFeature or unitDefID == terraunitDefID) then
+  if ((ud == nil) or ud.isFeature) then
     return
-  end]]--
+  end
   local px, py, pz = spGetUnitPosition(unitID)
   if (px and pz) then
     eventMap[unitID] = {
@@ -448,8 +449,10 @@ function widget:DrawInMiniMap(xSize, ySize)
   if circleList == 0 then
 	CreateLists()
   end
- 
-  glSmoothing(false, false, false)
+  
+  if glSmoothing then
+    glSmoothing(false, false, false)
+  end
   glBlending(GL_SRC_ALPHA, GL_ONE)
   glLineWidth(lineWidth)
   glTexture(false)
@@ -481,7 +484,9 @@ function widget:DrawInMiniMap(xSize, ySize)
   glColor(1,1,1,1)
   gl.Lighting(true)
   glBlending(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-  glSmoothing(true, true, false)
+  if glSmoothing then
+    glSmoothing(true, true, false)
+  end
 end
 
 

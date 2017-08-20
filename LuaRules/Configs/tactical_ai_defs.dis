@@ -1,0 +1,328 @@
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+local function Union(t1, t2)
+	local ret = {}
+	for i, v in pairs(t1) do
+		ret[i] = v
+	end
+	for i, v in pairs(t2) do
+		ret[i] = v
+	end
+	return ret
+end
+
+local function NameToDefID(nameTable)
+	local defTable = {}
+	for _,unitName in pairs(nameTable) do
+		local ud = UnitDefNames[unitName]
+		if ud then
+			defTable[ud.id] = true
+		end
+	end
+	return defTable
+end
+
+local function SetMinus(set, exclusion)
+	local copy = {}
+	for i,v in pairs(set) do
+		if not exclusion[i] then
+			copy[i] = v
+		end
+	end
+	
+	return copy
+end
+
+-- general arrays
+local allGround = {}
+local armedLand = {}
+
+for name,data in pairs(UnitDefNames) do
+	if not data.canfly then
+		allGround[data.id] = true
+		if data.canAttack and data.weapons[1] and data.weapons[1].onlyTargets.land then
+			armedLand[data.id] = true
+		end
+	end
+end
+
+---------------------------------------------------------------------------
+-- swarm arrays
+---------------------------------------------------------------------------
+-- these are not strictly required they just help with inputting the units
+
+local longRangeSwarmieeArray = NameToDefID({ 
+
+})
+
+local medRangeSwarmieeArray = NameToDefID({ 
+	"bug_larva",
+	"euf_marine",
+	"tc_undeadmarine_gun",
+})
+
+local lowRangeSwarmieeArray = NameToDefID({
+	"bug_med",
+	"bug_big",
+	"euf_paladin",
+	"euf_werewolf",
+	"tc_ghoul",
+	"tc_shade",
+	"tc_shade_lvl1",	
+	"tc_shade_lvl2",
+	"tc_shade_lvl3",
+	"tc_shade_lvl4",
+	"tc_shade_lvl5",
+	"tc_undeadmarine_melee",	
+-- only worth swarming sniper at low range, too accurate otherwise.
+})
+
+medRangeSwarmieeArray = Union(medRangeSwarmieeArray,longRangeSwarmieeArray)
+lowRangeSwarmieeArray = Union(lowRangeSwarmieeArray,medRangeSwarmieeArray)
+
+---------------------------------------------------------------------------
+-- skirm arrays
+---------------------------------------------------------------------------
+-- these are not strictly required they just help with inputting the units
+
+local veryShortRangeSkirmieeArray = NameToDefID({
+
+})
+
+local shortRangeSkirmieeArray = NameToDefID({
+
+})
+
+local riotRangeSkirmieeArray = NameToDefID({
+
+})
+
+local lowMedRangeSkirmieeArray = NameToDefID({
+
+})
+
+local medRangeSkirmieeArray = NameToDefID({
+
+})
+
+for name, data in pairs(UnitDefNames) do -- add all comms to mid ranged skirm because they might be short ranged (and also explode)
+	if data.customParams.commtype then
+		medRangeSkirmieeArray[data.id] = true
+	end
+end
+
+local longRangeSkirmieeArray = NameToDefID({
+
+})
+
+local artyRangeSkirmieeArray = NameToDefID({
+
+})
+
+local slasherSkirmieeArray = NameToDefID({
+
+})
+
+-- Nested union so long ranged things also skirm the things skirmed by short ranged things
+shortRangeSkirmieeArray  = Union(shortRangeSkirmieeArray,veryShortRangeSkirmieeArray)
+riotRangeSkirmieeArray   = Union(riotRangeSkirmieeArray,shortRangeSkirmieeArray)
+lowMedRangeSkirmieeArray = Union(lowMedRangeSkirmieeArray, riotRangeSkirmieeArray)
+medRangeSkirmieeArray    = Union(medRangeSkirmieeArray, lowMedRangeSkirmieeArray)
+longRangeSkirmieeArray   = Union(longRangeSkirmieeArray, medRangeSkirmieeArray)
+artyRangeSkirmieeArray   = Union(artyRangeSkirmieeArray, longRangeSkirmieeArray)
+
+---------------------------------------------------------------------------
+-- Explosion avoidance
+---------------------------------------------------------------------------
+
+local veryShortRangeExplodables = NameToDefID({
+})
+
+local shortRangeExplodables = NameToDefID({
+})
+
+local diverExplodables = NameToDefID({
+})
+
+local medRangeExplodables = NameToDefID({
+	"euf_powerplant", -- don't suicide vs fusions if possible.
+})
+
+for name, data in pairs(UnitDefNames) do -- avoid factory death explosions.
+	if string.match(name, "factory") or string.match(name, "hub") then
+		shortRangeExplodables[data.id] = true
+		medRangeExplodables[data.id] = true
+	end
+end
+
+-- Notably, this occurs after the skirm nested union
+veryShortRangeSkirmieeArray = Union(veryShortRangeSkirmieeArray, veryShortRangeExplodables)
+
+local diverSkirmieeArray = Union(shortRangeSkirmieeArray, diverExplodables)
+shortRangeSkirmieeArray  = Union(shortRangeSkirmieeArray, shortRangeExplodables)
+riotRangeSkirmieeArray   = Union(riotRangeSkirmieeArray, shortRangeExplodables)
+
+lowMedRangeSkirmieeArray = Union(lowMedRangeSkirmieeArray, medRangeExplodables)
+medRangeSkirmieeArray    = Union(medRangeSkirmieeArray, medRangeExplodables)
+longRangeSkirmieeArray   = Union(longRangeSkirmieeArray, medRangeExplodables)
+artyRangeSkirmieeArray   = Union(artyRangeSkirmieeArray, medRangeExplodables)
+
+-- Stuff that mobile AA skirms
+
+local skirmableAir = NameToDefID({
+
+})
+
+-- Brawler, for AA to swarm.
+local brawler = NameToDefID({
+
+})
+
+-- Things that are fled by some things
+local fleeables = NameToDefID({
+			"euf_bunker_ai",
+			"euf_plasmatower",
+			"euf_plasmatower_survival",	
+			"euf_lasertower",
+			"euf_lasertower_ai",	
+			"tc_defender",
+			"tc_defender_survival",			
+			"tc_tower",	
+			"tc_tower_survival",			
+})
+
+-- Submarines to be fled by some things
+local subfleeables = NameToDefID({
+
+})
+
+-- Some short ranged units dive everything that they don't skirm or swarm.
+local shortRangeDiveArray = SetMinus(SetMinus(allGround, diverSkirmieeArray), lowRangeSwarmieeArray)
+
+-- waterline(defaults to 0): Water level at which the unit switches between land and sea behaviour
+-- sea: table of behaviour for sea. Note that these tables are optional.
+-- land: table of behaviour for land 
+
+-- weaponNum(defaults to 1): Weapon to use when skirming
+-- searchRange(defaults to 800): max range of GetNearestEnemy for the unit.
+-- defaultAIState (defaults in config): (1 or 0) state of AI when unit is initialised
+
+--*** skirms(defaults to empty): the table of units that this unit will attempt to keep at max range
+-- skirmEverything (defaults to false): Skirms everything (does not skirm radar with this enabled only)
+-- skirmLeeway (defaults to 0): (Weapon range - skirmLeeway) = distance that the unit will try to keep from units while skirming
+-- stoppingDistance (defaults to 0): (skirmLeeway - stoppingDistance) = max distance from target unit that move commands can be given while skirming
+-- skirmRadar (defaults to false): Skirms radar dots
+-- skirmOnlyNearEnemyRange (defaults to false): If true, skirms only when the enemy unit is withing enemyRange + skirmOnlyNearEnemyRange
+-- skirmOrderDis (defaults in config): max distance the move order is from the unit when skirming
+-- skirmKeepOrder (defaults to false): If true the unit does not clear its move order when too far away from the unit it is skirming.
+-- velocityPrediction (defaults in config): number of frames of enemy velocity prediction for skirming and fleeing
+-- selfVelocityPrediction (defaults to false): Whether the unit predicts its own velocity when calculating range.
+-- reloadSkirmLeeway (defaults to false): Increase skirm range by reloadSkirmLeeway*remainingReloadFrames when reloading.
+-- skirmBlockedApproachFrames (defaults to false): Stop skirming after this many frames of being fully reloaded if not set to attack move.
+
+--*** swarms(defaults to empty): the table of units that this unit will jink towards and strafe
+-- maxSwarmLeeway (defaults to Weapon range): (Weapon range - maxSwarmLeeway) = Max range that the unit will begin strafing targets while swarming
+-- minSwarmLeeway (defaults to Weapon range): (Weapon range - minSwarmLeeway) = Range that the unit will attempt to move further away from the target while swarming
+-- jinkTangentLength (default in config): component of jink vector tangent to direction to enemy
+-- jinkParallelLength (default in config): component of jink vector parallel to direction to enemy
+-- circleStrafe (defaults to false): when set to true the unit will run all around the target unit, false will cause the unit to jink back and forth
+-- minCircleStrafeDistance (default in config): (weapon range - minCircleStrafeDistance) = distance at which the circle strafer will attempt to move away from target
+-- strafeOrderLength (default in config): length of move order while strafing
+-- swarmLeeway (defaults to 50): adds to enemy range when swarming
+-- swarmEnemyDefaultRange (defaults to 800): range of the enemy used if it cannot be seen.
+-- alwaysJinkFight (defaults to false): If enabled the unit with jink whenever it has a fight command
+-- localJinkOrder (defaults in config): Causes move commands to be given near the unit, otherwise given next to opponent
+
+--*** flees(defaults to empty): the table of units that this unit will flee like the coward it is!!!
+-- fleeCombat (defaults to false): if true will flee everything without catergory UNARMED
+-- fleeLeeway (defaults to 100): adds to enemy range when fleeing
+-- fleeDistance (defaults to 100): unit will flee to enemy range + fleeDistance away from enemy
+-- fleeRadar (defaults to false): does the unit flee radar dots?
+-- minFleeRange (defaults to 0): minumun range at which the unit will flee, will flee at higher range if the attacking unit outranges it
+-- fleeOrderDis (defaults to 120): max distance the move order is from the unit when fleeing
+
+--*** hugs(defaults to empty): the table of units to close range with.
+-- hugRange (default in config): Range to close to
+
+--*** fightOnlyUnits(defaults to empty): the table of units that the unit will only interact with when it has a fight command. No AI invoked with manual attack or leashing.
+--*** fightOnlyOverride(defaults to empty): Table tbat overrides parameters when fighting fight only units.
+
+--- Array loaded into gadget 
+local behaviourDefaults = {
+	defaultState = 1,
+	defaultJinkTangentLength = 80,
+	defaultJinkParallelLength = 200,
+	defaultStrafeOrderLength = 100,
+	defaultMinCircleStrafeDistance = 40,
+    defaultLocalJinkOrder = true,
+	defaultSkirmOrderDis = 120,
+	defaultVelocityPrediction = 30,
+	defaultHugRange = 50,
+}
+
+local behaviourConfig = { 
+	-- swarmers
+	["tc_ghoul"] = {
+		skirms = veryShortRangeSkirmieeArray, 
+		swarms = lowRangeSwarmieeArray, 
+		flees = {},
+		circleStrafe = true, 
+		maxSwarmLeeway = 50, 
+		jinkTangentLength = 50, 
+		minCircleStrafeDistance = 50,
+		minSwarmLeeway = 100,
+		swarmLeeway = 30, 
+		alwaysJinkFight = true,	
+	},
+	
+	-- could flee subs but isn't fast enough for it to be useful
+	
+	-- riots
+	
+	--assaults
+	
+	-- med range skirms
+	
+	-- long range skirms
+	
+	-- arty range skirms
+	["euf_sniper"] = {
+		skirms = allGround,
+		skirmRadar = true,
+		swarms = {}, 
+		flees = {},
+		skirmLeeway = 40,
+		skirmBlockedApproachFrames = 120,
+	},
+	
+	["tc_agares"] = {
+		skirms = allGround,
+		skirmRadar = true,
+		swarms = {}, 
+		flees = {},
+		skirmLeeway = 40,
+		skirmBlockedApproachFrames = 120,
+	},	
+	
+	-- cowardly support units
+	["tc_necromancer"] = {
+		skirms = {}, 
+		swarms = {}, 
+		flees = fleeables,
+		fleeCombat = true,
+		fleeLeeway = 100,
+		fleeDistance = 100,
+		minFleeRange = 500,
+	},
+
+	-- support
+	
+	-- mobile AA
+	
+}
+
+return behaviourConfig, behaviourDefaults
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------

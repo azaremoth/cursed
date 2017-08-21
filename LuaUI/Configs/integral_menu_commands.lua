@@ -81,7 +81,7 @@ local overrides = {
 	[CMD_SPECIALSKILL] = {text = ' ', texture = imageDirSpecials .. 'illusions.png'},		
 	[CMD.DGUN] = { texture = imageDir .. 'manualfire.png',  text= '\255\0\255\0A'},	
 	-- states
---	[CMD_UNIT_AI] = { texture = {'LuaUI/Images/commands/states/ai_off.png', 'LuaUI/Images/commands/states/ai_on.png'}, text=''},
+	[CMD_UNIT_AI] = { texture = {'LuaUI/Images/commands/states/ai_off.png', 'LuaUI/Images/commands/states/ai_on.png'}, text=''},
 	[CMD.ONOFF] = { texture = {'LuaUI/Images/commands/states/off.png', 'LuaUI/Images/commands/states/on.png'}, text=''},
 	[CMD.REPEAT] = { texture = {'LuaUI/Images/commands/states/repeat_off.png', 'LuaUI/Images/commands/states/repeat_on.png'}, text=''},
 	[CMD.CLOAK] = { texture = {'LuaUI/Images/commands/states/cloak_off.png', 'LuaUI/Images/commands/states/cloak_on.png'},
@@ -122,7 +122,7 @@ local overrides_faction_two = {
 	[CMD_CHANGEWEAPON_LUA] = {text = ' ', texture = imageDirSpecials .. 'weaponchange_sarge.png'},
 	[CMD_SPECIALSKILL] = {text = ' ', texture = imageDirSpecials .. 'illusions.png'},		
 	-- states
---	[CMD_UNIT_AI] = { texture = {'LuaUI/Images/commands/states/ai_off.png', 'LuaUI/Images/commands/states/ai_on.png'}, text=''},
+	[CMD_UNIT_AI] = { texture = {'LuaUI/Images/commands/states/ai_off.png', 'LuaUI/Images/commands/states/ai_on.png'}, text=''},
 	[CMD.ONOFF] = { texture = {'LuaUI/Images/commands/states/off.png', 'LuaUI/Images/commands/states/on.png'}, text=''},
 	[CMD.REPEAT] = { texture = {'LuaUI/Images/commands/states/repeat_off.png', 'LuaUI/Images/commands/states/repeat_on.png'}, text=''},
 	[CMD.CLOAK] = { texture = {'LuaUI/Images/commands/states/cloak_off.png', 'LuaUI/Images/commands/states/cloak_on.png'},

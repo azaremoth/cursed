@@ -26,6 +26,8 @@ local CMD_FIGHT        = CMD.FIGHT
 ----CONFIG
 --------------------------
 
+local updateinterval = 35 -- in gameframes
+
 -- skirm
 local orderDis = 100
 -- swarm
@@ -60,7 +62,8 @@ local skrimArray = {
   "tc_bonebeast",
 }
 
-local unitstate = {}	
+local unitstate = {}
+local updateListUnits = {}
 local controlledUnits = {}
 local swarmSet = {}
 local skrimSet = {}
@@ -142,9 +145,10 @@ function getAttack(unit,v,cQueue)
   return false
 end
 
-function checkSwarmers()
-  for unit, v in pairs(controlledUnits) do
+function checkUnit(unit)
 	if (unitstate[unit] == 1) then
+	  local v = controlledUnits[unit]
+	  if (v ~= nil) then
 		local cQueue = spGetCommandQueue(unit,2)
 		local enemy,move = getAttack(unit,v,cQueue) 
 		local burrowed = Spring.GetUnitRulesParam(unit,"burrowed")	
@@ -163,15 +167,13 @@ function checkSwarmers()
 		  local cz 
 		  if pointDis then
 			if (v.dir == nil) then -- skirm check
-				Spring.Echo("SKIRM: " .. unit)
 				local holdPos = (Spring.GetUnitStates(unit).movestate == 0)
 				if not holdPos then 
-					Spring.Echo("SKIRM: No hold position for " .. unit)
 					if v.range > pointDis then
 						local ed = spGetUnitDefID(enemy)
 						local er = UnitDefs[ed].maxWeaponRange
 						if (er) and (er < v.range) and (er > 0) then
-						  Spring.Echo("SKIRM: Get out of range! " .. unit)
+--						  Spring.Echo("SKIRM: Get out of range! " .. unit)
 						  local ex,ez,ez = spGetUnitPosition(enemy)
 						  local ux,uy,uz = spGetUnitPosition(unit)
 						  local pointDis = spGetUnitSeparation(unit,enemy)
@@ -271,12 +273,13 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 			if not unitstate[unitID] then
 				unitstate[unitID] = 1
 			end
-		end
-		if IsSkirm(ud) then
-		  controlledUnits[unitID] = {range = ud.maxWeaponRange, cx = 0, cy = 0, cz = 0}
-		end
-		if IsSwarm(ud) then
-		  controlledUnits[unitID] = {range = ud.maxWeaponRange, cx = 0, cy = 0, cz = 0, dir = jinkVariation, rot = random(0,1)*2-1}
+			updateListUnits[unitID] = (Spring.GetGameFrame() + updateinterval)
+			if IsSkirm(ud) then
+			  controlledUnits[unitID] = {update = nextupdate, range = ud.maxWeaponRange, cx = 0, cy = 0, cz = 0}
+			end
+			if IsSwarm(ud) then
+			  controlledUnits[unitID] = {update = nextupdate, range = ud.maxWeaponRange, cx = 0, cy = 0, cz = 0, dir = jinkVariation, rot = random(0,1)*2-1}
+			end
 		end
 	end
 end
@@ -292,8 +295,11 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 end
 
 function gadget:GameFrame(n)
-  if (n%15<1) then --was 35
-	checkSwarmers()
-  end
+	for unit, updateframe in pairs(updateListUnits) do -- this should spread the calculation load to more gameframes
+		if (updateframe <= n) then
+			updateListUnits[unit] = (n + updateinterval + random(0,3))
+			checkUnit(unit)
+		end
+	end
 end
 

@@ -15,6 +15,7 @@ include("LuaRules/Configs/customcmds.h.lua")
 
 local jumpDefNames  = VFS.Include"LuaRules/Configs/jump_defs.lua"
 local jumpDefs = {}
+local runrange = 300
 
 for name, data in pairs(jumpDefNames) do
 	jumpDefs[UnitDefNames[name].id] = data
@@ -33,13 +34,13 @@ local JumperPairs = {
 	[UnitDefNames.tc_shade_lvl3.id] = "tc_shade_lvl3",
 	[UnitDefNames.tc_shade_lvl4.id] = "tc_shade_lvl4",
 	[UnitDefNames.tc_shade_lvl5.id] = "tc_shade_lvl5",
-	[UnitDefNames.bug_med.id] = "bug_med",
-	[UnitDefNames.bug_med.id] = "bug_med_undead",	
 }	
 
 local AggressiveJumpersPairs = {
 	[UnitDefNames.euf_pyro.id] = "euf_pyro",
 	[UnitDefNames.tc_ghoul.id] = "tc_ghoul",
+	[UnitDefNames.bug_med.id] = "bug_med",
+	[UnitDefNames.bug_med.id] = "bug_med_undead",
 }	
 	
 
@@ -98,7 +99,7 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 							end
 							local jx = x+randomx
 							local jz = z+randomz
-							if ( jumpdist < (jumpDefs[unitDefID].range + 100)) then
+							if ( jumpdist < (jumpDefs[unitDefID].range + runrange)) then
 								jx = x+((ax-x)*(jumpdist/dist))
 								jz = z+((az-z)*(jumpdist/dist))
 							else

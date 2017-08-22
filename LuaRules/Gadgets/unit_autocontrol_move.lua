@@ -30,6 +30,7 @@ local updateinterval = 35 -- in gameframes
 
 -- skirm
 local orderDis = 100
+local rangeReduction = 30
 -- swarm
 local leeway = 20 -- substracted from weapon range
 local jinkOrderDis = 150
@@ -191,7 +192,7 @@ function checkUnit(unit)
 					end
 				end
 			else
-				if (v.range-leeway) < pointDis then
+				if v.range < pointDis then
 				  local ed = spGetUnitDefID(enemy)
 				  local er = UnitDefs[ed].maxWeaponRange
 				  if pointDis < er then
@@ -275,10 +276,10 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 			end
 			updateListUnits[unitID] = (Spring.GetGameFrame() + updateinterval)
 			if IsSkirm(ud) then
-			  controlledUnits[unitID] = {update = nextupdate, range = ud.maxWeaponRange, cx = 0, cy = 0, cz = 0}
+			  controlledUnits[unitID] = {update = nextupdate, range = (ud.maxWeaponRange-rangeReduction), cx = 0, cy = 0, cz = 0}
 			end
 			if IsSwarm(ud) then
-			  controlledUnits[unitID] = {update = nextupdate, range = ud.maxWeaponRange, cx = 0, cy = 0, cz = 0, dir = jinkVariation, rot = random(0,1)*2-1}
+			  controlledUnits[unitID] = {update = nextupdate, range = (ud.maxWeaponRange-leeway), cx = 0, cy = 0, cz = 0, dir = jinkVariation, rot = random(0,1)*2-1}
 			end
 		end
 	end

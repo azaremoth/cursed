@@ -19,6 +19,9 @@ local spGetCommandQueue = Spring.GetCommandQueue
 local spGetUnitSeparation = Spring.GetUnitSeparation
 local random = math.random
 
+local CMD_ATTACK       = CMD.ATTACK
+local CMD_FIGHT        = CMD.FIGHT
+
 --------------------------
 ----CONFIG
 --------------------------
@@ -26,49 +29,39 @@ local random = math.random
 -- skirm
 local orderDis = 100
 -- swarm
-local leeway = 10 -- substracted from weapon range
-local jinkOrderDis = 70
-local circleOrderDis = 60
-local jinkVariation = 30
+local leeway = 20 -- substracted from weapon range
+local jinkOrderDis = 150
+local jinkVariation = 80
+local circleOrderDis = 130 --currently not used as it looks like a fixed circling range
 local searchRange = 600
 
--- swarmers will more or less circle strafe around targets
+-- swarmers will more or less circle strafe around targets and move in zick-zack towards it
 local swarmArray = { 
--- melees
-  "tc_ghoul",
-  "tc_undeadmarine_melee",
+-- melees or close range
   "euf_pyro",
   "euf_paladin",
+  "euf_werewolf",
+  "tc_decoyshade",
+  "tc_ghoul",
+  "tc_undeadmarine_melee",  
+  "tc_skeleton",
+-- ranged 
   "euf_marine",
--- others  
---[[  "tc_gunner",
+  "tc_undeadmarine_gun",  
+  "tc_gunner",
   "tc_mage",
-  "tc_bonebeast",
-  "tc_mermeoth",
-  "tc_agares",
-  "tc_mancubus",
-  "tc_belial",
-  "euf_sarge",
-  "euf_sarge_lvl1",
-  "euf_sarge_lvl2",
-  "euf_sarge_lvl3",
-  "euf_sarge_lvl4",
-  "euf_sarge_lvl5",  
-  "euf_marine",
-  "euf_bazooka",
-  "euf_sniper", 
-  "euf_tank",
-  "euf_aatank",
-  "euf_mlrs",
-  "euf_scorpion", ]]--
 }
 
--- skirmishers will try to avoid enemy fire by zickzacking
-local skrimArray = { }
+-- Automatically sends units to max range
+local skrimArray = { 
+--  "bug_larva",
+--  "bug_larva_undead",  
+--  "euf_sniper",
+  "tc_bonebeast",
+}
 
 local unitstate = {}	
-local skirm = {}
-local swarmer = {}
+local controlledUnits = {}
 local swarmSet = {}
 local skrimSet = {}
 	
@@ -87,18 +80,16 @@ local unitAICmdDesc = {
 	type    = CMDTYPE.ICON_MODE,
 	name    = 'Unit AI',
 	action  = 'unitai',
-	tooltip = 'Toggles smart unit AI for the unit',
-	params  = {0, 'AI Off','AI On'}
+	tooltip = 'Toggles automated movement control for the unit',
+	params  = {1, 'AI On','AI Off'}
 }
 
 --------------------------------------------------------------------------------
 -- Command Handling
 local function AIToggleCommand(unitID, cmdParams, cmdOptions)
-Spring.Echo(cmdParams[1])
 	if unitstate[unitID] then
 		local state = cmdParams[1]
-		local cmdDescID = Spring.FindUnitCmdDesc(unitID, CMD_UNIT_AI)
-		
+		local cmdDescID = Spring.FindUnitCmdDesc(unitID, CMD_UNIT_AI)		
 		if (cmdDescID) then
 			unitAICmdDesc.params[1] = state
 			Spring.EditUnitCmdDesc(unitID, cmdDescID, { params = unitAICmdDesc.params})
@@ -123,164 +114,18 @@ function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpt
 	return false  -- command was used
 end
 --------------------------------------------------------------------------------
-
-
-function checkSkirms()
-  for unit, v in pairs(skirm) do
-  
-    if checkIdle(unit,v) then
-	
-	  local enemy = spGetUnitNearestEnemy(unit,v.range+200,true)
-	  if (enemy) then
-	    local ed = spGetUnitDefID(enemy)
-	    local er = UnitDefs[ed].maxWeaponRange
-	    if (er) and (er < v.range) and (er ~= 0) then
-	      local ex,ez,ez = spGetUnitPosition(enemy)
-	      local ux,uy,uz = spGetUnitPosition(unit)
-		  local pointDis = spGetUnitSeparation(unit,enemy)
-		  local dis = orderDis 
-		  local f = dis/pointDis
-
-		  if (pointDis+dis > v.range) then
-		    f = (v.range-pointDis)/pointDis
-		  end
-	      local cx = ux+(ux-ex)*f
-		  local cy = uy
-	      local cz = uz+(uz-ez)*f
-	      spGiveOrderToUnit(unit,CMD.MOVE,{cx,cy,cz},CMD.OPT_RIGHT)
-		  v.cx,v.cy,v.cz = cx,cy,cz
-		end
-	  end
-	  
-	end
-	
-  end
-end
-
-function checkSwarmers()
-
-  for unit, v in pairs(swarmer) do
-	local cQueue = spGetCommandQueue(unit,2)
-	local enemy,move = getAttack(unit,v,cQueue) 
-	local burrowed = Spring.GetUnitRulesParam(unit,"burrowed")	
-  
-    if ((burrowed ~= 1) and enemy) then
-	
-	  if enemy == -1 then
-		enemy = spGetUnitNearestEnemy(unit,searchRange)
-		if not enemy then
-		  return
-		end
-	  end
-	
-	  local ex,ey,ez = spGetUnitPosition(enemy)
-	  local ux,uy,uz = spGetUnitPosition(unit)
-	  local pointDis = spGetUnitSeparation(unit,enemy)
-	 
-	  local cx 
-	  local cy
-	  local cz 
-
-	  local jump = Spring.GetUnitRulesParam(unit,"jumpReload")
-	  Spring.Echo(jump)
-	  
-	  if pointDis then
-	  
-	    if v.range < pointDis then
-	      local ed = spGetUnitDefID(enemy)
-	      local er = UnitDefs[ed].maxWeaponRange
-	      if pointDis < er then
-		    v.dir = v.dir*-1
-			local dir = v.dir
-		    cx = ux+(-(ux-ex)*jinkOrderDis-(uz-ez)*dir)/pointDis
-	        cy = uy
-	        cz = uz+(-(uz-ez)*jinkOrderDis+(ux-ex)*dir)/pointDis
-			
-
-			  if (jump == 1) then
-				Spring.Echo("can jump")
-				Spring.GiveOrderToUnit(unit, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
-			  end			
-			
-		    if move then
-		      spGiveOrderToUnit(unit, CMD.REMOVE, {cQueue[1].tag}, {} )
-		      spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
-	        else
-		      spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
-	        end
-	        v.cx,v.cy,v.cz = cx,cy,cz
-  	   	  end
-	    else
-	      local up = 0.9
-		  local ep = 0.1
-		  v.dir = v.dir*-1
-		  if v.dir > 0 then
-		    up = 0.8
-			ep = 0.2
-		  end
-		  
-		  cx = ux*up+ex*ep+v.rot*(uz-ez)*v.range/pointDis --was cx = ux*up+ex*ep+v.rot*(uz-ez)*circleOrderDis/pointDis
-	      cy = uy
-	      cz = uz*up+ez*ep-v.rot*(ux-ex)*v.range/pointDis --was cz = uz*up+ez*ep-v.rot*(ux-ex)*circleOrderDis/pointDis
-		  
-			  if (jump == 1) then
-				Spring.Echo("can jump")
-				Spring.GiveOrderToUnit(unit, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
-			  end
-			
-		  if move then
-		    spGiveOrderToUnit(unit, CMD.REMOVE, {cQueue[1].tag}, {} )
-		    spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
-	      else
-		    spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
-	      end
-	      v.cx,v.cy,v.cz = cx,cy,cz
-		end
-		
-	  end
-	  
-	end
-	  
-  end
-	
-end
-
-function checkIdle(unit,v)
-
-  local cQueue = spGetCommandQueue(unit,6)
-
-  if cQueue and (#cQueue == 0) then
-    return true
-  elseif (#cQueue == 1) then
-  
-    local cx,cy,cz = cQueue[1].params[1],cQueue[1].params[2],cQueue[1].params[3]
-	if (cx == v.cx) and (cy == v.cy) and (cz == v.cz) then
-	  return true
-	end
-	
-  end
-
-  return false
-  
-end
-
 function getAttack(unit,v,cQueue)
-
   if cQueue and (#cQueue == 0) then
 	return false
   else
-    
 	if (cQueue[1].id == CMD.ATTACK) or (cQueue[1].id == 16) then
-      
 	  local target,check = cQueue[1].params[1],cQueue[1].params[2]
 	  if not check then
 	    return target,false
 	  elseif (cQueue[1].id == 16) then
 	    return -1,false
 	  end
-	  
     elseif (cQueue[1].id == CMD.MOVE) and #cQueue > 1 then
-	
 	  local cx,cy,cz = cQueue[1].params[1],cQueue[1].params[2],cQueue[1].params[3]
 	  if (cx == v.cx) and (cy == v.cy) and (cz == v.cz) then
 	    if (cQueue[2].id == CMD.ATTACK) or (cQueue[2].id == 16) then
@@ -292,13 +137,99 @@ function getAttack(unit,v,cQueue)
 	      end
 	    end
 	  end
-	  
 	end
-
   end
-
   return false
-  
+end
+
+function checkSwarmers()
+  for unit, v in pairs(controlledUnits) do
+	if (unitstate[unit] == 1) then
+		local cQueue = spGetCommandQueue(unit,2)
+		local enemy,move = getAttack(unit,v,cQueue) 
+		local burrowed = Spring.GetUnitRulesParam(unit,"burrowed")	
+		if ((burrowed ~= 1) and enemy) then
+		  if enemy == -1 then
+			enemy = spGetUnitNearestEnemy(unit,searchRange)
+			if not enemy then
+			  return
+			end
+		  end
+		  local ex,ey,ez = spGetUnitPosition(enemy)
+		  local ux,uy,uz = spGetUnitPosition(unit)
+		  local pointDis = spGetUnitSeparation(unit,enemy)
+		  local cx 
+		  local cy
+		  local cz 
+		  if pointDis then
+			if (v.dir == nil) then -- skirm check
+				Spring.Echo("SKIRM: " .. unit)
+				local holdPos = (Spring.GetUnitStates(unit).movestate == 0)
+				if not holdPos then 
+					Spring.Echo("SKIRM: No hold position for " .. unit)
+					if v.range > pointDis then
+						local ed = spGetUnitDefID(enemy)
+						local er = UnitDefs[ed].maxWeaponRange
+						if (er) and (er < v.range) and (er > 0) then
+						  Spring.Echo("SKIRM: Get out of range! " .. unit)
+						  local ex,ez,ez = spGetUnitPosition(enemy)
+						  local ux,uy,uz = spGetUnitPosition(unit)
+						  local pointDis = spGetUnitSeparation(unit,enemy)
+						  local dis = orderDis 
+						  local f = dis/pointDis
+						  if (pointDis+dis > v.range) then
+							f = (v.range-pointDis)/pointDis
+						  end
+						  local cx = ux+(ux-ex)*f
+						  local cy = uy
+						  local cz = uz+(uz-ez)*f
+						  spGiveOrderToUnit(unit,CMD.MOVE,{cx,cy,cz},CMD.OPT_RIGHT)
+						  v.cx,v.cy,v.cz = cx,cy,cz
+						end
+					end
+				end
+			else
+				if (v.range-leeway) < pointDis then
+				  local ed = spGetUnitDefID(enemy)
+				  local er = UnitDefs[ed].maxWeaponRange
+				  if pointDis < er then
+					v.dir = v.dir*-1
+					local dir = v.dir
+					cx = ux+(-(ux-ex)*jinkOrderDis-(uz-ez)*dir)/pointDis
+					cy = uy
+					cz = uz+(-(uz-ez)*jinkOrderDis+(ux-ex)*dir)/pointDis
+					if move then
+					  spGiveOrderToUnit(unit, CMD.REMOVE, {cQueue[1].tag}, {} )
+					  spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+					else
+					  spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+					end
+					v.cx,v.cy,v.cz = cx,cy,cz
+				  end
+				else
+				  local up = 0.9
+				  local ep = 0.1
+				  v.dir = v.dir*-1
+				  if v.dir > 0 then
+					up = 0.8
+					ep = 0.2
+				  end
+				  cx = ux*up+ex*ep+v.rot*(uz-ez)*circleOrderDis/pointDis
+				  cy = uy
+				  cz = uz*up+ez*ep-v.rot*(ux-ex)*circleOrderDis/pointDis
+				  if move then
+					spGiveOrderToUnit(unit, CMD.REMOVE, {cQueue[1].tag}, {} )
+					spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+				  else
+					spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+				  end
+				  v.cx,v.cy,v.cz = cx,cy,cz
+				end
+			end
+		  end
+		end 
+	  end
+	end
 end
 
 local function IsSwarm(ud)
@@ -319,12 +250,11 @@ local function IsSkirm(ud)
   return false
 end
 
-
 ---------------------------------------------------------------------------------------------------------------
 function gadget:Initialize()
-   -- register command
-   gadgetHandler:RegisterCMDID(CMD_UNIT_AI)
-	
+  -- register command -----------------------
+  gadgetHandler:RegisterCMDID(CMD_UNIT_AI)
+  -------------------------------------------
   for i, v in pairs(swarmArray) do
     swarmSet[v] = true
   end
@@ -342,12 +272,11 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 				unitstate[unitID] = 1
 			end
 		end
-
 		if IsSkirm(ud) then
-		  skirm[unitID] = {range = ud.maxWeaponRange-35, cx = 0, cy = 0, cz = 0}
+		  controlledUnits[unitID] = {range = ud.maxWeaponRange, cx = 0, cy = 0, cz = 0}
 		end
 		if IsSwarm(ud) then
-		  swarmer[unitID] = {range = ud.maxWeaponRange-leeway, cx = 0, cy = 0, cz = 0,dir = jinkVariation, rot = random(0,1)*2-1}
+		  controlledUnits[unitID] = {range = ud.maxWeaponRange, cx = 0, cy = 0, cz = 0, dir = jinkVariation, rot = random(0,1)*2-1}
 		end
 	end
 end
@@ -357,22 +286,14 @@ function gadget:UnitGiven(unitID, unitDefID, unitTeam)
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
-  if (skirm[unitID]) then
-    skirm[unitID] = nil
-  end
-  if (swarmer[unitID]) then
-    swarmer[unitID] = nil
+  if (controlledUnits[unitID]) then
+    controlledUnits[unitID] = nil
   end  
 end
 
-
-
 function gadget:GameFrame(n)
-  if (n%60<1) then 
+  if (n%15<1) then --was 35
 	checkSwarmers()
-  end
-  if (n%30<1) then 
-	checkSkirms()
   end
 end
 

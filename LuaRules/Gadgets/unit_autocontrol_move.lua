@@ -41,6 +41,7 @@ local searchRange = 600
 -- swarmers will more or less circle strafe around targets and move in zick-zack towards it
 local swarmArray = { 
 -- melees or close range
+  "bug_med",
   "euf_pyro",
   "euf_paladin",
   "euf_werewolf",
@@ -50,17 +51,28 @@ local swarmArray = {
   "tc_skeleton",
 -- ranged 
   "euf_marine",
+  "euf_raider", 
+  "tc_crawler",    
   "tc_undeadmarine_gun",  
   "tc_gunner",
   "tc_mage",
+  "tc_rictus",  
 }
 
--- Automatically sends units to max range
+-- Automatically sends units to (almost) max range
 local skrimArray = { 
---  "bug_larva",
---  "bug_larva_undead",  
---  "euf_sniper",
+  "bug_larva",
+  "bug_larva_undead",  
+  "euf_sniper",
+  "euf_bazooka",
+  "euf_hover",
+  "euf_tank",
+  "euf_aatank",
+  "tc_enforcer",  
   "tc_bonebeast",
+  "tc_mermeoth",    
+  "tc_agares",  
+  "tc_witch",
 }
 
 local unitstate = {}

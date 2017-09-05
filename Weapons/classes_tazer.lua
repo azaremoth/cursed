@@ -29,6 +29,7 @@ local TAZERBASE = {
     name               = "Tazer",
     paralyzer          = 1,
     rgbColor           = "1 1 1",
+    soundHit           = "null",	
     soundStart         = "paralyser",
     soundStartVolume   = 15,
     soundTrigger       = true,

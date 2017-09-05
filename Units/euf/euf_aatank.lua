@@ -138,6 +138,7 @@ local weaponDefs = {
     range              = 550,
     reloadtime         = .05,
     soundStart         = "flakgun",
+	soundHit           = "null",		
     soundStartVolume   = 15,
     soundTrigger       = true,
     tolerance          = 3000,

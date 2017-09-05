@@ -127,6 +127,7 @@ local weaponDefs = {
 	  reloadTime			= 2.5,
 	  -- rendertype			= 1,
 	  size					= 0.01,
+      soundHit           = "null",		  
 	  soundStart			= [[bug_larva_spit]],
 	  soundTrigger			= true,
 	  sprayAngle			= 1024,

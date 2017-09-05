@@ -127,6 +127,7 @@ local weaponDefs = {
       reloadtime              = 400,
       smokeTrail              = false,
       soundHit                = [[explosion\ex_ultra8]],
+      soundStart         = [[nuke_fire]],	  
       startVelocity           = 100,
 --      stockpile               = true,
 --      stockpileTime           = 10^4,

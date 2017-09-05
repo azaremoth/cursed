@@ -137,6 +137,7 @@ local weaponDefs = {
 			-- rendertype              = 1,
 			smokeTrail              = false,
 			soundstart              = "angel",
+			soundHit           = "null",				
 			soundStartVolume        = 30,
 			startVelocity           = 200,
 			texture1                = "",

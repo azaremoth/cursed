@@ -144,6 +144,7 @@ local weaponDefs = {
 --	cegTag                  = [[HELLSTORM]],	  
 	explosionGenerator = "custom:napalm_green",
 	soundHit           = "hellstorm_hit",
+    soundStart         = "null",	
 	soundHitVolume     = 160,
 
 ------------------------------------------------------------

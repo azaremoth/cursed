@@ -122,7 +122,8 @@ local weaponDefs = {
     interceptedByShieldType = 1,
     name               = "Marine Gun",
     range              = 275,
-    reloadtime         = .25,
+    reloadtime         = .12,
+	soundHit           = "null",	
     soundStart         = "battlegun",
     soundStartVolume   = 15,
     soundTrigger       = true,
@@ -137,10 +138,10 @@ local weaponDefs = {
 	weaponType         = "Cannon",
 ------------------------------------------------------------	  
     damage = {
-      default            = 22, --was 22
-      flyer              = 22, --was 22
-      heavy              = (22*0.75), --was 11
-      light              = 22, --was 22
+      default            = 11, --was 22
+      flyer              = 11, --was 22
+      heavy              = (11*0.75), --was 11
+      light              = 11, --was 22
     },
   },
 }

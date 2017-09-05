@@ -129,6 +129,7 @@ local weaponDefs = {
     -- rendertype         = 0,
     rgbColor           = "0.6 1 0.1568",
     soundStart         = "Rictus_Fire",
+	soundHit           = "null",	
     soundStartVolume   = 15,
     soundTrigger       = true,
     startVelocity      = 200,

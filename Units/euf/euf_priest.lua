@@ -127,54 +127,13 @@ local unitDef = {
   },
  --[[ weapons = {
     [1]  = {
-      def                = "STAFF",
+      name                = "STAFF",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
       onlyTargetCategory = "LAND",
     },
   },]]--
 }
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  STAFF = {
-    areaOfEffect       = 8,
-    avoidFriendly      = 0,
-    collideFriendly    = false,
-    craterBoost        = 1,
-    craterMult         = 2,
-	cylinderTargeting = 1,		
-      energypershot           = 0,	
-    explosionGenerator = "custom:NONE",
-    impactonly         = true,
-    impulseBoost       = 2,
-    impulseFactor      = 2,
-    interceptedByShieldType = 2,
-    -- lineofsight        = false,
-    name               = "Melee",
-    --noSelfDamage       = true,
-    range              = 55,
-    reloadtime         = 2,
-    size               = 0,
-    targetBorder       = 1,
-    tolerance          = 5000,
-    turret             = true,
-    waterWeapon        = true,
-    weaponTimer        = 0.1,
-    weaponType         = "Cannon",
-    weaponVelocity     = 500,
-    damage = {
-      default            = 100,
-      flyer              = 100,
-      heavy              = (100*0.75),
-      light              = 100,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
-
-
 --------------------------------------------------------------------------------
 
 return lowerkeys({ [unitName] = unitDef })

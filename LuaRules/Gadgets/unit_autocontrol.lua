@@ -48,16 +48,21 @@ local swarmArray = {
   "euf_werewolf",
   "tc_decoyshade",
   "tc_ghoul",
-  "tc_undeadmarine_melee",  
+  "tc_undeadmarine_melee",
+  "tc_shade_lvl1",
+  "tc_shade_lvl2",
+  "tc_shade_lvl3",
+  "tc_shade_lvl4",
+  "tc_shade_lvl5",
   "tc_skeleton",
 -- ranged 
   "euf_marine",
   "euf_raider", 
-  "tc_crawler",    
+--  "tc_crawler",    
   "tc_undeadmarine_gun",  
   "tc_gunner",
   "tc_mage",
-  "tc_rictus",  
+--  "tc_rictus",  
 }
 
 -- Automatically sends units to (almost) max range
@@ -192,38 +197,38 @@ function getAttack(unit,v,cQueue)
   return false
 end
 
-function checkUnit(unit)
-	if (unitstate[unit] == 1) then
-	  local v = controlledUnits[unit]
+function checkUnit(unitID)
+	if (unitstate[unitID] == 1) then
+	  local v = controlledUnits[unitID]
 	  if (v ~= nil) then
-		local cQueue = spGetCommandQueue(unit,2)
-		local enemy,move = getAttack(unit,v,cQueue) 
-		local burrowed = Spring.GetUnitRulesParam(unit,"burrowed")	
+		local cQueue = spGetCommandQueue(unitID,2)
+		local enemy,move = getAttack(unitID,v,cQueue) 
+		local burrowed = Spring.GetUnitRulesParam(unitID,"burrowed")	
 		if ((burrowed ~= 1) and enemy) then
 		  if enemy == -1 then
-			enemy = spGetUnitNearestEnemy(unit,searchRange)
+			enemy = spGetUnitNearestEnemy(unitID,searchRange)
 			if not enemy then
 			  return
 			end
 		  end
 		  local ex,ey,ez = spGetUnitPosition(enemy)
-		  local ux,uy,uz = spGetUnitPosition(unit)
-		  local pointDis = spGetUnitSeparation(unit,enemy)
+		  local ux,uy,uz = spGetUnitPosition(unitID)
+		  local pointDis = spGetUnitSeparation(unitID,enemy)
 		  local cx 
 		  local cy
 		  local cz 
 		  if pointDis then
 			if (v.dir == nil) then -- skirm check
-				local holdPos = (Spring.GetUnitStates(unit).movestate == 0)
+				local holdPos = (Spring.GetUnitStates(unitID).movestate == 0)
 				if not holdPos then 
 					if v.range > pointDis then
 						local ed = spGetUnitDefID(enemy)
 						local er = UnitDefs[ed].maxWeaponRange
 						if (er) and (er < v.range) and (er > 0) then
---						  Spring.Echo("SKIRM: Get out of range! " .. unit)
+--						  Spring.Echo("SKIRM: Get out of range! " .. unitID)
 						  local ex,ez,ez = spGetUnitPosition(enemy)
-						  local ux,uy,uz = spGetUnitPosition(unit)
-						  local pointDis = spGetUnitSeparation(unit,enemy)
+						  local ux,uy,uz = spGetUnitPosition(unitID)
+						  local pointDis = spGetUnitSeparation(unitID,enemy)
 						  local dis = orderDis 
 						  local f = dis/pointDis
 						  if (pointDis+dis > v.range) then
@@ -232,7 +237,7 @@ function checkUnit(unit)
 						  local cx = ux+(ux-ex)*f
 						  local cy = uy
 						  local cz = uz+(uz-ez)*f
-						  spGiveOrderToUnit(unit,CMD.MOVE,{cx,cy,cz},CMD.OPT_RIGHT)
+						  spGiveOrderToUnit(unitID,CMD.MOVE,{cx,cy,cz},CMD.OPT_RIGHT)
 						  v.cx,v.cy,v.cz = cx,cy,cz
 						end
 					end
@@ -242,20 +247,36 @@ function checkUnit(unit)
 				  local ed = spGetUnitDefID(enemy)
 				  local er = UnitDefs[ed].maxWeaponRange
 				  if pointDis < er then
+					local jump = false
+					if (JumperPairs [(spGetUnitDefID(unitID))]) then
+						jump = ((Spring.GetUnitRulesParam(unitID, "jumpReload") == nil) or (Spring.GetUnitRulesParam(unitID, "jumpReload") == 1))
+					end
 					v.dir = v.dir*-1
 					local dir = v.dir
 					cx = ux+(-(ux-ex)*jinkOrderDis-(uz-ez)*dir)/pointDis
 					cy = uy
 					cz = uz+(-(uz-ez)*jinkOrderDis+(ux-ex)*dir)/pointDis
 					if move then
-					  spGiveOrderToUnit(unit, CMD.REMOVE, {cQueue[1].tag}, {} )
-					  spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
-					else
-					  spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+						  spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )				  
+						  if jump then
+							spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
+						  else
+							spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+						  end	
+					else			
+						  if jump then
+							spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
+						  else
+							spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+						  end
 					end
 					v.cx,v.cy,v.cz = cx,cy,cz
 				  end
 				else
+					local jump = false				
+					if (JumperPairs [(spGetUnitDefID(unitID))]) then
+						jump = ((Spring.GetUnitRulesParam(unitID, "jumpReload") == nil) or (Spring.GetUnitRulesParam(unitID, "jumpReload") == 1))
+					end
 				  local up = 0.9
 				  local ep = 0.1
 				  v.dir = v.dir*-1
@@ -266,12 +287,20 @@ function checkUnit(unit)
 				  cx = ux*up+ex*ep+v.rot*(uz-ez)*circleOrderDis/pointDis
 				  cy = uy
 				  cz = uz*up+ez*ep-v.rot*(ux-ex)*circleOrderDis/pointDis
-				  if move then
-					spGiveOrderToUnit(unit, CMD.REMOVE, {cQueue[1].tag}, {} )
-					spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
-				  else
-					spGiveOrderToUnit(unit, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
-				  end
+					if move then
+						  spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )
+						  if jump then
+							spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
+						  else
+							spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+						  end	
+					else
+						  if jump then
+							spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
+						  else
+							spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+						  end
+					end
 				  v.cx,v.cy,v.cz = cx,cy,cz
 				end
 			end
@@ -395,8 +424,18 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 							end
 							local burrowed = Spring.GetUnitRulesParam(unitID,"burrowed")						
 							if (burrowed ~= 1 and (math.sqrt(jumpdist^2) > 50 )) then
-								-- Spring.GiveOrderToUnit(unitID, CMD_JUMP, {jx,y,jz}, {"alt"} )
-								Spring.GiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, jx,y,jz }, {"alt"} ) -- should insert the command at the beginning of the command queue 
+								-- Spring.GiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, jx,y,jz }, {"alt"} ) -- should insert the command at the beginning of the command queue 
+								  local move = false
+								  if (cQueue[1] ~= nil) then
+									move = (cQueue[1].id == CMD.MOVE)
+								  end
+								  if move then
+									spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )
+									spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, jx,y,jz }, {"alt"} )
+								  else
+									spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, jx,y,jz }, {"alt"} )
+								  end
+								
 							end
 						end
 					end

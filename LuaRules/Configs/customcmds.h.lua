@@ -24,3 +24,6 @@ CMD_JUMP 					= 34580
 CMD_UNIT_AI 				= 36214
 CMD_MORPH 					= 37001
 CMD_MORPH_STOP 				= 37501
+
+CMD_RAW_MOVE = 31109 --cmd_raw_move.lua
+CMD_RAW_BUILD = 31110 --cmd_raw_move.lua -- unregistered raw move

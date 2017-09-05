@@ -26,7 +26,7 @@ local CMD_FIGHT        = CMD.FIGHT
 ----CONFIG
 --------------------------
 
-local updateinterval = 40 -- in gameframes
+local stdupdateinterval = 40 -- in gameframes
 
 -- skirm
 local orderDis = 100
@@ -83,6 +83,7 @@ local skrimArray = {
 
 local unitstate = {}
 local updateListUnits = {}
+local stdupdateintervalUnits = {}
 local controlledUnits = {}
 local swarmSet = {}
 local skrimSet = {}
@@ -349,7 +350,8 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 			if not unitstate[unitID] then
 				unitstate[unitID] = 1
 			end
-			updateListUnits[unitID] = (Spring.GetGameFrame() + updateinterval)
+			stdupdateintervalUnits[unitID] = ((tonumber(UnitDefs[unitDefID].customParams.unitaiupdate)) or stdupdateinterval)
+			updateListUnits[unitID] = (Spring.GetGameFrame() + stdupdateintervalUnits[unitID])
 			if IsSkirm(ud) then
 			  controlledUnits[unitID] = {update = nextupdate, range = (ud.maxWeaponRange-rangeReduction), cx = 0, cy = 0, cz = 0}
 			end
@@ -367,6 +369,8 @@ end
 function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
   if (controlledUnits[unitID]) then
     controlledUnits[unitID] = nil
+	stdupdateintervalUnits[unitID] = nil
+	updateListUnits[unitID] = nil
   end  
 end
 
@@ -446,10 +450,10 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 end
 
 function gadget:GameFrame(n)
-	for unit, updateframe in pairs(updateListUnits) do -- this should spread the calculation load to more gameframes
+	for unitID, updateframe in pairs(updateListUnits) do -- this should spread the calculation load to more gameframes
 		if (updateframe <= n) then
-			updateListUnits[unit] = (n + updateinterval + random(0,3))
-			checkUnit(unit)
+			updateListUnits[unitID] = (n + stdupdateintervalUnits[unitID] + random(0,1))
+			checkUnit(unitID)
 		end
 	end
 end

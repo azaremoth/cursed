@@ -29,6 +29,7 @@ local unitDef = {
 	factionname		   = "imperials",
 	normaltex = "unittextures/normalmaps/euf_raider_normal.png",
 	normalmaps = "yes",	
+	unitaiupdate = "10",
     helptext = "Fast scouting and attack car. It is appropriate for hit and run tactics."	
 	},
   defaultmissiontype = "Standby",

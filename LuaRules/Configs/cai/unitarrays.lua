@@ -29,6 +29,15 @@ local assaultgroup = {
 	"euf_hover",	
 }	
 
+local skirmishers = {
+	"tc_enforcer",
+	"euf_bazooka",
+	"tc_gunner",
+	"tc_bonebeast",
+	"tc_mage",		
+	"euf_sniper_ai",	
+}	
+
 local raider = {
 	"tc_ghoul",
 	"tc_skeleton",
@@ -54,8 +63,6 @@ local jumper = { -- uses jump for offense. IE do not put commander or AA here.
 }
 
 local arty = {
-	"tc_enforcer",
-	"euf_bazooka",
 	"tc_purgatory_ai",
 	"euf_mlrs_ai",	
 }
@@ -75,7 +82,7 @@ local prioritySos = {
 
 local riot = assaultgroup
 local assault = assaultgroup
-local skirm = assaultgroup
+local skirm = skirmishers
 
 --global versions
 raiderArray = {}

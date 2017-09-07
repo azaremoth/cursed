@@ -73,7 +73,8 @@ local unitDef = {
 
   turnInPlace        = false,
   turnInPlaceSpeedLimit = 4.5,
-  turnRate           = 350,
+  turnRate           = 500,
+  
   unitname           = "euf_raider",
   sfxtypes = {
     explosiongenerators = {
@@ -144,25 +145,25 @@ local weaponDefs = {
       -- lineofsight             = true,
       --noSelfDamage            = true,
       range                   = 400,
-      reloadtime              = 0.125,
+      reloadtime              = 0.8,
       -- rendertype              = 0,
       rgbColor                = [[1 0.1 0.1]],
-      soundStart              = [[raiderlaser]],
+      soundStart              = [[medlaser_fire]],
 	  soundHit           = "null",	  
 	  soundStartVolume   = 50,
       soundTrigger            = true,
 	  sweepFire		          = true,		  
-      targetMoveError         = 0.15,
+      targetMoveError         = 0.0,
       thickness               = 2.54950975679639,
-      tolerance               = 10000,
+      tolerance               = 15000,
       turret                  = true,
       weaponType              = [[LaserCannon]],
       weaponVelocity          = 880,
       damage = {
-      default            = 25,
-      flyer              = 25*0.33,
-      heavy              = (25*0.75),
-      light              = 25,
+      default            = 160,
+      flyer              = (160*0.33),
+      heavy              = (160*0.75),
+      light              = 160,
     },
   },
 }

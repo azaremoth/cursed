@@ -112,7 +112,7 @@ local unitDef = {
       badTargetCategory = "AIR HEAVYARMOR",	  	
 	  def                = "Flamer",
       mainDir            = "0 0 1",
-      maxAngleDif        = 160,
+      maxAngleDif        = 180,
       onlyTargetCategory = "LAND",
     },
     [2]  = {

@@ -65,7 +65,7 @@ SweetSpot (piecenum)
 //weapon 1 -----------------------------------------------------------------
 RestoreAfterDelay()
 {
-	sleep 5000;
+	sleep 8000;
 	turn turret to y-axis <0.000000> speed <55.000000>;
 	turn sleeve to x-axis <0.000000> speed <30.000000>;
 }
@@ -82,8 +82,8 @@ AimWeapon1(heading, pitch)
 {
 	signal SIG_AIM1;
 	set-signal-mask SIG_AIM1;
-	turn turret to y-axis heading speed <160.000000>;
-	turn sleeve to x-axis <0.000000> - pitch speed <160.000000>;
+	turn turret to y-axis heading speed <350.000000>;
+	turn sleeve to x-axis <0.000000> - pitch speed <350.000000>;
     wait-for-turn turret around y-axis;
 	wait-for-turn sleeve around x-axis;
     start-script RestoreAfterDelay(); 
@@ -94,9 +94,6 @@ Shot1()
 {
 	emit-sfx FLARE from emit_gun;
 	emit-sfx GROUNDFLASH from emit_groundflash;
-	call-script lua_CreateLightMe(emit_gun, 255, 0, 0, 96);
-	sleep 125;
-	call-script lua_DestroyLightMe();
 	return(1);
 }
 

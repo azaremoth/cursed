@@ -239,8 +239,8 @@
 	weaponvelocity=1000;
 	areaofeffect=496;
 	noselfdamage=1;
-//	soundstart=Big_Explosion;
-//	soundhit=Big_Explosion;
+	soundstart=emp;
+	soundhit=emp;
 	edgeeffectiveness=0.25;
 	explosiongenerator=custom:electric_explosion;
 	NoSelfDamage=1;
@@ -261,8 +261,8 @@
 	weaponvelocity=1000;
 	areaofeffect=556;
 	noselfdamage=1;
-//	soundstart=Big_Explosion;
-//	soundhit=Big_Explosion;
+	soundstart=emp;
+	soundhit=emp;
 	edgeeffectiveness=0.25;
 	explosiongenerator=custom:electric_explosion;
 	NoSelfDamage=1;
@@ -319,8 +319,8 @@
 	reloadtime=3.6;
 	weaponvelocity=1000;
 	areaofeffect=1;
-//	soundstart=Small_Explosion;
-//	soundhit=Small_Explosion;
+	soundstart=null;
+	soundhit=null;
 	edgeeffectiveness=0.25;
 	explosiongenerator=custom:Greycloud;
 	[DAMAGE]

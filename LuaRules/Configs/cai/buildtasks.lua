@@ -219,7 +219,7 @@ factionBuildConfig = {
 
 		radarIds = {
 			count = 1,
-			[1] = {ID = UnitDefNames['tc_seer'].id, chance = 1},
+			[1] = {ID = UnitDefNames['tc_seer'].id, chance = 0.25},
 		},
 
 		mexIds = {
@@ -454,8 +454,9 @@ factionBuildConfig = {
 				},
 				[5] = { --assault
 					importanceMult = 1,
-					count = 1,
-					[1] = {ID = UnitDefNames['euf_tank'].id, chance = 1},
+					count = 2,
+					[1] = {ID = UnitDefNames['euf_tank'].id, chance = 0.66},
+					[2] = {ID = UnitDefNames['euf_aatank'].id, chance = 0.33},
 				},
 				[6] = { -- skirm
 					importanceMult = 1,

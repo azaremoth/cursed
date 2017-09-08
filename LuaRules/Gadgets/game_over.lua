@@ -185,9 +185,9 @@ function DestroyAlliance(allianceID)
 		if teamList == nil then return end	-- empty allyteam, don't bother
 		
 		if destroy_type == 'debug' then
-			Spring.Echo("Game Over: DEBUG")
-			Spring.Echo("Game Over: Allyteam " .. allianceID .. " has met the game over conditions.")
-			Spring.Echo("Game Over: If this is true, then please resign.")
+		--	Spring.Echo("Game Over: DEBUG")
+		--	Spring.Echo("Game Over: Allyteam " .. allianceID .. " has met the game over conditions.")
+		--	Spring.Echo("Game Over: If this is true, then please resign.")
 		elseif destroy_type == 'destroy' then	-- kaboom
 			Spring.Echo("Game Over: Destroying alliance " .. allianceID)
 			for i=1,#teamList do

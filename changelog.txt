@@ -1,5 +1,13 @@
 >> Major changes 1.433 => 1.434
 
+Balance
+- reload time for imperial AA towers increased by 10%
+
+Features
+- implemented improved automated unit behaviors for several units (jumpers, skirmishers, swarmers). Moroverover the functions are now all in a gadget and can be deactivated per unit individually
+
+Bugs
+- (hopefully adapted all pieces of lua to be compatibel with Spring 104
 
 
 

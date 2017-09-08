@@ -1,19 +1,19 @@
 [NULL]
 {
+	soundstart=null;
+	soundhit=null;	
 	[DAMAGE]
 	{
-		soundstart=null;
-		soundhit=null;	
 		default=1;
 	}
 }
 
 [NONE]
 {
+	soundstart=null;
+	soundhit=null;	
 	[DAMAGE]
 	{
-		soundstart=null;
-		soundhit=null;	
 		default=1;
 	}
 }

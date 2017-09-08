@@ -167,9 +167,9 @@ function getAttack(unit,v,cQueue)
 	if (cQueue[1].id == CMD.ATTACK) or (cQueue[1].id == 16) then
 	  local target,check = cQueue[1].params[1],cQueue[1].params[2]
 	  if not check then
-	    return target,false
+	    return target,false,false
 	  elseif (cQueue[1].id == 16) then
-	    return -1,false
+	    return -1,false,false
 	  end
     elseif (cQueue[1].id == CMD.MOVE) and #cQueue > 1 then
 	  local cx,cy,cz = cQueue[1].params[1],cQueue[1].params[2],cQueue[1].params[3]
@@ -177,11 +177,18 @@ function getAttack(unit,v,cQueue)
 	    if (cQueue[2].id == CMD.ATTACK) or (cQueue[2].id == 16) then
           local target,check = cQueue[2].params[1],cQueue[2].params[2]
 	      if not check then
-	        return target,true
+	        return target,true,false
 	      elseif (cQueue[2].id == 16) then
-	        return -1,true
+	        return -1,true,false
 	      end
 	    end
+	  end
+	elseif (cQueue[1].id == CMD_JUMP) and #cQueue > 1 then
+	  local target,check = cQueue[1].params[1],cQueue[1].params[2]
+	  if not check then
+	    return target,false,true
+	  elseif (cQueue[1].id == 16) then
+	    return -1,false,true
 	  end
 	end
   end
@@ -193,7 +200,7 @@ function checkUnit(unitID)
 	  local v = controlledUnits[unitID]
 	  if (v ~= nil) then
 		local cQueue = spGetCommandQueue(unitID,2)
-		local enemy,move = getAttack(unitID,v,cQueue) 
+		local enemy,move,jumpcom = getAttack(unitID,v,cQueue) 
 		local burrowed = Spring.GetUnitRulesParam(unitID,"burrowed")	
 		if ((burrowed ~= 1) and enemy) then
 		  if enemy == -1 then
@@ -240,7 +247,7 @@ function checkUnit(unitID)
 					  if (pointDis < er and (not v.jumperonly) and (not jump)) then -- within enemy's range => zick zack
 							v.dir = v.dir*-1
 							local dir = v.dir or 1
-							if move then
+							if (move or jumpcom) then
 								 spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )		
 							end
 							cx = ux+(-(ux-ex)*spec_jinkorderdis[unitID]-(uz-ez)*dir)/pointDis
@@ -261,7 +268,7 @@ function checkUnit(unitID)
 								local unittposdist = math.sqrt((ux-cx)^2+(uz-cz)^2)
 								-- Spring.Echo(unittposdist)
 								if (unittposdist > minimumjumpdist) then
-									if move then
+									if (move or jumpcom) then
 										 spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )
 									end
 									spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
@@ -284,7 +291,7 @@ function checkUnit(unitID)
 						cx = ux*up+ex*ep+v.rot*(uz-ez)*circleOrderDis/pointDis
 						cy = uy
 						cz = uz*up+ez*ep-v.rot*(ux-ex)*circleOrderDis/pointDis					  
-						if move then
+						if (move or jumpcom) then
 							  spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )
 							  if jump then						  
 									spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )

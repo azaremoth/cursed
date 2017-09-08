@@ -70,6 +70,8 @@ local unitDef = {
     "tc_gunner",
 	"tc_mage",
 	"tc_ghoul",
+	"tc_undeadmarine_gun",
+	"tc_bonebeast",	
 	"tc_shade",
   },
   sfxtypes = {

@@ -221,6 +221,7 @@ SARGE_CHAINGUN = {
       -- rendertype              = 0,
       rgbColor                = "0.1 0.9 0.9",
       rgbColor2               = "0.25 1 0.9",
+	  soundHit           	  = "null",	  
       soundStart              = "heatray_fire",
 	  sweepFire		          = false,		  
       thickness               = 3,

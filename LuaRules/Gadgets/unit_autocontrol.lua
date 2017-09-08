@@ -60,20 +60,13 @@ local swarmArray = {
   "tc_decoyshade",
   "tc_ghoul",
   "tc_undeadmarine_melee",
---  "tc_shade_lvl1",
---  "tc_shade_lvl2",
---  "tc_shade_lvl3",
---  "tc_shade_lvl4",
---  "tc_shade_lvl5",
   "tc_skeleton",
 -- ranged 
   "euf_marine",
   "euf_raider", 
---  "tc_crawler",    
   "tc_undeadmarine_gun",  
   "tc_gunner",
   "tc_mage",
---  "tc_rictus",  
 }
 
 -- Automatically sends units to (almost) max range

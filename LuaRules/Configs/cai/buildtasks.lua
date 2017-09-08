@@ -63,7 +63,8 @@ factionBuildConfig = {
 				[4] = { -- arty
 					importanceMult = 1,
 					count = 1,
-					[1] = {ID = UnitDefNames['tc_enforcer'].id, chance = 1},
+					[1] = {ID = UnitDefNames['tc_enforcer'].id, chance = 0.75},
+					[2] = {ID = UnitDefNames['tc_bonebeast'].id, chance = 0.25},
 				},
 				[5] = { --assault
 					importanceMult = 1,
@@ -73,12 +74,12 @@ factionBuildConfig = {
 				[6] = { -- skirm
 					importanceMult = 1,
 					count = 1,
-					[1] = {ID = UnitDefNames['tc_gunner'].id, chance = 1},
+					[1] = {ID = UnitDefNames['tc_mage'].id, chance = 1},
 				},
 				[7] = { -- riot
 					importanceMult = 0.2,
 					count = 1,
-					[1] = {ID = UnitDefNames['tc_mage'].id, chance = 1},
+					[1] = {ID = UnitDefNames['tc_undeadmarine_gun'].id, chance = 1},
 				},	
 				[8] = { -- aa
 					importanceMult = 0.8,

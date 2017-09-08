@@ -37,6 +37,7 @@ local std_jinkOrderDis = 150
 local jinkVariation = 20 -- was 80
 local circleOrderDis = 130
 local searchRange = 600
+local minimumjumpdist = 100
 
 local unitstate = {}
 local updateListUnits = {}
@@ -59,11 +60,11 @@ local swarmArray = {
   "tc_decoyshade",
   "tc_ghoul",
   "tc_undeadmarine_melee",
-  "tc_shade_lvl1",
-  "tc_shade_lvl2",
-  "tc_shade_lvl3",
-  "tc_shade_lvl4",
-  "tc_shade_lvl5",
+--  "tc_shade_lvl1",
+--  "tc_shade_lvl2",
+--  "tc_shade_lvl3",
+--  "tc_shade_lvl4",
+--  "tc_shade_lvl5",
   "tc_skeleton",
 -- ranged 
   "euf_marine",
@@ -105,7 +106,7 @@ local JumperPairs = {
 	[UnitDefNames.euf_pyro.id] = "euf_pyro",
 	[UnitDefNames.tc_ghoul.id] = "tc_ghoul",
 	[UnitDefNames.tc_mage.id] = "tc_mage",
-	[UnitDefNames.tc_cacodemon.id] = "tc_cacodemon",
+--	[UnitDefNames.tc_cacodemon.id] = "tc_cacodemon",
 	[UnitDefNames.euf_sarge_lvl2.id] = "euf_sarge_lvl2",
 	[UnitDefNames.euf_sarge_lvl3.id] = "euf_sarge_lvl3",
 	[UnitDefNames.euf_sarge_lvl4.id] = "euf_sarge_lvl4",
@@ -116,12 +117,6 @@ local JumperPairs = {
 	[UnitDefNames.tc_shade_lvl5.id] = "tc_shade_lvl5",
 }	
 
-local AggressiveJumpersPairs = {
-	[UnitDefNames.euf_pyro.id] = "euf_pyro",
-	[UnitDefNames.tc_ghoul.id] = "tc_ghoul",
-	[UnitDefNames.bug_med.id] = "bug_med",
-	[UnitDefNames.bug_med.id] = "bug_med_undead",
-}	
 	
 ---------------------------------------------------------------------------------------------------------------
 if (not gadgetHandler:IsSyncedCode()) then
@@ -227,11 +222,7 @@ function checkUnit(unitID)
 					if v.range > pointDis then
 						local ed = spGetUnitDefID(enemy)
 						local er = UnitDefs[ed].maxWeaponRange
-						if (er) and (er < v.range) and (er > 0) then
---						  Spring.Echo("SKIRM: Get out of range! " .. unitID)
-						  local ex,ez,ez = spGetUnitPosition(enemy)
-						  local ux,uy,uz = spGetUnitPosition(unitID)
-						  local pointDis = spGetUnitSeparation(unitID,enemy)
+						if (er) and (er < v.range) and (er > 0) then -- I can outdistance the enemy so run
 						  local dis = orderDis 
 						  local f = dis/pointDis
 						  if (pointDis+dis > v.range) then
@@ -245,87 +236,76 @@ function checkUnit(unitID)
 						end
 					end
 				end
-			else -- it is a swarmer
-				if v.range < pointDis then -- enemy not yet in own range
+			else -- it is a swarmer or jumper
+				if v.range < pointDis then -- enemy not yet in own range, close in
 					  local ed = spGetUnitDefID(enemy)
 					  local er = UnitDefs[ed].maxWeaponRange
 					  local jump = false
-					  if (JumperPairs [(spGetUnitDefID(unitID))]) then
+					  if v.jumper then
 							jump = ((Spring.GetUnitRulesParam(unitID, "jumpReload") == nil) or (Spring.GetUnitRulesParam(unitID, "jumpReload") == 1))
 					  end
-					  if pointDis < er then -- within enemies range => zick zack
+					  if (pointDis < er and (not v.jumperonly) and (not jump)) then -- within enemy's range => zick zack
 							v.dir = v.dir*-1
 							local dir = v.dir or 1
-							if jump then
-								if move then
-									 spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )
-								end
-								local curdistance = spec_jinkorderdis[unitID]
-								if (spec_jumprange[unitID] < pointDis) then
-									curdistance = spec_jumprange[unitID] 
-								end
-								cx = ux+(-(ux-ex)*curdistance-(uz-ez)*dir)/pointDis
-								cy = uy
-								cz = uz+(-(uz-ez)*curdistance+(ux-ex)*dir)/pointDis
-								spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )	
-							else 
-								if move then
-									 spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )		
-								end
-								cx = ux+(-(ux-ex)*spec_jinkorderdis[unitID]-(uz-ez)*dir)/pointDis
-								cy = uy
-								cz = uz+(-(uz-ez)*spec_jinkorderdis[unitID]+(ux-ex)*dir)/pointDis
-								spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+							if move then
+								 spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )		
 							end
+							cx = ux+(-(ux-ex)*spec_jinkorderdis[unitID]-(uz-ez)*dir)/pointDis
+							cy = uy
+							cz = uz+(-(uz-ez)*spec_jinkorderdis[unitID]+(ux-ex)*dir)/pointDis
+							spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
 							v.cx,v.cy,v.cz = cx,cy,cz
-					  else	
-							v.dir = v.dir*-1
-							local dir = v.dir or 1
-							if jump then
-								if move then
-									 spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )
+					  else -- outside of the enemy's range
+							if jump then	-- only relevant for jumpers: outside of the enemy's range. Jump there!	
+								local dis = orderDis 
+								local f = dis/pointDis
+								if (pointDis+dis > v.range) then
+									f = (v.range-pointDis)/pointDis
 								end
-								local curdistance = spec_jinkorderdis[unitID]
-								if (spec_jumprange[unitID] < pointDis) then
-									curdistance = spec_jumprange[unitID] 
+								local cx = ux+(ux-ex)*f
+								local cy = uy
+								local cz = uz+(uz-ez)*f
+								local unittposdist = math.sqrt((ux-cx)^2+(uz-cz)^2)
+								-- Spring.Echo(unittposdist)
+								if (unittposdist > minimumjumpdist) then
+									if move then
+										 spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )
+									end
+									spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
 								end
-								cx = ux+(-(ux-ex)*curdistance-(uz-ez)*dir)/pointDis
-								cy = uy
-								cz = uz+(-(uz-ez)*curdistance+(ux-ex)*dir)/pointDis
-								spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )	
 							end
 							v.cx,v.cy,v.cz = cx,cy,cz
 					  end
-				else -- enemy is in own fire range. Don't jump too far here. Circle around
-					local jump = false				
-					if (JumperPairs [(spGetUnitDefID(unitID))]) then
-						jump = ((Spring.GetUnitRulesParam(unitID, "jumpReload") == nil) or (Spring.GetUnitRulesParam(unitID, "jumpReload") == 1))
-					end
-				  local up = 0.9
-				  local ep = 0.1
-				  v.dir = v.dir*-1
-				  if v.dir > 0 then
-					up = 0.8
-					ep = 0.2
-				  end
-					cx = ux*up+ex*ep+v.rot*(uz-ez)*circleOrderDis/pointDis
-					cy = uy
-					cz = uz*up+ez*ep-v.rot*(ux-ex)*circleOrderDis/pointDis					  
-					if move then
-						  spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )
-						  if jump then						  
-								spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
-						  else
-								spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
-						  end	
-					else
-						  if jump then				  
-								spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
-						  else
-								spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
-						  end
-					end
-				  v.cx,v.cy,v.cz = cx,cy,cz
+				elseif (not v.jumperonly) then -- enemy is in own fire range. Don't jump too far here. Circle around
+						local jump = false				
+						if v.jumper then
+							jump = ((Spring.GetUnitRulesParam(unitID, "jumpReload") == nil) or (Spring.GetUnitRulesParam(unitID, "jumpReload") == 1))
+						end
+						local up = 0.9
+						local ep = 0.1
+						v.dir = v.dir*-1
+						if v.dir > 0 then
+							up = 0.8
+							ep = 0.2
+						end
+						cx = ux*up+ex*ep+v.rot*(uz-ez)*circleOrderDis/pointDis
+						cy = uy
+						cz = uz*up+ez*ep-v.rot*(ux-ex)*circleOrderDis/pointDis					  
+						if move then
+							  spGiveOrderToUnit(unitID, CMD.REMOVE, {cQueue[1].tag}, {} )
+							  if jump then						  
+									spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
+							  else
+									spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+							  end	
+						else
+							  if jump then				  
+									spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD_JUMP, CMD.OPT_INTERNAL, cx,cy,cz }, {"alt"} )
+							  else
+									spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
+							  end
+						end
+						v.cx,v.cy,v.cz = cx,cy,cz
 				end
 			end
 		  end
@@ -352,6 +332,18 @@ local function IsSkirm(ud)
   return false
 end
 
+local function prepareUnit(unitID, unitDefID)
+	Spring.InsertUnitCmdDesc(unitID, unitAICmdDesc)
+	if not unitstate[unitID] then
+		unitstate[unitID] = 1
+	end
+	spec_updateinterval[unitID] = ((tonumber(UnitDefs[unitDefID].customParams.unitaiupdate)) or std_updateinterval)
+	spec_jinkorderdis[unitID] = ((tonumber(UnitDefs[unitDefID].customParams.unitaijinkdis)) or std_jinkOrderDis)		
+	spec_jumprange[unitID] = ((tonumber(UnitDefs[unitDefID].customParams.unitjumpjink)) or std_jinkOrderDis)
+	updateListUnits[unitID] = (Spring.GetGameFrame() + spec_updateinterval[unitID])
+	return true
+end
+
 ---------------------------------------------------------------------------------------------------------------
 function gadget:Initialize()
   -- register command -----------------------
@@ -369,20 +361,25 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam)
 	local ud = UnitDefs[unitDefID]
     if (ud ~= nil) then
 		if (IsSkirm(ud) or IsSwarm(ud)) then
-			Spring.InsertUnitCmdDesc(unitID, unitAICmdDesc)
-			if not unitstate[unitID] then
-				unitstate[unitID] = 1
-			end
-			spec_updateinterval[unitID] = ((tonumber(UnitDefs[unitDefID].customParams.unitaiupdate)) or std_updateinterval)
-			spec_jinkorderdis[unitID] = ((tonumber(UnitDefs[unitDefID].customParams.unitaijinkdis)) or std_jinkOrderDis)		
-			spec_jumprange[unitID] = ((tonumber(UnitDefs[unitDefID].customParams.unitjumpjink)) or std_jinkOrderDis)
-			updateListUnits[unitID] = (Spring.GetGameFrame() + spec_updateinterval[unitID])
 			if IsSkirm(ud) then
-			  controlledUnits[unitID] = {update = nextupdate, range = (ud.maxWeaponRange-rangeReduction), cx = 0, cy = 0, cz = 0}
+				prepareUnit(unitID, unitDefID)
+				if JumperPairs [unitDefID] then
+					controlledUnits[unitID] = {jumper = true, update = nextupdate, range = (ud.maxWeaponRange-rangeReduction), cx = 0, cy = 0, cz = 0}
+				else
+					controlledUnits[unitID] = {update = nextupdate, range = (ud.maxWeaponRange-rangeReduction), cx = 0, cy = 0, cz = 0}
+				end
+			elseif IsSwarm(ud) then
+				prepareUnit(unitID, unitDefID)
+				if JumperPairs [unitDefID] then
+					controlledUnits[unitID] = {jumper = true, update = nextupdate, range = (ud.maxWeaponRange-leeway), cx = 0, cy = 0, cz = 0, dir = jinkVariation, rot = random(0,1)*2-1}
+				else
+					controlledUnits[unitID] = {update = nextupdate, range = (ud.maxWeaponRange-leeway), cx = 0, cy = 0, cz = 0, dir = jinkVariation, rot = random(0,1)*2-1}
+				end
 			end
-			if IsSwarm(ud) then
-			  controlledUnits[unitID] = {update = nextupdate, range = (ud.maxWeaponRange-leeway), cx = 0, cy = 0, cz = 0, dir = jinkVariation, rot = random(0,1)*2-1}
-			end
+		elseif (JumperPairs [unitDefID]) then
+			prepareUnit(unitID, unitDefID)
+--			Spring.Echo("Jumper only found!")
+			controlledUnits[unitID] = {jumperonly = true, jumper = true, update = nextupdate, range = (ud.maxWeaponRange-leeway), cx = 0, cy = 0, cz = 0, dir = jinkVariation, rot = random(0,1)*2-1}
 		end
 	end
 end
@@ -401,7 +398,7 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
   end  
 end
 
-function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponID, attackerID, attackerDefID, attackerTeam)
+--[[function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponID, attackerID, attackerDefID, attackerTeam)
 
 	local ai = select(4, Spring.GetTeamInfo(unitTeam))
 	local areallied = false
@@ -474,7 +471,7 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 			end
 		end
 	end
-end
+end ]]--
 
 function gadget:GameFrame(n)
 	for unitID, updateframe in pairs(updateListUnits) do -- this should spread the calculation load to more gameframes

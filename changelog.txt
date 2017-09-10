@@ -3,6 +3,7 @@
 Bugs
 - (hopefully) adapted all pieces of lua to be compatibel with Spring 104
 - removed unused land and idle mode state icons from the UI
+- fixed Sarge aiming a little off from the actual shooting trajectory
 
 Balance
 - reload time for imperial AA towers increased by 10%
@@ -15,7 +16,8 @@ Features
 
 Polishing
 - changed weapon grafics of cursed redeemers
-
+- changed belial's autogun visuals
+- cursed AI players build also undead bugs and bonebeasts now
 
 
 >> Major changes 1.430 => 1.433

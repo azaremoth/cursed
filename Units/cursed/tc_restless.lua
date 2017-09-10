@@ -132,68 +132,7 @@ local unitDef = {
       "lich",
     },
   },
---[[  weapons = {
-    [1]  = {
-      def                = "LICHBOLT",
-      mainDir            = "0 0 1",
-      maxAngleDif        = 120,
-      onlyTargetCategory = "LAND",
-    },
-  },]]--
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  LICHBOLT = {
-    accuracy           = 300,
-    areaOfEffect       = 8,
-    -- beamweapon         = true,
-    burnblow           = true,
-    cegTag             = "LICHBOLT",
-    coreThickness      = 0,
-    craterBoost        = 0,
-    craterMult         = 0,
-    duration           = 0.05,
-      energypershot           = 0,	
-    explosionGenerator = "custom:LICHBOLT_EXPLOSION",
-    impulseBoost       = 0,
-    intensity          = 0.5,
-    -- lineofsight        = true,
-    name               = "Lich Bolt",
-    paralyzer          = 1,
-    paralyzetime       = 15,
-    range              = 400,
-    reloadtime         = 2.0,
-    -- rendertype         = 0,
-    rgbColor           = "1 1 1",
-    soundHit           = "defender_hit",
-    soundStart         = "weirdbreath",
-    soundStartVolume   = 15,
-    soundTrigger       = true,
-    startVelocity      = 650,
-    texture1           = "darkbolt",
-    texture2           = "null_texture",
-    texture3           = "null_texture",
-    thickness          = 1.8,
-    tolerance          = 3000,
-    tracks             = false,
-    turnRate           = 6000,
-    turret             = true,
-    weaponAcceleration = 1,
-    weaponTimer        = 1,
-    weaponType         = "LaserCannon",
-    weaponVelocity     = 650,
-    damage = {
-      default            = 150,
-      flyer              = 150,
-      heavy              = 150,
-      light              = 150,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
 
 
 --------------------------------------------------------------------------------

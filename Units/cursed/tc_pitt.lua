@@ -66,6 +66,7 @@ local unitDef = {
     "tc_pestilence",
     "tc_mancubus",
     "tc_belial",
+	"bug_big_undead",	
   },
   sfxtypes = {
     explosiongenerators = {

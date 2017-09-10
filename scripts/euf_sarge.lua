@@ -159,8 +159,8 @@ local function Walkscript()
 				Turn2( chest, z_axis, -3, MOVEANIMATIONSPEED )	
 				Turn2( ruparm, x_axis, -26, MOVEANIMATIONSPEED*2.5 )				
 				Turn2( luparm, x_axis, -20, MOVEANIMATIONSPEED*2.5 )
-				Turn2( rloarm, x_axis, -18, MOVEANIMATIONSPEED*2 )
-				Turn2( lloarm, x_axis, -15, MOVEANIMATIONSPEED*2 )				
+				-- Turn2( rloarm, x_axis, -18, MOVEANIMATIONSPEED*2 )
+				-- Turn2( lloarm, x_axis, -15, MOVEANIMATIONSPEED*2 )				
 			end
 			Turn2( lthigh, x_axis, -40, MOVEANIMATIONSPEED*4 )
 			Turn2( rthigh, x_axis, 20, MOVEANIMATIONSPEED*2.7 )
@@ -211,8 +211,8 @@ local function Walkscript()
 				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED*2 )
 				Turn2( ruparm, x_axis, 20, MOVEANIMATIONSPEED*2 )			
 				Turn2( luparm, x_axis, 20, MOVEANIMATIONSPEED*2 )
-				Turn2( rloarm, x_axis, 50, MOVEANIMATIONSPEED*2 )
-				Turn2( lloarm, x_axis, 50, MOVEANIMATIONSPEED*2 )
+				-- Turn2( rloarm, x_axis, 50, MOVEANIMATIONSPEED*2 )
+				-- Turn2( lloarm, x_axis, 50, MOVEANIMATIONSPEED*2 )
 			end
 		end
 		Sleep(30)			
@@ -375,7 +375,7 @@ function script.QueryWeapon3 ()
 end
 
 function script.AimFromWeapon3 ()
-	return head end
+	return rloarm end
 
 function script.AimWeapon3(heading, pitch)
 	if chaingunactive == 1 then
@@ -416,7 +416,7 @@ function script.QueryWeapon4 ()
 end
 
 function script.AimFromWeapon4 ()
-	return head end
+	return lloarm end
 
 function script.AimWeapon4(heading, pitch)
 	if chaingunactive == 1 then

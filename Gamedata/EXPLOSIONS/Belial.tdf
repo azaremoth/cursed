@@ -8,8 +8,8 @@
       	{
          	dir = dir;
          	colorMap=1 1 1 0.01	1 1 1 0.01	0 0 0 0.01; 
-          	size=10;
-          	length=20;
+          	size=15;
+          	length=30;
           	sizeGrowth=1.25;
           	ttl=10;
           	frontOffset=0.1;
@@ -29,10 +29,110 @@
       		circleGrowth = 0;
       		circleAlpha = 0;
       		ttl = 10;
-			color = 0.6, 1, 0.1;
+			color = 0.5, 1, 0.1;
 			air=1;
-     			ground=1;
+     		ground=1;
       		water=1;
 
 	}
 }
+
+[BelialGunFlare]
+{
+   [BitmapMuzzleFlame]
+   {
+	class = CBitmapMuzzleFlame;
+      
+	[properties]
+      	{
+         	dir = dir;
+         	colorMap=1 1 1 0.01	1 1 1 0.01	0 0 0 0.01; 
+          	size=12;
+          	length=24;
+          	sizeGrowth=1.25;
+          	ttl=2;
+          	frontOffset=0.1;
+          	sideTexture=greengunflare;
+          	frontTexture=greenflare;
+      	}
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[groundflash]
+	{
+      		flashSize = 20;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 2;
+			color = 0.5, 1, 0.1;
+			air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[BelialGunImpact]
+{
+  [spikes]
+	{
+		class=explspike;
+		[properties]
+		{
+			dir=-15 r20,-15 r20,-15 r20;
+			width=2.0;
+			length=10;
+			alpha=0.8;
+			alphadecay=0.1;
+			color = 0.5, 1, 0.1;
+		}
+	air=1;
+	water=1;
+	ground=1;
+    count=12; 
+	}
+	[groundflash]
+	{
+      		flashSize = 15;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 50;
+			color = 0.5, 1, 0.1;
+			air=0;
+     		ground=1;
+      		water=0;
+
+	}
+}
+
+
+[BELIAL_CEG]
+{
+   [BitmapMuzzleFlame]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+        dir = dir; // don't touch me
+        colorMap=0.7 1 0.4 0.01 0.8 0.7 0.5 0.01 0.2 1 0.5 0.01 0 0 0 0.01; 
+        size=3;
+        length=3;
+        sizeGrowth=2;
+        ttl=3;
+        frontOffset=0;
+		frontTexture=cursedring;
+		sideTexture=null_texture;
+      }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+}
+

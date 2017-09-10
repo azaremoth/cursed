@@ -17,9 +17,11 @@ end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-local CMD_CLOAK 	= CMD.CLOAK
-local CMD_REPEAT 	= CMD.REPEAT
-local CMD_WAIT 		= CMD.WAIT
+local CMD_CLOAK 			= CMD.CLOAK
+local CMD_REPEAT 			= CMD.REPEAT
+local CMD_WAIT 				= CMD.WAIT
+local CMD_IDLEMODE 			= CMD.IDLEMODE
+local CMD_AUTOREPAIRLEVEL 	= CMD.AUTOREPAIRLEVEL
 
 local cloak = {
 --	[ UnitDefNames['armflea'].id ] = true,
@@ -28,6 +30,8 @@ local cloak = {
 }
 
 local repeater = {}
+
+local flyer = {}
 
 local wait = {
 --	[ UnitDefNames['tc_soulstone'].id ] = true,
@@ -41,6 +45,9 @@ function gadget:Initialize()
 		if not ud.canMove and not ud.isBuilder and not ud.canAttack then
 			repeater[udid] 	= true
 			wait[udid]		= true
+		end
+		if ud.canFly then
+			flyer[udid]		= true
 		end
 	end
 end
@@ -65,7 +72,16 @@ function gadget:UnitCreated(unitID, unitDefID)
 			Spring.RemoveUnitCmdDesc(unitID, cmdDescID)
 		end
 	end
-	
+	if flyer[unitDefID] then
+		local cmdDescID = Spring.FindUnitCmdDesc(unitID, CMD_AUTOREPAIRLEVEL)
+		if (cmdDescID) then
+			Spring.RemoveUnitCmdDesc(unitID, cmdDescID)
+		end
+		local cmdDescID2 = Spring.FindUnitCmdDesc(unitID, CMD_IDLEMODE)
+		if (cmdDescID2) then
+			Spring.RemoveUnitCmdDesc(unitID, cmdDescID2)
+		end
+	end
 end
 
 

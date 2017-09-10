@@ -113,7 +113,7 @@ local weaponDefs = {
     avoidFriendly      = true,
     burnblow = 0,
 	collideFriendly    = true,
-    accuracy           = 128,
+    accuracy           = 384,
     areaOfEffect       = 16,
 	cylinderTargeting = 128,		
     energypershot           = 0,	
@@ -122,15 +122,16 @@ local weaponDefs = {
     interceptedByShieldType = 1,
     name               = "Marine Gun",
     range              = 275,
-    reloadtime         = .12,
+    reloadtime         = .15,
 	soundHit           = "null",	
-    soundStart         = "battlegun",
+    soundStart         = "cannon_fire1",
     soundStartVolume   = 15,
     soundTrigger       = true,
-	sweepFire = true,	
+	sweepFire = false,	
+    targetMoveError    = 0.25,	
     tolerance          = 3000,
     turret             = true,
-    weaponVelocity     = 1600,
+    weaponVelocity     = 800,
 --	Weaponspecial ------------------------------------------
     Model              = "gunshot.s3o",    
 	Size               = 5,
@@ -138,10 +139,10 @@ local weaponDefs = {
 	weaponType         = "Cannon",
 ------------------------------------------------------------	  
     damage = {
-      default            = 11, --was 22
-      flyer              = 11, --was 22
-      heavy              = (11*0.75), --was 11
-      light              = 11, --was 22
+      default            = 15,
+      flyer              = 15, 
+      heavy              = (15*0.75),
+      light              = 15,
     },
   },
 }

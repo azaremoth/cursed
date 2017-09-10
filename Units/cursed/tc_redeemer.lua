@@ -111,6 +111,55 @@ local unitDef = {
 
 local weaponDefs = {
   REDEEMERGUN = {
+    avoidFriendly      = true,
+	collideFriendly    = true,  
+    accuracy           = 920,
+    areaOfEffect       = 64,
+    beamtime           = 0.75,
+    burnblow           = true,
+    coreThickness      = 0.5,
+    craterBoost        = 0,
+    craterMult         = 0,
+    energypershot           = 0,
+    explosionGenerator = "custom:AGARES_LASER",
+    fireStarter        = 20,
+    impulseBoost       = 0,
+    interceptedByShieldType = 1,
+    largeBeamLaser     = true,
+    laserFlareSize     = 3,
+    name               = "Agares Laser",
+	noSelfDamage     = true,
+    range              = 300,
+    reloadtime         = 1.00,
+    -- rendertype         = 0,
+	rgbColor           = {0.45, 1, 0.1},
+	rgbColor2 		   = {1, 1, 1},
+    soundHit           = "null",
+    soundStart         = "small_laser_fire",
+    soundTrigger       = true,
+	sweepFire		   = false,		
+    targetMoveError    = 0.25,
+    texture1           = "beam1",
+    texture2           = "null_texture",
+    texture3           = "null_texture",
+    texture4           = "null_texture",
+    thickness          = 3,
+    tolerance          = 1500,
+    turret             = true,
+    weaponType         = "BeamLaser",
+    weaponVelocity     = 1500,
+    damage = {
+      default            = 100,
+      flyer              = 100*0.33,
+      heavy              = (100*0.75),
+      light              = 100,
+    },
+  },
+}
+unitDef.weaponDefs = weaponDefs
+
+--[[local weaponDefs = {
+  REDEEMERGUN = {
     accuracy           = 920,
     alphaDecay         = 0.5,
     areaOfEffect       = 55,
@@ -144,7 +193,7 @@ local weaponDefs = {
     },
   },
 }
-unitDef.weaponDefs = weaponDefs
+unitDef.weaponDefs = weaponDefs]]--
 
 
 --------------------------------------------------------------------------------

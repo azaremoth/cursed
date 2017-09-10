@@ -1,13 +1,20 @@
 >> Major changes 1.433 => 1.434
 
+Bugs
+- (hopefully) adapted all pieces of lua to be compatibel with Spring 104
+- removed unused land and idle mode state icons from the UI
+
 Balance
 - reload time for imperial AA towers increased by 10%
+- cursed Agares should hit targets a little more accurate now
+- imperial scout aircrafts are less accurate against moving targets now but do little more damage
 
 Features
-- implemented improved automated unit behaviors for several units (jumpers, skirmishers, swarmers). Moroverover the functions are now all in a gadget and can be deactivated per unit individually
+- implemented improved automated unit behaviors comparable to a light version of ZeroK's unitAI for several units (jumpers, skirmishers, swarmers). Moreover the functions are now all in a gadget and can be deactivated per unit individually.
+- implemented improved unit movement (CMD_RAW_MOVE gadget from ZeroK)
 
-Bugs
-- (hopefully adapted all pieces of lua to be compatibel with Spring 104
+Polishing
+- changed weapon grafics of cursed redeemers
 
 
 

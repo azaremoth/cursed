@@ -37,7 +37,7 @@ local unitDef = {
 	canburrow      = "true",	
 	jumpclass = [[mage]],	
 	factionname		   = "cursed",
-    helptext = "The skeletal mage is useful for devasting surprises due to its teleport spell. It can teleport and has AA abilities. The magic bolts can penetrate shields and pass through allied units and obstacles."
+    helptext = "The skeletal mage is useful for devasting surprises due to its teleport spell. It can teleport and has AA abilities. The magic bolts can penetrate shields and pass through allied units, water and obstacles."
   },
   defaultmissiontype = "Standby",
   description        = "AA, can penetrate shields, can teleport",
@@ -169,6 +169,7 @@ local weaponDefs = {
     trajectoryHeight   = 0.4,
     turnRate           = 8000,
     turret             = true,
+    waterweapon        = true,	
     weaponAcceleration = 350,
     weaponType         = "MissileLauncher",
     weaponVelocity     = 500,

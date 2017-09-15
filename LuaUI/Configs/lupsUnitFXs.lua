@@ -1,15 +1,17 @@
 effectUnitDefs = { 
+  euf_sarge      = {    {class='GroundFlash', options=HeroAura},    }, 
   euf_sarge_lvl1 = {    {class='GroundFlash', options=HeroAura},    }, 
   euf_sarge_lvl2 = {    {class='GroundFlash', options=HeroAura},    }, 
   euf_sarge_lvl3 = {    {class='GroundFlash', options=HeroAura},    }, 
   euf_sarge_lvl4 = {    {class='GroundFlash', options=HeroAura},    },   
   euf_sarge_lvl5 = {    {class='GroundFlash', options=HeroAura},    },
   
-  tc_shade_lvl1 = {    {class='GroundFlash', options=HeroAura},    }, 
-  tc_shade_lvl2 = {    {class='GroundFlash', options=HeroAura},    }, 
-  tc_shade_lvl3 = {    {class='GroundFlash', options=HeroAura},    }, 
-  tc_shade_lvl4 = {    {class='GroundFlash', options=HeroAura},    },   
-  tc_shade_lvl5 = {    {class='GroundFlash', options=HeroAura},    }, 
+  tc_shade      = {    {class='GroundFlash', options=HeroAura},      {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_r", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_l", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, }, 
+  tc_shade_lvl1 = {    {class='GroundFlash', options=HeroAura},      {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_r", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_l", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, }, 
+  tc_shade_lvl2 = {    {class='GroundFlash', options=HeroAura},      {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_r", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_l", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, }, 
+  tc_shade_lvl3 = {    {class='GroundFlash', options=HeroAura},      {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_r", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_l", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, }, 
+  tc_shade_lvl4 = {    {class='GroundFlash', options=HeroAura},      {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_r", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_l", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, },   
+  tc_shade_lvl5 = {    {class='GroundFlash', options=HeroAura},      {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_r", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, {class='AirJet', options={color={0.8, 1.0, 0.0}, width=1, length=28, piece="katana_l", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}}, }, 
   
   euf_factory = { 
 	{class='ShieldJitter', options={layer=-16, life=math.huge, pos={0,0,0}, size=50, precision=1, strength=0.010, onActive=true, repeatEffect=true, noIconDraw = true}},

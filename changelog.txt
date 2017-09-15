@@ -1,3 +1,13 @@
+>> Major changes 1.434 => 1.435
+
+Balance
+- cursed mages can shoot under water now
+
+Polishing
+- cursed shade's blades do have a plasma sword look now
+
+
+
 >> Major changes 1.433 => 1.434
 
 Bugs

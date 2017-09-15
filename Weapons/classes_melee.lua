@@ -1,65 +1,78 @@
 ----------------------------------- ADAPTIONS TO BASE CLASS ------------------------------
 local GHOULMELEE = {
+    explosionGenerator      = [[custom:HITSPARKLE]],
 	range                   = 70,
     reloadtime 				= 1.30,
     damage 					= { default = 120, flyer = 120, heavy = (120*0.75), light = 120, },
 }
 local SKELMELEE = {
+    explosionGenerator      = [[custom:HITSPARKLE]],
 	range                   = 70,
     reloadtime				= 1.60,
     damage 					= { default = 140, flyer = 140, heavy = (140*0.75), light = 140, },
 }
 local UNDEADMARINEMELEE = {
+    explosionGenerator      = [[custom:HITSPARKLE]],
 	range                   = 70,
     reloadtime              = 2.60,
     damage 					= { default = 260, flyer = 260, heavy = (260*0.75), light = 260, },
 }
 local PALADINMELEE = {
+    explosionGenerator      = [[custom:HITSPARKLE]],
 	range                   = 70,
     reloadtime              = 2.00,
     damage 					= { default = 220, flyer = 220, heavy = (220*0.75), light = 220, },
 }
 local WEREWOLFMELEE = {
+    explosionGenerator      = [[custom:HITSPARKLE]],
 	range                   = 70,
     reloadtime              = 1.00,
     damage 					= { default = 200, flyer = 200, heavy = (200*0.75), light = 200, },
 }
 local DECOYSHADEMELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
 	range                   = 70,
     reloadtime              = 0.70,
     damage 					= { default = 50, flyer = 50, heavy = 50, light = 50, },
 }
 local SHADELVL1MELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
 	range                   = 70,
     reloadtime              = 0.70,
     damage 					= { default = 95, flyer = 95, heavy = 95, light = 95, },
 }
 local SHADELVL2MELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
 	range                   = 70,
     reloadtime              = 0.70,
     damage 					= { default = 128, flyer = 128, heavy = 128, light = 128, },
 }
 local SHADELVL3MELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
 	range                   = 70,
     reloadtime              = 0.70,
     damage 					= { default = 175, flyer = 175, heavy = 175, light = 200, },
 }
 local SHADELVL4MELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
 	range                   = 70,
     reloadtime              = 0.70,
     damage 					= { default = 360, flyer = 360, heavy = 360, light = 360, },
 }
 local SHADELVL5MELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
 	range                   = 70,
     reloadtime              = 0.70,
     damage 					= { default = 500, flyer = 500, heavy = 500, light = 500, },
 }
 local MEDBUGMELEE = {
+    explosionGenerator      = [[custom:HITSPARKLE]],
 	range                   = 70,
     reloadtime              = 1.50,
     damage 					= { default = 130, flyer = 130, heavy = (130*0.75), light = 130, },
 }
 local BIGBUGMELEE = {
+    explosionGenerator      = [[custom:HITSPARKLE]],
 	range                   = 130,
     reloadtime              = 1.50,
     damage 					= { default = 250, flyer = 250, heavy = 250, light = 250, },
@@ -79,7 +92,6 @@ local MELEEBASE = {
 	craterBoost             = 0,
     craterMult              = 0,
 	cylinderTargeting       = 1,		  
-    explosionGenerator      = [[custom:HITSPARKLE]],
 	explosionScar 			= false,
     fireStarter             = 90,
     impactOnly              = true,

@@ -77,6 +77,7 @@ local unitDef = {
       "custom:SPARKLES",
       "custom:smokescreen",
 	  "custom:NONE",	  
+	  "custom:GREENSPARKLE",		  
     },
   },
   sounds = {

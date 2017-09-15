@@ -76,7 +76,8 @@ local unitDef = {
       "custom:blood_spray",
       "custom:SPARKLES",
       "custom:Smoke_Shade",
-	  "custom:LEVELING",	  
+	  "custom:LEVELING", 
+	  "custom:GREENSPARKLE",	
     },
   },
   sounds = {

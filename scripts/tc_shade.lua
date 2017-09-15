@@ -43,6 +43,7 @@ local BLOODSPRAY	 = 1025+0
 local SPARKLES		 = 1026+0
 local JUMPDUST	 	 = 1027+0
 local LEVELING	 	 = 1028+0
+local SPARKLE	 	 = 1029+0
 
 ---- FOR BORED ANIMATION and other randomizations -----
 local rturn = math.random()
@@ -280,6 +281,9 @@ local function MeleeAnimations()
 			end
 			
 			Spring.UnitScript.Spin ( pelvis, y_axis, 20, 10) 
+			
+			EmitSfx(emit_r, SPARKLE)	
+			EmitSfx(emit_l, SPARKLE)				
 			
 			Turn2( head, y_axis, 30, 200 )					
 			

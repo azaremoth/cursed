@@ -1,10 +1,18 @@
+>> Major changes 1.435 => 1.436
+
+Polishing
+- optimized transparancy for build pics, awards and individual partly broken command buttons to enhance visibility
+- renamed the Mancubus to Moloch as the name Mancubus was obviously created by id Soft. 
+
+
+
 >> Major changes 1.434 => 1.435
 
 Balance
 - cursed mages can shoot under water now
 
 Polishing
-- optimized transparancy for build pics to avoid grey shading and thus enhance visibility
+- optimized transparancy for build pics, awards and individual partly broken command buttons to enhance visibility
 - cursed shade's blades do have a plasma sword look now
 
 

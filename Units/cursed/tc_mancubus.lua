@@ -26,7 +26,7 @@ local unitDef = {
 	isinfantry = "true",	
 	normaltex = "unittextures/normalmaps/tc_mancubus_normal.png",
 	normalmaps = "yes",
-    helptext 	= "The mancubus is a slow but enduring combat unit with a dual plasma gun."
+    helptext 	= "The Moloch demon is a slow but enduring combat unit with a dual plasma gun."
   },
   defaultmissiontype = "Standby",
   description        = "Combat",
@@ -46,7 +46,7 @@ local unitDef = {
   maxWaterDepth      = 24,
   mobilestandorders  = "1",
   movementClass      = "WALKER2X2",
-  name               = "Mancubus",
+  name               = "Moloch",
   nanoColor          = "0.6 1 0.15",
   noAutoFire         = false,
   noChaseCategory    = "AIR",

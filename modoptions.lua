@@ -56,7 +56,7 @@ local options={
   ---- AI OPTIONS ----
 	{
 		key    = 'e_aioptions',
-		name   = 'Additional AI Options',
+		name   = 'AI Options',
 		desc   = 'Additional AI Options',
 		type   = 'section',
 	},
@@ -183,7 +183,7 @@ local options={
 -- Control Victory Options	
 	{
 		key    = 'controlvictoryoptions',
-		name   = 'Control Victory Options',
+		name   = 'Control Victory',
 		desc   = 'Allows you to control at a granular level the individual options for Control Point Victory',
 		type   = 'section',
 	},
@@ -215,7 +215,7 @@ local options={
 	},
 	{
 		key    = "numberofcontrolpoints",
-		name   = "Set number of Control Points on the map",
+		name   = "Set number of Control Points on map",
 		desc   = "Sets the number of control points on the map and scales the total score amount to match. Has no effect if Preset map configs are enabled.",		
 		section= "controlvictoryoptions",
 		type="list",
@@ -312,7 +312,7 @@ local options={
 	},
 		{
 		key    = 'metalperpoint',
-		name   = 'Metal given to each player per captured point',
+		name   = 'Metal given per captured point',
 		desc   = 'Each player on an allyteam that has captured a point will receive this amount of resources per point captured per second',
 		type   = 'number',
 		section= 'controlvictoryoptions',
@@ -324,7 +324,7 @@ local options={
 	},
 		{
 		key    = 'energyperpoint',
-		name   = 'Energy given to each player per captured point',
+		name   = 'Energy given per captured point',
 		desc   = 'Each player on an allyteam that has captured a point will receive this amount of resources per point captured per second',
 		type   = 'number',
 		section= 'controlvictoryoptions',

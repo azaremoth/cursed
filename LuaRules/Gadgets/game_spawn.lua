@@ -37,7 +37,7 @@ local Gaia = Spring.GetGaiaTeamID
 local modOptions = Spring.GetModOptions()
 local cheatAItype = "0"
 local startbase = "1"
-local type = "std"
+local luaSetStartPositions = {}
 	
 local ChickenAIs = VFS.Include("LuaRules/Configs/ai_chickenlist.lua")	
 
@@ -49,26 +49,78 @@ if (Spring.GetModOptions().scoremode ~= nil) then
 	end
 end
 
-
-
 function gadget:Initialize()
 	GG.teamside = GG.teamside or {}
 end
 
+local function getMiddleOfStartBox(teamID)
+	local x = Game.mapSizeX / 2
+	local z = Game.mapSizeZ / 2
+
+	local boxID = Spring.GetTeamRulesParam(teamID, "start_box_id")
+	if boxID then
+		local startposList = GG.startBoxConfig[boxID] and GG.startBoxConfig[boxID].startpoints
+		if startposList then
+			local startpos = startposList[1] -- todo: distribute afkers over them all instead of always using the 1st
+			x = startpos[1]
+			z = startpos[2]
+		end
+	end
+
+	return x, Spring.GetGroundHeight(x,z), z
+end
+
+local function GetStartPos(teamID, teamInfo, isAI)
+	if luaSetStartPositions[teamID] then
+		return luaSetStartPositions[teamID].x, luaSetStartPositions[teamID].y, luaSetStartPositions[teamID].z
+	end
+	
+	if fixedStartPos then
+		local x, y, z
+		if teamInfo then
+			x, z = tonumber(teamInfo.start_x), tonumber(teamInfo.start_z)
+		end
+		if x then
+			y = Spring.GetGroundHeight(x, z)
+		else
+			x, y, z = Spring.GetTeamStartPosition(teamID)
+		end
+		return x, y, z
+	end
+	
+	if not (Spring.GetTeamRulesParam(teamID, "valid_startpos") or isAI) then
+		local x, y, z = getMiddleOfStartBox(teamID)
+		return x, y, z
+	end
+	
+	local x, y, z = Spring.GetTeamStartPosition(teamID)
+	-- clamp invalid positions
+	-- AIs can place them -- remove this once AIs are able to be filtered through AllowStartPosition
+	local boxID = isAI and Spring.GetTeamRulesParam(teamID, "start_box_id")
+	if boxID and not GG.CheckStartbox(boxID, x, z) then
+		x,y,z = getMiddleOfStartBox(teamID)
+	end
+	return x, y, z
+end
+
+local function SetStartLocation(teamID, x, z)
+    luaSetStartPositions[teamID] = {x = x, y = Spring.GetGroundHeight(x,z), z = z}
+end
+GG.SetStartLocation = SetStartLocation
 
 local function GetStartUnit(teamID)
 	-- get the team startup info
 	local side = select(5, Spring.GetTeamInfo(teamID))
 	local ai = select(4, Spring.GetTeamInfo(teamID))
+	local teamInfo = teamID and select(7, Spring.GetTeamInfo(teamID))
 	local IsChickenAI = false
 	if (ai and ChickenAIs[Spring.GetTeamLuaAI(teamID)]) then
 		IsChickenAI = true
 	end
 	local startUnit
-	local x,y,z = Spring.GetTeamStartPosition(teamID)
-	if Spring.GetModOptions().comm ~= nil then
-		type = Spring.GetModOptions().comm
-	end
+	-- local x,y,z = Spring.GetTeamStartPosition(teamID)
+	local x,y,z = GetStartPos(teamID, teamInfo, ai)
+
 	if Spring.GetModOptions().cheatingai ~= nil then
 		cheatAItype = Spring.GetModOptions().cheatingai
 	end 
@@ -241,10 +293,7 @@ end
 function gadget:GameStart()
 	local gaiaTeamID = Spring.GetGaiaTeamID()
 	local teams = Spring.GetTeamList()
-	
---	local type = "std"
---	type = Spring.GetModOptions().comm
-		
+			
 	for i = 1,#teams do
 		local teamID = teams[i]
 		-- don't spawn a start unit for the Gaia team

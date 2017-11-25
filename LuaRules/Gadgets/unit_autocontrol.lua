@@ -212,12 +212,12 @@ function checkUnit(unitID)
 		  local ex,ey,ez = spGetUnitPosition(enemy)
 		  local ux,uy,uz = spGetUnitPosition(unitID)
 		  local pointDis = spGetUnitSeparation(unitID,enemy)
+		  local holdPos = (Spring.GetUnitStates(unitID).movestate == 0)
 		  local cx 
 		  local cy
 		  local cz 
 		  if pointDis then
-			if (v.dir == nil) then -- skirm check
-				local holdPos = (Spring.GetUnitStates(unitID).movestate == 0)
+			if (v.dir == nil) then -- skirm (getting to max distance) check			
 				if not holdPos then 
 					if v.range > pointDis then
 						local ed = spGetUnitDefID(enemy)
@@ -244,7 +244,7 @@ function checkUnit(unitID)
 					  if v.jumper then
 							jump = ((Spring.GetUnitRulesParam(unitID, "jumpReload") == nil) or (Spring.GetUnitRulesParam(unitID, "jumpReload") == 1))
 					  end
-					  if (pointDis < er and (not v.jumperonly) and (not jump)) then -- within enemy's range => zick zack
+					  if (pointDis < er and (not v.jumperonly) and (not jump) and (not holdPos)) then -- within enemy's range => zick zack
 							v.dir = v.dir*-1
 							local dir = v.dir or 1
 							if (move or jumpcom) then
@@ -256,6 +256,7 @@ function checkUnit(unitID)
 							spGiveOrderToUnit(unitID, CMD.INSERT, {0, CMD.MOVE, CMD.OPT_SHIFT, cx,cy,cz }, {"alt"} )
 							v.cx,v.cy,v.cz = cx,cy,cz
 					  else -- outside of the enemy's range
+						if not holdPos then 
 							if jump then	-- only relevant for jumpers: outside of the enemy's range. Jump there!	
 								local dis = orderDis 
 								local f = dis/pointDis
@@ -275,8 +276,9 @@ function checkUnit(unitID)
 								end
 							end
 							v.cx,v.cy,v.cz = cx,cy,cz
+						end	
 					  end
-				elseif (not v.jumperonly) then -- enemy is in own fire range. Don't jump too far here. Circle around
+				elseif ((not v.jumperonly) and (not holdPos)) then -- enemy is in own fire range. Don't jump too far here. Circle around
 						local jump = false				
 						if v.jumper then
 							jump = ((Spring.GetUnitRulesParam(unitID, "jumpReload") == nil) or (Spring.GetUnitRulesParam(unitID, "jumpReload") == 1))

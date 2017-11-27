@@ -1,8 +1,13 @@
+>> Major changes 1.437 => 1.438
+
+
+
 >> Major changes 1.436 => 1.437
 
 Balance
 - weapon's range of imperial battle tanks increased to 500 (+43%)
 - weapon's range of cursed Moloch increased to 500 (+11%) and reload time reduced by 6%
+- imperials do start with two builderoids now
 
 Polishing
 - smart unit behavior will not impact units that have the hold position state active to avoid having units running around that should stick to their position

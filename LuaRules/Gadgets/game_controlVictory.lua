@@ -10,6 +10,8 @@ function gadget:GetInfo()
 	}
 end
 
+VFS.Include("LuaRules/Configs/cv_modOptions.lua")
+
 nonCapturingUnits = VFS.Include"LuaRules/Configs/cv_nonCapturingUnits.lua"
 buildableUnits = VFS.Include"LuaRules/Configs/cv_buildableUnits.lua"
 
@@ -38,8 +40,6 @@ if chickensEnabled == true then
 	Spring.Echo("[ControlVictory] Deactivated because Chickens are present!")
 	return false
 end
-
-VFS.Include("LuaRules/Configs/cv_modOptions.lua")
 
 local moveSpeed =.5
 local buildingMask = 2

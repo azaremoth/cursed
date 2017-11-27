@@ -7,6 +7,10 @@ Balance
 Polishing
 - smart unit behavior will not impact units that have the hold position state active to avoid having units running around that should stick to their position
 
+Features
+- implemented start boxed from ZeroK
+- control point victory will not be the standard game mode when spring.exe is started directly
+
 
 
 >> Major changes 1.435 => 1.436

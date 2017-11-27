@@ -1,11 +1,13 @@
--- CV Enabled/Disabled Controls
---[[if Spring.GetModOptions().scoremode == "disabled" then
-	return false
-end]]
+cvMode = Spring.GetModOptions().scoremode
 
 --Is CV Enabled when you launch spring.exe directly?
-if Spring.GetModOptions().scoremode == nil then
-	Spring.GetModOptions().scoremode = "disabled"
+if cvMode == nil then
+	cvMode = "disabled"
+end
+
+-- CV Enabled/Disabled Controls
+if cvMode == "disabled" then
+	return false
 end
 
 -------------------------------------------------------

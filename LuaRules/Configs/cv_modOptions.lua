@@ -1,15 +1,3 @@
-cvMode = Spring.GetModOptions().scoremode
-
---Is CV Enabled when you launch spring.exe directly?
-if cvMode == nil then
-	cvMode = "disabled"
-end
-
--- CV Enabled/Disabled Controls
-if cvMode == "disabled" then
-	return false
-end
-
 -------------------------------------------------------
 -- Use a building mask for Control Points?
 useBuildingMask = false

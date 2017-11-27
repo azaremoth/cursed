@@ -208,7 +208,9 @@ end
 
 function widget:Initialize()
 	-- only show at the beginning
-	if (Spring.GetGameFrame() > 1) or (Game.startPosType ~= 2) or (Spring.GetModOptions().fixedstartpos == "1") then
+	-- startPosType 0 = fixed / 1 = random / 2 = choose in game / 3 = choose before game (on map)
+	-- if (Spring.GetGameFrame() > 30) then	
+	if (Spring.GetGameFrame() > 30) or (Game.startPosType == 3) then
 		widgetHandler:RemoveWidget(self)
 		return
 	end

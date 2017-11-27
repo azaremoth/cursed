@@ -192,9 +192,13 @@ local function SpawnStartUnit(teamID)
 	if (ai and ChickenAIs[Spring.GetTeamLuaAI(teamID)]) then
 		IsChickenAI = true
 	end
-	local startUnit
-	-- local x,y,z = Spring.GetTeamStartPosition(teamID)
-	local x,y,z = GetStartPos(teamID, teamInfo, ai)
+
+	local x,y,z = Spring.GetTeamStartPosition(teamID)
+	
+	-- startPosType 0 = fixed / 1 = random / 2 = choose in game / 3 = choose before game (on map)
+	if (Game.startPosType ~= 3) then  --> Start Boxes active
+		x,y,z = GetStartPos(teamID, teamInfo, ai)
+	end
 
 	if Spring.GetModOptions().cheatingai ~= nil then
 		cheatAItype = Spring.GetModOptions().cheatingai

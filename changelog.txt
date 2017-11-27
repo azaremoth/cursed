@@ -8,7 +8,7 @@ Polishing
 - smart unit behavior will not impact units that have the hold position state active to avoid having units running around that should stick to their position
 
 Features
-- implemented start boxed from ZeroK
+- implemented start boxed from ZeroK. This should avoid a lot of multiplayer games beeing screwed just because none did set the boxes upfront
 - control point victory will not be the standard game mode when spring.exe is started directly
 
 

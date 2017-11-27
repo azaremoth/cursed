@@ -10,6 +10,17 @@ function gadget:GetInfo()
 	}
 end
 
+cvMode = Spring.GetModOptions().scoremode
+
+--Is CV Enabled when you launch spring.exe directly?
+if cvMode == nil then
+	cvMode = "disabled"
+end
+
+if cvMode == "disabled" then
+	return false
+end
+
 VFS.Include("LuaRules/Configs/cv_modOptions.lua")
 
 nonCapturingUnits = VFS.Include"LuaRules/Configs/cv_nonCapturingUnits.lua"

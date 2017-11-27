@@ -9,11 +9,11 @@ local options={
   },
 
    {
-    key    = "a_shuffle",
+    key    = "shuffle",
     name   = "Start Boxes",
     desc   = "Start box settings.",
     type   = "list",
-    section= 'startconds',
+    section= 'a_startconds',
     def    = "auto",
     items  = {
       {

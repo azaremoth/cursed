@@ -14,12 +14,12 @@
 
 function widget:GetInfo()
   return {
-    name      = "MiniMap Start Boxes",
-    desc      = "MiniMap Start Boxes",
+    name      = "Start Boxes by Lobby",
+    desc      = "Start Boxes by Lobby",
     author    = "trepan, jK, Rafal",
     date      = "2007-2012",
     license   = "GNU GPL, v2 or later",
-    layer     = 0,
+    layer     = 1001,
     enabled   = true  --  loaded by default?
   }
 end
@@ -67,9 +67,10 @@ local texScale = 512
 
 function widget:Initialize()
   -- only show at the beginning
-  if (Spring.GetGameFrame() > 1 or Game.startPosType ~= 2) then
-    widgetHandler:RemoveWidget()
-    return
+  local validposexists = Spring.GetTeamRulesParam(Spring.GetMyTeamID(), "valid_startpos")
+  if (Spring.GetGameFrame() > 30) or (validposexists == 1) or (Game.startPosType ~= 2) then
+		widgetHandler:RemoveWidget()
+		return
   end
 
   -- get the gaia teamID and allyTeamID

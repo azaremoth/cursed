@@ -13,9 +13,45 @@ function gadget:GetInfo() return {
 -- startPosType 0 = fixed / 1 = random / 2 = choose in game / 3 = choose before game (on map)
 Spring.Echo ("StartPosType is " .. Game.startPosType)
 
-if (Game.startPosType ~= 3) then
 ---------------------------------------------------------------------------------------------------
-	local gaiaAllyTeamID = select(6, Spring.GetTeamInfo(Spring.GetGaiaTeamID()))
+local teamshaveboxes = true
+local gaiaAllyTeamID = select(6, Spring.GetTeamInfo(Spring.GetGaiaTeamID()))
+
+if (Game.startPosType == 2) then
+	local allyTeamList = Spring.GetAllyTeamList()
+	for _,allyID in pairs(allyTeamList) do
+		if (allyID ~= gaiaAllyTeamID) then
+			local x1,z1,x2,z2 = Spring.GetAllyTeamStartBox(allyID)
+			local mx = Game.mapSizeX
+			local mz = Game.mapSizeZ
+					
+--[[			Spring.Echo ("Ally Team Start box is?")
+			Spring.Echo (x1)
+			Spring.Echo (z1)
+			Spring.Echo (x2)
+			Spring.Echo (z2)
+			Spring.Echo ("Map size is?")
+			Spring.Echo (mx)
+			Spring.Echo (mz) ]]
+			
+			if (teamshaveboxes == true) then
+				if ((x1 == nil) or ((x1+x2) == 0) or (x1 == 0 and x2 == mx and z1 == 0 and z2 == mz)) then
+					teamshaveboxes = false
+				end
+			end
+		end
+	end
+	if (teamshaveboxes == true) then -- set startpostion as valid for unit spawner. This is also checked by the widgets
+		for _,team in ipairs(Spring.GetTeamList()) do
+			if (team ~= nil and team ~= Spring.GetGaiaTeamID()) then
+				Spring.SetTeamRulesParam (team, "valid_startpos", 2) -- "2" valid but not set by start boxes
+			end
+		end
+		Spring.Echo ("StartBoxes is correctly predefined in lobby! Thus these are used!")
+	end
+end
+---------------------------------------------------------------
+if ((Game.startPosType ~= 3) and (teamshaveboxes == false)) then
 	local shuffleMode = Spring.GetModOptions().shuffle or "auto"
 	local startboxConfig
 

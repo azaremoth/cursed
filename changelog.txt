@@ -1,5 +1,8 @@
 >> Major changes 1.437 => 1.438
 
+Features
+- game side controlled start boxed will always be overwritten by (correctly) defined start-boxes via lobby. Game side control should only be relevant if something is missing or not corretly defined.
+
 
 
 >> Major changes 1.436 => 1.437

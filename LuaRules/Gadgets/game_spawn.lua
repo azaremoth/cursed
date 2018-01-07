@@ -74,6 +74,11 @@ local function getMiddleOfStartBox(teamID)
 			x = startpos[1]
 			z = startpos[2]
 		end
+	else -- using middle of lobby pre-defined box
+		local allyID = select(6, Spring.GetTeamInfo(teamID))
+		local a,b,c,d = Spring.GetAllyTeamStartBox(allyID)
+		x = (a+c)/2
+		z = (b+d)/2
 	end
 
 	return x, Spring.GetGroundHeight(x,z), z
@@ -196,8 +201,10 @@ local function SpawnStartUnit(teamID)
 	local x,y,z = Spring.GetTeamStartPosition(teamID)
 	
 	-- startPosType 0 = fixed / 1 = random / 2 = choose in game / 3 = choose before game (on map)
-	if (Game.startPosType ~= 3) then  --> Start Boxes active
+	if (Game.startPosType ~= 3) and (Spring.GetTeamRulesParam(teamID, "valid_startpos") ~= 2) then  --> Start Boxes active
 		x,y,z = GetStartPos(teamID, teamInfo, ai)
+	elseif	ai then
+		x,y,z = getMiddleOfStartBox(teamID)
 	end
 
 	if Spring.GetModOptions().cheatingai ~= nil then

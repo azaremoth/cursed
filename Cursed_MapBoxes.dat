@@ -1,0 +1,136 @@
+# Currently set on autohost
+# ArcticPlainsV2.1
+# Eye of Horus v13
+# Iceland_v1
+# Mescaline_V2
+# Ravaged_v2
+
+
+#?mapName:nbTeams|boxes
+1944_Antwerp_Alpha2.smf:3|0 0 30 30;170 170 200 200;0 170 30 200
+1944_BocageSkirmish.smf:2|0 0 200 40;0 160 200 200
+1944_Caucasus_Skirmish_V4.smf:2|0 160 40 200;160 0 200 40
+1944_Cooper_Hill_v3.smf:2|0 0 30 200;170 0 200 200
+1944_Cooper_Hill_v3.smf:4|0 0 60 60;140 140 200 200;0 140 60 200;140 0 200 60
+1944_FloodBank_v0.smf:2|0 0 30 200;170 0 200 200
+1944_Hill_128.smf:2|0 0 200 20;0 180 200 200
+1944_Hill_128.smf:3|6 12 37 45;168 170 200 194;12 163 36 191
+1944_Hill_128.smf:4|0 0 30 30;170 170 200 200;0 170 30 200;170 0 200 30
+1944_Keep_Off_The_Grass V1.smf:2|0 0 20 200;180 0 200 200
+1944_Kiev_V4.smf:2|0 0 200 20;0 180 200 200
+1944_Liege_V2.smf:2|0 0 200 20;0 180 200 200
+1944_Moro_River_V1.smf:2|0 0 200 54;0 146 200 200
+1944_Moro_River_V1.smf:3|32 132 72 172;80 20 115 55;132 128 172 168
+1944_Moro_River_V1.smf:4|0 0 40 40;160 160 200 200;0 160 40 200;160 0 200 40
+1944_Prokhorovka_V2.smf:2|0 0 200 30;0 170 200 200
+1944_Prokhorovka_V2.smf:3|20 20 44 44;35 175 63 198;178 93 194 121
+1944_Red_Planet.smf:2|0 0 200 30;0 170 200 200
+1944_River_Valley_v4.smf:2|0 0 200 32;0 168 200 200
+1944_Road_To_Rome_V3.smf:2|0 0 200 20;0 180 200 200
+1944_Road_To_Rome_V3.smf:3|5 5 35 35;10 155 35 190;150 80 190 120
+1944_Road_To_Rome_V3.smf:4|0 0 30 30;170 170 200 200;0 170 30 200;170 0 200 30
+1944_Terra_Firma.smf:2|0 0 200 20;0 180 200 200
+1944_Titan.smf:2|0 0 20 200;180 0 200 200
+1944_Village_Crossing_v2.smf:2|0 0 40 200;160 0 200 200
+1944_Village_Crossing_v2.smf:3|0 0 50 50;150 150 200 200;0 150 50 200
+1944_Village_Crossing_v2.smf:4|0 0 30 30;170 170 200 200;0 170 30 200;170 0 200 30
+AavikkoV2.smf:2|0 0 200 50;0 150 200 200
+Adansonia v4.1.smf:2|0 0 200 30;0 170 200 200
+Al Anih - Ila Tion 1.2.smf:2|175 0 200 200;0 0 25 200
+Aquatic Divide Revised v02.smf:2|0 0 20 20;180 180 200 200
+Archers_Valley_v5.smf:2|0 0 200 30;0 170 200 200
+Archers_Valley_v5.smf:3|20 0 60 40;160 60 200 100;0 140 40 180
+ArcticPlainsV2.1.smf:2|0 0 200 20;0 180 200 200
+ArcticZoneV3.smf:2|0 0 200 30;0 170 200 200
+Avalanche v3.1.smf:2|0 0 50 50;150 150 200 200
+Badlands.smf:2|0 0 50 200;150 0 200 200
+BananaDunes.smf:2|0 0 200 28;0 172 200 200
+Bandit_Plains_v1.smf:2|0 0 200 40;0 160 200 200
+Barbary Coves v2.smf:2|0 0 50 50;152 144 199 197
+Barbary Coves v2.smf:3|144 132 200 200;4 3 70 74;36 74 160 152
+Barbary Coves v2.smf:4|0 0 30 30;170 170 200 200;0 170 30 200;170 0 200 30
+Barren.smf:2|0 0 200 20;0 180 200 200
+Blindside_v2.smf:2|0 0 30 200;170 0 200 200
+ConquerorsIsle-v02.smf:2|0 0 200 54;0 146 200 200
+ConquerorsIsle-v02.smf:3|20 20 60 60;140 20 180 60;40 140 80 180
+Conquest_of_Paradise_v1.smf:2|0 0 40 200;160 0 200 200
+DeltaSiege.smf:2|0 0 20 200;180 0 200 200
+DeltaSiegeDry.smf:2|0 0 56 200;144 0 200 200
+Deserted_Gully-v05.smf:2|0 0 200 40;0 160 200 200
+DireStrights.smf:2|0 0 30 200;170 0 200 200
+Downs_of_Destruction_Fix.smf:2|0 0 200 20;0 180 200 200
+Dworld_V1.smf:2|0 0 50 200;150 0 200 200
+Dworld_V1.smf:3|61 160 71 170;34 51 42 61;153 59 161 66
+Dworld_V1.smf:4|7 5 187 193;27 9 194 193;15 7 189 196;14 7 192 191
+Eisenwald v1.0.smf:2|0 150 50 200;150 0 200 50
+Europe_a2.smf:2|0 0 200 40;0 160 200 200
+Eye of Horus v13.smf:2|0 0 200 40;0 160 200 200
+Fetid Marsh - v06.smf:2|0 0 200 40;0 160 200 200
+Flooded Valley v2.smf:2|0 0 200 30;0 170 200 200
+FolsomDamFlooded.smf:2|0 0 30 200;170 0 200 200
+FrozenFortress_v2.smf:2|0 0 40 200;160 0 200 200
+Grts_Cookedwell_008.smf:2|0 0 40 200;160 0 200 200
+Grts_DesertValley_011.smf:2|0 0 200 40;0 160 200 200
+Grts_DesertValley_011.smf:3|7 147 67 183;171 141 194 177;127 6 185 42
+Grts_Northernmountains_008.smf:2|0 0 200 40;0 160 200 200
+Grts_Rocky_Glacier_009.smf:2|0 0 20 200;180 0 200 200
+Grts_Rocky_Glacier_010.smf:2|0 0 20 200;180 0 200 200
+HolyWater.smf:2|0 0 40 40;160 160 200 200
+Hydra_Talus.smf:2|0 0 200 40;0 160 200 200
+Ibex v1.smf:2|0 0 30 200;170 0 200 200
+Iceland_v1.smf:2|0 0 30 200;170 0 200 200
+Koom Valley V2.smf:2|0 0 40 200;160 0 200 200
+LakeDay_v2.smf:2|0 0 200 50;0 150 200 200
+LakeLargo_v1.smf:2|0 0 56 200;144 0 200 200
+LakeLargo_v1.smf:4|3 7 31 27;152 157 200 193;4 158 47 199;169 2 183 49
+Malibu Beach v1.smf:2|0 0 30 200;170 0 200 200
+Mescaline_V2.smf:2|0 0 30 200;170 0 200 200
+Mescaline_V2.smf:4|0 0 80 45;120 0 200 45;0 155 80 200;120 155 200 200
+MiniTabula-beta.smf:2|0 0 20 200;180 0 200 200
+Mountain Passes V2.smf:2|0 0 40 40;160 160 200 200
+NarrowValleyR1.smf:2|0 0 20 200;180 0 200 200
+Nuclear_Winter_1944.smf:2|0 0 30 200;170 0 200 200
+OkiRiver_v2.smf:2|0 0 24 200;176 0 200 200
+OkiRiver_v2.smf:3|0 150 50 200;75 0 125 50;150 150 200 200
+Paradise Lost v2.smf:2|0 0 30 200;170 0 200 200
+Pearl Springs v2.smf:2|0 0 20 200;180 0 200 200
+Ravaged_v2.smf:2|50 10 185 55;15 145 150 190
+S44_fields6x14.smf:2|0 0 200 20;0 180 200 200
+SapphireShores_Dry_V2.1.smf:2|0 0 30 200;170 0 200 200
+ScorpioBattleground.smf:2|0 0 200 40;0 160 200 200
+Sea of Dunes v1.0.smf:2|10 172 37 195;160 16 193 52
+Sierra-v2.smf:2|0 0 200 30;0 170 200 200
+Small Supreme Battlefield V2.smf:2|0 0 50 200;150 0 200 200
+Small Supreme Battlefield V2.smf:4|0 0 50 50;150 150 200 200;150 0 200 50;0 150 50 200
+Small Supreme Islands V2.smf:2|0 140 60 200;140 0 200 60
+SmallDivide.smf:2|0 0 200 20;0 180 200 200
+SplinteredTropicsV3.smf:2|0 0 200 40;0 160 200 200
+SplinteredTropicsV3.smf:3|60 0 100 50;160 140 200 180;0 140 50 180
+SpringMountainDelta.smf:2|0 0 60 60;140 140 200 200
+Tabula-v4.smf:2|0 0 30 200;170 0 200 200
+Tabula_Flooded_v04.smf:2|0 0 30 200;170 0 200 200
+Talus.smf:2|0 0 200 40;0 160 200 200
+Tangerine.smf:2|0 0 200 20;0 180 200 200
+Tempest Siege v1.smf:2|0 0 30 200;170 0 200 200
+Tempest.smf:2|0 0 200 30;0 170 200 200
+Temple Redux v1.2.smf:2|0 0 30 200;170 0 200 200
+Temple Redux v1.2.smf:3|80 0 120 40;0 80 40 120;160 160 200 200
+The river Nix 20.smf:2|0 0 20 200;180 0 200 200
+ThreeReefs16.smf:2|0 0 200 40;0 160 200 200
+ThreeReefs16.smf:3|80 20 120 60;20 120 60 160;140 120 180 160
+TinySkirmishRedux1.1.smf:2|0 0 200 40;0 160 200 200
+Titan-Flooded v1.smf:2|0 0 20 200;180 0 200 200
+Trinity.smf:2|71 6 140 46;58 147 125 198
+Tropicalo.smf:2|0 0 200 30;0 170 200 200
+Tundra.smf:2|0 0 200 40;0 160 200 200
+Verdant 1944.smf:2|0 0 42 42;158 158 200 200
+Water-Ways.smf:2|0 0 200 30;0 170 200 200
+WesternFrontierV2.smf:2|6 104 41 185;152 26 185 98
+Wide Pass Final.smf:2|0 0 200 30;0 170 200 200
+Wide Pass-Modless_v0.1.smf:2|0 0 200 32;0 168 200 200
+neurope_a7.smf:2|0 0 30 200;170 0 200 200
+neurope_a7.smf:3|80 20 120 50;0 160 40 200;160 160 200 200
+rysia.smf:2|0 0 200 20;0 180 200 200
+rysia.smf:4|36 3 186 37;17 163 171 196;7 31 39 159;165 39 200 151
+spiders web.smf:2|0 0 200 30;0 170 200 200
+unified_battlefield_v0.smf:2|0 0 200 30;0 170 200 200

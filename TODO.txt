@@ -1,5 +1,16 @@
+Primar/next
+- Add ingame faction change button
+- Full Chobby implementation
+- Add quick start missions (as "Tutorials")
+- Add missions to replace quick start menue
+- update chilli epic menue to fit to Chobby
+- Do Chobby stuff relative to thecursed:latest 
+
+Secondary:
+- Convert CPV UI elements to Chili
+- nuke button
+- damage-over-time and area (e.g. flame throwers and electro guns) -> S44 shoudl have the gadgets in place
 - undead units summoned from hell strom
-- undead bugs
 - GAIA and AI units burrowing
 - normal mapped creep
 - growing creep

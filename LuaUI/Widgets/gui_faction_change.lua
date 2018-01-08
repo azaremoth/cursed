@@ -119,8 +119,8 @@ end
 function SetFaction(faction)
     -- tell initial_spawn
     spSendLuaRulesMsg('\138' .. faction) 
-	Spring.Echo('Sending')
-	Spring.Echo('\138' .. faction)
+	-- Spring.Echo('Sending')
+	-- Spring.Echo('\138' .. faction)
     -- tell sMenu and initial queue
     WG.faction = faction
 end

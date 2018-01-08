@@ -93,8 +93,8 @@ function gadget:RecvLuaMsg(msg, playerID)
 		return
 	end
 	local side = string.sub(msg,2,string.len(msg))
-	Spring.Echo("start Faction:")
-	Spring.Echo(side)
+	-- Spring.Echo("start Faction:")
+	-- Spring.Echo(side)
 	
 	local _, _, playerIsSpec, playerTeam = Spring.GetPlayerInfo(playerID)
 	if not playerIsSpec then

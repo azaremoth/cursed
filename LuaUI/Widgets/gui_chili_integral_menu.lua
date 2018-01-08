@@ -409,7 +409,7 @@ local function MakeButton(container, cmd, insertItem, index)
 	
 	local te
 	local myTeamID = Spring.GetMyTeamID()
-	local side = select(5, Spring.GetTeamInfo(myTeamID))
+	local side = WG.faction or select(5, Spring.GetTeamInfo(myTeamID)) or "cursed"
 	
 	if (side == 'cursed') then
 		te = overrides[cmd.id]  -- command overrides imperials		

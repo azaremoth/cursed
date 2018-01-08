@@ -22,7 +22,7 @@ local echo = Spring.Echo
 --------------------------------------------------------------------------------
 
 local Chili
-local cycle = 1
+
 local themes = {
 	cursed = 'Bones',
 	imperials = 'Imperial',
@@ -36,12 +36,8 @@ local cursors = {
 
 local function SetTheme()
 	local myTeamID = Spring.GetMyTeamID()
-	local side = select(5, Spring.GetTeamInfo(myTeamID))
-	
---	if ((side == "" or side == nil) and GG.teamside ~= nil) then -- startscript didn't specify a side
---		side = GG.teamside
---	end
-	
+	local side = WG.faction or select(5, Spring.GetTeamInfo(myTeamID)) or "cursed"
+
 	if not Chili then
 		Chili = WG.Chili
 	end
@@ -50,7 +46,7 @@ local function SetTheme()
 		if (themes[side] ~= nil) then
 			Chili.theme.skin.general.skinName = themes[side]
 		else
-			Chili.theme.skin.general.skinName = 'Imperial'
+			Chili.theme.skin.general.skinName = 'Bones'
 		end
 	end
 	
@@ -58,7 +54,7 @@ local function SetTheme()
 		if (cursors[side] ~= nil) then
 			WG.crude.SetCursor( cursors[side] )
 		else
-			WG.crude.SetCursor( 'imperial' )
+			WG.crude.SetCursor( 'cursed' )
 		end
 	end
 end
@@ -73,6 +69,14 @@ function widget:Update()
 		SetTheme()
 	end
 end]]--
+
+function widget:GameFrame(n)
+    if n==0 then
+		SetTheme()
+	elseif n>0 then
+        widgetHandler:RemoveWidget(self)
+    end
+end
 
 function widget:Initialize()
 	SetTheme()

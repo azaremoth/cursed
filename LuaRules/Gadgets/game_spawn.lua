@@ -38,6 +38,7 @@ local cheatAItype = "0"
 local cpvmode = false
 local cpvstartbase = false
 local luaSetStartPositions = {}
+local MsgStartFaction = '^\138(%d+)$'
 	
 local ChickenAIs = VFS.Include("LuaRules/Configs/ai_chickenlist.lua")	
 
@@ -60,7 +61,52 @@ end
 
 function gadget:Initialize()
 	GG.teamside = GG.teamside or {}
+	
+	local teams = Spring.GetTeamList()
+	for i = 1,#teams do
+		local teamID = teams[i]
+		-- don't spawn a start unit for the Gaia team
+		if (teamID ~= Gaia) then
+			local side = select(5, Spring.GetTeamInfo(teamID))
+			if side then
+				GG.teamside[teamID] = side
+			else
+				GG.teamside[teamID] = "cursed"
+			end
+		end
+	end	
 end
+
+
+----------------------------------------------------------------
+-- LuaUI Interaction
+----------------------------------------------------------------
+
+function gadget:RecvLuaMsg(msg, playerID)
+	-- these messages are only useful during pre-game placement
+	if Spring.GetGameFrame() > 0 then
+		return false
+	end
+
+	local code = string.sub(msg,1,1)
+	if code ~= '\138' then
+		return
+	end
+	local side = string.sub(msg,2,string.len(msg))
+	Spring.Echo("start Faction:")
+	Spring.Echo(side)
+	
+	local _, _, playerIsSpec, playerTeam = Spring.GetPlayerInfo(playerID)
+	if not playerIsSpec then
+		GG.teamside[playerTeam] = side
+		Spring.SetTeamRulesParam(playerTeam, "side", side, {allied=true, public=false}) -- visible to allies only, set visible to all on GameStart
+		side = select(5, Spring.GetTeamInfo(playerTeam))
+		return true
+	end
+end
+
+
+----------------------------------------------------------------
 
 local function getMiddleOfStartBox(teamID)
 	local x = Game.mapSizeX / 2
@@ -188,9 +234,10 @@ end
 ----------------------------------------------------------------
 
 
-local function SpawnStartUnit(teamID)
+local function SpawnstartFaction(teamID)
 	-- get the team startup info
-	local side = select(5, Spring.GetTeamInfo(teamID))
+--	local side = select(5, Spring.GetTeamInfo(teamID))
+	local side = GG.teamside[teamID] or "cursed"
 	local ai = select(4, Spring.GetTeamInfo(teamID))
 	local teamInfo = teamID and select(7, Spring.GetTeamInfo(teamID))
 	local IsChickenAI = false
@@ -211,14 +258,14 @@ local function SpawnStartUnit(teamID)
 		cheatAItype = Spring.GetModOptions().cheatingai
 	end 
 	
-	if (side == "" or side == nil) then -- startscript didn't specify a side for this team, ramdomly pick one
+--[[	if (side == "" or side == nil) then -- startscript didn't specify a side for this team, ramdomly pick one
 		if (math.random() > 0.5) then
 			side = "imperials"
 		else
 			side = "cursed"
 		end
 	end
-	GG.teamside = side
+	GG.teamside = side ]]
 	
 	if (IsChickenAI) then
 		SpawnChicken (teamID, x, y, z)				
@@ -281,7 +328,7 @@ function gadget:GameStart()
 		local teamID = teams[i]
 		-- don't spawn a start unit for the Gaia team
 		if (teamID ~= gaiaTeamID) then
-			SpawnStartUnit(teamID)
+			SpawnstartFaction(teamID)
 			SetStartingResources(teamID)
 		end
 	end	

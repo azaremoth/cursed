@@ -1,10 +1,9 @@
 Primar/next
-- Add ingame faction change button
+√ Add ingame faction change button -> test needed
 - Full Chobby implementation
-- Add quick start missions (as "Tutorials")
-- Add missions to replace quick start menue
-- update chilli epic menue to fit to Chobby
-- Do Chobby stuff relative to thecursed:latest 
+- Add quick start missions (as "Tutorials") to replace quick start menue
+- update chilli epic menue to fit to Chobby: double settings button etc.
+√ Do Chobby stuff relative to thecursed:latest -> test needed
 
 Secondary:
 - Convert CPV UI elements to Chili
@@ -16,3 +15,4 @@ Secondary:
 - growing creep
 - feature conversion on creep
 - fixing strange shader effect for derefered lights on terrain/maps with normals applied and normal mapped units
+- nicer wall placement

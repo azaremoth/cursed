@@ -50,7 +50,7 @@ local Chili, control, imperial_button, cursed_button
 
 function resizeUI(vsx,vsy)
     if control ~= nil then
-        control:SetPos(vsx*0.52, vsy*(1-0.05-0.01), vsx*0.05, vsy*0.05) 
+        control:SetPos(vsx*0.47, vsy*0.10, vsx*0.10, vsy*0.10) 
     end
 end
 
@@ -87,7 +87,7 @@ function widget:Initialize()
         onclick = {SetImperial},
         caption = "",
         backgroundColor = buttonColour,
-        children = { Chili.Image:New{width='100%', height='100%', file='Sidepics/Imperials.bmp'} }
+        children = { Chili.Image:New{width='100%', height='100%', file='Sidepics/imperials_big.png'} }
     }
 
     cursed_button = Chili.Button:New{
@@ -98,7 +98,7 @@ function widget:Initialize()
         onclick = {SetCursed},
         caption = "",
         backgroundColor = buttonColour,
-        children = { Chili.Image:New{width='100%', height='100%', file='Sidepics/Cursed.bmp'} }
+        children = { Chili.Image:New{width='100%', height='100%', file='Sidepics/cursed_big.png'} }
     }
 	
     local vsx,vsy = Spring.GetViewGeometry()

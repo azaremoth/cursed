@@ -29,12 +29,10 @@ local minimapThumbnailPath = LUA_DIRNAME .. "configs/gameConfig/zk/minimapThumbn
 ---------------------------------------------------------------------------------
 
 local externalFuncAndData = {
-	dirName                = "tc",
+	dirName                = "thecursed",
 	name                   = "The Cursed",
 	--_defaultGameArchiveName = "??", fill this in.
-	_defaultGameRapidTag   = "tc:latest", -- Do not read directly
-	--editor                 = "rapid://sb-evo:test",
-	--editor                 = "SpringBoard EVO $VERSION",	
+	_defaultGameRapidTag   = "thecursed:latest", -- Do not read directly
 	mapWhitelist           = mapWhitelist,
 	aiBlacklist            = aiBlacklist,
 	settingsConfig         = settingsConfig,

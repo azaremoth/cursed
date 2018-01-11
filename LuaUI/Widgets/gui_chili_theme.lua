@@ -36,7 +36,7 @@ local cursors = {
 
 local function SetTheme()
 	local myTeamID = Spring.GetMyTeamID()
-	local side = WG.faction or select(5, Spring.GetTeamInfo(myTeamID)) or "cursed"
+	local side = WG.faction or Spring.GetTeamRulesParam(myTeamID, "side") or select(5, Spring.GetTeamInfo(myTeamID)) or "cursed"
 
 	if not Chili then
 		Chili = WG.Chili

@@ -68,7 +68,7 @@ function gadget:Initialize()
 		-- don't spawn a start unit for the Gaia team
 		if (teamID ~= Gaia) then
 			local side = select(5, Spring.GetTeamInfo(teamID))
-			if side == nil then
+			if (side ~= "imperials" and side ~= "cursed") then
 				if (math.random() > 0.5) then
 					side = "imperials"
 				else
@@ -76,6 +76,7 @@ function gadget:Initialize()
 				end
 			end
 			GG.teamside[teamID] = side
+			Spring.SetTeamRulesParam(teamID, "side", side, {allied=true, public=false}) 
 		end
 	end	
 end

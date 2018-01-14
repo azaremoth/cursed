@@ -1,9 +1,9 @@
-Primar/next
+﻿Primar/next
 √ Add ingame faction change button -> test needed
-- Full Chobby implementation
-- Add quick start missions (as "Tutorials") to replace quick start menue
 - update chilli epic menue to fit to Chobby: double settings button etc.
 √ Do Chobby stuff relative to thecursed:latest -> test needed
+- Full Chobby implementation
+- Add quick start missions (as "Tutorials") to replace quick start menue
 
 Secondary:
 - Convert CPV UI elements to Chili

@@ -14,19 +14,18 @@ function widget:GetInfo()
 		handler   = true,
 		api       = true,
 		alwaysStart = true,
-		hidden    = true,
 	}
 end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local reverseCompatibility = true --(Game.version:find('91.0') == 1) or (Game.version:find('94') and not Game.version:find('94.1.1'))
+local reverseCompatibility = false
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-if reverseCompatibility or (Spring.GetConfigInt("ZKuseOldChili")==1) then
+if Spring.GetConfigInt("ZKuseNewChili") ~= 1 then
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -118,7 +117,8 @@ end
 
 
 function widget:IsAbove(x,y)
-  return (not screen0:IsEmpty()) and screen0:IsAbove(x,y)
+  local x, y, lmb, mmb, rmb, outsideSpring = Spring.GetMouseState()
+  return (not outsideSpring) and (not screen0:IsEmpty()) and screen0:IsAbove(x,y)
 end
 
 
@@ -167,6 +167,13 @@ function widget:KeyRelease()
   local _keyPressed = keyPressed
   keyPressed = false
   return _keyPressed -- block engine actions when we processed it
+end
+
+
+function widget:TextInput(utf8, ...)
+	if Spring.IsGUIHidden() then return false end
+
+	return screen0:TextInput(utf8, ...)
 end
 
 
@@ -291,7 +298,13 @@ end
 
 
 function widget:IsAbove(x,y)
-	if Spring.IsGUIHidden() then return false end
+	if Spring.IsGUIHidden() then
+		return false
+	end
+	local x, y, lmb, mmb, rmb, outsideSpring = Spring.GetMouseState()
+	if outsideSpring then
+		return false
+	end
 
 	return screen0:IsAbove(x,y)
 end

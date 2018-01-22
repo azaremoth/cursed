@@ -260,7 +260,7 @@ end
 
 
 local function getHelpText(unitDef)
-	local lang = WG.lang
+	local lang = 'en' -- WG.lang
 	local font = WG.langFont
 	
 	local helpText
@@ -281,7 +281,7 @@ end
 
 
 local function getDescription(unitDef)
-	local lang = WG.lang
+	local lang = 'en' -- WG.lang
 	local font = WG.langFont
 	
 	local desc

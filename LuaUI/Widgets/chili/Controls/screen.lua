@@ -103,6 +103,10 @@ function Screen:IsRectInView(x,y,w,h)
 end
 
 
+function Screen:IsVisibleOnScreen()
+  return true
+end
+
 --//=============================================================================
 
 function Screen:Resize(w,h)
@@ -120,7 +124,21 @@ function Screen:Update(...)
 	local hoveredControl = UnlinkSafe(self.hoveredControl)
 	local activeControl = UnlinkSafe(self.activeControl)
 	if hoveredControl and (not activeControl) then
-		local x, y = Spring.GetMouseState()
+		local x, y, lmb, mmb, rmb, outsideSpring = Spring.GetMouseState()
+		if outsideSpring then
+			if self.currentTooltip then
+				self.currentTooltip = nil
+			end
+			if self.activeControl then
+				self.activeControl:MouseOut()
+				self.activeControl = nil
+			end
+			if self.hoveredControl then
+				self.hoveredControl:MouseOut()
+				self.hoveredControl = nil
+			end
+			return
+		end
 		y = select(2,gl.GetViewSizes()) - y
 		local cx,cy = hoveredControl:ScreenToLocal(x, y)
 		hoveredControl:MouseMove(cx, cy, 0, 0)
@@ -131,6 +149,7 @@ end
 function Screen:IsAbove(x,y,...)
   local activeControl = UnlinkSafe(self.activeControl)
   if activeControl then
+    self.currentTooltip = activeControl.tooltip
     return true
   end
 
@@ -269,6 +288,15 @@ function Screen:KeyPress(...)
 		return (not not focusedControl:KeyPress(...))
 	end
 	return (not not inherited:KeyPress(...))
+end
+
+
+function Screen:TextInput(...)
+        local focusedControl = UnlinkSafe(self.focusedControl)
+        if focusedControl then
+                return (not not focusedControl:TextInput(...))
+        end
+        return (not not inherited:TextInput(...))
 end
 
 --//=============================================================================

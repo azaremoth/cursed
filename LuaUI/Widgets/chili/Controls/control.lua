@@ -254,7 +254,7 @@ function Control:GetRelativeBox(savespace)
   end
 
   local p = self.parent
-  if (not p) then
+  if not p or not UnlinkSafe(p) then
     return t
   end
 
@@ -320,18 +320,22 @@ function Control:UpdateClientArea()
     --FIXME sometimes this makes self:RequestRealign() redundant! try to reduce the Align() calls somehow
     self.parent:RequestRealign()
   end
+  local needResize = false
   if (self.width ~= self._oldwidth_uca)or(self.height ~= self._oldheight_uca) then
     self:RequestRealign()
+    needResize = true
     self._oldwidth_uca  = self.width
     self._oldheight_uca = self.height
   end
 
-if (self.debug) then
-  Spring.Echo(self.name, self.width, self.height, self._realignRequested)
-end
+  if (self.debug) then
+    Spring.Echo(self.name, self.width, self.height, self._realignRequested)
+  end
 
   self:Invalidate() --FIXME correct place?
-  self:CallListeners(self.OnResize) --FIXME more arguments and filter unchanged resizes
+  if needResize then
+    self:CallListeners(self.OnResize, self.clientWidth, self.clientHeight)
+  end
 end
 
 
@@ -875,7 +879,7 @@ end
 
 
 function Control:IsRectInView(x,y,w,h)
-	if (not self.parent) then 
+	if not self.parent or not UnlinkSafe(self.parent) then 
 		return false
 	end
 
@@ -1037,7 +1041,7 @@ function Control:HitTest(x,y)
       end
       --//an option that allow you to mouse click on empty panel
       if self.hitTestAllowEmpty then 
-      	return self 
+        return self 
       end
     end
   end
@@ -1048,7 +1052,11 @@ function Control:HitTest(x,y)
       return nchit
     end
   end
-
+  
+  if self.noClickThrough then
+    return self
+  end
+  
   return false
 end
 
@@ -1076,6 +1084,10 @@ function Control:MouseDown(x, y, ...)
     if (result) then
       return result
     end
+  end
+
+  if self.noClickThrough then
+    return self
   end
 end
 
@@ -1144,11 +1156,6 @@ end
 function Control:MouseWheel(x, y, ...)
   local cx,cy = self:LocalToClient(x,y)
   return inherited.MouseWheel(self, cx, cy, ...)
-end
-
-
-function Control:KeyPress(...)
-  return inherited.KeyPress(self, ...)
 end
 
 

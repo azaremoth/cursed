@@ -1,4 +1,5 @@
 local confdata = {}
+confdata.title = 'The Cursed'
 confdata.title_image = LUAUI_DIRNAME .. 'Images/ZK_logo.png'
 confdata.default_source_file = 'tc_keys.lua' --the file in ZIP archive where default key is stored.
 confdata.mission_keybinds_file = 'tc_keys.lua' --the filename to be used for Mission mod. set this to NIL if want to use mission's name as filename.
@@ -135,36 +136,70 @@ end
 
 local imgPath = LUAUI_DIRNAME  .. 'images/'
 confdata.subMenuIcons = {
-	['Game/Game Speed'] = imgPath..'epicmenu/speed-test-icon.png',
-	['Game/Unit AI'] = imgPath..'epicmenu/robot2.png',
-	['Settings/Reset Settings'] = imgPath..'epicmenu/undo.png',
-	['Settings/Audio'] = imgPath..'epicmenu/vol.png',
-	['Settings/Camera'] = imgPath..'epicmenu/video_camera.png',
-	['Settings/Graphics'] = imgPath..'epicmenu/graphics.png',
-	['Settings/HUD Panels'] = imgPath..'epicmenu/control_panel.png',
-	['Settings/Interface'] = imgPath..'epicmenu/robotarm.png',
-	['Settings/Misc'] = imgPath..'epicmenu/misc.png',
+	['Settings'] = imgPath..'epicmenu/settings.png',
+	['Help'] = imgPath..'epicmenu/questionmark.png',
 	
-	['Settings/Interface/Mouse Cursor'] = imgPath..'epicmenu/input_mouse.png',
-	['Settings/Interface/Map'] = imgPath..'epicmenu/map.png',
-	['Settings/Interface/Healthbars'] = imgPath..'commands/Bold/health.png',
-	['Settings/Interface/Spectating'] = imgPath..'epicmenu/find.png',
+	['Settings/Unit Behaviour/Worker AI'] = imgPath..'commands/Bold/build_light.png',
+	['Settings/Interface/Unit Marker']     = imgPath..'epicmenu/marker.png',
+	['Settings/Unit Behaviour']  = imgPath..'epicmenu/robot2.png',
+	['Hotkeys']         = imgPath..'epicmenu/keyboard.png',
+	
+	['Settings/Reset Settings']     = imgPath..'epicmenu/undo.png',
+	['Settings/Audio']              = imgPath..'epicmenu/vol.png',
+	['Settings/Camera']             = imgPath..'epicmenu/video_camera.png',
+	['Settings/Graphics']           = imgPath..'epicmenu/graphics.png',
+	['Settings/Accessibility']      = imgPath..'map/minimap_colors_simple.png',
+	['Settings/HUD Panels']         = imgPath..'epicmenu/control_panel.png',
+	['Settings/HUD Presets']        = imgPath..'epicmenu/speed-test-icon.png',
+	['Settings/Interface']          = imgPath..'epicmenu/robotarm.png',
+	['Settings/Misc']               = imgPath..'epicmenu/misc.png',
+	
+	['Settings/Interface/Mouse Cursor']             = imgPath..'epicmenu/input_mouse.png',
+	['Settings/Interface/Map']                      = imgPath..'epicmenu/map.png',
+	['Settings/Interface/Healthbars']               = imgPath..'commands/Bold/health.png',
+	['Settings/Interface/Retreat Zones']            = imgPath..'commands/Bold/retreat.png',
+	['Settings/Interface/Spectating']               = imgPath..'epicmenu/popcorn.png',
+	['Settings/Interface/Building Placement']       = imgPath..'factory.png',
+	['Settings/Interface/Team Colors']              = imgPath..'map/minimap_colors_simple.png',
+	['Settings/Interface/Common Team Colors']       = imgPath..'map/minimap_colors_simple.png',
+	['Settings/Interface/Build ETA']                = imgPath..'epicmenu/stop_watch_icon.png',
+	['Settings/Interface/Defense and Cloak Ranges'] = imgPath..'epicmenu/target.png',
+	['Settings/Interface/Command Visibility']       = imgPath..'epicmenu/fingertap.png',
+	['Settings/Interface/Hovering Icons']           = imgPath..'epicmenu/halo.png',
+	['Settings/Interface/Selection']                = imgPath..'epicmenu/selection.png',
+	['Settings/Interface/Control Groups']           = imgPath..'epicmenu/addusergroup.png',
+	['Settings/Interface/Gesture Menu']             = imgPath..'epicmenu/stock_brightness.png',
+	['Settings/Interface/Economy Overlay']          = imgPath..'energy.png',
+	['Settings/Interface/Falling Units']            = imgPath..'advplayerslist/point2.png',
+	
+	['Settings/HUD Panels/Minimap']                 = imgPath..'epicmenu/map.png',
+	['Settings/HUD Panels/Economy Panel']           = imgPath..'ibeam.png',
+	['Settings/HUD Panels/Commander Selector']      = imgPath..'epicmenu/corcommander.png',
+	['Settings/HUD Panels/Tooltip']                 = imgPath..'epicmenu/lightbulb.png',
+	['Settings/HUD Panels/Chat']                    = imgPath..'advplayerslist/chat.png',
+	['Settings/HUD Panels/FactoryPanel']            = imgPath..'factory.png',
+	['Settings/HUD Panels/Pause Screen']            = imgPath..'epicmenu/media_playback_pause.png',
+	['Settings/HUD Panels/Replay Controls']         = imgPath..'epicmenu/key_play_pause.png',
+	['Settings/HUD Panels/Unit Stats Help Window']  = imgPath..'advplayerslist/random.png',
+	['Settings/HUD Panels/Player List']             = imgPath..'epicmenu/people.png',
+	['Settings/HUD Panels/Extras/Docking']          = imgPath..'epicmenu/anchor.png',
+	['Settings/HUD Panels/Selected Units Panel']    = imgPath..'epicmenu/grid.png',
 }
 
 confdata.simpleModeDirectory = {
---	['Reset Settings'] = true,
+	['Reset Settings'] = true,
 --	['Interface'] = true,
---	['Audio'] = true,
+	['Audio'] = true,
 --	['Graphics'] = true,
---	['Camera'] = true,
+	['Camera'] = true,
 --	['Unit Behaviour'] = true,
 --	['Accessibility'] = true,
 }
 confdata.simpleModeFullDirectory = {
 	'Reset Settings',
 	'Hotkeys',
-	'Unit Behaviour',
-	'Help',
+--	'Unit Behaviour',
+--	'Help',
 }
 
 -- SETUP MENU HERE

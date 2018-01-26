@@ -7,7 +7,7 @@ function widget:GetInfo()
     author    = "Licho",
     date      = "6.9.2010",
     license   = "GNU GPL, v2 or later",
-    layer     = -math.huge,
+    layer     = -math.huge + 1,
     enabled   = true,
 	api = true,
 	alwaysStart = true,
@@ -25,26 +25,28 @@ local frameTex   = ":n:bitmaps/icons/frame_slate.png"
 Spring.Utilities = Spring.Utilities or {}
 VFS.Include("LuaRules/Utilities/unitDefReplacements.lua")
 VFS.Include("LuaRules/Utilities/tablefunctions.lua")
+VFS.Include("LuaRules/Utilities/rulesParam.lua")
 
 local function GetBuildIconFrame(udef) 
-  if (udef.isBuilder and udef.speed>0) then
-    return consTex
+	local cp = udef.customParams
+	if (udef.isBuilder and udef.speed>0) then
+		return consTex
 
-  elseif (udef.isBuilder or udef.isFactory) then
-    return consTex
+	elseif (udef.isBuilder or udef.isFactory) then
+		return consTex
 
-  elseif (udef.weapons[1] and udef.isBuilding) then
-    return unitTex
+	elseif (udef.weapons[1] and udef.isBuilding) then
+		return unitTex
 
-  elseif ((udef.totalEnergyOut>0) or (udef.customParams.ismex) or (udef.name=="armwin" or udef.name=="corwin")) then
-    return ecoTex
+	elseif (cp.income_energy or cp.ismex or cp.windgen) then
+		return ecoTex
 
-  elseif (udef.weapons[1] or udef.canKamikaze) then
-    return unitTex
+	elseif ((udef.weapons[1] or udef.canKamikaze) and not cp.unarmed) then
+		return unitTex
 
-  else
-    return diffTex
-  end
+	else
+		return diffTex
+	end
 end 
 
 --------------------------------------------------------------------------------
@@ -162,18 +164,16 @@ end
 WG.WriteTable = WriteTable
 
 function WG.SaveTable(tab, dir, fileName, tabName, params)
-	if (dir ~= nil and fileName ~= nil) then
-		Spring.CreateDir(dir)
-		params = params or {}
-		local file,err = io.open(dir .. fileName, "w")
-		if (err) then
-			Spring.Log(widget:GetInfo().name, LOG.WARNING, err)
-			return
-		end
-		file:write(WriteTable(tab, tabName, params))
-		file:flush()
-		file:close()
+	Spring.CreateDir(dir)
+	params = params or {}
+	local file,err = io.open(dir .. fileName, "w")
+	if (err) then
+		Spring.Log(widget:GetInfo().name, LOG.WARNING, err)
+		return
 	end
+	file:write(WriteTable(tab, tabName, params))
+	file:flush()
+	file:close()
 end
 
 -- raw = print table key-value pairs straight to file (i.e. not as a table)
@@ -256,7 +256,7 @@ end
 local builderDefs = {}
 --[[for udid, ud in ipairs(UnitDefs) do 
 	for i, option in ipairs(ud.buildOptions) do 
-		if UnitDefNames.cormex.id == option then
+		if UnitDefNames.staticmex.id == option then
 			builderDefs[udid] = true
 		end
 	end

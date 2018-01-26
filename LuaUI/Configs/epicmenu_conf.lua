@@ -169,8 +169,8 @@ confdata.simpleModeFullDirectory = {
 
 -- SETUP MENU HERE
 
-ShButton('', 'Save Game', (function() if WG.SaveGame then WG.SaveGame.CreateSaveWindow() end end), nil, nil, imgPath .. 'commands/Bold/unload.png')
-ShButton('', 'Load Game', (function() if WG.SaveGame then WG.SaveGame.CreateLoadWindow() end end), nil, nil, imgPath .. 'commands/Bold/load.png')
+-- ShButton('', 'Save Game', (function() if WG.SaveGame then WG.SaveGame.CreateSaveWindow() end end), nil, nil, imgPath .. 'commands/Bold/unload.png')
+-- ShButton('', 'Load Game', (function() if WG.SaveGame then WG.SaveGame.CreateLoadWindow() end end), nil, nil, imgPath .. 'commands/Bold/load.png')
 
 --- GENERAL SETTINGS --- settings about settings
 local generalPath = 'Settings/Reset Settings'
@@ -219,7 +219,6 @@ local hotkeysMiscPath = 'Hotkeys/Misc'
 		ShButton(hotkeysMiscPath, 'Slow Camera Movement', 'moveslow', "Decreased camera speed while this key is held.", nil, nil, nil, true)
 		
 	--ShLabel(hotkeysMiscPath, '')
-	ShButton(hotkeysMiscPath, 'Choose Commander Type', (function() spSendCommands{"luaui showstartupinfoselector"} end), nil, nil, imgPath..'epicmenu/corcommander.png' ) 
 	ShButton(hotkeysMiscPath, 'Save Screenshot (PNG)', 'screenshot png', 'Find your screenshots under Spring/screenshots') 
 	ShButton(hotkeysMiscPath, 'Save Screenshot (JPG)', 'screenshot jpg', 'Find your screenshots under Spring/screenshots')
 	ShButton(hotkeysMiscPath, 'Zoom In', 'movedown', 'Key to zoom the camera out.')
@@ -233,8 +232,7 @@ local hotkeysMiscPath = 'Hotkeys/Misc'
 	ShButton(hotkeysMiscPath, 'Game Info', "gameinfo", '', true)
 	--ShButton(hotkeysMiscPath, 'Share Dialog...', 'sharedialog', '', true)
 	--ShButton(hotkeysMiscPath, 'FPS Control', "controlunit", 'Control a unit directly in FPS mode.', true)
-	
-	--ShButton(hotkeysMiscPath, 'Constructor Auto Assist', function() spSendCommands{"luaui togglewidget Constructor Auto Assist"} end)
+
 
 --- CAMERA ---
 local cameraPath = 'Settings/Camera'
@@ -266,8 +264,8 @@ local cameraPath = 'Settings/Camera'
 				spSendCommands{cofcDisable ,"viewrot"}
 			elseif key == 'Total War' then
 				spSendCommands{cofcDisable ,"viewtw"}
-			elseif key == 'COFC' then
-				spSendCommands{"luaui enablewidget Combo Overhead/Free Camera (experimental)",}
+--			elseif key == 'COFC' then
+--				spSendCommands{"luaui enablewidget Combo Overhead/Free Camera (experimental)",}
 			else
 				spSendCommands{cofcDisable ,"viewta"} -- Fallback for any issue with settings.
 			end
@@ -332,17 +330,6 @@ local pathMouse = 'Settings/Interface/Mouse Cursor'
 		OnChange=function(self) spSendCommands{"hardwarecursor " .. (self.value and 1 or 0) } end, 
 	})    
 	
-local pathSelectionShapes = 'Settings/Interface/Selection/Selection Shapes'
-local pathSelectionXrayHalo = 'Settings/Interface/Selection/Selection XRay&Halo'
-local pathSelectionPlatters = 'Settings/Interface/Selection/Team Platters'
-local pathSelectionBluryHalo = 'Settings/Interface/Selection/Blurry Halo Selections'
-	ShButton(pathSelectionShapes, 'Toggle Selection Shapes', function() spSendCommands{"luaui togglewidget UnitShapes"} end, "Draws coloured shapes under selected units")
-	ShButton(pathSelectionXrayHalo, 'Toggle Selection XRay&Halo', function() spSendCommands{"luaui togglewidget XrayHaloSelections"} end, "Highlights bodies of selected units")    
-	ShButton(pathSelectionPlatters, 'Toggle Team Platters', function() spSendCommands{"luaui togglewidget TeamPlatter"} end, "Puts team-coloured disk below units")
-	ShButton(pathSelectionBluryHalo, 'Toggle Blurry Halo Selections', function() spSendCommands{"luaui togglewidget Selection BlurryHalo"} end, "Places blurry halo around selected units")
-
-local pathGesture = 'Settings/Interface/Gesture Menu'
-	ShButton(pathGesture, 'Toggle gesture menu', function() spSendCommands{"luaui togglewidget Chili Gesture Menu"} end, "Enable/disable gesture build menu.")
   
 --- MISC --- Ungrouped. If some of the settings here can be grouped together, make a new subsection or its own section.
 local pathMisc = 'Settings/Misc'
@@ -366,7 +353,7 @@ local pathMisc = 'Settings/Misc'
 		noHotkey = true,
 		value = false,
 	})
-	AddOption(pathMisc,
+--[[	AddOption(pathMisc,
 	{
 		name = 'Use Old Chili',
 		desc = 'Enable this if menu element is missing or does not render properly in Spring 96+. '..
@@ -385,7 +372,7 @@ local pathMisc = 'Settings/Misc'
 			end
 			Spring.SetConfigInt("ZKuseOldChili", value); --store in Springsettings.txt because api_chili.lua must read it independent of gui_epicmenu.lua
 		end,
-	})
+	})]]--
 	ShButton(pathMisc, 'Toggle Widget Profiler', function() spSendCommands{"luaui togglewidget WidgetProfiler"} end, '', true)
 
 --- GRAPHICS --- We might define section as containing anything graphical that has a significant impact on performance and isn't necessary for gameplay
@@ -483,8 +470,6 @@ local pathGraphicsExtras = 'Settings/Graphics/Effects'
 		OnChange=function(self) spSendCommands{"maxparticles " .. self.value } end, 
 	} )
 	ShButton(pathGraphicsExtras, 'Toggle Lups (Lua Particle System)', function() spSendCommands{'luaui togglewidget LupsManager','luaui togglewidget Lups'} end )
-	ShButton(pathGraphicsExtras, 'Toggle Nightvision', function() spSendCommands{'luaui togglewidget Nightvision Shader'} end, 'Applies a nightvision filter to screen')
-	ShButton(pathGraphicsExtras, 'Toggle Night View', function() spSendCommands{'luaui togglewidget Night'} end, 'Adds a day/night cycle effect' )
 
 	
 local pathUnitVisiblity = 'Settings/Graphics/Unit Visibility'
@@ -518,16 +503,6 @@ local pathUnitVisiblity = 'Settings/Graphics/Unit Visibility'
 	} )
 	ShLabel(pathUnitVisiblity, 'Unit Visibility Widgets')
 	ShButton(pathUnitVisiblity,'Toggle Unit Halos', function() spSendCommands{"luaui togglewidget Halo"} end, "Shows halo around units")
-	
-	local pathSpotter = 'Settings/Graphics/Unit Visibility/Spotter'
-		ShButton(pathSpotter, 'Toggle Unit Spotter', function() spSendCommands{"luaui togglewidget Spotter"} end, "Puts team-coloured blob below units")
-	local pathPlatter = 'Settings/Graphics/Unit Visibility/Platter'
-		ShButton(pathPlatter, 'Toggle Unit Platter', function() spSendCommands{"luaui togglewidget Fancy Teamplatter"} end, "Puts a team-coloured platter-halo below units.")
-	local pathXrayShader = 'Settings/Graphics/Unit Visibility/XRay Shader'
-		ShButton(pathXrayShader, 'Toggle XRay Shader', function() spSendCommands{"luaui togglewidget XrayShader"} end, "Highlights edges of units")
-	local pathUnitOutline = 'Settings/Graphics/Unit Visibility/Outline'
-		ShButton(pathUnitOutline, 'Toggle Unit Outline', function() spSendCommands{"luaui togglewidget Outline"} end, "Highlights edges of units")
-
 
 local pathAudio = 'Settings/Audio'
 	AddOption(pathAudio,{
@@ -629,10 +604,7 @@ local pathHelp = 'Settings/Nag'
 		value = [[Hold your meta-key (spacebar by default) while clicking on a unit or corpse for more info and options. 
 		          You can also space-click on menu elements to see context settings. ]]
 	})
-	ShButton(pathHelp,'Tutorial', function() spSendCommands{"luaui togglewidget Nubtron"} end )
-	ShButton(pathHelp,'Tip Dispenser', function() spSendCommands{"luaui togglewidget Automatic Tip Dispenser"} end, 'An advisor which gives you tips as you play' )
-local pathClippy = 'Settings/Nag/Clippy Comments'
-	ShButton(pathClippy, 'Toggle Clippy Comments', function() spSendCommands{"luaui togglewidget Clippy Comments"} end, "Units speak up if they see you're not playing optimally" )
+
 
 --- MISC
 --

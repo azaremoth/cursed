@@ -18,7 +18,7 @@ local UPDATE_PERIOD = 15 -- I'd prefer if this was not changed
 
 
 local weapons = {
-	tc_witch_witchray = { slowDamage = 800, onlySlow = false, smartRetarget = 0.33, scaleSlow = false},
+	tc_witch_witchray = { slowDamage = 400, onlySlow = false, smartRetarget = 0.33, scaleSlow = false},
 }
 
 -- reads from customParams and copies to weapons as appropriate - needed for procedurally generated comms

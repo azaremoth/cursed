@@ -1,6 +1,25 @@
+
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
-local function GetGridTooltip (unitID)
+
+local buildTimes = {}
+local variableCostUnit = {
+--	[UnitDefNames["terraunit"].id] = true
+}
+local isCommander = {}
+
+for i = 1, #UnitDefs do
+	local ud = UnitDefs[i]
+	buildTimes[i] = ud.buildTime
+	if ud.customParams.level or ud.customParams.dynamic_comm then
+		variableCostUnit[i] = true
+		isCommander[i] = true
+	end
+end
+
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+local function GetGridTooltip(unitID)
 	local gridCurrent = Spring.GetUnitRulesParam(unitID, "OD_gridCurrent")
 	if not gridCurrent then return end
 
@@ -19,7 +38,7 @@ local function GetGridTooltip (unitID)
 	return WG.Translate("interface", "grid") .. ": " .. math.round(gridCurrent,2) .. "/" .. math.round(gridMaximum,2) .. " E => " .. math.round(gridMetal,2) .. " M " .. windStr
 end
 
-local function GetMexTooltip (unitID)
+local function GetMexTooltip(unitID)
 	local metalMult = Spring.GetUnitRulesParam(unitID, "overdrive_proportion")
 	if not metalMult then return end
 
@@ -107,35 +126,25 @@ end
 
 function Spring.Utilities.GetHelptext(ud, unitID)
 	local name_override = ud.customParams.statsname or ud.name
-	return WG.Translate ("units", name_override .. ".helptext") or ud.customParams.helptext or WG.Translate("interface", "no_helptext")
+	return WG.Translate ("units", name_override .. ".helptext") or WG.Translate("interface", "no_helptext")
 end
 
 function Spring.Utilities.GetUnitHeight(ud)
 	local customHeight = ud.customParams.custom_height
 	return (customHeight and tonumber(customHeight)) or ud.height
 end
--------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------
 
-local buildTimes = {}
-for i = 1, #UnitDefs do
-	local ud = UnitDefs[i]
-	local realBuildTime = ud.customParams.real_buildtime
-	if realBuildTime then
-		buildTimes[i] = tonumber(realBuildTime)
-	else
-		buildTimes[i] = ud.buildTime
-	end
-end
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
 function Spring.Utilities.GetUnitCost(unitID, unitDefID)
-	if unitID then
+	unitDefID = unitDefID or Spring.GetUnitDefID(unitID)
+	if unitID and variableCostUnit[unitDefID] then
 		local realCost = Spring.GetUnitRulesParam(unitID, "comm_cost") or Spring.GetUnitRulesParam(unitID, "terraform_estimate")
 		if realCost then
 			return realCost
 		end
 	end
-	unitDefID = unitDefID or Spring.GetUnitDefID(unitID)
 	if unitDefID and buildTimes[unitDefID] then
 		return buildTimes[unitDefID] 
 	end

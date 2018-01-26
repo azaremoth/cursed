@@ -1,5 +1,10 @@
--- Caching results for Spring.* functions
+-- Poisoning for Spring.* functions (caching, filtering, providing back compat)
 
+if not Spring.IsUserWriting then
+	Spring.IsUserWriting = function()
+		return false
+	end
+end
 
 -- *etTeamColor
 local teamColor = {}
@@ -20,17 +25,27 @@ local MarkerAddPoint = Spring.MarkerAddPoint
 --end
 
 local spGetProjectileDefID = Spring.GetProjectileDefID
+local function FilterOutSniperBullets(projectiles)
+	local i = 1
+	local n = #projectiles
+	while i <= n do
+		local p = projectiles[i]
+		local pID = spGetProjectileDefID(p)
+		i = i + 1
+	end
+	return projectiles
+end
 
 local GetProjectilesInRectangle = Spring.GetProjectilesInRectangle
 function Spring.GetProjectilesInRectangle(x1,z1,x2,z2)
 	local projectiles = GetProjectilesInRectangle(x1,z1,x2,z2)
-	return projectiles
+	return FilterOutSniperBullets(projectiles)
 end
 
 -- Cutscenes apply F5
 local IsGUIHidden = Spring.IsGUIHidden
 function Spring.IsGUIHidden()
-	return IsGUIHidden() -- or (WG.Cutscene and WG.Cutscene.IsInCutscene())
+	return IsGUIHidden() or (WG.Cutscene and WG.Cutscene.IsInCutscene())
 end
 
 function Spring.GetTeamColor(teamid)
@@ -63,36 +78,34 @@ end
 
 -- returns unitTable = { [1] = number unitID, ... }
 function Spring.GetVisibleUnits(teamID, radius, Icons)
-  local index = buildIndex(teamID, radius, Icons)
-  local ret
-  local update = false
-  if visibleUnits[index] then
-    local visible = visibleUnits[index]
-    -- check time
-    local now = Spring.GetTimer()
-    local diff = Spring.DiffTimers(now, visible.time)
-    if diff > 1/20 then
-      visible.time = now
-      update = true
-    else
-      return visible.units
-      end
-  else
-    update = true
-  end
+	local index = buildIndex(teamID, radius, Icons)
 
-  if update then
-    ret = GetVisibleUnits(teamID, radius, Icons)
-    visibleUnits[index] = {}
-    visibleUnits[index].units = ret
-    visibleUnits[index].time = Spring.GetTimer()
-    local rev = {}
-    for i=1,#ret do
-      rev[ret[i]] = i
-    end
-    visibleUnits[index].reverse = rev
-  end
-  return ret
+	local currentFrame = Spring.GetGameFrame() -- frame is necessary (invalidates visibility; units can die or disappear outta LoS)
+	local now = Spring.GetTimer() -- frame is not sufficient (eg. you can move the screen while game is paused)
+
+	local visible = visibleUnits[index]
+	if visible then
+		local diff = Spring.DiffTimers(now, visible.time)
+		if diff < 0.05 and currentFrame == visible.frame then
+			return visible.units
+		end
+	else
+		visibleUnits[index] = {}
+		visible = visibleUnits[index]
+	end
+
+	local ret = GetVisibleUnits(teamID, radius, Icons)
+	local rev = {}
+	for i = 1, #ret do
+		rev[ret[i]] = i
+	end
+
+	visible.units = ret
+	visible.frame = currentFrame
+	visible.time = now
+	visible.reverse = rev
+
+	return ret
 end
 
 -- returns unitTable = { [unitID] = number indexFromTableReturnedByGetVisibleUnits, ... }
@@ -137,5 +150,7 @@ function Spring.SetCameraTarget(x,y,z,transTime)
 		x = x-xDist --add current FreeStyle camera to x-component 
 		z = z-ori_zDist-zDist --remove default FreeStyle z-component, then add current Freestyle camera to z-component
 	end
-	return SetCameraTarget(x,y,z,transTime) --return new results
+	if x and y and z then
+		return SetCameraTarget(x,y,z,transTime) --return new results
+	end
 end

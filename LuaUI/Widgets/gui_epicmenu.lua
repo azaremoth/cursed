@@ -2729,7 +2729,8 @@ function widget:Initialize()
 	--this is done to establish order the correct button order
 	AddOption('Settings')
 	AddOption('Hotkeys')
-	AddOption('Settings/Unit Behaviour')
+--	AddOption('Settings/Unit Behaviour')
+	AddOption('Game')
 	AddOption('Help')
 	
 	local imgPath = LUAUI_DIRNAME  .. 'images/'

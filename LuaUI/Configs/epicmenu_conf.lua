@@ -188,18 +188,18 @@ confdata.subMenuIcons = {
 
 confdata.simpleModeDirectory = {
 	['Reset Settings'] = true,
---	['Interface'] = true,
+	['Interface'] = true,
 	['Audio'] = true,
---	['Graphics'] = true,
+	['Graphics'] = true,
 	['Camera'] = true,
 --	['Unit Behaviour'] = true,
---	['Accessibility'] = true,
+	['Accessibility'] = true,
 }
 confdata.simpleModeFullDirectory = {
 	'Reset Settings',
 	'Hotkeys',
 --	'Unit Behaviour',
---	'Help',
+	'Help',
 }
 
 -- SETUP MENU HERE
@@ -221,8 +221,8 @@ local generalPath = 'Settings/Reset Settings'
 						"luaui disablewidget Display DPS",
 						"luaui disablewidget Map Edge Extension",
 						'mapborder 1',
-						"luaui disablewidget SelectionHalo",
-						"luaui disablewidget SelectionCircle",
+--						"luaui disablewidget SelectionHalo",
+						"luaui disablewidget TeamPlatter",
 					}
 				end,
 				'Test minimal graphics. Use the main settings menu to make a permanent if necessary.'
@@ -258,15 +258,9 @@ local hotkeysMiscPath = 'Hotkeys/Misc'
 	ShButton(hotkeysMiscPath, 'Save Screenshot (JPG)', 'screenshot jpg', 'Find your screenshots under Spring/screenshots')
 	ShButton(hotkeysMiscPath, 'Zoom In', 'movedown', 'Key to zoom the camera out.')
 	ShButton(hotkeysMiscPath, 'Zoom Out', 'moveup', 'Key to zoom the camera in.')
-	ShButton(hotkeysMiscPath, 
-	     'Create Video (risky)', 'createvideo', 'Capture video directly from Spring without sound. Gets saved in the Spring folder. '
-	     ..'Creates a smooth video framerate without ingame stutter. '
-	     ..'Caution: It\'s safer to use this in windowed mode because the encoder pop-up menu appears in the foreground window, and could crash the game with a "Fatal Error" after a long recording. '
-	     ..'\n\nRecommendation (especially for low-end PCs): After activating the video recording select the fastest encoder such as Microsoft Video and record the video in segments. '
-	     ..' You can then use VirtualDub (opensource software) to do futher compression and editing. Note: there is other opensource video capture software like Taksi that you could try.') 
 	ShButton(hotkeysMiscPath, 'Game Info', "gameinfo", '', true)
-	--ShButton(hotkeysMiscPath, 'Share Dialog...', 'sharedialog', '', true)
-	--ShButton(hotkeysMiscPath, 'FPS Control', "controlunit", 'Control a unit directly in FPS mode.', true)
+	ShButton(hotkeysMiscPath, 'Share Dialog...', 'sharedialog', '', true)
+	ShButton(hotkeysMiscPath, 'FPS Control', "controlunit", 'Control a unit directly in FPS mode.', true)
 
 
 --- CAMERA ---
@@ -299,8 +293,8 @@ local cameraPath = 'Settings/Camera'
 				spSendCommands{cofcDisable ,"viewrot"}
 			elseif key == 'Total War' then
 				spSendCommands{cofcDisable ,"viewtw"}
---			elseif key == 'COFC' then
---				spSendCommands{"luaui enablewidget Combo Overhead/Free Camera (experimental)",}
+			elseif key == 'COFC' then
+				spSendCommands{"luaui enablewidget Combo Overhead/Free Camera (experimental)",}
 			else
 				spSendCommands{cofcDisable ,"viewta"} -- Fallback for any issue with settings.
 			end
@@ -330,7 +324,7 @@ local camerHotkeys = 'Hotkeys/Camera'
 local HUDPath = 'Settings/HUD Panels/Extras'
 	ShButton(HUDPath, 'Tweak Mode (Esc to exit)', 'luaui tweakgui', 'Tweak Mode. Move and resize parts of the user interface. (Hit Esc to exit)')
 
-local HUDSkinPath = 'Settings/HUD Panels/Extras/HUD Skin'
+--[[local HUDSkinPath = 'Settings/HUD Panels/Extras/HUD Skin'
 	AddOption(HUDSkinPath,
 	{
 		name = 'Skin Sets (Requires LuaUI Reload)',
@@ -350,7 +344,7 @@ local HUDSkinPath = 'Settings/HUD Panels/Extras/HUD Skin'
 			--{ key = 'Twilight', name = 'Twilight', },
 		},
 	})
-	ShButton(HUDSkinPath, 'Reload LuaUI', 'luaui reload', 'Reloads the entire UI. NOTE: This button will not work. You must bind a hotkey to this command and use the hotkey.')
+	ShButton(HUDSkinPath, 'Reload LuaUI', 'luaui reload', 'Reloads the entire UI. NOTE: This button will not work. You must bind a hotkey to this command and use the hotkey.')]]
 
 
 --- Interface --- anything that's an interface but not a HUD Panel

@@ -3,7 +3,7 @@ local array = {}
 ------------------------
 -- Config
 
-local MAX_SLOW_FACTOR = 1.0
+local MAX_SLOW_FACTOR = 0.9
 -- Max slow damage on a unit = MAX_SLOW_FACTOR * current health
 -- Slowdown of unit = slow damage / current health
 -- So MAX_SLOW_FACTOR is the limit for how much units can be slowed
@@ -18,7 +18,7 @@ local UPDATE_PERIOD = 15 -- I'd prefer if this was not changed
 
 
 local weapons = {
-	tc_witch_witchray = { slowDamage = 100, onlySlow = false, smartRetarget = 0.33, scaleSlow = false}, -- was 800
+	tc_witch_witchray = { slowDamage = 50, onlySlow = false, smartRetarget = 0.33, scaleSlow = false}, -- was 800
 }
 
 -- reads from customParams and copies to weapons as appropriate - needed for procedurally generated comms

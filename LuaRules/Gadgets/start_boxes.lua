@@ -14,10 +14,10 @@ function gadget:GetInfo() return {
 Spring.Echo ("StartPosType is " .. Game.startPosType)
 
 ---------------------------------------------------------------------------------------------------
-local teamshaveboxes = true
+local teamshaveboxes = false
 local gaiaAllyTeamID = select(6, Spring.GetTeamInfo(Spring.GetGaiaTeamID()))
 
-if (Game.startPosType == 2) then
+if (Game.startPosType ~= 3) then
 	local allyTeamList = Spring.GetAllyTeamList()
 	for _,allyID in pairs(allyTeamList) do
 		if (allyID ~= gaiaAllyTeamID) then

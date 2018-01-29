@@ -61,15 +61,6 @@ local usingNewEngine = (#{Spring.GetLosViewColors()} == 5) -- newer engine has r
 
 WG.MinimapDraggingCamera = false --Boolean, false if selection through minimap is possible
 
-local function ToggleShoweco()
-  if (WG.metalSpots and (Spring.GetMapDrawMode() ~= "metal")) then
-    Spring.SendCommands("showmetalmap")
-  else
-    Spring.SendCommands("showstandard")
-  end
-end
-WG.ToggleShoweco = ToggleShoweco
-
 local function toggleTeamColors()
 	if WG.LocalColor and WG.LocalColor.localTeamColorToggle then
 		WG.LocalColor.localTeamColorToggle()
@@ -219,7 +210,7 @@ options = {
 	
 	showeco = {
 		name = 'Toggle Economy Overlay',
-		desc = 'Show metal',
+		desc = 'Show metal, geo spots and energy grid',
 		hotkey = {key='f4', mod=''},
 		type ='button',
 		action='showeco',
@@ -773,7 +764,7 @@ MakeMinimapWindow = function()
 			MakeMinimapButton( nil, {option = 'viewstandard'} ),
 			MakeMinimapButton( 'LuaUI/images/map/heightmap.png', {option = 'viewheightmap'} ),
 			MakeMinimapButton( 'LuaUI/images/map/blockmap.png', {option = 'viewblockmap'} ),
-			MakeMinimapButton( 'LuaUI/images/map/metalmap.png', {name = "Toggle Eco Display", action = 'showeco', desc = " (show metal)"}),	-- handled differently because command is registered in another widget
+			MakeMinimapButton( 'LuaUI/images/map/metalmap.png', {name = "Toggle Eco Display", action = 'showeco', desc = " (show metal, geo spots and pylon fields)"}),	-- handled differently because command is registered in another widget
 			
 			Chili.Label:New{ width=iconsize/2, height=iconsize/2, caption='', autosize = false,},
 			

@@ -772,9 +772,7 @@ local function formatMessage(msg)
 end
 
 local function MessageIsChatInfo(msg)
-	return string.find(msg.argument,'enabled!') or
-	string.find(msg.argument,'disabled!') or 
-	string.find(msg.argument,'Speed set to') or
+	return string.find(msg.argument,'Speed set to') or
 	string.find(msg.argument,'following') or
 	string.find(msg.argument,'Connection attempted') or
 	string.find(msg.argument,'exited') or 
@@ -1178,7 +1176,7 @@ local function MakeMessageWindow(name, enabled)
 		local screenWidth, screenHeight = Spring.GetWindowGeometry()
 		local integralWidth = math.max(350, math.min(450, screenWidth*screenHeight*0.0004))
 		local integralHeight = math.min(screenHeight/4.5, 200*integralWidth/450)
-		width = 0.33*screenWidth
+		width = 450
 		x = integralWidth
 		height = integralHeight*0.84
 		bottom = integralHeight*0.84
@@ -1204,7 +1202,7 @@ local function MakeMessageWindow(name, enabled)
 		x = 0,
 		y = y,
 		bottom = bottom,
-		width  = width,
+		width  = 0.33*screenWidth,
 		height = height,
 		draggable = false,
 		resizable = false,

@@ -137,7 +137,7 @@ colorConfig["ally"] = colorConfig["enemy"]
 --end of DEFAULT COLOR CONFIG
 
 local Chili
-options_path = 'Game/Settings/Defense Ranges'
+options_path = 'Settings/Interface/Defense Ranges'
 
 allynuke = true
 enemynuke = true

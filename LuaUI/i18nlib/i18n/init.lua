@@ -147,7 +147,7 @@ function i18n.translate(key, data, newLocale)
       end
       local missingTranslation = missingTranslations[key]
       if not missingTranslation[fallback] then
-        Spring.Log("i18n", "warning", "\"" .. key .. "\" is not translated in " .. fallback)
+        -- Spring.Log("i18n", "warning", "\"" .. key .. "\" is not translated in " .. fallback)
         missingTranslation[fallback] = true
       end
     end
@@ -157,7 +157,7 @@ function i18n.translate(key, data, newLocale)
   end
   local missingTranslation = missingTranslations[key]
   if not missingTranslation["_all"] then
-    Spring.Log("i18n", "error", "No translation found for \"" .. key .. "\"")
+    -- Spring.Log("i18n", "error", "No translation found for \"" .. key .. "\"")
     missingTranslation["_all"] = true
   end
   return data.default

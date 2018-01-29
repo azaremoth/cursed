@@ -25,12 +25,19 @@ local MarkerAddPoint = Spring.MarkerAddPoint
 --end
 
 local spGetProjectileDefID = Spring.GetProjectileDefID
+-- local sniperWeaponDefID = WeaponDefNames.cloaksnipe_shockrifle.id
 local function FilterOutSniperBullets(projectiles)
 	local i = 1
 	local n = #projectiles
 	while i <= n do
 		local p = projectiles[i]
 		local pID = spGetProjectileDefID(p)
+--[[		if pID == sniperWeaponDefID then
+			projectiles[i] = projectiles[n]
+			projectiles[n] = nil
+			n = n - 1
+			i = i - 1
+		end]]
 		i = i + 1
 	end
 	return projectiles

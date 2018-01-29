@@ -26,19 +26,21 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-options_path = 'Settings/Audio/Music'
+options_path = 'Settings/Audio'
 options = {
 	useIncludedTracks = {
 		name = "Use Included Tracks",
 		type = 'bool',
 		value = true,
 		desc = 'Use the tracks included with Zero-K',
+		noHotkey = true,
 	},
 	pausemusic = {
-		name='Pause Music',
-		type='bool',
-		value=false,
+		name = 'Pause Music',
+		type = 'bool',
+		value = false,
 		desc = "Music pauses with game",
+		noHotkey = true,
 	},
 }
 
@@ -50,6 +52,7 @@ local warThreshold = 5000
 local peaceThreshold = 1000
 local PLAYLIST_FILE = 'sounds/music/playlist.lua'
 local LOOP_BUFFER = 0.015	-- if looping track is this close to the end, go ahead and loop
+local UPDATE_PERIOD = 1
 
 local musicType = 'peace'
 local dethklok = {} -- keeps track of the number of doods killed in each time frame
@@ -94,7 +97,7 @@ local function StartLoopingTrack(trackInit, trackLoop)
 	end
 	haltMusic = true
 	Spring.StopSoundStream()
-	musicType = 'unknown'
+	musicType = 'custom'
 	
 	curTrack = trackInit
 	loopTrack = trackLoop
@@ -103,14 +106,23 @@ local function StartLoopingTrack(trackInit, trackLoop)
 end
 
 local function StartTrack(track)
+	if not peaceTracks then
+		Spring.Echo("Missing peaceTracks file, no music started")
+		return
+	end
+
 	haltMusic = false
 	looping = false
 	Spring.StopSoundStream()
 	
 	local newTrack = previousTrack
+	if musicType == 'custom' then
+		previousTrackType = "peace"
+		musicType = "peace"
+	end
 	if track then
 		newTrack = track	-- play specified track
-		musicType = 'unknown'
+		musicType = 'custom'
 	else
 		local tries = 0
 		repeat
@@ -150,6 +162,9 @@ local function StopTrack(noContinue)
 	Spring.StopSoundStream()
 	if noContinue then
 		haltMusic = true
+	else
+		haltMusic = false
+		StartTrack()
 	end
 end
 
@@ -165,7 +180,7 @@ local function SetPeaceThreshold(num)
 	if num and num >= 0 then
 		peaceThreshold = num
 	else
-		peaceThreshold = 5000
+		peaceThreshold = 1000
 	end	
 end
 
@@ -213,7 +228,7 @@ function widget:Update(dt)
 	end
 	
 	timeframetimer = timeframetimer + dt
-	if (timeframetimer > 1) then	-- every second
+	if (timeframetimer > UPDATE_PERIOD) then	-- every second
 		timeframetimer = 0
 		newTrackWait = newTrackWait + 1
 		local PlayerTeam = Spring.GetMyTeamID()
@@ -225,7 +240,7 @@ function widget:Update(dt)
 			end
 		end
 			
-		totalKilled = 0
+		local totalKilled = 0
 		for i = 1, 10, 1 do --calculate the first half of the table (1-15)
 			totalKilled = totalKilled + (dethklok[i] * 2)
 		end
@@ -239,10 +254,12 @@ function widget:Update(dt)
 		end
 		dethklok[1] = 0 -- empty the first row
 		
-		if (totalKilled >= warThreshold) then
-			musicType = 'war'
-		elseif (totalKilled <= peaceThreshold) then
-			musicType = 'peace'
+		if (musicType == 'war' or musicType == 'peace') then
+			if (totalKilled >= warThreshold) then
+				musicType = 'war'
+			elseif (totalKilled <= peaceThreshold) then
+				musicType = 'peace'
+			end
 		end
 		
 		if (not firstTime) then
@@ -270,7 +287,7 @@ function widget:Update(dt)
 			--Spring.Echo("volume:", playedTime/5)
 			--Spring.SetSoundStreamVolume( playedTime/5)
 		--end
-
+		--Spring.Echo(previousTrackType, musicType)
 		if ( previousTrackType == "peace" and musicType == 'war' )
 		 or (playedTime >= totalTime)	-- both zero means track stopped
 		 and not(haltMusic or looping) then
@@ -289,44 +306,21 @@ function widget:Update(dt)
 end
 
 function widget:GameStart()
-	gameStarted = true
-	previousTrackType = musicType
-	StartTrack()
+	if not gameStarted then
+		gameStarted = true
+		previousTrackType = musicType
+		musicType = "peace"
+		StartTrack()
+	end
 	
 	--Spring.Echo("Track: " .. newTrack)
 	newTrackWait = 0	
 end
 
-function widget:Initialize()
-	WG.Music = WG.Music or {}
-	WG.Music.StartTrack = StartTrack
-	WG.Music.StartLoopingTrack = StartLoopingTrack
-	WG.Music.StopTrack = StopTrack
-	WG.Music.SetWarThreshold = SetWarThreshold
-	WG.Music.SetPeaceThreshold = SetPeaceThreshold
-	WG.Music.GetMusicType = GetMusicType
-
-	-- Spring.Echo(math.random(), math.random())
-	-- Spring.Echo(os.clock())
- 
-	-- for TrackName,TrackDef in pairs(peaceTracks) do
-		-- Spring.Echo("Track: " .. TrackDef)	
-	-- end
-	--math.randomseed(os.clock()* 101.01)--lurker wants you to burn in hell rgn
-	-- for i=1,20 do Spring.Echo(math.random()) end
-	
-	for i = 1, 30, 1 do
-		dethklok[i]=0
-	end
-end
-
-function widget:Shutdown()
-	Spring.StopSoundStream()
-	WG.Music = nil
-	
-	for i=1,#windows do
-		(windows[i]):Dispose()
-	end
+-- Safety of a heisenbug
+function widget:GameFrame()
+	widget:GameStart()
+	widgetHandler:RemoveCallIn('GameFrame')
 end
 
 function widget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer)
@@ -386,11 +380,9 @@ function widget:TeamDied(team)
 	end
 end
 
-function widget:GameOver()
-	--gameOver = true
+local function PlayGameOverMusic(gameWon)
 	local track
-	-- FIXME: get a better way to detect who won
-	if not defeat then
+	if gameWon then
 		if #victoryTracks <= 0 then return end
 		track = victoryTracks[math.random(1, #victoryTracks)]
 		musicType = "victory"
@@ -405,6 +397,42 @@ function widget:GameOver()
 	WG.music_start_volume = WG.music_volume
 end
 
+function widget:GameOver()
+	PlayGameOverMusic(not defeat)
+end
+
+function widget:Initialize()
+	WG.Music = WG.Music or {}
+	WG.Music.StartTrack = StartTrack
+	WG.Music.StartLoopingTrack = StartLoopingTrack
+	WG.Music.StopTrack = StopTrack
+	WG.Music.SetWarThreshold = SetWarThreshold
+	WG.Music.SetPeaceThreshold = SetPeaceThreshold
+	WG.Music.GetMusicType = GetMusicType
+	WG.Music.PlayGameOverMusic = PlayGameOverMusic
+
+	-- Spring.Echo(math.random(), math.random())
+	-- Spring.Echo(os.clock())
+ 
+	-- for TrackName,TrackDef in pairs(peaceTracks) do
+		-- Spring.Echo("Track: " .. TrackDef)	
+	-- end
+	--math.randomseed(os.clock()* 101.01)--lurker wants you to burn in hell rgn
+	-- for i=1,20 do Spring.Echo(math.random()) end
+	
+	for i = 1, 30, 1 do
+		dethklok[i]=0
+	end
+end
+
+function widget:Shutdown()
+	Spring.StopSoundStream()
+	WG.Music = nil
+	
+	for i=1,#windows do
+		(windows[i]):Dispose()
+	end
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

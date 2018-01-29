@@ -103,7 +103,7 @@ options_path = 'Settings/HUD Panels/Command Panel'
 options_order = { 
 	'background_opacity', 'disablesmartselect', 'hidetabs', 'unitstabhotkey', 'unitshotkeyrequiremeta', 
 	'unitshotkeyaltaswell',  'hotkeysWithTabClick', 'keyboardType',
-	'tab_factory', 'tab_economy', 'tab_defence', 'tab_special','old_menu_at_shutdown','hide_when_spectating'
+	'old_menu_at_shutdown','hide_when_spectating'
 }
 options = {
 	background_opacity = {
@@ -171,26 +171,6 @@ options = {
 				gridKeyMap = GenerateGridKeyMap(gridMap)
 			end
 		end,
-	},
-	tab_factory = {
-		name = "Factory Tab",
-		desc = "Switches to factory tab, enables grid hotkeys",
-		type = 'button',
-	},
-	tab_economy = {
-		name = "Economy Tab",
-		desc = "Switches to economy tab, enables grid hotkeys",
-		type = 'button',
-	},
-	tab_defence = {
-		name = "Defence Tab",
-		desc = "Switches to defence tab, enables grid hotkeys",
-		type = 'button',
-	},
-	tab_special = {
-		name = "Special Tab",
-		desc = "Switches to special tab, enables grid hotkeys",
-		type = 'button',
 	},
 	old_menu_at_shutdown = {
 		name = 'Reenable Spring Menu at Shutdown',
@@ -1320,10 +1300,10 @@ local function HotkeyTabSpecial()
 	ColorTabs()
 end
 
-options.tab_factory.OnChange = HotkeyTabFactory
-options.tab_economy.OnChange = HotkeyTabEconomy
-options.tab_defence.OnChange = HotkeyTabDefence
-options.tab_special.OnChange = HotkeyTabSpecial
+-- options.tab_factory.OnChange = HotkeyTabFactory
+-- options.tab_economy.OnChange = HotkeyTabEconomy
+-- options.tab_defence.OnChange = HotkeyTabDefence
+-- options.tab_special.OnChange = HotkeyTabSpecial
 
 local function AddAction(cmd, func, data, types)
 	return widgetHandler.actionHandler:AddAction(widget, cmd, func, data, types)
@@ -1415,8 +1395,8 @@ function widget:Initialize()
 	
 	-- Set the size for the default settings.
 	local screenWidth, screenHeight = Spring.GetWindowGeometry()
-	local width = 0.33*screenWidth -- math.max(350, math.min(450, screenWidth*screenHeight*0.0004))
-	local height = width*4/9 -- math.min(screenHeight/4.5, 200*width/450)
+	local width = 0.33*screenWidth
+	local height = width*4/9
 	
 	--create main Chili elements
 	window = Window:New{

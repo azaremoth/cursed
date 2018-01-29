@@ -108,7 +108,7 @@ options = {
   opacity = {
 	name = "Opacity",
 	type = "number",
-	value = 0, min = 0, max = 1, step = 0.01,
+	value = 0.8, min = 0, max = 1, step = 0.01,
 	OnChange = function(self) window.color = {1,1,1,self.value}; window:Invalidate() end,
   }
 }
@@ -150,8 +150,8 @@ local function updateReserveBars(metal, energy, value, overrideOption)
 		if value > 1 then value = 1 end
 		if metal then
 			local _, mStor = GetTeamResources(GetMyTeamID(), "metal")
-			Spring.SendLuaRulesMsg("mreserve:"..value*mStor) 
-			WG.metalStorageReserve = value*mStor
+			Spring.SendLuaRulesMsg("mreserve:"..value*(mStor - HIDDEN_STORAGE)) 
+			WG.metalStorageReserve = value*(mStor - HIDDEN_STORAGE)
 			bar_metal_reserve_overlay:SetValue(value)
 		end
 		if energy then
@@ -197,7 +197,7 @@ local function Format(input, override)
 	leadingString = override or leadingString
 	input = math.abs(input)
 	
-	if input < 0.01 then
+	if input < 0.05 then
 		return WhiteStr .. "0"
 	elseif input < 5 then
 		return leadingString .. ("%.2f"):format(input) .. WhiteStr
@@ -216,6 +216,7 @@ end
 
 local initialReserveSet = false
 function widget:GameFrame(n)
+
 	if (n%TEAM_SLOWUPDATE_RATE ~= 0) or not window then 
         return 
     end
@@ -251,8 +252,8 @@ function widget:GameFrame(n)
 		teamMInco = teamMInco + mInco
 		teamMSpent = teamMSpent + mExpe
 		teamFreeStorage = teamFreeStorage + mStor - mCurr
-		teamTotalMetalStored = teamTotalMetalStored + mCurr
-		teamTotalMetalCapacity = teamTotalMetalCapacity + mStor
+		teamTotalMetalStored = teamTotalMetalStored + math.min(mCurr, mStor - HIDDEN_STORAGE)
+		teamTotalMetalCapacity = teamTotalMetalCapacity + mStor - HIDDEN_STORAGE
 		
 		local extraMetalPull = spGetTeamRulesParam(teams[i], "extraMetalPull") or 0
 		teamMPull = teamMPull + mPull + extraMetalPull
@@ -288,6 +289,7 @@ function widget:GameFrame(n)
 	
 	ePull = ePull + extraEnergyPull
 	
+	mStor = mStor - HIDDEN_STORAGE -- reduce by hidden storage
 	eStor = eStor - HIDDEN_STORAGE -- reduce by hidden storage
 	if eCurr > eStor then 
 		eCurr = eStor -- cap by storage
@@ -363,7 +365,7 @@ function widget:GameFrame(n)
 	
 	local energyGenerators = Format(cp.energyIncome)
 	local energyReclaim = Format(eReclaim)
-	local energyOther = Format(-eExpe + mExpe)
+	local energyOther = Format(-eExpe + mExpe )
 	
 	local team_energyIncome = Format(teamEnergyIncome)
 	local team_energyGenerators = Format(cp.team_energyIncome)
@@ -441,6 +443,8 @@ function widget:GameFrame(n)
 		lbl_energy.font:SetColor(0,1,0,1)
 	elseif (eTotal > 0.1) then
 		lbl_energy.font:SetColor(1,0.7,0,1)
+	--elseif ((eStore - eCurr) < 50) then --// prevents blinking when overdrive is active
+	--	lbl_energy.font:SetColor(0,1,0,1)
 	else		
 		lbl_energy.font:SetColor(1,0,0,1)
 	end
@@ -622,7 +626,7 @@ function CreateWindow()
  		align  = "center",
 		autosize = false,
 		font   = {size = 12, outline = true, color = {0,1,0,1}},
-		tooltip = "Your metal Income.\nGained primarilly from metal extractors and reclaim",
+		tooltip = "Your metal Income.\nGained primarily from metal extractors and reclaim",
 	}
 	lbl_m_expense = Chili.Label:New{
 		parent = window,
@@ -684,7 +688,7 @@ function CreateWindow()
 		right  = 36,
                 x      = 100,
                 y      = 1,
-		tooltip = "Shows your current energy reserves.",
+		tooltip = "Shows your current energy reserves.\n Anything above 100% will be burned",
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 		OnMouseDown = {function() return (not widgetHandler:InTweakMode()) end},	-- this is needed for OnMouseUp to work
 		OnMouseUp = {function(self, x, y, mouse)
@@ -731,7 +735,7 @@ function CreateWindow()
 		align  = "center",
 		autosize = false,
 		font   = {size = 12, outline = true, color = {1,0,0,1}},
-		tooltip = "This is the energy demand of your economy, defenses and shields",
+		tooltip = "This is the energy demand of your economy, cloakers and shields",
 	}
 	
 	-- Activate tooltips for lables and bars, they do not have them in default chili

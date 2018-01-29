@@ -242,9 +242,9 @@ local function AddHotkeyOptions()
 		end
 	end
 
-	options.lblcmd 		= { type='label', name='Targeted Commands', path = 'Game/Command Hotkeys',}
-	options.lblcmdinstant	= { type='label', name='Instant Commands', path = 'Game/Command Hotkeys',}
-	options.lblstate	= { type='label', name='State Commands', path = 'Game/Command Hotkeys',}
+	options.lblcmd 		= { type='label', name='Targeted Commands', path = 'Settings/HUD Panels/Command Panel/Command Hotkeys',}
+	options.lblcmdinstant	= { type='label', name='Instant Commands', path = 'Settings/HUD Panels/Command Panel/Command Hotkeys',}
+	options.lblstate	= { type='label', name='State Commands', path = 'Settings/HUD Panels/Command Panel/Command Hotkeys',}
 	
 	
 	table.sort(options_order_tmp_cmd)
@@ -1474,7 +1474,7 @@ function widget:Initialize()
 			if not spaceClicked and x> self.x and y>self.y and x<self.x+self.width and y<self.y+self.height then
 				if select(3,Spring.GetMouseState()) and select(3,Spring.GetModKeyState()) then -- meta and mouse down
 					spaceClicked = true
-					WG.crude.OpenPath('Game/Commands')  -- click+ space on panel beside command button will open command-hotkey-binder
+					WG.crude.OpenPath('Settings/HUD Panels/Command Panel/Commands')  -- click+ space on panel beside command button will open command-hotkey-binder
 					WG.crude.ShowMenu() --make epic Chili menu appear.
 				end
 			end
@@ -1515,7 +1515,7 @@ function widget:Initialize()
 		OnMouseDown={ function(self) --// click+ space on any unit-State button will open Unit-AI menu,
 			local _,_, meta,_ = Spring.GetModKeyState()
 			if not meta then return false end --allow button to continue its function
-			WG.crude.OpenPath('Game/Unit AI')
+			WG.crude.OpenPath('Settings/HUD Panels/Command Panel/Unit AI')
 			WG.crude.ShowMenu() --make epic Chili menu appear.
 			return true --stop the button's function, else unit-state button will look bugged. 
 		end },			

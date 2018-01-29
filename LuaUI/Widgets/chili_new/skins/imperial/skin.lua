@@ -3,9 +3,9 @@
 
 local skin = {
   info = {
-    name    = "Imperial",
-    version = "0.1",
-    author  = "luckywaldo7",
+    name    = "imperial",
+    version = "0.3",
+    author  = "jK",
   }
 }
 
@@ -13,13 +13,19 @@ local skin = {
 --//
 
 skin.general = {
-  --font        = "FreeSansBold.ttf",
-  fontOutline = false,
-  fontsize    = 13,
-  textColor   = {1,1,1,1},
+  focusColor  = {0.12, 0.98, 0.98, 0.5},
+  borderColor = {1.0, 1.0, 1.0, 1.0},
+
+  font = {
+   -- font    = SKINDIR .. "fonts/n019003l.pfb",
+    color        = {1,1,1,1},
+   -- outlineColor = {0.05,0.05,0.05,0.9},
+    outline = false,
+    shadow  = false,
+    size    = 14,
+  },
 
   --padding         = {5, 5, 5, 5}, --// padding: left, top, right, bottom
-  backgroundColor = {0.1, 0.1, 0.1, 0.7},
 }
 
 
@@ -28,27 +34,51 @@ skin.icons = {
 }
 
 skin.button = {
-  TileImageBK = ":cl:tech_button.png",
-  TileImageFG = ":cl:empty.png",
+  TileImageBK = ":cl:tech_button_bk.png",
+  TileImageFG = ":cl:tech_button_fg.png",
   tiles = {22, 22, 22, 22}, --// tile widths: left,top,right,bottom
   padding = {10, 10, 10, 10},
 
   backgroundColor = {1, 1, 1, 0.7},
+  borderColor = {1,1,1,0},
 
   DrawControl = DrawButton,
 }
 
-skin.button_disabled = {
-  TileImageBK = ":cl:tech_button.png",
-  TileImageFG = ":cl:empty.png",
-  tiles = {22, 22, 22, 22}, --// tile widths: left,top,right,bottom
-  padding = {10, 10, 10, 10},
+skin.combobox = {
+	TileImageBK = ":cl:combobox_ctrl.png",
+	TileImageFG = ":cl:combobox_ctrl_fg.png",
+	TileImageArrow = ":cl:combobox_ctrl_arrow.png",
+	tiles   = {22, 22, 48, 22},
+	padding = {10, 10, 24, 10},
 
-  color = {0.3,.3,.3,1},
-  backgroundColor = {0.1,0.1,0.1,0.8},
+	backgroundColor = {1, 1, 1, 0.7},
+	borderColor = {1,1,1,0},
 
-  DrawControl = DrawButton,
+	DrawControl = DrawComboBox,
 }
+
+
+skin.combobox_window = {
+	clone     = "window";
+	TileImage = ":cl:combobox_wnd.png";
+	tiles     = {10, 10, 10, 10};
+	padding   = {4, 3, 3, 4};
+}
+
+
+skin.combobox_scrollpanel = {
+	clone       = "scrollpanel";
+	borderColor = {1, 1, 1, 0};
+	padding     = {0, 0, 0, 0};
+}
+
+
+skin.combobox_item = {
+	clone       = "button";
+	borderColor = {1, 1, 1, 0};
+}
+
 
 skin.checkbox = {
   TileImageFG = ":cl:tech_checkbox_checked.png",
@@ -57,6 +87,32 @@ skin.checkbox = {
   boxsize     = 13,
 
   DrawControl = DrawCheckbox,
+}
+
+skin.editbox = {
+  hintFont = table.merge({color = {1,1,1,0.7}}, skin.general.font),
+  
+  backgroundColor = {0.1, 0.1, 0.1, 0.7},
+  cursorColor     = {1.0, 0.7, 0.1, 0.8},
+
+  TileImageBK = ":cl:panel2_bg.png",
+  TileImageFG = ":cl:panel2_border.png",
+  tiles       = {14,14,14,14},
+
+  DrawControl = DrawEditBox,
+}
+
+skin.textbox = {
+  hintFont = table.merge({color = {1,1,1,0.7}}, skin.general.font),
+
+  TileImageBK = ":cl:panel2_bg.png",
+  TileImageFG = ":cl:panel2_border.png",
+  tiles       = {14,14,14,14},
+
+  borderColor     = {0.0, 0.0, 0.0, 0.0},
+  focusColor      = {0.0, 0.0, 0.0, 0.0},
+
+  DrawControl = DrawEditBox,
 }
 
 skin.imagelistview = {
@@ -75,8 +131,6 @@ skin.imagelistview = {
   imageFG  = ":cl:node_selected.png",
   tiles    = {9, 9, 9, 9},
 
-  --tiles = {17,15,17,20},
-
   DrawItemBackground = DrawItemBkGnd,
 }
 --[[
@@ -92,14 +146,9 @@ skin.imagelistviewitem = {
 --]]
 
 skin.panel = {
-  --TileImageFG = ":cl:glassFG.png",
-  --TileImageBK = ":cl:glassBK.png",
-  --tiles = {17,15,17,20},
   TileImageBK = ":cl:tech_button.png",
   TileImageFG = ":cl:empty.png",
   tiles = {22, 22, 22, 22},
-
-  backgroundColor = {1, 1, 1, 0.6},
 
   DrawControl = DrawPanel,
 }
@@ -112,6 +161,8 @@ skin.progressbar = {
   font = {
     shadow = true,
   },
+
+  backgroundColor = {1,1,1,1},
 
   DrawControl = DrawProgressbar,
 }
@@ -135,13 +186,15 @@ skin.scrollpanel = {
 
   KnobColorSelected = {1,0.7,0.1,0.8},
 
+  padding = {5, 5, 5, 0},
+
   scrollbarSize = 11,
   DrawControl = DrawScrollPanel,
   DrawControlPostChildren = DrawScrollPanelBorder,
 }
 
 skin.trackbar = {
-  TileImage = ":cl:trackbar.png",
+  TileImage = ":cn:trackbar.png",
   tiles     = {10, 14, 10, 14}, --// tile widths: left,top,right,bottom
 
   ThumbImage = ":cl:trackbar_thumb.png",
@@ -166,7 +219,7 @@ skin.treeview = {
 }
 
 skin.window = {
-  TileImage = ":cl:tech_dragwindow.png",
+  TileImage = ":c:tech_dragwindow.png",
   --TileImage = ":cl:tech_window.png",
   --TileImage = ":cl:window_tooltip.png",
   --tiles = {25, 25, 25, 25}, --// tile widths: left,top,right,bottom
@@ -175,6 +228,8 @@ skin.window = {
   hitpadding = {4, 4, 4, 4},
 
   captionColor = {1, 1, 1, 0.45},
+
+  backgroundColor = {0.1, 0.1, 0.1, 0.7},
 
   boxes = {
     resize = {-21, -21, -10, -10},
@@ -188,6 +243,28 @@ skin.window = {
   DrawControl = DrawWindow,
   DrawDragGrip = function() end,
   DrawResizeGrip = DrawResizeGrip,
+}
+
+skin.line = {
+  TileImage = ":cl:tech_line.png",
+  tiles = {0, 0, 0, 0},
+  TileImageV = ":cl:tech_line_vert.png",
+  tilesV = {0, 0, 0, 0},
+  DrawControl = DrawLine,
+}
+
+skin.tabbar = {
+  padding = {3, 1, 1, 0},
+}
+
+skin.tabbaritem = {
+  TileImageBK = ":cl:tech_tabbaritem_bk.png",
+  TileImageFG = ":cl:tech_tabbaritem_fg.png",
+  tiles = {10, 10, 10, 0}, --// tile widths: left,top,right,bottom
+  padding = {5, 3, 3, 2},
+  backgroundColor = {1, 1, 1, 1.0},
+
+  DrawControl = DrawTabBarItem,
 }
 
 

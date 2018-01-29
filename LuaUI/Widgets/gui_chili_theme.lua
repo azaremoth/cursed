@@ -24,8 +24,8 @@ local echo = Spring.Echo
 local Chili
 
 local themes = {
-	cursed = 'Bones',
-	imperials = 'Imperial',
+	cursed = 'cursed',
+	imperials = 'imperial',
 }
 local cursors = {
 	cursed = 'cursed',

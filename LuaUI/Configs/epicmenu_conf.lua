@@ -38,13 +38,13 @@ color.tooltip_fg = color.null
 color.tooltip_info = color.cyan
 color.tooltip_help = color.green
 
-color.main_bg = color.transnull3
+color.main_bg = darkgray
 color.main_fg = color.null
 
-color.menu_bg = color.null
+color.menu_bg = darkgray
 color.menu_fg = color.null
 
-color.game_bg = color.null
+color.game_bg = darkgray
 color.game_fg = color.null
 
 color.sub_bg    = color.transnull
@@ -64,7 +64,7 @@ color.stats_bg = color.sub_bg
 color.stats_fg = color.sub_fg
 color.stats_header = color.sub_header
 
-color.context_bg = color.transnull
+color.context_bg = darkgray
 color.context_fg = color.null
 color.context_header = color.yellow
 
@@ -625,7 +625,7 @@ AddOption("Settings/HUD Panels/Pause Screen",
 	})
 
 --- HELP ---
-local pathHelp = 'Settings/Nag'
+local pathHelp = 'Help'
 	AddOption(pathHelp,
 	{
 		type='text',

@@ -1,13 +1,13 @@
 -- $Id$
 
 local objects = {
-	"behepine_regular_2.s3o",
-	"behepine_regular_3.s3o",
-	"behepine_regular_1.s3o",
+	"features/behe/behepine_regular_2.s3o",
+	"features/behe/behepine_regular_3.s3o",
+	"features/behe/behepine_regular_1.s3o",
 
-	"behepine_brown_1.s3o",
-	"behepine_brown_2.s3o",
-	"behepine_brown_3.s3o",
+	"features/behe/behepine_brown_1.s3o",
+	"features/behe/behepine_brown_2.s3o",
+	"features/behe/behepine_brown_3.s3o",
 }
 
 local treeDefs = {}

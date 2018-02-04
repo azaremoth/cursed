@@ -2163,7 +2163,8 @@ local function GetSelectionWindow()
 
 	local holderWindow = Chili.Window:New{
 		name      = 'selections',
-		x         = x, 
+		-- x         = x, 
+		right = 0,
 		bottom    = 0,
 		width     = width,
 		height    = height,

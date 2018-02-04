@@ -216,7 +216,7 @@ local function CapCase(str)
 	return str
 end
 
-local function AddHotkeyOptions()
+--[[ local function AddHotkeyOptions()
 	local options_order_tmp_cmd = {}
 	local options_order_tmp_cmd_instant = {}
 	local options_order_tmp_states = {}
@@ -267,7 +267,7 @@ local function AddHotkeyOptions()
 	end
 end
 
-AddHotkeyOptions()
+AddHotkeyOptions() ]]--
 
 
 local MAX_COLUMNS = 6

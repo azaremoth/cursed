@@ -188,12 +188,12 @@ confdata.subMenuIcons = {
 
 confdata.simpleModeDirectory = {
 	['Reset Settings'] = true,
-	['Interface'] = true,
+--	['Interface'] = true,
 	['Audio'] = true,
-	['Graphics'] = true,
+--	['Graphics'] = true,
 	['Camera'] = true,
 --	['Unit Behaviour'] = true,
-	['Accessibility'] = true,
+--	['Accessibility'] = true,
 }
 confdata.simpleModeFullDirectory = {
 	'Reset Settings',
@@ -630,8 +630,7 @@ local pathHelp = 'Help'
 	{
 		type='text',
 		name='Tips',
-		value = [[Hold your meta-key (spacebar by default) while clicking on a unit or corpse for more info and options. 
-		          You can also space-click on menu elements to see context settings. ]]
+		value = [[Hold your meta-key (spacebar by default) while clicking on a unit or corpse for more info and options. You can also space-click on menu elements to see context settings. ]]
 	})
 
 

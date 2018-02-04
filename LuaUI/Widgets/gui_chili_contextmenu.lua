@@ -83,7 +83,7 @@ options = {}
 local ignoreList = {
 --	['firebug']=1,
 }
-local UnitDefsList = {}
+--[[local UnitDefsList = {}
 for i=1,#UnitDefs do
 	local ud = UnitDefs[i]
 	local unitName = ud.humanName
@@ -121,7 +121,7 @@ for i=1,#UnitDefsList do
 	}
 	options_order[#options_order + 1] = optionName
 end
-UnitDefsList = nil
+UnitDefsList = nil ]]
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 

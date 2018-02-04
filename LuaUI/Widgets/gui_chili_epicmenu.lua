@@ -2798,7 +2798,7 @@ function widget:Initialize()
 	AddOption('Settings/Graphics')
 	AddOption('Settings/Accessibility')
 	AddOption('Settings/HUD Panels')
-	AddOption('Settings/HUD Presets')
+	-- AddOption('Settings/HUD Presets')
 	AddOption('Settings/Interface')
 	AddOption('Settings/Misc')
 	

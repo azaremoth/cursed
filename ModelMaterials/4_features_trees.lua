@@ -94,6 +94,31 @@ local materials = {
 		},
 		--DrawFeature = DrawFeature,
 	},
+	feature_normal = {
+		shader    = include("ModelMaterials/Shaders/default.lua"),
+		deferred  = include("ModelMaterials/Shaders/default.lua"),
+		shaderDefinitions = {
+			"#define use_normalmapping",
+			"#define deferred_mode 0",
+		},
+		deferredDefinitions = {
+			"#define use_normalmapping",
+			"#define deferred_mode 1",
+		},
+		force     = false, --// always use the shader even when normalmapping is disabled
+		feature = true, --// This is used to define that this is a feature shader
+		usecamera = false,
+		culling   = GL.BACK,
+		texunits  = {
+			[0] = '%%FEATUREDEFID:0',
+			[1] = '%%FEATUREDEFID:1',
+			[2] = '$shadow',
+			[3] = '$specular',
+			[4] = '$reflection',
+			[5] = '%NORMALTEX',
+		},
+		--DrawFeature = DrawFeature,
+	},
 }
 
 --------------------------------------------------------------------------------
@@ -113,23 +138,17 @@ local tex1_to_normaltex = {}
 -- All feature defs that contain the string "aleppo" will be affected by it
 for id, featureDef in pairs(FeatureDefs) do
 	Spring.PreloadFeatureDefModel(id)
+	if (featureDef.customParams ~= nil and featureDef.customParams.normaltex ~= nil) then
+		Spring.Echo("FEATURENORMALS FOUND!")
+		featureMaterials[id] = {"feature_normal", NORMALTEX = featureDef.customParams.normaltex}
+	end
 	for _,stubData in ipairs (featureNameStubs) do
-		if featureDef.model.textures and featureDef.model.textures.tex1 and featureDef.name:find(stubData.str) and 
-			((not stubData.prefix) or featureDef.name:find(stubData.str) == 1) then
-			--if featureDef.customParam.normaltex then
-				-- Spring.Echo('Feature',featureDef.name,'seems like a nice tree, assigning the default normal texture to it.')
-				if featureDef.name:find('btree') == 1 then --beherith's old trees suffer if they get shitty normals
-					featureMaterials[id] = {"feature_tree", NORMALTEX = "unittextures/blank_normal.tga"}
-				else
-					featureMaterials[id] = {"feature_tree", NORMALTEX = "unittextures/default_tree_normal.tga"}
-				end
-
-			--TODO: dont forget the feature normals!
-			--TODO: actually generate normals for all these old-ass features, and include them in BAR
-			--TODO: add a blank normal map to avoid major fuckups.
-			--Todo, grab the texture1 names for features in tex1_to_normaltex assignments,
-			--and hope that I dont have to actually load the models to do so
-
+		if featureDef.model.textures and featureDef.model.textures.tex1 and featureDef.name:find(stubData.str) and ((not stubData.prefix) or featureDef.name:find(stubData.str) == 1) then
+			if featureDef.name:find('btree') == 1 then --beherith's old trees suffer if they get shitty normals
+				featureMaterials[id] = {"feature_tree", NORMALTEX = "unittextures/blank_normal.tga"}
+			else
+				featureMaterials[id] = {"feature_tree", NORMALTEX = "unittextures/default_tree_normal.tga"}
+			end
 		end
 	end
 end

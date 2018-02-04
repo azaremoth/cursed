@@ -22,8 +22,8 @@ local featureDef	=	{
 	reclaimable			= true,
 	autoreclaimable		= true, 	
 	world				= "All Worlds",
-	customparams = { 
- 
+	customParams = { 
+		normaltex = "unittextures/normalmaps/tc_mancubus_normal.png",
 		randomrotate		= "true", 
 	}, 
 }

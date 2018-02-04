@@ -297,6 +297,7 @@ local function SpawnstartFaction(teamID)
 			end	
 		end
 	end
+	-- local testbox = Spring.CreateFeature("uselessbox", x, y, z, math.random(3), teamID)
 end
 
 local function SetStartingResources(teamID)

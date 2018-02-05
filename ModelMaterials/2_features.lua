@@ -126,7 +126,7 @@ local materials = {
 -- affected unitdefs
 
 local featureMaterials = {}
-local featureNameStubs = {
+local treeNameStubs = {
 	-- all of the 0ad, beherith and artturi features start with these.
 	{str = "ad0_", prefix = true}, 
 	{str = "btree", prefix = true}, 
@@ -134,22 +134,33 @@ local featureNameStubs = {
 	-- Other trees will probably contain "tree" as a substring.
 	{str = "tree", prefix = false}, 
 } 
+local rocksNameStubs = {
+	{str = "rock", prefix = false}, 
+	{str = "Rock", prefix = false}, 	
+} 
+
+
 local tex1_to_normaltex = {}
 -- All feature defs that contain the string "aleppo" will be affected by it
 for id, featureDef in pairs(FeatureDefs) do
 	Spring.PreloadFeatureDefModel(id)
-	if (featureDef.customParams ~= nil and featureDef.customParams.normaltex ~= nil) then
-		Spring.Echo("FEATURENORMALS FOUND!")
-		featureMaterials[id] = {"feature_normal", NORMALTEX = featureDef.customParams.normaltex}
-	end
-	for _,stubData in ipairs (featureNameStubs) do
+	for _,stubData in ipairs (treeNameStubs) do
 		if featureDef.model.textures and featureDef.model.textures.tex1 and featureDef.name:find(stubData.str) and ((not stubData.prefix) or featureDef.name:find(stubData.str) == 1) then
 			if featureDef.name:find('btree') == 1 then --beherith's old trees suffer if they get shitty normals
-				featureMaterials[id] = {"feature_tree", NORMALTEX = "unittextures/blank_normal.tga"}
+				featureMaterials[id] = {"feature_tree", NORMALTEX = "unittextures/normalmaps/feat_blank_normal.tga"}
 			else
-				featureMaterials[id] = {"feature_tree", NORMALTEX = "unittextures/default_tree_normal.tga"}
+				featureMaterials[id] = {"feature_tree", NORMALTEX = "unittextures/normalmaps/feat_default_tree_normal.tga"}
 			end
 		end
+	end
+	for _,stubData in ipairs (rocksNameStubs) do
+		if featureDef.model.textures and featureDef.model.textures.tex1 and featureDef.name:find(stubData.str) and ((not stubData.prefix) or featureDef.name:find(stubData.str) == 1) then
+			featureMaterials[id] = {"feature_normal", NORMALTEX = "unittextures/normalmaps/feat_rocks.png"}
+		end
+	end
+	if (featureDef.customParams ~= nil and featureDef.customParams.normaltex ~= nil) then -- overwrite any normal map with customized one in case present
+		Spring.Echo("FEATURENORMALS FOUND!")
+		featureMaterials[id] = {"feature_normal", NORMALTEX = featureDef.customParams.normaltex}
 	end
 end
 

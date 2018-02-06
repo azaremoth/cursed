@@ -14,10 +14,10 @@ function gadget:GetInfo() return {
 Spring.Echo ("StartPosType is " .. Game.startPosType)
 
 ---------------------------------------------------------------------------------------------------
-local teamshaveboxes = false
+local teamshaveboxes = true
 local gaiaAllyTeamID = select(6, Spring.GetTeamInfo(Spring.GetGaiaTeamID()))
 
-if (Game.startPosType ~= 3) then
+if (Game.startPosType == 2) then -- was 2
 	local allyTeamList = Spring.GetAllyTeamList()
 	for _,allyID in pairs(allyTeamList) do
 		if (allyID ~= gaiaAllyTeamID) then
@@ -51,7 +51,7 @@ if (Game.startPosType ~= 3) then
 	end
 end
 ---------------------------------------------------------------
-if ((Game.startPosType ~= 3) and (teamshaveboxes == false)) then
+if ((Game.startPosType == 2) and (teamshaveboxes == false)) then -- was 2
 	local shuffleMode = Spring.GetModOptions().shuffle or "auto"
 	local startboxConfig
 

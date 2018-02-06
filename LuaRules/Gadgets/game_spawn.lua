@@ -138,20 +138,7 @@ local function GetStartPos(teamID, teamInfo, isAI)
 	if luaSetStartPositions[teamID] then
 		return luaSetStartPositions[teamID].x, luaSetStartPositions[teamID].y, luaSetStartPositions[teamID].z
 	end
-	
-	if fixedStartPos then
-		local x, y, z
-		if teamInfo then
-			x, z = tonumber(teamInfo.start_x), tonumber(teamInfo.start_z)
-		end
-		if x then
-			y = Spring.GetGroundHeight(x, z)
-		else
-			x, y, z = Spring.GetTeamStartPosition(teamID)
-		end
-		return x, y, z
-	end
-	
+
 	if not (Spring.GetTeamRulesParam(teamID, "valid_startpos") or isAI) then
 		local x, y, z = getMiddleOfStartBox(teamID)
 		return x, y, z
@@ -252,10 +239,12 @@ local function SpawnstartFaction(teamID)
 	local x,y,z = Spring.GetTeamStartPosition(teamID)
 	
 	-- startPosType 0 = fixed / 1 = random / 2 = choose in game / 3 = choose before game (on map)
-	if (Game.startPosType ~= 3) and (Spring.GetTeamRulesParam(teamID, "valid_startpos") ~= 2) then  --> Start Boxes active
-		x,y,z = GetStartPos(teamID, teamInfo, ai)
-	elseif	ai then
-		x,y,z = getMiddleOfStartBox(teamID)
+	if (Game.startPosType ~= 3) then 
+		if (Spring.GetTeamRulesParam(teamID, "valid_startpos") ~= 2) then  --> Start Boxes active
+			x,y,z = GetStartPos(teamID, teamInfo, ai)
+		elseif	ai then
+			x,y,z = getMiddleOfStartBox(teamID)
+		end
 	end
 
 	if Spring.GetModOptions().cheatingai ~= nil then
@@ -297,7 +286,7 @@ local function SpawnstartFaction(teamID)
 			end	
 		end
 	end
-	local testbox = Spring.CreateFeature("uselessbox", x, y, z, math.random(3), teamID)
+--	local testbox = Spring.CreateFeature("uselessbox", x, y, z, math.random(3), teamID)
 end
 
 local function SetStartingResources(teamID)

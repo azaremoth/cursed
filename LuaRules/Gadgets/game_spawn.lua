@@ -38,6 +38,8 @@ local cheatAItype = "0"
 local cpvmode = false
 local cpvstartbase = false
 local luaSetStartPositions = {}
+local alliedTeamsCount = {}
+local teamOrderStartBox = {}
 local MsgStartFaction = '^\138(%d+)$'
 	
 local ChickenAIs = VFS.Include("LuaRules/Configs/ai_chickenlist.lua")	
@@ -61,13 +63,22 @@ end
 
 function gadget:Initialize()
 	GG.teamside = GG.teamside or {}
-	
 	local teams = Spring.GetTeamList()
+
 	for i = 1,#teams do
 		local teamID = teams[i]
 		-- don't spawn a start unit for the Gaia team
 		if (teamID ~= Gaia) then
 			local side = select(5, Spring.GetTeamInfo(teamID))
+			local allyteamID = select(6, Spring.GetTeamInfo(teamID))
+			
+			if (alliedTeamsCount[allyteamID] ~= nil) then
+				alliedTeamsCount[allyteamID] = (alliedTeamsCount[allyteamID] + 1)
+			else
+				alliedTeamsCount[allyteamID] = 1
+			end
+			teamOrderStartBox[teamID] = alliedTeamsCount[allyteamID]
+			
 			if (side ~= "imperials" and side ~= "cursed") then
 				if (math.random() > 0.5) then
 					side = "imperials"
@@ -80,7 +91,6 @@ function gadget:Initialize()
 		end
 	end	
 end
-
 
 ----------------------------------------------------------------
 -- LuaUI Interaction
@@ -124,11 +134,19 @@ local function getMiddleOfStartBox(teamID)
 			x = startpos[1]
 			z = startpos[2]
 		end
-	else -- using middle of lobby pre-defined box
+	else -- using middle of lobby pre-defined box, respective spread teams over range of box
 		local allyID = select(6, Spring.GetTeamInfo(teamID))
+		local teamsInBox = alliedTeamsCount[allyID]
+		local teamPositionInBox = teamOrderStartBox[teamID]
 		local a,b,c,d = Spring.GetAllyTeamStartBox(allyID)
-		x = (a+c)/2
-		z = (b+d)/2
+		
+		if ((c-a) > (d-b)) then
+			x = (a+((c-a)/(teamsInBox+1))*teamPositionInBox)
+			z = (b+d)/2			
+		else
+			x = (a+c)/2
+			z = (b+((d-b)/(teamsInBox+1))*teamPositionInBox)	
+		end
 	end
 
 	return x, Spring.GetGroundHeight(x,z), z
@@ -250,15 +268,6 @@ local function SpawnstartFaction(teamID)
 	if Spring.GetModOptions().cheatingai ~= nil then
 		cheatAItype = Spring.GetModOptions().cheatingai
 	end 
-	
---[[	if (side == "" or side == nil) then -- startscript didn't specify a side for this team, ramdomly pick one
-		if (math.random() > 0.5) then
-			side = "imperials"
-		else
-			side = "cursed"
-		end
-	end
-	GG.teamside = side ]]
 	
 	if (IsChickenAI) then
 		SpawnChicken (teamID, x, y, z)				

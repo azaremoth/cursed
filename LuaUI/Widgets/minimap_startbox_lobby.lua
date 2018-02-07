@@ -69,7 +69,7 @@ function widget:Initialize()
   -- only show at the beginning
   -- startPosType 0 = fixed / 1 = random / 2 = choose in game / 3 = choose before game (on map)  
   local validposexists = Spring.GetTeamRulesParam(Spring.GetMyTeamID(), "valid_startpos")
-  if (Spring.GetGameFrame() > 30) or (validposexists ~= 1)  or (Game.startPosType ~= 2) then
+  if (Spring.GetGameFrame() > 30) or (validposexists ~= 2)  or (Game.startPosType ~= 2) then
 		widgetHandler:RemoveWidget()
 		return
   end

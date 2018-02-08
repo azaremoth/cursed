@@ -1,13 +1,4 @@
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
---
---  file:    game_spawn.lua
---  brief:   spawns start unit and sets storage levels
---  author:  Tobi Vollebregt
---
---  Copyright (C) 2010.
---  Licensed under the terms of the GNU GPL, v2 or later.
---
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -22,7 +13,6 @@ function gadget:GetInfo()
 		enabled   = true  --  loaded by default?
 	}
 end
-
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -122,7 +112,7 @@ end
 
 ----------------------------------------------------------------
 
-local function getMiddleOfStartBox(teamID)
+local function getPositionInStartBox(teamID)
 	local x = Game.mapSizeX / 2
 	local z = Game.mapSizeZ / 2
 
@@ -153,29 +143,24 @@ local function getMiddleOfStartBox(teamID)
 end
 
 local function GetStartPos(teamID, teamInfo, isAI)
-	if luaSetStartPositions[teamID] then
-		return luaSetStartPositions[teamID].x, luaSetStartPositions[teamID].y, luaSetStartPositions[teamID].z
-	end
 
-	if not (Spring.GetTeamRulesParam(teamID, "valid_startpos") or isAI) then
-		local x, y, z = getMiddleOfStartBox(teamID)
-		return x, y, z
+	local startPosValid = Spring.GetTeamRulesParam(teamID, "valid_startpos")
+
+	if ((startPosValid == nil) or (startPosValid == 2)) then
+		if not isAI then
+			local x, y, z = getPositionInStartBox(teamID)
+			return x, y, z
+		end
 	end
 	
 	local x, y, z = Spring.GetTeamStartPosition(teamID)
-	-- clamp invalid positions
-	-- AIs can place them -- remove this once AIs are able to be filtered through AllowStartPosition
+
 	local boxID = isAI and Spring.GetTeamRulesParam(teamID, "start_box_id")
 	if boxID and not GG.CheckStartbox(boxID, x, z) then
-		x,y,z = getMiddleOfStartBox(teamID)
+		x,y,z = getPositionInStartBox(teamID)
 	end
 	return x, y, z
 end
-
-local function SetStartLocation(teamID, x, z)
-    luaSetStartPositions[teamID] = {x = x, y = Spring.GetGroundHeight(x,z), z = z}
-end
-GG.SetStartLocation = SetStartLocation
 
 ---- Chicken Spawns -------------------------------------------
 local function SpawnChicken (teamID, x, y, z)
@@ -257,13 +242,14 @@ local function SpawnstartFaction(teamID)
 	local x,y,z = Spring.GetTeamStartPosition(teamID)
 	
 	-- startPosType 0 = fixed / 1 = random / 2 = choose in game / 3 = choose before game (on map)
-	if (Game.startPosType ~= 3) then 
-		if (Spring.GetTeamRulesParam(teamID, "valid_startpos") ~= 2) then  --> Start Boxes active
-			x,y,z = GetStartPos(teamID, teamInfo, ai)
-		elseif	ai then
-			x,y,z = getMiddleOfStartBox(teamID)
-		end
+	if (Spring.GetTeamRulesParam(teamID, "valid_startpos") ~= 2) then  --> Start Boxes Gadget active
+		x,y,z = GetStartPos(teamID, teamInfo, ai)
 	end
+	
+	if	(ai and Game.startPosType == 2) then -- AIs are not able to choose starting position in boxes
+		x,y,z = getPositionInStartBox(teamID)
+	end
+
 
 	if Spring.GetModOptions().cheatingai ~= nil then
 		cheatAItype = Spring.GetModOptions().cheatingai

@@ -33,7 +33,7 @@ function addon.Initialize()
 	local musicfiles = VFS.DirList("sounds/music/loading", "*.ogg")
 	Spring.Echo("musicfiles", #musicfiles)
 	if (#musicfiles > 0) then
-		Spring.PlaySoundStream(musicfiles[ math.random(#musicfiles) ], 1)
+		Spring.PlaySoundStream(musicfiles[ 1 ], 1) --math.random(#musicfiles)
 		Spring.SetSoundStreamVolume(1)
 	end
 end

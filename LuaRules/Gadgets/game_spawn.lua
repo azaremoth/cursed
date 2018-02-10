@@ -22,7 +22,7 @@ if (not gadgetHandler:IsSyncedCode()) then
 	return false
 end
 
-local Gaia = Spring.GetGaiaTeamID
+local Gaia = Spring.GetGaiaTeamID()
 local modOptions = Spring.GetModOptions()
 local cheatAItype = "0"
 local cpvmode = false

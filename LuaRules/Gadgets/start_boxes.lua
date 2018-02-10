@@ -16,7 +16,7 @@ Spring.Echo ("StartPosType is " .. Game.startPosType)
 ---------------------------------------------------------------------------------------------------
 local allyTeamsHaveBoxes = true
 local teamsHavePos = true
-local Gaia = Spring.GetGaiaTeamID
+local Gaia = Spring.GetGaiaTeamID()
 local gaiaAllyTeamID = select(6, Spring.GetTeamInfo(Spring.GetGaiaTeamID()))
 
 if (Game.startPosType == 2) then
@@ -37,10 +37,10 @@ if (Game.startPosType == 2) then
 	if (allyTeamsHaveBoxes == true) then -- set startpostion as valid for unit spawner. This is also checked by the widgets
 		for _,team in ipairs(Spring.GetTeamList()) do
 			if (team ~= nil and team ~= Gaia) then
-				Spring.SetTeamRulesParam (team, "valid_startpos", 2) -- "2" valid but not set by start boxes
+				Spring.SetTeamRulesParam (team, "valid_startpos", 2) -- "2" valid, set by start boxes but not by this gadget
 			end
 		end
-		Spring.Echo ("StartBoxes is correctly predefined in lobby! Thus these are used!")
+		-- Spring.Echo ("StartBoxes is correctly predefined in lobby! Thus these are used!")
 	end
 else -- startPos is nil or start positions are 0,0 may happen. In that case the gagdet should also start
 	for _,team in ipairs(Spring.GetTeamList()) do
@@ -54,7 +54,7 @@ else -- startPos is nil or start positions are 0,0 may happen. In that case the 
 	if (teamsHavePos == true) then -- set startpostion as valid for unit spawner.
 		for _,team in ipairs(Spring.GetTeamList()) do
 			if (team ~= nil and team ~= Gaia) then
-				Spring.SetTeamRulesParam (team, "valid_startpos", 2) -- "2" valid but not set by start boxes
+				Spring.SetTeamRulesParam (team, "valid_startpos", 2) -- "2" valid, set by start boxes but not by this gadget
 			end
 		end
 	end
@@ -63,6 +63,7 @@ end
 ---------------------------------------------------------------
 
 if (Game.startPosType == nil) or ((Game.startPosType == 2) and (allyTeamsHaveBoxes == false)) or (teamsHavePos == false) then -- start only in case nothing was defined
+	Spring.Echo ("Starting conditions (boxes or positions) are not correctly predefined in lobby! Thus I will take over!")
 	local shuffleMode = Spring.GetModOptions().shuffle or "auto"
 	local startboxConfig
 

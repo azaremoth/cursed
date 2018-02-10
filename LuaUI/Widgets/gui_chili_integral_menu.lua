@@ -183,7 +183,7 @@ options = {
 	hide_when_spectating = {
 		name = 'Hide when Spectating',
 		type = 'bool',
-		value = false,
+		value = true,
 		noHotkey = true,
 	},
 }

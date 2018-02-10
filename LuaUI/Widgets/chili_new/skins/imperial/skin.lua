@@ -257,7 +257,7 @@ skin.tabbar = {
   padding = {3, 1, 1, 0},
 }
 
-skin.tabbaritem = {
+skin.tabbaritem = { -- tab bar
   TileImageBK = ":cl:tech_tabbaritem_bk.png",
   TileImageFG = ":cl:tech_tabbaritem_fg.png",
   tiles = {10, 10, 10, 0}, --// tile widths: left,top,right,bottom

@@ -68,7 +68,7 @@ factionBuildConfig = {
 				},
 				[5] = { --assault
 					importanceMult = 1,
-					count = 1,
+					count = 2,
 					[1] = {ID = UnitDefNames['tc_gunner'].id, chance = 0.7},
 					[2] = {ID = UnitDefNames['bug_med_undead'].id, chance = 0.3},					
 				},

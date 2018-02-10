@@ -27,9 +27,11 @@ function GetColor(colormap,life)
 
   local col1,col2 = colormap[iposn],colormap[iposn+1]
 
-  if (col1[1] ~= nil and col1[2] ~= nil and col1[3] ~= nil and col1[4] ~= nil and col2[1] ~= nil and col2[2] ~= nil and col2[3] ~= nil and col2[4] ~= nil and ia ~= nil and aa ~= nil) then
+  if (col1 ~= nil and col2 ~= nil and col1[1] ~= nil and col1[2] ~= nil and col1[3] ~= nil and col1[4] ~= nil and col2[1] ~= nil and col2[2] ~= nil and col2[3] ~= nil and col2[4] ~= nil and ia ~= nil and aa ~= nil) then
 	  return col1[1]*ia + col2[1]*aa, col1[2]*ia + col2[2]*aa,
 			 col1[3]*ia + col2[3]*aa, col1[4]*ia + col2[4]*aa
+  else
+	  return 1, 1, 1, 1
   end
 end
 

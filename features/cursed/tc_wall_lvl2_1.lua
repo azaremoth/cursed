@@ -4,6 +4,9 @@ local featureDef  =  {
    blocking       = true,	
    mass			   = 10000,
    category         = [[dragonteeth]],
+	customparams = { 
+		normaltex 		= "unittextures/normalmaps/tc_wall_lvl2_normal.png",
+	}, 	   
    collisionVolumeType 	= "Box",
    collisionVolumeScales 	= "80 70 10",
    collisionVolumeOffsets 	= "0 0 5",	   

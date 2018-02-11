@@ -136,7 +136,9 @@ local treeNameStubs = {
 } 
 local rocksNameStubs = {
 	{str = "rock", prefix = false}, 
-	{str = "Rock", prefix = false}, 	
+	{str = "Rock", prefix = false}, 
+	{str = "stone", prefix = false}, 
+	{str = "Stone", prefix = false}, 		
 } 
 local wrecksNameStubs = {
 	{str = "dead", prefix = false},

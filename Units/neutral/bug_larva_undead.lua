@@ -156,6 +156,7 @@ local featureDefs = {
     blocking           = false,
 	customParams          = {
 		resurrectintounit	= "bug_larva",
+		normaltex = "unittextures/normalmaps/bug_library_normal.png",				
 		featuredecaytime	= "150"
 	},  
     damage             = 500,

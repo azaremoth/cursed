@@ -62,6 +62,9 @@ local featureDefs = {
     autoreclaimable    = "0",
     blocking           = true,
 	mass			   = 10000,
+	customparams = { 
+		normaltex 		= "unittextures/normalmaps/euf_wall_lvl2_normal.png",
+	}, 	
   collisionVolumeType 		= "Box",
   collisionVolumeScales 	= "80 70 10",
   collisionVolumeOffsets 	= "0 0 5",	

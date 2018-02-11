@@ -166,7 +166,7 @@ for id, featureDef in pairs(FeatureDefs) do
 		end
 	end
 	if (featureDef.customParams ~= nil and featureDef.customParams.normaltex ~= nil) then -- overwrite any normal map with customized one in case present
-		Spring.Echo("FEATURENORMALS FOUND!")
+		--Spring.Echo("FEATURENORMALS FOUND!")
 		featureMaterials[id] = {"feature_normal", NORMALTEX = featureDef.customParams.normaltex}
 	end
 end

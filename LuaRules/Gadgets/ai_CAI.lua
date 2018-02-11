@@ -3955,7 +3955,7 @@ function gadget:Initialize()
 			Spring.Echo("Skirmish AI: Chicken AI detected")
 		elseif (team == GaiaAITeam) then
 			IsGaiaAI = true
-			Spring.Echo("GAIA AI: Chicken AI detected")
+			-- Spring.Echo("GAIA AI detected")
 		elseif (ai and SupportedAIs[Spring.GetTeamLuaAI(team)]) then
 			IsChickenAI = true
 			Spring.Echo("Skirmish AI: Chicken AI detected")			

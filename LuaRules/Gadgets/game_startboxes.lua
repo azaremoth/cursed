@@ -42,8 +42,14 @@ if (Game.startPosType == 2) then
 		end
 		-- Spring.Echo ("StartBoxes is correctly predefined in lobby! Thus these are used!")
 	end
-else -- startPos is nil or start positions are 0,0 may happen. In that case the gagdet should also start
+elseif (Game.startPosType == nil) or (Game.startPosType == 3) then -- startPos is nil or start positions are 0,0 may happen. In that case the gadget should also start. FOr random and fixed  the position returned is always 0
 	for _,team in ipairs(Spring.GetTeamList()) do
+	--	local x,y,z = Spring.GetTeamStartPosition(team)
+	--	Spring.Echo("team")
+	--	Spring.Echo(team)
+	--	Spring.Echo(x)
+	--	Spring.Echo(z)
+
 		if (team ~= Gaia) then
 			local x,y,z = Spring.GetTeamStartPosition(team)
 			if ((x == nil) or (z == nil) or ((x == 0) and (z == 0))) then

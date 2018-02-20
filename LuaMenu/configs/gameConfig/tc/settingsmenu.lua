@@ -292,23 +292,23 @@ local settings = {
 				options = {
 					{
 						name = "Minimal",
-						file = "LuaMenu/configs/gameConfig/evorts/lups/lups0.cfg"
+						file = "LuaMenu/configs/gameConfig/tc/lups/lups0.cfg"
 					},
 					{
 						name = "Low",
-						file = "LuaMenu/configs/gameConfig/evorts/lups/lups1.cfg"
+						file = "LuaMenu/configs/gameConfig/tc/lups/lups1.cfg"
 					},
 					{
 						name = "Medium",
-						file = "LuaMenu/configs/gameConfig/evorts/lups/lups2.cfg"
+						file = "LuaMenu/configs/gameConfig/tc/lups/lups2.cfg"
 					},
 					{
 						name = "High",
-						file = "LuaMenu/configs/gameConfig/evorts/lups/lups3.cfg"
+						file = "LuaMenu/configs/gameConfig/tc/lups/lups3.cfg"
 					},
 					{
 						name = "Ultra",
-						file = "LuaMenu/configs/gameConfig/evorts/lups/lups4.cfg"
+						file = "LuaMenu/configs/gameConfig/tc/lups/lups4.cfg"
 					},
 				},
 			},

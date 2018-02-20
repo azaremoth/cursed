@@ -2,6 +2,50 @@ local options={
  ---- GAME SETTINGS ----
  -- make keys alwas lower case and adjust the widgest/gadgets accordingly
   {
+    key    = 'a_startconds',
+    name   = 'Start',
+    desc   = 'Start condition settings.',
+    type   = 'section',
+  },
+
+   {
+    key    = "shuffle",
+    name   = "Start Boxes",
+    desc   = "Start box settings.",
+    type   = "list",
+    section= 'a_startconds',
+    def    = "auto",
+    items  = {
+      {
+        key  = "off",
+        name = "Fixed",
+        desc = "Startboxes have a fixed correspondence to teams.",
+      },
+      {
+        key  = "shuffle",
+        name = "Shuffle",
+        desc = "Shuffle among boxes that would be used.",
+      },
+      {
+        key  = "allshuffle",
+        name = "All Shuffle",
+        desc = "Shuffle all present boxes.",
+      },
+      {
+        key  = "auto",
+        name = "Autodetect",
+        desc = "Shuffle if FFA.",
+      },
+      {
+        key  = "disable",
+        name = "Start Anywhere",
+        desc = "Allow to place anywhere. Boxes are still drawn for reference but are not obligatory.",
+      },
+    },
+  },
+
+ -------------------------------------------------------------------------------
+  {
     key    = 'b_resources',
     name   = 'Resources',
     desc   = 'Sets storage and amount of resources that players will start with',

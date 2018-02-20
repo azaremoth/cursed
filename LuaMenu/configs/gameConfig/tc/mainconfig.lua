@@ -1,12 +1,11 @@
-local shortname = "thecursed"
+local shortname = "tc"
 
 local mapWhitelist       = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/mapWhitelist.lua")
 local aiBlacklist        = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/aiBlacklist.lua")
-local aiSimpleNames      = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/aiSimpleName.lua")
 local singleplayerConfig = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/singleplayerMenu.lua")
 local skirmishDefault    = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/skirmishDefault.lua")
 local defaultModoptions  = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/ModOptions.lua")
-local rankFunction       = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/rankFunction.lua")
+local rankFunction       = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/zk/rankFunction.lua")
 local backgroundConfig   = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/skinning/skinConfig.lua")
 
 local settingsConfig, settingsDefault = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/settingsMenu.lua")
@@ -21,18 +20,20 @@ local background = {
 	backgroundFocus = backgroundConfig.backgroundFocus,
 }
 
-local minimapOverridePath  = LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/minimapOverride/"
-local minimapThumbnailPath = LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/minimapThumbnail/"
+local minimapOverridePath  = LUA_DIRNAME .. "configs/gameConfig/zk/minimapOverride/"
+local minimapThumbnailPath = LUA_DIRNAME .. "configs/gameConfig/zk/minimapThumbnail/"
 
 ---------------------------------------------------------------------------------
 -- Getters
 ---------------------------------------------------------------------------------
 
 local externalFuncAndData = {
-	dirName                = "thecursed",
+	dirName                = "tc",
 	name                   = "The Cursed",
 	--_defaultGameArchiveName = "??", fill this in.
 	_defaultGameRapidTag   = "thecursed:latest", -- Do not read directly
+	--editor                 = "rapid://sb-evo:test",
+	--editor                 = "SpringBoard EVO $VERSION",
 	mapWhitelist           = mapWhitelist,
 	aiBlacklist            = aiBlacklist,
 	settingsConfig         = settingsConfig,
@@ -44,10 +45,13 @@ local externalFuncAndData = {
 	rankFunction           = rankFunction,
 	headingLarge           = headingLarge,
 	headingSmall           = headingSmall,
+	taskbarTitle           = "The Cursed",
+	taskbarTitleShort      = "TC",
 	taskbarIcon            = taskbarIcon,
 	background             = background,
 	minimapOverridePath    = minimapOverridePath,
 	minimapThumbnailPath   = minimapThumbnailPath,
+	ignoreServerVersion    = true,
 }
 
 function externalFuncAndData.CheckAvailability()

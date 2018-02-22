@@ -11,34 +11,11 @@ local skirmishSetupData = {
 			},
 		},
 		{
-			humanName = "Select Difficulty",
-			name = "difficulty",
-			options = {
-				"Beginner",
-				"Novice",
-				"Easy",
-				"Normal",
-				"Hard",
-				"Brutal",
-			},
-			optionTooltip = {
-				"Recommended for players with no strategy game experience.",
-				"Recommended for players with some strategy game experience, or experience with related genres (such as MOBA).",
-				"Recommended for experienced strategy gamers with some experience of streaming economy.",
-				"Recommended for veteran strategy gamers.",
-				"Recommended for veteran strategy gamers who aren't afraid of losing.",
-				"Recommended for veterans of Zero-K.",
-			}
-		},
-		{
 			humanName = "Select Map",
 			name = "map",
 			minimap = true,
 			options = {
-				"TitanDuel 2",
-				"Onyx Cauldron 1.8",
-				"Fairyland v1.0",
-				"Calamity 1.1",
+				"Barren 2",
 			},
 		},
 	},
@@ -52,14 +29,7 @@ local chickenDifficulty = {
 	"Chicken: Hard",
 	"Chicken: Suicidal",
 }
-local aiDifficultyMap = {
-	"CircuitAIBeginner",
-	"CircuitAINovice",
-	"CircuitAIEasy",
-	"CircuitAINormal",
-	"CircuitAIHard",
-	"CircuitAIBrutal",
-}
+
 
 function skirmishSetupData.ApplyFunction(battleLobby, pageChoices)
 	local difficulty = pageChoices.difficulty or 2 -- easy is default
@@ -82,7 +52,7 @@ function skirmishSetupData.ApplyFunction(battleLobby, pageChoices)
 	end
 	
 	local bitAppend = (Configuration:GetIsRunning64Bit() and "64") or "32"
-	local aiName = aiDifficultyMap[difficulty] .. bitAppend
+	local aiName = "Skirmish AI"
 	local displayName = aiName
 	
 	if Configuration.gameConfig.GetAiSimpleName then

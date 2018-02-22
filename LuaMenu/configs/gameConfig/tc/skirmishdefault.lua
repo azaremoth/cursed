@@ -1,4 +1,4 @@
 return {
-	map = "Terra 2",
+	map = "Barren 2",
 	enemyAI = "Skirmish AI",
 }

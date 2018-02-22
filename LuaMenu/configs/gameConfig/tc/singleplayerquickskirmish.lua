@@ -19,9 +19,9 @@ local skirmishSetupData = {
 				"Barren 2",
 				"Onyx Cauldron 1.9",
 				"ArcticPlainsV2.1",
-				"ravaged_v2",
+				"Ravaged_v2",
 				"Badlands 2.1",
-				"iceland_v1",
+				"Iceland_v1",
 				"Mescaline_v2",
 				"Wanderlust v03",
 			},
@@ -41,7 +41,13 @@ local aiNames = {
 	"Evil666",
 	"Goliath",
 	"Vega",
-	"Blade",	
+	"Blade",
+	"Bunny",
+	"Testament",
+	"Hellgate",
+	"Deadmoon",
+	"Lil'Sister",
+	"STFU&Play",		
 }
 
 function skirmishSetupData.ApplyFunction(battleLobby, pageChoices)

@@ -389,7 +389,8 @@ function widget:Initialize()
 	
 	local labelHeight = 22
 	local fontSize = 16
-
+	local botpos = (screenHeight*0.5)
+	
 	
 	window = Window:New{
 		parent = screen0,
@@ -398,7 +399,7 @@ function widget:Initialize()
 		width = 270;
 		height = 189;
 		right = 0; 
-		bottom = 0;
+		bottom = botpos;
 		dockable = true;
 		draggable = false,
 		resizable = false,

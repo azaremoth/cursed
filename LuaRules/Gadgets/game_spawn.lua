@@ -23,6 +23,9 @@ if (not gadgetHandler:IsSyncedCode()) then
 end
 
 local Gaia = Spring.GetGaiaTeamID()
+local gaiaAllyTeamID = select(6, Spring.GetTeamInfo(Spring.GetGaiaTeamID()))
+local allyTeamsHaveBoxes = true
+local teamsHavePos = true
 local modOptions = Spring.GetModOptions()
 local cheatAItype = "0"
 local cpvmode = false
@@ -111,6 +114,63 @@ end
 
 
 ----------------------------------------------------------------
+local function CheckValidStartPositions()
+	-- startPosType 0 = fixed / 1 = random / 2 = choose in game / 3 = choose before game (on map)
+	Spring.Echo ("StartPosType is " .. Game.startPosType)
+
+	if (Game.startPosType == 2) then
+		local allyTeamList = Spring.GetAllyTeamList()
+		for _,allyID in pairs(allyTeamList) do
+			if (allyID ~= gaiaAllyTeamID) then
+				local x1,z1,x2,z2 = Spring.GetAllyTeamStartBox(allyID)
+				local mx = Game.mapSizeX
+				local mz = Game.mapSizeZ
+					
+				if (allyTeamsHaveBoxes == true) then
+					if ((x1 == nil) or ((x1+x2) == 0) or (x1 == 0 and x2 == mx and z1 == 0 and z2 == mz)) then
+						allyTeamsHaveBoxes = false
+					end
+				end
+			end
+		end
+		if (allyTeamsHaveBoxes == true) then -- set startpostion as valid for unit spawner. This is also checked by the widgets
+			for _,team in ipairs(Spring.GetTeamList()) do
+				if (team ~= nil and team ~= Gaia) then
+					Spring.SetTeamRulesParam (team, "valid_startpos", 2) -- "2" valid, set by start boxes but not by the startbox gadget
+				end
+			end
+			Spring.Echo ("StartBoxes is correctly predefined in lobby! Thus these are used!")
+			return true
+		end
+		return false
+	-- elseif (Game.startPosType == nil) or (Game.startPosType == 3) then -- startPos is nil or start positions are 0,0 may happen. In that case the gadget should also start. FOr random and fixed  the position returned is always 0
+	else
+		for _,team in ipairs(Spring.GetTeamList()) do
+		--	local x,y,z = Spring.GetTeamStartPosition(team)
+		--	Spring.Echo("team")
+		--	Spring.Echo(team)
+		--	Spring.Echo(x)
+		--	Spring.Echo(z)
+
+			if (team ~= Gaia) then
+				local x,y,z = Spring.GetTeamStartPosition(team)
+				if ((x == nil) or (z == nil) or ((x == 0) and (z == 0))) then
+					teamsHavePos = false
+				end
+			end
+		end
+		if (teamsHavePos == true) then -- set startpostion as valid for unit spawner.
+			for _,team in ipairs(Spring.GetTeamList()) do
+				if (team ~= nil and team ~= Gaia) then
+					Spring.SetTeamRulesParam (team, "valid_startpos", 2) -- "2" valid, set by start boxes but not by the startbox gadget
+				end
+			end
+			return true
+		end
+		return false
+	end
+end
+
 
 local function getPositionInStartBox(teamID)
 	local x = Game.mapSizeX / 2
@@ -239,10 +299,15 @@ local function SpawnstartFaction(teamID)
 		IsChickenAI = true
 	end
 
-	local x,y,z = Spring.GetTeamStartPosition(teamID)
+	local startPosIsFine = CheckValidStartPositions() -- Check if positions are set right
+
+	local x = Game.mapSizeX / 2
+	local z = Game.mapSizeZ / 2
+	local y = Spring.GetGroundHeight(x,z)
 	
-	-- startPosType 0 = fixed / 1 = random / 2 = choose in game / 3 = choose before game (on map)
-	if (Spring.GetTeamRulesParam(teamID, "valid_startpos") ~= 2) then  --> Start Boxes Gadget active
+	if (startPosIsFine == true) then
+		x,y,z = Spring.GetTeamStartPosition(teamID)
+	else
 		x,y,z = GetStartPos(teamID, teamInfo, ai)
 	end
 	

@@ -426,7 +426,7 @@ function widget:DrawScreen()
 			widgetScale = 5
 		end
 		
-		if opacityMultiplier > 0 then
+		if (opacityMultiplier > 0) and (drawinfolist ~= nil) then
 			gl.PushMatrix()
 			gl.Translate(vsx/2, vsy/1.5, 0)
 			gl.Scale(widgetScale,widgetScale,0)

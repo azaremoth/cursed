@@ -7,8 +7,9 @@ local skirmishSetupData = {
 				"1v1",
 				"2v2",
 				"3v3",
-				"Easy Survival",
-				"Hard Survival",
+				"Survival",
+				"Survival+",
+				"KOTH",
 			},
 		},
 		{
@@ -35,6 +36,9 @@ local aiNames = {
 	"Undertaker",
 	"Purger",
 	"Alpha",
+	"Beta",
+	"Maneater",	
+	"GammaRay",
 	"Omega",
 	"Snake",
 	"Your Mom",
@@ -46,6 +50,7 @@ local aiNames = {
 	"Testament",
 	"Hellgate",
 	"Deadmoon",
+	"Deadmeat",	
 	"Lil'Sister",
 	"STFU&Play",		
 }
@@ -72,17 +77,36 @@ function skirmishSetupData.ApplyFunction(battleLobby, pageChoices)
 		return
 	end
 	
+	-- KOTH
+	if gameType == 6 then
+	
+	
+--[[		local currentModoptions = battleLobby:GetMyBattleModoptions() or {}
+		localModoptions = {}
+		for key,_ in pairs(currentModoptions) do
+			if modoptionDefaults[key] then
+				Spring.Echo(modoptionDefaults[key])
+				if (modoptionDefaults[key] == "scoremode") then
+					localModoptions[key] = "countdown"
+				else
+					localModoptions[key] = modoptionDefaults[key]
+				end
+			end
+		end
+		battleLobby:SetModOptions(localModoptions) ]]
+	end
+	
 	local aiName = "Skirmish AI"
 	
 	-- AI game
 	local aiNumber = 1
-	local allies = gameType - 1
+	local allies = gameType - 1 -- needs cahnge
 	for i = 1, allies do
 		battleLobby:AddAi(aiNames[math.random(#aiNames)] .. " (" .. aiNumber .. ")", aiName, 0, Configuration.gameConfig.aiVersion)
 		aiNumber = aiNumber + 1
 	end
 	
-	local enemies = gameType
+	local enemies = gameType -- needs cahnge
 	for i = 1, enemies do
 		battleLobby:AddAi(aiNames[math.random(#aiNames)] .. " (" .. aiNumber .. ")", aiName, 1, Configuration.gameConfig.aiVersion)
 		aiNumber = aiNumber + 1

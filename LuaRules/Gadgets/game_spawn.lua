@@ -180,7 +180,8 @@ local function getPositionInStartBox(teamID)
 	if boxID then
 		local startposList = GG.startBoxConfig[boxID] and GG.startBoxConfig[boxID].startpoints
 		if startposList then
-			local startpos = startposList[1] -- todo: distribute afkers over them all instead of always using the 1st
+			local teamPositionInBox = teamOrderStartBox[teamID]
+			local startpos = startposList[teamPositionInBox] or startposList[1]
 			x = startpos[1]
 			z = startpos[2]
 		end

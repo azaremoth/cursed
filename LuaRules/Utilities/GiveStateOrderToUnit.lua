@@ -16,9 +16,9 @@ local cmdToStateName = {
   [CMD.CLOAK]           = "cloak",
   [CMD.ONOFF]           = "active",
   [CMD.TRAJECTORY]      = "trajectory",
-  [CMD.IDLEMODE]        = "autoland",
-  [CMD.AUTOREPAIRLEVEL] = "autorepairlevel",
-  [CMD.LOOPBACKATTACK]  = "loopbackattack",
+ -- [CMD.IDLEMODE]        = "autoland",
+ -- [CMD.AUTOREPAIRLEVEL] = "autorepairlevel",
+ -- [CMD.LOOPBACKATTACK]  = "loopbackattack",
 }
 
 local stateToParam = {

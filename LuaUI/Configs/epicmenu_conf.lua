@@ -324,29 +324,6 @@ local camerHotkeys = 'Hotkeys/Camera'
 local HUDPath = 'Settings/HUD Panels/Extras'
 	ShButton(HUDPath, 'Tweak Mode (Esc to exit)', 'luaui tweakgui', 'Tweak Mode. Move and resize parts of the user interface. (Hit Esc to exit)')
 
---[[local HUDSkinPath = 'Settings/HUD Panels/Extras/HUD Skin'
-	AddOption(HUDSkinPath,
-	{
-		name = 'Skin Sets (Requires LuaUI Reload)',
-		type = 'list',
-		OnChange = function (self)
-			WG.crude.SetSkin( self.value );
-		end,
-		items = {
-			-- { key = 'Blueprint', name = 'Blueprint', },
-			{ key = 'Carbon', name = 'Carbon', },
-			{ key = 'Robocracy', name = 'Robocracy', },
-			--{ key = 'DarkGlass', name = 'DarkGlass', }, -- Broken
-			--{ key = 'DarkHive', name = 'DarkHive', },
-			--{ key = 'DarkHiveSquare', name = 'DarkHive (square)', },
-			--{ key = 'Evolved', name = 'Evolved', },
-			--{ key = 'Glass', name = 'Glass', }, -- Broken
-			--{ key = 'Twilight', name = 'Twilight', },
-		},
-	})
-	ShButton(HUDSkinPath, 'Reload LuaUI', 'luaui reload', 'Reloads the entire UI. NOTE: This button will not work. You must bind a hotkey to this command and use the hotkey.')]]
-
-
 --- Interface --- anything that's an interface but not a HUD Panel
 local pathInterface = 'Settings/Interface'
 local pathMouse = 'Settings/Interface/Mouse Cursor'
@@ -372,36 +349,7 @@ local pathMisc = 'Settings/Misc'
 			WG.Epic_SetShowAdvancedSettings(self.value)
 		end,
 	})
-	ShButton(pathMisc, 'Local Widget Config', function() spSendCommands{"luaui localwidgetsconfig"} end, '', true)
-	AddOption(pathMisc,
-	{
-		name = 'Use uikeys.txt',
-		desc = 'NOT RECOMMENDED! Enable this to use the engine\'s keybind file. This can break existing functionality. Requires restart.',
-		type = 'bool',
-		advanced = true,
-		noHotkey = true,
-		value = false,
-	})
---[[	AddOption(pathMisc,
-	{
-		name = 'Use Old Chili',
-		desc = 'Enable this if menu element is missing or does not render properly in Spring 96+. '..
-		       'Do NOT enable if you see nothing wrong with the menu (it is slower).'..
-		       '\n(type "/luaui reload" to apply settings)',
-		type = 'bool',
-		value = false,
-		noHotkey = true,
-		advanced = true,
-		OnChange = function (self)
-			local value = (self.value and 1) or 0 --true = 1, false = 0
-			if self.value then
-				Spring.Echo("Will use old Chili")
-			else
-				Spring.Echo("Will use new Chili")
-			end
-			Spring.SetConfigInt("ZKuseOldChili", value); --store in Springsettings.txt because api_chili.lua must read it independent of gui_epicmenu.lua
-		end,
-	})]]--
+
 	ShButton(pathMisc, 'Toggle Widget Profiler', function() spSendCommands{"luaui togglewidget WidgetProfiler"} end, '', true)
 
 --- GRAPHICS --- We might define section as containing anything graphical that has a significant impact on performance and isn't necessary for gameplay

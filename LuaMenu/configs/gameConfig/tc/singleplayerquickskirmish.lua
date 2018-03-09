@@ -8,8 +8,8 @@ local skirmishSetupData = {
 				"2v2",
 				"3v3",
 				"Survival",
-				"Survival+",
-				"KOTH",
+				"Suffer",
+--				"KOTH",
 			},
 		},
 		{
@@ -78,10 +78,8 @@ function skirmishSetupData.ApplyFunction(battleLobby, pageChoices)
 	end
 	
 	-- KOTH
-	if gameType == 6 then
-	
-	
---[[		local currentModoptions = battleLobby:GetMyBattleModoptions() or {}
+--[[	if gameType == 6 then
+		local currentModoptions = battleLobby:GetMyBattleModoptions() or {}
 		localModoptions = {}
 		for key,_ in pairs(currentModoptions) do
 			if modoptionDefaults[key] then
@@ -93,8 +91,8 @@ function skirmishSetupData.ApplyFunction(battleLobby, pageChoices)
 				end
 			end
 		end
-		battleLobby:SetModOptions(localModoptions) ]]
-	end
+		battleLobby:SetModOptions(localModoptions) 
+	end]]
 	
 	local aiName = "Skirmish AI"
 	

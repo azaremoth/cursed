@@ -582,7 +582,7 @@ function CreateWindow()
 		x      = 110,
 		y      = p(100/bars),
 		noSkin = true,
-		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
+		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0}, },
 	}
 	
 	bar_metal = Chili.Progressbar:New{
@@ -593,7 +593,7 @@ function CreateWindow()
                 x      = 110,
                 y      = p(100/bars),
 		tooltip = "This shows your current metal reserves",
-		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
+		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0}, },
 		OnMouseDown = {function() return (not widgetHandler:InTweakMode()) end},	-- this is needed for OnMouseUp to work
 		OnMouseUp = {function(self, x, y, mouse)
 			if widgetHandler:InTweakMode() then return end
@@ -612,7 +612,7 @@ function CreateWindow()
 		align  = "right",
 		caption = "0",
 		autosize = false,
-		font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
+		font   = {size = 19, outline = false, outlineWidth = 4, outlineWeight = 3,},
 		tooltip = "Your net metal income",
 	}
 	lbl_m_income = Chili.Label:New{
@@ -625,7 +625,7 @@ function CreateWindow()
 		valign = "center",
  		align  = "center",
 		autosize = false,
-		font   = {size = 12, outline = true, color = {0,1,0,1}},
+		font   = {size = 12, outline = false, color = {0,1,0,1}},
 		tooltip = "Your metal Income.\nGained primarily from metal extractors and reclaim",
 	}
 	lbl_m_expense = Chili.Label:New{
@@ -638,7 +638,7 @@ function CreateWindow()
 		valign = "center",
 		align  = "center",
 		autosize = false,
-		font   = {size = 12, outline = true, color = {1,0,0,1}},
+		font   = {size = 12, outline = false, color = {1,0,0,1}},
 		tooltip = "This is the metal demand of your construction",
 	}
 
@@ -652,20 +652,7 @@ function CreateWindow()
                 y      = 1,
 		file   = 'LuaUI/Images/energy.png',
 	}
-    
-	bar_energy_overlay = Chili.Progressbar:New{
-		parent = window,
-		color  = col_energy,
-		height = p(100/bars),
-		value  = 100,
-		color  = {0,0,0,0},
-		right  = 36,
-		x      = 100,
-		y      = 1,
-		noSkin = true,
-		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
-	}
-	
+ 
 	bar_energy_reserve_overlay = Chili.Progressbar:New{
 		parent = window,
 		color  = {0.5,0.5,0.5,0.5},
@@ -678,9 +665,9 @@ function CreateWindow()
 		x      = 100,
 		y      = 1,
 		noSkin = true,
-		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
+		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0}, },
 	}
-    
+ 
 	bar_energy = Chili.Progressbar:New{
 		parent = window,
 		color  = col_energy,
@@ -689,13 +676,26 @@ function CreateWindow()
                 x      = 100,
                 y      = 1,
 		tooltip = "Shows your current energy reserves.\n Anything above 100% will be burned",
-		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
+		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0}, },
 		OnMouseDown = {function() return (not widgetHandler:InTweakMode()) end},	-- this is needed for OnMouseUp to work
 		OnMouseUp = {function(self, x, y, mouse)
 			if widgetHandler:InTweakMode() then return end
 			local reserve = x / (self.width - self.padding[1] - self.padding[3])
 			updateReserveBars(mouse ~= 3, true, reserve)
 		end},
+	}
+ 
+	bar_energy_overlay = Chili.Progressbar:New{
+		parent = window,
+		color  = col_energy,
+		height = p(100/bars),
+		value  = 100,
+		color  = {1,1,0,0.1},
+		right  = 36,
+		x      = 100,
+		y      = 1,
+		noSkin = true,
+		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0}, },
 	}
 	
 	lbl_energy = Chili.Label:New{
@@ -708,9 +708,10 @@ function CreateWindow()
 		align  = "right",
 		caption = "0",
 		autosize = false,
-		font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
+		font   = {size = 19, outline = false, outlineWidth = 4, outlineWeight = 3,},
 		tooltip = "Your net energy income.",
 	}
+	
 	lbl_e_income = Chili.Label:New{
 		parent = window,
 		height = p(50/bars),
@@ -721,7 +722,7 @@ function CreateWindow()
 		valign  = "center",
 		align   = "center",
 		autosize = false,
-		font   = {size = 12, outline = true, color = {0,1,0,1}},
+		font   = {size = 12, outline = false, color = {0,1,0,1}},
 		tooltip = "Your energy income.\nGained from powerplants.",
 	}
 	lbl_e_expense = Chili.Label:New{
@@ -734,7 +735,7 @@ function CreateWindow()
 		valign = "center",
 		align  = "center",
 		autosize = false,
-		font   = {size = 12, outline = true, color = {1,0,0,1}},
+		font   = {size = 12, outline = false, color = {1,0,0,1}},
 		tooltip = "This is the energy demand of your economy, cloakers and shields",
 	}
 	

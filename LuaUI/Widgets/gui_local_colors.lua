@@ -2,7 +2,7 @@ function widget:GetInfo()
 	return {
 		name = "Local Team Colors",
 		desc = "Makes neat team color scheme - you teal, allies blueish, enemies reddish",
-		author = "Licho",
+		author = "Licho, adapted for the cursed by azaremoth",
 		date = "February, 2010",
 		license = "GNU GPL v2, or later",
 		layer = -10001,
@@ -38,16 +38,16 @@ gaiaColor[2] = 0.25
 gaiaColor[3] = 0.25
 
 myColor[1] = 0.0
-myColor[2] = 0.0
+myColor[2] = 0.2
 myColor[3] = 0.8
 
-allyColors[1] = math.random(0.1,0.5)
+allyColors[1] = 0.0
 allyColors[2] = 1.0
-allyColors[3] = math.random(0.1,0.5)
+allyColors[3] = 0.0
 
 enemyColors[1] = 1.0
-enemyColors[2] = math.random(0.1,0.5)
-enemyColors[3] = math.random(0.1,0.5)
+enemyColors[2] = 0.0
+enemyColors[3] = 0.0
 
 WG.LocalColor = (type(WG.LocalColor) == "table" and WG.LocalColor) or {}
 WG.LocalColor.listeners = WG.LocalColor.listeners or {}
@@ -65,29 +65,34 @@ local function SetNewTeamColors()
 	local myTeam = Spring.GetMyTeamID()
 	local teams = Spring.GetTeamList()
 
-	local a = 0.3
-	local e = 0.3
+	local a = 0.35
+	local e = 0.35
+	local increase = 0.35
 	
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
 		if (allyID == myAlly) then
-			a = a+0.3
-			if (a > 1) then 
-				a = a-1
-			end
-			local r = allyColors[1]*a
+			local r = allyColors[1]
 			local g = allyColors[2]*a
-			local b = allyColors[3]*a
+			local b = math.random()*g
 			Spring.SetTeamColor(teamID, r,g,b)
-		elseif (teamID ~= gaia) then
-			e = e+0.3
-			if (e > 1) then 
-				e = e-1
-			end			
+			
+			a = a+increase
+			if (a > 1) then 
+				a = math.random()
+			end
+			
+		elseif (teamID ~= gaia) then		
 			local r = enemyColors[1]*e
-			local g = enemyColors[2]*e
-			local b = enemyColors[3]*e
+			local g = enemyColors[2]
+			local b = math.random()*r
 			Spring.SetTeamColor(teamID, r,g,b)
+			
+			e = e+increase
+			if (e > 1) then  
+				e = math.random()
+			end			
+			
 		end
 	end
 	if not is_speccing then

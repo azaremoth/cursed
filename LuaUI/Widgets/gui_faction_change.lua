@@ -127,6 +127,8 @@ end
 
 function widget:GameFrame(n)
     if n>0 then
+		Spring.SendCommands("luaui disablewidget Chili Integral Menu")
+		Spring.SendCommands("luaui enablewidget Chili Integral Menu")
         widgetHandler:RemoveWidget(self)
     end
 end

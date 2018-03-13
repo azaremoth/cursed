@@ -23,7 +23,7 @@ local skirmishSetupData = {
 				"Ravaged_v2",
 				"Badlands 2.1",
 				"Iceland_v1",
-				"Mescaline_v2",
+				"Mescaline_V2",
 				"Wanderlust v03",
 			},
 		},

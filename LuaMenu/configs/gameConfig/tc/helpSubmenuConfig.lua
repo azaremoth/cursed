@@ -54,70 +54,49 @@ local communityLines = {
 		"Site home page.",
 		"Home",
 		function ()
-			WG.BrowserHandler.OpenUrl("http://zero-k.info/")
+			WG.BrowserHandler.OpenUrl("http://www.cursed.one")
 		end
 	},
 	{
 		"Community forums.",
 		"Forums",
 		function ()
-			WG.BrowserHandler.OpenUrl("http://zero-k.info/Forum")
+			WG.BrowserHandler.OpenUrl("https://springrts.com/phpbb/viewforum.php?f=54")
 		end
 	},
 	{
 		"Discord chat server.",
 		"Discord",
 		function ()
-			WG.BrowserHandler.OpenUrl("https://discord.gg/aab63Vt")
+			WG.BrowserHandler.OpenUrl("https://discord.gg/6FGe3NJ")
 		end
 	},
 	{
-		"Shadowfury333's Youtube channel.",
+		"Youtube channel.",
 		"Youtube",
 		function ()
-			WG.BrowserHandler.OpenUrl("https://www.youtube.com/user/Shadowfury333")
+			WG.BrowserHandler.OpenUrl("https://www.youtube.com/user/azaremoth")
 		end
 	},
 	{
-		"Shadowfury333's Twitch stream.",
-		"Twitch",
-		function ()
-			WG.BrowserHandler.OpenUrl("https://www.twitch.tv/shadowfury333")
-		end
-	},
-	{
-		"Shadowfury333's Hitbox stream.",
-		"Hitbox",
-		function ()
-			WG.BrowserHandler.OpenUrl("http://www.hitbox.tv/shadowfury333")
-		end
-	},
-	{
-		"Zero-K facebook page.",
-		"Facebook",
-		function ()
-			WG.BrowserHandler.OpenUrl("https://www.facebook.com/ZeroK.RTS/")
-		end
-	},
-	{
-		"Top 50 players.",
+		"Hall of Fame",
 		"Ladder",
 		function ()
-			WG.BrowserHandler.OpenUrl("http://zero-k.info/Ladders")
+			WG.BrowserHandler.OpenUrl("http://replays.springrts.com/hall_of_fame/TC/")
 		end
 	},
 	{
 		"Browse and download maps.",
 		"Maps",
 		function ()
-			WG.BrowserHandler.OpenUrl("http://zero-k.info/Maps")
+			WG.BrowserHandler.OpenUrl("https://springfiles.com/spring/spring-maps")
 		end
 	},
 	{
 		"Browse and download replays.",
 		"Replays",
 		function ()
-			WG.BrowserHandler.OpenUrl("http://zero-k.info/Battles")
+			WG.BrowserHandler.OpenUrl("http://replays.springrts.com/?game_pref=24")
 		end
 	},
 }
@@ -177,33 +156,19 @@ local bugLines = {
 		"Report the bug on the forum.",
 		"Forum",
 		function ()
-			WG.BrowserHandler.OpenUrl("http://zero-k.info/Forum/NewPost?categoryID=3")
+			WG.BrowserHandler.OpenUrl("https://springrts.com/phpbb/viewforum.php?f=54")
 		end
 	},
 	{
-		"Report an ingame bug on GitHub. This requires a GitHub account.",
+		"Report an in-game bug on GitHub. This requires a GitHub account.",
 		"Game Bug",
 		function ()
-			WG.BrowserHandler.OpenUrl("https://github.com/ZeroK-RTS/Zero-K/issues/new")
-		end
-	},
-	{
-		"Report a game menu bug on GitHub. This requires a GitHub account.",
-		"Menu Bug",
-		function ()
-			WG.BrowserHandler.OpenUrl("https://github.com/ZeroK-RTS/Chobby/issues/new")
-		end
-	},
-	{
-		"Report a site bug on GitHub. This requires a GitHub account.",
-		"Site Bug",
-		function ()
-			WG.BrowserHandler.OpenUrl("https://github.com/ZeroK-RTS/Zero-K-Infrastructure/issues/new")
+			WG.BrowserHandler.OpenUrl("https://github.com/azaremoth/cursed/issues")
 		end
 	},
 }
 
-if VFS.HasArchive("Zero-K $VERSION") then
+--[[if VFS.HasArchive("Zero-K $VERSION") then
 	bugLines[#bugLines + 1] = {
 		"Run a benchmark game.",
 		"Benchmark",
@@ -214,7 +179,7 @@ if VFS.HasArchive("Zero-K $VERSION") then
 			end
 		end
 	}
-end
+end]]--
 
 local firstBugParent = true
 local bugControl = Control:New {
@@ -252,10 +217,10 @@ return {
 		name = "links",
 		control = communityControl,
 	},
-	{
-		name = "tutorials", 
-		control = WG.MissionHandler.GetControl(),
-	},
+--	{
+--		name = "tutorials", 
+--		control = WG.MissionHandler.GetControl(),
+--	},
 	{
 		name = "report_a_bug",
 		control = bugControl,

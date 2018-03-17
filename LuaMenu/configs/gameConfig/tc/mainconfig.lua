@@ -7,11 +7,10 @@ local helpSubmenuConfig               = VFS.Include(LUA_DIRNAME .. "configs/game
 local skirmishDefault                 = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/skirmishDefault.lua")
 local skirmishSetupData               = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/singleplayerQuickSkirmish.lua")
 local defaultModoptions               = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/ModOptions.lua")
-local rankFunction, largeRankFunction = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/rankFunction.lua")
+local rankFunction, largeRankFunction = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/zk/rankFunction.lua")
 local backgroundConfig                = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/skinning/skinConfig.lua")
--- local gameUnitInformation             = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/gameUnitInformation.lua")
 
-local link_reportPlayer, link_userPage, link_homePage, link_replays, link_maps, link_particularMapPage = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/linkFunctions.lua")
+-- local link_homePage, link_replays, link_maps = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/linkFunctions.lua")
 
 local settingsConfig, settingsNames, settingsDefault, SettingsPresetFunc = VFS.Include(LUA_DIRNAME .. "configs/gameConfig/" .. shortname .. "/settingsMenu.lua")
 
@@ -75,19 +74,19 @@ local externalFuncAndData = {
 	headingLarge            = headingLarge,
 	headingSmall            = headingSmall,
 	subheadings             = subheadings,
-	taskbarTitle            = "Zero-K",
-	taskbarTitleShort       = "Zero-K",
+	taskbarTitle            = "The Cursed",
+	taskbarTitleShort       = "TC",
 	taskbarIcon             = taskbarIcon,
 	background              = background,
 	minimapOverridePath     = minimapOverridePath,
 	minimapThumbnailPath    = minimapThumbnailPath,
 	gameUnitInformation     = gameUnitInformation,
-	link_reportPlayer       = link_reportPlayer,
-	link_userPage           = link_userPage,
-	link_homePage           = link_homePage,
-	link_replays            = link_replays,
-	link_maps               = link_maps,
-	link_particularMapPage  = link_particularMapPage,
+--	link_reportPlayer       = link_reportPlayer,
+--	link_userPage           = link_userPage,
+--	link_homePage           = link_homePage,
+--	link_replays            = link_replays,
+--	link_maps               = link_maps,
+--	link_particularMapPage  = link_particularMapPage,
 	ignoreServerVersion     = false,
 }
 

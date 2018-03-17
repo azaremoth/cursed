@@ -1,5 +1,17 @@
 >> Major changes 1.438 => 1.439
+
+Bugs
+- removed undead bugs from cursed AI's build options as they got stuck in the factories (pyramids)
+
+Features
 - added faction change buttons
+- enabled and optimized simplified team colors by default
+
+Polishing
+- added support for normal mapped features
+- optimized game initiation (unit spawning and start box control, also for AIs)
+- optimized several pieces of lua code to enhance compatibility with Chobby and direct starts by spring.exe 
+- updated Chili widgets (shoudl hopefully not be seen ingame)
 
 
 

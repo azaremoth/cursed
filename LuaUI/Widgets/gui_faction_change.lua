@@ -128,7 +128,18 @@ end
 function widget:GameFrame(n)
     if n>0 then
 		Spring.SendCommands("luaui disablewidget Chili Integral Menu")
+		Spring.SendCommands("luaui disablewidget Chili Resource Bars Classic")
+		Spring.SendCommands("luaui disablewidget Chili Pro Console2")
+		Spring.SendCommands("luaui disablewidget Chili Selections & CursorTip v2")
+		Spring.SendCommands("luaui disablewidget Chili Minimap")		
+		Spring.SendCommands("luaui disablewidget Context Menu")		
+		
 		Spring.SendCommands("luaui enablewidget Chili Integral Menu")
+		Spring.SendCommands("luaui enablewidget Chili Resource Bars Classic")
+		Spring.SendCommands("luaui enablewidget Chili Pro Console2")
+		Spring.SendCommands("luaui enablewidget Chili Selections & CursorTip v2")
+		Spring.SendCommands("luaui enablewidget Chili Minimap")		
+		Spring.SendCommands("luaui enablewidget Context Menu")		
         widgetHandler:RemoveWidget(self)
     end
 end

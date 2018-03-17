@@ -690,7 +690,7 @@ function CreateWindow()
 		color  = col_energy,
 		height = p(100/bars),
 		value  = 100,
-		color  = {1,1,0,0.1},
+		-- color  = {1,1,0,0.1},
 		right  = 36,
 		x      = 100,
 		y      = 1,

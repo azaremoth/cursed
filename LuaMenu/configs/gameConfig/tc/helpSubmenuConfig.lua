@@ -168,14 +168,14 @@ local bugLines = {
 	},
 }
 
---[[if VFS.HasArchive("Zero-K $VERSION") then
+--[[if VFS.HasArchive("The Cursed $VERSION") then
 	bugLines[#bugLines + 1] = {
 		"Run a benchmark game.",
 		"Benchmark",
 		function ()
 			local localLobby = WG.LibLobby and WG.LibLobby.localLobby
 			if localLobby then
-				localLobby:StartGameFromString(VFS.Include(LUA_DIRNAME .. "configs/gameConfig/zk/benchmarkFile.lua"))
+				localLobby:StartGameFromString(VFS.Include(LUA_DIRNAME .. "configs/gameConfig/tc/benchmarkFile.lua"))
 			end
 		end
 	}

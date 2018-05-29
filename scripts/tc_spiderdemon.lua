@@ -40,11 +40,17 @@ local SUMMONING			 = 1024+0
 local DefenderGunFlare	 = 1025+0
 local BLOODSPRAY	 = 1026+0
 
-local forward = 2.2
-local backward = 2
-local up = 1
-local sa = math.rad(-10)*50
-local ma = math.rad(40)*50
+
+local legRaiseSpeed = math.rad(45)
+local legRaiseAngle = math.rad(20)
+local legLowerSpeed = math.rad(50)
+
+local legForwardSpeed = math.rad(40)
+local legForwardAngle = -math.rad(20)
+local legBackwardSpeed = math.rad(35)
+local legBackwardAngle = math.rad(45)
+local legBackwardAngleMinor = math.rad(30)
+
 
 local function Turn2(piecenum,axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180
@@ -57,7 +63,14 @@ local function Turn2(piecenum,axis, degrees, speed)
 end
 
 local function SetMoveAnimationSpeed()
-	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/2000)
+	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/52000)
+	
+	 legRaiseSpeed = math.rad(45)*MOVEANIMATIONSPEED
+	 legLowerSpeed = math.rad(50)*MOVEANIMATIONSPEED
+
+	 legForwardSpeed = math.rad(40)*MOVEANIMATIONSPEED
+	 legBackwardSpeed = math.rad(35)*MOVEANIMATIONSPEED
+	
 	MOVEANIMATIONSLEEPTIME = (55000000/GetUnitValue(COB.MAX_SPEED))
 	--if statements inside walkscript contain wait functions that can take forever if speed is too slow
 	if MOVEANIMATIONSPEED < 50 then 
@@ -74,45 +87,46 @@ local function Walkscript()
 	while true do
 		SetMoveAnimationSpeed()	
    		if moving then 
+			-- Spring.Echo("left fore and right back move, left back and right fore anchor")
+			-- Hide(lrleg1)
+			Turn(lfleg1, z_axis, legRaiseAngle, legRaiseSpeed)	-- LF leg up
+			Turn(lfleg1, y_axis, legForwardAngle, legForwardSpeed)	-- LF leg forward
+			--Turn(leg3, z_axis, 0, legLowerSpeed)	-- LB leg down
+			Turn(rrleg1, y_axis, legBackwardAngle, legBackwardSpeed)	-- LB leg back
+			
+			--Turn(leg1, z_axis, 0, legLowerSpeed)	-- RF leg down
+			Turn(rfleg1, y_axis, -legBackwardAngleMinor, legBackwardSpeed)	-- RF leg back
+			Turn(lrleg1, z_axis, -legRaiseAngle, legRaiseSpeed)	-- RB leg up
+			Turn(lrleg1, y_axis, 0, legForwardSpeed)	-- RB leg forward	
+			
+			WaitForTurn(lfleg1, z_axis)
+			WaitForTurn(lfleg1, y_axis)
+			Sleep(0)
+			
+			-- Spring.Echo("lower left fore and right back")
+			Turn(lfleg1, z_axis, 0, legLowerSpeed)	-- LF leg down		
+			Turn(lrleg1, z_axis, 0, legLowerSpeed)	-- RB leg down
+			Sleep(0)
+			WaitForTurn(lfleg1, z_axis)
+			
 
-		Turn2( lfleg1, y_axis, 1.5*ma, forward*MOVEANIMATIONSPEED )   	-- right front forward
-		Turn2( lfleg1, z_axis, -ma/2, up*MOVEANIMATIONSPEED )       	-- right front up
-		Turn2( lfleg2, z_axis, -ma/3, up*MOVEANIMATIONSPEED )
-				
-		Turn2( lrleg1, y_axis, -1.5*ma, backward*MOVEANIMATIONSPEED ) 	-- right back backward
-		Turn2( lrleg1, z_axis, 0, 6*up*MOVEANIMATIONSPEED )         	-- right back down
-		Turn2( lrleg2, z_axis, 0, up*MOVEANIMATIONSPEED )
-		
-		Turn2( rfleg1, y_axis, sa, backward*MOVEANIMATIONSPEED ) 	-- left front backward
-    	Turn2( rfleg1, z_axis, 0, 6*up*MOVEANIMATIONSPEED )         	-- left front down
-		Turn2( rfleg3, z_axis, 0, up*MOVEANIMATIONSPEED )
-		
-		Turn2( rrleg1, y_axis, -sa, forward*MOVEANIMATIONSPEED ) 	-- left back forward
-		Turn2( rrleg1, z_axis, ma/2, up*MOVEANIMATIONSPEED )       	-- left back up
-		Turn2( rrleg3, z_axis, ma/3, up*MOVEANIMATIONSPEED )
-	  
-		Sleep(MOVEANIMATIONSLEEPTIME)
-  
-   		end 
-   		if moving then 
-   		 
-		Turn2( lfleg1, y_axis, -sa, backward*MOVEANIMATIONSPEED ) 	-- right front backward
-		Turn2( lfleg1, z_axis, 0, 6*up*MOVEANIMATIONSPEED )         	-- right front down
-		Turn2( lfleg2, z_axis, 0, up*MOVEANIMATIONSPEED )
-		
-		Turn2( lrleg1, y_axis, sa, forward*MOVEANIMATIONSPEED )   	-- right back forward
-		Turn2( lrleg1, z_axis, -ma/2, up*MOVEANIMATIONSPEED )       	-- right back up
-		Turn2( lrleg2, z_axis, -ma/3, up*MOVEANIMATIONSPEED )
-		
-		Turn2( rfleg1, y_axis, -1.5*ma, forward*MOVEANIMATIONSPEED ) 	-- left front forward
-		Turn2( rfleg1, z_axis, ma/2, up*MOVEANIMATIONSPEED )       	-- left front up
-		Turn2( rfleg3, z_axis, ma/3, up*MOVEANIMATIONSPEED )
-		
-		Turn2( rrleg1, y_axis, 1.5*ma, backward*MOVEANIMATIONSPEED ) 	-- left back backward
-		Turn2( rrleg1, z_axis, 0, 6*up*MOVEANIMATIONSPEED )         	-- left back down
-		Turn2( rrleg3, z_axis, 0, up*MOVEANIMATIONSPEED )
-	 
-		Sleep(MOVEANIMATIONSLEEPTIME)
+			Turn(lfleg1, y_axis, legBackwardAngleMinor, legBackwardSpeed)	-- LF leg back
+			Turn(rrleg1, z_axis, legRaiseAngle, legRaiseSpeed)	-- LB leg up
+			Turn(rrleg1, y_axis, 0, legForwardSpeed)	-- LB leg forward
+			
+			Turn(rfleg1, z_axis, -legRaiseAngle, legRaiseSpeed)	-- RF leg up
+			Turn(rfleg1, y_axis, -legForwardAngle, legForwardSpeed)	-- RF leg forward
+			--Turn(leg2, z_axis, 0, legLowerSpeed)	-- RB leg down
+			Turn(lrleg1, y_axis, -legBackwardAngle, legBackwardSpeed)	-- RB leg back	
+			WaitForTurn(rfleg1, z_axis)
+			WaitForTurn(rfleg1, y_axis)
+			Sleep(0)
+
+			-- Spring.Echo("lower left back and right fore")
+			Turn(rrleg1, z_axis, 0, legLowerSpeed)	-- LB leg down		
+			Turn(rfleg1, z_axis, 0, legLowerSpeed)	-- RF leg down
+			Sleep(0)
+			WaitForTurn(rrleg1, z_axis)
 
    		end 
 

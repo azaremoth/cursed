@@ -1,6 +1,8 @@
 >> Major changes 1.439 => 1.440
 
-
+Features
+- reworked the role of cursed Moloch demons: shorter range, higher aoe, more dps
+- added cursed Spiderdemon as tier2 support with ranged attacks
 
 
 >> Major changes 1.438 => 1.439

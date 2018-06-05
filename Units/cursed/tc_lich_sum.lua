@@ -66,6 +66,7 @@ local unitDef = {
     "tc_crawler",
     "tc_pestilence",
     "tc_mancubus",
+	"tc_spiderdemon",	
     "tc_belial",
   },
   sfxtypes = {

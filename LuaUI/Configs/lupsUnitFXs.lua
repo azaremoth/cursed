@@ -138,6 +138,10 @@ effectUnitDefs = {
    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit1", onActive=false, noIconDraw = true}},
    {class='AirJet', options={color={0.6,1.0,0.15}, width=5, length=70, piece="emit2", onActive=false, noIconDraw = true}},
   },
+	tc_spiderdemon = {
+		{class='SimpleParticles2', options=MergeTable({piece="emit3", delay=20, lifeSpread=math.random()*20},sparks)},
+		{class='SimpleParticles2', options=MergeTable({piece="emit4", delay=40, lifeSpread=math.random()*20},sparks)},
+	},  
   tc_metalextractor_lvl2 = {
    {class='AirJet', options={color={0.6,1.0,0.15}, emitVector = {0, 1, 0}, width=3, length=50, piece="tamper", onActive=false, noIconDraw = true}},
   },  

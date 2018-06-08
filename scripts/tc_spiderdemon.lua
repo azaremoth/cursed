@@ -3,31 +3,32 @@
 local echo = Spring.Echo
 
 local base = piece 'base'
+local pelvis = piece 'pelvis'
 local brain = piece 'brain'
 local tail1 = piece 'tail1'
 local tail2 = piece 'tail2'
 local tail3 = piece 'tail3'
 local tail4 = piece 'tail4'
-local rfleg1 = piece 'rfleg1'
-local rfleg2 = piece 'rfleg2'
-local rfleg3 = piece 'rfleg3'
 local rrleg1 = piece 'rrleg1'
 local rrleg2 = piece 'rrleg2'
 local rrleg3 = piece 'rrleg3'
-local lrleg1 = piece 'lrleg1'
-local lrleg2 = piece 'lrleg2'
-local lrleg3 = piece 'lrleg3'
+local rfleg1 = piece 'rfleg1'
+local rfleg2 = piece 'rfleg2'
+local rfleg3 = piece 'rfleg3'
 local lfleg1 = piece 'lfleg1'
 local lfleg2 = piece 'lfleg2'
 local lfleg3 = piece 'lfleg3'
+local lrleg1 = piece 'lrleg1'
+local lrleg2 = piece 'lrleg2'
+local lrleg3 = piece 'lrleg3'
 local emit1 = piece 'emit1'
 local emit2 = piece 'emit2'
+local emit3 = piece 'emit3'
+local emit4 = piece 'emit4'
 local summon = piece 'summon'
 
 local moving = false
 local attacking = false
-
-local activegun
 
 local MOVEANIMATIONSPEED
 local MOVEANIMATIONSLEEPTIME
@@ -37,7 +38,7 @@ local	SIG_AIM1	=	2
 local	MOVELEGMAXANGLE = 40
 
 local SUMMONING			 = 1024+0
-local DefenderGunFlare	 = 1025+0
+local GUNFLARE	 = 1025+0
 local BLOODSPRAY	 = 1026+0
 
 
@@ -88,71 +89,71 @@ local function Walkscript()
 		SetMoveAnimationSpeed()	
    		if moving then 
 			-- Spring.Echo("left fore and right back move, left back and right fore anchor")
-			-- Hide(lrleg1)
-			Turn(lfleg1, z_axis, legRaiseAngle, legRaiseSpeed)	-- LF leg up
-			Turn(lfleg1, y_axis, legForwardAngle, legForwardSpeed)	-- LF leg forward
+			-- Hide(lfleg1)
+			Turn(lrleg1, z_axis, legRaiseAngle, legRaiseSpeed)	-- LF leg up
+			Turn(lrleg1, y_axis, legForwardAngle, legForwardSpeed)	-- LF leg forward
 			--Turn(leg3, z_axis, 0, legLowerSpeed)	-- LB leg down
-			Turn(rrleg1, y_axis, legBackwardAngle, legBackwardSpeed)	-- LB leg back
+			Turn(rfleg1, y_axis, legBackwardAngle, legBackwardSpeed)	-- LB leg back
 			
 			--Turn(leg1, z_axis, 0, legLowerSpeed)	-- RF leg down
-			Turn(rfleg1, y_axis, -legBackwardAngleMinor, legBackwardSpeed)	-- RF leg back
-			Turn(lrleg1, z_axis, -legRaiseAngle, legRaiseSpeed)	-- RB leg up
-			Turn(lrleg1, y_axis, 0, legForwardSpeed)	-- RB leg forward	
+			Turn(rrleg1, y_axis, -legBackwardAngleMinor, legBackwardSpeed)	-- RF leg back
+			Turn(lfleg1, z_axis, -legRaiseAngle, legRaiseSpeed)	-- RB leg up
+			Turn(lfleg1, y_axis, 0, legForwardSpeed)	-- RB leg forward	
 			
-			WaitForTurn(lfleg1, z_axis)
-			WaitForTurn(lfleg1, y_axis)
+			WaitForTurn(lrleg1, z_axis)
+			WaitForTurn(lrleg1, y_axis)
 			Sleep(0)
 			
 			-- Spring.Echo("lower left fore and right back")
-			Turn(lfleg1, z_axis, 0, legLowerSpeed)	-- LF leg down		
-			Turn(lrleg1, z_axis, 0, legLowerSpeed)	-- RB leg down
+			Turn(lrleg1, z_axis, 0, legLowerSpeed)	-- LF leg down		
+			Turn(lfleg1, z_axis, 0, legLowerSpeed)	-- RB leg down
 			Sleep(0)
-			WaitForTurn(lfleg1, z_axis)
+			WaitForTurn(lrleg1, z_axis)
 			
 
-			Turn(lfleg1, y_axis, legBackwardAngleMinor, legBackwardSpeed)	-- LF leg back
-			Turn(rrleg1, z_axis, legRaiseAngle, legRaiseSpeed)	-- LB leg up
-			Turn(rrleg1, y_axis, 0, legForwardSpeed)	-- LB leg forward
+			Turn(lrleg1, y_axis, legBackwardAngleMinor, legBackwardSpeed)	-- LF leg back
+			Turn(rfleg1, z_axis, legRaiseAngle, legRaiseSpeed)	-- LB leg up
+			Turn(rfleg1, y_axis, 0, legForwardSpeed)	-- LB leg forward
 			
-			Turn(rfleg1, z_axis, -legRaiseAngle, legRaiseSpeed)	-- RF leg up
-			Turn(rfleg1, y_axis, -legForwardAngle, legForwardSpeed)	-- RF leg forward
+			Turn(rrleg1, z_axis, -legRaiseAngle, legRaiseSpeed)	-- RF leg up
+			Turn(rrleg1, y_axis, -legForwardAngle, legForwardSpeed)	-- RF leg forward
 			--Turn(leg2, z_axis, 0, legLowerSpeed)	-- RB leg down
-			Turn(lrleg1, y_axis, -legBackwardAngle, legBackwardSpeed)	-- RB leg back	
-			WaitForTurn(rfleg1, z_axis)
-			WaitForTurn(rfleg1, y_axis)
+			Turn(lfleg1, y_axis, -legBackwardAngle, legBackwardSpeed)	-- RB leg back	
+			WaitForTurn(rrleg1, z_axis)
+			WaitForTurn(rrleg1, y_axis)
 			Sleep(0)
 
 			-- Spring.Echo("lower left back and right fore")
-			Turn(rrleg1, z_axis, 0, legLowerSpeed)	-- LB leg down		
-			Turn(rfleg1, z_axis, 0, legLowerSpeed)	-- RF leg down
+			Turn(rfleg1, z_axis, 0, legLowerSpeed)	-- LB leg down		
+			Turn(rrleg1, z_axis, 0, legLowerSpeed)	-- RF leg down
 			Sleep(0)
-			WaitForTurn(rrleg1, z_axis)
+			WaitForTurn(rfleg1, z_axis)
 
    		end 
 
-		if not moving then
+		if not moving and not attacking then
 		
-			Turn2( lrleg1, y_axis, -20, ((MOVEANIMATIONSPEED)*1.72)  )
-			Turn2( lfleg1, y_axis, 20, ((MOVEANIMATIONSPEED)*1.72)  )
-			Turn2( lrleg1, z_axis, 0, ((MOVEANIMATIONSPEED)*1.72)  )
+			Turn2( lfleg1, y_axis, -20, ((MOVEANIMATIONSPEED)*1.72)  )
+			Turn2( lrleg1, y_axis, 20, ((MOVEANIMATIONSPEED)*1.72)  )
 			Turn2( lfleg1, z_axis, 0, ((MOVEANIMATIONSPEED)*1.72)  )
+			Turn2( lrleg1, z_axis, 0, ((MOVEANIMATIONSPEED)*1.72)  )
 
-			Turn2( lrleg2, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
-			Turn2( lrleg3, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
 			Turn2( lfleg2, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
 			Turn2( lfleg3, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
+			Turn2( lrleg2, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
+			Turn2( lrleg3, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
 					
-			Turn2( rfleg1, y_axis, -20, ((MOVEANIMATIONSPEED)*1.72)  )
-			Turn2( rrleg1, y_axis, 20, ((MOVEANIMATIONSPEED)*1.72)  )
-			Turn2( rfleg1, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
+			Turn2( rrleg1, y_axis, -20, ((MOVEANIMATIONSPEED)*1.72)  )
+			Turn2( rfleg1, y_axis, 20, ((MOVEANIMATIONSPEED)*1.72)  )
 			Turn2( rrleg1, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
+			Turn2( rfleg1, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
 	  
-			Turn2( rfleg2, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
-			Turn2( rfleg3, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
 			Turn2( rrleg2, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
-			Turn2( rrleg3, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )	
+			Turn2( rrleg3, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
+			Turn2( rfleg2, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
+			Turn2( rfleg3, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )	
 			
-			Sleep(MOVEANIMATIONSLEEPTIME)
+			Sleep(MOVEANIMATIONSLEEPTIME) 
         end
 		Sleep(50)
 	end
@@ -162,17 +163,15 @@ end
 function script.Create()
 
    	Turn2( summon, x_axis, -90 )
-   	Turn2( lrleg1, y_axis, -20 ) 
-   	Turn2( lfleg1, y_axis, 20 ) 
-    Turn2( rfleg1, y_axis, -20 ) 
-	Turn2( rrleg1, y_axis, 20 ) 
+   	Turn2( lfleg1, y_axis, -20 ) 
+   	Turn2( lrleg1, y_axis, 20 ) 
+    Turn2( rrleg1, y_axis, -20 ) 
+	Turn2( rfleg1, y_axis, 20 ) 
 
 	moving = false
 	attacking = false	
-	activegun = 1
-	
 
-		
+
 	----------------------------------START BUILD CYCLE
 	while  GetUnitValue( COB.BUILD_PERCENT_LEFT ) > 0 do
 			EmitSfx(summon, SUMMONING)
@@ -193,9 +192,8 @@ end
 --weapon 1 -----------------------------------------------------------------
 
 local function RestoreAfterDelay()
-	Sleep(5000)
+	Sleep(2000)
 	attacking = false	
-    activegun = 0
 end
 
 function script.AimWeapon1(heading, pitch)
@@ -207,40 +205,41 @@ function script.AimWeapon1(heading, pitch)
 end
 
 function script.FireWeapon1()
-
-	if  activegun ~= 1  then
+	EmitSfx(emit1, GUNFLARE)
+	Turn2( pelvis, x_axis, -20, 100  )
 	
-		EmitSfx(emit1, DefenderGunFlare)
-		Sleep(100)
-		activegun = 1
-		return(1)
-	end
-	if  activegun == 1  then
+   	Turn2( lfleg1, y_axis, -20 ) 
+   	Turn2( lrleg1, y_axis, 20 ) 
+    Turn2( rrleg1, y_axis, -20 ) 
+	Turn2( rfleg1, y_axis, 20 ) 
+			
+	Turn2( rrleg1, x_axis, 30, 100 )
+	Turn2( lrleg1, x_axis, 30, 100 )
+	Turn2( rrleg2, z_axis, -20, 100 )
+	Turn2( lrleg2, z_axis, 20, 100 )				
+	Turn2( rfleg2, z_axis, 30, 100 )
+	Turn2( lfleg2, z_axis, -30, 100 )
+	Sleep(400)
 	
-		EmitSfx(emit2, DefenderGunFlare)
-		Sleep(100)
-		activegun = 0
-		return(1)
-	end
+	Turn2( pelvis, x_axis, 0, 50  )
+	
+	Turn2( rrleg1, x_axis, 0, 50 )
+	Turn2( rfleg1, x_axis, 0, 50 )	
+	Turn2( rfleg2, z_axis, 0, 50 )
+	Turn2( lfleg2, z_axis, 0, 50 )
+	Turn2( rrleg2, z_axis, 0, 50 )
+	Turn2( lrleg2, z_axis, 0, 50 )			
+	return(1)
 end
 
 --AimFromWeapon
 
 function script.AimFromWeapon1(piecenum)
-
-	return gun
+	return emit1
 end
 
 function script.QueryWeapon1(piecenum)
-
-	if  activegun ~= 1  then
-	
-		return emit1
-	end
-	if  activegun == 1  then
-	
-		return emit2
-	end
+	return emit1
 end
 
 	
@@ -248,10 +247,10 @@ function script.Killed(recentDamage,maxHealth )
 
 	local severity = recentDamage/maxHealth
 
-	Explode(rfleg1, math.bit_or(SFX.FALL, SFX.EXPLODE_ON_HIT ) )
-	Explode(rfleg2, math.bit_or(SFX.FALL, SFX.EXPLODE_ON_HIT ) )	
-	Explode(tail1, math.bit_or(SFX.FALL , SFX.SMOKE , SFX.EXPLODE_ON_HIT ) )
-	Explode(tail2, math.bit_or(SFX.FALL , SFX.SMOKE , SFX.EXPLODE_ON_HIT ) )
+	Explode(rrleg1, math.bit_or(SFX.FALL, SFX.EXPLODE_ON_HIT ) )
+	Explode(rrleg2, math.bit_or(SFX.FALL, SFX.EXPLODE_ON_HIT ) )	
+--	Explode(tail1, math.bit_or(SFX.FALL , SFX.SMOKE , SFX.EXPLODE_ON_HIT ) )
+--	Explode(tail2, math.bit_or(SFX.FALL , SFX.SMOKE , SFX.EXPLODE_ON_HIT ) )
 	EmitSfx(brain, BLOODSPRAY)
 	
 	if severity <= 0.5 then

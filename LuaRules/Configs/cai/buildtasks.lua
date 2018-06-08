@@ -155,8 +155,9 @@ factionBuildConfig = {
 				},
 				[5] = { --assault
 					importanceMult = 0.75,
-					count = 1,
-					[1] = {ID = UnitDefNames['tc_belial'].id, chance = 1},
+					count = 2,
+					[1] = {ID = UnitDefNames['tc_belial'].id, chance = 0.4},
+					[2] = {ID = UnitDefNames['tc_spiderdemon'].id, chance = 0.6},					
 				},
 				[6] = { -- skirm
 					importanceMult = 1,

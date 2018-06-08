@@ -128,17 +128,24 @@ end
 -- times in minutes
 local chickenTypes = {
   tc_ghoul				=  {time =  -60, squadSize = 1.4, obsolete = 30},
-  tc_skeleton			=  {time =  -60, squadSize = 1.2, obsolete = 20},
-  tc_undeadmarine_melee	=  {time =  -60, squadSize = 1.2, obsolete = 20},
+  tc_undeadmarine_melee	=  {time =  -60, squadSize = 1.2, obsolete = 30},
+
+  tc_skeleton			=  {time =  5, squadSize = 0.2, obsolete = 30},
   tc_gunner       		=  {time = 5, squadSize = 0.8, obsolete = 30},
+  
   tc_mage				=  {time = 7, squadSize = 0.5},
-  tc_bonebeast			=  {time = 7, squadSize = 0.6, obsolete = 35},
-  tc_enforcer			=  {time = 9, squadSize = 0.6, obsolete = 20},
-  tc_undeadmarine_gun	=  {time = 10, squadSize = 0.8, obsolete = 35},
-  tc_redeemer			=  {time = 10, squadSize = 0.7},
-  tc_blade				=  {time = 10, squadSize = 0.5},
-  tc_rictus 			=  {time = 15, squadSize = 0.5},
-  tc_mancubus			=  {time = 15, squadSize = 0.5},
+  tc_bonebeast			=  {time = 7, squadSize = 0.5, obsolete = 40},
+  
+  tc_enforcer			=  {time = 9, squadSize = 1.0, obsolete = 30},
+  
+  tc_undeadmarine_gun	=  {time = 10, squadSize = 0.4, obsolete = 30},
+  tc_redeemer			=  {time = 10, squadSize = 0.3},
+  tc_blade				=  {time = 10, squadSize = 0.3},
+  
+  tc_spiderdemon		=  {time = 15, squadSize = 0.3},
+  tc_rictus 			=  {time = 15, squadSize = 0.3},
+  tc_mancubus			=  {time = 15, squadSize = 0.4},
+  
   tc_purgatory_ai		=  {time = 30, squadSize = 0.2},
   tc_belial				=  {time = 36, squadSize = 0.3},
   tc_dragon				=  {time = 40, squadSize = 0.15},

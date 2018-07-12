@@ -62,7 +62,7 @@ local unitDef = {
   trackStrength          = 7,
   trackStretch           = 1,
   trackType              = [[Pointy]],
-  trackWidth             = 70,  
+  trackWidth             = 75,  
   
   turnRate           = 800,
   unitname           = "tc_spiderdemon",

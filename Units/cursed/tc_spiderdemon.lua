@@ -59,10 +59,10 @@ local unitDef = {
   
   leavetracks            = 1,
   trackOffset            = 0,
-  trackStrength          = 9,
+  trackStrength          = 7,
   trackStretch           = 1,
   trackType              = [[Pointy]],
-  trackWidth             = 60,  
+  trackWidth             = 70,  
   
   turnRate           = 800,
   unitname           = "tc_spiderdemon",
@@ -135,7 +135,7 @@ local weaponDefs = {
     interceptedByShieldType = 1,
     gravityAffected          = false,
     range              = 750,
-    reloadtime         = 3.5,
+    reloadtime         = 5,
     targetBorder       = 0,
     targetMoveError    = 0.8,
     tolerance          = 550,
@@ -145,7 +145,7 @@ local weaponDefs = {
     weaponVelocity     = 275,  
 	noSelfDamage       = true,
 --  Sound	------------------------------------------------	
-    soundHit           = "null",
+    soundHit           = "sonicgun2",
     soundStart         = "DSCACSIT",
     soundHitVolume     = 50,
     soundStartVolume   = 50,
@@ -158,10 +158,10 @@ local weaponDefs = {
 	weaponType         = "Cannon",
 ------------------------------------------------------------
     damage = {
-      default            = 600,
-      flyer              = 600*0.33,
-      heavy              = 600,
-      light              = 600,
+      default            = 500,
+      flyer              = 500*0.33,
+      heavy              = 500,
+      light              = 500,
     },
   },
 }

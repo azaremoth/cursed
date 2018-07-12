@@ -88,52 +88,37 @@ local function Walkscript()
 	while true do
 		SetMoveAnimationSpeed()	
    		if moving then 
-			-- Spring.Echo("left fore and right back move, left back and right fore anchor")
-			-- Hide(lfleg1)
 			Turn(lrleg1, z_axis, legRaiseAngle, legRaiseSpeed)	-- LF leg up
 			Turn(lrleg1, y_axis, legForwardAngle, legForwardSpeed)	-- LF leg forward
-			--Turn(leg3, z_axis, 0, legLowerSpeed)	-- LB leg down
-			Turn(rfleg1, y_axis, legBackwardAngle, legBackwardSpeed)	-- LB leg back
-			
-			--Turn(leg1, z_axis, 0, legLowerSpeed)	-- RF leg down
+			Turn(rfleg1, y_axis, legBackwardAngle, legBackwardSpeed)	-- LB leg back		
 			Turn(rrleg1, y_axis, -legBackwardAngleMinor, legBackwardSpeed)	-- RF leg back
 			Turn(lfleg1, z_axis, -legRaiseAngle, legRaiseSpeed)	-- RB leg up
 			Turn(lfleg1, y_axis, 0, legForwardSpeed)	-- RB leg forward	
-			
 			WaitForTurn(lrleg1, z_axis)
 			WaitForTurn(lrleg1, y_axis)
-			Sleep(0)
 			
-			-- Spring.Echo("lower left fore and right back")
 			Turn(lrleg1, z_axis, 0, legLowerSpeed)	-- LF leg down		
 			Turn(lfleg1, z_axis, 0, legLowerSpeed)	-- RB leg down
-			Sleep(0)
 			WaitForTurn(lrleg1, z_axis)
-			
 
 			Turn(lrleg1, y_axis, legBackwardAngleMinor, legBackwardSpeed)	-- LF leg back
 			Turn(rfleg1, z_axis, legRaiseAngle, legRaiseSpeed)	-- LB leg up
 			Turn(rfleg1, y_axis, 0, legForwardSpeed)	-- LB leg forward
-			
 			Turn(rrleg1, z_axis, -legRaiseAngle, legRaiseSpeed)	-- RF leg up
 			Turn(rrleg1, y_axis, -legForwardAngle, legForwardSpeed)	-- RF leg forward
-			--Turn(leg2, z_axis, 0, legLowerSpeed)	-- RB leg down
 			Turn(lfleg1, y_axis, -legBackwardAngle, legBackwardSpeed)	-- RB leg back	
 			WaitForTurn(rrleg1, z_axis)
 			WaitForTurn(rrleg1, y_axis)
-			Sleep(0)
-
-			-- Spring.Echo("lower left back and right fore")
+			
 			Turn(rfleg1, z_axis, 0, legLowerSpeed)	-- LB leg down		
 			Turn(rrleg1, z_axis, 0, legLowerSpeed)	-- RF leg down
-			Sleep(0)
 			WaitForTurn(rfleg1, z_axis)
 
    		end 
 
 		if not moving and not attacking then
 		
-			Turn2( lfleg1, y_axis, -20, ((MOVEANIMATIONSPEED)*1.72)  )
+--			Turn2( lfleg1, y_axis, -20, ((MOVEANIMATIONSPEED)*1.72)  )
 			Turn2( lrleg1, y_axis, 20, ((MOVEANIMATIONSPEED)*1.72)  )
 			Turn2( lfleg1, z_axis, 0, ((MOVEANIMATIONSPEED)*1.72)  )
 			Turn2( lrleg1, z_axis, 0, ((MOVEANIMATIONSPEED)*1.72)  )
@@ -143,7 +128,7 @@ local function Walkscript()
 			Turn2( lrleg2, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
 			Turn2( lrleg3, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
 					
-			Turn2( rrleg1, y_axis, -20, ((MOVEANIMATIONSPEED)*1.72)  )
+--			Turn2( rrleg1, y_axis, -20, ((MOVEANIMATIONSPEED)*1.72)  )
 			Turn2( rfleg1, y_axis, 20, ((MOVEANIMATIONSPEED)*1.72)  )
 			Turn2( rrleg1, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
 			Turn2( rfleg1, z_axis, 0, ((MOVEANIMATIONSPEED)*1.17)  )
@@ -159,6 +144,34 @@ local function Walkscript()
 	end
 end
 
+-- Bored Animation ------------------------
+local function BoredAnimation()
+	while true do
+		if (not attacking) and (not moving) then		
+			local borednumber = math.random(50)
+			if (borednumber > 45) then
+				Turn2( brain, y_axis, 10, MOVEANIMATIONSPEED*2 )
+				WaitForTurn( rrleg2, y_axis )
+			elseif (borednumber < 5)then
+				Turn2( lfleg1, y_axis, -40, ((MOVEANIMATIONSPEED)*2)  )
+				Turn2( rrleg1, y_axis, 20, ((MOVEANIMATIONSPEED)*2)  )
+				Turn2( lfleg2, x_axis, 30, ((MOVEANIMATIONSPEED)*2)  )
+				Turn2( rrleg2, x_axis, 30, ((MOVEANIMATIONSPEED)*2)  )	
+				WaitForTurn(rrleg2, x_axis)
+				Turn2( lfleg2, x_axis, 0, ((MOVEANIMATIONSPEED)*3)  )
+				Turn2( rrleg2, x_axis, 0, ((MOVEANIMATIONSPEED)*3)  )	
+			else 
+				Turn2( brain, y_axis, 0, MOVEANIMATIONSPEED*2 )
+				Turn2( lfleg1, y_axis, -20, ((MOVEANIMATIONSPEED)*2)  )
+				Turn2( rrleg1, y_axis, -20, ((MOVEANIMATIONSPEED)*2)  )	
+				
+				
+			end
+		end
+	Sleep(1500)		
+	end
+end
+-----------------------------------------------------------------
 
 function script.Create()
 
@@ -179,6 +192,7 @@ function script.Create()
 	end
 	--------------------------------/END BUILD CYCLE
 	StartThread( Walkscript )
+	StartThread( BoredAnimation )	
 end
 
 function script.StartMoving()

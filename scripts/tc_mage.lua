@@ -156,7 +156,7 @@ end
 local function BoredAnimation()
 	while true do
 		if not attacking and not jumping and not burrowed then		
-			borednumber = math.random(50)
+			local borednumber = math.random(50)
 			if (borednumber > 45) then
 				Turn2( lloarm, x_axis, -70, MOVEANIMATIONSPEED*2 )
 				Turn2( chest, x_axis, 10, MOVEANIMATIONSPEED )

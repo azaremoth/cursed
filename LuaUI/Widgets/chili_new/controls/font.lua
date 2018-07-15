@@ -18,13 +18,13 @@ Font = Object:Inherit{
 
   font          = "FreeSansBold.otf",
   size          = 12,
-  outlineWidth  = 3,
-  outlineWeight = 3,
+  outlineWidth  = 0,
+  outlineWeight = 0,
 
   shadow        = false,
   outline       = false,
   color         = {1,1,1,1},
-  outlineColor  = {0,0,0,1},
+  outlineColor  = {0,0,0,0},
   autoOutlineColor = true,
 }
 

@@ -36,9 +36,9 @@ local spGetTeamRulesParam = Spring.GetTeamRulesParam
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local col_metal = {136/255,214/255,251/255,1}
+local col_metal = {136/255,214/255,251/255,.75}
 local col_energy = {1,1,0,1}
-local col_buildpower = {0.8, 0.8, 0.2, 1}
+local col_buildpower = {0.8, 0.8, 0.2, 0.75}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ options = {
   opacity = {
 	name = "Opacity",
 	type = "number",
-	value = 0.0, min = 0, max = 1, step = 0.01,
+	value = 1.0, min = 0, max = 1, step = 0.01,
 	OnChange = function(self) window.color = {1,1,1,self.value}; window:Invalidate() end,
   }
 }
@@ -564,9 +564,9 @@ function CreateWindow()
 	--// METAL
 	Chili.Image:New{
 		parent = window,
-		height = p(100/bars),
+		height = p(90/bars),
 		width  = 25,
-		y      = p(100/bars),
+		y      = p(95/bars+2),
 		right  = 0,
 		file   = 'LuaUI/Images/ibeam.png',
 	}
@@ -574,26 +574,27 @@ function CreateWindow()
 	bar_metal_reserve_overlay = Chili.Progressbar:New{
 		parent = window,
 		color  = {0.5,0.5,0.5,0},
-		height = p(100/bars),
+		height = p(90/bars),
 		right  = 26,
 		min = 0,
 		max = 1,
 		value  = 0,
 		x      = 110,
-		y      = p(100/bars),
+		y      = p(95/bars+2),
 		noSkin = true,
-		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0}, },
+		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,1}, },
 	}
 	
 	bar_metal = Chili.Progressbar:New{
 		parent = window,
 		color  = col_metal,
-		height = p(100/bars),
+		height = p(90/bars),
 		right  = 26,
                 x      = 110,
-                y      = p(100/bars),
+                y      = p(95/bars+2),
 		tooltip = "This shows your current metal reserves",
 		font   = {color = {1,1,1,0}, outlineColor = {0,0,0,0}, },
+		skinName  = "imperial",
 		OnMouseDown = {function() return (not widgetHandler:InTweakMode()) end},	-- this is needed for OnMouseUp to work
 		OnMouseUp = {function(self, x, y, mouse)
 			if widgetHandler:InTweakMode() then return end
@@ -604,10 +605,10 @@ function CreateWindow()
 	
 	lbl_metal = Chili.Label:New{
 		parent = window,
-		height = p(100/bars),
+		height = p(90/bars),
 		width  = 60,
                 x      = 10,
-                y      = p(100/bars),
+                y      = p(95/bars+2),
 		valign = "center",
 		align  = "right",
 		caption = "0",
@@ -617,10 +618,10 @@ function CreateWindow()
 	}
 	lbl_m_income = Chili.Label:New{
 		parent = window,
-		height = p(50/bars),
+		height = p(45/bars),
 		width  = 40,
                 x      = 70,
-                y      = p(100/bars),
+                y      = p(95/bars+2),
 		caption = "10.0",
 		valign = "center",
  		align  = "center",
@@ -630,7 +631,7 @@ function CreateWindow()
 	}
 	lbl_m_expense = Chili.Label:New{
 		parent = window,
-		height = p(50/bars),
+		height = p(45/bars),
 		width  = 40,
                 x      = 70,
                 y      = p(1.5*100/bars),
@@ -646,37 +647,38 @@ function CreateWindow()
 	--// ENERGY
 	Chili.Image:New{
 		parent = window,
-		height = p(100/bars),
+		height = p(90/bars),
 		width  = 25,
                 right  = 10,
-                y      = 1,
+                y      = 2,
 		file   = 'LuaUI/Images/energy.png',
 	}
  
 	bar_energy_reserve_overlay = Chili.Progressbar:New{ -- Balken ganz links
 		parent = window,
 		color  = {0.5,0.5,0.5,0},
-		height = p(100/bars),
+		height = p(90/bars),
 		right  = 26,
 		 value = 0,
 		min = 0,
 		max = 1,
 		right  = 36,
 		x      = 100,
-		y      = 1,
+		y      = 2,
 		noSkin = true,
-		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0}, },
+		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,1}, },
 	}
  
 	bar_energy = Chili.Progressbar:New{
 		parent = window,
 		color  = col_energy,
-		height = p(100/bars),
+		height = p(90/bars),
 		right  = 36,
                 x      = 100,
-                y      = 1,
+                y      = 2,
 		tooltip = "Shows your current energy reserves.\n Anything above 100% will be burned",
 		font   = {color = {1,1,1,0}, outlineColor = {0,0,0,0}, },
+		skinName  = "imperial",
 		OnMouseDown = {function() return (not widgetHandler:InTweakMode()) end},	-- this is needed for OnMouseUp to work
 		OnMouseUp = {function(self, x, y, mouse)
 			if widgetHandler:InTweakMode() then return end
@@ -688,22 +690,22 @@ function CreateWindow()
 	bar_energy_overlay = Chili.Progressbar:New{
 		parent = window,
 		color  = col_energy,
-		height = p(100/bars),
+		height = p(90/bars),
 		value  = 100,
 		-- color  = {1,1,0,0.1},
 		right  = 36,
 		x      = 100,
-		y      = 1,
+		y      = 2,
 		noSkin = true,
-		font   = {color = {1,1,1,0}, outlineColor = {0,0,0,0}, },
+		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0}, },
 	}
 	
 	lbl_energy = Chili.Label:New{
 		parent = window,
-		height = p(100/bars),
+		height = p(90/bars),
 		width  = 60,
                 x      = 0,
-                y      = 1,
+                y      = 2,
 		valign = "center",
 		align  = "right",
 		caption = "0",
@@ -714,10 +716,10 @@ function CreateWindow()
 	
 	lbl_e_income = Chili.Label:New{
 		parent = window,
-		height = p(50/bars),
+		height = p(45/bars),
 		width  = 40,
                 x      = 60,
-                y      = 1,
+                y      = 2,
 		caption = "10.0",
 		valign  = "center",
 		align   = "center",
@@ -727,10 +729,10 @@ function CreateWindow()
 	}
 	lbl_e_expense = Chili.Label:New{
 		parent = window,
-		height = p(50/bars),
+		height = p(45/bars),
 		width  = 40,
                 x      = 60,
-                y      = p(50/bars),
+                y      = p(45/bars),
 		caption = "10.0",
 		valign = "center",
 		align  = "center",

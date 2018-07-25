@@ -46,7 +46,7 @@ local function SetTheme()
 		if (themes[side] ~= nil) then
 			Chili.theme.skin.general.skinName = themes[side]
 		else
-			Chili.theme.skin.general.skinName = 'Bones'
+			Chili.theme.skin.general.skinName = 'cursed'
 		end
 	end
 	

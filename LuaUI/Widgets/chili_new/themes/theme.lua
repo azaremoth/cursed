@@ -9,7 +9,7 @@ theme.name = "default"
 --//=============================================================================
 --// Define default skins
 
-local defaultSkin = "Robocracy"
+local defaultSkin = "default"
 --local defaultSkin = "DarkGlass"
 
 theme.skin = {

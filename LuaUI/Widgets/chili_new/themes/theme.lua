@@ -9,7 +9,7 @@ theme.name = "default"
 --//=============================================================================
 --// Define default skins
 
-local defaultSkin = "default"
+local defaultSkin = "Robocracy"
 --local defaultSkin = "DarkGlass"
 
 theme.skin = {
@@ -45,7 +45,7 @@ function theme.GetDefaultSkin(class)
   end
 
   if (not skinName)or(not SkinHandler.IsValidSkin(skinName)) then
-    skinName = "default"
+    skinName = "cursed"
   end
 
   return skinName

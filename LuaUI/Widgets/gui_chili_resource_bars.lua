@@ -90,7 +90,7 @@ end
 options_order = {'eexcessflashalways', 'energyFlash', 'workerUsage','opacity','onlyShowExpense','enableReserveBar','defaultEnergyReserve','defaultMetalReserve'}
  
 options = { 
-  eexcessflashalways = {name='Always Flash On Energy Excess', type='bool', value=false},
+  eexcessflashalways = {name='Always Flash On Energy Excess', type='bool', value=true},
   onlyShowExpense = {name='Only Show Expense', type='bool', value=false},
   enableReserveBar = {name='Enable Reserve', type='bool', value=false, tooltip = "Enables high priority reserve"},
   defaultEnergyReserve = {
@@ -173,19 +173,22 @@ function widget:Update(s)
 	blink_alpha = math.abs(blink_periode/2 - blink)
 
 	if blinkM_status then
-		bar_metal:SetColor( 1 - 119/255*blink_alpha,214/255,251/255,0.65 + 0.3*blink_alpha ) -- overlays fonts somehow
-		--lbl_metal.font:SetColor(0,1,0,1)
+	    bar_metal:SetColor( 0,1,0,blink_alpha )
 	end
 
 	if blinkE_status then
+	Spring.Echo("blinkE_status!")
 		if excessE then
+			Spring.Echo("Excess!")
 			bar_energy_overlay:SetColor({0,0,0,0})
-            bar_energy:SetColor(1-0.5*blink_alpha,1,0,0.65 + 0.35 *blink_alpha)
-			--lbl_energy.font:SetColor(0,1,0,1)
+            -- bar_energy:SetColor(1-0.5*blink_alpha,1,0,0.65 + 0.35 *blink_alpha)
+			bar_energy:SetColor( 1,1,0,blink_alpha )
 		else
 			-- flash red if stalling
-			bar_energy_overlay:SetColor(1,0,0,blink_alpha)
-			--lbl_energy.font:SetColor(1,0,0,1)
+			-- bar_energy_overlay:SetColor(1,0,0,blink_alpha)
+			Spring.Echo("Stalling!")
+			bar_energy_overlay:SetColor({1,0,0,blink_alpha})
+			-- bar_metal:SetColor( 1,0,0,1 )
 		end
 	end
 
@@ -294,6 +297,7 @@ function widget:GameFrame(n)
 	
 	mStor = mStor - HIDDEN_STORAGE -- reduce by hidden storage
 	eStor = eStor - HIDDEN_STORAGE -- reduce by hidden storage
+	
 	if eCurr > eStor then 
 		eCurr = eStor -- cap by storage
 	end 
@@ -315,10 +319,7 @@ function widget:GameFrame(n)
 
 	local wastingE = false
 	if options.eexcessflashalways.value then
-		wastingE = (cp.team_energyWaste > 0)
-	else
-		local waste = ((cp.allies > 0 and cp.team_energyWaste/cp.allies) or 0)
-		wastingE = (waste > eInco*0.05) and (waste > 15)
+		wastingE = eCurr >= eStor * 0.9
 	end
 	local stallingE = (eCurr <= eStor * options.energyFlash.value) and (eCurr < 1000) and (eCurr >= 0)
 	if stallingE or wastingE then

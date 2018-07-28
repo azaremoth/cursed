@@ -108,7 +108,7 @@ options = {
   opacity = {
 	name = "Opacity",
 	type = "number",
-	value = 0.0, min = 0, max = 1, step = 0.01,
+	value = 0.75, min = 0, max = 1, step = 0.01,
 	OnChange = function(self) window.color = {1,1,1,self.value}; window:Invalidate() end,
   }
 }
@@ -177,16 +177,13 @@ function widget:Update(s)
 	end
 
 	if blinkE_status then
-	Spring.Echo("blinkE_status!")
 		if excessE then
-			Spring.Echo("Excess!")
 			bar_energy_overlay:SetColor({0,0,0,0})
             -- bar_energy:SetColor(1-0.5*blink_alpha,1,0,0.65 + 0.35 *blink_alpha)
 			bar_energy:SetColor( 1,1,0,blink_alpha )
 		else
 			-- flash red if stalling
 			-- bar_energy_overlay:SetColor(1,0,0,blink_alpha)
-			Spring.Echo("Stalling!")
 			bar_energy_overlay:SetColor({1,0,0,blink_alpha})
 			-- bar_metal:SetColor( 1,0,0,1 )
 		end
@@ -536,8 +533,16 @@ function CreateWindow()
 	
 	-- Set the size for the default settings.
 	local screenWidth,screenHeight = Spring.GetWindowGeometry()
-	local width = 430
-	local x = math.min(screenWidth/2 - width/2, screenWidth - 400 - width)
+	local integralWidth = 0.33*screenWidth
+	local width = integralWidth
+	if width < 430 then
+		width = 430
+	end
+	local integralHeigth = screenWidth*4/9
+	local height = 60
+	local firstbarstart = 5
+	local barheight = (height-2*firstbarstart)/bars
+	-- local x = math.min(screenWidth/2 - width/2, screenWidth - 400 - width)
 	
 	--// WINDOW
 	window = Chili.Window:New{
@@ -546,10 +551,10 @@ function CreateWindow()
 		dockable = true,
 		name="ResourceBars",
 		padding = {0,0,0,0},
-		x = x,
-		y = 0,
-		width  = 430,
-		height = 50,
+		x = 0,
+		y = (integralHeigth + height),
+		width  = width,
+		height = height,
 		draggable = false,
 		resizable = false,
 		tweakDraggable = true,
@@ -568,9 +573,9 @@ function CreateWindow()
 	--// METAL
 	Chili.Image:New{
 		parent = window,
-		height = p(100/bars),
+		height = barheight,
 		width  = 25,
-		y      = p(100/bars),
+		y      = ( barheight+firstbarstart ),
 		right  = 0,
 		file   = 'LuaUI/Images/ibeam.png',
 	}
@@ -578,13 +583,13 @@ function CreateWindow()
 	bar_metal_reserve_overlay = Chili.Progressbar:New{
 		parent = window,
 		color  = {0.5,0.5,0.5,0.5},
-		height = p(100/bars),
+		height = barheight,
 		right  = 26,
 		min = 0,
 		max = 1,
 		value  = 0,
 		x      = 110,
-		y      = p(100/bars),
+		y      = ( barheight+firstbarstart ),
 		noSkin = true,
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 	}
@@ -592,10 +597,10 @@ function CreateWindow()
 	bar_metal = Chili.Progressbar:New{
 		parent = window,
 		color  = col_metal,
-		height = p(100/bars),
+		height = barheight,
 		right  = 26,
                 x      = 110,
-                y      = p(100/bars),
+                y      = ( barheight+firstbarstart ),
 		tooltip = "This shows your current metal reserves",
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 		OnMouseDown = {function() return (not widgetHandler:InTweakMode()) end},	-- this is needed for OnMouseUp to work
@@ -608,10 +613,10 @@ function CreateWindow()
 	
 	lbl_metal = Chili.Label:New{
 		parent = window,
-		height = p(100/bars),
+		height = barheight,
 		width  = 60,
                 x      = 10,
-                y      = p(100/bars),
+                y      = ( barheight+firstbarstart ),
 		valign = "center",
 		align  = "right",
 		caption = "0",
@@ -624,7 +629,7 @@ function CreateWindow()
 		height = p(50/bars),
 		width  = 40,
                 x      = 70,
-                y      = p(100/bars),
+                y      = ( barheight+firstbarstart ),
 		caption = "10.0",
 		valign = "center",
  		align  = "center",
@@ -637,7 +642,7 @@ function CreateWindow()
 		height = p(50/bars),
 		width  = 40,
                 x      = 70,
-                y      = p(1.5*100/bars),
+                y      = p(1.5*95/bars),
 		caption = "10.0",
 		valign = "center",
 		align  = "center",
@@ -650,22 +655,22 @@ function CreateWindow()
 	--// ENERGY
 	Chili.Image:New{
 		parent = window,
-		height = p(100/bars),
+		height = barheight,
 		width  = 25,
                 right  = 10,
-                y      = 1,
+                y      = firstbarstart,
 		file   = 'LuaUI/Images/energy.png',
 	}
     
 	bar_energy_overlay = Chili.Progressbar:New{
 		parent = window,
 		color  = col_energy,
-		height = p(100/bars),
+		height = barheight,
 		value  = 100,
 		color  = {0,0,0,0},
 		right  = 36,
 		x      = 100,
-		y      = 1,
+		y      = firstbarstart,
 		noSkin = true,
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 	}
@@ -673,14 +678,14 @@ function CreateWindow()
 	bar_energy_reserve_overlay = Chili.Progressbar:New{
 		parent = window,
 		color  = {0.5,0.5,0.5,0.5},
-		height = p(100/bars),
+		height = barheight,
 		right  = 26,
 		 value = 0,
 		min = 0,
 		max = 1,
 		right  = 36,
 		x      = 100,
-		y      = 1,
+		y      = firstbarstart,
 		noSkin = true,
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 	}
@@ -688,10 +693,10 @@ function CreateWindow()
 	bar_energy = Chili.Progressbar:New{
 		parent = window,
 		color  = col_energy,
-		height = p(100/bars),
+		height = barheight,
 		right  = 36,
                 x      = 100,
-                y      = 1,
+                y      = firstbarstart,
 		tooltip = "Shows your current energy reserves.\n Anything above 100% will be burned by 'mex overdrive'\n which increases production of your mines",
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 		OnMouseDown = {function() return (not widgetHandler:InTweakMode()) end},	-- this is needed for OnMouseUp to work
@@ -704,10 +709,10 @@ function CreateWindow()
 	
 	lbl_energy = Chili.Label:New{
 		parent = window,
-		height = p(100/bars),
+		height = barheight,
 		width  = 60,
                 x      = 0,
-                y      = 1,
+                y      = firstbarstart,
 		valign = "center",
 		align  = "right",
 		caption = "0",
@@ -720,7 +725,7 @@ function CreateWindow()
 		height = p(50/bars),
 		width  = 40,
                 x      = 60,
-                y      = 1,
+                y      = firstbarstart,
 		caption = "10.0",
 		valign  = "center",
 		align   = "center",

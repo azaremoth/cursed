@@ -1,5 +1,5 @@
 local nonCapturingUnits = {
---	"eairengineer",
+	"euf_scorpion_burrowed",
 }
 
 return nonCapturingUnits

@@ -16,10 +16,8 @@ include("LuaRules/Configs/customcmds.h.lua")
 local modOptions = Spring.GetModOptions()
 local cittersenabled = modOptions.critters
 
-if (cittersenabled ~= nil) then
-	Spring.Echo("Critters loading: " .. cittersenabled)
-else 
-	cittersenabled = "0"
+if (cittersenabled == nil) then
+	cittersenabled = false
 end
 
 local jumpDefNames  = VFS.Include"LuaRules/Configs/jump_defs.lua"
@@ -30,7 +28,7 @@ for name, data in pairs(jumpDefNames) do
 end
 
 
-if (gadgetHandler:IsSyncedCode() and cittersenabled == "1") then
+if (gadgetHandler:IsSyncedCode() and cittersenabled) then
 -------------------------------------
 ----- SYNCED -----
 

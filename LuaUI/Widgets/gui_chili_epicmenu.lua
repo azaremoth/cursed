@@ -2584,7 +2584,8 @@ local function MakeMenuBar()
 	
 	window_crude = Window:New{
 		name = 'epicmenubar',
-		x = screen_width - crude_width,
+		--x = screen_width - crude_width,
+		x = 0,
 		y = 0,
 		width = crude_width,
 		height = crude_height,

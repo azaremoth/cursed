@@ -2159,12 +2159,12 @@ local function GetSelectionWindow()
 	local integralHeight = integralWidth*4/9
 	local x = integralWidth
 	local width = 0.75*integralWidth
-	local height = integralHeight
+	local height = 0.86*integralHeight
 
 	local holderWindow = Chili.Window:New{
 		name      = 'selections',
 		-- x         = x, 
-		right = 0,
+		right = x,
 		bottom    = 0,
 		width     = width,
 		height    = height,

@@ -10,9 +10,10 @@ function gadget:GetInfo()
 	}
 end
 
+local modOptions = Spring.GetModOptions()
+
 cvMode = Spring.GetModOptions().scoremode
 
---Is CV Enabled when you launch spring.exe directly?
 if cvMode == nil then
 	cvMode = "disabled"
 end
@@ -21,13 +22,10 @@ if cvMode == "disabled" then
 	return false
 end
 
-VFS.Include("LuaRules/Configs/cv_modOptions.lua")
-
-nonCapturingUnits = VFS.Include"LuaRules/Configs/cv_nonCapturingUnits.lua"
-buildableUnits = VFS.Include"LuaRules/Configs/cv_buildableUnits.lua"
+nonCapturingUnits = VFS.Include("LuaRules/Configs/cv_nonCapturingUnits.lua")
+buildableUnits = VFS.Include("LuaRules/Configs/cv_buildableUnits.lua")
 
 local MapCenterX,MapCenterZ=Game.mapSizeX/2,Game.mapSizeZ/2
---local pointMarker = FeatureDefNames.xelnotgawatchtower.id -- Feature marking a point- This doesn't do anything atm
 
 --Make controlvictory exit if chickens are present
 local ChickenAIs = VFS.Include("LuaRules/Configs/ai_chickenlist.lua")	

@@ -539,8 +539,8 @@ function CreateWindow()
 		width = 430
 	end
 	local integralHeigth = screenWidth*4/9
-	local height = 60
-	local firstbarstart = 5
+	local height = 50
+	local firstbarstart = 3
 	local barheight = (height-2*firstbarstart)/bars
 	-- local x = math.min(screenWidth/2 - width/2, screenWidth - 400 - width)
 	
@@ -551,8 +551,10 @@ function CreateWindow()
 		dockable = true,
 		name="ResourceBars",
 		padding = {0,0,0,0},
-		x = 0,
-		y = (integralHeigth + height),
+		right = 0,
+		y = 0,
+		--x = 0,
+		--y = (integralHeigth + height),
 		width  = width,
 		height = height,
 		draggable = false,
@@ -626,7 +628,7 @@ function CreateWindow()
 	}
 	lbl_m_income = Chili.Label:New{
 		parent = window,
-		height = p(50/bars),
+		height = ( firstbarstart + 0.5*barheight ),
 		width  = 40,
                 x      = 70,
                 y      = ( barheight+firstbarstart ),
@@ -642,7 +644,7 @@ function CreateWindow()
 		height = p(50/bars),
 		width  = 40,
                 x      = 70,
-                y      = p(1.5*95/bars),
+                y      = ( firstbarstart + 1.5*barheight ),
 		caption = "10.0",
 		valign = "center",
 		align  = "center",
@@ -738,7 +740,7 @@ function CreateWindow()
 		height = p(50/bars),
 		width  = 40,
                 x      = 60,
-                y      = p(50/bars),
+                y      = ( firstbarstart + 0.5*barheight ),
 		caption = "10.0",
 		valign = "center",
 		align  = "center",

@@ -30,7 +30,6 @@ local scabbard1 = piece 'scabbard1'
 local scabbard2 = piece 'scabbard2'
 
 local moving = false
-local attackdone = false
 local attacking = false
 local inbunker = false
 
@@ -49,6 +48,7 @@ local SPARKLE	 	 = 1029+0
 local rturn = math.random()
 local lturn = math.random()
 -------------------------------------------------------
+local RestoreAtkCount = 0
 local WeaponRange = 0
 local WeaponDamage = 0
 local udid = Spring.GetUnitDefID(unitID)
@@ -190,6 +190,27 @@ function script.endJump()
 	jumping = false	
 end
 
+--- Restores
+function RestoreAtkAfterDelay()
+	Sleep(750)
+	RestoreAtkCount = RestoreAtkCount - 1
+	if (RestoreAtkCount < 1) then
+		RestoreAtkCount = 0
+		attacking = false
+	end
+end
+
+function RestoreAfterDelay()
+	Sleep(2000)
+	if ((ud.customParams.cloakedduring == "standing") and not moving and not attacking) then	
+		Spring.SetUnitCloak(unitID, 2, 50)
+		Spring.SetUnitStealth(unitID, true)	
+	elseif ((ud.customParams.cloakedduring == "moving") and not attacking) then
+		Spring.SetUnitCloak(unitID, 2, 50)
+		Spring.SetUnitStealth(unitID, true)		
+	end
+end
+
 -- Walk Motion
 local function Walkscript()
 	SetSignalMask(SIG_WALK)
@@ -280,7 +301,7 @@ local function MeleeAnimations()
 				Turn2( lleg, x_axis, 50, 600 )
 			end
 			
-			Spring.UnitScript.Spin ( pelvis, y_axis, 20, 10) 
+			Spring.UnitScript.Spin ( pelvis, y_axis, 25, 20) 
 			
 			EmitSfx(emit_r, SPARKLE)	
 			EmitSfx(emit_l, SPARKLE)				
@@ -307,11 +328,10 @@ local function MeleeAnimations()
 			Turn2( lhand, y_axis, -30, 300 )
 			Turn2( lhand, z_axis, 15, 300 )
 					
-			attackdone = true
 		end
 		
 		if not attacking then
-			Spring.UnitScript.StopSpin ( pelvis, y_axis)
+			Spring.UnitScript.StopSpin ( pelvis, y_axis, 1)
 			Turn2( pelvis, y_axis, 0, 500 )	
 			Turn2( ruparm, y_axis, 0, 400 )
 			Turn2( ruparm, z_axis, 0, 400 )
@@ -427,20 +447,6 @@ function script.HitByWeapon ( x, z, weaponDefID, damage )
 	return(damage)		
 end
   
-function RestoreAfterDelay()
-	Sleep(750)
-	if attackdone then
-		attacking = false
-	end
-	Sleep(1250)
-	if ((ud.customParams.cloakedduring == "standing") and not moving and not attacking) then	
-		Spring.SetUnitCloak(unitID, 2, 50)
-		Spring.SetUnitStealth(unitID, true)	
-	elseif ((ud.customParams.cloakedduring == "moving") and not attacking) then
-		Spring.SetUnitCloak(unitID, 2, 50)
-		Spring.SetUnitStealth(unitID, true)		
-	end
-end
 
 function CircleAttack()
 	-----------------------------------------------------------------	
@@ -488,9 +494,9 @@ end
 
 function script.Shot1()
 	attacking = true
-	attackdone = false
+	RestoreAtkCount = RestoreAtkCount +1
 	StartThread( CircleAttack ) 
-	StartThread( RestoreAfterDelay ) 
+	StartThread( RestoreAtkAfterDelay ) 
 end
 
 function script.Killed( damage, health )

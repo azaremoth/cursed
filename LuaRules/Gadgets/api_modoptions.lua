@@ -14,7 +14,7 @@ local modOptions = Spring.GetModOptions()
 
 do
 	local fileMO = VFS.Include("modoptions.lua")
-	Spring.Echo("MODOPTIONS")
+	Spring.Echo("MODOPTIONS LOADED")
 	for i = 1, #fileMO do
 		local modopt = fileMO[i]
 		Spring.Echo(modopt.key)

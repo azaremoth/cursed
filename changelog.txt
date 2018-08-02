@@ -4,6 +4,11 @@ Features
 - reworked the role of cursed Moloch demons: shorter range, higher aoe, more dps
 - added cursed Spiderdemon as tier2 support with ranged attacks
 
+Polishing
+- optimized the animation of Shade's circle attack
+- Updated IU code and appearance
+
+
 
 >> Major changes 1.438 => 1.439
 
@@ -18,7 +23,7 @@ Polishing
 - added support for normal mapped features
 - optimized game initiation (unit spawning and start box control, also for AIs)
 - optimized several pieces of lua code to enhance compatibility with Chobby and direct starts by spring.exe 
-- updated Chili widgets (shoudl hopefully not be seen ingame)
+- updated Chili widgets (should hopefully not be seen ingame)
 
 
 

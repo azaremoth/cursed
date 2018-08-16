@@ -401,7 +401,7 @@ options = {
 	opacity = {
 		name = "Opacity",
 		type = "number",
-		value = 0, min = 0, max = 1, step = 0.01,
+		value = 0.5, min = 0, max = 1, step = 0.01,
 		OnChange = function(self)
 			if self.value == 0 then
 				bgColor_panel = {nil, nil, nil, 1}

@@ -1,11 +1,13 @@
+
+
 --//=============================================================================
 --// Skin
 
 local skin = {
   info = {
     name    = "imperial",
-    version = "0.3",
-    author  = "jK",
+    version = "1.0",
+    author  = "aZaremoth",
   }
 }
 
@@ -34,8 +36,8 @@ skin.icons = {
 }
 
 skin.button = {
-  TileImageBK = ":cl:tech_button_bk.png",
-  TileImageFG = ":cl:tech_button_fg.png",
+  TileImageBK = ":cl:button.png",
+  TileImageFG = ":cl:button_fg.png",
   tiles = {22, 22, 22, 22}, --// tile widths: left,top,right,bottom
   padding = {10, 10, 10, 10},
 
@@ -95,8 +97,8 @@ skin.editbox = {
   backgroundColor = {0.1, 0.1, 0.1, 0.7},
   cursorColor     = {1.0, 0.7, 0.1, 0.8},
 
-  TileImageBK = ":cl:panel2_bg.png",
-  TileImageFG = ":cl:panel2_border.png",
+  TileImageBK = ":cl:window.png",
+  TileImageFG = ":cl:menue_frame.png",
   tiles       = {14,14,14,14},
 
   DrawControl = DrawEditBox,
@@ -105,8 +107,8 @@ skin.editbox = {
 skin.textbox = {
   hintFont = table.merge({color = {1,1,1,0.7}}, skin.general.font),
 
-  TileImageBK = ":cl:panel2_bg.png",
-  TileImageFG = ":cl:panel2_border.png",
+  TileImageBK = ":cl:window.png",
+  TileImageFG = ":cl:menue_frame.png",
   tiles       = {14,14,14,14},
 
   borderColor     = {0.0, 0.0, 0.0, 0.0},
@@ -133,20 +135,9 @@ skin.imagelistview = {
 
   DrawItemBackground = DrawItemBkGnd,
 }
---[[
-skin.imagelistviewitem = {
-  imageFG = ":cl:glassFG.png",
-  imageBK = ":cl:glassBK.png",
-  tiles = {17,15,17,20},
-
-  padding = {12, 12, 12, 12},
-
-  DrawSelectionItemBkGnd = DrawSelectionItemBkGnd,
-}
---]]
 
 skin.panel = {
-  TileImageBK = ":cl:tech_button.png",
+  TileImageBK = ":cl:window.png",
   TileImageFG = ":cl:empty.png",
   tiles = {22, 22, 22, 22},
 
@@ -168,10 +159,10 @@ skin.progressbar = {
 }
 
 skin.scrollpanel = {
-  BorderTileImage = ":cl:panel2_border.png",
+  BorderTileImage = ":cl:menue_frame.png",
   bordertiles = {14,14,14,14},
 
-  BackgroundTileImage = ":cl:panel2_bg.png",
+  BackgroundTileImage = ":cl:window.png",
   bkgndtiles = {14,14,14,14},
 
   TileImage = ":cl:tech_scrollbar.png",
@@ -206,7 +197,6 @@ skin.trackbar = {
 }
 
 skin.treeview = {
-  --ImageNode         = ":cl:node.png",
   ImageNodeSelected = ":cl:node_selected.png",
   tiles = {9, 9, 9, 9},
 
@@ -219,10 +209,7 @@ skin.treeview = {
 }
 
 skin.window = {
-  TileImage = ":c:tech_dragwindow.png",
-  --TileImage = ":cl:tech_window.png",
-  --TileImage = ":cl:window_tooltip.png",
-  --tiles = {25, 25, 25, 25}, --// tile widths: left,top,right,bottom
+  TileImage = ":c:button.png",
   tiles = {62, 62, 62, 62}, --// tile widths: left,top,right,bottom
   padding = {13, 13, 13, 13},
   hitpadding = {4, 4, 4, 4},

@@ -249,7 +249,7 @@ options = {
 	tooltip_opacity = {
 		name = "Opacity",
 		type = "number",
-		value = 0.8, min = 0, max = 1, step = 0.01,
+		value = 0.5, min = 0, max = 1, step = 0.01,
 		update_on_the_fly = true,
 		OnChange = function(self)
 			if not tooltipWindow then
@@ -262,7 +262,7 @@ options = {
 	selection_opacity = {
 		name = "Opacity",
 		type = "number",
-		value = 0.8, min = 0, max = 1, step = 0.01,
+		value = 0.5, min = 0, max = 1, step = 0.01,
 		update_on_the_fly = true,
 		OnChange = function(self)
 			if selectionWindow then
@@ -2159,7 +2159,7 @@ local function GetSelectionWindow()
 	local integralHeight = integralWidth*4/9
 	local x = integralWidth
 	local width = 0.75*integralWidth
-	local height = 0.86*integralHeight
+	local height = 0.85*integralHeight
 
 	local holderWindow = Chili.Window:New{
 		name      = 'selections',

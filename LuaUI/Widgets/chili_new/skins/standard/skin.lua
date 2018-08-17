@@ -5,7 +5,7 @@
 
 local skin = {
   info = {
-    name    = "cursed",
+    name    = "imperial",
     version = "1.0",
     author  = "aZaremoth",
   }
@@ -15,7 +15,7 @@ local skin = {
 --//
 
 skin.general = {
-  focusColor  = {0.65, 0.90, 0.15, 0.5},
+  focusColor  = {0.12, 0.98, 0.98, 0.5},
   borderColor = {1.0, 1.0, 1.0, 1.0},
 
   font = {

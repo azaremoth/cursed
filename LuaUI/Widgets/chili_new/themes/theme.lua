@@ -45,7 +45,7 @@ function theme.GetDefaultSkin(class)
   end
 
   if (not skinName)or(not SkinHandler.IsValidSkin(skinName)) then
-    skinName = "cursed"
+    skinName = "standard"
   end
 
   return skinName

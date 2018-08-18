@@ -36,9 +36,9 @@ local spGetTeamRulesParam = Spring.GetTeamRulesParam
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local col_metal = {136/255,214/255,251/255,.75}
+local col_metal = {136/255,214/255,251/255,1}
 local col_energy = {1,1,0,1}
-local col_buildpower = {0.8, 0.8, 0.2, 0.75}
+local col_xp = {0.5, 0.5, 0.5, 1}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -49,7 +49,8 @@ local bar_metal_reserve_overlay
 local bar_energy
 local bar_energy_overlay
 local bar_energy_reserve_overlay
-local bar_buildpower
+local bar_xp
+local lbl_xp
 local lbl_metal
 local lbl_energy
 local lbl_m_expense
@@ -82,12 +83,12 @@ end
 
 options_path = 'Settings/HUD Panels/Resource Bars'
 
-local function option_workerUsageUpdate()
+local function option_xpBarUpdate()
 	DestroyWindow()
 	CreateWindow()
 end
 
-options_order = {'eexcessflashalways', 'energyFlash', 'workerUsage','opacity','onlyShowExpense','enableReserveBar','defaultEnergyReserve','defaultMetalReserve'}
+options_order = {'eexcessflashalways', 'energyFlash', 'xpBar','opacity','onlyShowExpense','enableReserveBar','defaultEnergyReserve','defaultMetalReserve'}
  
 options = { 
   eexcessflashalways = {name='Always Flash On Energy Excess', type='bool', value=true},
@@ -103,7 +104,7 @@ options = {
 	type = "number",
 	value = 0, min = 0, max = 1, step = 0.01,
   },
-  workerUsage = {name = "Show Worker Usage", type = "bool", value=false, OnChange = option_workerUsageUpdate},
+  xpBar = {name = "Show Hero XPs", type = "bool", value=true, OnChange = option_xpBarUpdate},
   energyFlash = {name = "Energy Stall Flash", type = "number", value=0.1, min=0,max=1,step=0.02},
   opacity = {
 	name = "Opacity",
@@ -468,30 +469,17 @@ function widget:GameFrame(n)
 	lbl_m_income:SetCaption( ("%.1f"):format(mInco+mReci) )
 	lbl_e_income:SetCaption( ("%.1f"):format(eInco) )
 
-
-	if options.workerUsage.value then
-		local bp_aval = 0
-		local bp_use = 0
-		local builderIDs = Spring.GetTeamUnitsByDefs(GetMyTeamID(), builderDefs)
-		if (builderIDs) then
-			for i=1,#builderIDs do
-				local unit = builderIDs[i]
-				local ud = UnitDefs[Spring.GetUnitDefID(unit)]
-
-				local _, metalUse, _,energyUse = Spring.GetUnitResources(unit)
-				bp_use = bp_use + math.max(abs(metalUse), abs(energyUse))
-				bp_aval = bp_aval + ud.buildSpeed
-			end
-		end
-		if bp_aval == 0 then
-			bar_buildpower:SetValue(0)
-			bar_buildpower:SetCaption("no workers")
-		else
-			local buildpercent = bp_use/bp_aval * 100
-			bar_buildpower:SetValue(buildpercent)
-			bar_buildpower:SetCaption(("%.1f%%"):format(buildpercent))
-		end
+	if options.xpBar.value then
+		local current_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"current_xps")
+		local nextlevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"nextlevel_xps")
+		local rellevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"rellevel_xps")*100
+		bar_xp:SetValue(rellevel_xps)
+		bar_xp:SetCaption(("%.1f%%"):format(rellevel_xps))
+		-- bar_xp:SetCaption( (GreenStr.."%i/%i"):format(current_xps, nextlevel_xps) )
+		lbl_xp.font:SetColor(col_xp)
+		lbl_xp:SetCaption( "Exp." )
 	end
+
 end
 
 --------------------------------------------------------------------------------
@@ -524,7 +512,7 @@ end
 function CreateWindow()
 
 	local bars = 2
-	if options.workerUsage.value then
+	if options.xpBar.value then
 		bars = 3
 	end
 	local function p(a)
@@ -539,7 +527,7 @@ function CreateWindow()
 		width = 430
 	end
 	local integralHeigth = screenWidth*4/9
-	local height = 50
+	local height = 75
 	local firstbarstart = 3
 	local barheight = (height-2*firstbarstart)/bars
 	-- local x = math.min(screenWidth/2 - width/2, screenWidth - 400 - width)
@@ -759,18 +747,32 @@ function CreateWindow()
 	function lbl_e_expense:HitTest(x,y) return self end
 	function lbl_m_expense:HitTest(x,y) return self end
 
-	if not options.workerUsage.value then return end
+	if not options.xpBar.value then return end
 	-- worker usage
-	bar_buildpower = Chili.Progressbar:New{
+	bar_xp = Chili.Progressbar:New{
 		parent = window,
-		color  = col_buildpower,
+		color  = col_xp,
 		height = "33%",
 		right  = 6,
 		x      = 120,
 		y      = "66%",
-		tooltip = "",
+		tooltip = "The experience your hero has gained",
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 	}
+	lbl_xp = Chili.Label:New{
+		parent = window,
+		height = barheight,
+		width  = 60,
+                x      = 35,
+                y      = ( 2*barheight+firstbarstart ),
+		valign = "center",
+		align  = "right",
+		caption = "0",
+		autosize = false,
+		font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
+		tooltip = "",
+	}
+
 end
 
 function DestroyWindow()

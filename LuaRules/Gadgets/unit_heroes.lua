@@ -46,8 +46,6 @@ local ChickenAIs =
 if (gadgetHandler:IsSyncedCode()) then
 --SYNCED
 
--------- Needed for health bars widget to show leveling progress
-Spring.SetGameRulesParam("xps",1)
 ----------------------------------------------------------------
 
 function gadget:Initialize()
@@ -56,6 +54,10 @@ function gadget:Initialize()
 	for _,team in ipairs(allTeams) do
 		HeroLevelList[team] = 1
 		HeroXPList[team] = 0
+		-------- Needed for ressource bars widget to show leveling progress
+		Spring.SetTeamRulesParam(team,"current_xps",0)
+		Spring.SetTeamRulesParam(team,"nextlevel_xps",0)
+		Spring.SetTeamRulesParam(team,"rellevel_xps",0)
 	end
 end
 
@@ -153,6 +155,10 @@ end
 
 local function CheckLeveling(unitID)
 	local HeroTeam = Spring.GetUnitTeam(unitID)
+	local current_xps = HeroXPList[HeroTeam]
+	local nextlevel_xps = ((HeroLevelList[HeroTeam]^1.5)*LevelXPMultiplier^1.5)
+	local lastlevel_xps = (((HeroLevelList[HeroTeam]-1)^1.5)*LevelXPMultiplier^1.5)
+	local rellevel_xps = (current_xps-lastlevel_xps)/(nextlevel_xps-lastlevel_xps)
 ----------------------- for testing
 --		local heroDefID = Spring.GetUnitDefID(unitID)
 --		local udhero = UnitDefs[heroDefID]
@@ -160,20 +166,23 @@ local function CheckLeveling(unitID)
 --		Spring.Echo("Team " .. HeroTeam .. " has " .. HeroXPList[HeroTeam] .. " XP")	
 -----------------------	
 	-- Hero has sufficient XP to Level
-	if (HeroLevelList[HeroTeam] < MaxLevel and HeroXPList[HeroTeam] > ((HeroLevelList[HeroTeam]^1.5)*LevelXPMultiplier^1.5)) then
+	if (HeroLevelList[HeroTeam] < MaxLevel and current_xps > nextlevel_xps) then
 		HeroLevelList[HeroTeam] = (HeroLevelList[HeroTeam]+1)
-		Spring.Echo('Hero of team '.. HeroTeam .. ' reached level: ' .. HeroLevelList[HeroTeam] )		
+		-- Spring.Echo('Hero of team '.. HeroTeam .. ' reached level: ' .. HeroLevelList[HeroTeam] )		
 		ReplaceHero(unitID, HeroTeam)
 	end
 -------- Needed for health bars widget to show leveling progress
 	if (HeroLevelList[HeroTeam] < MaxLevel) then
-		-- local currentlevelXPs = HeroXPList[HeroTeam]/((HeroLevelList[HeroTeam]^1.5)*LevelXPMultiplier^1.5)
-		local currentlevelXPs = (HeroXPList[HeroTeam]-(HeroLevelList[HeroTeam]-1)^1.5*LevelXPMultiplier^1.5)/(HeroLevelList[HeroTeam]^1.5*LevelXPMultiplier^1.5)
-		Spring.SetUnitRulesParam(unitID,'xps',currentlevelXPs)
+		Spring.SetUnitRulesParam(unitID,'xps',rellevel_xps)
 	else
 		Spring.SetUnitRulesParam(unitID,'xps',0)
 	end
-----------------------------------------------------------------	
+----------------------------------------------------------------
+	Spring.SetTeamRulesParam(HeroTeam,"current_xps",current_xps)
+	Spring.SetTeamRulesParam(HeroTeam,"nextlevel_xps",nextlevel_xps)
+	Spring.SetTeamRulesParam(HeroTeam,"rellevel_xps",rellevel_xps)
+	Spring.Echo(nextlevel_xps)
+	Spring.Echo(current_xps)
 end
 
 --- A little hacky but it preventes two heros build at once by multiple factories (accounting for some problems (bug?) I had with the tech tree gadget)
@@ -221,7 +230,7 @@ local function DecreaseHeroXP(unitID)
 		elseif (HeroXPList[HeroTeam] < ((HeroLevelList[HeroTeam]-1)^1.5*LevelXPMultiplier^1.5)) then
 			HeroXPList[HeroTeam] = ((HeroLevelList[HeroTeam]-1)^1.5*LevelXPMultiplier^1.5)			
 		end		
-		Spring.Echo('Hero died: Team ' .. HeroTeam .. ' gets an experience penalty!')
+		-- Spring.Echo('Hero died: Team ' .. HeroTeam .. ' gets an experience penalty!')
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)

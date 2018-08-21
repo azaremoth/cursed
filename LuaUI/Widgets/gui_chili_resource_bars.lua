@@ -470,14 +470,15 @@ function widget:GameFrame(n)
 	lbl_e_income:SetCaption( ("%.1f"):format(eInco) )
 
 	if options.xpBar.value then
-		local current_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"current_xps")
-		local nextlevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"nextlevel_xps")
+		local current_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"current_xps")*100
+		local nextlevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"nextlevel_xps")*100
 		local rellevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"rellevel_xps")*100
+		local team_level = Spring.GetTeamRulesParam(GetMyTeamID(),"team_level")
 		bar_xp:SetValue(rellevel_xps)
-		bar_xp:SetCaption(("%.1f%%"):format(rellevel_xps))
-		-- bar_xp:SetCaption( (GreenStr.."%i/%i"):format(current_xps, nextlevel_xps) )
+		-- bar_xp:SetCaption(("%.1f%%"):format(rellevel_xps))
+		bar_xp:SetCaption( (WhiteStr.."%i/%i"):format(current_xps, nextlevel_xps) )
 		lbl_xp.font:SetColor(col_xp)
-		lbl_xp:SetCaption( "Exp." )
+		lbl_xp:SetCaption( "Lvl. " .. team_level)
 	end
 
 end

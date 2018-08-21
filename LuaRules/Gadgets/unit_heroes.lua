@@ -5,7 +5,7 @@ function gadget:GetInfo()
 		author = "aZaremoth",
 		date = "2011-11-03",
 		license = "GNU GPL v2, or later",
-		layer = 25,
+		layer = 0,
 		enabled = true
 	}
 end
@@ -30,7 +30,7 @@ local ChickenAIs =
 	}	
 ----------- Experience Range -----------
 	local expRange = 500
-	local DeathPenalty = 0.5
+	local DeathPenalty = 0.3
 	local GainForKilledHero = 0.5	
 	local LevelXPMultiplier = 0.7
 	local MaxLevel = 5
@@ -58,6 +58,7 @@ function gadget:Initialize()
 		Spring.SetTeamRulesParam(team,"current_xps",0)
 		Spring.SetTeamRulesParam(team,"nextlevel_xps",0)
 		Spring.SetTeamRulesParam(team,"rellevel_xps",0)
+		Spring.SetTeamRulesParam(team,"team_level",1)
 	end
 end
 
@@ -178,9 +179,6 @@ local function CheckLeveling(unitID)
 		Spring.SetUnitRulesParam(unitID,'xps',0)
 	end
 ----------------------------------------------------------------
-	Spring.SetTeamRulesParam(HeroTeam,"current_xps",current_xps)
-	Spring.SetTeamRulesParam(HeroTeam,"nextlevel_xps",nextlevel_xps)
-	Spring.SetTeamRulesParam(HeroTeam,"rellevel_xps",rellevel_xps)
 	Spring.Echo(nextlevel_xps)
 	Spring.Echo(current_xps)
 end
@@ -294,7 +292,22 @@ function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
 end
 
 function gadget:GameFrame(f)
-	if (f % 30) == 8 then
+	------------- data update for widgets
+	if (f % 10) == 1 then
+		local allTeams = Spring.GetTeamList()
+		for _,team in ipairs(allTeams) do
+			local current_xps = HeroXPList[team]
+			local nextlevel_xps = ((HeroLevelList[team]^1.5)*LevelXPMultiplier^1.5)
+			local lastlevel_xps = (((HeroLevelList[team]-1)^1.5)*LevelXPMultiplier^1.5)
+			local rellevel_xps = (current_xps-lastlevel_xps)/(nextlevel_xps-lastlevel_xps)
+			Spring.SetTeamRulesParam(team,"current_xps",current_xps)
+			Spring.SetTeamRulesParam(team,"nextlevel_xps",nextlevel_xps)
+			Spring.SetTeamRulesParam(team,"rellevel_xps",rellevel_xps)
+			Spring.SetTeamRulesParam(team,"team_level",HeroLevelList[team])
+		end
+	end
+	------------- AI Respawn and level increase
+	if (f % 30) == 8 then	
 		for teamID, gameframe in ipairs(AIRespawnList) do
 			local heroteam = (teamID-1) -- spring does not like tables with 0
 			if (gameframe < Spring.GetGameFrame()) then

@@ -179,8 +179,6 @@ local function CheckLeveling(unitID)
 		Spring.SetUnitRulesParam(unitID,'xps',0)
 	end
 ----------------------------------------------------------------
-	Spring.Echo(nextlevel_xps)
-	Spring.Echo(current_xps)
 end
 
 --- A little hacky but it preventes two heros build at once by multiple factories (accounting for some problems (bug?) I had with the tech tree gadget)

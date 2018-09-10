@@ -148,6 +148,141 @@ local LVL5 = {
     },
   },  
 }
+local LVL6 = {
+  unitname           = "tc_shade_lvl6",
+  name               = "Shade (Hero Lvl. 6)", 
+  maxDamage          = 4400,
+  customParams       = {
+		factionname	= "cursed",
+		isinfantry 	= "true",
+		cloakedduring	= "moving",	
+		illusions 	= 3,		
+		canjump     = "1",
+		jumpclass 	= "hero",		
+		normaltex 	= "unittextures/normalmaps/tc_shade_normal.png",
+		normalmaps 	= "yes",	
+		RequireTech = "0 Hero",
+		ProvideTech = "-Hero",
+		helptext 	= "The Shade is a stealthy melee class damage dealer."		
+  },  
+  weapons = {
+    [1]  = {
+      name                	= "SHADELVL5MELEE",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 360,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND",
+    },
+  },  
+}
+local LVL7 = {
+  unitname           = "tc_shade_lvl7",
+  name               = "Shade (Hero Lvl. 7)", 
+  maxDamage          = 4400,
+  customParams       = {
+		factionname	= "cursed",
+		isinfantry 	= "true",
+		cloakedduring	= "moving",	
+		illusions 	= 3,		
+		canjump     = "1",
+		jumpclass 	= "hero",		
+		normaltex 	= "unittextures/normalmaps/tc_shade_normal.png",
+		normalmaps 	= "yes",	
+		RequireTech = "0 Hero",
+		ProvideTech = "-Hero",
+		helptext 	= "The Shade is a stealthy melee class damage dealer."		
+  },  
+  weapons = {
+    [1]  = {
+      name                	= "SHADELVL5MELEE",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 360,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND",
+    },
+  },  
+}
+local LVL8 = {
+  unitname           = "tc_shade_lvl8",
+  name               = "Shade (Hero Lvl. 8)", 
+  maxDamage          = 4400,
+  customParams       = {
+		factionname	= "cursed",
+		isinfantry 	= "true",
+		cloakedduring	= "moving",	
+		illusions 	= 3,		
+		canjump     = "1",
+		jumpclass 	= "hero",		
+		normaltex 	= "unittextures/normalmaps/tc_shade_normal.png",
+		normalmaps 	= "yes",	
+		RequireTech = "0 Hero",
+		ProvideTech = "-Hero",
+		helptext 	= "The Shade is a stealthy melee class damage dealer."		
+  },  
+  weapons = {
+    [1]  = {
+      name                	= "SHADELVL5MELEE",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 360,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND",
+    },
+  },  
+}
+local LVL9 = {
+  unitname           = "tc_shade_lvl9",
+  name               = "Shade (Hero Lvl. 9)", 
+  maxDamage          = 4400,
+  customParams       = {
+		factionname	= "cursed",
+		isinfantry 	= "true",
+		cloakedduring	= "moving",	
+		illusions 	= 3,		
+		canjump     = "1",
+		jumpclass 	= "hero",		
+		normaltex 	= "unittextures/normalmaps/tc_shade_normal.png",
+		normalmaps 	= "yes",	
+		RequireTech = "0 Hero",
+		ProvideTech = "-Hero",
+		helptext 	= "The Shade is a stealthy melee class damage dealer."		
+  },  
+  weapons = {
+    [1]  = {
+      name                	= "SHADELVL5MELEE",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 360,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND",
+    },
+  },  
+}
+local LVL10 = {
+  unitname           = "tc_shade_lvl10",
+  name               = "Shade (Hero Lvl. 10)", 
+  maxDamage          = 4400,
+  customParams       = {
+		factionname	= "cursed",
+		isinfantry 	= "true",
+		cloakedduring	= "moving",	
+		illusions 	= 3,		
+		canjump     = "1",
+		jumpclass 	= "hero",		
+		normaltex 	= "unittextures/normalmaps/tc_shade_normal.png",
+		normalmaps 	= "yes",	
+		RequireTech = "0 Hero",
+		ProvideTech = "-Hero",
+		helptext 	= "The Shade is a stealthy melee class damage dealer."		
+  },  
+  weapons = {
+    [1]  = {
+      name                	= "SHADELVL5MELEE",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 360,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND",
+    },
+  },  
+}
 ------------------------------------------------------ BASE CLASS
 local BASE = {
   acceleration       = 1.0,
@@ -269,10 +404,15 @@ function DefMergeTable(primary, secondary, deep)
 end
 
 return lowerkeys({
-	tc_shade 		= DefMergeTable(BASE, LVL0),
+	tc_shade 	= DefMergeTable(BASE, LVL0),
 	tc_shade_lvl1 	= DefMergeTable(BASE, LVL1),
 	tc_shade_lvl2 	= DefMergeTable(BASE, LVL2),
 	tc_shade_lvl3 	= DefMergeTable(BASE, LVL3),
 	tc_shade_lvl4 	= DefMergeTable(BASE, LVL4),
 	tc_shade_lvl5 	= DefMergeTable(BASE, LVL5),
+	tc_shade_lvl6 	= DefMergeTable(BASE, LVL6),
+	tc_shade_lvl7 	= DefMergeTable(BASE, LVL7),
+	tc_shade_lvl8 	= DefMergeTable(BASE, LVL8),
+	tc_shade_lvl9 	= DefMergeTable(BASE, LVL9),
+	tc_shade_lvl10 	= DefMergeTable(BASE, LVL10),		
 })

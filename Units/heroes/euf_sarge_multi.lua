@@ -216,6 +216,236 @@ local LVL5 = {
 		},
   },  
 }
+local LVL6 = {
+  unitname           = "euf_sarge_lvl6",
+  name               = "Sarge (Hero Lvl. 6)", 
+  maxDamage          = 5500,
+  customParams       = {
+		factionname	= "imperials",
+		isinfantry 	= "true",	
+		canjump     = "1",
+		jumpclass 	= "hero",		
+		normaltex 	= "unittextures/normalmaps/euf_sarge_normal.png",
+		normalmaps 	= "yes",	
+		RequireTech = "0 Hero",
+		ProvideTech = "-Hero",
+		helptext 	= "The Sarge is a tank class imperial hero. Fear his chain- and plasmaguns!"		
+  },  
+  weapons = {
+		[1] = {
+			name               	= "SARGELVL5CHAINGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[2] = {
+			name               	= "SARGELVL5CHAINGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[3] = {
+			name               	= "SARGELVL3PLASMAGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			badTargetCategory 	= "AIR",
+			onlyTargetCategory 	= "LAND",
+		},
+		[4] = {
+			name               	= "SARGELVL3PLASMAGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			badTargetCategory 	= "AIR",
+			onlyTargetCategory 	= "LAND",
+		},
+  },  
+}
+local LVL7 = {
+  unitname           = "euf_sarge_lvl7",
+  name               = "Sarge (Hero Lvl. 7)", 
+  maxDamage          = 5500,
+  customParams       = {
+		factionname	= "imperials",
+		isinfantry 	= "true",	
+		canjump     = "1",
+		jumpclass 	= "hero",		
+		normaltex 	= "unittextures/normalmaps/euf_sarge_normal.png",
+		normalmaps 	= "yes",	
+		RequireTech = "0 Hero",
+		ProvideTech = "-Hero",
+		helptext 	= "The Sarge is a tank class imperial hero. Fear his chain- and plasmaguns!"		
+  },  
+  weapons = {
+		[1] = {
+			name               	= "SARGELVL5CHAINGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[2] = {
+			name               	= "SARGELVL5CHAINGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[3] = {
+			name               	= "SARGELVL3PLASMAGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			badTargetCategory 	= "AIR",
+			onlyTargetCategory 	= "LAND",
+		},
+		[4] = {
+			name               	= "SARGELVL3PLASMAGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			badTargetCategory 	= "AIR",
+			onlyTargetCategory 	= "LAND",
+		},
+  },  
+}
+local LVL8 = {
+  unitname           = "euf_sarge_lvl8",
+  name               = "Sarge (Hero Lvl. 8)", 
+  maxDamage          = 5500,
+  customParams       = {
+		factionname	= "imperials",
+		isinfantry 	= "true",	
+		canjump     = "1",
+		jumpclass 	= "hero",		
+		normaltex 	= "unittextures/normalmaps/euf_sarge_normal.png",
+		normalmaps 	= "yes",	
+		RequireTech = "0 Hero",
+		ProvideTech = "-Hero",
+		helptext 	= "The Sarge is a tank class imperial hero. Fear his chain- and plasmaguns!"		
+  },  
+  weapons = {
+		[1] = {
+			name               	= "SARGELVL5CHAINGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[2] = {
+			name               	= "SARGELVL5CHAINGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[3] = {
+			name               	= "SARGELVL3PLASMAGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			badTargetCategory 	= "AIR",
+			onlyTargetCategory 	= "LAND",
+		},
+		[4] = {
+			name               	= "SARGELVL3PLASMAGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			badTargetCategory 	= "AIR",
+			onlyTargetCategory 	= "LAND",
+		},
+  },  
+}
+local LVL9 = {
+  unitname           = "euf_sarge_lvl9",
+  name               = "Sarge (Hero Lvl. 9)", 
+  maxDamage          = 5500,
+  customParams       = {
+		factionname	= "imperials",
+		isinfantry 	= "true",	
+		canjump     = "1",
+		jumpclass 	= "hero",		
+		normaltex 	= "unittextures/normalmaps/euf_sarge_normal.png",
+		normalmaps 	= "yes",	
+		RequireTech = "0 Hero",
+		ProvideTech = "-Hero",
+		helptext 	= "The Sarge is a tank class imperial hero. Fear his chain- and plasmaguns!"		
+  },  
+  weapons = {
+		[1] = {
+			name               	= "SARGELVL5CHAINGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[2] = {
+			name               	= "SARGELVL5CHAINGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[3] = {
+			name               	= "SARGELVL3PLASMAGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			badTargetCategory 	= "AIR",
+			onlyTargetCategory 	= "LAND",
+		},
+		[4] = {
+			name               	= "SARGELVL3PLASMAGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			badTargetCategory 	= "AIR",
+			onlyTargetCategory 	= "LAND",
+		},
+  },  
+}
+local LVL10 = {
+  unitname           = "euf_sarge_lvl10",
+  name               = "Sarge (Hero Lvl. 10)", 
+  maxDamage          = 5500,
+  customParams       = {
+		factionname	= "imperials",
+		isinfantry 	= "true",	
+		canjump     = "1",
+		jumpclass 	= "hero",		
+		normaltex 	= "unittextures/normalmaps/euf_sarge_normal.png",
+		normalmaps 	= "yes",	
+		RequireTech = "0 Hero",
+		ProvideTech = "-Hero",
+		helptext 	= "The Sarge is a tank class imperial hero. Fear his chain- and plasmaguns!"		
+  },  
+  weapons = {
+		[1] = {
+			name               	= "SARGELVL5CHAINGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[2] = {
+			name               	= "SARGELVL5CHAINGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[3] = {
+			name               	= "SARGELVL3PLASMAGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			badTargetCategory 	= "AIR",
+			onlyTargetCategory 	= "LAND",
+		},
+		[4] = {
+			name               	= "SARGELVL3PLASMAGUN",
+			mainDir            	= "0 0 1",
+			maxAngleDif        	= 180,
+			badTargetCategory 	= "AIR",
+			onlyTargetCategory 	= "LAND",
+		},
+  },  
+}
 ------------------------------------------------------ BASE CLASS
 local BASE = {
   acceleration       = 1.0,
@@ -339,10 +569,15 @@ function DefMergeTable(primary, secondary, deep)
 end
 
 return lowerkeys({
-	euf_sarge 		= DefMergeTable(BASE, LVL0),
+	euf_sarge = DefMergeTable(BASE, LVL0),
 	euf_sarge_lvl1 	= DefMergeTable(BASE, LVL1),
 	euf_sarge_lvl2 	= DefMergeTable(BASE, LVL2),
 	euf_sarge_lvl3 	= DefMergeTable(BASE, LVL3),
 	euf_sarge_lvl4 	= DefMergeTable(BASE, LVL4),
 	euf_sarge_lvl5 	= DefMergeTable(BASE, LVL5),
+	euf_sarge_lvl6 	= DefMergeTable(BASE, LVL6),
+	euf_sarge_lvl7	= DefMergeTable(BASE, LVL7),
+	euf_sarge_lvl8 	= DefMergeTable(BASE, LVL8),
+	euf_sarge_lvl9 	= DefMergeTable(BASE, LVL9),
+	euf_sarge_lvl10	= DefMergeTable(BASE, LVL10),		
 })

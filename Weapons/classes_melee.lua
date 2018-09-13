@@ -37,33 +37,63 @@ local DECOYSHADEMELEE = {
 }
 local SHADELVL1MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
-	range                   = 70,
+    range                   = 70,
     reloadtime              = 0.70,
-    damage 					= { default = 95, flyer = 95, heavy = 95, light = 95, },
+    damage 		    = { default = 95, flyer = 95, heavy = 95, light = 95, },
 }
 local SHADELVL2MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
-	range                   = 70,
+    range                   = 70,
     reloadtime              = 0.70,
-    damage 					= { default = 128, flyer = 128, heavy = 128, light = 128, },
+    damage 		    = { default = 150, flyer = 150, heavy = 150, light = 150, },
 }
 local SHADELVL3MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
-	range                   = 70,
+    range                   = 70,
     reloadtime              = 0.70,
-    damage 					= { default = 175, flyer = 175, heavy = 175, light = 200, },
+    damage 		    = { default = 205, flyer = 205, heavy = 205, light = 205, },
 }
 local SHADELVL4MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
-	range                   = 70,
+    range                   = 70,
     reloadtime              = 0.70,
-    damage 					= { default = 360, flyer = 360, heavy = 360, light = 360, },
+    damage 		    = { default = 260, flyer = 260, heavy = 260, light = 260, },
 }
 local SHADELVL5MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
-	range                   = 70,
+    range                   = 70,
     reloadtime              = 0.70,
-    damage 					= { default = 500, flyer = 500, heavy = 500, light = 500, },
+    damage 		    = { default = 315, flyer = 315, heavy = 315, light = 315, },
+}
+local SHADELVL6MELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
+    range                   = 70,
+    reloadtime              = 0.70,
+    damage 		    = { default = 370, flyer = 370, heavy = 370, light = 370, },
+}
+local SHADELVL7MELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
+    range                   = 70,
+    reloadtime              = 0.70,
+    damage 		    = { default = 425, flyer = 425, heavy = 425, light = 425, },
+}
+local SHADELVL8MELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
+    range                   = 70,
+    reloadtime              = 0.70,
+    damage 		    = { default = 480, flyer = 480, heavy = 480, light = 480, },
+}
+local SHADELVL9MELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
+    range                   = 70,
+    reloadtime              = 0.70,
+    damage 		    = { default = 535, flyer = 535, heavy = 535, light = 535, },
+}
+local SHADELVL10MELEE = {
+    explosionGenerator      = [[custom:GREENHITSPARKLE]],
+    range                   = 70,
+    reloadtime              = 0.70,
+    damage 		    = { default = 590, flyer = 590, heavy = 590, light = 590, },
 }
 local MEDBUGMELEE = {
     explosionGenerator      = [[custom:HITSPARKLE]],
@@ -189,6 +219,11 @@ return lowerkeys({
 	SHADELVL3MELEE = WeaponDefMergeTable(MELEEBASE, SHADELVL3MELEE),
 	SHADELVL4MELEE = WeaponDefMergeTable(MELEEBASE, SHADELVL4MELEE),
 	SHADELVL5MELEE = WeaponDefMergeTable(MELEEBASE, SHADELVL5MELEE),
+	SHADELVL6MELEE = WeaponDefMergeTable(MELEEBASE, SHADELVL6MELEE),
+	SHADELVL7MELEE = WeaponDefMergeTable(MELEEBASE, SHADELVL7MELEE),
+	SHADELVL8MELEE = WeaponDefMergeTable(MELEEBASE, SHADELVL8MELEE),
+	SHADELVL9MELEE = WeaponDefMergeTable(MELEEBASE, SHADELVL9MELEE),
+	SHADELVL10MELEE = WeaponDefMergeTable(MELEEBASE, SHADELVL10MELEE),		
 	MEDBUGMELEE = WeaponDefMergeTable(MELEEBASE, MEDBUGMELEE),
 	BIGBUGMELEE = WeaponDefMergeTable(MELEEBASE, BIGBUGMELEE),
 })

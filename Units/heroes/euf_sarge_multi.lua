@@ -32,13 +32,18 @@ local LVL1 = {
   weapons = {
 		[1] = {
 			name               	= "SARGELVL1CHAINGUN",
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[2] = {
+			name               	= "SARGELVL1PISTOL",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
-		[2] = {
-			name               	= "SARGELVL1CHAINGUN",
+		[3] = {
+			name               	= "SARGELVL1PISTOL",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
@@ -64,18 +69,23 @@ local LVL2 = {
   weapons = {
 		[1] = {
 			name               	= "SARGELVL2CHAINGUN",
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
+		},
+		[2] = {
+			name               	= "SARGELVL2PISTOL",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
-		[2] = {
-			name               	= "SARGELVL2CHAINGUN",
+		[3] = {
+			name               	= "SARGELVL2PISTOL",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
-		},	
+		},
   },  
 }
 local LVL3 = {
@@ -96,31 +106,22 @@ local LVL3 = {
   weapons = {
 		[1] = {
 			name               	= "SARGELVL3CHAINGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL3CHAINGUN",
+			name               	= "SARGELVL3PISTOL",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[3] = {
-			name               	= "SARGELVL1PLASMAGUN",
+			name               	= "SARGELVL3PISTOL",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
-		},
-		[4] = {
-			name               	= "SARGELVL1PLASMAGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
 		},
   },  
 }
@@ -142,31 +143,22 @@ local LVL4 = {
   weapons = {
 		[1] = {
 			name               	= "SARGELVL4CHAINGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL4CHAINGUN",
+			name               	= "SARGELVL4PISTOL",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[3] = {
-			name               	= "SARGELVL2PLASMAGUN",
+			name               	= "SARGELVL4PLASMAGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
-		},
-		[4] = {
-			name               	= "SARGELVL2PLASMAGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
 		},
   },  
 }
@@ -188,31 +180,22 @@ local LVL5 = {
   weapons = {
 		[1] = {
 			name               	= "SARGELVL5CHAINGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL5PISTOL",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[3] = {
-			name               	= "SARGELVL3PLASMAGUN",
+			name               	= "SARGELVL5PLASMAGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
-		},
-		[4] = {
-			name               	= "SARGELVL3PLASMAGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
 		},
   },  
 }
@@ -234,31 +217,22 @@ local LVL6 = {
   weapons = {
 		[1] = {
 			name               	= "SARGELVL6CHAINGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL6CHAINGUN",
+			name               	= "SARGELVL6BFG",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[3] = {
-			name               	= "SARGELVL3PLASMAGUN",
+			name               	= "SARGELVL6PLASMAGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
-		},
-		[4] = {
-			name               	= "SARGELVL3PLASMAGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
 		},
   },  
 }
@@ -280,31 +254,22 @@ local LVL7 = {
   weapons = {
 		[1] = {
 			name               	= "SARGELVL7CHAINGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL7CHAINGUN",
+			name               	= "SARGELVL7BFG",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[3] = {
-			name               	= "SARGELVL3PLASMAGUN",
+			name               	= "SARGELVL7PLASMAGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
-		},
-		[4] = {
-			name               	= "SARGELVL3PLASMAGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
 		},
   },  
 }
@@ -326,31 +291,22 @@ local LVL8 = {
   weapons = {
 		[1] = {
 			name               	= "SARGELVL8CHAINGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL8CHAINGUN",
+			name               	= "SARGELVL8BFG",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[3] = {
-			name               	= "SARGELVL3PLASMAGUN",
+			name               	= "SARGELVL8PLASMAGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
-		},
-		[4] = {
-			name               	= "SARGELVL3PLASMAGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
 		},
   },  
 }
@@ -372,31 +328,22 @@ local LVL9 = {
   weapons = {
 		[1] = {
 			name               	= "SARGELVL9CHAINGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL9CHAINGUN",
+			name               	= "SARGELVL9BFG",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[3] = {
-			name               	= "SARGELVL3PLASMAGUN",
+			name               	= "SARGELVL9PLASMAGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
-		},
-		[4] = {
-			name               	= "SARGELVL3PLASMAGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
 		},
   },  
 }
@@ -418,31 +365,22 @@ local LVL10 = {
   weapons = {
 		[1] = {
 			name               	= "SARGELVL10CHAINGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL10CHAINGUN",
+			name               	= "SARGELVL10BFG",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[3] = {
-			name               	= "SARGELVL3PLASMAGUN",
+			name               	= "SARGELVL10PLASMAGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
-		},
-		[4] = {
-			name               	= "SARGELVL3PLASMAGUN",
-			mainDir            	= "0 0 1",
-			maxAngleDif        	= 180,
-			badTargetCategory 	= "AIR",
-			onlyTargetCategory 	= "LAND",
+			onlyTargetCategory 	= "LAND AIR",
+			badTargetCategory 	= "HEAVYARMOR",
 		},
   },  
 }

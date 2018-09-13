@@ -51,12 +51,22 @@ jumpClassGroups = {
 		"euf_sarge_lvl2",
 		"euf_sarge_lvl3",
 		"euf_sarge_lvl4",
-		"euf_sarge_lvl5",},
+		"euf_sarge_lvl5",
+		"euf_sarge_lvl6",
+		"euf_sarge_lvl7",
+		"euf_sarge_lvl8",
+		"euf_sarge_lvl9",		
+		"euf_sarge_lvl10",},
 	fasthero = {
 		"tc_shade_lvl2",
 		"tc_shade_lvl3",
 		"tc_shade_lvl4",
-		"tc_shade_lvl5",},
+		"tc_shade_lvl5",
+		"tc_shade_lvl6",
+		"tc_shade_lvl7",
+		"tc_shade_lvl8",
+		"tc_shade_lvl9",		
+		"tc_shade_lvl10",},
 	mage = {
 		"tc_mage",},
 	warpjump = {
@@ -79,12 +89,14 @@ end
 --		reload
 ------------------------------------------------------------------------------------------------------------------------------------------------	
 overCategory = {
-euf_sarge_lvl3 = { range = 330, reload = 4 },
-euf_sarge_lvl4 = { range = 360, reload = 3.2 },
-euf_sarge_lvl5 = { range = 400, reload = 2.6 },
-tc_shade_lvl3 = { range = 330, reload = 4 },
-tc_shade_lvl4 = { range = 360, reload = 3.2 },
-tc_shade_lvl5 = { range = 400, reload = 2.6 },
+euf_sarge_lvl4 = { range = 350, reload = 4.25 },
+euf_sarge_lvl6 = { range = 400, reload = 3.5 },
+euf_sarge_lvl8 = { range = 450, reload = 2.75 },
+euf_sarge_lvl10 = { range = 500, reload = 2.0 },	
+tc_shade_lvl4 = { range = 350, reload = 4.25 },
+tc_shade_lvl6 = { range = 400, reload = 3.5 },
+tc_shade_lvl8 = { range = 450, reload = 2.75 },
+tc_shade_lvl10 = { range = 500, reload = 2.0 },
 }
 
 

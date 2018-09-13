@@ -1,9 +1,14 @@
 ----------------------------------- ADAPTIONS TO BASE CLASS ------------------------------
 local SARGELVL1CHAINGUN = { damage = { default = 15, flyer = 15, heavy = (15*0.75), light = 15, },}
-local SARGELVL2CHAINGUN = { damage = { default = 20, flyer = 20, heavy = (20*0.75), light = 20, },}
-local SARGELVL3CHAINGUN = { damage = { default = 24, flyer = 24, heavy = (24*0.75), light = 24, },}
-local SARGELVL4CHAINGUN = { damage = { default = 30, flyer = 30, heavy = (30*0.75), light = 30, },}
-local SARGELVL5CHAINGUN = { damage = { default = 38, flyer = 38, heavy = (38*0.75), light = 38, },}
+local SARGELVL2CHAINGUN = { damage = { default = 18, flyer = 18, heavy = (18*0.75), light = 18, },}
+local SARGELVL3CHAINGUN = { damage = { default = 21, flyer = 21, heavy = (21*0.75), light = 21, },}
+local SARGELVL4CHAINGUN = { damage = { default = 24, flyer = 24, heavy = (24*0.75), light = 24, },}
+local SARGELVL5CHAINGUN = { damage = { default = 27, flyer = 27, heavy = (27*0.75), light = 27, },}
+local SARGELVL6CHAINGUN = { damage = { default = 30, flyer = 30, heavy = (30*0.75), light = 30, },}
+local SARGELVL7CHAINGUN = { damage = { default = 33, flyer = 33, heavy = (33*0.75), light = 33, },}
+local SARGELVL8CHAINGUN = { damage = { default = 36, flyer = 36, heavy = (36*0.75), light = 36, },}
+local SARGELVL9CHAINGUN = { damage = { default = 39, flyer = 39, heavy = (39*0.75), light = 39, },}
+local SARGELVL10CHAINGUN = { damage = { default = 42, flyer = 42, heavy = (42*0.75), light = 42, },}
 
 local SARGELVL1PLASMAGUN = { damage = { default = 50, flyer = (50*0.33), heavy = 50, light = 50, },}
 local SARGELVL2PLASMAGUN = { damage = { default = 63, flyer = (63*0.33), heavy = 63, light = 63, },}
@@ -107,6 +112,11 @@ return lowerkeys({
 	SARGELVL3CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL3CHAINGUN),
 	SARGELVL4CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL4CHAINGUN),
 	SARGELVL5CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL5CHAINGUN),
+	SARGELVL6CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL6CHAINGUN),
+	SARGELVL7CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL7CHAINGUN),
+	SARGELVL8CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL8CHAINGUN),
+	SARGELVL9CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL9CHAINGUN),
+	SARGELVL10CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL10CHAINGUN),		
 	SARGELVL1PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL1PLASMAGUN),
 	SARGELVL2PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL2PLASMAGUN),
 	SARGELVL3PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL3PLASMAGUN),	

@@ -175,7 +175,7 @@ local LVL6 = {
   },  
   weapons = {
     [1]  = {
-      name                	= "SHADELVL5MELEE",
+      name                	= "SHADELVL6MELEE",
       mainDir            	= "0 0 1",
       maxAngleDif        	= 360,
 	  badTargetCategory 	= "AIR",
@@ -203,7 +203,7 @@ local LVL7 = {
   },  
   weapons = {
     [1]  = {
-      name                	= "SHADELVL5MELEE",
+      name                	= "SHADELVL7MELEE",
       mainDir            	= "0 0 1",
       maxAngleDif        	= 360,
 	  badTargetCategory 	= "AIR",
@@ -231,7 +231,7 @@ local LVL8 = {
   },  
   weapons = {
     [1]  = {
-      name                	= "SHADELVL5MELEE",
+      name                	= "SHADELVL8MELEE",
       mainDir            	= "0 0 1",
       maxAngleDif        	= 360,
 	  badTargetCategory 	= "AIR",
@@ -259,7 +259,7 @@ local LVL9 = {
   },  
   weapons = {
     [1]  = {
-      name                	= "SHADELVL5MELEE",
+      name                	= "SHADELVL9MELEE",
       mainDir            	= "0 0 1",
       maxAngleDif        	= 360,
 	  badTargetCategory 	= "AIR",
@@ -287,7 +287,7 @@ local LVL10 = {
   },  
   weapons = {
     [1]  = {
-      name                	= "SHADELVL5MELEE",
+      name                	= "SHADELVL10MELEE",
       mainDir            	= "0 0 1",
       maxAngleDif        	= 360,
 	  badTargetCategory 	= "AIR",

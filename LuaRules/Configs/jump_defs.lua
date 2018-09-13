@@ -89,13 +89,21 @@ end
 --		reload
 ------------------------------------------------------------------------------------------------------------------------------------------------	
 overCategory = {
+euf_sarge_lvl3 = { range = 325, reload = 4.625 },
 euf_sarge_lvl4 = { range = 350, reload = 4.25 },
+euf_sarge_lvl5 = { range = 375, reload = 3.875 },
 euf_sarge_lvl6 = { range = 400, reload = 3.5 },
+euf_sarge_lvl7 = { range = 425, reload = 3.125 },
 euf_sarge_lvl8 = { range = 450, reload = 2.75 },
-euf_sarge_lvl10 = { range = 500, reload = 2.0 },	
+euf_sarge_lvl9 = { range = 475, reload = 2.375 },
+euf_sarge_lvl10 = { range = 500, reload = 2.0 },
+tc_shade_lvl3 = { range = 325, reload = 4.625 },
 tc_shade_lvl4 = { range = 350, reload = 4.25 },
+tc_shade_lvl5 = { range = 375, reload = 3.875 },
 tc_shade_lvl6 = { range = 400, reload = 3.5 },
+tc_shade_lvl7 = { range = 425, reload = 3.125 },
 tc_shade_lvl8 = { range = 450, reload = 2.75 },
+tc_shade_lvl9 = { range = 475, reload = 2.375 },
 tc_shade_lvl10 = { range = 500, reload = 2.0 },
 }
 

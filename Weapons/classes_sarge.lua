@@ -10,19 +10,23 @@ local SARGELVL8CHAINGUN = { damage = { default = 36, flyer = 36, heavy = (36*0.7
 local SARGELVL9CHAINGUN = { damage = { default = 39, flyer = 39, heavy = (39*0.75), light = 39, },}
 local SARGELVL10CHAINGUN = { damage = { default = 42, flyer = 42, heavy = (42*0.75), light = 42, },}
 
-local SARGELVL1PLASMAGUN = { damage = { default = 50, flyer = (50*0.33), heavy = 50, light = 50, },}
-local SARGELVL2PLASMAGUN = { damage = { default = 63, flyer = (63*0.33), heavy = 63, light = 63, },}
-local SARGELVL3PLASMAGUN = { damage = { default = 80, flyer = (80*0.33), heavy = 80, light = 80, },}
+local SARGELVL4PLASMAGUN = { damage = { default = 200, flyer = (200*0.33), heavy = 200, light = 200, },}
+local SARGELVL5PLASMAGUN = { damage = { default = 224, flyer = (224*0.33), heavy = 224, light = 224, },}
+local SARGELVL6PLASMAGUN = { damage = { default = 248, flyer = (248*0.33), heavy = 248, light = 248, },}
+local SARGELVL7PLASMAGUN = { damage = { default = 272, flyer = (272*0.33), heavy = 272, light = 272, },}
+local SARGELVL8PLASMAGUN = { damage = { default = 296, flyer = (296*0.33), heavy = 296, light = 296, },}
+local SARGELVL9PLASMAGUN = { damage = { default = 320, flyer = (320*0.33), heavy = 320, light = 320, },}
+local SARGELVL10PLASMAGUN = { damage = { default = 344, flyer = (344*0.33), heavy = 344, light = 344, },}
 -----------------------------------  BASE CLASS CHAINGUN ---------------------------------
 local CHAINGUNBASE = {
     avoidFriendly      	= true,
-	collideFriendly    	= true,
+    collideFriendly    	= true,
     accuracy           	= 1024,
     areaOfEffect       	= 16,
-	cylinderTargeting 	= 128,		
+    cylinderTargeting 	= 128,		
     energypershot       = 0,	
     explosionGenerator 	= "custom:SMALL_BULLET_FX",
-	explosionScar      	= false,	
+    explosionScar      	= false,	
     interceptedByShieldType = 1,
     name               	= "Chaingun",
     range              	= 350,
@@ -63,7 +67,7 @@ local PLASMAGUNBASE = {
       lodDistance             = 10000,
       proximityPriority       = 4,
       range                   = 350,
-      reloadtime              = 0.1,
+      reloadtime              = 0.4,
       rgbColor                = "0.1 0.9 0.9",
       rgbColor2               = "0.25 1 0.9",
 	  soundHit           	  = "null",
@@ -117,8 +121,12 @@ return lowerkeys({
 	SARGELVL8CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL8CHAINGUN),
 	SARGELVL9CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL9CHAINGUN),
 	SARGELVL10CHAINGUN = WeaponDefMergeTable(CHAINGUNBASE, SARGELVL10CHAINGUN),		
-	SARGELVL1PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL1PLASMAGUN),
-	SARGELVL2PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL2PLASMAGUN),
-	SARGELVL3PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL3PLASMAGUN),	
+	SARGELVL4PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL4PLASMAGUN),
+	SARGELVL5PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL5PLASMAGUN),
+	SARGELVL6PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL6PLASMAGUN),
+	SARGELVL7PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL7PLASMAGUN),
+	SARGELVL8PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL8PLASMAGUN),
+	SARGELVL9PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL9PLASMAGUN),
+	SARGELVL10PLASMAGUN = WeaponDefMergeTable(PLASMAGUNBASE, SARGELVL10PLASMAGUN),
 })
 

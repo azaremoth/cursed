@@ -33,7 +33,7 @@ local ChickenAIs =
 	local DeathPenalty = 0.3
 	local GainForKilledHero = 0.5	
 	local LevelXPMultiplier = 0.7
-	local MaxLevel = 5
+	local MaxLevel = 10
 	local AILevelIncreaseInterval = 5400 -- 3*60*30 means 3 minutes in gameframes
 	local AILevelIncreaseNext = 7200 -- first enforced level increase after 4 minutes
 -----------

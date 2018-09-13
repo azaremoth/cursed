@@ -233,14 +233,14 @@ local LVL6 = {
   },  
   weapons = {
 		[1] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL6CHAINGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL6CHAINGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
@@ -279,14 +279,14 @@ local LVL7 = {
   },  
   weapons = {
 		[1] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL7CHAINGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL7CHAINGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
@@ -325,14 +325,14 @@ local LVL8 = {
   },  
   weapons = {
 		[1] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL8CHAINGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL8CHAINGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
@@ -371,14 +371,14 @@ local LVL9 = {
   },  
   weapons = {
 		[1] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL9CHAINGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL9CHAINGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
@@ -417,14 +417,14 @@ local LVL10 = {
   },  
   weapons = {
 		[1] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL10CHAINGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL5CHAINGUN",
+			name               	= "SARGELVL10CHAINGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND AIR",

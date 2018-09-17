@@ -245,6 +245,12 @@ end
 ------------------------ ACTIVATION
 
 function script.Create()
+
+--	for name,data in pairs(WeaponDefNames) do
+--		local weaponname = data.name
+--		Spring.Echo(weaponname)
+--	end
+	
 	Turn2(emit_rjetpack,x_axis, 90, 500)
 	Turn2(emit_ljetpack,x_axis, 90, 500)
 	SetMoveAnimationSpeed()

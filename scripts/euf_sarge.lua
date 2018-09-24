@@ -40,7 +40,6 @@ local attacking
 local jumping
 local MOVEANIMATIONSPEED
 local MOVEANIMATIONSLEEPTIME
-local chaingunactive
 local flarecount = 0
 
 -- local SIG_AIM1 = 2
@@ -85,25 +84,6 @@ local function SetMoveAnimationSpeed()
 end
 
 local echo = Spring.Echo
-
-function script.Changeweapon()
-	chaingunactive = chaingunactive*(-1)
-	if chaingunactive < 1 then
-		Show (rplasmagun)
-		Show (lplasmagun)	
-		Hide (rchaingun)
-		Hide (rsleeve)
-		Hide (lchaingun)
-		Hide (lsleeve)
-	else
-		Hide (rplasmagun)
-		Hide (lplasmagun)	
-		Show (rchaingun)
-		Show (rsleeve)
-		Show (lchaingun)
-		Show (lsleeve)
-	end		
-end
 
 --Jumps
 local function JumpExhaust()
@@ -249,16 +229,15 @@ function script.Create()
 --	for name,data in pairs(WeaponDefNames) do
 --		local weaponname = data.name
 --		Spring.Echo(weaponname)
+--		Hide(plasmagun)
+--		Hide(bfg)
 --	end
 	
 	Turn2(emit_rjetpack,x_axis, 90, 500)
 	Turn2(emit_ljetpack,x_axis, 90, 500)
 	SetMoveAnimationSpeed()
 	moving = false
-	chaingunactive = 1
 	restore_delay = 1000
-	Hide(rplasmagun)
-	Hide(lplasmagun)
 	--START BUILD CYCLE
 	Sleep(200)
 	while GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0 do
@@ -297,41 +276,31 @@ end
 --weapon 1 -----------------------------------------------------------------
 
 function script.QueryWeapon1 ()
-	return emit_rgun end
+	return emit_shouldergun end
 
 function script.AimFromWeapon1 ()
-	return head end
+	return shouldergun end
 
 function script.AimWeapon1(heading, pitch)
-	if chaingunactive < 1 then
-		return false
-	end
-	Turn2( ruparm, x_axis, 0, MOVEANIMATIONSPEED*3 )
-			
+	
 	attacking=true
-	Spin ( rsleeve, z_axis, 300 )	
+	Spin ( shouldergunsleeve, z_axis, 300 )	
 	
 	local SIG_Aim = 2^1
 	Signal(SIG_Aim)
 	SetSignalMask(SIG_Aim)
 	
-	Turn( rloarm, y_axis, heading, 4 )
-	Turn( head, y_axis, heading, 10 )	
-	Turn( rloarm, x_axis, -pitch, 4 )
+	Turn( shtail3, y_axis, heading, 4 )	
+	Turn( shtail3, x_axis, -pitch, 4 )
 	StartThread( RestoreAfterDelay) 
-    WaitForTurn( rloarm, x_axis )
-    WaitForTurn( rloarm, y_axis )
+	WaitForTurn( shtail3, x_axis )
+	WaitForTurn( shtail3, y_axis )
 	return true
 end
 
 function script.FireWeapon1()
 		EmitSfx( emit_rgunflare, GUNFLARE )
 		EmitSfx( emit_rgroundflash, GROUNDFLASH )
---		local unitDef = Spring.GetUnitDefID(unitID)
---		local team = Spring.GetUnitTeam(unitID)
---		GG.CreateLightMe(unitID, unitDef, team, emit_rgun, 155, 233, 233, 128)
---		Sleep(300)
---		GG.DestroyLightMe(unitID, unitDef, team)
 		return(1)
 end
 
@@ -368,11 +337,6 @@ end
 function script.FireWeapon2()
 		EmitSfx( emit_lgunflare, GUNFLARE )
 		EmitSfx( emit_lgroundflash, GROUNDFLASH )
---		local unitDef = Spring.GetUnitDefID(unitID)
---		local team = Spring.GetUnitTeam(unitID)
---		GG.CreateLightMe(unitID, unitDef, team, emit_rgun, 155, 233, 233, 128)
---		Sleep(300)
---		GG.DestroyLightMe(unitID, unitDef, team)
 		return(1)
 end
 --weapon 3 -----------------------------------------------------------------
@@ -416,45 +380,7 @@ function script.FireWeapon3()
 	return(1)
 end
 
---weapon 4 -----------------------------------------------------------------
-function script.QueryWeapon4 ()
-	return emit_lgun
-end
-
-function script.AimFromWeapon4 ()
-	return lloarm end
-
-function script.AimWeapon4(heading, pitch)
-	if chaingunactive == 1 then
-		return false
-	end
-	
-	Turn2( luparm, x_axis, 0, MOVEANIMATIONSPEED*3 )
-	
-	attacking=true
-	
-	local SIG_Aim = 2^4
-	Signal(SIG_Aim)
-	SetSignalMask(SIG_Aim)
-	
-	Turn( lloarm, y_axis, heading, 4 )
-	Turn( lloarm, x_axis, -pitch, 4 )
-	StartThread( RestoreAfterDelay) 
-    WaitForTurn( lloarm, x_axis )
-    WaitForTurn( lloarm, y_axis )
-	return true
-end
-
-function script.FireWeapon4()
-	flarecount = (flarecount + 1)
-	if (flarecount > 2) then
-		EmitSfx( emit_lgun, PLASMAGUNFLARE )
-		flarecount = 0
-	end
-	EmitSfx( emit_lgroundflash, PLASMAGROUNDFLASH )
-	Sleep(100)
-	return(1)
-end
+---------------------------------------------------------------------------
 
 function script.HitByWeapon ( x, z, weaponDefID, damage )
 	if jumping then

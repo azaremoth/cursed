@@ -13,7 +13,7 @@ end
 
 include("LuaRules/Configs/customcmds.h.lua")
 
-local weaponActive = {}
+-- local weaponActive = {}
 local BurrowerUnitList = {}	
 local KamakaziUnitList = {}	
 
@@ -25,11 +25,11 @@ local SpecialSkillPairs = {
 local DeployPairs = {
 	[UnitDefNames.tc_purgatory.id] = "tc_purgatory",
 	}	
-local WeaponchangersPairs = {
-	[UnitDefNames.euf_sarge_lvl3.id] = "euf_sarge_lvl3",
-	[UnitDefNames.euf_sarge_lvl4.id] = "euf_sarge_lvl4",	
-	[UnitDefNames.euf_sarge_lvl5.id] = "euf_sarge_lvl5",
-	}
+--local WeaponchangersPairs = {
+--	[UnitDefNames.euf_sarge_lvl3.id] = "euf_sarge_lvl3",
+--	[UnitDefNames.euf_sarge_lvl4.id] = "euf_sarge_lvl4",	
+--	[UnitDefNames.euf_sarge_lvl5.id] = "euf_sarge_lvl5",
+--	}
 local BunkerPairs = {
 	[UnitDefNames.euf_bunker.id] = 'euf_bunker',
 }
@@ -75,14 +75,14 @@ SpecialSkillCommand = {
 		tooltip="Illusions\r\nHint: Create Shade illusions",
 		action="specialstuff"
 		}		
-ChangeweaponCommand = {
-		id=CMD_CHANGEWEAPON_LUA,
-		type=CMDTYPE.ICON,
-		name="",
-		texture="&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/sarge-chaingun.png",
-		tooltip="Weapon-change.\r\nHint: Change between chain- and plasmagun",
-		action="changeweapon"
-		}
+--ChangeweaponCommand = {
+--		id=CMD_CHANGEWEAPON_LUA,
+--		type=CMDTYPE.ICON,
+--		name="",
+--		texture="&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/sarge-chaingun.png",
+--		tooltip="Weapon-change.\r\nHint: Change between chain- and plasmagun",
+--		action="changeweapon"
+--		}
 BurrowCommand = {
 		id=CMD_BURROW,
 		type=CMDTYPE.ICON,
@@ -109,10 +109,10 @@ function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 	if SpecialSkillPairs [unitDefID] then
 		Spring.InsertUnitCmdDesc(unitID, SpecialSkillCommand)
 	end
-	if WeaponchangersPairs [unitDefID] then
-		Spring.InsertUnitCmdDesc(unitID, ChangeweaponCommand)
-		weaponActive[unitID] = 1
-	end	
+--	if WeaponchangersPairs [unitDefID] then
+--		Spring.InsertUnitCmdDesc(unitID, ChangeweaponCommand)
+--		weaponActive[unitID] = 1
+--	end	
 	if BunkerPairs [unitDefID] then
 		local cmdID = Spring.FindUnitCmdDesc(unitID, 80)
 		if cmdID ~= nil then
@@ -170,33 +170,33 @@ function gadget:CommandFallback(unitID, unitDefID, team, cmd, param, opts)
 			Spring.InsertUnitCmdDesc(unitID, TransformPurgatoryOff)
 		end
 		return true, true  --// command was used, remove it
-	elseif (cmd  == CMD_CHANGEWEAPON_LUA and WeaponchangersPairs[unitDefID] ~= nil) then  -- Change weapon command for the sarge
-			local cmdID
-			local changedpic = false
-			cmdID = Spring.FindUnitCmdDesc(unitID, CMD_CHANGEWEAPON_LUA)
-			if cmdID ~= nil then
-				if weaponActive[unitID] == 1 then
-					Spring.EditUnitCmdDesc(unitID, cmdID, {
-						texture = "&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/sarge-plasmagun.png",
-						tooltip="Weapon-change.\r\nHint: Active weapon: Plasmagun.",
-					})
-					weaponActive[unitID] = 2
-					changedpic = true
-				elseif weaponActive[unitID] == 2 then
-					Spring.EditUnitCmdDesc(unitID, cmdID, {
-						texture = "&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/sarge-chaingun.png",
-						tooltip="Weapon-change.\r\nHint: Active weapon: Chaingun.",
-					})
-					weaponActive[unitID] = 1
-					changedpic = true
-				else 
-					changedpic = false
-				end
-			end	
-			if changedpic == true then
-				CallUnitScript(unitID, "Changeweapon")
-			end
-		return true, true  --// command was used, remove it
+--	elseif (cmd  == CMD_CHANGEWEAPON_LUA and WeaponchangersPairs[unitDefID] ~= nil) then  -- Change weapon command for the sarge
+--			local cmdID
+--			local changedpic = false
+--			cmdID = Spring.FindUnitCmdDesc(unitID, CMD_CHANGEWEAPON_LUA)
+--			if cmdID ~= nil then
+--				if weaponActive[unitID] == 1 then
+--					Spring.EditUnitCmdDesc(unitID, cmdID, {
+--						texture = "&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/sarge-plasmagun.png",
+--						tooltip="Weapon-change.\r\nHint: Active weapon: Plasmagun.",
+--					})
+--					weaponActive[unitID] = 2
+--					changedpic = true
+--				elseif weaponActive[unitID] == 2 then
+--					Spring.EditUnitCmdDesc(unitID, cmdID, {
+--						texture = "&.9x.9&bitmaps/icons/blank.tif&bitmaps/icons/sarge-chaingun.png",
+--						tooltip="Weapon-change.\r\nHint: Active weapon: Chaingun.",
+--					})
+--					weaponActive[unitID] = 1
+--					changedpic = true
+--				else 
+--					changedpic = false
+--				end
+--			end	
+--			if changedpic == true then
+--				CallUnitScript(unitID, "Changeweapon")
+--			end
+--		return true, true  --// command was used, remove it
 	elseif (cmd == CMD_BURROW and BurrowerUnitList[unitID] == true) then  -- Burrowing command
 		CallUnitScript(unitID, "Burrow")
 		return true, true  --// command was used, remove it

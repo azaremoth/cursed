@@ -2,6 +2,8 @@
 
 local base = piece 'base'
 local chest = piece 'chest'
+local rshoulder = piece 'rshoulder'
+local lshoulder = piece 'lshoulder'
 local pelvis = piece 'pelvis'
 local rthigh = piece 'rthigh'
 local lthigh = piece 'lthigh'
@@ -38,6 +40,7 @@ local sgsleeve = piece 'sgsleeve'
 local emit_sgun = piece 'emit_sgun'
 local emit_rgroundflash = piece 'emit_rgroundflash'
 local emit_lgroundflash = piece 'emit_lgroundflash'
+local jetpack = piece 'jetpack'
 local emit_rjetpack = piece 'emit_rjetpack'
 local emit_ljetpack = piece 'emit_ljetpack'
 local cigtip = piece 'cigtip'
@@ -141,8 +144,8 @@ local function Walkscript()
 				Turn2( chest, x_axis, 10, MOVEANIMATIONSPEED )		
 				Turn2( chest, y_axis, -10, MOVEANIMATIONSPEED )	
 				Turn2( chest, z_axis, -3, MOVEANIMATIONSPEED )	
-				Turn2( ruparm, x_axis, -26, MOVEANIMATIONSPEED*2.5 )				
-				Turn2( luparm, x_axis, -20, MOVEANIMATIONSPEED*2.5 )
+				Turn2( rshoulder, x_axis, -26, MOVEANIMATIONSPEED*2.5 )				
+				Turn2( lshoulder, x_axis, -20, MOVEANIMATIONSPEED*2.5 )
 				-- Turn2( rloarm, x_axis, -18, MOVEANIMATIONSPEED*2 )
 				-- Turn2( lloarm, x_axis, -15, MOVEANIMATIONSPEED*2 )				
 			end
@@ -193,8 +196,8 @@ local function Walkscript()
 			if not attacking then 
 				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*2 )			
 				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED*2 )
-				Turn2( ruparm, x_axis, 20, MOVEANIMATIONSPEED*2 )			
-				Turn2( luparm, x_axis, 20, MOVEANIMATIONSPEED*2 )
+				Turn2( rshoulder, x_axis, 20, MOVEANIMATIONSPEED*2 )			
+				Turn2( lshoulder, x_axis, 20, MOVEANIMATIONSPEED*2 )
 				-- Turn2( rloarm, x_axis, 50, MOVEANIMATIONSPEED*2 )
 				-- Turn2( lloarm, x_axis, 50, MOVEANIMATIONSPEED*2 )
 			end
@@ -233,11 +236,21 @@ function script.Create()
 	Move( mask, y_axis, -0.5)
 	Hide(mask)	
 
-	for name,data in pairs(WeaponDefNames) do
-		local weaponname = data.name
-		Spring.Echo(weaponname)
+	local team = Spring.GetUnitTeam(unitID)
+	local level = Spring.GetTeamRulesParam(team,"team_level")
+	
+	if (level < 2) then
+		Hide(jetpack)
+	end
+	if (level < 4) then
 		Hide(plasmagun)
+	else
+		Hide(lpistol)
+	end
+	if (level < 6) then
 		Hide(bfg)
+	else
+		Hide(rpistol)
 	end
 	
 	Turn2(emit_rjetpack,x_axis, 90, 500)
@@ -281,9 +294,9 @@ local function RestoreAfterDelay()
 	Sleep(100)	
 	StopSpin  ( sgsleeve, z_axis, 50 )
 
-	Turn2( sgarm1, x_axis, -90, MOVEANIMATIONSPEED*3 )
-	Turn2( sgarm2, x_axis, -60, MOVEANIMATIONSPEED*3 )	
-	Turn2( sgarm3, x_axis, 115, MOVEANIMATIONSPEED*3 )
+	Turn2( sgarm1, x_axis, -70, MOVEANIMATIONSPEED*3 )
+	Turn2( sgarm2, x_axis, -120, MOVEANIMATIONSPEED*3 )	
+	Turn2( sgarm3, x_axis, 145, MOVEANIMATIONSPEED*3 )
 	
 	attacking = false
 	return (0)

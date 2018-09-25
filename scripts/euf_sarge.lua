@@ -14,24 +14,32 @@ local lloarm = piece 'lloarm'
 local ruparm = piece 'ruparm'
 local rloarm = piece 'rloarm'
 local head = piece 'head'
+local mask = piece 'mask'
 local lhand = piece 'lhand'
 local lthumb = piece 'lthumb'
+local lghandle = piece 'lghandle'
 local rhand = piece 'rhand'
 local rthumb = piece 'rthumb'
-local rchaingun = piece 'rchaingun'
-local lchaingun = piece 'lchaingun'
-local rplasmagun = piece 'rplasmagun'
-local lplasmagun = piece 'lplasmagun'
-local rsleeve = piece 'rsleeve'
-local lsleeve = piece 'lsleeve'
-local emit_rgun = piece 'emit_rgun'
+local rghandle = piece 'rghandle'
+local lpistol = piece 'lpistol'
+local emit_lpistol = piece 'emit_lpistol'
+local rpistol = piece 'rpistol'
+local emit_rpistol = piece 'emit_rpistol'
+local plasmagun = piece 'plasmagun'
+local emit_plasma = piece 'emit_plasma'
+local bfg = piece 'bfg'
+local emit_bfg = piece 'emit_bfg'
+local sgbase = piece 'sgbase'
+local sgarm1 = piece 'sgarm1'
+local sgarm2 = piece 'sgarm2'
+local sgarm3 = piece 'sgarm3'
+local sgun = piece 'sgun'
+local sgsleeve = piece 'sgsleeve'
+local emit_sgun = piece 'emit_sgun'
 local emit_rgroundflash = piece 'emit_rgroundflash'
-local emit_lgun = piece 'emit_lgun'
 local emit_lgroundflash = piece 'emit_lgroundflash'
 local emit_rjetpack = piece 'emit_rjetpack'
 local emit_ljetpack = piece 'emit_ljetpack'
-local emit_rgunflare = piece 'emit_rgunflare'
-local emit_lgunflare = piece 'emit_lgunflare'
 local cigtip = piece 'cigtip'
 
 local restore_delay
@@ -42,10 +50,6 @@ local MOVEANIMATIONSPEED
 local MOVEANIMATIONSLEEPTIME
 local flarecount = 0
 
--- local SIG_AIM1 = 2
--- local SIG_AIM2 = 4
--- local SIG_AIM3 = 8
--- local SIG_AIM4 = 16
 local SIG_WALK = 1
 
 local BLOODSPLASH	 = 1024+0
@@ -225,13 +229,16 @@ end
 ------------------------ ACTIVATION
 
 function script.Create()
+	Turn2( mask, x_axis, -120 )
+	Move( mask, y_axis, -0.5)
+	Hide(mask)	
 
---	for name,data in pairs(WeaponDefNames) do
---		local weaponname = data.name
---		Spring.Echo(weaponname)
---		Hide(plasmagun)
---		Hide(bfg)
---	end
+	for name,data in pairs(WeaponDefNames) do
+		local weaponname = data.name
+		Spring.Echo(weaponname)
+		Hide(plasmagun)
+		Hide(bfg)
+	end
 	
 	Turn2(emit_rjetpack,x_axis, 90, 500)
 	Turn2(emit_ljetpack,x_axis, 90, 500)
@@ -259,14 +266,25 @@ end
   
 local function RestoreAfterDelay()
 
-	Sleep(3000)
+	Sleep(1500)
 	Turn2( rloarm, y_axis, 0, 90 )
 	Turn2( lloarm, y_axis, 0, 100 )
+	Turn2( mask, x_axis, -120, 300 )
+	Move( mask, y_axis, -0.5, 20)	
+	Sleep(400)	
+	Hide(mask)
+	Sleep(1100)	
+	Turn2( sgarm3, y_axis, 0, MOVEANIMATIONSPEED*3 )
+	Turn2( sgarm3, z_axis, 0, MOVEANIMATIONSPEED*3 )
 	Sleep(1000)
 	Turn2( head, y_axis, 0, 120 )
-	Sleep(100)
-	StopSpin  ( rsleeve, z_axis, 50 )		
-	StopSpin  ( lsleeve, z_axis, 50 )			
+	Sleep(100)	
+	StopSpin  ( sgsleeve, z_axis, 50 )
+
+	Turn2( sgarm1, x_axis, -90, MOVEANIMATIONSPEED*3 )
+	Turn2( sgarm2, x_axis, -60, MOVEANIMATIONSPEED*3 )	
+	Turn2( sgarm3, x_axis, 115, MOVEANIMATIONSPEED*3 )
+	
 	attacking = false
 	return (0)
 end
@@ -276,51 +294,51 @@ end
 --weapon 1 -----------------------------------------------------------------
 
 function script.QueryWeapon1 ()
-	return emit_shouldergun end
+	return emit_sgun end
 
 function script.AimFromWeapon1 ()
-	return shouldergun end
+	return sgun end
 
 function script.AimWeapon1(heading, pitch)
+
+	Turn2( sgarm1, x_axis, 0, MOVEANIMATIONSPEED*6 )
+	Turn2( sgarm2, x_axis, 0, MOVEANIMATIONSPEED*6 )
+	Turn2( sgarm3, x_axis, 0, MOVEANIMATIONSPEED*6 )	
+	WaitForTurn( sgarm2, x_axis )	
 	
 	attacking=true
-	Spin ( shouldergunsleeve, z_axis, 300 )	
+	Spin ( sgsleeve, z_axis, 300 )	
 	
 	local SIG_Aim = 2^1
 	Signal(SIG_Aim)
 	SetSignalMask(SIG_Aim)
 	
-	Turn( shtail3, y_axis, heading, 4 )	
-	Turn( shtail3, x_axis, -pitch, 4 )
+	Turn( sgarm3, y_axis, heading, 4 )	
+	Turn( sgarm3, x_axis, -pitch, 4 )
 	StartThread( RestoreAfterDelay) 
-	WaitForTurn( shtail3, x_axis )
-	WaitForTurn( shtail3, y_axis )
+	WaitForTurn( sgarm3, x_axis )
+	WaitForTurn( sgarm3, y_axis )
 	return true
 end
 
 function script.FireWeapon1()
-		EmitSfx( emit_rgunflare, GUNFLARE )
-		EmitSfx( emit_rgroundflash, GROUNDFLASH )
+		EmitSfx( emit_sgun, GUNFLARE )
 		return(1)
 end
 
 --weapon 2 -----------------------------------------------------------------
 
 function script.QueryWeapon2 ()
-	return emit_lgun end
+	return emit_lpistol end
 
 function script.AimFromWeapon2 ()
 	return head end
 
 function script.AimWeapon2(heading, pitch)
-	if chaingunactive < 1 then
-		return false
-	end
 	
 	Turn2( luparm, x_axis, 0, MOVEANIMATIONSPEED*3 )
 	
 	attacking=true
-	Spin ( lsleeve, z_axis, 300 )	
 	
 	local SIG_Aim = 2^2
 	Signal(SIG_Aim)
@@ -335,22 +353,19 @@ function script.AimWeapon2(heading, pitch)
 end
 
 function script.FireWeapon2()
-		EmitSfx( emit_lgunflare, GUNFLARE )
+		EmitSfx( emit_lpistol, GUNFLARE )
 		EmitSfx( emit_lgroundflash, GROUNDFLASH )
 		return(1)
 end
 --weapon 3 -----------------------------------------------------------------
 function script.QueryWeapon3 ()
-	return emit_rgun
+	return emit_rpistol
 end
 
 function script.AimFromWeapon3 ()
 	return rloarm end
 
 function script.AimWeapon3(heading, pitch)
-	if chaingunactive == 1 then
-		return false
-	end
 
 	Turn2( ruparm, x_axis, 0, MOVEANIMATIONSPEED*3 )
 	
@@ -370,19 +385,17 @@ function script.AimWeapon3(heading, pitch)
 end
 
 function script.FireWeapon3()
-	flarecount = (flarecount + 1)
-	if (flarecount > 2) then
-		EmitSfx( emit_rgun, PLASMAGUNFLARE )
-		flarecount = 0
-	end
-	EmitSfx( emit_rgroundflash, PLASMAGROUNDFLASH )
-	Sleep(100)
-	return(1)
+		EmitSfx( emit_rpistol, GUNFLARE )
+		EmitSfx( emit_rgroundflash, GROUNDFLASH )
+		return(1)
 end
 
 ---------------------------------------------------------------------------
 
 function script.HitByWeapon ( x, z, weaponDefID, damage )
+	Turn2( mask, x_axis, 0, 300 )
+	Move( mask, y_axis, 0, 20)	
+	Show(mask)	
 	if jumping then
 		return(0)
 	else

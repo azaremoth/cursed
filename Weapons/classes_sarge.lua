@@ -118,7 +118,7 @@ local PLASMAGUNBASE = {
       weaponVelocity          = 500,
 }
 local BFGBASE = {
-      name                    = "Brutal Force Gun,
+      name                    = "Brutal Force Gun",
       accuracy                = 128,
       areaOfEffect            = 512,
       cegTag                  = "HEATRAY_CEG",

@@ -134,8 +134,7 @@ local LVL5 = {
   customParams       = {
 		factionname	= "cursed",
 		isinfantry 	= "true",
-		cloakedduring	= "standing
-",	
+		cloakedduring	= "standing",	
 		illusions 	= 3,		
 		canjump     = "1",
 		jumpclass 	= "hero",		

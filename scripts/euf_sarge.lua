@@ -144,10 +144,10 @@ local function Walkscript()
 				Turn2( chest, x_axis, 10, MOVEANIMATIONSPEED )		
 				Turn2( chest, y_axis, -10, MOVEANIMATIONSPEED )	
 				Turn2( chest, z_axis, -3, MOVEANIMATIONSPEED )	
-				Turn2( rshoulder, x_axis, -26, MOVEANIMATIONSPEED*2.5 )				
-				Turn2( lshoulder, x_axis, -20, MOVEANIMATIONSPEED*2.5 )
-				-- Turn2( rloarm, x_axis, -18, MOVEANIMATIONSPEED*2 )
-				-- Turn2( lloarm, x_axis, -15, MOVEANIMATIONSPEED*2 )				
+				Turn2( rshoulder, x_axis, 60, MOVEANIMATIONSPEED*2.5 )				
+				Turn2( lshoulder, x_axis, 40, MOVEANIMATIONSPEED*2.5 )
+				Turn2( rloarm, x_axis, -50, MOVEANIMATIONSPEED*4 )
+				Turn2( lloarm, x_axis, -30, MOVEANIMATIONSPEED*4 )				
 			end
 			Turn2( lthigh, x_axis, -40, MOVEANIMATIONSPEED*4 )
 			Turn2( rthigh, x_axis, 20, MOVEANIMATIONSPEED*2.7 )
@@ -196,10 +196,10 @@ local function Walkscript()
 			if not attacking then 
 				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*2 )			
 				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED*2 )
-				Turn2( rshoulder, x_axis, 20, MOVEANIMATIONSPEED*2 )			
-				Turn2( lshoulder, x_axis, 20, MOVEANIMATIONSPEED*2 )
-				-- Turn2( rloarm, x_axis, 50, MOVEANIMATIONSPEED*2 )
-				-- Turn2( lloarm, x_axis, 50, MOVEANIMATIONSPEED*2 )
+				Turn2( rshoulder, x_axis, 40, MOVEANIMATIONSPEED*2 )			
+				Turn2( lshoulder, x_axis, 60, MOVEANIMATIONSPEED*2 )
+				Turn2( rloarm, x_axis, 30, MOVEANIMATIONSPEED*4 )
+				Turn2( lloarm, x_axis, 30, MOVEANIMATIONSPEED*4 )
 			end
 		end
 		Sleep(30)			
@@ -280,8 +280,8 @@ end
 local function RestoreAfterDelay()
 
 	Sleep(1500)
-	Turn2( rloarm, y_axis, 0, 90 )
-	Turn2( lloarm, y_axis, 0, 100 )
+	Turn2( rloarm, y_axis, 0, MOVEANIMATIONSPEED*4 )
+	Turn2( lloarm, y_axis, 0, MOVEANIMATIONSPEED*4 )	
 	Turn2( mask, x_axis, -120, 300 )
 	Move( mask, y_axis, -0.5, 20)	
 	Sleep(400)	
@@ -291,14 +291,14 @@ local function RestoreAfterDelay()
 	Turn2( sgarm3, z_axis, 0, MOVEANIMATIONSPEED*3 )
 	Sleep(1000)
 	Turn2( head, y_axis, 0, 120 )
+	attacking = false
+	
 	Sleep(100)	
 	StopSpin  ( sgsleeve, z_axis, 50 )
-
 	Turn2( sgarm1, x_axis, -70, MOVEANIMATIONSPEED*3 )
 	Turn2( sgarm2, x_axis, -120, MOVEANIMATIONSPEED*3 )	
 	Turn2( sgarm3, x_axis, 145, MOVEANIMATIONSPEED*3 )
-	
-	attacking = false
+
 	return (0)
 end
 
@@ -345,12 +345,11 @@ function script.QueryWeapon2 ()
 	return emit_lpistol end
 
 function script.AimFromWeapon2 ()
-	return head end
+	return lloarm end
 
 function script.AimWeapon2(heading, pitch)
-	
-	Turn2( luparm, x_axis, 0, MOVEANIMATIONSPEED*3 )
-	
+			
+	Turn2( lshoulder, x_axis, 0, MOVEANIMATIONSPEED*6 )
 	attacking=true
 	
 	local SIG_Aim = 2^2
@@ -380,8 +379,7 @@ function script.AimFromWeapon3 ()
 
 function script.AimWeapon3(heading, pitch)
 
-	Turn2( ruparm, x_axis, 0, MOVEANIMATIONSPEED*3 )
-	
+	Turn2( rshoulder, x_axis, 0, MOVEANIMATIONSPEED*6 )
 	attacking=true
 	
 	local SIG_Aim = 2^3

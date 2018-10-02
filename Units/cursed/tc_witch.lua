@@ -134,13 +134,13 @@ local unitDef = {
     [1]  = {
       def                = "WITCHRAY",
       mainDir            = "0 0 1",
-      maxAngleDif        = 120,
+      maxAngleDif        = 160,
       onlyTargetCategory = "LAND AIR",
     	},  
      [2]  = {
       def                = "HELLSTORM",
       mainDir            = "0 0 1",
-      maxAngleDif        = 180,
+      maxAngleDif        = 360,
       onlyTargetCategory = "LAND",
     	},
   },

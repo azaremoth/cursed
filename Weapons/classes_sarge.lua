@@ -16,13 +16,13 @@ local SARGELVL8CHAINGUN = { damage = { default = 36, flyer = 36, heavy = (36*0.7
 local SARGELVL9CHAINGUN = { damage = { default = 39, flyer = 39, heavy = (39*0.75), light = 39, },}
 local SARGELVL10CHAINGUN = { damage = { default = 42, flyer = 42, heavy = (42*0.75), light = 42, },}
 
-local SARGELVL4PLASMAGUN = { damage = { default = 200, flyer = (200*0.33), heavy = 200, light = 200, },}
-local SARGELVL5PLASMAGUN = { damage = { default = 224, flyer = (224*0.33), heavy = 224, light = 224, },}
-local SARGELVL6PLASMAGUN = { damage = { default = 248, flyer = (248*0.33), heavy = 248, light = 248, },}
-local SARGELVL7PLASMAGUN = { damage = { default = 272, flyer = (272*0.33), heavy = 272, light = 272, },}
-local SARGELVL8PLASMAGUN = { damage = { default = 296, flyer = (296*0.33), heavy = 296, light = 296, },}
-local SARGELVL9PLASMAGUN = { damage = { default = 320, flyer = (320*0.33), heavy = 320, light = 320, },}
-local SARGELVL10PLASMAGUN = { damage = { default = 344, flyer = (344*0.33), heavy = 344, light = 344, },}
+local SARGELVL4PLASMAGUN = { damage = { default = 50, flyer = 50, heavy = 50, light = 50, },}
+local SARGELVL5PLASMAGUN = { damage = { default = 56, flyer = 56, heavy = 56, light = 56, },}
+local SARGELVL6PLASMAGUN = { damage = { default = 62, flyer = 62, heavy = 62, light = 62, },}
+local SARGELVL7PLASMAGUN = { damage = { default = 68, flyer = 68, heavy = 68, light = 68, },}
+local SARGELVL8PLASMAGUN = { damage = { default = 74, flyer = 74, heavy = 74, light = 74, },}
+local SARGELVL9PLASMAGUN = { damage = { default = 80, flyer = 80, heavy = 80, light = 80, },}
+local SARGELVL10PLASMAGUN = { damage = { default = 86, flyer = 86, heavy = 86, light = 86, },}
 
 local SARGELVL6BFG = { damage = { default = 500, flyer = 500, heavy = 500, light = 500, },}
 local SARGELVL7BFG = { damage = { default = 575, flyer = 575, heavy = 575, light = 575, },}
@@ -31,18 +31,19 @@ local SARGELVL9BFG = { damage = { default = 725, flyer = 725, heavy = 725, light
 local SARGELVL10BFG = { damage = { default = 800, flyer = 800, heavy = 800, light = 800, },}
 -----------------------------------  BASE CLASS CHAINGUN ---------------------------------
 local PISTOLBASE = {
+      name               = "Pistol",
+	  accuracy           = 256,
+      areaOfEffect       = 16,  
+      range              = 350,
+	  reloadtime         = 0.5,	  
+-----------------------------
     avoidFriendly      	= true,
     collideFriendly    	= true,
-    accuracy           	= 1024,
-    areaOfEffect       	= 16,
     cylinderTargeting 	= 128,		
     energypershot       = 0,	
     explosionGenerator 	= "custom:SMALL_BULLET_FX",
     explosionScar      	= false,	
     interceptedByShieldType = 1,
-    name               	= "Pistol",
-    range              	= 350,
-    reloadtime         	= .5,
     soundHit           	= "defender_hit",
     soundStart         	= "chaingun",
     soundStartVolume   	= 15,
@@ -57,18 +58,19 @@ local PISTOLBASE = {
 	weaponType         	= "Cannon",
 }
 local CHAINGUNBASE = {
+      name               = "Chaingun",
+	  accuracy           = 1024,
+      areaOfEffect       = 16,  
+      range              = 350,
+	  reloadtime         = 0.1,	  
+-----------------------------
     avoidFriendly      	= true,
     collideFriendly    	= true,
-    accuracy           	= 1024,
-    areaOfEffect       	= 16,
     cylinderTargeting 	= 128,		
     energypershot       = 0,	
     explosionGenerator 	= "custom:SMALL_BULLET_FX",
     explosionScar      	= false,	
     interceptedByShieldType = 1,
-    name               	= "Chaingun",
-    range              	= 350,
-    reloadtime         	= .1,
     soundHit           	= "defender_hit",
     soundStart         	= "chaingun",
     soundStartVolume   	= 15,
@@ -82,74 +84,74 @@ local CHAINGUNBASE = {
 	stages 			   	= 0,
 	weaponType         	= "Cannon",
 }
------------------------------------  BASE CLASS PLASMA ---------------------------------
+----------------------------------- BASE CLASSES
 local PLASMAGUNBASE = {
-      name                    = "Plasma Cannon",
-      accuracy                = 512,
-      areaOfEffect            = 20,
-      cegTag                  = "HEATRAY_CEG",
-      coreThickness           = 0.5,
-      craterBoost             = 0,
-      craterMult              = 0,
-      duration                = 0.3,
-      dynDamageExp            = 1,
-      dynDamageInverted       = false,
-      explosionGenerator      = "custom:SargePlasmaImpact",
-      fallOffRate             = 1,
-      fireStarter             = 90,
-      heightMod               = 1,
-      impactOnly              = true,
-      impulseBoost            = 0,
-      impulseFactor           = 0.4,
-      interceptedByShieldType = 1,
-      lodDistance             = 10000,
-      proximityPriority       = 4,
-      range                   = 350,
-      reloadtime              = 0.4,
-      rgbColor                = "0.1 0.9 0.9",
-      rgbColor2               = "0.25 1 0.9",
-	  soundHit           	  = "null",
-      soundStart              = "heatray_fire",
-	  sweepFire		          = false,	  
-      thickness               = 3,
-      tolerance               = 5000,
-      turret                  = true,
-      weaponType              = "LaserCannon",
-      weaponVelocity          = 500,
+      name               = "Plasma Gun",
+	  accuracy           = 1024,
+      areaOfEffect       = 64,  
+      range              = 350,
+	  reloadtime         = 0.1,	  
+-----------------------------
+    avoidFriendly      = true,
+    burnblow           = true,	  	
+	collideFriendly    = true,
+    energypershot           = 5,	
+    explosionGenerator = "custom:smallblueexp",
+    cegTag             = "PLasmaTowerGunProjectileGroundflash",	
+    interceptedByShieldType = 1,
+    rgbColor           = "0.55 0.58 0.94",
+    soundHit           = "mediumexplosion",
+    soundStart         = "plasma",
+    soundStartVolume   = 75,
+    texture1           = "blueflare",
+    texture2           = "null_texture",
+    texture3           = "null_texture",
+    thickness          = 5.00,
+    tolerance          = 1500,
+    turret             = true,
+    weaponType         = "LaserCannon",
+    weaponVelocity     = 900, 
 }
 local BFGBASE = {
       name                    = "Brutal Force Gun",
-      accuracy                = 128,
-      areaOfEffect            = 512,
-      cegTag                  = "HEATRAY_CEG",
-      coreThickness           = 0.5,
-      craterBoost             = 0,
-      craterMult              = 0,
-      duration                = 0.3,
-      dynDamageExp            = 1,
-      dynDamageInverted       = false,
-      explosionGenerator      = "custom:SargePlasmaImpact",
-      fallOffRate             = 1,
-      fireStarter             = 90,
-      heightMod               = 1,
-      impactOnly              = true,
-      impulseBoost            = 0,
-      impulseFactor           = 0.4,
-      interceptedByShieldType = 1,
-      lodDistance             = 10000,
-      proximityPriority       = 4,
-      range                   = 350,
-      reloadtime              = 0.4,
-      rgbColor                = "0.1 0.9 0.3",
-      rgbColor2               = "0.25 1 0.3",
-	  soundHit           	  = "null",
-      soundStart              = "heatray_fire",
-	  sweepFire		          = false,	  
-      thickness               = 5,
-      tolerance               = 5000,
-      turret                  = true,
-      weaponType              = "LaserCannon",
-      weaponVelocity          = 500,
+	  accuracy           = 64,
+      areaOfEffect       = 128,
+	  commandFire 	     = true,	  
+      range              = 350,
+	  reloadtime         = 10,	  
+-----------------------------
+    burnblow           = true,	  
+    cegTag             = "MERMEOTH_SHELLFLARE",
+    coreThickness      = 0.5,
+    craterBoost        = 0,
+    craterMult         = 0,
+    duration           = 0.03,
+    energypershot           = 0,	
+    explosionGenerator = "custom:greencannonimpact",
+	fallOffRate        = 0.25,
+	hardStop           = false,
+    impulseBoost       = 0,
+    intensity          = 0.5,
+    interceptedByShieldType = 1,
+    rgbColor           = "0.6 1 0.16",
+    rgbColor2           = "0.8 1 0.35",
+    soundHit           = "cannon_hit4",
+    soundStart         = "shell_gun",
+    soundStartVolume   = 15,
+    soundTrigger       = true,
+    startVelocity      = 1000,
+    texture1           = "waveball",
+    texture2           = "null_texture",
+    texture3           = "null_texture",
+    thickness          = 14,
+    tolerance          = 3000,
+    tracks             = false,
+    turnRate           = 6000,
+    turret             = true,
+    weaponAcceleration = 1,
+    weaponTimer        = 1,
+    weaponType         = "LaserCannon",
+    weaponVelocity     = 1000,
 }
 ----------------------------------- FINALIZE ---------------------------------------------
 function WeaponDefCopyTable(tableToCopy, deep)

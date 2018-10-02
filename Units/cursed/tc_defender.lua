@@ -65,7 +65,7 @@ local unitDef = {
       "custom:DefenderGunFlare",
       "custom:Small_Explosion_Green",
       "custom:Structurebuilding_Small",
-      "custom:GunGroundFlash_Small",
+      "custom:NONE",
     },
   },
   sounds = {

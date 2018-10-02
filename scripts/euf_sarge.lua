@@ -55,18 +55,23 @@ local flarecount = 0
 
 local SIG_WALK = 1
 
-local BLOODSPLASH	 = 1024+0
-local GUNFLARE		 = 1025+0
-local GROUNDFLASH	 = 1026+0
-local BLOODSPRAY	 = 1027+0
-local GREY			 = 1028+0
-local PLASMAGUNFLARE	 	= 1029+0
-local PLASMAGROUNDFLASH	 	= 1030+0
-local JETFIRE	 			= 1031+0
-local LEVELING	 			= 1032+0
+local BLOODSPLASH	 		= 1024+0
+local BLOODSPRAY	 		= 1025+0
+local GREY			 		= 1026+0
+local JETFIRE	 	 		= 1027+0
+local LEVELING	 	 		= 1028+0
+local GUNFLARE		 		= 1029+0
+local GROUNDFLASH	 		= 1030+0
+local PLASMAGUNFLARE	 	= 1031+0
+local PLASMAGROUNDFLASH	 	= 1032+0
+local BFGFLARE	 			= 1033+0
+local BFGGROUNDFLASH	 	= 1034+0
 
 local rturn = (math.random()*50)
 local lturn = (math.random()*(-50))
+
+local team = Spring.GetUnitTeam(unitID)
+local level = Spring.GetTeamRulesParam(team,"team_level")
 
 local function Turn2(piecenum,axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180
@@ -197,7 +202,7 @@ local function Walkscript()
 				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*2 )			
 				Turn2( chest, z_axis, 0, MOVEANIMATIONSPEED*2 )
 				Turn2( rshoulder, x_axis, 40, MOVEANIMATIONSPEED*2 )			
-				Turn2( lshoulder, x_axis, 60, MOVEANIMATIONSPEED*2 )
+				Turn2( lshoulder, x_axis, 50, MOVEANIMATIONSPEED*2 )
 				Turn2( rloarm, x_axis, 30, MOVEANIMATIONSPEED*4 )
 				Turn2( lloarm, x_axis, 30, MOVEANIMATIONSPEED*4 )
 			end
@@ -235,9 +240,6 @@ function script.Create()
 	Turn2( mask, x_axis, -120 )
 	Move( mask, y_axis, -0.5)
 	Hide(mask)	
-
-	local team = Spring.GetUnitTeam(unitID)
-	local level = Spring.GetTeamRulesParam(team,"team_level")
 	
 	if (level < 2) then
 		Hide(jetpack)
@@ -302,10 +304,7 @@ local function RestoreAfterDelay()
 	return (0)
 end
 
-
-
 --weapon 1 -----------------------------------------------------------------
-
 function script.QueryWeapon1 ()
 	return emit_sgun end
 
@@ -340,44 +339,18 @@ function script.FireWeapon1()
 end
 
 --weapon 2 -----------------------------------------------------------------
-
 function script.QueryWeapon2 ()
-	return emit_lpistol end
+		if (level < 6) then
+			return emit_rpistol 
+		else
+			return emit_bfg 
+		end
+end
 
 function script.AimFromWeapon2 ()
-	return lloarm end
-
-function script.AimWeapon2(heading, pitch)
-			
-	Turn2( lshoulder, x_axis, 0, MOVEANIMATIONSPEED*6 )
-	attacking=true
-	
-	local SIG_Aim = 2^2
-	Signal(SIG_Aim)
-	SetSignalMask(SIG_Aim)
-	
-	Turn( lloarm, y_axis, heading, 4 )
-	Turn( lloarm, x_axis, -pitch, 4 )
-	StartThread( RestoreAfterDelay) 
-    WaitForTurn( lloarm, x_axis )
-    WaitForTurn( lloarm, y_axis )
-	return true
-end
-
-function script.FireWeapon2()
-		EmitSfx( emit_lpistol, GUNFLARE )
-		EmitSfx( emit_lgroundflash, GROUNDFLASH )
-		return(1)
-end
---weapon 3 -----------------------------------------------------------------
-function script.QueryWeapon3 ()
-	return emit_rpistol
-end
-
-function script.AimFromWeapon3 ()
 	return rloarm end
 
-function script.AimWeapon3(heading, pitch)
+function script.AimWeapon2(heading, pitch)
 
 	Turn2( rshoulder, x_axis, 0, MOVEANIMATIONSPEED*6 )
 	attacking=true
@@ -395,12 +368,56 @@ function script.AimWeapon3(heading, pitch)
 	return true
 end
 
-function script.FireWeapon3()
-		EmitSfx( emit_rpistol, GUNFLARE )
-		EmitSfx( emit_rgroundflash, GROUNDFLASH )
+function script.FireWeapon2()
+		if (level < 6) then
+			EmitSfx( emit_rpistol, GUNFLARE )
+			EmitSfx( emit_rgroundflash, GROUNDFLASH )
+		else
+			EmitSfx( emit_bfg, BFGFLARE )
+			EmitSfx( emit_rgroundflash, BFGGROUNDFLASH )
+		end
 		return(1)
 end
 
+--weapon 3 -----------------------------------------------------------------
+function script.QueryWeapon3 ()
+		if (level < 4) then
+			return emit_lpistol 
+		else
+			return emit_plasma 
+		end
+end
+
+function script.AimFromWeapon3 ()
+	return lloarm end
+
+function script.AimWeapon3(heading, pitch)
+			
+	Turn2( lshoulder, x_axis, 0, MOVEANIMATIONSPEED*6 )
+	attacking=true
+	
+	local SIG_Aim = 2^2
+	Signal(SIG_Aim)
+	SetSignalMask(SIG_Aim)
+	
+	Turn( lloarm, y_axis, heading, 4 )
+	Turn( lloarm, x_axis, -pitch, 4 )
+	StartThread( RestoreAfterDelay) 
+    WaitForTurn( lloarm, x_axis )
+    WaitForTurn( lloarm, y_axis )
+	return true
+end
+
+function script.FireWeapon3()
+		if (level < 4) then
+			EmitSfx( emit_lpistol, GUNFLARE )
+			EmitSfx( emit_lgroundflash, GROUNDFLASH )
+		else
+			EmitSfx( emit_plasma, PLASMAGUNFLARE )
+			EmitSfx( emit_lgroundflash, PLASMAGROUNDFLASH )
+		end
+		return(1)
+end
 ---------------------------------------------------------------------------
 
 function script.HitByWeapon ( x, z, weaponDefID, damage )

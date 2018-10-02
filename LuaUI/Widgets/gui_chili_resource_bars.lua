@@ -474,9 +474,17 @@ function widget:GameFrame(n)
 		local nextlevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"nextlevel_xps")*100
 		local rellevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"rellevel_xps")*100
 		local team_level = Spring.GetTeamRulesParam(GetMyTeamID(),"team_level")
-		bar_xp:SetValue(rellevel_xps)
+		local max_level = Spring.GetTeamRulesParam(GetMyTeamID(),"max_level")
+
+
 		-- bar_xp:SetCaption(("%.1f%%"):format(rellevel_xps))
-		bar_xp:SetCaption( (WhiteStr.."%i/%i"):format(current_xps, nextlevel_xps) )
+		if (team_level < max_level) then
+			bar_xp:SetValue(rellevel_xps)
+			bar_xp:SetCaption( (WhiteStr.."%i/%i"):format(current_xps, nextlevel_xps) )
+		else
+			bar_xp:SetValue(0)
+			bar_xp:SetCaption( "max. level" )
+		end
 		lbl_xp.font:SetColor(col_xp)
 		lbl_xp:SetCaption( "Lvl. " .. team_level)
 	end

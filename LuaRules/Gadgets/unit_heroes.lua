@@ -32,7 +32,7 @@ local ChickenAIs =
 	local expRange = 500
 	local DeathPenalty = 0.3
 	local GainForKilledHero = 0.5	
-	local LevelXPMultiplier = 0.7
+	local LevelXPMultiplier = 0.1 --0.7
 	local MaxLevel = 10
 	local AILevelIncreaseInterval = 5400 -- 3*60*30 means 3 minutes in gameframes
 	local AILevelIncreaseNext = 7200 -- first enforced level increase after 4 minutes
@@ -59,6 +59,7 @@ function gadget:Initialize()
 		Spring.SetTeamRulesParam(team,"nextlevel_xps",0)
 		Spring.SetTeamRulesParam(team,"rellevel_xps",0)
 		Spring.SetTeamRulesParam(team,"team_level",1)
+		Spring.SetTeamRulesParam(team,"max_level",MaxLevel)
 	end
 end
 
@@ -100,6 +101,17 @@ local function ReplaceHero(unitID, team)
 		local HeroTeam = Spring.GetUnitTeam(unitID)		
 		local x, y, z = Spring.GetUnitPosition(unitID)
 
+		local current_xps = HeroXPList[team]
+		local nextlevel_xps = ((HeroLevelList[team]^1.5)*LevelXPMultiplier^1.5)
+		local lastlevel_xps = (((HeroLevelList[team]-1)^1.5)*LevelXPMultiplier^1.5)
+		local rellevel_xps = (current_xps-lastlevel_xps)/(nextlevel_xps-lastlevel_xps)
+		
+		Spring.SetTeamRulesParam(team,"current_xps",current_xps)
+		Spring.SetTeamRulesParam(team,"nextlevel_xps",nextlevel_xps)
+		Spring.SetTeamRulesParam(team,"rellevel_xps",rellevel_xps)
+		Spring.SetTeamRulesParam(team,"team_level",HeroLevelList[team])
+		Spring.SetTeamRulesParam(team,"max_level",MaxLevel)
+		
 		--- direction to facing ---
 		local dx, dy, dz = Spring.GetUnitDirection(unitID)
 		if (dx == 0 and dz == 1) then
@@ -290,7 +302,7 @@ function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
 end
 
 function gadget:GameFrame(f)
-	------------- data update for widgets
+	------------- data update for widgets --------------------------------------------------------
 	if (f % 10) == 1 then
 		local allTeams = Spring.GetTeamList()
 		for _,team in ipairs(allTeams) do
@@ -301,10 +313,9 @@ function gadget:GameFrame(f)
 			Spring.SetTeamRulesParam(team,"current_xps",current_xps)
 			Spring.SetTeamRulesParam(team,"nextlevel_xps",nextlevel_xps)
 			Spring.SetTeamRulesParam(team,"rellevel_xps",rellevel_xps)
-			Spring.SetTeamRulesParam(team,"team_level",HeroLevelList[team])
 		end
 	end
-	------------- AI Respawn and level increase
+	------------- AI Respawn and level increase --------------------------------------------------------
 	if (f % 30) == 8 then	
 		for teamID, gameframe in ipairs(AIRespawnList) do
 			local heroteam = (teamID-1) -- spring does not like tables with 0

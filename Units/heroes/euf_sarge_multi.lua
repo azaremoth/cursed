@@ -447,14 +447,16 @@ local BASE = {
   sfxtypes = {
     explosiongenerators = {
       "custom:BLOOD_EXPLOSION",
-      "custom:MARINEGUNFLARE",
-      "custom:MARINEGROUNDFLASH",
       "custom:blood_spray",
       "custom:Greycloud",
-      "custom:SargeGunFlare",
-      "custom:PLasmaTowerGunGroundflash",
 	  "custom:JUMPBURST",
-	  "custom:NONE",	  
+	  "custom:NONE",
+      "custom:MARINEGUNFLARE",
+      "custom:MARINEGROUNDFLASH",	  
+      "custom:PLasmaTowerGunFlare",
+      "custom:PLasmaTowerGunGroundflash",
+	  "custom:BelialBigGunFlare",
+	  "custom:NONE",
     },
   },
   sounds = {

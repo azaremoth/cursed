@@ -93,7 +93,7 @@ local PLASMAGUNBASE = {
 	  reloadtime         = 0.1,	  
 -----------------------------
     avoidFriendly      = true,
-    burnblow           = true,	  	
+    burnblow           = false,	  	
 	collideFriendly    = true,
     energypershot           = 5,	
     explosionGenerator = "custom:smallblueexp",
@@ -120,7 +120,7 @@ local BFGBASE = {
       range              = 350,
 	  reloadtime         = 10,	  
 -----------------------------
-    burnblow           = true,	  
+    burnblow           = false,	  
     cegTag             = "MERMEOTH_SHELLFLARE",
     coreThickness      = 0.5,
     craterBoost        = 0,

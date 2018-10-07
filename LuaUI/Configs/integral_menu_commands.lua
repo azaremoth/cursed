@@ -122,7 +122,8 @@ local overrides_faction_two = {
 	[CMD_TRANSFORM_PURGATORY] = {text = ' ', texture = imageDirSpecials .. 'deploy.png'},	
 	[CMD_TRANSFORM_PURGATORY_OFF] = {text = ' ', texture = imageDirSpecials .. 'deploy_off.png'},
 	[CMD_CHANGEWEAPON_LUA] = {text = ' ', texture = imageDirSpecials .. 'weaponchange_sarge.png'},
-	[CMD_SPECIALSKILL] = {text = ' ', texture = imageDirSpecials .. 'illusions.png'},		
+	[CMD_SPECIALSKILL] = {text = ' ', texture = imageDirSpecials .. 'illusions.png'},
+	[CMD.DGUN] = { texture = imageDirTwo .. 'manualfire.png',  text= '\255\0\255\0A'},		
 	-- states
 	[CMD_UNIT_AI] = { texture = {'LuaUI/Images/commands/states/ai_off.png', 'LuaUI/Images/commands/states/ai_on.png'}, text=''},
 	[CMD.ONOFF] = { texture = {'LuaUI/Images/commands/states/off.png', 'LuaUI/Images/commands/states/on.png'}, text=''},

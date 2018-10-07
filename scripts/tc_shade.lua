@@ -470,7 +470,6 @@ function CircleAttack()
 end
 
 --weapon 1 -----------------------------------------------------------------
-
 function script.QueryWeapon1 ()
 	return emit_melee
 end
@@ -480,8 +479,8 @@ function script.AimFromWeapon1 ()
 end
 
 function script.AimWeapon1(heading, pitch)
-	randomsleeptime = math.random(100)
-	Sleep(randomsleeptime)
+--	randomsleeptime = math.random(100)
+--	Sleep(randomsleeptime)
 	if inbunker then
 		return false
 	end
@@ -492,12 +491,39 @@ function script.AimWeapon1(heading, pitch)
 	return true
 end
 
-function script.Shot1()
+function script.FireWeapon1()
 	attacking = true
 	RestoreAtkCount = RestoreAtkCount +1
 	StartThread( CircleAttack ) 
 	StartThread( RestoreAtkAfterDelay ) 
 end
+
+--weapon 2 -----------------------------------------------------------------
+function script.QueryWeapon2 ()
+	return emit_melee
+end
+
+function script.AimFromWeapon2 ()
+	return emit_melee
+end
+
+function script.AimWeapon1(heading, pitch)
+	if inbunker then
+		return false
+	end
+	
+	local SIG_Aim = 2^2
+	Signal(SIG_Aim)
+	SetSignalMask(SIG_Aim)
+	return true
+end
+
+function script.FireWeapon2()
+	attacking = true
+	StartThread( RestoreAtkAfterDelay ) 
+end
+
+--------------------------------------------------------------------------------------
 
 function script.Killed( damage, health )
 		Turn2( pelvis, x_axis, 90, 250 )

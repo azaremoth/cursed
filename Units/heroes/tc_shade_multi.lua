@@ -158,7 +158,8 @@ local LVL6 = {
   unitname           = "tc_shade_lvl6",
   name               = "Shade (Hero Lvl. 6)", 
   maxDamage          = 4050,
-  maxVelocity        = 4.1,	
+  maxVelocity        = 4.1,
+  canManualFire      = true,  
   customParams       = {
 		factionname	= "cursed",
 		isinfantry 	= "true",
@@ -180,6 +181,13 @@ local LVL6 = {
 	  badTargetCategory 	= "AIR",
       onlyTargetCategory 	= "LAND",
     },
+    [2]  = {
+      name                	= "SHADELVL6DRAGON",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 180,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND",
+    },	
   },  
 }
 local LVL7 = {
@@ -187,6 +195,7 @@ local LVL7 = {
   name               = "Shade (Hero Lvl. 7)", 
   maxDamage          = 4500,
   maxVelocity        = 4.2,	
+  canManualFire      = true,  
   customParams       = {
 		factionname	= "cursed",
 		isinfantry 	= "true",
@@ -208,6 +217,13 @@ local LVL7 = {
 	  badTargetCategory 	= "AIR",
       onlyTargetCategory 	= "LAND",
     },
+    [2]  = {
+      name                	= "SHADELVL7DRAGON",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 180,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND",
+    },	
   },  
 }
 local LVL8 = {
@@ -215,6 +231,7 @@ local LVL8 = {
   name               = "Shade (Hero Lvl. 8)", 
   maxDamage          = 4950,
   maxVelocity        = 4.3,	
+  canManualFire      = true,  
   customParams       = {
 		factionname	= "cursed",
 		isinfantry 	= "true",
@@ -236,13 +253,21 @@ local LVL8 = {
 	  badTargetCategory 	= "AIR",
       onlyTargetCategory 	= "LAND",
     },
+    [2]  = {
+      name                	= "SHADELVL8DRAGON",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 180,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND",
+    },	
   },  
 }
 local LVL9 = {
   unitname           = "tc_shade_lvl9",
   name               = "Shade (Hero Lvl. 9)", 
   maxDamage          = 5400,
-  maxVelocity        = 4.4,	
+  maxVelocity        = 4.4,
+  canManualFire      = true,  
   customParams       = {
 		factionname	= "cursed",
 		isinfantry 	= "true",
@@ -264,13 +289,21 @@ local LVL9 = {
 	  badTargetCategory 	= "AIR",
       onlyTargetCategory 	= "LAND",
     },
+    [2]  = {
+      name                	= "SHADELVL9DRAGON",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 180,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND",
+    },	
   },  
 }
 local LVL10 = {
   unitname           = "tc_shade_lvl10",
   name               = "Shade (Hero Lvl. 10)", 
   maxDamage          = 5850,
-  maxVelocity        = 4.5,	
+  maxVelocity        = 4.5,
+  canManualFire      = true,  
   customParams       = {
 		factionname	= "cursed",
 		isinfantry 	= "true",
@@ -292,6 +325,13 @@ local LVL10 = {
 	  badTargetCategory 	= "AIR",
       onlyTargetCategory 	= "LAND",
     },
+    [2]  = {
+      name                	= "SHADELVL10DRAGON",
+      mainDir            	= "0 0 1",
+      maxAngleDif        	= 180,
+	  badTargetCategory 	= "AIR",
+      onlyTargetCategory 	= "LAND",
+    },	
   },  
 }
 ------------------------------------------------------ BASE CLASS

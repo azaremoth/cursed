@@ -53,6 +53,8 @@ local MOVEANIMATIONSPEED
 local MOVEANIMATIONSLEEPTIME
 local flarecount = 0
 
+local bfg_sound = 0
+
 local SIG_WALK = 1
 
 local BLOODSPLASH	 		= 1024+0
@@ -300,7 +302,8 @@ local function RestoreAfterDelay()
 	Turn2( sgarm1, x_axis, -70, MOVEANIMATIONSPEED*3 )
 	Turn2( sgarm2, x_axis, -120, MOVEANIMATIONSPEED*3 )	
 	Turn2( sgarm3, x_axis, 145, MOVEANIMATIONSPEED*3 )
-
+	
+	bfg_sound = 0
 	return (0)
 end
 
@@ -351,6 +354,11 @@ function script.AimFromWeapon2 ()
 	return rloarm end
 
 function script.AimWeapon2(heading, pitch)
+	if ((level > 5) and (bfg_sound < 1)) then
+		local x, y, z = Spring.GetUnitPosition(unitID)
+		Spring.PlaySoundFile("sounds/bfg_aim.ogg", 80, x, y, z)	
+		bfg_sound = bfg_sound+1
+	end
 
 	Turn2( rshoulder, x_axis, 0, MOVEANIMATIONSPEED*6 )
 	attacking=true
@@ -365,6 +373,11 @@ function script.AimWeapon2(heading, pitch)
 	StartThread( RestoreAfterDelay) 
     WaitForTurn( rloarm, x_axis )
     WaitForTurn( rloarm, y_axis )
+	
+	if (level > 5) then
+		Sleep(400)	
+	end	
+	
 	return true
 end
 
@@ -373,6 +386,7 @@ function script.FireWeapon2()
 			EmitSfx( emit_rpistol, GUNFLARE )
 			EmitSfx( emit_rgroundflash, GROUNDFLASH )
 		else
+			bfg_sound = 0
 			EmitSfx( emit_bfg, BFGFLARE )
 			EmitSfx( emit_rgroundflash, BFGGROUNDFLASH )
 		end

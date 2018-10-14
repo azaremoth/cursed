@@ -384,6 +384,149 @@
    }
 }
 
+[SMALL_EXPLOSION_GREEN2]
+{
+   [BOOM]
+   {
+   class=heatcloud;
+      
+      [properties]
+            {
+      texture=firecloud8;
+            heat = 10;
+            maxheat = 15;
+            heatFalloff = 0.2;
+
+            size = 50;
+            sizeGrowth = 0.9;
+
+            pos = r-2 r2, 5, r-2 r2;
+            speed=0, 1 0, 0;
+            }
+   air=1;
+         water=1;
+         ground=1;
+         count=1;
+   }
+
+   [firepoof2]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=firecloud8;
+
+      colorMap   = 0.2 1.0 0.2 0.04   0.7 0.9 0.2 0.01   0.2 0.6 0.1 0.01;
+
+            pos       = 0, 5, 0;
+      gravity      = 0, -0.005, 0;
+             emitVector   = 0, 1, 0;
+      emitRot      = 20;
+      emitRotSpread   = 12;
+
+      sizeGrowth   = 0.8;
+      sizeMod      = 1.0;
+
+      airdrag         = 0.8;
+      particleLife      = 7;
+      particleLifeSpread   = 16;
+      numParticles      = 16;
+      particleSpeed      = 12;
+      particleSpeedSpread   = 1;
+      particleSize      = 17;
+      particleSizeSpread   = 5;
+
+      directional      = 0;
+      useAirLos      = 0;
+      }
+   air=1;
+   ground=1;
+   water=1;
+   count=1;
+   }
+
+   [WATERPOOF]
+   {
+   class=CSimpleParticleSystem;
+
+      [properties]
+      {
+      Texture=firecloud3;
+
+      colorMap   = 0.0 1.0 0.0 0.04   0.7 1.0 0.2 0.01   0.5 0.8 0.2 0.01;
+
+      pos       = 0, 5, 0;
+      gravity      = 0, -0.005, 0;
+      emitVector   = 0, 1, 0;
+      emitRot      = 60;
+      emitRotSpread   = 32;
+
+      sizeGrowth   = 0.6;
+      sizeMod      = 1.0;
+
+      airdrag         = 0.8;
+      particleLife      = 8;
+      particleLifeSpread   = 10;
+      numParticles      = 6;
+      particleSpeed      = 12;
+      particleSpeedSpread   = 12;
+      particleSize      = 10;
+      particleSizeSpread   = 0;
+
+      directional      = 0;
+      useAirLos      = 0;
+      }
+   water=1;
+   count=1;
+   }
+
+   [watersplash]
+   {
+   class=dirt;
+
+      [properties]
+      {
+         size=28;
+         color=0.7, 0.7, 1.0;
+         alphaFalloff=2;
+         speed= r0.5 r-0.5, 2, r0.5 r-0.5;
+         pos=r-100 r100, 0, r-100 r100;
+      }
+   water=1;
+   count=20;
+   }
+	[Spikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-45 r90,-45 r90,-45 r90;
+			width=2; 
+			length=10;
+			alpha=0.5;
+			alphadecay=0.09;
+			color=0.45, 1, 0.1;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=8; 
+	}
+   [groundflash]
+      {
+         ttl = 200;
+         flashSize = 30;
+         flashAlpha = 0.9;
+         circleGrowth = 0;
+         circleAlpha = 0.9;
+         color = 0.6, 1.0, 0.15;
+		air=0;
+        ground=1;
+        water=0;
+   }	
+}
+
 [blood_spray]
 {
    	[splashes]

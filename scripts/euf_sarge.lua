@@ -363,7 +363,7 @@ function script.AimWeapon2(heading, pitch)
 	Turn2( rshoulder, x_axis, 0, MOVEANIMATIONSPEED*6 )
 	attacking=true
 	
-	local SIG_Aim = 2^3
+	local SIG_Aim = 2^2
 	Signal(SIG_Aim)
 	SetSignalMask(SIG_Aim)
 	
@@ -410,7 +410,7 @@ function script.AimWeapon3(heading, pitch)
 	Turn2( lshoulder, x_axis, 0, MOVEANIMATIONSPEED*6 )
 	attacking=true
 	
-	local SIG_Aim = 2^2
+	local SIG_Aim = 2^3
 	Signal(SIG_Aim)
 	SetSignalMask(SIG_Aim)
 	

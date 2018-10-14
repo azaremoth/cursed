@@ -202,6 +202,7 @@ end
 
 function RestoreAfterDelay()
 	Sleep(2000)
+	Turn( head, y_axis, 0, 4 )
 	if ((ud.customParams.cloakedduring == "standing") and not moving and not attacking) then	
 		Spring.SetUnitCloak(unitID, 2, 50)
 		Spring.SetUnitStealth(unitID, true)	
@@ -479,8 +480,6 @@ function script.AimFromWeapon1 ()
 end
 
 function script.AimWeapon1(heading, pitch)
---	randomsleeptime = math.random(100)
---	Sleep(randomsleeptime)
 	if inbunker then
 		return false
 	end
@@ -495,19 +494,20 @@ function script.FireWeapon1()
 	attacking = true
 	RestoreAtkCount = RestoreAtkCount +1
 	StartThread( CircleAttack ) 
-	StartThread( RestoreAtkAfterDelay ) 
+	StartThread( RestoreAtkAfterDelay )
+	return(1)
 end
 
 --weapon 2 -----------------------------------------------------------------
 function script.QueryWeapon2 ()
-	return emit_melee
+	return head
 end
 
 function script.AimFromWeapon2 ()
-	return emit_melee
+	return head
 end
 
-function script.AimWeapon1(heading, pitch)
+function script.AimWeapon2(heading, pitch)
 	if inbunker then
 		return false
 	end
@@ -515,12 +515,15 @@ function script.AimWeapon1(heading, pitch)
 	local SIG_Aim = 2^2
 	Signal(SIG_Aim)
 	SetSignalMask(SIG_Aim)
+	
+	Turn( head, y_axis, heading, 4 )
+
 	return true
 end
 
 function script.FireWeapon2()
-	attacking = true
-	StartThread( RestoreAtkAfterDelay ) 
+	StartThread( RestoreAfterDelay) 	
+	return(1)
 end
 
 --------------------------------------------------------------------------------------

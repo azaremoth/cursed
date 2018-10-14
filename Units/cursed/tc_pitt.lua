@@ -22,8 +22,10 @@ local unitDef = {
   canstop            = "1",
   category           = "CURSED LAND HEAVYARMOR",
 --  corpse             = "dead",
-  customParams          = {
+  customParams       = {	
 	factionname	= "cursed",
+	normaltex = "unittextures/normalmaps/tc_damnedportal_normal.png",
+	normalmaps = "yes",	
     helptext 	= "Demons are summoned here."
   },
   description        = "Demons are summoned here",
@@ -46,6 +48,7 @@ local unitDef = {
   noAutoFire         = false,
   objectName         = "tc_pitt.s3o",
   radarDistance      = 64,
+  script			 = "tc_pitt.lua",
   selfDestructAs     = "BIG_EXPLOSION_GREEN",
   showNanoFrame      = false,
   showNanoSpray      = false,
@@ -71,10 +74,9 @@ local unitDef = {
   },
   sfxtypes = {
     explosiongenerators = {
-      "custom:PORTALGLOW",
-      "custom:SPIKES_NECROMANCER",
       "custom:Big_Explosion_Green",
       "custom:Structurebuilding_Big",
+      "custom:SPIKES_NECROMANCER",	  
     },
   },
   sounds = {

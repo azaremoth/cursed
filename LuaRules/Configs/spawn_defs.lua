@@ -147,8 +147,21 @@ local chickenTypes = {
   tc_mancubus			=  {time = 15, squadSize = 0.4},
   
   tc_purgatory_ai		=  {time = 30, squadSize = 0.2},
+  
   tc_belial				=  {time = 36, squadSize = 0.3},
+
   tc_dragon				=  {time = 40, squadSize = 0.15},
+  
+  tc_shade_lvl1			=  {time = 5, squadSize = 0.05},
+  tc_shade_lvl2			=  {time = 7, squadSize = 0.05},
+  tc_shade_lvl3			=  {time = 9, squadSize = 0.05},
+  tc_shade_lvl4			=  {time = 10, squadSize = 0.05},
+  tc_shade_lvl5			=  {time = 15, squadSize = 0.05},
+  tc_shade_lvl6			=  {time = 20, squadSize = 0.05},
+  tc_shade_lvl7			=  {time = 25, squadSize = 0.05},
+  tc_shade_lvl8			=  {time = 30, squadSize = 0.05},
+  tc_shade_lvl9			=  {time = 36, squadSize = 0.05},
+  
 }
 
 local defenders = {
@@ -201,7 +214,7 @@ difficulties = {
 	waveSizeMult	 = 0.8,
     timeSpawnBonus   = .02,     -- how much each time level increases spawn size
 	queenTime		 = 35*60,
-	queenName        = "tc_shade_lvl5",
+	queenName        = "tc_shade_lvl10",
 	queenMorphName	 = '',
 	maxBurrows       = 15,
 	specialPowers	 = {},

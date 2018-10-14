@@ -237,6 +237,16 @@ Greenglow_big = {
   count       = 1,
   repeatEffect = true,
 }
+Greenglow_huge = {
+  life        = 50,
+  lifeSpread  = 0,
+  size        = 100,
+  sizeSpread  = 33,
+  colormap    = { {0.8, 1.0, 0.45, 0.05}, {0.6, 0.8, 0.15, 0.02}, {0.7, 1.0, 0.25, 0.05}, {0.6, 0.8, 0.15, 0.02}  },
+  texture     = 'bitmaps/cursed/firecloud6.tga',
+  count       = 1,
+  repeatEffect = true,
+}
 Blueglow_big = {
   life        = 50,
   lifeSpread  = 0,

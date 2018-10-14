@@ -138,7 +138,13 @@ effectUnitDefs = {
   tc_soulcage = {
 	{class='StaticParticles', options=MergeTable(Greenglow_big,{piece="emit"})},
     {class='GroundFlash', options=groundFlashGreen},	
-	},      
+	},
+  tc_pitt = {
+   {class='StaticParticles', options=MergeTable(Greenglow_huge,{piece="emit"})},
+   {class='AirJet', options={color={0.6,1.0,0.15}, width=30, length=30, piece="emit", emitVector = {0, -1, 0}, onActive=false, noIconDraw = true}},
+   {class='AirJet', options={color={0.6,1.0,0.15}, width=30, length=30, piece="emit", emitVector = {0, 1, 0}, onActive=false, noIconDraw = true}},   
+   {class='AirJet', options={color={0.6,1.0,0.15}, width=30, length=100, piece="emit", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}},
+  },	
   tc_pyramid = {	{class='StaticParticles', options=MergeTable(Smoke, {piece="emit2"})},  },
   tc_tower= {	
   {class='StaticParticles', options=MergeTable(Greenglow_small, {piece="emit"})},  

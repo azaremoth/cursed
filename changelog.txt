@@ -3,6 +3,10 @@
 Features
 - reworked the role of cursed Moloch demons: shorter range, higher aoe, more dps
 - added cursed Spiderdemon as tier2 support with ranged attacks
+- reworked heros stats: can level up to level 10; bar indicating progress
+- reworked sarge's visuals
+- reworked cursed summoning pitt's visuals (only available for AI)
+- Cursed Shade will also spawn in survival mode
 
 Polishing
 - optimized the animation of Shade's circle attack

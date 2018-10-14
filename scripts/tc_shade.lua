@@ -452,7 +452,7 @@ end
 function CircleAttack()
 	-----------------------------------------------------------------	
 	local x, y, z = Spring.GetUnitPosition(unitID)
-	Spring.PlaySoundFile("sounds/swoosh.wav", 80, x, y, z)			
+	Spring.PlaySoundFile("sounds/laser_sword_multi.ogg", 80, x, y, z)			
 	-----------------------------------------------------------------	
 	local HitUnits = Spring.GetUnitsInSphere(x,y,z, WeaponRange)
 	local MyTeam = Spring.GetUnitTeam(unitID)
@@ -521,8 +521,7 @@ function script.AimWeapon2(heading, pitch)
 	return true
 end
 
-function script.FireWeapon2()
-	StartThread( RestoreAfterDelay) 	
+function script.FireWeapon2()	
 	return(1)
 end
 

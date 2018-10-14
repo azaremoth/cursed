@@ -45,7 +45,6 @@ local emit_rjetpack = piece 'emit_rjetpack'
 local emit_ljetpack = piece 'emit_ljetpack'
 local cigtip = piece 'cigtip'
 
-local restore_delay
 local moving
 local attacking
 local jumping
@@ -261,7 +260,6 @@ function script.Create()
 	Turn2(emit_ljetpack,x_axis, 90, 500)
 	SetMoveAnimationSpeed()
 	moving = false
-	restore_delay = 1000
 	--START BUILD CYCLE
 	Sleep(200)
 	while GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0 do
@@ -318,7 +316,6 @@ function script.AimWeapon1(heading, pitch)
 
 	Turn2( sgarm1, x_axis, 0, MOVEANIMATIONSPEED*6 )
 	Turn2( sgarm2, x_axis, 0, MOVEANIMATIONSPEED*6 )
-	Turn2( sgarm3, x_axis, 0, MOVEANIMATIONSPEED*6 )	
 	WaitForTurn( sgarm2, x_axis )	
 	
 	attacking=true

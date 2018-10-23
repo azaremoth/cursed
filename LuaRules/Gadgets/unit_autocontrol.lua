@@ -104,10 +104,20 @@ local JumperPairs = {
 	[UnitDefNames.euf_sarge_lvl3.id] = "euf_sarge_lvl3",
 	[UnitDefNames.euf_sarge_lvl4.id] = "euf_sarge_lvl4",
 	[UnitDefNames.euf_sarge_lvl5.id] = "euf_sarge_lvl5",
+	[UnitDefNames.euf_sarge_lvl6.id] = "euf_sarge_lvl6",
+	[UnitDefNames.euf_sarge_lvl7.id] = "euf_sarge_lvl7",
+	[UnitDefNames.euf_sarge_lvl8.id] = "euf_sarge_lvl8",
+	[UnitDefNames.euf_sarge_lvl9.id] = "euf_sarge_lvl9",	
+	[UnitDefNames.euf_sarge_lvl10.id] = "euf_sarge_lvl10",	
 	[UnitDefNames.tc_shade_lvl2.id] = "tc_shade_lvl2",
 	[UnitDefNames.tc_shade_lvl3.id] = "tc_shade_lvl3",
 	[UnitDefNames.tc_shade_lvl4.id] = "tc_shade_lvl4",
 	[UnitDefNames.tc_shade_lvl5.id] = "tc_shade_lvl5",
+	[UnitDefNames.tc_shade_lvl6.id] = "tc_shade_lvl6",
+	[UnitDefNames.tc_shade_lvl7.id] = "tc_shade_lvl7",
+	[UnitDefNames.tc_shade_lvl8.id] = "tc_shade_lvl8",
+	[UnitDefNames.tc_shade_lvl9.id] = "tc_shade_lvl9",
+	[UnitDefNames.tc_shade_lvl10.id] = "tc_shade_lvl10",		
 }	
 
 	

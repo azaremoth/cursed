@@ -39,13 +39,23 @@ local seerTypes = {
 	[UnitDefNames.tc_shade_lvl3.id] = true,
 	[UnitDefNames.tc_shade_lvl4.id] = true,
 	[UnitDefNames.tc_shade_lvl5.id] = true,
+	[UnitDefNames.tc_shade_lvl6.id] = true,
+	[UnitDefNames.tc_shade_lvl7.id] = true,
+	[UnitDefNames.tc_shade_lvl8.id] = true,
+	[UnitDefNames.tc_shade_lvl9.id] = true,
+	[UnitDefNames.tc_shade_lvl10.id] = true,
+	
 	[UnitDefNames.euf_sarge.id] = true,
 	[UnitDefNames.euf_sarge_lvl1.id] = true,
 	[UnitDefNames.euf_sarge_lvl2.id] = true,
 	[UnitDefNames.euf_sarge_lvl3.id] = true,
-	[UnitDefNames.euf_sarge_lvl4.id] = true,	
-	[UnitDefNames.euf_sarge_lvl5.id] = true,	
-
+	[UnitDefNames.euf_sarge_lvl4.id] = true,
+	[UnitDefNames.euf_sarge_lvl5.id] = true,
+	[UnitDefNames.euf_sarge_lvl6.id] = true,
+	[UnitDefNames.euf_sarge_lvl7.id] = true,
+	[UnitDefNames.euf_sarge_lvl8.id] = true,
+	[UnitDefNames.euf_sarge_lvl9.id] = true,
+	[UnitDefNames.euf_sarge_lvl10.id] = true,
 	
 }
 local seers = {}

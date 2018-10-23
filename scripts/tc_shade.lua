@@ -55,9 +55,12 @@ local udid = Spring.GetUnitDefID(unitID)
 local ud = UnitDefs[udid]
 
 for i,w in ipairs(ud.weapons) do
-	WeaponRange = WeaponDefs[w.weaponDef].range
-	local WeaponDamagePairs = WeaponDefs[w.weaponDef].damages
-	WeaponDamage = WeaponDamagePairs[1]*0.5
+	local circlestrike = WeaponDefs[w.weaponDef].customParams.circlestrike
+	if (circlestrike == "true") then
+		WeaponRange = WeaponDefs[w.weaponDef].range
+		local WeaponDamagePairs = WeaponDefs[w.weaponDef].damages
+		WeaponDamage = WeaponDamagePairs[1]*0.5
+	end
 end
 
 local function Turn2(piecenum,axis, degrees, speed)
@@ -458,6 +461,8 @@ function CircleAttack()
 	local MyTeam = Spring.GetUnitTeam(unitID)
 	for _,eUnitID in ipairs(HitUnits) do
 		local eTeam = Spring.GetUnitTeam(eUnitID)
+		local hx, hy, hz = Spring.GetUnitPosition(eUnitID)
+		Spring.SpawnCEG('GREENHITSPARKLE', hx, hy+10, hz)
 		if (eUnitID ~= unitID) and (eTeam ~= MyTeam) and not (Spring.AreTeamsAllied(eTeam, MyTeam)) then
 			local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
 			if (WeaponDamage > eUnitIDhealth) then

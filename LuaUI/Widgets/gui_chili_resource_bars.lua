@@ -470,11 +470,11 @@ function widget:GameFrame(n)
 	lbl_e_income:SetCaption( ("%.1f"):format(eInco) )
 
 	if options.xpBar.value then
-		local current_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"current_xps")*100
-		local nextlevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"nextlevel_xps")*100
-		local rellevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"rellevel_xps")*100
-		local team_level = Spring.GetTeamRulesParam(GetMyTeamID(),"team_level")
-		local max_level = Spring.GetTeamRulesParam(GetMyTeamID(),"max_level")
+		local current_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"current_xps")*100 or 0
+		local nextlevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"nextlevel_xps")*100 or 0
+		local rellevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"rellevel_xps")*100 or 0
+		local team_level = Spring.GetTeamRulesParam(GetMyTeamID(),"team_level") or 0
+		local max_level = Spring.GetTeamRulesParam(GetMyTeamID(),"max_level") or 0
 
 
 		-- bar_xp:SetCaption(("%.1f%%"):format(rellevel_xps))

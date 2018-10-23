@@ -32,7 +32,10 @@ local ChickenAIs =
 	local expRange = 500
 	local DeathPenalty = 0.3
 	local GainForKilledHero = 0.5	
-	local LevelXPMultiplier = 0.7 --0.7
+	
+	local LevelXPExp = 2.0 --2.0
+	local LevelXPDiv = 12 --12
+	
 	local MaxLevel = 10
 	local AILevelIncreaseInterval = 5400 -- 3*60*30 means 3 minutes in gameframes
 	local AILevelIncreaseNext = 7200 -- first enforced level increase after 4 minutes
@@ -47,6 +50,12 @@ if (gadgetHandler:IsSyncedCode()) then
 --SYNCED
 
 ----------------------------------------------------------------
+local function LevelFormula(team)
+	local nextLevelXps = ((HeroLevelList[team]^LevelXPExp)/LevelXPDiv)
+	local lastLevelXps = (((HeroLevelList[team]-1)^LevelXPExp)/LevelXPDiv)
+	return nextLevelXps, lastLevelXps
+end
+
 
 function gadget:Initialize()
 	GG.delayeddeathlist = GG.delayeddeathlist or {}
@@ -96,21 +105,20 @@ local function ReAssignAssists(newUnit,oldUnit)
   end
 end
 
-local function ReplaceHero(unitID, team)
+local function ReplaceHero(unitID)
 	if (unitID ~= nil) then
 		local HeroTeam = Spring.GetUnitTeam(unitID)		
 		local x, y, z = Spring.GetUnitPosition(unitID)
 
-		local current_xps = HeroXPList[team]
-		local nextlevel_xps = ((HeroLevelList[team]^1.5)*LevelXPMultiplier^1.5)
-		local lastlevel_xps = (((HeroLevelList[team]-1)^1.5)*LevelXPMultiplier^1.5)
+		local current_xps = HeroXPList[HeroTeam]
+		local nextlevel_xps, lastlevel_xps = LevelFormula(HeroTeam)
 		local rellevel_xps = (current_xps-lastlevel_xps)/(nextlevel_xps-lastlevel_xps)
 		
-		Spring.SetTeamRulesParam(team,"current_xps",current_xps)
-		Spring.SetTeamRulesParam(team,"nextlevel_xps",nextlevel_xps)
-		Spring.SetTeamRulesParam(team,"rellevel_xps",rellevel_xps)
-		Spring.SetTeamRulesParam(team,"team_level",HeroLevelList[team])
-		Spring.SetTeamRulesParam(team,"max_level",MaxLevel)
+		Spring.SetTeamRulesParam(HeroTeam,"current_xps",current_xps)
+		Spring.SetTeamRulesParam(HeroTeam,"nextlevel_xps",nextlevel_xps)
+		Spring.SetTeamRulesParam(HeroTeam,"rellevel_xps",rellevel_xps)
+		Spring.SetTeamRulesParam(HeroTeam,"team_level",HeroLevelList[HeroTeam])
+		Spring.SetTeamRulesParam(HeroTeam,"max_level",MaxLevel)
 		
 		--- direction to facing ---
 		local dx, dy, dz = Spring.GetUnitDirection(unitID)
@@ -130,9 +138,9 @@ local function ReplaceHero(unitID, team)
 		local issarge = string.find(udhero.name, "euf_sarge")
 		local isshade = string.find(udhero.name, "tc_shade")
 		if (issarge) then
-			newhero = Spring.CreateUnit("euf_sarge_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, team)
+			newhero = Spring.CreateUnit("euf_sarge_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, HeroTeam)
 		elseif (isshade) then
-			newhero = Spring.CreateUnit("tc_shade_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, team)
+			newhero = Spring.CreateUnit("tc_shade_lvl".. HeroLevelList[HeroTeam], x,y,z, facing, HeroTeam)
 		end
 		if (newhero ~= nil) then
 			--//copy command queue
@@ -169,8 +177,7 @@ end
 local function CheckLeveling(unitID)
 	local HeroTeam = Spring.GetUnitTeam(unitID)
 	local current_xps = HeroXPList[HeroTeam]
-	local nextlevel_xps = ((HeroLevelList[HeroTeam]^1.5)*LevelXPMultiplier^1.5)
-	local lastlevel_xps = (((HeroLevelList[HeroTeam]-1)^1.5)*LevelXPMultiplier^1.5)
+	local nextlevel_xps, lastlevel_xps = LevelFormula(HeroTeam)
 	local rellevel_xps = (current_xps-lastlevel_xps)/(nextlevel_xps-lastlevel_xps)
 ----------------------- for testing
 --		local heroDefID = Spring.GetUnitDefID(unitID)
@@ -182,7 +189,7 @@ local function CheckLeveling(unitID)
 	if (HeroLevelList[HeroTeam] < MaxLevel and current_xps > nextlevel_xps) then
 		HeroLevelList[HeroTeam] = (HeroLevelList[HeroTeam]+1)
 		-- Spring.Echo('Hero of team '.. HeroTeam .. ' reached level: ' .. HeroLevelList[HeroTeam] )		
-		ReplaceHero(unitID, HeroTeam)
+		ReplaceHero(unitID)
 	end
 -------- Needed for health bars widget to show leveling progress
 	if (HeroLevelList[HeroTeam] < MaxLevel) then
@@ -220,7 +227,7 @@ end
 
 function gadget:UnitFromFactory(unitID, unitDefID, team, factID, factDefID, userOrders)
 	if IsAHero [unitDefID] then
-		ReplaceHero(unitID, team)
+		ReplaceHero(unitID)
 	end 
 end
 
@@ -232,11 +239,12 @@ end
 
 local function DecreaseHeroXP(unitID)
 		local HeroTeam = Spring.GetUnitTeam(unitID)
-		HeroXPList[HeroTeam] = (HeroXPList[HeroTeam]-DeathPenalty)	
+		HeroXPList[HeroTeam] = (HeroXPList[HeroTeam]-DeathPenalty)
+		local nextlevel_xps, lastlevel_xps = LevelFormula(HeroTeam)
 		if (HeroXPList[HeroTeam] < 0) then
 			HeroXPList[HeroTeam]  = 0
-		elseif (HeroXPList[HeroTeam] < ((HeroLevelList[HeroTeam]-1)^1.5*LevelXPMultiplier^1.5)) then
-			HeroXPList[HeroTeam] = ((HeroLevelList[HeroTeam]-1)^1.5*LevelXPMultiplier^1.5)			
+		elseif (HeroXPList[HeroTeam] < lastlevel_xps) then
+			HeroXPList[HeroTeam] = lastlevel_xps			
 		end		
 		-- Spring.Echo('Hero died: Team ' .. HeroTeam .. ' gets an experience penalty!')
 end
@@ -307,8 +315,7 @@ function gadget:GameFrame(f)
 		local allTeams = Spring.GetTeamList()
 		for _,team in ipairs(allTeams) do
 			local current_xps = HeroXPList[team]
-			local nextlevel_xps = ((HeroLevelList[team]^1.5)*LevelXPMultiplier^1.5)
-			local lastlevel_xps = (((HeroLevelList[team]-1)^1.5)*LevelXPMultiplier^1.5)
+			local nextlevel_xps, lastlevel_xps = LevelFormula(team)
 			local rellevel_xps = (current_xps-lastlevel_xps)/(nextlevel_xps-lastlevel_xps)
 			Spring.SetTeamRulesParam(team,"current_xps",current_xps)
 			Spring.SetTeamRulesParam(team,"nextlevel_xps",nextlevel_xps)

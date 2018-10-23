@@ -39,60 +39,70 @@ local SHADELVL1MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 70,
     reloadtime              = 0.70,
-    damage 		    = { default = 95, flyer = 95, heavy = 95, light = 95, },
+	customParams          	= {	circlestrike = "true" },
+    damage 		    		= { default = 95, flyer = 95, heavy = 95, light = 95, },
 }
 local SHADELVL2MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 70,
     reloadtime              = 0.70,
+	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 150, flyer = 150, heavy = 150, light = 150, },
 }
 local SHADELVL3MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 70,
     reloadtime              = 0.70,
+	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 205, flyer = 205, heavy = 205, light = 205, },
 }
 local SHADELVL4MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 70,
     reloadtime              = 0.70,
+	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 260, flyer = 260, heavy = 260, light = 260, },
 }
 local SHADELVL5MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 70,
     reloadtime              = 0.70,
+	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 315, flyer = 315, heavy = 315, light = 315, },
 }
 local SHADELVL6MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 70,
     reloadtime              = 0.70,
+	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 370, flyer = 370, heavy = 370, light = 370, },
 }
 local SHADELVL7MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 70,
     reloadtime              = 0.70,
+	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 425, flyer = 425, heavy = 425, light = 425, },
 }
 local SHADELVL8MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 70,
     reloadtime              = 0.70,
+	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 480, flyer = 480, heavy = 480, light = 480, },
 }
 local SHADELVL9MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 70,
     reloadtime              = 0.70,
+	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 535, flyer = 535, heavy = 535, light = 535, },
 }
 local SHADELVL10MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 70,
     reloadtime              = 0.70,
+	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 590, flyer = 590, heavy = 590, light = 590, },
 }
 local MEDBUGMELEE = {

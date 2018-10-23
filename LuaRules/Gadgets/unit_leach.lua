@@ -19,11 +19,11 @@ local IsALeach = {
 	[UnitDefNames.tc_shade_lvl3.id] = "tc_shade_lvl3",
 	[UnitDefNames.tc_shade_lvl4.id] = "tc_shade_lvl4",
 	[UnitDefNames.tc_shade_lvl5.id] = "tc_shade_lvl5",
-	[UnitDefNames.tc_shade_lvl1.id] = "tc_shade_lvl6",
-	[UnitDefNames.tc_shade_lvl2.id] = "tc_shade_lvl7",
-	[UnitDefNames.tc_shade_lvl3.id] = "tc_shade_lvl8",
-	[UnitDefNames.tc_shade_lvl4.id] = "tc_shade_lvl9",
-	[UnitDefNames.tc_shade_lvl5.id] = "tc_shade_lvl10",	
+	[UnitDefNames.tc_shade_lvl6.id] = "tc_shade_lvl6",
+	[UnitDefNames.tc_shade_lvl7.id] = "tc_shade_lvl7",
+	[UnitDefNames.tc_shade_lvl8.id] = "tc_shade_lvl8",
+	[UnitDefNames.tc_shade_lvl9.id] = "tc_shade_lvl9",
+	[UnitDefNames.tc_shade_lvl10.id] = "tc_shade_lvl10",	
 	}
 	
 if (gadgetHandler:IsSyncedCode()) then

@@ -50,7 +50,7 @@ local lturn = math.random()
 -------------------------------------------------------
 local RestoreAtkCount = 0
 local WeaponRange = 0
-local WeaponDamage = 0
+local CirlceWeaponDamage = 0
 local udid = Spring.GetUnitDefID(unitID)
 local ud = UnitDefs[udid]
 
@@ -59,7 +59,7 @@ for i,w in ipairs(ud.weapons) do
 	if (circlestrike == "true") then
 		WeaponRange = WeaponDefs[w.weaponDef].range
 		local WeaponDamagePairs = WeaponDefs[w.weaponDef].damages
-		WeaponDamage = WeaponDamagePairs[1]*0.5
+		CirlceWeaponDamage = WeaponDamagePairs[1]*0.5
 	end
 end
 
@@ -465,10 +465,11 @@ function CircleAttack()
 		Spring.SpawnCEG('GREENHITSPARKLE', hx, hy+10, hz)
 		if (eUnitID ~= unitID) and (eTeam ~= MyTeam) and not (Spring.AreTeamsAllied(eTeam, MyTeam)) then
 			local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
-			if (WeaponDamage > eUnitIDhealth) then
+			if (CirlceWeaponDamage > eUnitIDhealth) then
 				Spring.DestroyUnit(eUnitID,true,false,unitID)
 			else
-				Spring.SetUnitHealth(eUnitID, (eUnitIDhealth-WeaponDamage))
+				-- Spring.SetUnitHealth(eUnitID, (eUnitIDhealth-CirlceWeaponDamage))
+				Spring.AddUnitDamage(eUnitID, CirlceWeaponDamage, 0, unitID)
 			end
 		end
 	end
@@ -513,9 +514,6 @@ function script.AimFromWeapon2 ()
 end
 
 function script.AimWeapon2(heading, pitch)
-	if inbunker then
-		return false
-	end
 	
 	local SIG_Aim = 2^2
 	Signal(SIG_Aim)

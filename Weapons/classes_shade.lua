@@ -7,16 +7,21 @@ local SHADELVL10DRAGON = { damage = { default = 350, flyer = 350, heavy = 350, l
 -----------------------------------  BASE CLASS CHAINGUN ---------------------------------
 
 local DRAGONBASE = {
-      name               = "Dragon's Wrath",
+      name               = "Dragon's Wrath",	  
 	  accuracy           = 64,
       areaOfEffect       = 80,
 	  commandFire 	     = true,	  
       range              = 350,
 	  reloadtime         = 10,	  
------------------------------
-		avoidfeature = false,
-		avoidfriendly = false,
-		avoidground = false,
+	------------------------------------------
+		avoidFeature			= false,
+		avoidGround 			= false,
+		avoidFriendly      		= false,
+		avoidNeutral      		= false, 		
+		canAttackGround      	= true,
+		collideFriendly    		= false,
+		collideFeature    		= false,
+	------------------------------------------
 		cegTag = "BIGDRAGONFLAMETRAIL",		
 		craterareaofeffect = 0,
 		craterboost = 0,

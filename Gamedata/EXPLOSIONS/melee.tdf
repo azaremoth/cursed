@@ -99,6 +99,23 @@
 	ground=1;
 	count=1;
 	}
+	[Spikes]
+	{
+		class=CExploSpikeProjectile;
+		[properties]
+		{
+			dir=-45 r90,-45 r90,-45 r90;
+			width=3; 
+			length=1;
+			alpha=0.5;
+			alphadecay=0.1;
+			color=0.45, 1, 0.1;
+		}
+		air=1;
+		water=1;
+		ground=1;
+  		count=4; 
+	}	
 }
 
 [GREENSPARKLE]

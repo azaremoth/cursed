@@ -32,6 +32,7 @@ local scabbard2 = piece 'scabbard2'
 local moving = false
 local attacking = false
 local inbunker = false
+local soundsec = 1
 
 local restore_delay, MOVEANIMATIONSPEED, MOVEANIMATIONSLEEPTIME
 
@@ -307,8 +308,8 @@ local function MeleeAnimations()
 			
 			Spring.UnitScript.Spin ( pelvis, y_axis, 25, 20) 
 			
-			EmitSfx(emit_r, SPARKLE)	
-			EmitSfx(emit_l, SPARKLE)				
+			-- EmitSfx(emit_r, SPARKLE)	
+			-- EmitSfx(emit_l, SPARKLE)				
 			
 			Turn2( head, y_axis, 30, 200 )					
 			
@@ -455,15 +456,18 @@ end
 function CircleAttack()
 	-----------------------------------------------------------------	
 	local x, y, z = Spring.GetUnitPosition(unitID)
-	Spring.PlaySoundFile("sounds/laser_sword_multi.ogg", 80, x, y, z)			
+	if ( soundsec > 0) then
+		Spring.PlaySoundFile("sounds/laser_sword_multi.ogg", 80, x, y, z)
+	end
+	soundsec = (-1*soundsec)
 	-----------------------------------------------------------------	
 	local HitUnits = Spring.GetUnitsInSphere(x,y,z, WeaponRange)
 	local MyTeam = Spring.GetUnitTeam(unitID)
 	for _,eUnitID in ipairs(HitUnits) do
 		local eTeam = Spring.GetUnitTeam(eUnitID)
-		local hx, hy, hz = Spring.GetUnitPosition(eUnitID)
-		Spring.SpawnCEG('GREENHITSPARKLE', hx, hy+10, hz)
 		if (eUnitID ~= unitID) and (eTeam ~= MyTeam) and not (Spring.AreTeamsAllied(eTeam, MyTeam)) then
+			local hx, hy, hz = Spring.GetUnitPosition(eUnitID)
+			Spring.SpawnCEG('GREENHITSPARKLE', hx, hy+10, hz)
 			local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
 			if (CirlceWeaponDamage > eUnitIDhealth) then
 				Spring.DestroyUnit(eUnitID,true,false,unitID)

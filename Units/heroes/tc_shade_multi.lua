@@ -20,7 +20,7 @@ local LVL1 = {
   unitname           = "tc_shade_lvl1",
   name               = "Shade (Hero Lvl. 1)",
   maxDamage          = 1800,
-  maxVelocity        = 3.6,	 
+  maxVelocity        = 3.6,
   customParams       = {
 		factionname	= "cursed",
 		isinfantry 	= "true",
@@ -159,7 +159,7 @@ local LVL6 = {
   name               = "Shade (Hero Lvl. 6)", 
   maxDamage          = 4050,
   maxVelocity        = 4.1,
-  canManualFire      = true,  
+  canManualFire      = true,
   customParams       = {
 		factionname	= "cursed",
 		isinfantry 	= "true",
@@ -187,7 +187,7 @@ local LVL6 = {
       maxAngleDif        	= 180,
 	  badTargetCategory 	= "AIR",
       onlyTargetCategory 	= "LAND",
-    },	
+    },
   },  
 }
 local LVL7 = {

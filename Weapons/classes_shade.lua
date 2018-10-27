@@ -9,10 +9,19 @@ local SHADELVL10DRAGON = { damage = { default = 350, flyer = 350, heavy = 350, l
 local DRAGONBASE = {
       name               = "Dragon's Wrath",	  
 	  accuracy           = 64,
-      areaOfEffect       = 80,
+      areaOfEffect       = 64,
 	  commandFire 	     = true,	  
       range              = 350,
 	  reloadtime         = 10,	  
+	------------------------------------------	  
+	  cegTag = "BIGDRAGONFLAMETRAIL",
+	  explosiongenerator = "custom:SMALL_EXPLOSION_GREEN2", --SMALL_EXPLOSION_GREEN or DRAGONFLAMEEXPLOSION?
+	------------------------------------------
+		soundhit = "explosion/ex_large8",
+		soundhitwet = "explosion/wet/large_water_explode",
+		soundhitwetvolume = 0.5,
+		soundstart = "dragoncall",
+		soundtrigger = true,
 	------------------------------------------
 		avoidFeature			= false,
 		avoidGround 			= false,
@@ -22,33 +31,22 @@ local DRAGONBASE = {
 		collideFriendly    		= false,
 		collideFeature    		= false,
 	------------------------------------------
-		cegTag = "BIGDRAGONFLAMETRAIL",		
 		craterareaofeffect = 0,
 		craterboost = 0,
 		cratermult = 0,
-		waterbounce = true,
 		groundbounce = true,
-		bounceRebound = 0, --0: stick the explosion to ground with 0 vertical component
-		waterweapon = false,
-		firesubmersed = false,
-		energypershot = 500,
-		explosiongenerator = "custom:SMALL_EXPLOSION_GREEN2", --SMALL_EXPLOSION_GREEN or DRAGONFLAMEEXPLOSION?
-		firestarter = 100,
+		bounceRebound = 0, --stick the explosion to ground with 0 vertical component
+		waterweapon = false, -- can not pass trough water
+		firesubmersed = false, -- but not _fire_ underwater
 		impulseboost = 0,
 		impulsefactor = 0,
 		noexplode = true,
 		noselfdamage = true,
-		rgbColor  = {0.6, 1.0, 0.15},
-		soundhit = "explosion/ex_large8",
-		soundhitwet = "explosion/wet/large_water_explode",
-		soundhitwetvolume = 0.5,
-		soundstart = "dragoncall",
-		soundtrigger = true,
 		tolerance = 10000,
 		turret = true,
 		weapontimer = 4.2,
 		weapontype = "DGun",
-		weaponvelocity = 300,
+		weaponvelocity = 300,	
 }
 ----------------------------------- FINALIZE ---------------------------------------------
 function WeaponDefCopyTable(tableToCopy, deep)

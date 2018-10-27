@@ -525,6 +525,10 @@ function script.AimWeapon2(heading, pitch)
 end
 
 function script.FireWeapon2()	
+	Turn2( ruparm, y_axis, 90 )
+	Turn2( luparm, y_axis, -90 )
+	Turn2( ruparm, x_axis, -90 )
+	Turn2( luparm, x_axis, -90 )
 	return(1)
 end
 

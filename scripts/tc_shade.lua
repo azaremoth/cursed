@@ -21,13 +21,16 @@ local lhand = piece 'lhand'
 local lthumb = piece 'lthumb'
 local rhand = piece 'rhand'
 local rthumb = piece 'rthumb'
-local katana_r = piece 'katana_r'
-local katana_l = piece 'katana_l'
-local emit_r = piece 'emit_r'
-local emit_l = piece 'emit_l'
-local joint = piece 'joint'
-local scabbard1 = piece 'scabbard1'
-local scabbard2 = piece 'scabbard2'
+local rkatana = piece 'rkatana'
+local lkatana = piece 'lkatana'
+local twohanded = piece 'twohanded'
+local lscythe = piece 'lscythe'
+local rscythe = piece 'rscythe'
+local hat = piece 'hat'
+local lshspikes = piece 'lshspikes'
+local rshspikes = piece 'rshspikes'
+local lshield = piece 'lshield'
+local rshield = piece 'rshield'
 
 local moving = false
 local attacking = false
@@ -48,6 +51,9 @@ local SPARKLE	 	 = 1029+0
 ---- FOR BORED ANIMATION and other randomizations -----
 local rturn = math.random()
 local lturn = math.random()
+-------------------------------------------------------
+local team = Spring.GetUnitTeam(unitID)
+local level = Spring.GetTeamRulesParam(team,"team_level")
 -------------------------------------------------------
 local RestoreAtkCount = 0
 local WeaponRange = 0
@@ -110,7 +116,44 @@ function script.specialskill()
 	end
 	StartThread( RestoreIllusionCast)	
 end
---- End Illusions ------------------------------------------
+
+------------------------ LEVEL VISUALS
+local function LevelAdjust()
+	Hide(rkatana)
+	Hide(lkatana)
+	Hide(twohanded)
+	Hide(lscythe)
+	Hide(rscythe)
+	Hide(hat)
+	Hide(rshspikes)
+	Hide(lshspikes)
+	Hide(lshield)
+	Hide(rshield)
+	Hide(mask)	
+	if (level > 8) then
+		Show(rkatana)
+		Show(lkatana)
+		Show(rshspikes)
+		Show(lshspikes)
+		Show(hat)
+		Show(lshield)
+		Show(rshield)
+		Show(mask)		
+	elseif (level > 5) then
+		Show(lscythe)
+		Show(rscythe)
+		Show(hat)
+		Show(lshield)
+		Show(rshield)
+		Show(mask)	
+	elseif (level > 2) then
+		Show(lshield)
+		Show(rshield)
+		Show(mask)
+	else
+		Show(twohanded)
+	end	
+end
 
 --Jumps ----------------------------------------------------
 
@@ -145,11 +188,18 @@ function script.beginJump()
 	Hide(lthumb)
 	Hide(rhand)
 	Hide(rthumb)
-	Hide(katana_r)
-	Hide(katana_l)
+
+	Hide(rkatana)
+	Hide(lkatana)
+	Hide(twohanded)
+	Hide(lscythe)
+	Hide(rscythe)
+	Hide(hat)
+	Hide(rshspikes)
+	Hide(lshspikes)
+	Hide(lshield)
+	Hide(rshield)
 	Hide(mask)	
-	Hide(scabbard1)	
-	Hide(scabbard2)		
 
 	jumping = true
 --	StartThread(JumpExhaust)
@@ -180,11 +230,8 @@ function script.endJump()
 	Show(lthumb)
 	Show(rhand)
 	Show(rthumb)
-	Show(katana_r)
-	Show(katana_l)
-	Show(mask)	
-	Show(scabbard2)	
-	Show(scabbard2)
+
+	LevelAdjust()
 	
 	EmitSfx(base, JUMPDUST)
 	EmitSfx(head, JUMPDUST)	
@@ -225,7 +272,16 @@ local function Walkscript()
 			Turn2( rleg, y_axis, 0, MOVEANIMATIONSPEED*2 )
 			Turn2( lleg, y_axis, 0, MOVEANIMATIONSPEED*2 )	
 			if not attacking then 
-				Turn2( ruparm, x_axis, 15, MOVEANIMATIONSPEED )
+				if (level < 6) then
+					Turn2( ruparm, x_axis, -9, MOVEANIMATIONSPEED*3 )
+					Turn2( luparm, x_axis, -9, MOVEANIMATIONSPEED*3 )
+					Turn2( rloarm, x_axis, -90, MOVEANIMATIONSPEED*3 )
+					Turn2( lloarm, x_axis, -90, MOVEANIMATIONSPEED*3 )
+					Turn2( lhand, y_axis, 85, MOVEANIMATIONSPEED*3 )
+					Turn2( twohanded, z_axis, 90, MOVEANIMATIONSPEED*3 )
+				else 
+					Turn2( ruparm, x_axis, 15, MOVEANIMATIONSPEED )
+				end
 				Turn2( chest, x_axis, 20, MOVEANIMATIONSPEED)
 			end
 			Turn2( lthigh, x_axis, -50, MOVEANIMATIONSPEED*5 )
@@ -236,8 +292,10 @@ local function Walkscript()
 		end
 		if moving then
 --			SetMoveAnimationSpeed()
-			if not attacking then 
-				Turn2( luparm, x_axis, -15, MOVEANIMATIONSPEED )
+			if not attacking then
+				if (level > 5) then
+					Turn2( luparm, x_axis, -15, MOVEANIMATIONSPEED )
+				end
 				Turn2( chest, y_axis, 10, MOVEANIMATIONSPEED )	
 				Turn2( chest, z_axis, 3, MOVEANIMATIONSPEED )	
 				Turn2( head, z_axis, 2, MOVEANIMATIONSPEED*0.3 )
@@ -249,7 +307,7 @@ local function Walkscript()
 		end
 		if moving then
 --			SetMoveAnimationSpeed()
-			if not attacking then 
+			if not attacking and (level > 5) then 
 				Turn2( luparm, x_axis, 15, MOVEANIMATIONSPEED )
 			end
 			Turn2( lthigh, x_axis, 20, MOVEANIMATIONSPEED*2.7 )
@@ -261,7 +319,9 @@ local function Walkscript()
 		if moving then
 --			SetMoveAnimationSpeed()
 			if not attacking then 
-				Turn2( ruparm, x_axis, -15, MOVEANIMATIONSPEED )
+				if (level > 5) then
+					Turn2( ruparm, x_axis, -15, MOVEANIMATIONSPEED )
+				end
 				Turn2( chest, y_axis, -10, MOVEANIMATIONSPEED )	
 				Turn2( chest, z_axis, -3, MOVEANIMATIONSPEED )	
 				Turn2( head, z_axis, -2, MOVEANIMATIONSPEED*0.3 )
@@ -306,30 +366,36 @@ local function MeleeAnimations()
 				Turn2( lleg, x_axis, 50, 600 )
 			end
 			
-			Spring.UnitScript.Spin ( pelvis, y_axis, 25, 20) 
+			Spring.UnitScript.Spin ( pelvis, y_axis, -25, 20) 
+						
+			Turn2( twohanded, z_axis, 0 )
 			
-			-- EmitSfx(emit_r, SPARKLE)	
-			-- EmitSfx(emit_l, SPARKLE)				
+			Turn2( lscythe, z_axis, -90 )
+			Turn2( rscythe, z_axis, -90 )
+			
+			Turn2( lkatana, z_axis, -90 )
+			Turn2( rkatana, z_axis, -90 )
+			
 			
 			Turn2( head, y_axis, 30, 200 )					
 			
-			Turn2( ruparm, x_axis, 0, 300 )
+			Turn2( ruparm, x_axis, -9, 300 )
 			Turn2( ruparm, y_axis, 0, 300 )
 			Turn2( ruparm, z_axis, 50, 300 )			
-			Turn2( rloarm, x_axis, 0, 300 )
+			Turn2( rloarm, x_axis, -20, 300 )
 			Turn2( rloarm, y_axis, 60, 300 )
 			Turn2( rloarm, z_axis, 0, 300 )			
-			Turn2( rhand, x_axis, 35, 300 )
+			Turn2( rhand, x_axis, 40, 300 )
 			Turn2( rhand, y_axis, 0, 300 )
 			Turn2( rhand, z_axis, 0, 300 )	
 			
-			Turn2( luparm, x_axis, 0, 300 )
+			Turn2( luparm, x_axis, -9, 300 )
 			Turn2( luparm, y_axis, 0, 300 )
 			Turn2( luparm, z_axis, -45, 300 )			
-			Turn2( lloarm, x_axis, -25, 300 )
+			Turn2( lloarm, x_axis, -20, 300 )
 			Turn2( lloarm, y_axis, 0, 300 )
 			Turn2( lloarm, z_axis, 0, 300 )			
-			Turn2( lhand, x_axis, 25, 300 )
+			Turn2( lhand, x_axis, 40, 300 )
 			Turn2( lhand, y_axis, -30, 300 )
 			Turn2( lhand, z_axis, 15, 300 )
 					
@@ -337,6 +403,12 @@ local function MeleeAnimations()
 		
 		if not attacking then
 			Spring.UnitScript.StopSpin ( pelvis, y_axis, 1)
+			
+			Turn2( lscythe, z_axis, 0, 400 )
+			Turn2( rscythe, z_axis, 0, 400 )
+			Turn2( lkatana, z_axis, 0, 400 )
+			Turn2( rkatana, z_axis, 0, 400 )
+			
 			Turn2( pelvis, y_axis, 0, 500 )	
 			Turn2( ruparm, y_axis, 0, 400 )
 			Turn2( ruparm, z_axis, 0, 400 )
@@ -399,16 +471,15 @@ end
 ------------------------ ACTIVATION
 function script.Create()
 	SetMoveAnimationSpeed()
-	
 	restore_delay = 1000
-	
+	LevelAdjust()
 	--START BUILD CYCLE
 	Sleep(200)
 	while GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0 do
 			Sleep(300)
 	end
 	--END BUILD CYCLE
-	EmitSfx(base, LEVELING)	
+	EmitSfx(base, LEVELING)
 	StartThread( Walkscript )
 	StartThread( MeleeAnimations )	
 	StartThread( BoredAnimation )	

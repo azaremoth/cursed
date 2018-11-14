@@ -72,7 +72,7 @@ local rturn = (math.random()*50)
 local lturn = (math.random()*(-50))
 
 local team = Spring.GetUnitTeam(unitID)
-local level = Spring.GetTeamRulesParam(team,"team_level")
+local level = Spring.GetTeamRulesParam(team,"team_level") or 1
 
 local function Turn2(piecenum,axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180

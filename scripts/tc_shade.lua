@@ -53,7 +53,7 @@ local rturn = math.random()
 local lturn = math.random()
 -------------------------------------------------------
 local team = Spring.GetUnitTeam(unitID)
-local level = Spring.GetTeamRulesParam(team,"team_level")
+local level = Spring.GetTeamRulesParam(team,"team_level") or 1
 -------------------------------------------------------
 local RestoreAtkCount = 0
 local WeaponRange = 0
@@ -147,6 +147,7 @@ local function LevelAdjust()
 		Show(rshield)
 		Show(mask)	
 	elseif (level > 2) then
+		Show(twohanded)
 		Show(lshield)
 		Show(rshield)
 		Show(mask)

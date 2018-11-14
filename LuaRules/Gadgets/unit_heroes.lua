@@ -34,7 +34,7 @@ local ChickenAIs =
 	local GainForKilledHero = 0.5	
 	
 	local LevelXPExp = 2.0 --2.0
-	local LevelXPDiv = 120 --12
+	local LevelXPDiv = 12 --12
 	
 	local MaxLevel = 10
 	local AILevelIncreaseInterval = 5400 -- 3*60*30 means 3 minutes in gameframes

@@ -96,7 +96,33 @@ local function SetMoveAnimationSpeed()
 	end	
 end
 
-local echo = Spring.Echo
+------------------------ LEVEL VISUALS
+local function LevelAdjust()
+	Hide(jetpack)
+	Hide(plasmagun)
+	Hide(lpistol)
+	Hide(rpistol)
+	Hide(bfg)
+	if (level > 5) then
+		Show(jetpack)	
+		Show(bfg)
+		Show(plasmagun)
+		Hide(rpistol)		
+		Hide(lpistol)	
+	elseif (level > 3) then
+		Show(jetpack)
+		Show(plasmagun)
+		Show(rpistol)		
+		Hide(lpistol)
+	elseif (level > 1) then
+		Show(jetpack)	
+		Show(rpistol)
+		Show(lpistol)
+	else
+		Show(rpistol)
+		Show(lpistol)
+	end
+end
 
 --Jumps
 local function JumpExhaust()
@@ -240,21 +266,8 @@ end
 function script.Create()
 	Turn2( mask, x_axis, -120 )
 	Move( mask, y_axis, -0.5)
+	LevelAdjust()	
 	Hide(mask)	
-	
-	if (level < 2) then
-		Hide(jetpack)
-	end
-	if (level < 4) then
-		Hide(plasmagun)
-	else
-		Hide(lpistol)
-	end
-	if (level < 6) then
-		Hide(bfg)
-	else
-		Hide(rpistol)
-	end
 	
 	Turn2(emit_rjetpack,x_axis, 90, 500)
 	Turn2(emit_ljetpack,x_axis, 90, 500)

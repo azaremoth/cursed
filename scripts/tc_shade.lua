@@ -113,6 +113,9 @@ function script.specialskill()
 			local createillusion = Spring.CreateUnit("tc_decoyshade", x+math.random(50),y,z+math.random(50), heading, team)		
 		end
 		IllusionCast = true
+		Spring.SetUnitCloak(unitID, false)
+		Spring.SetUnitStealth(unitID, false)
+		StartThread( RestoreAfterDelay)	
 	end
 	StartThread( RestoreIllusionCast)	
 end
@@ -253,7 +256,7 @@ function RestoreAtkAfterDelay()
 end
 
 function RestoreAfterDelay()
-	Sleep(2000)
+	Sleep(4000) --was 2000
 	Turn( head, y_axis, 0, 4 )
 	if ((ud.customParams.cloakedduring == "standing") and not moving and not attacking) then	
 		Spring.SetUnitCloak(unitID, 2, 50)
@@ -480,17 +483,19 @@ function script.Create()
 			Sleep(300)
 	end
 	--END BUILD CYCLE
-	EmitSfx(base, LEVELING)
 	StartThread( Walkscript )
 	StartThread( MeleeAnimations )	
 	StartThread( BoredAnimation )	
 	StartThread( RestoreAfterDelay)	
 	if (ud.customParams.hploss ~= nil) then
-		StartThread( LoseHP )	
+		StartThread( LoseHP )
+		EmitSfx(pelvis, JUMPDUST)
+		EmitSfx(head, JUMPDUST)				
+	else 
+		EmitSfx(base, LEVELING)
+		EmitSfx(pelvis, LEVELING)
+		EmitSfx(head, LEVELING)		
 	end
-	EmitSfx(pelvis, JUMPDUST)
-	EmitSfx(head, JUMPDUST)		
-	
 end
 
 --move control -----------------------------------------------------------------

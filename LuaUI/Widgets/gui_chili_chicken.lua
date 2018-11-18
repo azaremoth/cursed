@@ -340,7 +340,7 @@ function ChickenEvent(chickenEventArgs)
 	waveTime = Spring.GetTimer()
   elseif (chickenEventArgs.type == "queen") then
     waveMessage    = {}
-    waveMessage[1] = "The Hive is angered!"
+    waveMessage[1] = "The Scourge is angered!"
     waveTime = Spring.GetTimer()
   end
 end

@@ -15,7 +15,7 @@ triggerTolerance     = 0.01      -- increase if lag prevention mode switches on 
 maxAge               = 5*60      -- chicken die at this age, seconds
 queenName            = "tc_dragonqueen"
 queenMorphName		 = ""
-miniQueenName		 = "tc_shade_lvl5"
+miniQueenName		 = "tc_dragon"
 waveRatio            = 0.6       -- waves are composed by two types of chicken, waveRatio% of one and (1-waveRatio)% of the other
 baseWaveSize		 = 2.00		 -- multiplied by malus, 1 = 1 squadSize of chickens
 waveSizeMult		 = 1

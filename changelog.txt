@@ -19,6 +19,8 @@ Polishing
 - Updated IU code and appearance
 - Progressbar indicating progress
 
+Bugs
+- AI players will no longer try to capture (non-existing) control points in chicken games
 
 
 

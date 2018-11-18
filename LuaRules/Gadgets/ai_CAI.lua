@@ -54,12 +54,6 @@ local mexCount = 0
 
 local cvmode = false
 
-if (Spring.GetModOptions().scoremode ~= nil) then
-	if (Spring.GetModOptions().scoremode ~= "disabled") then
-		cvmode = true
-	end
-end
-
 for name, data in pairs(jumpDefNames) do
 	jumpDefs[UnitDefNames[name].id] = data
 end
@@ -3938,6 +3932,7 @@ end
 function gadget:Initialize()
 	-- Initialise AI for all team that are set to use it
 	local aiOnTeam = {}
+	local chickens = 0
 	usingAI = false
 	
 	GG.capturepointsx = GG.capturepointsx or {}
@@ -3952,6 +3947,7 @@ function gadget:Initialize()
 		local IsSupportedAI = false
 		if (ai and ChickenAIs[Spring.GetTeamLuaAI(team)]) then
 			IsChickenAI = true
+			chickens = (chickens + 1)
 			Spring.Echo("Skirmish AI: Chicken AI detected")
 		elseif (team == GaiaAITeam) then
 			IsGaiaAI = true
@@ -3960,6 +3956,7 @@ function gadget:Initialize()
 			IsChickenAI = true
 			Spring.Echo("Skirmish AI: Chicken AI detected")			
 		end
+			
 		if (ai and (not IsGaiaAI)) then
 			cvActiveX[team] = MapCenterX
 			cvActiveZ[team] = MapCenterZ
@@ -3972,6 +3969,13 @@ function gadget:Initialize()
 			initialiseAiTeam(team, allyTeam, aiConfigByName["Skirmish AI"])
 			aiOnTeam[allyTeam] = true
 			usingAI = true
+		end
+	end
+	
+	if (Spring.GetModOptions().scoremode ~= nil) then
+		if ((Spring.GetModOptions().scoremode ~= "disabled") and (chickens < 1)) then
+			cvmode = true
+			Spring.Echo("Skirmish AI: CPV mode active")	
 		end
 	end
 	

@@ -152,15 +152,15 @@ local chickenTypes = {
 
   tc_dragon				=  {time = 40, squadSize = 0.15},
   
-  tc_shade_lvl1			=  {time = 5, squadSize = 0.01},
-  tc_shade_lvl2			=  {time = 7, squadSize = 0.01},
-  tc_shade_lvl3			=  {time = 9, squadSize = 0.01},
-  tc_shade_lvl4			=  {time = 10, squadSize = 0.01},
-  tc_shade_lvl5			=  {time = 15, squadSize = 0.01},
-  tc_shade_lvl6			=  {time = 20, squadSize = 0.01},
-  tc_shade_lvl7			=  {time = 25, squadSize = 0.01},
-  tc_shade_lvl8			=  {time = 30, squadSize = 0.01},
-  tc_shade_lvl9			=  {time = 36, squadSize = 0.01},
+  tc_shade			=  {time = 5, squadSize = 0.01},
+  tc_shade			=  {time = 7, squadSize = 0.01},
+  tc_shade			=  {time = 9, squadSize = 0.01},
+  tc_shade			=  {time = 10, squadSize = 0.01},
+  tc_shade			=  {time = 15, squadSize = 0.01},
+  tc_shade			=  {time = 20, squadSize = 0.01},
+  tc_shade			=  {time = 25, squadSize = 0.01},
+  tc_shade			=  {time = 30, squadSize = 0.01},
+  tc_shade			=  {time = 36, squadSize = 0.01},
   
 }
 

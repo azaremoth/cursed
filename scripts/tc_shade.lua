@@ -148,7 +148,7 @@ local function LevelAdjust()
 		Show(rshield)
 		Show(mask)
 	elseif (level > 6) then
-		Show(lscythe)
+		Show(rscythe)
 		Show(lkatana)
 		Show(hat)
 		Show(lshield)
@@ -294,7 +294,7 @@ local function Walkscript()
 			Turn2( rleg, y_axis, 0, MOVEANIMATIONSPEED*2 )
 			Turn2( lleg, y_axis, 0, MOVEANIMATIONSPEED*2 )	
 			if not attacking then 
-				if (level < 6) then
+				if (level < 5) then
 					Turn2( ruparm, x_axis, -9, MOVEANIMATIONSPEED*3 )
 					Turn2( luparm, x_axis, -9, MOVEANIMATIONSPEED*3 )
 					Turn2( rloarm, x_axis, -90, MOVEANIMATIONSPEED*3 )

@@ -76,11 +76,12 @@ function gadget:GameFrame(f)
 					elseif (UnitDefs[eunitDefID].customParams.isbones and eUnitID ~= unitID and eTeam ~= MyTeam and hashealed == false and manahurtamount ~= nil and manahurtcost ~= nil and areAllied ~= true) then
 						local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
 						if loopmana >= manahurtcost then
-							if (manahurtamount > eUnitIDhealth) then
-								Spring.DestroyUnit(eUnitID,true,false)
-							else
-								Spring.SetUnitHealth(eUnitID, (eUnitIDhealth-manahurtamount))
-							end	
+							Spring.AddUnitDamage(eUnitID, manahurtamount, 0, unitID)
+							--if (manahurtamount > eUnitIDhealth) then
+							--	Spring.DestroyUnit(eUnitID,true,false)
+							--else
+							--	Spring.SetUnitHealth(eUnitID, (eUnitIDhealth-manahurtamount))
+							--end	
 							Spring.SetUnitRulesParam(unitID,'mana',(loopmana-manahurtcost))	
 							local ex, ey, ez = Spring.GetUnitPosition(eUnitID)
 							Spring.UnitScript.CallAsUnit(unitID,Spring.UnitScript.GetScriptEnv(unitID).script.cast)				

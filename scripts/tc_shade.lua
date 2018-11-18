@@ -24,6 +24,9 @@ local rthumb = piece 'rthumb'
 local rkatana = piece 'rkatana'
 local lkatana = piece 'lkatana'
 local twohanded = piece 'twohanded'
+local emit_rkatana = piece 'emit_rkatana'
+local emit_lkatana = piece 'emit_lkatana'
+local emit_twohanded = piece 'emit_twohanded'
 local lscythe = piece 'lscythe'
 local rscythe = piece 'rscythe'
 local hat = piece 'hat'
@@ -297,11 +300,11 @@ local function Walkscript()
 					Turn2( rloarm, x_axis, -90, MOVEANIMATIONSPEED*3 )
 					Turn2( lloarm, x_axis, -90, MOVEANIMATIONSPEED*3 )
 					Turn2( lhand, y_axis, 85, MOVEANIMATIONSPEED*3 )
-					Turn2( twohanded, z_axis, 90, MOVEANIMATIONSPEED*3 )
 				else 
 					Turn2( ruparm, x_axis, 15, MOVEANIMATIONSPEED )
 				end
 				Turn2( chest, x_axis, 20, MOVEANIMATIONSPEED)
+				Turn2( twohanded, z_axis, 0, MOVEANIMATIONSPEED*3 )	
 			end
 			Turn2( lthigh, x_axis, -50, MOVEANIMATIONSPEED*5 )
 			Turn2( rthigh, x_axis, 20, MOVEANIMATIONSPEED*2.7 )
@@ -387,14 +390,13 @@ local function MeleeAnimations()
 			
 			Spring.UnitScript.Spin ( pelvis, y_axis, -25, 20) 
 						
-			Turn2( twohanded, z_axis, 0 )
+			Turn2( twohanded, z_axis, 90 )
 			
 			Turn2( lscythe, z_axis, -90 )
 			Turn2( rscythe, z_axis, -90 )
 			
 			Turn2( lkatana, z_axis, -90 )
 			Turn2( rkatana, z_axis, -90 )
-			
 			
 			Turn2( head, y_axis, 30, 200 )					
 			
@@ -489,6 +491,10 @@ end
 
 ------------------------ ACTIVATION
 function script.Create()
+	Turn2( emit_twohanded, z_axis, 90 )	
+	Turn2( emit_rkatana, z_axis, 90 )	
+	Turn2( emit_lkatana, z_axis, 90 )		
+
 	SetMoveAnimationSpeed()
 	restore_delay = 1000
 	LevelAdjust()

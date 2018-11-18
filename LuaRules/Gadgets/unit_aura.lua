@@ -330,12 +330,13 @@ function gadget:GameFrame(f)
 						end	
 						-- Pest --
 						if (spGetUnitRulesParam(unitID,"Pest Aura") == 1) then
-							if ((spGetUnitHealth(unitID)-PESTAURADAMAGE) > 0 ) then 
-								spSetUnitHealth(unitID, spGetUnitHealth(unitID)-PESTAURADAMAGE )
-							else
-								GG.delayeddeathlist[unitID] = Spring.GetGameFrame()
-								-- Spring.DestroyUnit(unitID,true,false,unitID) -- fix some time: killer should be the aura caster
-							end
+							Spring.AddUnitDamage(unitID, PESTAURADAMAGE, 0)
+							--if ((spGetUnitHealth(unitID)-PESTAURADAMAGE) > 0 ) then 
+							--	spSetUnitHealth(unitID, spGetUnitHealth(unitID)-PESTAURADAMAGE )
+							--else
+							--	GG.delayeddeathlist[unitID] = Spring.GetGameFrame()
+							--	-- Spring.DestroyUnit(unitID,true,false,unitID) -- fix some time: killer should be the aura caster
+							--end
 						end
 					end
 				end

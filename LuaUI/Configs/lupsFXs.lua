@@ -197,12 +197,32 @@ Blueglow_small = {
   count       = 1,
   repeatEffect = true,
 }
+Greenglow_sword = {
+  life        = 50,
+  lifeSpread  = 0,
+  size        = 100,
+  sizeSpread  = 8,
+  colormap    = { {0.7, 1.0, 0.25, 0.03}, {0.6, 0.8, 0.15, 0.01}, {0.7, 1.0, 0.25, 0.03}, },
+  texture     = 'bitmaps/GPL/corelaser.png',
+  count       = 1,
+  repeatEffect = true,
+}
 Greenglow_small = {
   life        = 50,
   lifeSpread  = 0,
   size        = 40,
   sizeSpread  = 8,
   colormap    = { {0.7, 1.0, 0.25, 0.03}, {0.35, 0.5, 0.12, 0.01}, {0.7, 1.0, 0.25, 0.03}, },
+  texture     = 'bitmaps/GPL/smallflare.tga',
+  count       = 1,
+  repeatEffect = true,
+}
+Greenglow_tiny_stable = {
+  life        = 50,
+  lifeSpread  = 0,
+  size        = 20,
+  sizeSpread  = 4,
+  colormap    = { {0.5, 1.0, 0.16, 0.03}, },
   texture     = 'bitmaps/GPL/smallflare.tga',
   count       = 1,
   repeatEffect = true,
@@ -299,4 +319,24 @@ sparks = {
 	texture      = 'bitmaps/cursed/lightningball.tga',
 	count        = 6,
 	repeatEffect = true,
+}
+----------------------------------------------------------------------------
+-- BURSTS ------------------------------------------------------------------
+----------------------------------------------------------------------------
+Bursts = {
+	delay      = 30,
+	life       = math.huge,
+	pos        = {0,40,0},
+	rotSpeed   = 2,
+	rotSpread  = 1,
+	rotairdrag = 1,
+	arc        = 90,
+	arcSpread  = 0,
+	size       = 17,
+	sizeSpread = 5,
+	--colormap   = { {0.10, 0.8, 0.8, 0.4} },
+	colormap   = { {0.8, 0.4, 0.1, 0.4} },
+	directional= true,
+	repeatEffect = true,
+	count      = 17,
 }

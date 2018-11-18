@@ -70,6 +70,7 @@ local unitDef = {
     "tc_mancubus",
 	"tc_spiderdemon",
     "tc_belial",
+	"bug_med_undead",	
 	"bug_big_undead",	
   },
   sfxtypes = {

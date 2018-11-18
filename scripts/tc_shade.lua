@@ -304,7 +304,11 @@ local function Walkscript()
 					Turn2( ruparm, x_axis, 15, MOVEANIMATIONSPEED )
 				end
 				Turn2( chest, x_axis, 20, MOVEANIMATIONSPEED)
-				Turn2( twohanded, z_axis, 0, MOVEANIMATIONSPEED*3 )	
+				Turn2( twohanded, z_axis, 0, MOVEANIMATIONSPEED*3 )
+				Turn2( lscythe, z_axis, 0, MOVEANIMATIONSPEED*3  )
+				Turn2( rscythe, z_axis, 0, MOVEANIMATIONSPEED*3  )
+				Turn2( lkatana, z_axis, 0, MOVEANIMATIONSPEED*3  )
+				Turn2( rkatana, z_axis, 0, MOVEANIMATIONSPEED*3  )				
 			end
 			Turn2( lthigh, x_axis, -50, MOVEANIMATIONSPEED*5 )
 			Turn2( rthigh, x_axis, 20, MOVEANIMATIONSPEED*2.7 )

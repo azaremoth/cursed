@@ -22,6 +22,22 @@ if cvMode == "disabled" then
 	return false
 end
 
+-------------------------------------------------------
+useBuildingMask = false
+captureRadius = tonumber(Spring.GetModOptions().captureradius) -- Radius around a point in which to capture it
+captureTime = tonumber(Spring.GetModOptions().capturetime) -- Time to capture a point
+captureBonus = tonumber(Spring.GetModOptions().capturebonus) -- speedup from adding more units
+decapSpeed = tonumber(Spring.GetModOptions().decapspeed) -- speed multiplier for neutralizing an enemy point
+dominationScore = tonumber(Spring.GetModOptions().dominationscore)
+dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime) -- Time needed holding all points to score in multi domination
+usemapconfig = Spring.GetModOptions().usemapconfig
+limitScore = tonumber(Spring.GetModOptions().limitscore)
+metalPerPoint = tonumber(Spring.GetModOptions().metalperpoint)
+energyPerPoint = tonumber(Spring.GetModOptions().energyperpoint)
+numberOfControlPoints = tonumber(Spring.GetModOptions().numberofcontrolpoints)
+startTime = tonumber(Spring.GetModOptions().starttime) -- The time when capturing can start
+tugofWarModifier = tonumber(Spring.GetModOptions().tugofwarmodifier) -- Radius around a point in which to capture it
+-------------------------------------------------------
 nonCapturingUnits = VFS.Include("LuaRules/Configs/cv_nonCapturingUnits.lua")
 buildableUnits = VFS.Include("LuaRules/Configs/cv_buildableUnits.lua")
 

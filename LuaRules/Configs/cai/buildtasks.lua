@@ -147,7 +147,7 @@ factionBuildConfig = {
 					importanceMult = 1,
 					count = 2,
 					[1] = {ID = UnitDefNames['tc_rictus'].id, chance = 0.6},
-					[2] = {ID = UnitDefNames['bug_big_undead'].id, chance = 0.4},					
+					[2] = {ID = UnitDefNames['bug_med_undead'].id, chance = 0.4},					
 				},
 				[4] = { -- arty
 					importanceMult = 0,
@@ -155,9 +155,10 @@ factionBuildConfig = {
 				},
 				[5] = { --assault
 					importanceMult = 0.75,
-					count = 2,
-					[1] = {ID = UnitDefNames['tc_belial'].id, chance = 0.4},
-					[2] = {ID = UnitDefNames['tc_spiderdemon'].id, chance = 0.6},					
+					count = 3,
+					[1] = {ID = UnitDefNames['tc_belial'].id, chance = 0.25},
+					[2] = {ID = UnitDefNames['tc_spiderdemon'].id, chance = 0.50},
+					[3] = {ID = UnitDefNames['bug_big_undead'].id, chance = 0.25},							
 				},
 				[6] = { -- skirm
 					importanceMult = 1,

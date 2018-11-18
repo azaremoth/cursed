@@ -11,7 +11,7 @@ spawnSquareIncrement = 1         -- square size increase for each unit spawned
 burrowName           = "tc_pitt"   -- burrow unit name
 playerMalus          = 1         -- how much harder it becomes for each additional player, exponential (playercount^playerMalus = malus)	-- used only for burrow spawn rate and queen XP
 lagTrigger           = 0.7       -- average cpu usage after which lag prevention mode triggers
-triggerTolerance     = 0.05      -- increase if lag prevention mode switches on and off too fast
+triggerTolerance     = 0.01      -- increase if lag prevention mode switches on and off too fast
 maxAge               = 5*60      -- chicken die at this age, seconds
 queenName            = "tc_dragonqueen"
 queenMorphName		 = ""
@@ -152,15 +152,15 @@ local chickenTypes = {
 
   tc_dragon				=  {time = 40, squadSize = 0.15},
   
-  tc_shade_lvl1			=  {time = 5, squadSize = 0.05},
-  tc_shade_lvl2			=  {time = 7, squadSize = 0.05},
-  tc_shade_lvl3			=  {time = 9, squadSize = 0.05},
-  tc_shade_lvl4			=  {time = 10, squadSize = 0.05},
-  tc_shade_lvl5			=  {time = 15, squadSize = 0.05},
-  tc_shade_lvl6			=  {time = 20, squadSize = 0.05},
-  tc_shade_lvl7			=  {time = 25, squadSize = 0.05},
-  tc_shade_lvl8			=  {time = 30, squadSize = 0.05},
-  tc_shade_lvl9			=  {time = 36, squadSize = 0.05},
+  tc_shade_lvl1			=  {time = 5, squadSize = 0.01},
+  tc_shade_lvl2			=  {time = 7, squadSize = 0.01},
+  tc_shade_lvl3			=  {time = 9, squadSize = 0.01},
+  tc_shade_lvl4			=  {time = 10, squadSize = 0.01},
+  tc_shade_lvl5			=  {time = 15, squadSize = 0.01},
+  tc_shade_lvl6			=  {time = 20, squadSize = 0.01},
+  tc_shade_lvl7			=  {time = 25, squadSize = 0.01},
+  tc_shade_lvl8			=  {time = 30, squadSize = 0.01},
+  tc_shade_lvl9			=  {time = 36, squadSize = 0.01},
   
 }
 

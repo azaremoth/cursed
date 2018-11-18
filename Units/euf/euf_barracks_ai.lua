@@ -75,7 +75,7 @@ buildingGroundDecalDecaySpeed = 0.2,
     "euf_bazooka",
     "euf_pyro",
     "euf_sniper_ai",
-    "euf_sarge",	
+--    "euf_sarge",	
   },
   sfxtypes = {
     explosiongenerators = {

@@ -73,8 +73,7 @@ local unitDef = {
 	"tc_undeadmarine_gun",
 	"tc_bonebeast",	
 	"bug_larva_undead",
---	"bug_med_undead",
-	"tc_shade",
+--	"tc_shade",
   },
   sfxtypes = {
     explosiongenerators = {

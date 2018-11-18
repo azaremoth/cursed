@@ -2,6 +2,7 @@ local obelisk1, obelisk2, obelisk3, obelisk4, obelisk5, obelisk6 = piece ("obeli
 local horn1, horn2, horn3, horn4, horn5, horn6, horn7 = piece ("horn1", "horn2", "horn3", "horn4", "horn5", "horn6", "horn7")
 
 local base = piece 'base' 
+local building = piece 'building'
 local createpoint = piece 'createpoint' 
 local emit = piece 'emit' 
 

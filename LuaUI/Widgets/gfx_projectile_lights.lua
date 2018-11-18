@@ -31,7 +31,7 @@ local spGetProjectileVelocity     = Spring.GetProjectileVelocity
 local lightsEnabled = true
 
 local colorOverride = {1, 1, 1}
-local colorBrightness = 1
+local colorBrightness = 0.75 -- 1
 local radiusOverride = 200
 local overrideParam = {r = 1, g = 1, b = 1, radius = 200}
 local doOverride = false

@@ -337,6 +337,7 @@ function gadget:GameFrame(f)
 				if ((HeroLevelList[heroteam] < MaxLevel) and (gameframe > AILevelIncreaseInterval)) then
 					HeroLevelList[heroteam] = (HeroLevelList[heroteam]+1)
 					AILevelIncreaseNext = (AILevelIncreaseNext + AILevelIncreaseInterval)
+					Spring.SetTeamRulesParam(heroteam,"team_level",HeroLevelList[heroteam])
 				end
 				
 				if (side == "imperials" and AIBarracks ~= nil) then

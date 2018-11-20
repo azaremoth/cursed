@@ -60,7 +60,7 @@ local level = Spring.GetTeamRulesParam(team,"team_level") or 1
 -------------------------------------------------------
 local RestoreAtkCount = 0
 local WeaponRange = 0
-local MeleeID = nil
+local CircleMeleeID = nil
 local CirlceWeaponDamage = 0
 local udid = Spring.GetUnitDefID(unitID)
 local ud = UnitDefs[udid]
@@ -69,7 +69,7 @@ for i,w in ipairs(ud.weapons) do
 	local circlestrike = WeaponDefs[w.weaponDef].customParams.circlestrike
 	if (circlestrike == "true") then
 		WeaponRange = WeaponDefs[w.weaponDef].range
-		MeleeID = i
+		CircleMeleeID = i
 		local WeaponDamagePairs = WeaponDefs[w.weaponDef].damages
 		CirlceWeaponDamage = WeaponDamagePairs[1]*0.5
 	end
@@ -108,6 +108,7 @@ function RestoreIllusionCast()
 end
 
 function script.specialskill()
+	-- Spring.Echo("It was cast!")
 	local x, y, z = Spring.GetUnitPosition(unitID)
 	local heading = Spring.GetUnitBuildFacing(unitID)
 	local team = Spring.GetUnitTeam(unitID)
@@ -115,7 +116,7 @@ function script.specialskill()
 --	Spring.PlaySoundFile("sounds/FLAMHVY1.WAV", 30, x, y, z)
 	if not IllusionCast and illusioncount ~= nil then
 		for xy = 1,illusioncount,1 do
-			local createillusion = Spring.CreateUnit("tc_decoyshade", x+math.random(50),y,z+math.random(50), heading, team)		
+			local createillusion = Spring.CreateUnit("tc_decoyshade", x+math.random(100)-math.random(100),y,z+math.random(100)-math.random(100), heading, team)		
 		end
 		IllusionCast = true
 		Spring.SetUnitCloak(unitID, false)
@@ -556,25 +557,27 @@ end
   
 
 function CircleAttack()
-	-----------------------------------------------------------------	
-	local x, y, z = Spring.GetUnitPosition(unitID)
-	if ( soundsec > 0) then
-		Spring.PlaySoundFile("sounds/laser_sword_multi.ogg", 80, x, y, z)
-	end
-	soundsec = (-1*soundsec)
-	-----------------------------------------------------------------	
-	local HitUnits = Spring.GetUnitsInSphere(x,y,z, WeaponRange)
-	local MyTeam = Spring.GetUnitTeam(unitID)
-	local _,_, targetUnitID = Spring.GetUnitWeaponTarget(unitID, MeleeID)
-	for _,eUnitID in ipairs(HitUnits) do
-		local eTeam = Spring.GetUnitTeam(eUnitID)
-		if (eUnitID ~= unitID) and (eUnitID ~= targetUnitID) and (eTeam ~= MyTeam) and not (Spring.AreTeamsAllied(eTeam, MyTeam)) then
-			local hx, hy, hz = Spring.GetUnitPosition(eUnitID)
-			Spring.SpawnCEG('GREENHITSPARKLE', hx, hy+10, hz)
-			Spring.AddUnitDamage(eUnitID, CirlceWeaponDamage, 0, unitID)
+	if (CircleMeleeID ~= nil) then
+		-----------------------------------------------------------------	
+		local x, y, z = Spring.GetUnitPosition(unitID)
+		if ( soundsec > 0) then
+			Spring.PlaySoundFile("sounds/laser_sword_multi.ogg", 80, x, y, z)
 		end
+		soundsec = (-1*soundsec)
+		-----------------------------------------------------------------	
+		local HitUnits = Spring.GetUnitsInSphere(x,y,z, WeaponRange)
+		local MyTeam = Spring.GetUnitTeam(unitID)
+		local _,_, targetUnitID = Spring.GetUnitWeaponTarget(unitID, CircleMeleeID)
+		for _,eUnitID in ipairs(HitUnits) do
+			local eTeam = Spring.GetUnitTeam(eUnitID)
+			if (eUnitID ~= unitID) and (eUnitID ~= targetUnitID) and (eTeam ~= MyTeam) and not (Spring.AreTeamsAllied(eTeam, MyTeam)) then
+				local hx, hy, hz = Spring.GetUnitPosition(eUnitID)
+				Spring.SpawnCEG('GREENHITSPARKLE', hx, hy+10, hz)
+				Spring.AddUnitDamage(eUnitID, CirlceWeaponDamage, 0, unitID)
+			end
+		end
+		-----------------------------------------------------------------
 	end
-	-----------------------------------------------------------------		
 end
 
 --weapon 1 -----------------------------------------------------------------

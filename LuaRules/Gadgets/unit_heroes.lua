@@ -281,12 +281,13 @@ function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
 		--				Spring.Echo("unitIDLoop: " .. unitIDLoop .. " attackerID: " .. attacker .. " atkDefIDLoop: " .. atkDefIDLoop .. " killed:" .. unitID)
 					if ((not Spring.AreTeamsAllied((Spring.GetUnitTeam(unitIDLoop)),team)) and (unitIDLoop ~= attacker)) then
 						local unitDefIDLoop = Spring.GetUnitDefID(unitIDLoop)
+						local noxpgain = tonumber(UnitDefs[unitDefIDLoop].customParams.noxpgain)
 						if (IsAHero[unitDefIDLoop]) then
 							IncreaseHeroXP(unitIDLoop, XPGain)
 	--						Spring.Echo('assistant hero gets XPs ' .. XPGain)
 						else 
 							local LoopUnitXPs = Spring.GetUnitExperience(unitIDLoop)
-							if (Spring.GetUnitExperience(unitIDLoop) < 1) then
+							if (LoopUnitXPs < 1)  and (noxpgain ~= 1) then
 								Spring.SetUnitExperience(unitIDLoop,LoopUnitXPs+XPGain)
 							end
 						end
@@ -301,7 +302,9 @@ function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
 		--		Spring.Echo('attacker hero gets XPs ' .. XPGain)
 			else
 				local AtkXPs = Spring.GetUnitExperience(attacker)
-				if (Spring.GetUnitExperience(attacker) < 1) then
+				local atkDefID = Spring.GetUnitDefID(attacker)
+				local atknoxpgain = tonumber(UnitDefs[atkDefID].customParams.noxpgain)
+				if (AtkXPs < 1) and (atknoxpgain ~= 1)then
 					Spring.SetUnitExperience(attacker,AtkXPs+XPGain)
 				end
 			end		

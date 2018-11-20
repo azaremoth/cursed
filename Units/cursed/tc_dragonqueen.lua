@@ -26,6 +26,7 @@ local unitDef = {
   cruiseAlt          = 250,
     customParams          = {	
 	factionname	= "cursed", 
+	noxpgain = "1",	
 	isbones = "true",
     helptext 	= "The Queen has come to get your soul!"	
   },

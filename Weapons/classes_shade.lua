@@ -9,7 +9,7 @@ local SHADELVL10DRAGON = { damage = { default = 350, flyer = 350, heavy = 350, l
 local DRAGONBASE = {
       name               = "Dragon's Wrath",	  
 	  accuracy           = 64,
-      areaOfEffect       = 64,
+      areaOfEffect       = 80,
 	  commandFire 	     = true,	  
       range              = 350,
 	  reloadtime         = 10,	  

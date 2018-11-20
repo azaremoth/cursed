@@ -10,11 +10,11 @@ local SARGELVL2CHAINGUN = { damage = { default = 18, flyer = 18, heavy = (18*0.7
 local SARGELVL3CHAINGUN = { damage = { default = 21, flyer = 21, heavy = (21*0.75), light = 21, },}
 local SARGELVL4CHAINGUN = { damage = { default = 24, flyer = 24, heavy = (24*0.75), light = 24, },}
 local SARGELVL5CHAINGUN = { damage = { default = 27, flyer = 27, heavy = (27*0.75), light = 27, },}
-local SARGELVL6CHAINGUN = { damage = { default = 30, flyer = 30, heavy = (30*0.75), light = 30, },}
-local SARGELVL7CHAINGUN = { damage = { default = 33, flyer = 33, heavy = (33*0.75), light = 33, },}
-local SARGELVL8CHAINGUN = { damage = { default = 36, flyer = 36, heavy = (36*0.75), light = 36, },}
-local SARGELVL9CHAINGUN = { damage = { default = 39, flyer = 39, heavy = (39*0.75), light = 39, },}
-local SARGELVL10CHAINGUN = { damage = { default = 42, flyer = 42, heavy = (42*0.75), light = 42, },}
+local SARGELVL6CHAINGUN = { damage = { default = 57, flyer = 57, heavy = (57*0.75), light = 57, },} --30
+local SARGELVL7CHAINGUN = { damage = { default = 60, flyer = 60, heavy = (60*0.75), light = 60, },} --33
+local SARGELVL8CHAINGUN = { damage = { default = 63, flyer = 63, heavy = (63*0.75), light = 63, },} --36
+local SARGELVL9CHAINGUN = { damage = { default = 66, flyer = 66, heavy = (66*0.75), light = 66, },} --39
+local SARGELVL10CHAINGUN = { damage = { default = 69, flyer = 69, heavy = (69*0.75), light = 69, },} --42
 
 local SARGELVL4PLASMAGUN = { damage = { default = 50, flyer = 50, heavy = 50, light = 50, },}
 local SARGELVL5PLASMAGUN = { damage = { default = 56, flyer = 56, heavy = 56, light = 56, },}

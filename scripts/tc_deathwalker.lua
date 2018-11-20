@@ -1,12 +1,21 @@
 local base = piece 'base' 
 local pelvis = piece 'pelvis' 
 local chest = piece 'chest' 
+local top1 = piece 'top1' 
+local top2 = piece 'top2' 
+local top3 = piece 'top3' 
 local head = piece 'head' 
+local horn1 = piece 'horn1' 
+local horn2 = piece 'horn2' 
 local luparm = piece 'luparm' 
-local gun = piece 'gun' 
-local barrel = piece 'barrel' 
+local lgun_holder = piece 'lgun_holder' 
+local rgun_holder = piece 'rgun_holder' 
+local lgun = piece 'lgun' 
+local rgun = piece 'rgun'
+local lbarrel = piece 'lbarrel' 
+local rbarrel = piece 'rbarrel'
+local rockbox = piece 'rockbox' 
 local ruparm = piece 'ruparm' 
-local rocketgun = piece 'rocketgun' 
 local lleg1 = piece 'lleg1' 
 local lleg2 = piece 'lleg2' 
 local lleg3 = piece 'lleg3' 
@@ -15,6 +24,7 @@ local rleg2 = piece 'rleg2'
 local rleg3 = piece 'rleg3' 
 local lemit = piece 'lemit' 
 local remit = piece 'remit' 
+local rockemit = piece 'rockemit' 
 local emit_summon = piece 'emit_summon' 
 local emit_rleg = piece 'emit_rleg' 
 local emit_lleg = piece 'emit_lleg' 
@@ -25,13 +35,14 @@ local RandomNumber2, moving, attacking, MOVEANIMATIONSPEED
 
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4
+local SIG_AIM2 = 8
 local SIG_WALK = 1
 
 local SUMMONING = 1024+0
 local FOOTDUST = 1025+0
 local BLOOD = 1026+0
 local BIGGUNFLARE = 1027+0
-local SMALLGUNFLARE = 1028+0
+local ROCKETFLARE = 1028+0
 local GROUNDFLASH = 1029+0
 
 local function Turn2(piecenum,axis, degrees, speed)
@@ -65,6 +76,10 @@ local function Walkscript()
 			if not attacking then
 				Turn( luparm , x_axis, math.rad(-25), math.rad(MOVEANIMATIONSPEED*0.8) )
 			end
+			Turn( top1 , x_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED*0.5) )
+			Turn( top2 , x_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED*0.5) )			
+			Turn( top3 , x_axis, math.rad(-3), math.rad(MOVEANIMATIONSPEED*0.5) )			
+			
 			Turn( rleg1 , x_axis, math.rad(-30), math.rad(MOVEANIMATIONSPEED) )
 			Turn( rleg2 , x_axis, math.rad(40), math.rad(MOVEANIMATIONSPEED*1.6) )
 			Move( pelvis , y_axis, 0.3 , 8 )
@@ -108,6 +123,10 @@ local function Walkscript()
 			if not attacking then
 				Turn( luparm , x_axis, math.rad(15), math.rad(MOVEANIMATIONSPEED*0.8) )
 			end
+			Turn( top1 , x_axis, math.rad(3), math.rad(MOVEANIMATIONSPEED*0.5) )
+			Turn( top2 , x_axis, math.rad(3), math.rad(MOVEANIMATIONSPEED*0.5) )			
+			Turn( top3 , x_axis, math.rad(5), math.rad(MOVEANIMATIONSPEED*0.5) )		
+			
 			Turn( lleg1 , x_axis, math.rad(-30), math.rad(MOVEANIMATIONSPEED) )
 			Turn( lleg2 , x_axis, math.rad(40), math.rad(MOVEANIMATIONSPEED*1.6) )
 			Move( pelvis , y_axis, 0.3 , 8 )
@@ -124,11 +143,14 @@ local function Walkscript()
 			if not attacking then	
 				Turn( luparm , x_axis, math.rad(-15), math.rad(MOVEANIMATIONSPEED*1.2) )
 				Turn( ruparm , x_axis, math.rad(-15), math.rad(MOVEANIMATIONSPEED*1.2) )
-				Turn( gun , x_axis, math.rad(60), math.rad(MOVEANIMATIONSPEED*1.2) )
-				Turn( rocketgun , x_axis, math.rad(60), math.rad(MOVEANIMATIONSPEED*1.2) )		
+				Turn( lgun_holder , x_axis, math.rad(60), math.rad(MOVEANIMATIONSPEED*1.2) )
+				Turn( rgun_holder , x_axis, math.rad(60), math.rad(MOVEANIMATIONSPEED*1.2) )		
 				Turn( chest , z_axis, math.rad(-(0)), math.rad(MOVEANIMATIONSPEED) )
 				Turn( head , z_axis, math.rad(-(0)), math.rad(MOVEANIMATIONSPEED*0.3) )
-			end					
+			end	
+			Turn( top1 , x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED) )
+			Turn( top2 , x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED) )			
+			Turn( top3 , x_axis, math.rad(0), math.rad(MOVEANIMATIONSPEED) )	
 			Turn( rleg1 , x_axis, math.rad(0 ), math.rad(MOVEANIMATIONSPEED) )
 			Turn( lleg1 , x_axis, math.rad(0 ), math.rad(MOVEANIMATIONSPEED) )
 			Turn( rleg2 , x_axis, math.rad(0 ), math.rad(MOVEANIMATIONSPEED*1.6) )
@@ -149,7 +171,7 @@ local function BoredAnimation()
 			borednumber = math.random(50)
 			if (borednumber > 45) then
 				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED )
-				Turn2( head, y_axis, 25, MOVEANIMATIONSPEED*1.5 )			
+				Turn2( head, y_axis, 30, MOVEANIMATIONSPEED*1.5 )			
 				WaitForTurn( chest, y_axis )
 			elseif (borednumber < 5)then
 				Turn2( chest, y_axis, -100, MOVEANIMATIONSPEED )			
@@ -157,7 +179,7 @@ local function BoredAnimation()
 				WaitForTurn( chest, y_axis )
 			else 
 				Turn2( chest, y_axis, -50, MOVEANIMATIONSPEED )
-				Turn2( head, y_axis, 25, MOVEANIMATIONSPEED*1.5 )
+				Turn2( head, y_axis, 20, MOVEANIMATIONSPEED*1.5 )
 				WaitForTurn( chest, y_axis )				
 			end
 		end
@@ -171,8 +193,8 @@ function script.Create()
 	attacking = false
 	Turn( luparm , x_axis, math.rad(45) )
 	Turn( ruparm , x_axis, math.rad(45) )
-	Turn( gun , x_axis, math.rad(-45) )
-	Turn( rocketgun , x_axis, math.rad(-45) )
+	Turn( lgun_holder , x_axis, math.rad(-45) )
+	Turn( rgun_holder , x_axis, math.rad(-45) )
 	Turn( emit_summon , x_axis, math.rad(-90) )
 	--START BUILD CYCLE
 	Sleep(200)
@@ -195,8 +217,9 @@ function script.StopMoving()
 end
 
 local function RestoreAfterDelay()
+	Move( rbarrel , z_axis, 0 , 20 )
+	Move( lbarrel , z_axis, 0 , 20 )
 	Sleep( 5000)
-	StopSpin  ( barrel, z_axis, 50 )	
 	Turn( ruparm , y_axis, 0, 5 )
 	Turn( luparm , y_axis, 0, 5 )
 	Turn( head, y_axis, 0, 1 )
@@ -211,7 +234,7 @@ function script.QueryWeapon1 ()
 end
 
 function script.AimFromWeapon1 ()
-	return rocketgun	
+	return rgun_holder	
 end
 
 function script.AimWeapon1(heading, pitch)
@@ -221,20 +244,19 @@ function script.AimWeapon1(heading, pitch)
 	attacking = true
 	Signal( SIG_AIM1)
 	SetSignalMask( SIG_AIM1)
-
-	Turn( head, y_axis, heading, 1 )
 	
 	Turn( ruparm, y_axis, heading, 5 )
-	Turn( rocketgun, x_axis, -pitch, 5 )		
+	Turn( rgun_holder, x_axis, -pitch, 5 )		
 	
 	
     WaitForTurn(ruparm, y_axis)
-	WaitForTurn(rocketgun, x_axis)
+	WaitForTurn(rgun_holder, x_axis)
 	StartThread(RestoreAfterDelay) 
     return (1)
 end
 
 function script.Shot1()
+	Move( rbarrel , z_axis, -10, 100 )
 	EmitSfx( remit,  BIGGUNFLARE )	
 	EmitSfx( emit_groundflash_r,  GROUNDFLASH )
 	return (0)
@@ -248,7 +270,7 @@ function script.QueryWeapon2 (piecenum)
 end
 
 function script.AimFromWeapon2 (piecenum)
-	return gun	
+	return lgun_holder	
 end
 
 function script.AimWeapon2 (heading, pitch)
@@ -258,28 +280,48 @@ function script.AimWeapon2 (heading, pitch)
 	attacking = true
 	Signal( SIG_AIM2)
 	SetSignalMask( SIG_AIM2)
-	Spring.UnitScript.Spin ( barrel, z_axis, 10, 20)	
 
 	Turn( luparm, y_axis, heading, 5 )
-	Turn( gun, x_axis, -pitch, 5 )	
+	Turn( lgun_holder, x_axis, -pitch, 5 )	
  
     WaitForTurn(luparm, y_axis)
-	WaitForTurn(gun, x_axis)
+	WaitForTurn(lgun_holder, x_axis)
 	StartThread(RestoreAfterDelay) 
     return (1)
 end
 
 function script.Shot2()
-	EmitSfx( lemit,  SMALLGUNFLARE )	
+	Move( lbarrel , z_axis, -10, 100 )
+	EmitSfx( lemit,  BIGGUNFLARE )	
 	EmitSfx( emit_groundflash_l,  GROUNDFLASH )
 	return (0)
 end
 
+--weapon 3 -----------------------------------------------------------------
+
+function script.QueryWeapon3 (piecenum)
+	return rockemit	
+end
+
+function script.AimFromWeapon3 (piecenum)
+	return rockbox	
+end
+
+function script.AimWeapon3 (heading, pitch)
+	Signal( SIG_AIM3)
+	SetSignalMask( SIG_AIM3)
+    return (1)
+end
+
+function script.Shot3()
+	EmitSfx( rockemit,  ROCKETFLARE )	
+	return (0)
+end
 	
 function script.Killed(severity, corpsetype)
 
 	local px, py, pz = Spring.GetUnitPosition(unitID)
-	Spring.PlaySoundFile("sounds/demoncry.wav", 10, px, py, pz)
+	Spring.PlaySoundFile("sounds/agares_select.wav", 10, px, py, pz)
 			
 	Turn( chest , x_axis, math.rad(-43), math.rad(300) )
 	Turn( chest , y_axis, math.rad(15), math.rad(50) )

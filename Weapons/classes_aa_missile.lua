@@ -1,10 +1,29 @@
 ----------------------------------- ADAPTIONS TO BASE CLASS ------------------------------
+local AA_DW = {
+    avoidFriendly      = false,
+	collideFriendly    = false,
+    areaOfEffect       		= 32,	
+	range                   = 800,
+    reloadtime 				= 0.50,
+	trajectoryHeight 		= 0.66,
+	dance					= 200,
+    startVelocity           = 100,
+    weaponAcceleration      = 300,
+	turnRate                = 3000,	
+	cegTag                  = "GreenRocketTrail",
+    damage 					= { default = 100, flyer = 100, heavy = 100, light = 100, },
+}
+
 local AA_MISSILE_TOWER = {
     avoidFriendly      = false,
 	collideFriendly    = false,
     areaOfEffect       		= 32,	
 	range                   = 1000,
     reloadtime 				= 2.00,
+    startVelocity           = 550,
+    weaponAcceleration      = 550,
+	turnRate                = 55000,
+	cegTag                  = "MLRSRocketTrail",
     damage 					= { default = 400, flyer = 400, heavy = 400, light = 400, },
 }
 
@@ -12,7 +31,6 @@ local AA_MISSILE_TOWER = {
 local AA_MISSILE_BASE = {
       name                    = "AA Missile",
       canattackground         = false,
-      cegTag                  = "MLRSRocketTrail",
       craterBoost             = 0,
       craterMult              = 0,
       cylinderTargeting       = 128,
@@ -32,14 +50,11 @@ local AA_MISSILE_BASE = {
       soundHit                = "mediumexplosion",
       soundStart              = "launchrocket",
       soundTrigger            = true,
-      startVelocity           = 550,
       texture2                = "none",
       tolerance               = 16000,
       tracks                  = true,
-      turnRate                = 55000,
       turret                  = true,
       waterweapon             = true,
-      weaponAcceleration      = 550,
       weaponTimer             = 3,
       weaponType              = "MissileLauncher",
       weaponVelocity          = 800,
@@ -76,6 +91,7 @@ function WeaponDefMergeTable(primary, secondary, deep)
 end
 
 return lowerkeys({
+	AA_DW = WeaponDefMergeTable(AA_MISSILE_BASE, AA_DW),
 	AA_MISSILE_TOWER = WeaponDefMergeTable(AA_MISSILE_BASE, AA_MISSILE_TOWER),
 })
 

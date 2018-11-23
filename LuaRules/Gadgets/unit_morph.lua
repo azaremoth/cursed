@@ -1051,7 +1051,7 @@ local function processMorph(unitID, unitDefID, teamID, cmdID, cmdParams)
 end
 
 function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOptions)
-Spring.Echo(cmdID)
+--Spring.Echo(cmdID)
 	local morphData = morphUnits[unitID]
 	if (morphData) then
 		if (cmdID==morphData.def.stopCmd)or(cmdID==CMD.STOP and not morphData.def.combatMorph)or(cmdID==CMD_MORPH_STOP) then

@@ -640,8 +640,8 @@ local function ProcessCommand(cmd)
 			n_special[#n_special+1] = cmd
 		elseif (cmd.id and UnitDefs[-(cmd.id)]) then
 			n_units[#n_units+1] = cmd
-		elseif (cmd.id == 37003 or  cmd.id == 37004 or cmd.id == 37005 or cmd.id == 37006 or cmd.id == 37011 or cmd.id == 37012 or cmd.id == 37013 or cmd.id == 37016 or
-				cmd.id == 37503 or  cmd.id == 37504 or cmd.id == 37505 or cmd.id == 37506 or cmd.id == 37511 or cmd.id == 37512 or cmd.id == 37513 or cmd.id == 37516) then -- CURSED morph commands for builders
+		elseif (cmd.id == 37015 or cmd.id == 37003 or  cmd.id == 37004 or cmd.id == 37005 or cmd.id == 37006 or cmd.id == 37011 or cmd.id == 37012 or cmd.id == 37013 or cmd.id == 37016 or
+				cmd.id == 37515 or cmd.id == 37503 or  cmd.id == 37504 or cmd.id == 37505 or cmd.id == 37506 or cmd.id == 37511 or cmd.id == 37512 or cmd.id == 37513 or cmd.id == 37516) then -- CURSED morph commands for builders
 			n_units[#n_units+1] = cmd
 		elseif builder_commands[cmd.id] then -- CURSED special definition
 			n_units[#n_units+1] = cmd			

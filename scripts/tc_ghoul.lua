@@ -471,11 +471,17 @@ function script.beginJump()
 --	prejumpinghealth = Spring.GetUnitHealth(unitID)
 	
 	Turn2( chest, x_axis, -40, 400 )
-	Turn2( rleg, x_axis, 90, 400 )
-    Turn2( lleg, x_axis, 90, 400 )	
+	
+	Turn2( lthigh, x_axis, 45 )
+	Turn2( rthigh, x_axis, 45 )
+	
+	Turn2( rleg, x_axis, 30 )
+    Turn2( lleg, x_axis, 30 )	
 end
 
 function script.jumping()
+	Turn2( lthigh, x_axis, -45, 600 )
+	Turn2( rthigh, x_axis, -45, 600 )
 end
 
 function script.halfJump()
@@ -486,6 +492,8 @@ end
 
 function script.endJump() 
 	Turn2( chest, x_axis, 0, 400 )
+	Turn2( lthigh, x_axis, 0, 600 )
+	Turn2( rthigh, x_axis, 0, 600 )
 	Turn2( rleg, x_axis, 0, 400 )
     Turn2( lleg, x_axis, 0, 400 )
 	jumping = false	

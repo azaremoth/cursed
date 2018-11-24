@@ -2,11 +2,11 @@
 
 Balance
 - reworked the role of cursed Moloch demons: shorter range, higher aoe, more dps
-- cursed shades have to wait longer before recloaking
+- cursed Shades have to wait longer before recloaking
 - Rebuilding heroes only does cost time, not resources anymore
 
 Features
-- added cursed Spiderdemon as tier2 support with ranged attacks
+- added cursed Spiderdemon as tier2 support with ranged attacks balanced to work well with the Moloch demons
 - reworked heros stats: can level up to level 10: visuals, sounds, weapons
 	> both heroes do have point an click weapons ("ulti") now beginning with level 6
 	> Cursed shade will change visuals (including carried weapons) while leveling
@@ -17,10 +17,10 @@ Features
 Polishing
 - optimized the animation of Shade's circle attack
 - Updated IU code and appearance
-- Progressbar indicating progress
+- Progressbar indicating progress of leveling for heroes now
 
 Bugs
-- AI players will no longer try to capture (non-existing) control points in chicken games
+- AI players will no longer try to capture (non-existing) control points in chicken games in case the CPV game option was set before
 
 
 

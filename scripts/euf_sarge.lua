@@ -264,6 +264,9 @@ end
 ------------------------ ACTIVATION
 
 function script.Create()
+	Turn2( sgarm1, x_axis, -70 )
+	Turn2( sgarm2, x_axis, -120 )	
+	Turn2( sgarm3, x_axis, 145 )
 	Turn2( mask, x_axis, -120 )
 	Move( mask, y_axis, -0.5)
 	LevelAdjust()	
@@ -281,7 +284,7 @@ function script.Create()
 	--END BUILD CYCLE
 	EmitSfx(base, LEVELING)	
 	StartThread( Walkscript )
-	StartThread( BoredAnimation )	
+	StartThread( BoredAnimation )
 end
 
 function script.StartMoving()

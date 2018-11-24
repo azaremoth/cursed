@@ -24,11 +24,11 @@ local SARGELVL8PLASMAGUN = { damage = { default = 78, flyer = 78, heavy = 78, li
 local SARGELVL9PLASMAGUN = { damage = { default = 90, flyer = 90, heavy = 90, light = 90, },}
 local SARGELVL10PLASMAGUN = { damage = { default = 102, flyer = 102, heavy = 102, light = 102, },}
 
-local SARGELVL6BFG = { damage = { default = 500, flyer = 500, heavy = 500, light = 500, },}
-local SARGELVL7BFG = { damage = { default = 575, flyer = 575, heavy = 575, light = 575, },}
-local SARGELVL8BFG = { damage = { default = 650, flyer = 650, heavy = 650, light = 650, },}
-local SARGELVL9BFG = { damage = { default = 725, flyer = 725, heavy = 725, light = 725, },}
-local SARGELVL10BFG = { damage = { default = 800, flyer = 800, heavy = 800, light = 800, },}
+local SARGELVL6BFG = { damage = { default = 600, flyer = 900, heavy = 600, light = 600, },}
+local SARGELVL7BFG = { damage = { default = 700, flyer = 700, heavy = 700, light = 700, },}
+local SARGELVL8BFG = { damage = { default = 800, flyer = 800, heavy = 800, light = 800, },}
+local SARGELVL9BFG = { damage = { default = 900, flyer = 900, heavy = 900, light = 900, },}
+local SARGELVL10BFG = { damage = { default = 1000, flyer = 1000, heavy = 1000, light = 1000, },}
 -----------------------------------  BASE CLASS CHAINGUN ---------------------------------
 local PISTOLBASE = {
       name               = "Pistol",

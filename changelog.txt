@@ -10,14 +10,16 @@ Features
 - reworked heros stats: can level up to level 10: visuals, sounds, weapons
 	> both heroes do have point an click weapons ("ulti") now beginning with level 6
 	> Cursed shade will change visuals (including carried weapons) while leveling
-	> Cursed shade will decloak after creation of illusions  
-- reworked cursed summoning pitt's visuals (only available for AI)
+	> Cursed shade will decloak after creation of illusions
+	> Cursed shade will leach health from all units he hits with circle strike
 - Cursed Shade will also spawn in survival mode
 
 Polishing
 - optimized the animation of Shade's circle attack
-- Updated IU code and appearance
-- Progressbar indicating progress of leveling for heroes now
+- Updated IU code and visuals
+- Progressbar indicating progress of leveling for heroes is now shown below the resource bars
+- reworked cursed summoning pitt's visuals (only available for AI)
+- increased resolution of load screens
 
 Bugs
 - AI players will no longer try to capture (non-existing) control points in chicken games in case the CPV game option was set before

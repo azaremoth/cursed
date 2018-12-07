@@ -93,6 +93,8 @@ local function Walkscript()
 				Turn( head , z_axis, math.rad(-(5)), math.rad(MOVEANIMATIONSPEED*0.3) )
 			end
 			EmitSfx( emit_lleg,  FOOTDUST )
+			local px, py, pz = Spring.GetUnitPosition(unitID)
+			Spring.PlaySoundFile("sounds/cannon_hit4.wav", 10, px, py, pz)
 			Turn( lleg1 , x_axis, math.rad(20), math.rad(MOVEANIMATIONSPEED) )		
 			Turn2( pelvis, z_axis, -2, MOVEANIMATIONSPEED*0.3 )			
 			Turn( rleg1 , z_axis, math.rad(-(-5)), math.rad(MOVEANIMATIONSPEED*0.8) )
@@ -112,6 +114,8 @@ local function Walkscript()
 				Turn( head , z_axis, math.rad(-(-5)), math.rad(MOVEANIMATIONSPEED*0.3) )
 			end
 			EmitSfx( emit_rleg,  FOOTDUST )
+			local px, py, pz = Spring.GetUnitPosition(unitID)
+			Spring.PlaySoundFile("sounds/cannon_hit4.wav", 10, px, py, pz)			
 			Turn( rleg1 , x_axis, math.rad(20), math.rad(MOVEANIMATIONSPEED) )
 			Turn2( pelvis, z_axis, 2, MOVEANIMATIONSPEED*0.3 )		
 			Turn( lleg1 , z_axis, math.rad(-(5)), math.rad(MOVEANIMATIONSPEED*0.8) )
@@ -331,20 +335,19 @@ function script.Killed(severity, corpsetype)
 	Turn( rleg1 , y_axis, math.rad(-45), math.rad(500) )
 	Turn( rleg1 , z_axis, math.rad(-(17)), math.rad(500) )
 
-	Turn( base , x_axis, math.rad(-25), math.rad(75) )
+	Turn( base , x_axis, math.rad(25), math.rad(75) )
 	WaitForTurn(base, x_axis)
-	Turn( base , x_axis, math.rad(-50), math.rad(200) )
+	Turn( base , x_axis, math.rad(50), math.rad(200) )
 	WaitForTurn(base, x_axis)
-	Turn( base , x_axis, math.rad(-75), math.rad(400) )
+	Turn( base , x_axis, math.rad(75), math.rad(400) )
 	WaitForTurn(base, x_axis)
 	
 	EmitSfx( chest,  BLOOD )
-	EmitSfx( head,  BLOOD )
-
-	EmitSfx( lleg3,  FOOTDUST )
-	EmitSfx( rleg3,  FOOTDUST )
 	
 	Sleep( 100)
-
+	
+	EmitSfx( head,  BLOOD )
+	EmitSfx( rleg3,  BLOOD )
+	
 	return (0)
 end

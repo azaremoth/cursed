@@ -13,6 +13,7 @@ Features
 	> Cursed shade will decloak after creation of illusions
 	> Cursed shade will leach health from all units he hits with circle strike
 - Cursed Shade will also spawn in survival mode
+- Added the cursed Death Walker as new unit. It will spawn as miniqueen in Survival mode
 
 Polishing
 - optimized the animation of Shade's circle attack

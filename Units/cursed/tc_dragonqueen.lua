@@ -54,7 +54,7 @@ local unitDef = {
   onoffable          = false,
   radarDistance      = 1024,
   repairable         = false,     
-  script             = 'tc_dragon.cob',  
+  script             = 'tc_dragon.lua',  
   selfDestructAs     = "NULL",
   showNanoFrame      = false,
   side               = "cursed",
@@ -65,7 +65,7 @@ local unitDef = {
   useSmoothMesh      = "1",
   sfxtypes = {
     explosiongenerators = {
-      "custom:SUMMONDRAGON",
+      "custom:Structurebuilding_Small",
       "custom:SUMMONDRAGON2",
     },
   },

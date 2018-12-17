@@ -58,7 +58,7 @@ local dying = false
 local restore_delay = 3000
 
 local BOOM	 = 1024+0
-local TELEPORTFX	 = 1025+0
+local BOOM2	 = 1025+0
 
 --signals
 local SIG_Aim = 1
@@ -88,7 +88,7 @@ end
 
 -- Walk Motion
 local function Moveanimation()
-	while true do
+	while not dying do
 		SetMoveAnimationSpeed()	
 		if moving then
 			Move( pelvis , y_axis, 0 , MOVEANIMATIONSPEED*4 )		
@@ -348,10 +348,130 @@ function script.HitByWeapon ( x, z, weaponDefID, damage )
 end
 
 function script.Create()
+	Turn2( pelvis , x_axis, -55)
+	Turn2( chest , x_axis, 30 )
+	Turn2( luparm , z_axis, 75)	
+	Turn2( ruparm , z_axis, -75 )
+	Turn2( lloarm , z_axis, 75)	
+	Turn2( rloarm , z_axis, -75 )
+	Turn2( neck1 , x_axis, 10 )
+	Turn2( neck2 , x_axis, 10 )
+	Turn2( neck3 , x_axis, 10 )
+	Turn2( neck4 , x_axis, 10 )
+	Turn2( neck5 , x_axis, 10 )
+	
+	Turn2( tail2 , x_axis, -20 )
+	Turn2( neck4 , x_axis, -20 )	
+
+	Turn2( finger_l11 , y_axis, -25 )
+	Turn2( finger_l12 , y_axis, -25 )
+	Turn2( finger_l13 , y_axis, -25 )
+	Turn2( finger_l21 , y_axis, -25 )
+	Turn2( finger_l22 , y_axis, -25 )
+	Turn2( finger_l23 , y_axis, -25 )
+	Turn2( finger_l31 , y_axis, -10 )
+	Turn2( finger_l32 , y_axis, -100 )
+			
+	Turn2( finger_r11 , y_axis, 25 )
+	Turn2( finger_r12 , y_axis, 25 )
+	Turn2( finger_r13 , y_axis, 25 )
+	Turn2( finger_r21 , y_axis, 25 )
+	Turn2( finger_r22 , y_axis, 25 )
+	Turn2( finger_r23 , y_axis, 25 )
+	Turn2( finger_r31 , y_axis, 10 )
+	Turn2( finger_r32 , y_axis, 10 )
+	
+
 	while GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0 do
-	--		EmitSfx(emit_summon,SUMMONING)
-			Sleep(300)
+			Move( pelvis , y_axis, 20 , 5 )	
+			EmitSfx(chest,BOOM)		
+			Sleep(150)
+			EmitSfx(finger_l13,BOOM)
+			Sleep(150)	
+			EmitSfx(neck1,BOOM)	
+			EmitSfx(finger_r23,BOOM)
+			Sleep(150)
+			EmitSfx(neck2,BOOM)	
+			EmitSfx(tail3,BOOM)	
+			EmitSfx(finger_l13,BOOM)			
+			Sleep(150)
+			EmitSfx(neck3,BOOM)				
+			EmitSfx(finger_r11,BOOM)
+			Sleep(150)			
+			EmitSfx(neck4,BOOM)				
+			EmitSfx(finger_l31,BOOM)
+			Sleep(150)
+			EmitSfx(finger_l23,BOOM)			
+			EmitSfx(neck5,BOOM)
+			Sleep(150)	
+			EmitSfx(head,BOOM)
+			EmitSfx(finger_r23,BOOM)		
+			Sleep(150)			
+			Move( pelvis , y_axis, 0 , 5 )	
+			EmitSfx(tail9,BOOM)
+			EmitSfx(finger_l31,BOOM)		
+			Sleep(150)
+			EmitSfx(tail8,BOOM)			
+			EmitSfx(finger_r21,BOOM)
+			Sleep(150)			
+			EmitSfx(tail7,BOOM)
+			EmitSfx(finger_l31,BOOM)
+			Sleep(150)
+			EmitSfx(tail5,BOOM)			
+			EmitSfx(finger_r12,BOOM)
+			Sleep(150)
+			EmitSfx(tail4,BOOM)			
+			EmitSfx(finger_l21,BOOM)
+			Sleep(150)
+			EmitSfx(tail3,BOOM)			
+			EmitSfx(finger_r23,BOOM)
+			Sleep(150)
+			EmitSfx(tail1,BOOM)			
+			EmitSfx(finger_l32,BOOM)			
+			Sleep(150)
 	end
+	
+
+	
+	
+	
+	SetMoveAnimationSpeed()
+	
+	Turn2( pelvis , x_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( chest , x_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( luparm , z_axis, 0 , MOVEANIMATIONSPEED )	
+	Turn2( ruparm , z_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( lloarm , z_axis, 0 , MOVEANIMATIONSPEED )	
+	Turn2( rloarm , z_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( neck1 , x_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( neck2 , x_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( neck3 , x_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( neck4 , x_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( neck5 , x_axis, 0 , MOVEANIMATIONSPEED )
+
+	Turn2( tail2 , x_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( tail4 , x_axis, 0 , MOVEANIMATIONSPEED )	
+	
+	Turn2( finger_l11 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_l12 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_l13 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_l21 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_l22 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_l23 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_l31 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_l32 , y_axis, 0 , MOVEANIMATIONSPEED )
+			
+	Turn2( finger_r11 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_r12 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_r13 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_r21 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_r22 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_r23 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_r31 , y_axis, 0 , MOVEANIMATIONSPEED )
+	Turn2( finger_r32 , y_axis, 0 , MOVEANIMATIONSPEED )
+	
+	Sleep(500)
+	
 	StartThread( Moveanimation )
 	StartThread( AimingShooting )	
 end
@@ -427,6 +547,44 @@ end
 
 function script.Killed(recentDamage, maxHealth)
 	dying = true
+	
+	Spin ( pelvis, y_axis, 8, 30 )	
+	Spring.SetUnitVelocity(unitID, 0,-2,0)
+	
+	Turn2( pelvis , z_axis, -180, 20 )
+	Turn2( luparm , z_axis, -38, 20 )
+	Turn2( ruparm , z_axis, -42, 20 )
+	Turn2( lloarm , z_axis, -81, 20 )
+	Turn2( rloarm , z_axis, -55, 20 )
+	Turn2( tail1 , x_axis, -20, 20 )
+	Turn2( tail3 , x_axis, -20, 20 )
+	Turn2( tail5 , x_axis, -20, 20 )
+	Turn2( tail7 , x_axis, -20, 20 )
+	Turn2( tail9 , x_axis, -20, 20 )
+	
+	Sleep( 1000 )
+	
+	EmitSfx( chest,  BOOM2 )
+	
+	Explode(tail1, SFX.FALL + SFX.NO_HEATCLOUD)	
+	Explode(tail2, SFX.FALL + SFX.NO_HEATCLOUD)		
+	Explode(tail3, SFX.FALL + SFX.NO_HEATCLOUD)
+	Explode(tail4, SFX.FALL + SFX.NO_HEATCLOUD)				
+	Explode(neck1, SFX.FALL + SFX.NO_HEATCLOUD)		
+	Explode(neck2, SFX.FALL + SFX.NO_HEATCLOUD)
+	Explode(neck3, SFX.FALL + SFX.NO_HEATCLOUD)		
+	Explode(neck4, SFX.FALL + SFX.NO_HEATCLOUD)			
+	Explode(chest, SFX.FALL + SFX.NO_HEATCLOUD)	
+	Explode(luparm, SFX.FALL + SFX.NO_HEATCLOUD)
+	Explode(ruparm, SFX.FALL + SFX.NO_HEATCLOUD)	
+	Explode(lloarm, SFX.FALL + SFX.NO_HEATCLOUD)	
+	Explode(rloarm, SFX.FALL + SFX.NO_HEATCLOUD)			
+	Explode(lshank, SFX.FALL + SFX.NO_HEATCLOUD)
+	Explode(rshank, SFX.FALL + SFX.NO_HEATCLOUD)	
+	Explode(lfoot, SFX.FALL + SFX.NO_HEATCLOUD)	
+	Explode(rfoot, SFX.FALL + SFX.NO_HEATCLOUD)
+
+	
 	EmitSfx(base, BOOM)		
 	return 3
 end

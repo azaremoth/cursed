@@ -64,7 +64,7 @@ local unitDef = {
   useSmoothMesh      = "1",
   sfxtypes = {
     explosiongenerators = {
-      "custom:SUMMONDRAGON",
+      "custom:Structurebuilding_Small",
       "custom:SUMMONDRAGON2",
     },
   },

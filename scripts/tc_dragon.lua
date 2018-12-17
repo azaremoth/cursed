@@ -122,7 +122,26 @@ local function Moveanimation()
 			Turn2( finger_r23 , y_axis, -25, MOVEANIMATIONSPEED )
 			Turn2( finger_r31 , y_axis, -25, MOVEANIMATIONSPEED )
 			Turn2( finger_r32 , y_axis, -25, MOVEANIMATIONSPEED )
-						
+
+			Turn2( rtight , x_axis, 60+math.random(30), MOVEANIMATIONSPEED )	
+			Turn2( ltight , x_axis, 50+math.random(30), MOVEANIMATIONSPEED )	
+			Turn2( rshank , x_axis, -50, MOVEANIMATIONSPEED*2 )	
+			Turn2( lshank , x_axis, -50, MOVEANIMATIONSPEED*2 )				
+
+			Turn2( tail1 , x_axis, -3, MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail2 , x_axis, -math.random(5), MOVEANIMATIONSPEED*0.25 )		
+			Turn2( tail3 , x_axis, -3, MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail4 , x_axis, -math.random(5), MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail5 , x_axis, -3, MOVEANIMATIONSPEED*0.25 )		
+			Turn2( tail6 , x_axis, -math.random(5), MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail7 , x_axis, -3, MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail8 , x_axis, -math.random(5), MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail9 , x_axis, -5, MOVEANIMATIONSPEED*0.25 )					
+			
+			Turn2( tail2 , z_axis, -math.random(10), MOVEANIMATIONSPEED*0.5 )	
+			Turn2( tail4 , z_axis, math.random(10), MOVEANIMATIONSPEED*0.5 )	
+			Turn2( tail6 , z_axis, -math.random(10), MOVEANIMATIONSPEED*0.5 )	
+			Turn2( tail8 , z_axis, math.random(10), MOVEANIMATIONSPEED*0.5 )
 			
 			if not aiming then		
 				Turn2( neck1 , x_axis, 0, MOVEANIMATIONSPEED*0.5 )
@@ -160,6 +179,24 @@ local function Moveanimation()
 			Turn2( finger_r23 , y_axis, 5, MOVEANIMATIONSPEED*2 )
 			Turn2( finger_r31 , y_axis, 0, MOVEANIMATIONSPEED*2 )
 			Turn2( finger_r32 , y_axis, 0, MOVEANIMATIONSPEED*2 )
+
+			Turn2( rtight , x_axis, 50+math.random(30), MOVEANIMATIONSPEED )	
+			Turn2( ltight , x_axis, 60+math.random(30), MOVEANIMATIONSPEED )	
+
+			Turn2( tail1 , x_axis, 3, MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail2 , x_axis, math.random(10), MOVEANIMATIONSPEED*0.25 )		
+			Turn2( tail3 , x_axis, 3, MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail4 , x_axis, math.random(10), MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail5 , x_axis, 3, MOVEANIMATIONSPEED*0.25 )		
+			Turn2( tail6 , x_axis, math.random(10), MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail7 , x_axis, 3, MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail8 , x_axis, math.random(10), MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail9 , x_axis, 3, MOVEANIMATIONSPEED*0.25 )					
+			
+			Turn2( tail2 , z_axis, math.random(10), MOVEANIMATIONSPEED*0.5 )	
+			Turn2( tail4 , z_axis, -math.random(10), MOVEANIMATIONSPEED*0.5 )	
+			Turn2( tail6 , z_axis, math.random(10), MOVEANIMATIONSPEED*0.5 )	
+			Turn2( tail8 , z_axis, -math.random(10), MOVEANIMATIONSPEED*0.5 )
 			
 			if not aiming then
 
@@ -200,8 +237,30 @@ local function Moveanimation()
 			Turn2( finger_r23 , y_axis, 0, MOVEANIMATIONSPEED )
 			Turn2( finger_r31 , y_axis, 0, MOVEANIMATIONSPEED )
 			Turn2( finger_r32 , y_axis, 0, MOVEANIMATIONSPEED )	
-			
 
+			Turn2( tail1 , x_axis, 3, MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail2 , x_axis, math.random(20), MOVEANIMATIONSPEED*0.25 )		
+			Turn2( tail3 , x_axis, 3, MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail4 , x_axis, math.random(10), MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail5 , x_axis, 3, MOVEANIMATIONSPEED*0.25 )		
+			Turn2( tail6 , x_axis, math.random(10), MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail7 , x_axis, 3, MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail8 , x_axis, math.random(7), MOVEANIMATIONSPEED*0.25 )
+			Turn2( tail9 , x_axis, 3, MOVEANIMATIONSPEED*0.25 )					
+			
+			Turn2( tail2 , z_axis, math.random(25), MOVEANIMATIONSPEED*0.5 )	
+			Turn2( tail4 , z_axis, -math.random(25), MOVEANIMATIONSPEED*0.5 )	
+			Turn2( tail6 , z_axis, math.random(25), MOVEANIMATIONSPEED*0.5 )	
+			Turn2( tail8 , z_axis, -math.random(25), MOVEANIMATIONSPEED*0.5 )	
+			
+			Turn2( rtight , x_axis, 30+math.random(50), MOVEANIMATIONSPEED*2 )	
+			Turn2( ltight , x_axis, 30+math.random(50), MOVEANIMATIONSPEED*2 )	
+			Turn2( rfoot , x_axis, math.random(30), MOVEANIMATIONSPEED )	
+			Turn2( lfoot , x_axis, math.random(30), MOVEANIMATIONSPEED )				
+
+			Turn2( rshank , x_axis, 0, MOVEANIMATIONSPEED )	
+			Turn2( lshank , x_axis, 0, MOVEANIMATIONSPEED )				
+			
 			if not aiming then
 				Turn2( neck1 , x_axis, 15, MOVEANIMATIONSPEED )
 				Turn2( neck2 , x_axis, 15, MOVEANIMATIONSPEED )
@@ -224,6 +283,26 @@ local function Moveanimation()
 			Turn2( lloarm , y_axis, 0, MOVEANIMATIONSPEED*3 )
 			Turn2( rloarm , z_axis, 0, MOVEANIMATIONSPEED*3 )	
 
+			Turn2( tail1 , x_axis, -3, MOVEANIMATIONSPEED*0.5 )
+			Turn2( tail2 , x_axis, -3, MOVEANIMATIONSPEED*0.5 )
+			Turn2( tail3 , x_axis, -7, MOVEANIMATIONSPEED*0.5 )
+			Turn2( tail4 , x_axis, -3, MOVEANIMATIONSPEED*0.5 )
+			Turn2( tail5 , x_axis, -3, MOVEANIMATIONSPEED*0.5 )
+			Turn2( tail6 , x_axis, -5, MOVEANIMATIONSPEED*0.5 )
+			Turn2( tail7 , x_axis, -3, MOVEANIMATIONSPEED*0.5 )
+			Turn2( tail8 , x_axis, -3, MOVEANIMATIONSPEED*0.5 )
+			Turn2( tail9 , x_axis, -10, MOVEANIMATIONSPEED*0.5 )			
+
+			Turn2( tail2 , z_axis, -math.random(25), MOVEANIMATIONSPEED )	
+			Turn2( tail4 , z_axis, math.random(25), MOVEANIMATIONSPEED )	
+			Turn2( tail6 , z_axis, -math.random(25), MOVEANIMATIONSPEED )	
+			Turn2( tail8 , z_axis, math.random(25), MOVEANIMATIONSPEED )	
+
+			Turn2( rtight , x_axis, -math.random(50), MOVEANIMATIONSPEED*2 )	
+			Turn2( ltight , x_axis, -math.random(50), MOVEANIMATIONSPEED*2 )	
+			Turn2( rfoot , x_axis, 0, MOVEANIMATIONSPEED )	
+			Turn2( lfoot , x_axis, 0, MOVEANIMATIONSPEED )					
+			
 			if not aiming then		
 
 			end

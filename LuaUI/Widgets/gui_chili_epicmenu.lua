@@ -2581,12 +2581,15 @@ local function MakeMenuBar()
 	img_flag = Image:New{tooltip = 'Choose Language', file = ":cn:".. LUAUI_DIRNAME .. "Images/flags/".. flagByLang[settings.lang] ..'.png', width = 16, height = 11, OnClick = {MakeFlags }, padding = {4, 4, 4, 6}  }
 	
 	local screen_width, screen_height = Spring.GetWindowGeometry()
+	local menuex = (screen_width/2 - crude_width/2)
 	
 	window_crude = Window:New{
 		name = 'epicmenubar',
 		--x = screen_width - crude_width,
-		x = 0,
-		y = 0,
+		-- x = 0,
+		-- y = 0,
+		x = menuex,  
+		y = 0, 	
 		width = crude_width,
 		height = crude_height,
 		minHeight = crude_height,

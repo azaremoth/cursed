@@ -26,18 +26,18 @@
 		}
 		[trees]
 		{
-			bark=Bark.bmp;
-			leaf=bleaf.bmp;
-			gran1=gran.bmp;
-			gran2=gran2.bmp;
-			birch1=birch1.bmp;
-			birch2=birch2.bmp;
-			birch3=birch3.bmp;
+			bark=defaults/trees/bark.bmp;
+			leaf=defaults/trees/leaf.bmp;
+			gran1=defaults/trees/gran.bmp;
+			gran2=defaults/trees/gran2.bmp;
+			birch1=defaults/trees/birch1.bmp;
+			birch2=defaults/trees/birch2.bmp;
+			birch3=defaults/trees/birch3.bmp;
 		}
 		[maps]
 		{
-			detailtex=detailtex2.bmp;
-			watertex=ocean.jpg;
+			detailtex=defaults/ground/detailtex2.bmp;
+			watertex=defaults/ground/watertex.jpg;
 		}
 		[groundfx]
 		{

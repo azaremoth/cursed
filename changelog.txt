@@ -2,7 +2,8 @@
 
 Polishing
 - redid the animation effect for cursed dragons
-
+- optimized layout for the UI
+- replaced old ugly details texture for maps
 
 
 >> Major changes 1.439 => 1.440

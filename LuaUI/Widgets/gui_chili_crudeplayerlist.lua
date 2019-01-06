@@ -83,7 +83,7 @@ local x_cpu				= x_share + 16
 local x_ping			= x_cpu + 16
 local x_postping		= x_ping + 16
 
-local x_bound	= x_postping + 20
+local x_bound	= x_postping + 40
 
 local UPDATE_FREQUENCY = 0.8	-- seconds
 
@@ -788,7 +788,8 @@ function widget:Initialize()
 		return
 	end
 	
-
+	local screenWidth, screenHeight = Spring.GetWindowGeometry()
+	
 	Chili = WG.Chili
 	Image = Chili.Image
 	Button = Chili.Button
@@ -814,7 +815,7 @@ function widget:Initialize()
 		name = "Player List",
 		color = {0,0,0,0},
 		right = 0,  
-		bottom = 300,
+		y = screenHeight * 0.50,
 		width  = x_bound,
 		height = 150,
 		padding = {8, 2, 8, 2};

@@ -1018,7 +1018,7 @@ function widget:Initialize()
 		dockable = true,
 		name = "Chat",
 		x = 0,
-		y = 100,
+		y = screenHeight * 0.50,
 		width  = screenWidth * 0.30,
 		height = screenHeight * 0.20,
 		--parent = screen0,

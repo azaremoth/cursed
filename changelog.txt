@@ -1,4 +1,4 @@
->> Major changes 1.440 => 1.441
+>> Major changes 1.440 => 1.442
 
 Polishing
 - redid the animation effect for cursed dragons

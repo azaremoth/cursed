@@ -1,0 +1,20 @@
+{
+  "title" : "Cursed",
+  "setups" : [
+    {
+      "package": {
+        "id": "cursed",
+        "display": "Cursed"
+      },
+      "downloads": {
+        "games" : ["tc:test", "chobby:test"],
+        "engines" : [ "104.0.1-964-g0e56068 maintenance" ]
+      },
+      "no_start_script" : true,
+      "launch": {
+        "start_args": ["--menu", "rapid://chobby:test"]
+      }
+    }
+  ]
+
+}

@@ -41,7 +41,7 @@ local CMD_ATTACK = CMD.ATTACK
 local CMD_REMOVE = CMD.REMOVE
 local CMD_MOVE   = CMD.MOVE
 local CMD_FIGHT  = CMD.FIGHT
-local CMD_SET_WANTED_MAX_SPEED = CMD.SET_WANTED_MAX_SPEED
+-- local CMD_SET_WANTED_MAX_SPEED = CMD.SET_WANTED_MAX_SPEED
 local LOS_ACCESS = {inlos = true}
 
 local gaiaTeamID			= Spring.GetGaiaTeamID()
@@ -130,15 +130,16 @@ function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, w
 			-- set order by player
 			if #cmd > 1 and (cmd[1].id == CMD_ATTACK and #cmd[1].params == 1 and cmd[1].params[1] == unitID
 				and (cmd[2].id == CMD_ATTACK or
-				(#cmd > 2 and cmd[2].id == CMD_SET_WANTED_MAX_SPEED and cmd[3].id == CMD_ATTACK))) then
+--				(#cmd > 2 and cmd[2].id == CMD_SET_WANTED_MAX_SPEED and cmd[3].id == CMD_ATTACK))) then
+				(#cmd > 2 and cmd[3].id == CMD_ATTACK))) then
 
 				local re = spGetUnitStates(attackerID)["repeat"]
 
-				if cmd[2].id == CMD_SET_WANTED_MAX_SPEED then
-					spGiveOrderToUnit(attackerID,CMD_REMOVE,{cmd[1].tag,cmd[2].tag},{})
-				else
+--				if cmd[2].id == CMD_SET_WANTED_MAX_SPEED then
+--					spGiveOrderToUnit(attackerID,CMD_REMOVE,{cmd[1].tag,cmd[2].tag},{})
+--				else
 					spGiveOrderToUnit(attackerID,CMD_REMOVE,{cmd[1].tag},{})
-				end
+--				end
 
 				if re then
 					spGiveOrderToUnit(attackerID,CMD_ATTACK,cmd[1].params,{"shift"})
@@ -154,7 +155,8 @@ function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, w
 					if (not team) or team ~= gaiaTeamID then
 						spSetUnitTarget(attackerID,newTargetID)
 						if #cmd > 0 and cmd[1].id == CMD_ATTACK then
-							if #cmd > 1 and cmd[2].id == CMD_SET_WANTED_MAX_SPEED then
+--							if #cmd > 1 and cmd[2].id == CMD_SET_WANTED_MAX_SPEED then
+							if #cmd > 1 then
 								spGiveOrderToUnit(attackerID,CMD_REMOVE,{cmd[1].tag,cmd[2].tag},{})
 							else
 								spGiveOrderToUnit(attackerID,CMD_REMOVE,{cmd[1].tag},{})

@@ -68,8 +68,8 @@ local spSetFeatureHealth	= Spring.SetFeatureHealth
 local spSetFeatureReclaim	= Spring.SetFeatureReclaim
 
 local cmdTypeIconModeOrNumber = {
-	[CMD.AUTOREPAIRLEVEL] = true,
-	[CMD.SET_WANTED_MAX_SPEED] = true,
+--	[CMD.AUTOREPAIRLEVEL] = true,
+--	[CMD.SET_WANTED_MAX_SPEED] = true,
 }
 
 -- vars
@@ -188,7 +188,7 @@ local function LoadUnits()
 			spGiveOrderToUnit(newID, CMD.CLOAK, {boolToNum(data.states.cloak)}, {})
 			spGiveOrderToUnit(newID, CMD.ONOFF, {boolToNum(data.states.active)}, {})
 			spGiveOrderToUnit(newID, CMD.TRAJECTORY, {boolToNum(data.states.trajectory)}, {})
-			spGiveOrderToUnit(newID, CMD.AUTOREPAIRLEVEL, {boolToNum(data.states.autorepairlevel)}, {})
+--			spGiveOrderToUnit(newID, CMD.AUTOREPAIRLEVEL, {boolToNum(data.states.autorepairlevel)}, {})
 			
 			-- rulesparams
 			for name,value in pairs(data.rulesParams) do

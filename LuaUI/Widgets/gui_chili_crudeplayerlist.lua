@@ -435,17 +435,19 @@ local function AddEntity(entity, teamID, allyTeamID)
 	
 	-- clan/faction emblems, level, country
 	if (not entity.isAI and customKeys ~= nil) then 
-		if (customKeys.clan~=nil and customKeys.clan~="") then 
-			icon = "LuaUI/Configs/Clans/" .. customKeys.clan ..".png"
-		elseif (customKeys.faction~=nil and customKeys.faction~="") then
-			icon = "LuaUI/Configs/Factions/" .. customKeys.faction ..".png"
-		end 
-		if customKeys.level ~= nil and customKeys.level~="" then 
-			local level = 1+math.floor((customKeys.level or 0)/10)
-			if level > 9 then 
-				level = 9
+		if (customKeys ~= false) then  -- CURSED HACK
+			if (customKeys.clan~=nil and customKeys.clan~="") then 
+				icon = "LuaUI/Configs/Clans/" .. customKeys.clan ..".png"
+			elseif (customKeys.faction~=nil and customKeys.faction~="") then
+				icon = "LuaUI/Configs/Factions/" .. customKeys.faction ..".png"
 			end 
-			icRank = "LuaUI/Images/Ranks/" .. level .. ".png"
+			if customKeys.level ~= nil and customKeys.level~="" then 
+				local level = 1+math.floor((customKeys.level or 0)/10)
+				if level > 9 then 
+					level = 9
+				end 
+				icRank = "LuaUI/Images/Ranks/" .. level .. ".png"
+			end
 		end
 	end
 	

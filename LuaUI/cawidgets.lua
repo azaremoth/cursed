@@ -413,20 +413,22 @@ function widgetHandler:Initialize()
   end
 
   -- Add ignorelist --
-  local customkeys = select(10, Spring.GetPlayerInfo(Spring.GetMyPlayerID()))
-  if customkeys["ignored"] then
-    if string.find(customkeys["ignored"],",") then
-      local newignorelist = string.gsub(customkeys["ignored"],","," ")
-      Spring.Echo("Setting Serverside ignorelist: " .. newignorelist)
-      for ignoree in string.gmatch(newignorelist,"%S+") do
-        ignorelist.ignorees[ignoree] = true
-        ignorelist.count = ignorelist.count + 1
-      end
-      newignorelist = nil
-    elseif string.len(customkeys["ignored"]) > 1 then
-      ignorelist.ignorees[customkeys["ignored"]] = true
-      ignorelist.count = ignorelist.count + 1
-    end
+  local customkeys = select(10, Spring.GetPlayerInfo(Spring.GetMyPlayerID())) -- CURSED HACK
+  if (customKeys ~= nil and customKeys ~= false) then  -- CURSED HACK
+	  if customkeys["ignored"] then
+		if string.find(customkeys["ignored"],",") then
+		  local newignorelist = string.gsub(customkeys["ignored"],","," ")
+		  Spring.Echo("Setting Serverside ignorelist: " .. newignorelist)
+		  for ignoree in string.gmatch(newignorelist,"%S+") do
+			ignorelist.ignorees[ignoree] = true
+			ignorelist.count = ignorelist.count + 1
+		  end
+		  newignorelist = nil
+		elseif string.len(customkeys["ignored"]) > 1 then
+		  ignorelist.ignorees[customkeys["ignored"]] = true
+		  ignorelist.count = ignorelist.count + 1
+	   end
+	  end
   end
   customkeys = nil
   self:LoadOrderList()

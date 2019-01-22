@@ -17,8 +17,8 @@
     },
     {
       "package": {
-        "id": "cursed",
-        "display": "Cursed"
+        "id": "test",
+        "display": "Test"
       },
       "downloads": {
         "games" : ["tc:test", "chobby:test"],

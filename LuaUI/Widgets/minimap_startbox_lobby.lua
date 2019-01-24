@@ -33,19 +33,10 @@ end
 -- enable simple version by default though
 local drawGroundQuads = true
 
---------------------------------------------------------------------------------
+VFS.Include("LuaRules/Utilities/glVolumes.lua")
+
 local modOptions = Spring.GetModOptions()
 local campaignBattleID = modOptions.singleplayercampaignbattleid
-
-if campaignBattleID then
-    widgetHandler:RemoveWidget(self)
-end
--------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-VFS.Include("LuaRules/Utilities/glVolumes.lua")
 
 local gl = gl  --  use a local copy for faster access
 

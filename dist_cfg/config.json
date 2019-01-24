@@ -14,20 +14,6 @@
         "launch": {
         "start_args" : ["--menu", "rapid://chobby:test"]
          }
-    },
-    {
-      "package": {
-        "id": "test",
-        "display": "Test"
-      },
-      "downloads": {
-        "games" : ["tc:test", "chobby:test"],
-        "engines" : [ "104.0.1-287-gf7b0fcc maintenance" ]
-      },
-      "no_start_script" : true,
-      "launch": {
-      "start_args": ["--menu", "rapid://chobby:test"]
-      }
     }
   ]
 

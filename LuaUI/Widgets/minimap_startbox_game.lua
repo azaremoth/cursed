@@ -11,12 +11,6 @@ function widget:GetInfo() return {
 --------------------------------------------------------------------------------
 local modOptions = Spring.GetModOptions()
 local campaignBattleID = modOptions.singleplayercampaignbattleid
-
-if campaignBattleID then
-    widgetHandler:RemoveWidget(self)
-end
--------------------------------------------------------------------------------
-
 local mapX = Game.mapSizeX
 local mapZ = Game.mapSizeZ
 
@@ -220,7 +214,7 @@ function widget:Initialize()
 	-- startPosType 0 = fixed / 1 = random / 2 = choose in game / 3 = choose before game (on map)
 	-- if (Spring.GetGameFrame() > 30) then	
 	local validposexists = Spring.GetTeamRulesParam(Spring.GetMyTeamID(), "valid_startpos")
-	if (Spring.GetGameFrame() > 30) or (validposexists == 2) or (Game.startPosType ~= 2 and Game.startPosType ~= nil) then
+	if campaignBattleID or (Spring.GetGameFrame() > 30) or (validposexists == 2) or (Game.startPosType ~= 2 and Game.startPosType ~= nil) then
 		widgetHandler:RemoveWidget(self)
 		return
 	end

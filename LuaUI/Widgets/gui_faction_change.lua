@@ -11,17 +11,12 @@ function widget:GetInfo()
     }
 end
 
---------------------------------------------------------------------------------
-local modOptions = Spring.GetModOptions()
-local campaignBattleID = modOptions.singleplayercampaignbattleid
-
-if campaignBattleID then
-    widgetHandler:RemoveWidget(self)
-end
 -------------------------------------------------------------------------------
 
 local teamList = Spring.GetTeamList()
 local myTeamID = Spring.GetMyTeamID()
+local modOptions = Spring.GetModOptions()
+local campaignBattleID = modOptions.singleplayercampaignbattleid
 
 local glTexCoord = gl.TexCoord
 local glVertex = gl.Vertex
@@ -71,6 +66,7 @@ function widget:Initialize()
    if spGetSpectatingState() or
         Spring.GetGameFrame() > 0 or
         (#Spring.GetTeamList()<=2 and Game.startPosType~=2) or
+		campaignBattleID or
         WG.isMission then
         widgetHandler:RemoveWidget(self)
         return

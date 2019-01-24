@@ -15,8 +15,9 @@ include("LuaRules/Configs/customcmds.h.lua")
 
 local modOptions = Spring.GetModOptions()
 local cittersenabled = modOptions.critters
+local campaignBattleID = Spring.GetModOptions().singleplayercampaignbattleid
 
-if (cittersenabled == nil) then
+if (cittersenabled == nil) or campaignBattleID then
 	cittersenabled = false
 end
 

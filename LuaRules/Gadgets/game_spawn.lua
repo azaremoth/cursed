@@ -56,32 +56,18 @@ if (cpvmode and Spring.GetModOptions().startbase ~= nil) then
 end
 
 function gadget:Initialize()
-	GG.teamside = GG.teamside or {}
 	local teams = Spring.GetTeamList()
-
 	for i = 1,#teams do
 		local teamID = teams[i]
 		-- don't spawn a start unit for the Gaia team
 		if (teamID ~= Gaia) then
-			local side = select(5, Spring.GetTeamInfo(teamID))
 			local allyteamID = select(6, Spring.GetTeamInfo(teamID))
-			
 			if (alliedTeamsCount[allyteamID] ~= nil) then
 				alliedTeamsCount[allyteamID] = (alliedTeamsCount[allyteamID] + 1)
 			else
 				alliedTeamsCount[allyteamID] = 1
 			end
 			teamOrderStartBox[teamID] = alliedTeamsCount[allyteamID]
-			
-			if (side ~= "imperials" and side ~= "cursed") then
-				if (math.random() > 0.5) then
-					side = "imperials"
-				else
-					side = "cursed"
-				end
-			end
-			GG.teamside[teamID] = side
-			Spring.SetTeamRulesParam(teamID, "side", side, {allied=true, public=false}) 
 		end
 	end	
 end

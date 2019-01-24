@@ -8,6 +8,15 @@ function widget:GetInfo() return {
 	enabled   = true,
 } end
 
+--------------------------------------------------------------------------------
+local modOptions = Spring.GetModOptions()
+local campaignBattleID = modOptions.singleplayercampaignbattleid
+
+if campaignBattleID then
+    widgetHandler:RemoveWidget(self)
+end
+-------------------------------------------------------------------------------
+
 local mapX = Game.mapSizeX
 local mapZ = Game.mapSizeZ
 

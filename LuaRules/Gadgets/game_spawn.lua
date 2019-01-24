@@ -27,6 +27,7 @@ local gaiaAllyTeamID = select(6, Spring.GetTeamInfo(Spring.GetGaiaTeamID()))
 local allyTeamsHaveBoxes = true
 local teamsHavePos = true
 local modOptions = Spring.GetModOptions()
+local campaignBattleID = modOptions.singleplayercampaignbattleid
 local cheatAItype = "0"
 local cpvmode = false
 local cpvstartbase = false
@@ -383,7 +384,9 @@ function gadget:GameStart()
 		local teamID = teams[i]
 		-- don't spawn a start unit for the Gaia team
 		if (teamID ~= gaiaTeamID) then
-			SpawnstartFaction(teamID)
+			if not campaignBattleID then
+				SpawnstartFaction(teamID)
+			end
 			SetStartingResources(teamID)
 		end
 	end	

@@ -11,6 +11,14 @@ function widget:GetInfo()
     }
 end
 
+--------------------------------------------------------------------------------
+local modOptions = Spring.GetModOptions()
+local campaignBattleID = modOptions.singleplayercampaignbattleid
+
+if campaignBattleID then
+    widgetHandler:RemoveWidget(self)
+end
+-------------------------------------------------------------------------------
 
 local teamList = Spring.GetTeamList()
 local myTeamID = Spring.GetMyTeamID()
@@ -23,7 +31,6 @@ local glTexRect = gl.TexRect
 local glDepthTest = gl.DepthTest
 local glBeginEnd = gl.BeginEnd
 local GL_QUADS = GL.QUADS
-
 local spGetTeamStartPosition = Spring.GetTeamStartPosition
 local spGetTeamRulesParam = Spring.GetTeamRulesParam
 local spGetGroundHeight = Spring.GetGroundHeight
@@ -31,6 +38,7 @@ local spSendLuaRulesMsg = Spring.SendLuaRulesMsg
 local spGetSpectatingState = Spring.GetSpectatingState
 
 local buttonColour, panelColour, sliderColour 
+
 
 --------------------------------------------------------------------------------
 -- Funcs

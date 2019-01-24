@@ -11,7 +11,6 @@
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-
 function widget:GetInfo()
   return {
     name      = "Start Boxes by Lobby",
@@ -23,6 +22,7 @@ function widget:GetInfo()
     enabled   = true  --  loaded by default?
   }
 end
+
 -- version: 1.02
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -33,6 +33,14 @@ end
 -- enable simple version by default though
 local drawGroundQuads = true
 
+--------------------------------------------------------------------------------
+local modOptions = Spring.GetModOptions()
+local campaignBattleID = modOptions.singleplayercampaignbattleid
+
+if campaignBattleID then
+    widgetHandler:RemoveWidget(self)
+end
+-------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

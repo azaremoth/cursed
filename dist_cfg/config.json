@@ -8,7 +8,7 @@
         },
         "downloads": {
             "games" : ["tc:stable", "chobby:test"],
-            "engines" : [ "104.0.1-287-gf7b0fcc maintenance" ]
+            "engines" : [ "104.0.1-972-gb2624e5 maintenance" ]
         },
         "no_start_script" : true,
         "launch": {

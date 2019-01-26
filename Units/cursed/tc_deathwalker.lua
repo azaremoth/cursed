@@ -166,7 +166,7 @@ local weaponDefs = {
     weaponVelocity     = 900,
 --	burst --------------------------------------------------
 	burst = 10,
-	burstrate = 0.005,
+	burstrate = 0.001,
 	sprayangle = 1536,
 --	Weaponspecial ------------------------------------------
     intensity          = 1,

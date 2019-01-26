@@ -33,6 +33,9 @@ local emit_groundflash_l = piece 'emit_groundflash_l'
 
 local RandomNumber2, moving, attacking, MOVEANIMATIONSPEED
 
+local burstcount1 = 0
+local burstcount2 = 0
+
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4
 local SIG_AIM2 = 8
@@ -261,8 +264,15 @@ end
 
 function script.Shot1()
 	Move( rbarrel , z_axis, -10, 100 )
-	EmitSfx( remit,  BIGGUNFLARE )	
-	EmitSfx( emit_groundflash_r,  GROUNDFLASH )
+	if 	burstcount1 < 1 then
+		EmitSfx( remit,  BIGGUNFLARE )	
+		EmitSfx( emit_groundflash_r,  GROUNDFLASH )
+		burstcount1 = burstcount1 +1		
+	elseif burstcount1 > 9 then
+		burstcount1 = 0
+	else
+		burstcount1 = burstcount1 +1
+	end
 	return (0)
 end
 
@@ -296,8 +306,15 @@ end
 
 function script.Shot2()
 	Move( lbarrel , z_axis, -10, 100 )
-	EmitSfx( lemit,  BIGGUNFLARE )	
-	EmitSfx( emit_groundflash_l,  GROUNDFLASH )
+	if 	burstcount2 < 1 then
+		EmitSfx( lemit,  BIGGUNFLARE )	
+		EmitSfx( emit_groundflash_l,  GROUNDFLASH )
+		burstcount2 = burstcount2 +1		
+	elseif burstcount2 > 9 then
+		burstcount2 = 0
+	else
+		burstcount2 = burstcount2 +1
+	end	
 	return (0)
 end
 

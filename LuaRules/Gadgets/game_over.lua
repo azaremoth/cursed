@@ -63,7 +63,6 @@ local destroyedAlliances = {}
 local finishedUnits = {}	-- this stores a list of all units that have ever been completed, so it can distinguish between incomplete and partly reclaimed units
 
 local destroy_type = 'destroy'
-local commends = false
 
 local gameover = false
 
@@ -89,11 +88,6 @@ for name, ud in pairs(UnitDefs) do
 	end
 end
 
-local commsAlive = {}
-for _,allianceID in ipairs(spGetAllyTeamList()) do
-	commsAlive[allianceID] = {}
-end
-
 --------------------------------------------------------------------------------
 -- local funcs
 --------------------------------------------------------------------------------
@@ -115,30 +109,17 @@ local function CountAllianceUnits(allianceID)
 	return count
 end
 
-local function HasNoComms(allianceID)
-	for unitID in pairs(commsAlive[allianceID]) do
-		return false
-	end
-	return true
-end
-
 function AddAllianceUnit(u, ud, teamID)
 	local _, _, _, _, _, allianceID = spGetTeamInfo(teamID)
 	aliveCount[teamID] = aliveCount[teamID] + 1
 	--Spring.Echo("added alliance=" .. teamID, 'count='..aliveCount[allianceID])
-	if UnitDefs[ud].customParams.commtype then
-		commsAlive[allianceID][u] = true
-	end	
 end
 
 function RemoveAllianceUnit(u, ud, teamID)
 	local _, _, _, _, _, allianceID = spGetTeamInfo(teamID)
 	aliveCount[teamID] = aliveCount[teamID] - 1
 	--Spring.Echo("removed alliance=" .. teamID, 'count='..aliveCount[allianceID]) 
-	if UnitDefs[ud].customParams.commtype then
-		commsAlive[allianceID][u] = nil
-	end
-	if ((CountAllianceUnits(allianceID) <= 0) or (commends and HasNoComms(allianceID))) and (allianceID ~= chickenAllyTeamID) then
+	if (CountAllianceUnits(allianceID) <= 0) and (allianceID ~= chickenAllyTeamID) then
 		Spring.Echo("purge")
 		DestroyAlliance(allianceID)
 	end
@@ -183,6 +164,26 @@ function DestroyAlliance(allianceID)
 		destroyedAlliances[allianceID] = true
 		local teamList = spGetTeamList(allianceID)
 		if teamList == nil then return end	-- empty allyteam, don't bother
+		
+--[[]		local explodeUnits = true
+		if GG.GalaxyCampaignHandler then
+			local defeatConfig = GG.GalaxyCampaignHandler.GetDefeatConfig(allianceID)
+			if defeatConfig then
+				if defeatConfig.allyTeamLossObjectiveID then
+					local objParameter = "objectiveSuccess_" .. defeatConfig.allyTeamLossObjectiveID
+					Spring.SetGameRulesParam(objParameter, (Spring.GetGameRulesParam(objParameter) or 0) + ((allianceID == MISSION_PLAYER_ALLY_TEAM_ID and 0) or 1))
+				end
+				if defeatConfig.defeatOtherAllyTeamsOnLoss then
+					local otherTeams = defeatConfig.defeatOtherAllyTeamsOnLoss
+					for i = 1, #otherTeams do
+						DestroyAlliance(otherTeams[i])
+					end
+				end
+				if defeatConfig.doNotExplodeOnLoss then
+					explodeUnits = false
+				end
+			end
+		end	]]
 		
 		if destroy_type == 'debug' then
 		--	Spring.Echo("Game Over: DEBUG")
@@ -233,7 +234,7 @@ local function ProcessLastAlly()
 			local t = teamlist[i]
 			-- any team without units is dead to us; so only teams who are active AND have units matter
 			-- except chicken, who are alive even without units
-			if (aliveCount[t] > 0) or (GG.waitingForComm or {})[t] or (GetTeamIsChicken(t)) then	
+			if (aliveCount[t] > 0) or (GetTeamIsChicken(t)) then	
 				local playerlist = spGetPlayerList(t, true) -- active players
 				if playerlist then
 					for j=1,#playerlist do
@@ -316,7 +317,6 @@ function gadget:Initialize()
 	_,_,_,_,_, gaiaAlliance = spGetTeamInfo(gaiaTeam)
 	CheckAllUnits()
 	destroy_type = Spring.GetModOptions() and Spring.GetModOptions().defeatmode or 'debug'
-	commends = Spring.GetModOptions() and tobool(Spring.GetModOptions().commends)
 	
 	local teams = spGetTeamList()
 	for i=1,#teams do

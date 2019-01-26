@@ -50,6 +50,9 @@ local drawStunnedOverlay = true
 local drawUnitsOnFire    = Spring.GetGameRulesParam("unitsOnFire")
 local drawJumpJet        = Spring.GetGameRulesParam("jumpJets")
 
+local modOptions = Spring.GetModOptions()
+local campaignBattleID = modOptions.singleplayercampaignbattleid
+
 --// this table is used to shows the hp of perimeter defence, and filter it for default wreckages
 local walls = {dragonsteeth=true,dragonsteeth_core=true,fortification=true,fortification_core=true,spike=true,floatingteeth=true,floatingteeth_core=true,spike=true}
 

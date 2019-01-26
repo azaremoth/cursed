@@ -935,6 +935,7 @@ function widget:GameFrame(n)
 end
 
 function widget:Initialize()
+	WG.PauseScreen_SetEnabled = WG.PauseScreen_SetEnabled or false
 	Chili = WG.Chili
 	objectivesWindow = InitializeObjectivesWindow()
 	if objectivesWindow then

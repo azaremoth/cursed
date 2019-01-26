@@ -10,6 +10,9 @@ function gadget:GetInfo()
 	}
 end
 
+local modOptions = Spring.GetModOptions()
+local campaignBattleID = modOptions.singleplayercampaignbattleid
+
 ----------- Hero units -----------
 local IsAHeroBlank = {
 	[UnitDefNames.tc_shade.id] = "tc_shade",
@@ -106,7 +109,7 @@ local function ReAssignAssists(newUnit,oldUnit)
 end
 
 local function ReplaceHero(unitID)
-	if (unitID ~= nil) then
+	if unitID ~= nil then
 		local HeroTeam = Spring.GetUnitTeam(unitID)		
 		local x, y, z = Spring.GetUnitPosition(unitID)
 
@@ -232,12 +235,15 @@ function gadget:UnitFromFactory(unitID, unitDefID, team, factID, factDefID, user
 end
 
 local function IncreaseHeroXP(unitID, XPGain)
-	local HeroTeam = Spring.GetUnitTeam(unitID)
-	HeroXPList[HeroTeam] = (HeroXPList[HeroTeam]+XPGain)
-	CheckLeveling(unitID)
+	if (not campaignBattleID) then
+		local HeroTeam = Spring.GetUnitTeam(unitID)
+		HeroXPList[HeroTeam] = (HeroXPList[HeroTeam]+XPGain)
+		CheckLeveling(unitID)
+	end
 end
 
 local function DecreaseHeroXP(unitID)
+	if (not campaignBattleID) then
 		local HeroTeam = Spring.GetUnitTeam(unitID)
 		HeroXPList[HeroTeam] = (HeroXPList[HeroTeam]-DeathPenalty)
 		local nextlevel_xps, lastlevel_xps = LevelFormula(HeroTeam)
@@ -247,6 +253,7 @@ local function DecreaseHeroXP(unitID)
 			HeroXPList[HeroTeam] = lastlevel_xps			
 		end		
 		-- Spring.Echo('Hero died: Team ' .. HeroTeam .. ' gets an experience penalty!')
+	end
 end
 
 function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)

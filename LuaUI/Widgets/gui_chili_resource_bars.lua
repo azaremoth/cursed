@@ -33,6 +33,9 @@ local Chili
 
 local spGetTeamRulesParam = Spring.GetTeamRulesParam
 
+local modOptions = Spring.GetModOptions()
+local campaignBattleID = modOptions.singleplayercampaignbattleid
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -469,7 +472,7 @@ function widget:GameFrame(n)
 	lbl_m_income:SetCaption( ("%.1f"):format(mInco+mReci) )
 	lbl_e_income:SetCaption( ("%.1f"):format(eInco) )
 
-	if options.xpBar.value then
+	if options.xpBar.value and (not campaignBattleID) then
 		local current_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"current_xps")*100 or 0
 		local nextlevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"nextlevel_xps")*100 or 0
 		local rellevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"rellevel_xps")*100 or 0
@@ -521,7 +524,7 @@ end
 function CreateWindow()
 
 	local bars = 2
-	if options.xpBar.value then
+	if options.xpBar.value and (not campaignBattleID) then
 		bars = 3
 	end
 	local function p(a)
@@ -756,7 +759,7 @@ function CreateWindow()
 	function lbl_e_expense:HitTest(x,y) return self end
 	function lbl_m_expense:HitTest(x,y) return self end
 
-	if not options.xpBar.value then return end
+	if campaignBattleID or not options.xpBar.value then return end
 	-- worker usage
 	bar_xp = Chili.Progressbar:New{
 		parent = window,

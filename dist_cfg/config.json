@@ -2,18 +2,31 @@
   "title" : "Cursed",
   "setups" : [
     {
-        "package": {
-            "id": "stable",
-            "display": "Stable"
-        },
-        "downloads": {
-            "games" : ["tc:stable", "chobby:test"],
-            "engines" : [ "104.0.1-972-gb2624e5 maintenance" ]
-        },
-        "no_start_script" : true,
-        "launch": {
-        "start_args" : ["--menu", "rapid://chobby:test"]
-         }
+      "package": {
+          "id": "stable",
+          "display": "Stable"
+      },
+      "downloads": {
+          "games" : ["tc:stable", "chobby:test"],
+          "engines" : [ "104.0.1-972-gb2624e5 maintenance" ]
+      },
+      "no_start_script" : true,
+      "launch": {
+      "start_args" : ["--menu", "rapid://chobby:test"]
+       }
+    },
+    {
+      "package": {
+          "id": "dev-lobby",
+          "display": "Dev Lobby"
+      },
+      "downloads": {
+          "engines" : [ "104.0.1-972-gb2624e5 maintenance" ]
+      },
+      "no_start_script" : true,
+      "launch": {
+        "start_args" : ["--menu", "Chobby $VERSION"]
+      }
     }
   ]
 

@@ -25,18 +25,18 @@ local Chili
 
 local themes = {
 	cursed = 'cursed',
-	imperials = 'imperial',
+	imperial = 'imperial',
 }
 local cursors = {
 	cursed = 'cursed',
-	imperials = 'imperial',
+	imperial = 'imperial',
 }
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 local function SetTheme()
 	local myTeamID = Spring.GetMyTeamID()
-	local side = WG.faction or Spring.GetTeamRulesParam(myTeamID, "side") or select(5, Spring.GetTeamInfo(myTeamID)) or "cursed"
+	local side = WG.faction or Spring.GetTeamRulesParam(myTeamID, "side") or select(5, Spring.GetTeamInfo(myTeamID)) or "imperial"
 
 	if not Chili then
 		Chili = WG.Chili
@@ -46,7 +46,7 @@ local function SetTheme()
 		if (themes[side] ~= nil) then
 			Chili.theme.skin.general.skinName = themes[side]
 		else
-			Chili.theme.skin.general.skinName = 'cursed'
+			Chili.theme.skin.general.skinName = 'imperial'
 		end
 	end
 	
@@ -54,7 +54,7 @@ local function SetTheme()
 		if (cursors[side] ~= nil) then
 			WG.crude.SetCursor( cursors[side] )
 		else
-			WG.crude.SetCursor( 'cursed' )
+			WG.crude.SetCursor( 'imperial' )
 		end
 	end
 end

@@ -8,6 +8,7 @@
       },
       "downloads": {
           "games" : ["tc:stable", "chobby:test"],
+		  "maps" : ["Red Comet", "Comet Catcher Redux"],
           "engines" : [ "104.0.1-972-gb2624e5 maintenance" ]
       },
       "no_start_script" : true,

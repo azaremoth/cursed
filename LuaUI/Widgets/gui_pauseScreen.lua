@@ -114,10 +114,10 @@ options = {
 	},
 }
 
-local SOUND_DIRNAME = 'sounds/reply/advisor/'
+local SOUND_DIRNAME = 'sounds/'
 
-local pauseSound = "warzone_paused"
-local unpauseSound = "warzone_active"
+local pauseSound = "bell"
+local unpauseSound = "bell"
 local tempDisabled = false
 local doNotDisableSound = false
 local disablePauseSlideTimestamp = 0

@@ -28,7 +28,7 @@
 		{
 			bark=defaults/trees/bark.bmp;
 			leaf=defaults/trees/leaf.bmp;
-			gran1=defaults/trees/gran.bmp;
+			gran1=defaults/trees/gran1.bmp;
 			gran2=defaults/trees/gran2.bmp;
 			birch1=defaults/trees/birch1.bmp;
 			birch2=defaults/trees/birch2.bmp;

@@ -293,7 +293,7 @@ local function InitializeBriefingWindow()
 		height = 26,
 		fontsize = 18,
 		align = "center",
-		caption = "  Main Objectives                                          Bonus Objectives",
+		caption = "Main Objectives                                                            ",
 		parent = briefingWindow,
 	}
 	
@@ -308,6 +308,16 @@ local function InitializeBriefingWindow()
 	
 	local bonusHolder
 	if bonusObjectiveBlock then
+		Chili.Label:New{
+			x = 0,
+			y = 75,
+			width = briefingWindow.width - (briefingWindow.padding[2] + briefingWindow.padding[4]),
+			height = 26,
+			fontsize = 18,
+			align = "center",
+			caption = "                                                           Bonus Objectives",
+			parent = briefingWindow,
+		}		
 		bonusHolder = Chili.ScrollPanel:New{
 			right = "4%",
 			y = SCROLL_POS,

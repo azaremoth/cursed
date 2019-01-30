@@ -285,6 +285,17 @@ local function InitializeBriefingWindow()
 		caption = "Planet " .. planetInformation.name,
 		parent = briefingWindow,
 	}
+
+	Chili.Label:New{
+		x = 0,
+		y = 75,
+		width = briefingWindow.width - (briefingWindow.padding[2] + briefingWindow.padding[4]),
+		height = 26,
+		fontsize = 18,
+		align = "center",
+		caption = "  Main Objectives                                          Bonus Objectives",
+		parent = briefingWindow,
+	}
 	
 	local mainHolder = Chili.ScrollPanel:New{
 		x = "4%",

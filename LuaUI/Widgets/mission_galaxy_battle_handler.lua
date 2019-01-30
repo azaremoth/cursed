@@ -546,8 +546,8 @@ local function InitializeObjectivesWindow()
 	local holderWindow = Chili.Window:New{
 		classname = "main_window_small",
 		name = 'mission_galaxy_objectives_4',
-		x = 6,
-		y = 44,
+		x = 0,
+		y = 150,
 		width = 320,
 		height = 22 + 16*(#objectiveList),
 		dockable = true,
@@ -556,6 +556,16 @@ local function InitializeObjectivesWindow()
 		tweakDraggable = true,
 		tweakResizable = false,
 		parent = Chili.Screen0,
+	}
+	Chili.Label:New{
+		x = 6,
+		y = 7,
+		width = 320,
+		height = 18,
+		fontsize = 16,
+		align = "left",
+		caption = "Objectives",
+		parent = holderWindow,
 	}
 	holderWindow:SetVisibility(false)
 	

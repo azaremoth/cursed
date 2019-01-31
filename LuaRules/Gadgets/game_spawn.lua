@@ -342,6 +342,18 @@ local function SetStartingResources(teamID)
 	local teamOptions = select(7, Spring.GetTeamInfo(teamID))
 	local m = modOptions.startmetal or teamOptions.startmetal or 1000
 	local e = modOptions.startenergy or teamOptions.startenergy or 2000
+	if campaignBattleID then
+		local customKeys = select(7, Spring.GetTeamInfo(teamID))
+		local campaignStartmetal = customKeys.start_metal
+		if campaignStartmetal then
+			m = campaignStartmetal
+		end
+		local campaignStartenergy = customKeys.start_energy
+		if campaignStartenergy then
+			e = campaignStartenergy
+		end
+	end
+	
 	-- using SetTeamResource to get rid of any existing resource without affecting stats
 	-- using AddTeamResource to add starting resource and counting it as income
 	if (m and tonumber(m) ~= 0) then
@@ -351,6 +363,10 @@ local function SetStartingResources(teamID)
 		Spring.SetTeamResource(teamID, "ms", tonumber(m))
 		Spring.SetTeamResource(teamID, "m", 0)
 		Spring.AddTeamResource(teamID, "m", tonumber(m))
+	elseif (m and tonumber(m) == 0) then
+		Spring.SetTeamResource(teamID, "ms", 100)
+		Spring.SetTeamResource(teamID, "m", 0)
+		Spring.AddTeamResource(teamID, "m", 0)
 	end
 	if (e and tonumber(e) ~= 0) then
 		-- remove the pre-existing storage
@@ -359,6 +375,10 @@ local function SetStartingResources(teamID)
 		Spring.SetTeamResource(teamID, "es", tonumber(e))
 		Spring.SetTeamResource(teamID, "e", 0)
 		Spring.AddTeamResource(teamID, "e", tonumber(e))
+	elseif (e and tonumber(e) == 0) then
+		Spring.SetTeamResource(teamID, "es", 100)
+		Spring.SetTeamResource(teamID, "e", 0)
+		Spring.AddTeamResource(teamID, "e", 0)	
 	end
 end
 

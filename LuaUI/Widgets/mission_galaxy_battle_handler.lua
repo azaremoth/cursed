@@ -990,6 +990,10 @@ function widget:Initialize()
 	end
 end
 
+function widget:GameSetup()
+  return true, true 
+end
+
 function widget:Shutdown()
 	SendMissionResult(true)
 	glDeleteFont(myFont)

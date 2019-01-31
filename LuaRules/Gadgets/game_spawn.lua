@@ -341,7 +341,7 @@ local function SetStartingResources(teamID)
 	-- set start resources, either from mod options or custom team keys
 	local teamOptions = select(7, Spring.GetTeamInfo(teamID))
 	local m = modOptions.startmetal or teamOptions.startmetal or 1000
-	local e = modOptions.startenergy or teamOptions.startenergy or 2000
+	local e = modOptions.startenergy or teamOptions.startenergy or 1000
 	if campaignBattleID then
 		local customKeys = select(7, Spring.GetTeamInfo(teamID))
 		local campaignStartmetal = customKeys.start_metal

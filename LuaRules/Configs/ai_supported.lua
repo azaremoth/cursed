@@ -1,3 +1,1 @@
-return {
-"Null AI" = true,
-}
+return { }

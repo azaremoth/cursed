@@ -1,2 +1,3 @@
 return {
+"Null AI" = true,
 }

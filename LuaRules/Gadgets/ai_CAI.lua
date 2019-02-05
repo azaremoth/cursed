@@ -3964,7 +3964,7 @@ function gadget:Initialize()
 			cvActiveX[team] = MapCenterX
 			cvActiveZ[team] = MapCenterZ
 		end
-		if (ai and (not IsGaiaAI) and (not IsChickenAI) and (not IsSupportedAI) and (not campaignBattleID)) then
+		if (ai and (not IsGaiaAI) and (not IsChickenAI) and (not IsSupportedAI)) then
 			local _,_,_,_,_,allyTeam = spGetTeamInfo(team)
 			if (aiConfigByName[spGetTeamLuaAI(team)] == nil) then
 				Spring.Echo("Warning: chosen AI is not supported by the game and is replaced with the game's own LuaAI")

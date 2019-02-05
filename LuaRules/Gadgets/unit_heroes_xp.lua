@@ -12,7 +12,8 @@ end
 
 local modOptions = Spring.GetModOptions()
 local campaignBattleID = modOptions.singleplayercampaignbattleid
-
+-- local maxCampaignLevel = 1
+local campainHeroReplaced = false
 ----------- Hero units -----------
 local IsAHeroBlank = {
 	[UnitDefNames.tc_shade.id] = "tc_shade",
@@ -66,6 +67,21 @@ function gadget:Initialize()
 	for _,team in ipairs(allTeams) do
 		HeroLevelList[team] = 1
 		HeroXPList[team] = 0
+		-------- Needed for campaign only
+		local campaignHeroLevel = 1
+		if campaignBattleID then
+			local customKeys = select(7, Spring.GetTeamInfo(team))
+			if customKeys then
+				campaignHeroLevel = tonumber(customKeys.static_level)
+				if campaignHeroLevel then
+--					if maxCampaignLevel < campaignHeroLevel then
+--						maxCampaignLevel = campaignHeroLevel
+--					end
+					HeroLevelList[team] = (1 + campaignHeroLevel)
+					HeroXPList[team] =  0.5*((((HeroLevelList[team]-1)^LevelXPExp)/LevelXPDiv)+((HeroLevelList[team]^LevelXPExp)/LevelXPDiv))
+				end
+			end
+		end
 		-------- Needed for ressource bars widget to show leveling progress
 		Spring.SetTeamRulesParam(team,"current_xps",0)
 		Spring.SetTeamRulesParam(team,"nextlevel_xps",0)
@@ -320,6 +336,34 @@ function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
 end
 
 function gadget:GameFrame(f)
+--Spring.Echo("FRAMING")
+--Spring.Echo(campainHeroReplaced)
+--Spring.Echo(campaignBattleID)
+	if (not campainHeroReplaced) and campaignBattleID then
+		--Spring.Echo("FRAME")
+		--Spring.Echo(f)
+		if f > 0 then
+			--Spring.Echo("CHECK!")
+			local allTeams = Spring.GetTeamList()
+			for _,chteam in ipairs(allTeams) do
+				--Spring.Echo("POOP")
+				local CampaignSarge = Spring.GetTeamUnitsByDefs (chteam, {UnitDefNames["euf_sarge"].id})
+				local CampaignShade = Spring.GetTeamUnitsByDefs (chteam, {UnitDefNames["tc_shade"].id})
+				if CampaignSarge ~= nil then
+					--Spring.Echo("SARGE")
+					for _,unitID in ipairs(CampaignSarge) do
+						--Spring.Echo("FOUND")
+						ReplaceHero(unitID)
+					end
+				elseif CampaignShade ~= nil then
+					for _,unitID in ipairs(CampaignShade) do
+						ReplaceHero(unitID)
+					end
+				end
+			end
+			campainHeroReplaced = true
+		end
+	end
 	------------- data update for widgets --------------------------------------------------------
 	if (f % 10) == 1 then
 		local allTeams = Spring.GetTeamList()

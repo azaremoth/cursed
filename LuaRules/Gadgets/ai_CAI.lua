@@ -3965,13 +3965,18 @@ function gadget:Initialize()
 			cvActiveZ[team] = MapCenterZ
 		end
 		if (ai and (not IsGaiaAI) and (not IsChickenAI) and (not IsSupportedAI)) then
-			local _,_,_,_,_,allyTeam = spGetTeamInfo(team)
-			if (aiConfigByName[spGetTeamLuaAI(team)] == nil) then
-				Spring.Echo("Warning: chosen AI is not supported by the game and is replaced with the game's own LuaAI")
+			if (aiConfigByName[spGetTeamLuaAI(team)] == "Null AI") then 
+				Spring.Echo("CAI: Null AI was chosen, thus the game will runs without an LuaAI. Nothing schould happen.")
+			else
+				if (aiConfigByName[spGetTeamLuaAI(team)] == nil) then
+					Spring.Echo("CAI: No AI was chosen, thus the game's uses the own LuaAI")
+				end
+				Spring.Echo("CAI: chosen AI is not supported by the game and is replaced with the game's own LuaAI")			
+				local _,_,_,_,_,allyTeam = spGetTeamInfo(team)
+				initialiseAiTeam(team, allyTeam, aiConfigByName["Skirmish AI"])
+				aiOnTeam[allyTeam] = true
+				usingAI = true
 			end
-			initialiseAiTeam(team, allyTeam, aiConfigByName["Skirmish AI"])
-			aiOnTeam[allyTeam] = true
-			usingAI = true
 		end
 	end
 	

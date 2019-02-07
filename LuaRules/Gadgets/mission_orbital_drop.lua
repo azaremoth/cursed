@@ -109,7 +109,7 @@ function GG.DropUnit(unitDefName, x, y, z, facing, teamID, useSetUnitVelocity, t
     unitDefName = UnitDefs[unitDefName].name
   end  
   if StartsWith(unitDefName, "chicken") then -- don't drop chickens, make them appear in a cloud of dirt instead
-    Spring.SpawnCEG("dirt3", x, y, z)
+    Spring.SpawnCEG("BURROWING", x, y, z)
     return unitID
   end
   local unitDef = UnitDefNames[unitDefName]
@@ -197,11 +197,11 @@ function gadget:GameFrame(frame)
       elseif y < brakeAltitude+10  then
         -- unit is braking
 		if frame % 2 == 0 then
-			Spring.SpawnCEG("vindiback", x, y - 20, z) -- black dust
-			Spring.SpawnCEG("banishertrail", x + 10, y - 40, z + 10) -- braking thrusters
-			Spring.SpawnCEG("banishertrail", x - 10, y - 40, z + 10)
-			Spring.SpawnCEG("banishertrail", x + 10, y - 40, z - 10)
-			Spring.SpawnCEG("banishertrail", x - 10, y - 40, z - 10)
+			Spring.SpawnCEG("Greycloud", x, y - 20, z) -- black dust
+			Spring.SpawnCEG("JUMPBURST", x + 10, y - 40, z + 10) -- braking thrusters
+			Spring.SpawnCEG("JUMPBURST", x - 10, y - 40, z + 10)
+			Spring.SpawnCEG("JUMPBURST", x + 10, y - 40, z - 10)
+			Spring.SpawnCEG("JUMPBURST", x - 10, y - 40, z - 10)
 		end
 		--if Spring.GetUnitNeutral(unitID) then
 		--	Spring.SetUnitNeutral(unitID, true)
@@ -209,7 +209,7 @@ function gadget:GameFrame(frame)
       else
 	  	-- unit is falling
 		if frame % 2 == 0 then
-			Spring.SpawnCEG("raventrail", x, y - 40, z) -- meteor trail
+			Spring.SpawnCEG("JUMPBURST", x, y - 40, z) -- meteor trail
 		end
       end
     else

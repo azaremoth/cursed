@@ -3955,7 +3955,7 @@ function gadget:Initialize()
 		elseif (team == GaiaAITeam) then
 			IsGaiaAI = true
 			-- Spring.Echo("GAIA AI detected")
-		elseif (ai and SupportedAIs[Spring.GetTeamLuaAI(team)]) then
+		elseif (ai and SupportedAIs[spGetTeamLuaAI(team)]) then
 			IsChickenAI = true
 			Spring.Echo("Skirmish AI: Chicken AI detected")			
 		end
@@ -3965,13 +3965,16 @@ function gadget:Initialize()
 			cvActiveZ[team] = MapCenterZ
 		end
 		if (ai and (not IsGaiaAI) and (not IsChickenAI) and (not IsSupportedAI)) then
-			if (aiConfigByName[spGetTeamLuaAI(team)] == "Null AI") then 
-				Spring.Echo("CAI: Null AI was chosen, thus the game will runs without an LuaAI. Nothing schould happen.")
+			Spring.Echo("CAI: AI identified:")
+			local AIname,_,_,_,_,_ = spGetTeamLuaAI(team) 
+			Spring.Echo(AIname)
+			if (AIname == "NO AI") then 
+				Spring.Echo("CAI: The NO AI was chosen, thus the game will runs without an LuaAI. Nothing schould happen for team " .. team)
 			else
 				if (aiConfigByName[spGetTeamLuaAI(team)] == nil) then
-					Spring.Echo("CAI: No AI was chosen, thus the game's uses the own LuaAI")
+					Spring.Echo("CAI: AI was not chosen, thus the game's uses the own LuaAI for team " .. team)
 				end
-				Spring.Echo("CAI: chosen AI is not supported by the game and is replaced with the game's own LuaAI")			
+				Spring.Echo("CAI: chosen AI is not supported by the game and is replaced with the game's own LuaAI for team " .. team)			
 				local _,_,_,_,_,allyTeam = spGetTeamInfo(team)
 				initialiseAiTeam(team, allyTeam, aiConfigByName["Skirmish AI"])
 				aiOnTeam[allyTeam] = true

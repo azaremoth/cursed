@@ -66,7 +66,7 @@ local spGetVisibleUnits      = Spring.GetVisibleUnits
 local ScaleCircle = {
 	[UnitDefNames.euf_transport.id] = "euf_transport",
 	}
-
+local IgnoreUnit = VFS.Include"LuaUI/Configs/ignore.lua"
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -279,44 +279,46 @@ if not spIsGUIHidden() then
         if (teamID and (gaiaTeamID ~= teamID)) then
           local udid = spGetUnitDefID(visUnits[i])
           local radius = GetUnitDefRealRadius(udid)
-          if (radius) then
-			if ScaleCircle [udid] then
-				radius = radius*5
-			end
-            if showOutline then
-              radius = radius + extraRadius
-            else
-              radius = radius + noOutlineExtraRadius
-            end
-            local colorSet  = GetTeamColorSet(teamID)
-            if (trackSlope and (not UnitDefs[udid].canFly)) then
-              local x, y, z = spGetUnitPosition(visUnits[i])
-              local gx, gy, gz = spGetGroundNormal(x, z)
-              local degrot = acos(gy) * radInDeg
-              colorSet[4] = fillOpacity
-              glColor(colorSet)
-              glDrawListAtUnit(visUnits[i], circlePolys, false,
-                               radius, 1.0, radius,
-                               degrot, gz, 0, -gx) 
-              if showOutline then
-                colorSet[4] = outlineOpacity
-                glColor(colorSet)
-                glDrawListAtUnit(visUnits[i], circleLines, false,
-                                 radius, 1.0, radius,
-                                 degrot, gz, 0, -gx)
-              end
-            else
-              colorSet[4] = fillOpacity
-              glColor(colorSet)
-              glDrawListAtUnit(visUnits[i], circlePolys, false,
-                               radius, 1.0, radius)
-              if showOutline then
-                colorSet[4] = outlineOpacity
-                glColor(colorSet)
-                glDrawListAtUnit(visUnits[i], circleLines, false,
-                                 radius, 1.0, radius)
-              end
-            end
+		  if not IgnoreUnit [udid] then
+			  if (radius) then
+				if ScaleCircle [udid] then
+					radius = radius*5
+				end
+				if showOutline then
+				  radius = radius + extraRadius
+				else
+				  radius = radius + noOutlineExtraRadius
+				end
+				local colorSet  = GetTeamColorSet(teamID)
+				if (trackSlope and (not UnitDefs[udid].canFly)) then
+				  local x, y, z = spGetUnitPosition(visUnits[i])
+				  local gx, gy, gz = spGetGroundNormal(x, z)
+				  local degrot = acos(gy) * radInDeg
+				  colorSet[4] = fillOpacity
+				  glColor(colorSet)
+				  glDrawListAtUnit(visUnits[i], circlePolys, false,
+								   radius, 1.0, radius,
+								   degrot, gz, 0, -gx) 
+				  if showOutline then
+					colorSet[4] = outlineOpacity
+					glColor(colorSet)
+					glDrawListAtUnit(visUnits[i], circleLines, false,
+									 radius, 1.0, radius,
+									 degrot, gz, 0, -gx)
+				  end
+				else
+				  colorSet[4] = fillOpacity
+				  glColor(colorSet)
+				  glDrawListAtUnit(visUnits[i], circlePolys, false,
+								   radius, 1.0, radius)
+				  if showOutline then
+					colorSet[4] = outlineOpacity
+					glColor(colorSet)
+					glDrawListAtUnit(visUnits[i], circleLines, false,
+									 radius, 1.0, radius)
+				  end
+				end
+			 end
           end
         end
       end

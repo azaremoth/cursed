@@ -147,6 +147,7 @@ local armorDefs = {
 			"tc_purgatory_ai",			
 			"tc_pyramid",
 			"tc_pyramid_ai",
+			"tc_soulstone",			
 			"tc_soulcage",
 			"tc_spiderdemon",
 			"tc_storage",

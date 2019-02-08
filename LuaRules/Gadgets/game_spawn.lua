@@ -364,7 +364,7 @@ local function SetStartingResources(teamID)
 		Spring.SetTeamResource(teamID, "m", 0)
 		Spring.AddTeamResource(teamID, "m", tonumber(m))
 	elseif (m and tonumber(m) == 0) then
-		Spring.SetTeamResource(teamID, "ms", 100)
+		Spring.SetTeamResource(teamID, "ms", 500)
 		Spring.SetTeamResource(teamID, "m", 0)
 		Spring.AddTeamResource(teamID, "m", 0)
 	end
@@ -376,7 +376,7 @@ local function SetStartingResources(teamID)
 		Spring.SetTeamResource(teamID, "e", 0)
 		Spring.AddTeamResource(teamID, "e", tonumber(e))
 	elseif (e and tonumber(e) == 0) then
-		Spring.SetTeamResource(teamID, "es", 100)
+		Spring.SetTeamResource(teamID, "es", 500)
 		Spring.SetTeamResource(teamID, "e", 0)
 		Spring.AddTeamResource(teamID, "e", 0)	
 	end

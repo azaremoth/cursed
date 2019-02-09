@@ -1,3 +1,4 @@
+-- UNITDEF -- euf_transport_mis --
 --------------------------------------------------------------------------------
 
 local unitName = "euf_transport_mis"
@@ -5,6 +6,7 @@ local unitName = "euf_transport_mis"
 --------------------------------------------------------------------------------
 
 local unitDef = {
+  unitname           = "euf_transport_mis", 
   name               = "Dropship",
   description        = "Troop transport",
   objectName         = "euf_transport_mis.s3o",
@@ -14,9 +16,31 @@ local unitDef = {
   armortype          = "FLYER",   
   side               = "imperials",
   iconType           = "triangle",
-  buildCostEnergy    = 0,
-  buildCostMetal     = 0,
-  buildTime          = 0,
+  customParams       = {
+--	transportcapa		= 8,
+	factionname			= "imperials",
+	normaltex 			= "unittextures/normalmaps/euf_transport_normal.png",
+	normalmaps 			= "yes",			
+	helptext 			= "An armored flying troop transporter that can hold up to 8 soldiers."	
+  }, 
+-- Costs and HPs
+  buildCostEnergy     = 600,
+  buildCostMetal      = 600,
+  buildTime           = 600,
+  maxDamage           = 1800,  
+--  Flyer/Movement specifics 
+  airStrafe          = false, 
+  canFly             = true,
+  floater            = false,
+  hoverAttack        = true,
+  upright            = true,
+  dontland           = "1",  
+  acceleration       = 0.20,
+  airHoverFactor     = 0,
+  brakeRate          = 0.15,
+  cruiseAlt          = 30,
+  maxVelocity        = 0,
+  turnRate           = 512,
 -- Collision
   collide                = false,
   collisionSphereScale   = 0.05,
@@ -24,39 +48,39 @@ local unitDef = {
   collisionVolumeScales  = [[85 35 85]],
   collisionVolumeTest    = 1,
   collisionVolumeType    = [[Box]],
-  customParams          = {	
-	factionname			= "imperials",
-	normaltex 			= "unittextures/normalmaps/euf_transport_normal.png",
-	normalmaps 			= "yes",			
-	helptext 			= "An armored flying troop transporter that can hold up to 8 soldiers."	
-	},
-  energyMake         = 0,
-  energyStorage      = 0,
-  explodeAs          = "SMALL_EXPLOSION_YELLOW",
-  footprintX         = 6,
-  footprintZ         = 6,
-  idleAutoHeal       = 0.01,
+-- misc --
+  canAttack           = false,
+  canGuard            = true,
+--  canload                = [[1]],  
+  canMove             = true,
+  canPatrol           = true,
+  canstop             = "1",
+  defaultmissiontype  = "VTOL_standby",
+  fireState           = 2,
+  footprintX          = 3,
+  footprintZ          = 3,
+  idleAutoHeal        = 0.01,
   idleTime           = 400,
-  levelGround        = false,
-  maxDamage          = 3000,
-  maxSlope           = 25,
-  maxWaterDepth      = 0,
-  nanoColor          = "0 0 0",
-  noAutoFire         = false,
-  onoffable          = false,
-  radarDistance      = 0,
+  mass                = 600,
+  noChaseCategory     = "AIR",
+  seismicSignature    = 0,
+  sightDistance       = 512,
+  smoothAnim          = true,
+-- Effects and Explosions
+  explodeAs          = "SMALL_EXPLOSION_YELLOW",
   selfDestructAs     = "SMALL_EXPLOSION_YELLOW",
+  nanoColor          = "0 0 0",
   showNanoFrame      = false,
-  sightDistance      = 512,
-  smoothAnim         = false,
-  unitname           = "euf_transport_mis",
-  useBuildingGroundDecal = false,  
-  yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo",
+------------- transport ---------  
+  isfirePlatform     = false,
+  isTransport        = false, 
+-------------------------------
   sfxtypes = {
     explosiongenerators = {
-      "custom:Small_Explosion_YELLOW",
+      "custom:SMALL_EXPLOSION_YELLOW",
+      "custom:Greycloud_Big",	  
     },
-  },  
+  },
   sounds = {
     build              = "",
     canceldestruct     = "",
@@ -84,7 +108,11 @@ local unitDef = {
       "bomber_select",
     },
   },
+ weapons = {},
 }
+
+
+--------------------------------------------------------------------------------
 
 
 --------------------------------------------------------------------------------

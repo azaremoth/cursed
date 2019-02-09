@@ -85,9 +85,8 @@ local unitDef = {
 -------------------------------
   sfxtypes = {
     explosiongenerators = {
-      "custom:MARINEGUNFLARE",
-      "custom:Small_Explosion_YELLOW",
       "custom:SMALL_EXPLOSION_YELLOW",
+	  "custom:EUF_Structurebuilding_Small",
     },
   },
   sounds = {

@@ -29,6 +29,9 @@ local LANDING	 = 1025+0
 
 local x, y, z = Spring.GetUnitPosition(unitID)
 local teamID = Spring.GetUnitTeam(unitID)
+
+local modOptions = Spring.GetModOptions()
+local campaignBattleID = tonumber(modOptions.singleplayercampaignbattleid)
 	
 local function Turn2(piecenum,axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180
@@ -69,6 +72,24 @@ local function ShowAll()
 	Show(rrengine)
 	Show(rdoor)
 	Show(ldoor)	
+end
+
+local function UnitSpawner()
+	Sleep(2000)
+	if campaignBattleID == 1 then
+		local unitOne = Spring.CreateUnit("euf_marine", x-30, y, z-30, 0, teamID)
+		local unitTwo = Spring.CreateUnit("euf_marine", x-30, y, z+30, 0, teamID)
+		local unitThr = Spring.CreateUnit("euf_marine", x+30, y, z-30, 0, teamID)
+		local unitFou = Spring.CreateUnit("euf_marine", x+30, y, z+30, 0, teamID)
+	else
+		local unitOne = Spring.CreateUnit("euf_marine", x-30, y, z-30, 0, teamID)
+		local unitTwo = Spring.CreateUnit("euf_marine", x-30, y, z+30, 0, teamID)
+		local unitThr = Spring.CreateUnit("euf_marine", x+30, y, z-30, 0, teamID)
+		local unitFou = Spring.CreateUnit("euf_marine", x+30, y, z+30, 0, teamID)	
+		local unitFiv = Spring.CreateUnit("euf_marine", x+40, y, z-40, 0, teamID)
+		local unitSix = Spring.CreateUnit("euf_marine", x+40, y, z+40, 0, teamID)		
+	end
+	Sleep(2000)
 end
 
 local function Landing()
@@ -120,7 +141,8 @@ function script.Create()
 	while GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0 do
 			Sleep(300)
 	end
-	StartThread( Landing )		
+	StartThread( Landing )
+	StartThread( UnitSpawner )		
 end
 
 function script.StartMoving()

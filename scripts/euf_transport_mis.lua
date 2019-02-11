@@ -81,6 +81,13 @@ local function UnitSpawner()
 		local unitTwo = Spring.CreateUnit("euf_marine", x-30, y, z+30, 0, teamID)
 		local unitThr = Spring.CreateUnit("euf_marine", x+30, y, z-30, 0, teamID)
 		local unitFou = Spring.CreateUnit("euf_marine", x+30, y, z+30, 0, teamID)
+	elseif campaignBattleID == 3 then
+		local unitOne = Spring.CreateUnit("euf_marine", x-30, y, z-30, 0, teamID)
+		local unitTwo = Spring.CreateUnit("euf_marine", x-30, y, z+30, 0, teamID)
+		local unitThr = Spring.CreateUnit("euf_marine", x+30, y, z-30, 0, teamID)
+		local unitFou = Spring.CreateUnit("euf_marine", x+30, y, z+30, 0, teamID)
+		local unitFiv = Spring.CreateUnit("euf_scoutdrone", x+40, y, z-40, 0, teamID)
+		local unitSix = Spring.CreateUnit("euf_constructor", x+40, y, z+40, 0, teamID)			
 	else
 		local unitOne = Spring.CreateUnit("euf_marine", x-30, y, z-30, 0, teamID)
 		local unitTwo = Spring.CreateUnit("euf_marine", x-30, y, z+30, 0, teamID)

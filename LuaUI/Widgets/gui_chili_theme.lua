@@ -25,18 +25,18 @@ local Chili
 
 local themes = {
 	cursed = 'cursed',
-	imperial = 'imperial',
+	imperials = 'imperial',
 }
 local cursors = {
 	cursed = 'cursed',
-	imperial = 'imperial',
+	imperials = 'imperial',
 }
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 local function SetTheme()
 	local myTeamID = Spring.GetMyTeamID()
-	local side = WG.faction or Spring.GetTeamRulesParam(myTeamID, "side") or select(5, Spring.GetTeamInfo(myTeamID)) or "imperial"
+	local side = WG.faction or Spring.GetTeamRulesParam(myTeamID, "side") or select(5, Spring.GetTeamInfo(myTeamID)) or "imperials"
 
 	if not Chili then
 		Chili = WG.Chili

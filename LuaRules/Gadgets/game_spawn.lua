@@ -353,7 +353,6 @@ local function SetStartingResources(teamID)
 			e = campaignStartenergy
 		end
 	end
-	
 	-- using SetTeamResource to get rid of any existing resource without affecting stats
 	-- using AddTeamResource to add starting resource and counting it as income
 	if (m and tonumber(m) ~= 0) then
@@ -363,8 +362,8 @@ local function SetStartingResources(teamID)
 		Spring.SetTeamResource(teamID, "ms", tonumber(m))
 		Spring.SetTeamResource(teamID, "m", 0)
 		Spring.AddTeamResource(teamID, "m", tonumber(m))
-	elseif (m and tonumber(m) == 0) then
-		Spring.SetTeamResource(teamID, "ms", 500)
+	else
+		Spring.SetTeamResource(teamID, "ms", 100)
 		Spring.SetTeamResource(teamID, "m", 0)
 		Spring.AddTeamResource(teamID, "m", 0)
 	end
@@ -375,8 +374,8 @@ local function SetStartingResources(teamID)
 		Spring.SetTeamResource(teamID, "es", tonumber(e))
 		Spring.SetTeamResource(teamID, "e", 0)
 		Spring.AddTeamResource(teamID, "e", tonumber(e))
-	elseif (e and tonumber(e) == 0) then
-		Spring.SetTeamResource(teamID, "es", 500)
+	else
+		Spring.SetTeamResource(teamID, "es", 100)
 		Spring.SetTeamResource(teamID, "e", 0)
 		Spring.AddTeamResource(teamID, "e", 0)	
 	end

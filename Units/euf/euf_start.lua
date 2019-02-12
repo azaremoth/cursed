@@ -25,7 +25,7 @@ local unitDef = {
   useFootPrintCollisionVolume = true,  
   customParams		 = {
 		factionname		   = "imperials",
-		helptext = "This is your storage for filled with resources to start with."
+--		helptext = "This is your storage for filled with resources to start with."
   },  
   description        = "",
   --  energyMake         = 0,
@@ -42,7 +42,7 @@ local unitDef = {
   maxWaterDepth      = 10,
   metalMake          = 0,
   metalStorage       = 0,
-  name               = "Wild Storage",
+  name               = "Containers",
   nanoColor          = "0 0 0",
   objectName         = "euf_start.s3o",
   radarDistance      = 0,

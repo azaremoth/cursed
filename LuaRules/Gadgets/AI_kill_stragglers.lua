@@ -12,9 +12,15 @@ end
 
 if gadgetHandler:IsSyncedCode() then
 
+local modOptions = Spring.GetModOptions()
+local campaignBattleID = modOptions.singleplayercampaignbattleid
 local killstragglers = Spring.GetModOptions().killstragglers
 if (killstragglers == nil) then -- set active by default if no modoptions are available
-	killstragglers = "1"
+	if campaignBattleID then
+		killstragglers = "0"
+	else
+		killstragglers = "1"
+	end
 end
 	
 local kothisactive = false

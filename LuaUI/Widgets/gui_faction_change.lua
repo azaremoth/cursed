@@ -51,6 +51,25 @@ end
 --------------------------------------------------------------------------------
 local Chili, control, imperial_button, cursed_button
 
+function SetFaction(faction)
+    -- tell initial_spawn
+    spSendLuaRulesMsg('\138' .. faction) 
+	-- Spring.Echo('Sending')
+	-- Spring.Echo('\138' .. faction)
+    -- tell sMenu and initial queue
+    WG.faction = faction
+end
+
+function SetImperial()
+    SetFaction('imperials')
+    return true
+end
+
+function SetCursed()
+    SetFaction('cursed')
+    return true
+end
+
 function resizeUI(vsx,vsy)
     if control ~= nil then
         control:SetPos(vsx*0.47, vsy*0.10, vsx*0.10, vsy*0.10) 
@@ -63,12 +82,8 @@ end
 
 
 function widget:Initialize()
-   if spGetSpectatingState() or
-        Spring.GetGameFrame() > 0 or
-        (#Spring.GetTeamList()<=2 and Game.startPosType~=2) or
-		campaignBattleID or
-        WG.isMission then
-        widgetHandler:RemoveWidget(self)
+   if spGetSpectatingState() or Spring.GetGameFrame() > 0 or (#Spring.GetTeamList()<=2 and Game.startPosType~=2) or campaignBattleID or WG.isMission then
+		widgetHandler:RemoveWidget(self)
         return
     end
         
@@ -110,21 +125,9 @@ function widget:Initialize()
 	
 end
 
-function SetImperial()
-    SetFaction('imperials')
-    return true
-end
-
-function SetCursed()
-    SetFaction('cursed')
-    return true
-end
-
-function SetFaction(faction)
-    -- tell initial_spawn
-    spSendLuaRulesMsg('\138' .. faction) 
-	-- Spring.Echo('Sending')
-	-- Spring.Echo('\138' .. faction)
-    -- tell sMenu and initial queue
-    WG.faction = faction
+function widget:GameFrame(n)
+   if n > 0 then
+		widgetHandler:RemoveWidget(self)
+        return
+    end
 end

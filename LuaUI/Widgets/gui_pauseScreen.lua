@@ -116,8 +116,8 @@ options = {
 
 local SOUND_DIRNAME = 'sounds/'
 
-local pauseSound = "bell"
-local unpauseSound = "bell"
+local pauseSound = "digin"
+local unpauseSound = "digin"
 local tempDisabled = false
 local doNotDisableSound = false
 local disablePauseSlideTimestamp = 0

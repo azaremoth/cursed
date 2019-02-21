@@ -91,6 +91,15 @@ local overrides = {
 		text='', tooltip = tooltips.priority},
 	[CMD.MOVE_STATE] = { texture = {'LuaUI/Images/commands/states/move_hold.png', 'LuaUI/Images/commands/states/move_engage.png', 'LuaUI/Images/commands/states/move_roam.png'}, text=''},
 	[CMD.FIRE_STATE] = { texture = {'LuaUI/Images/commands/states/fire_hold.png', 'LuaUI/Images/commands/states/fire_return.png', 'LuaUI/Images/commands/states/fire_atwill.png'}, text=''},
+	
+	[CMD_RAMP] = {text = ' ', texture = 'LuaUI/Images/commands/ramp.png'},	
+	[CMD_LEVEL] = {text = ' ', texture = 'LuaUI/Images/commands/level.png'},	
+	[CMD_RAISE] = {text = ' ', texture = 'LuaUI/Images/commands/raise.png'},	
+	[CMD_SMOOTH] = {text = ' ', texture = 'LuaUI/Images/commands/smooth.png'},	
+	[CMD_RESTORE] = {text = ' ', texture = 'LuaUI/Images/commands/restore.png'},	
+	[CMD_BUMPY] = {text = ' ', texture = 'LuaUI/Images/commands/bumpy.png'},	
+	[CMD_TERRAFORM_INTERNAL] = {text = ' ', texture = 'LuaUI/Images/commands/arearestore.png'},	
+	
 }
 
 local overrides_faction_two = {
@@ -134,6 +143,15 @@ local overrides_faction_two = {
 		text='', tooltip = tooltips.priority},
 	[CMD.MOVE_STATE] = { texture = {'LuaUI/Images/commands/states/move_hold.png', 'LuaUI/Images/commands/states/move_engage.png', 'LuaUI/Images/commands/states/move_roam.png'}, text=''},
 	[CMD.FIRE_STATE] = { texture = {'LuaUI/Images/commands/states/fire_hold.png', 'LuaUI/Images/commands/states/fire_return.png', 'LuaUI/Images/commands/states/fire_atwill.png'}, text=''},
+	
+	[CMD_RAMP] = {text = ' ', texture = 'LuaUI/Images/commands/ramp.png'},	
+	[CMD_LEVEL] = {text = ' ', texture = 'LuaUI/Images/commands/level.png'},	
+	[CMD_RAISE] = {text = ' ', texture = 'LuaUI/Images/commands/raise.png'},	
+	[CMD_SMOOTH] = {text = ' ', texture = 'LuaUI/Images/commands/smooth.png'},	
+	[CMD_RESTORE] = {text = ' ', texture = 'LuaUI/Images/commands/restore.png'},	
+	[CMD_BUMPY] = {text = ' ', texture = 'LuaUI/Images/commands/bumpy.png'},	
+	[CMD_TERRAFORM_INTERNAL] = {text = ' ', texture = 'LuaUI/Images/commands/arearestore.png'},	
+	
 }
 
 

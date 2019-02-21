@@ -8,7 +8,7 @@ unitDef = {
   builder                = false,
   buildPic               = [[crystals.png]],
   capturable             = false,
-  category               = [[TERRAFORM STUPIDTARGET]],
+  category               = [[TERRAFORM]],
   collisionVolumeOffsets = [[0 -3000 0]],
   collisionVolumeScales  = [[32 32 32]],
   collisionVolumeType    = [[box]],
@@ -16,6 +16,9 @@ unitDef = {
   selectionVolumeScales  = [[32 16 32]],
   selectionVolumeType    = [[box]],
 
+  explodeAs          = "SMOKE_EXPLOSION",
+  selfDestructAs     = "SMOKE_EXPLOSION",  
+    
   customParams           = {
     dontcount      = [[1]],
     mobilebuilding = [[1]],

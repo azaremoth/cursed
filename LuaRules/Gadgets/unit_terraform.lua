@@ -218,12 +218,12 @@ local exceptionArray = {
 }
 
 local terraformUnitDefIDs = {}
-for i = 1, #UnitDefs do
-	local ud = UnitDefs[i]
-	if ud and ud.isBuilder and not ud.isFactory and not exceptionArray[i] then
-		terraformUnitDefIDs[i] = true
-	end
-end
+--for i = 1, #UnitDefs do 			-- disabled for now. Terraform intended for Campaigns only
+--	local ud = UnitDefs[i]
+--	if ud and ud.isBuilder and not ud.isFactory and not exceptionArray[i] then
+--		terraformUnitDefIDs[i] = true 
+--	end
+--end
 
 local REPAIR_ORDER_PARAMS = {0, CMD_REPAIR, CMD_OPT_RIGHT, 0} -- static because only the 4th parameter changes
 

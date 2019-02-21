@@ -27,3 +27,12 @@ CMD_MORPH_STOP 				= 37501
 
 CMD_RAW_MOVE = 31109 --cmd_raw_move.lua
 CMD_RAW_BUILD = 31110 --cmd_raw_move.lua -- unregistered raw move
+
+-- terraform
+CMD_RAMP = 39734
+CMD_LEVEL = 39736
+CMD_RAISE = 39737
+CMD_SMOOTH = 39738
+CMD_RESTORE = 39739
+CMD_BUMPY = 39740
+CMD_TERRAFORM_INTERNAL = 39801

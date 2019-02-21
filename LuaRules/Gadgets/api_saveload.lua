@@ -165,6 +165,16 @@ local function LoadUnits()
 			Spring.MoveCtrl.Enable(newID)
 			Spring.MoveCtrl.SetHeading(newID, data.heading)	-- workaround?
 			Spring.MoveCtrl.Disable(newID)
+			
+			if UnitDefNames[data.unitDefName].isImmobile then
+				if data.groundHeight and GG.Terraform then
+					GG.Terraform.SetStructureHeight(newID, data.groundHeight)
+				end
+			else
+				Spring.MoveCtrl.Enable(newID)
+				Spring.MoveCtrl.SetHeading(newID, data.heading)	-- workaround?
+				Spring.MoveCtrl.Disable(newID)
+			end			
 			-- health
 			spSetUnitMaxHealth(newID, data.maxHealth)
 			spSetUnitHealth(newID, {health = data.health, capture = data.captureProgress, paralyze = data.paralyzeDamage, build = data.buildProgress})

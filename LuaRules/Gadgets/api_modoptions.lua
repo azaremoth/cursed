@@ -31,6 +31,7 @@ do
 				end
 			end
 			GG.teamside[teamID] = side
+			-- Spring.SetTeamRulesParam(teamID, "side", side, {allied=true, public=false}) -- visible to allies only, set visible to all on GameStart
 		end
 	end	
 end

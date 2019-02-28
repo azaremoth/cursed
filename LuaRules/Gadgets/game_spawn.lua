@@ -82,15 +82,16 @@ function gadget:RecvLuaMsg(msg, playerID)
 		return false
 	end
 
+	local _, _, playerIsSpec, playerTeam = Spring.GetPlayerInfo(playerID)	
+	local side = GG.teamside[playerTeam]
+	
 	local code = string.sub(msg,1,1)
-	if code ~= '\138' then
-		return
+	if code == '\138' then
+		side = string.sub(msg,2,string.len(msg))
 	end
-	local side = string.sub(msg,2,string.len(msg))
 	-- Spring.Echo("start Faction:")
 	-- Spring.Echo(side)
-	
-	local _, _, playerIsSpec, playerTeam = Spring.GetPlayerInfo(playerID)
+
 	if not playerIsSpec then
 		GG.teamside[playerTeam] = side
 		Spring.SetTeamRulesParam(playerTeam, "side", side, {allied=true, public=false}) -- visible to allies only, set visible to all on GameStart
@@ -279,7 +280,7 @@ end
 local function SpawnstartFaction(teamID)
 	-- get the team startup info
 --	local side = select(5, Spring.GetTeamInfo(teamID))
-	local side = GG.teamside[teamID] or "cursed"
+	local side = GG.teamside[teamID] or "imperials"
 	local ai = select(4, Spring.GetTeamInfo(teamID))
 	local teamInfo = teamID and select(7, Spring.GetTeamInfo(teamID))
 	local IsChickenAI = false

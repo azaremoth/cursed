@@ -7,13 +7,13 @@
           "display": "Stable"
       },
       "downloads": {
-          "games" : ["tc:stable", "tchobby:test"],
+          "games" : ["tc:stable", "tchobby:stable"],
 		  "maps" : ["Red Comet", "Comet Catcher Redux", "Barren 2", "Onyx Cauldron 1.9", "Barren 2", "Titan v3.1", "Ravaged_v2", "Badlands 2.1", "Iceland_v1", "Mescaline_V2", "Wanderlust v03"],
-          "engines" : [ "104.0.1-981-g773f998 maintenance" ]
+          "engines" : [ "104.0.1-1057-g9b92666 maintenance" ]
       },
       "no_start_script" : true,
       "launch": {
-      "start_args" : ["--menu", "rapid://tchobby:test"]
+      "start_args" : ["--menu", "rapid://tchobby:stable"]
        }
     },
     {
@@ -22,7 +22,7 @@
           "display": "Dev Lobby"
       },
       "downloads": {
-          "engines" : [ "104.0.1-981-g773f998 maintenance" ]
+          "engines" : [ "104.0.1-1057-g9b92666 maintenance" ]
       },
       "no_start_script" : true,
       "no_downloads" : true,

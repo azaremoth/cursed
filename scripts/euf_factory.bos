@@ -1,6 +1,6 @@
 #include "basic_spring_stuff.h"
 
-piece  base, factory, box1, box2, box3, door, funnel1, funnel2, emit_smoke1, emit_smoke2, build_point, emit_sparkles1, emit_sparkles2, emit_sparkles3;
+piece  base, factory, door, funnel1, funnel2, emit_smoke1, emit_smoke2, build_point, emit_sparkles1, emit_sparkles2, emit_sparkles3;
 
 static-var  statechg_DesiredState, statechg_StateChanging, isbuilding, structureheight, inground, sparklepoint;
 

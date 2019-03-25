@@ -1,6 +1,6 @@
 #include "basic_spring_stuff.h"
 
-piece  base, barrack, box1, box2, box3, box4, box5, door, extension, light1, light2, light3, light4, light5, buildpoint;
+piece  base, barrack, door, extension, light1, light2, light3, light4, light5, buildpoint;
 
 static-var  statechg_DesiredState, statechg_StateChanging, isbuilding, structureheight, inground;
 

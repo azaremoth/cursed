@@ -20,10 +20,10 @@ buildingGroundDecalDecaySpeed = 0.2,
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",   
   customParams          = {	
-	factionname		   = "imperials",
-	normaltex = "unittextures/normalmaps/euf_solar_normal.png",
-	normalmaps = "yes",			
-    helptext = "This is the basic energy supply."
+		factionname		   	= "imperials",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",		
+		helptext 			= "This is the basic energy supply."
 	},
   description        = "Generates Energy",
   energyMake         = 10,

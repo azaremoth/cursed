@@ -29,10 +29,10 @@ buildingGroundDecalDecaySpeed = 0.2,
   useFootPrintCollisionVolume = true,
   -- collisionVolumeTest 		= 1,  
   customParams          = {	
-	factionname		   = "imperials",
-	normaltex = "unittextures/normalmaps/euf_airport_normal.png",
-	normalmaps = "yes",			
-    helptext = "Various aircrafts can be build here."	
+		factionname		   	= "imperials",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",	
+		helptext 			= "Various aircrafts can be build here."	
 	},
   description        = "Produces Aircrafts",
   explodeAs          = "BIG_EXPLOSION_YELLOW",

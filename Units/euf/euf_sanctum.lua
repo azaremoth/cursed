@@ -22,11 +22,11 @@ local unitDef = {
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {
-	ProvideTech         = "Divine Help",
-	normaltex = "unittextures/normalmaps/euf_sanctum_normal.png",
-	normalmaps = "yes",		
-	factionname		   = "imperials",
-    helptext = "This statue will ensure divine support. Enables angels."
+		ProvideTech         = "Divine Help",
+		factionname		   	= "imperials",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",
+		helptext 			= "This statue will ensure divine support. Enables angels."
   },
   description        = "Enables angels",
   --  energyMake         = 0,

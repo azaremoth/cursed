@@ -28,10 +28,10 @@ buildingGroundDecalDecaySpeed = 0.2,
   -- collisionVolumeTest 		= 1,  
   corpse             = "dead",
   customParams          = {
-	factionname	= "imperials",
-	normaltex = "unittextures/normalmaps/euf_aatower_normal.png",
-	normalmaps = "yes",		
-    helptext 	= "Anti-Air Tower. Perfect against air targets."
+	factionname				= "imperials",
+	normaltex				= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+	normalmaps 				= "yes",
+    helptext 				= "Anti-Air Tower. Perfect against air targets."
   },
   defaultmissiontype = "GUARD_NOMOVE",
   description        = "Light Defense Tower",

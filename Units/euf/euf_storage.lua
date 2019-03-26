@@ -20,10 +20,10 @@ buildingGroundDecalDecaySpeed = 0.2,
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",   
   customParams          = {	
-	factionname		   = "imperials",
-	normaltex = "unittextures/normalmaps/euf_storage_normal.png",
-	normalmaps = "yes",		
-    helptext = "This building stores energy and metal."
+	factionname		   		= "imperials",
+	normaltex 				= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+	normalmaps 				= "yes",
+    helptext 				= "This building stores energy and metal."
 	},
   description        = "Storage building",
 --  energyMake         = 0,

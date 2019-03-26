@@ -23,10 +23,10 @@ buildingGroundDecalDecaySpeed = 0.2,
   useFootPrintCollisionVolume = true,
   corpse             = "dead",
   customParams          = {	
-	factionname		   = "imperials",
-	normaltex 			= "unittextures/normalmaps/euf_powerplant_normal.png",
-	normalmaps 			= "yes",		
-    helptext = "This is the advanced energy supply."	
+		factionname		   	= "imperials",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",
+		helptext 			= "The fusion powerplant supplies lots of energy."	
 	},
   description        = "Creates energy",
   energyMake         = 150,

@@ -24,8 +24,8 @@ local unitDef = {
   corpse             = "dead",
   customParams          = {
   	factionname		= "imperials",
-	normaltex = "unittextures/normalmaps/euf_mlrs_normal.png",
-	normalmaps = "yes",		
+	normaltex 		= "unittextures/normalmaps/euf_mlrs_normal.png",
+	normalmaps 		= "yes",		
 	RequireTech     = "Advanced Technology",
     helptext 		= "A hovering long ranged artillery that is very effective against structures."	
   },      

@@ -1,5 +1,7 @@
 local base = piece 'base'
 local groundbase = piece 'groundbase'
+local door1 = piece 'door1'
+local door2 = piece 'door2'
 local turret = piece 'turret'
 local arm1 = piece 'arm1'
 local arm2 = piece 'arm2'
@@ -35,6 +37,9 @@ local function Animation()
 			Turn2( turret, y_axis, -90, 200 )
 			Turn2( arm1, z_axis, 70, 50 )
 			Turn2( arm2, z_axis, -50, 50 )	
+			Sleep(2000)	
+			Turn2( door1, z_axis, -45, 50 )
+			Turn2( door2, z_axis, 45, 50 )
 			Sleep(2000)				
 			Spring.UnitScript.Spin ( robohead, x_axis, 20, 10) 
 			Turn2( roboclaw1, y_axis, -50, 50 )
@@ -51,7 +56,9 @@ local function Animation()
 			Turn2( arm1, z_axis, 0, 50 )
 			Turn2( arm2, z_axis, 30, 50 )
 			Turn2( turret, y_axis, 0, 100 )	
-			Sleep(2000)	
+			Sleep(2000)
+			Turn2( door1, z_axis, 0, 30 )
+			Turn2( door2, z_axis, 0, 30 )			
 		elseif (randomnumber < 0.33) then
 			Spring.UnitScript.Spin ( robohead, x_axis, 20, 10) 
 			Turn2( roboclaw1, y_axis, -70, 50 )
@@ -93,7 +100,7 @@ function script.Create()
 	end
 	Move( groundbase, y_axis, 0, 1000 )	
 	Turn2( arm1, z_axis, 0 )		
---	StartThread( Animation )
+	StartThread( Animation )
 end
 	
 function script.Killed( damage, health )

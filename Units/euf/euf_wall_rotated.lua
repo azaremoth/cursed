@@ -56,6 +56,10 @@ local featureDefs = {
     autoreclaimable    = "0",
     blocking           = true,
 	mass			   = 1500,
+	customparams = { 
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",
+	}, 		
     damage             = 2400,
     description        = "Perimeter Defense",
     footprintX         = 1,

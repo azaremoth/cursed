@@ -64,7 +64,7 @@ lua_UnFreeze()
 {
 }
 
-lua_PurgatoryTransformCommandReactivate()
+lua_PurgatoryTransformCommandReact()
 {
 }
 
@@ -125,7 +125,7 @@ Deployscript()
 		turn petal4 to y-axis <50> speed <30>;
 
 		sleep 500;
-		call-script lua_PurgatoryTransformCommandReactivate();
+		call-script lua_PurgatoryTransformCommandReact();
 		isdeploying = FALSE;
 		canemit = TRUE;
 		call-script lua_CreateLightMe(soulgem, 96, 255, 0, 68);
@@ -166,7 +166,7 @@ Deployscript()
 		call-script lua_UnFreeze();
 
 		sleep 500;
-		call-script lua_PurgatoryTransformCommandReactivate();
+		call-script lua_PurgatoryTransformCommandReact();
 		canemit = FALSE;
 		call-script lua_DestroyLightMe();
 		isdeploying = FALSE;

@@ -21,11 +21,11 @@ buildingGroundDecalDecaySpeed = 0.2,
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {
-  	factionname		   = "imperials",
---	ProvideTech         = "Advanced Technology",
-	normaltex = "unittextures/normalmaps/euf_techcenter_normal.png",
-	normalmaps = "yes",					
-    helptext = "Provides energy and metal income and a base shield."
+--		ProvideTech         = "Advanced Technology",
+		factionname		   	= "imperials",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",					
+		helptext 			= "Provides energy and metal income and a base shield."
   },
   description        = "Provides shield and income",
   energyStorage      = 2000,

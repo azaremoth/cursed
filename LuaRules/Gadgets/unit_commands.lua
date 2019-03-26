@@ -148,11 +148,11 @@ function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
 end
 -----------------------------------
 
-function PurgatoryTransformCommandReactivate(unitID, ud, team)
+function PurgatoryTransformCommandReact(unitID, ud, team)
 	Spring.RemoveUnitCmdDesc(unitID, TransformPurgatoryOff)
 	Spring.InsertUnitCmdDesc(unitID, TransformPurgatory)
 end
-gadgetHandler:RegisterGlobal("PurgatoryTransformCommandReactivate", PurgatoryTransformCommandReactivate)
+gadgetHandler:RegisterGlobal("PurgatoryTransformCommandReact", PurgatoryTransformCommandReact)
 
 local function CallUnitScript(unitID, funcName, ...)
 	Spring.UnitScript.CallAsUnit(unitID, Spring.UnitScript.GetScriptEnv(unitID).script[funcName], ...)

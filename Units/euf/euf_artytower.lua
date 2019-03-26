@@ -26,11 +26,11 @@ buildingGroundDecalDecaySpeed = 0.2,
   collisionVolumeOffsets 	= "0 0 0",
   -- collisionVolumeTest 		= 1,
   corpse             = "dead",
-  customParams          = {
-	factionname	= "imperials",
-	normaltex 			= "unittextures/normalmaps/euf_lasertower_normal.png",
+  customParams       = {
+	factionname			= "imperials",
+	normaltex 			= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
 	normalmaps 			= "yes",		
-    helptext 	= "Defense Tower. Perfect for area control."
+    helptext 			= "Defense Tower. Perfect for area control."
   },
   defaultmissiontype = "GUARD_NOMOVE",
   description        = "Artillery Defense Tower",

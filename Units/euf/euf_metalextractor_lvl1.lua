@@ -22,11 +22,11 @@ buildingGroundDecalDecaySpeed = 0.2,
   category           = "EUF LAND HEAVYARMOR",
   corpse             = "dead",   
   customParams          = {
-	factionname	= "imperials",
-	metal_extractor = true,	
-	normaltex = "unittextures/normalmaps/euf_metalextractor_lvl1_normal.png",
-	normalmaps = "yes",			
-    helptext 	= "Basic metal extractor."
+		factionname			= "imperials",
+		metal_extractor 	= true,	
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",
+		helptext 			= "Basic metal extractor."
   },
   description        = "Extracts Metal",
   energyUse          = 10,

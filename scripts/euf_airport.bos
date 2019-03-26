@@ -1,6 +1,6 @@
 #include "basic_spring_stuff.h"
 
-piece  base, building, platform, createpoint, emit_blight1, emit_blight2, emit_rlight1, emit_rlight2, box_01, box_02, box_03, box_04, box_05, box_06, barrel_01, barrel_02, barrel_03, emit_sparkles1, emit_sparkles2, emit_sparkles3;
+piece  base, building, platform, createpoint, emit_blight1, emit_blight2, emit_rlight1, emit_rlight2, emit_sparkles1, emit_sparkles2, emit_sparkles3;
 
 static-var  statechg_DesiredState, statechg_StateChanging, isbuilding, structureheight, inground, sparklepoint;
 
@@ -11,26 +11,18 @@ static-var  statechg_DesiredState, statechg_StateChanging, isbuilding, structure
 #define SPARKLES				1026+0
 #define DUST				1027+0
 
-lua_CreateLightMe(arg) { return (0); }
-lua_DestroyLightMe(arg) { return (0); }
-
 BuildingAnimation()
 {
 	while (TRUE)
 	{
 		if( isbuilding == 1 )
 		{
-			call-script lua_CreateLightMe(createpoint, 0, 255, 255, 96);
 			if (sparklepoint == 0) {	emit-sfx SPARKLES from emit_sparkles1;	}
 			if (sparklepoint == 1) {	emit-sfx SPARKLES from emit_sparkles2;	}
 			if (sparklepoint == 2) {	emit-sfx SPARKLES from emit_sparkles3;	}
 			sparklepoint = sparklepoint+1;
 			if (sparklepoint > 2) {	sparklepoint = 0;	}
 			emit-sfx DUST from createpoint;	
-		}
-		if( isbuilding == 0 )
-		{
-			call-script lua_DestroyLightMe();
 		}
 		sleep 400;
 	}

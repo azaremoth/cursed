@@ -20,11 +20,11 @@ buildingGroundDecalDecaySpeed = 0.2,
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {
-	factionname		   = "imperials",
-	ProvideTech         = "Advanced Technology",
-	normaltex = "unittextures/normalmaps/euf_techcenter_normal.png",
-	normalmaps = "yes",					
-    helptext = "Enables diggers, walkers and MLRS. Was upgraded with a shield generator."
+		ProvideTech         = "Advanced Technology",
+		factionname		   	= "imperials",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",					
+		helptext 			= "Enables diggers, walkers and MLRS. Was upgraded with a SHIELD GENERATOR."
   },
   description        = "Enables advanced Technology",
   --  energyMake         = 0,

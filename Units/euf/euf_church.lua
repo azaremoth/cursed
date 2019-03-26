@@ -27,10 +27,10 @@ local unitDef = {
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {	
-	factionname		   = "imperials",
-	normaltex = "unittextures/normalmaps/euf_church_normal.png",
-	normalmaps = "yes",		
-    helptext = "Priests and paladins can be build here."	
+		factionname		   	= "imperials",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",			
+		helptext 			= "Priests and paladins can be build here."	
 	},
   description        = "Produces priests and paladins",
   explodeAs          = "MEDIUM_EXPLOSION_YELLOW",

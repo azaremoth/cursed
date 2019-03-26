@@ -63,7 +63,8 @@ local featureDefs = {
     blocking           = true,
 	mass			   = 10000,
 	customparams = { 
-		normaltex 		= "unittextures/normalmaps/euf_wall_lvl2_normal.png",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",
 	}, 	
   collisionVolumeType 		= "Box",
   collisionVolumeScales 	= "80 70 10",

@@ -29,12 +29,12 @@ buildingGroundDecalDecaySpeed = 0.2,
   corpse             = "dead",
     customParams          = {
 		blinking = 0.8,		
-		factionname		   = "imperials",
+		factionname		   	= "imperials",
 		RequireTech         = "Barracks",
 		ProvideTech         = "Factory",
-		normaltex = "unittextures/normalmaps/euf_factory_normal.png",
-		normalmaps = "yes",			
-		helptext = "Various engines of destruction and advanced builderoids can be build here. In this building essential parts for high-tech devices are produced that are needed for the equipment of snipers and paladins."	
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",		
+		helptext 			= "Various engines of destruction and advanced builderoids can be build here. In this building essential parts for high-tech devices are produced that are needed for the equipment of snipers and paladins."	
 		},
   description        = "Produces Heavy Weapons. Enables snipers and paladins.",
   explodeAs          = "MEDIUM_EXPLOSION_YELLOW",

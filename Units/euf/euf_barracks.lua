@@ -28,12 +28,12 @@ buildingGroundDecalDecaySpeed = 0.2,
   useFootPrintCollisionVolume = true, 
   corpse             = "dead",
     customParams          = {	
-		blinking = 0.8,	
-		factionname		   = "imperials",
+		blinking 			= 0.8,	
+		factionname		   	= "imperials",
 		ProvideTech         = "Barracks",
-		normaltex = "unittextures/normalmaps/euf_barracks_normal.png",
-		normalmaps = "yes",			
-		helptext = "Various soldiers and the builderoids can be build here."			
+		normaltex 			= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 			= "yes",			
+		helptext 			= "Various soldiers and the builderoids can be build here."			
 		},
   description        = "Produces Soldiers",
   explodeAs          = "MEDIUM_EXPLOSION_YELLOW",

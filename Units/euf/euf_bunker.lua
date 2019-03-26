@@ -26,7 +26,7 @@ local unitDef = {
   customParams       = {
 	transportcapa		= 4,  
 	factionname		 	= "imperials",
-	normaltex 			= "unittextures/normalmaps/euf_bunker_normal.png",
+	normaltex 			= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
 	normalmaps 			= "yes",		
     helptext 			= "The bunker is a heavily fortified structure that can be used as a firebase for up to 4 soldiers."	
 	},

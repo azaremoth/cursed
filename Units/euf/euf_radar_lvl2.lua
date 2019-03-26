@@ -22,10 +22,10 @@ local unitDef = {
   category           = "EUF LAND HEAVYARMOR",
   corpse             = "dead",   
   customParams          = {	
-	factionname		   = "imperials",
-	normaltex = "unittextures/normalmaps/euf_radar_normal.png",
-	normalmaps = "yes",	
-    helptext = "Advanced radar."	
+		factionname		   	= "imperials",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",
+		helptext 			= "Advanced radar with increased range."	
 	},
   description        = "Detektion Technology",
   explodeAs          = "SMALL_EXPLOSION_YELLOW",

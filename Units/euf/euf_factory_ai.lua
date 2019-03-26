@@ -30,11 +30,11 @@ buildingGroundDecalDecaySpeed = 0.2,
     corpse             = "dead",
     customParams          = {
 		blinking = 0.8,		
-		factionname		   = "imperials",
+		factionname		   	= "imperials",
 		ProvideTech         = "Factory",
-		normaltex = "unittextures/normalmaps/euf_factory_normal.png",
-		normalmaps = "yes",			
-		helptext = "Various engines of destruction and advanced builderoids can be build here. In this building essential parts for cloaking devices are produced that are needed for the equipment of snipers."	
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",					
+		helptext 			= "Various engines of destruction and advanced builderoids can be build here. In this building essential parts for cloaking devices are produced that are needed for the equipment of snipers."	
 		},
   description        = "Produces Heavy Weapons",
   explodeAs          = "MEDIUM_EXPLOSION_YELLOW",

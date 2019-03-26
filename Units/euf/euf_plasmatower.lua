@@ -28,10 +28,10 @@ buildingGroundDecalDecaySpeed = 0.2,
   -- collisionVolumeTest 		= 1,  
   corpse             = "dead",
   customParams          = {
-	factionname	= "imperials",
-	normaltex = "unittextures/normalmaps/euf_plasmatower_normal.png",
-	normalmaps = "yes",	
-    helptext 	= "Defense Tower. Perfect against all sorts of ground targets."
+		factionname			= "imperials",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",
+		helptext 			= "Defense Tower. Perfect against all sorts of GROUND targets."
   },
   defaultmissiontype = "GUARD_NOMOVE",
   description        = "Light Defense Tower",

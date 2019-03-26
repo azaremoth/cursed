@@ -28,10 +28,10 @@ buildingGroundDecalDecaySpeed = 0.2,
   collisionVolumeOffsets 	= "0 0 0",
   -- collisionVolumeTest 		= 1,  
   customParams          = {
-	factionname	= "imperials",
-	normaltex 			= "unittextures/normalmaps/euf_lasertower_normal.png",
-	normalmaps 			= "yes",		
-    helptext 	= "Heavy Defense Tower. Perfect against all sorts of ground targets."
+		factionname			= "imperials",
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",
+		helptext 			= "Heavy Defense Tower. Perfect against all sorts of GROUND targets."
   },
   defaultmissiontype = "GUARD_NOMOVE",
   description        = "Heavy Defense Tower",

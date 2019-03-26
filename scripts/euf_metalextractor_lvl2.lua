@@ -96,7 +96,7 @@ function script.Create()
 	end
 end
 
-local explodables = {leg_1, leg_2, leg_3}
+local explodables = {leg_1u, leg_2u, leg_3u}
 local shatters = {bottom, tamper}
 
 function script.Killed(recentDamage, maxHealth)

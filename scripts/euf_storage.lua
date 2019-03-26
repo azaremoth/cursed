@@ -8,13 +8,13 @@ local arm2 = piece 'arm2'
 local robohead = piece 'robohead'
 local roboclaw1 = piece 'roboclaw1'
 local roboclaw2 = piece 'roboclaw2'
-local box_16 = piece 'box_16'
-local box_17 = piece 'box_17'
-local box_18 = piece 'box_18'
-local box_19 = piece 'box_19'
-local box_20 = piece 'box_20'
-local box_25 = piece 'box_25'
-local box_27 = piece 'box_27'
+local box_1 = piece 'box_1'
+local box_2 = piece 'box_2'
+local box_3 = piece 'box_3'
+local box_4 = piece 'box_4'
+local box_5 = piece 'box_5'
+local box_6 = piece 'box_6'
+local box_7 = piece 'box_7'
 
 local BUILDINGFX	 = 1024+0
 local BOOM	 = 1025+0
@@ -105,12 +105,12 @@ end
 	
 function script.Killed( damage, health )
 	EmitSfx(base,BOOM)
-	Explode(box_16, SFX.FALL + SFX.NO_HEATCLOUD)		
-	Explode(box_17, SFX.FALL + SFX.NO_HEATCLOUD)	
-	Explode(box_18, SFX.FALL + SFX.NO_HEATCLOUD)	
-	Explode(box_19, SFX.FALL + SFX.NO_HEATCLOUD)	
-	Explode(box_20, SFX.FALL + SFX.NO_HEATCLOUD)		
-	Explode(box_25, SFX.FALL + SFX.NO_HEATCLOUD)	
-	Explode(box_27, SFX.FALL + SFX.NO_HEATCLOUD)		
+	Explode(box_1, SFX.FALL + SFX.NO_HEATCLOUD)		
+	Explode(box_2, SFX.FALL + SFX.NO_HEATCLOUD)	
+	Explode(box_3, SFX.FALL + SFX.NO_HEATCLOUD)	
+	Explode(box_4, SFX.FALL + SFX.NO_HEATCLOUD)	
+	Explode(box_5, SFX.FALL + SFX.NO_HEATCLOUD)		
+	Explode(box_6, SFX.FALL + SFX.NO_HEATCLOUD)	
+	Explode(box_7, SFX.FALL + SFX.NO_HEATCLOUD)		
 	return (1)
 end

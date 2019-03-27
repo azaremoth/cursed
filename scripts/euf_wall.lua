@@ -1,6 +1,5 @@
 local base = piece 'base'
 local sperre = piece 'sperre'
-local wirre = piece 'wirre'
 local BUILDINGFX	 = 1024+0
 
 function script.Create()
@@ -10,19 +9,16 @@ function script.Create()
 	end
 
 	local x, y, z = Spring.GetUnitPosition(unitID)
-	local heading = math.random(3)
-	local randomnumber  = math.random(3)	
-	local newteeth
+	local randomnumber  = math.random()	
 	local team = Spring.GetUnitTeam(unitID)
 
-		if (randomnumber < 2 ) then
-			newteeth = Spring.CreateUnit("euf_wall_rotated", x, y, z, heading, team)
+		if (randomnumber < 0.33 ) then
+			local wall1 = Spring.CreateFeature("euf_wall_lvl1_1", x, y, z, math.random(0, 3), team)
+		elseif (randomnumber > 0.66 ) then
+			local wall2 = Spring.CreateFeature("euf_wall_lvl1_2", x, y, z, math.random(0, 3), team)
+		else
+			local wall3 = Spring.CreateFeature("euf_wall_lvl1_3", x, y, z, math.random(0, 3), team)	
 		end
-
-		if (randomnumber >= 2 ) then
-			newteeth = Spring.CreateUnit("euf_wall_rotated2", x, y, z, heading, team)
-		end
-	
 end
 	
 function script.Killed( damage, health )

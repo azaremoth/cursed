@@ -12,11 +12,11 @@ function script.Create()
 	local team = Spring.GetUnitTeam(unitID)
 
 		if (randomnumber < 0.33 ) then
-			local wall1 = Spring.CreateFeature("euf_wall_lvl1_1", x, y, z, math.random(0, 3), team)
+			local wall1 = Spring.CreateFeature("tc_wall_lvl1_1", x, y, z, math.random(0, 3), team)
 		elseif (randomnumber > 0.66 ) then
-			local wall2 = Spring.CreateFeature("euf_wall_lvl1_2", x, y, z, math.random(0, 3), team)
+			local wall2 = Spring.CreateFeature("tc_wall_lvl1_2", x, y, z, math.random(0, 3), team)
 		else
-			local wall3 = Spring.CreateFeature("euf_wall_lvl1_3", x, y, z, math.random(0, 3), team)	
+			local wall3 = Spring.CreateFeature("tc_wall_lvl1_3", x, y, z, math.random(0, 3), team)	
 		end
 end
 	

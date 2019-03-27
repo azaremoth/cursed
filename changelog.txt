@@ -1,3 +1,13 @@
+>> Major changes 1.442 => 1.443
+
+Polishing
+- replaced imperial storage building
+
+Bugs
+- made all collision spheres for the different cursed teeth (tier 1 wall) the same size
+
+
+
 >> Major changes 1.440 => 1.442
 
 Polishing

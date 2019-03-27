@@ -1,14 +1,12 @@
--- $Id$
-
 local objects = {
 	"features/euf_wall_lvl1_1.s3o",
 	"features/euf_wall_lvl1_2.s3o",
 	"features/euf_wall_lvl1_3.s3o",	
 }
 
-local treeDefs = {}
+local wallDefs = {}
 local function CreateWallDef(i)
-  treeDefs["euf_wall_lvl1_" .. i] = {
+  wallDefs["euf_wall_lvl1_" .. i] = {
 	object = objects[(i % #objects) + 1] ,
     resurrectable	   = 0,  
     category         = [[dragonteeth]],
@@ -36,14 +34,14 @@ local function CreateWallDef(i)
   }
 end
 
-for i=0,3 do
+for i=1,3 do
   CreateWallDef(i)
 end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-return lowerkeys( treeDefs )
+return lowerkeys( wallDefs )
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

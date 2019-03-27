@@ -1,10 +1,10 @@
 -- $Id$
 
 local objects = {
-	"features/behe/euf_container1.s3o",
-	"features/behe/euf_container2.s3o",
-	"features/behe/euf_container3.s3o",		
-	"features/behe/euf_container4.s3o",
+	"features/euf_container1.s3o",
+	"features/euf_container2.s3o",
+	"features/euf_container3.s3o",		
+	"features/euf_container4.s3o",
 }
 
 local containerDef = {}
@@ -34,7 +34,7 @@ local function createContainerDef(i)
   }
 end
 
-for i=0,3 do
+for i=1,4 do
   createContainerDef(i)
 end
 

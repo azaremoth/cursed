@@ -329,9 +329,9 @@ function script.Killed(recentDamage, maxHealth)
 	EmitSfx(pelvis, BLOODSPLASH)
 	EmitSfx(head, BLOODSPRAY)
 	if (math.random() > 0.5) then
-		Spring.PlaySoundFile("sounds/dying_man.ogg", 10, px, py, pz)	
+		Spring.PlaySoundFile("sounds/dying_man.wav", 10, px, py, pz)	
 	else
-		Spring.PlaySoundFile("sounds/dying_man_2.ogg", 10, px, py, pz)		
+		Spring.PlaySoundFile("sounds/dying_man_2.wav", 10, px, py, pz)		
 	end		
 	if (severity > 0.5) then
 		return 2

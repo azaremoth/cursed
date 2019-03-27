@@ -466,18 +466,18 @@ local BASE = {
   },
   sounds = {
     canceldestruct     = "",
-    underattack        = "sarge_underatk.ogg",
+    underattack        = "sarge_underatk",
     arrived = { "", },
     cant = { "", },
     count = { "", "", "", "", "", "", },
     ok = {
-      "sarge_move.ogg",
-      "sarge_move2.ogg",	  
-      "sarge_move3.ogg",	  
+      "sarge_move",
+      "sarge_move2",	  
+      "sarge_move3",	  
     },
     select = {
-      "sarge_select.ogg",
-      "sarge_select2.ogg",	  
+      "sarge_select",
+      "sarge_select2",	  
     },
   },
 }

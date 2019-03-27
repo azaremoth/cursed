@@ -369,7 +369,7 @@ function script.AimFromWeapon2 ()
 function script.AimWeapon2(heading, pitch)
 	if ((level > 5) and (bfg_sound < 1)) then
 		local x, y, z = Spring.GetUnitPosition(unitID)
-		Spring.PlaySoundFile("sounds/bfg_aim.ogg", 80, x, y, z)	
+		Spring.PlaySoundFile("sounds/bfg_aim.wav", 80, x, y, z)	
 		bfg_sound = bfg_sound+1
 	end
 

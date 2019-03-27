@@ -118,11 +118,11 @@ local unitDef = {
       "",
     },
     ok = {
-      "priest3.ogg",
+      "priest3",
     },
     select = {
-      "priest1.ogg",
-      "priest2.ogg",	  
+      "priest1",
+      "priest2",	  
     },
   },
  --[[ weapons = {

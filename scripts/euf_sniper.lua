@@ -346,7 +346,7 @@ function script.Killed(recentDamage, maxHealth)
 	local px, py, pz = Spring.GetUnitPosition(unitID)
 	EmitSfx(pelvis, BLOODSPLASH)
 	EmitSfx(head, BLOODSPRAY)
-	Spring.PlaySoundFile("sounds/dying_female.ogg", 10, px, py, pz)	
+	Spring.PlaySoundFile("sounds/dying_female.wav", 10, px, py, pz)	
 	if (severity > 0.5) then
 		Explode(gun, SFX.FALL + SFX.NO_HEATCLOUD)	
 		return 2

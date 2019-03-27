@@ -367,9 +367,9 @@ function script.Killed( damage, health )
 		EmitSfx(head, BLOODSPLASH)
 		Explode(gun, SFX.FALL + SFX.NO_HEATCLOUD)	
 		if (math.random() > 0.5) then
-			Spring.PlaySoundFile("sounds/zombie_growl.ogg", 10, px, py, pz)
+			Spring.PlaySoundFile("sounds/zombie_growl.wav", 10, px, py, pz)
 		else
-			Spring.PlaySoundFile("sounds/zombie_growl.ogg", 10, px, py, pz)
+			Spring.PlaySoundFile("sounds/zombie_growl.wav", 10, px, py, pz)
 		end
 		return 2
 	else
@@ -384,9 +384,9 @@ function script.Killed( damage, health )
 		EmitSfx(pelvis,BLOODSPLASH)
 		EmitSfx(head,BLOODSPLASH)
 		if (math.random() > 0.5) then
-			Spring.PlaySoundFile("sounds/zombie_growl.ogg", 10, px, py, pz)	
+			Spring.PlaySoundFile("sounds/zombie_growl.wav", 10, px, py, pz)	
 		else
-			Spring.PlaySoundFile("sounds/zombie_growl.ogg", 10, px, py, pz)		
+			Spring.PlaySoundFile("sounds/zombie_growl.wav", 10, px, py, pz)		
 		end		
 		return (1)
 	end

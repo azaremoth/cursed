@@ -561,7 +561,7 @@ function CircleAttack()
 		-----------------------------------------------------------------	
 		local x, y, z = Spring.GetUnitPosition(unitID)
 		if ( soundsec > 0) then
-			Spring.PlaySoundFile("sounds/laser_sword_multi.ogg", 80, x, y, z)
+			Spring.PlaySoundFile("sounds/laser_sword_multi.wav", 20, x, y, z)
 		end
 		soundsec = (-1*soundsec)
 		-----------------------------------------------------------------	

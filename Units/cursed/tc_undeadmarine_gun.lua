@@ -94,7 +94,7 @@ local unitDef = {
       "",
     },
     cant = {
-      "zombie_moan.ogg",
+      "zombie_moan",
     },
     count = {
       "",
@@ -105,10 +105,10 @@ local unitDef = {
       "",
     },
     ok = {
-      "zombie_moan.ogg",
+      "zombie_moan",
     },
     select = {
-      "zombie_moan.ogg",
+      "zombie_moan",
     },
   },  
   weapons = {

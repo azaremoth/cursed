@@ -95,7 +95,6 @@ function gadget:RecvLuaMsg(msg, playerID)
 	if not playerIsSpec then
 		GG.teamside[playerTeam] = side
 		Spring.SetTeamRulesParam(playerTeam, "side", side, {allied=true, public=false}) -- visible to allies only, set visible to all on GameStart
-		side = select(5, Spring.GetTeamInfo(playerTeam))
 		return true
 	end
 end
@@ -279,7 +278,6 @@ end
 
 local function SpawnstartFaction(teamID)
 	-- get the team startup info
---	local side = select(5, Spring.GetTeamInfo(teamID))
 	local side = GG.teamside[teamID] or "imperials"
 	local ai = select(4, Spring.GetTeamInfo(teamID))
 	local teamInfo = teamID and select(7, Spring.GetTeamInfo(teamID))

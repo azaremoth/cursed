@@ -9,7 +9,7 @@ theme.name = "default"
 --//=============================================================================
 --// Define default skins
 
-local defaultSkin = "Evolved"
+local defaultSkin = "imperials"
 --local defaultSkin = "DarkGlass"
 
 theme.skin = {

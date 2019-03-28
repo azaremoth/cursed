@@ -77,6 +77,8 @@ local buildQueueUnsorted = {}	--puts all units of same type into single index; t
 
 local gridLocation = {}
 
+WG.myteamside = WG.myteamside or "imperials"
+
 ------------------------
 --  GRID KEY CONFIG
 ------------------------
@@ -389,7 +391,7 @@ local function MakeButton(container, cmd, insertItem, index)
 	
 	local te
 	local myTeamID = Spring.GetMyTeamID()
-	local side = WG.faction or Spring.GetTeamRulesParam(myTeamID, "side") or select(5, Spring.GetTeamInfo(myTeamID)) or "imperials"
+	local side = WG.myteamside
 
 	if (side == 'cursed') then
 		te = overrides[cmd.id]  -- command overrides with cursed

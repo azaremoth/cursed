@@ -34,6 +34,7 @@ local spGetSpectatingState = Spring.GetSpectatingState
 
 local buttonColour, panelColour, sliderColour 
 
+WG.myteamside = WG.myteamside or "imperials"
 
 --------------------------------------------------------------------------------
 -- Funcs
@@ -57,7 +58,7 @@ function SetFaction(faction)
 	-- Spring.Echo('Sending')
 	-- Spring.Echo('\138' .. faction)
     -- tell sMenu and initial queue
-    WG.faction = faction
+    WG.myteamside = faction
 end
 
 function SetImperial()
@@ -86,8 +87,6 @@ function widget:Initialize()
 		widgetHandler:RemoveWidget(self)
         return
     end
-        
-    WG.faction = cursed
     
     Chili = WG.Chili
     buttonColour = WG.buttonColour

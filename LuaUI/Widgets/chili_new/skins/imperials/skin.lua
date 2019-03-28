@@ -5,7 +5,7 @@
 
 local skin = {
   info = {
-    name    = "imperial",
+    name    = "imperials",
     version = "1.0",
     author  = "aZaremoth",
   }

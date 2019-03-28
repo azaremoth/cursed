@@ -3,7 +3,7 @@
 
 local skin = {
   info = {
-    name    = "imperial",
+    name    = "imperials",
     version = "0.1",
     author  = "luckywaldo7",
   }

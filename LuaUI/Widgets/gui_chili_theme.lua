@@ -8,7 +8,7 @@ function widget:GetInfo()
     author    = "CarRepairer",
     date      = "2010-06-06",
     license   = "GNU GPL, v2 or later",
-    layer     = -1000001,
+    layer     = math.huge-2,
     enabled   = true,
   }
 end
@@ -16,28 +16,24 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local echo = Spring.Echo
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
 local Chili
+WG.myteamside = WG.myteamside or "imperials"
 
 local themes = {
 	cursed = 'cursed',
-	imperials = 'imperial',
+	imperials = 'imperials',
 }
 local cursors = {
 	cursed = 'cursed',
-	imperials = 'imperial',
+	imperials = 'imperials',
 }
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 local function SetTheme()
 	local myTeamID = Spring.GetMyTeamID()
---	local side = WG.faction or Spring.GetTeamRulesParam(myTeamID, "side") or select(5, Spring.GetTeamInfo(myTeamID)) or "imperials"
-	local side = Spring.GetTeamRulesParam(myTeamID, "side") or select(5, Spring.GetTeamInfo(myTeamID)) or WG.faction or "imperials"
+	local side = Spring.GetTeamRulesParam(myTeamID, "side") or "imperials"
+	WG.myteamside = side
 
 	if not Chili then
 		Chili = WG.Chili
@@ -75,19 +71,24 @@ function widget:GameFrame(n)
     if n==0 then
 		SetTheme()
 	elseif n>0 then
+		Spring.SendCommands("luaui disablewidget EPIC Menu")
 		Spring.SendCommands("luaui disablewidget Chili Integral Menu")
 		Spring.SendCommands("luaui disablewidget Chili Resource Bars Classic")
---		Spring.SendCommands("luaui disablewidget Chili Pro Console2")
+		Spring.SendCommands("luaui disablewidget Chili Chat")
 		Spring.SendCommands("luaui disablewidget Chili Selections & CursorTip v2")
-		Spring.SendCommands("luaui disablewidget Chili Minimap")		
-		Spring.SendCommands("luaui disablewidget Context Menu")		
+		Spring.SendCommands("luaui disablewidget Chili Minimap")
+		Spring.SendCommands("luaui disablewidget Context Menu")
+		Spring.SendCommands("luaui disablewidget Chili Crude Player List")
 		
+		Spring.SendCommands("luaui enablewidget EPIC Menu")
 		Spring.SendCommands("luaui enablewidget Chili Integral Menu")
 		Spring.SendCommands("luaui enablewidget Chili Resource Bars Classic")
---		Spring.SendCommands("luaui enablewidget Chili Pro Console2")
+		Spring.SendCommands("luaui enablewidget Chili Chat")
 		Spring.SendCommands("luaui enablewidget Chili Selections & CursorTip v2")
 		Spring.SendCommands("luaui enablewidget Chili Minimap")		
-		Spring.SendCommands("luaui enablewidget Context Menu")		
+		Spring.SendCommands("luaui enablewidget Context Menu")
+		Spring.SendCommands("luaui enablewidget Chili Crude Player List")
+		
         widgetHandler:RemoveWidget(self)
     end
 end

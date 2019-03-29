@@ -77,7 +77,7 @@ local buildQueueUnsorted = {}	--puts all units of same type into single index; t
 
 local gridLocation = {}
 
-WG.myteamside = WG.myteamside or "imperials"
+WG.myteamside = WG.myteamside
 
 ------------------------
 --  GRID KEY CONFIG

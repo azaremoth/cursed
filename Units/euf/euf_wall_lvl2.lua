@@ -20,7 +20,7 @@ local unitDef = {
   
   corpse             = "euf_wall_lvl2_dead",    
     customParams          = {	factionname		   = "imperials",  },
-  description        = "Defensive Wall",
+  description        = "Heavy wall",
   footprintX         = 5,
   footprintZ         = 1,
   idleAutoHeal       = 0.01,
@@ -30,7 +30,7 @@ local unitDef = {
   maxDamage          = 6000,
   maxSlope           = 15,
   maxWaterDepth      = 35,
-  name               = "Defensive Wall",
+  name               = "Defensive wall",
   nanoColor          = "0 0 0",
   noAutoFire         = false,
   objectName         = "euf_wall_lvl2.s3o",

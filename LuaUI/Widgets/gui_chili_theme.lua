@@ -17,7 +17,7 @@ end
 --------------------------------------------------------------------------------
 
 local Chili
-WG.myteamside = WG.myteamside or "imperials"
+WG.myteamside = WG.myteamside
 
 local themes = {
 	cursed = 'cursed',
@@ -32,8 +32,21 @@ local cursors = {
 
 local function SetTheme()
 	local myTeamID = Spring.GetMyTeamID()
-	local side = Spring.GetTeamRulesParam(myTeamID, "side") or "imperials"
-	WG.myteamside = side
+	local side
+--	Spring.Echo("WG.myteamside")
+--	Spring.Echo(WG.myteamside)	
+	if not WG.myteamside then -- WG.myteamside may be overwriten by faction selector widget
+		side = Spring.GetTeamRulesParam(myTeamID, "side") -- should be defined by api_faction.lua
+		if not side then
+			WG.myteamside = "imperials"
+			side = "imperials"
+			Spring.Echo("WARNING: No faction defined by luarules. Imperials theme is used.")
+		else 
+			WG.myteamside = side
+		end
+	else 
+		side = WG.myteamside
+	end
 
 	if not Chili then
 		Chili = WG.Chili

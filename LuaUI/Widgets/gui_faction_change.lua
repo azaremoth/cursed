@@ -34,7 +34,7 @@ local spGetSpectatingState = Spring.GetSpectatingState
 
 local buttonColour, panelColour, sliderColour 
 
-WG.myteamside = WG.myteamside or "imperials"
+WG.myteamside = WG.myteamside
 
 --------------------------------------------------------------------------------
 -- Funcs

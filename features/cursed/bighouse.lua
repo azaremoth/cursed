@@ -1,0 +1,25 @@
+local objectname= "bighouse" 
+local featureDef  =  {
+   name           = "bighouse",
+   blocking       = true,	
+   mass			   = 1000000000,
+   collisionVolumeType 	= "Box",
+   collisionVolumeScales 	= "60 60 60",
+   collisionVolumeOffsets 	= "0 0 0", 
+   damage            = 10000,
+   description       = "Big house",
+   energy            = 0,
+   flammable         = 0,
+   nodrawundergray   = false,
+   footprintX        = 6,
+   footprintZ        = 6,
+   upright          = true,
+   height      		= "60",
+   hitdensity       = "1000000000",
+   metal            = 0,
+   object           = "features/bighouse.s3o",  
+   reclaimable		= false,
+   autoreclaimable	= false,
+   world            = "allworld",
+}
+return lowerkeys({[featureDef.name] = featureDef})

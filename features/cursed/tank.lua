@@ -1,0 +1,25 @@
+local objectname= "tank" 
+local featureDef  =  {
+   name           = "tank",
+   blocking       = true,	
+   mass			   = 1000000000,
+   collisionVolumeType 	= "Box",
+   collisionVolumeScales 	= "20 20 20",
+   collisionVolumeOffsets 	= "0 0 0", 
+   damage            = 10000,
+   description       = "Tank",
+   energy            = 0,
+   flammable         = 0,
+   nodrawundergray   = false,
+   footprintX        = 2,
+   footprintZ        = 2,
+   upright          = true,
+   height      		= "10",
+   hitdensity       = "1000000000",
+   metal            = 0,
+   object           = "features/tank.s3o",  
+   reclaimable		= false,
+   autoreclaimable	= false,
+   world            = "allworld",
+}
+return lowerkeys({[featureDef.name] = featureDef})

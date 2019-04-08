@@ -12,8 +12,20 @@ function SmokeUnit(smokepiece, SMOKE)
 	while true do
 		health = Spring.GetUnitHealth(unitID)
 		if (health < 200 and (not Spring.GetUnitIsCloaked(unitID))) then
-			EmitSfx(smokepiece, SMOKE)
+			if SMOKE ~= nil then
+				EmitSfx(smokepiece, SMOKE)
+			end
 		end
 		Sleep(500)		
+	end
+end
+
+function NotAI()
+	local team = Spring.GetUnitTeam(unitID)
+	local ai = select(4, Spring.GetTeamInfo(team))
+	if ai then
+		return false
+	else
+		return true
 	end
 end

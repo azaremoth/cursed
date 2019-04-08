@@ -1,4 +1,5 @@
 include "constants.lua"
+include "common.lua"
 
 -- pieces
 local base = piece 'base' 
@@ -9,11 +10,13 @@ local light1 = piece 'light1'
 local light2 = piece 'light2' 
 local light3 = piece 'light3' 
 local light4 = piece 'light4' 
-local light5 = piece 'light5' 
+local light5 = piece 'light5'
+local fist = piece 'fist'
 
 -- action pieces
 local buildpoint = piece 'buildpoint' 
-local smokePiece = { barrack, extension, light4 }
+local smokePieces= { barrack, extension, light4 }
+local nanoPieces = { base }
 
 -- variables
 local isbuilding = false
@@ -72,6 +75,11 @@ local function Close()
 end
 
 function script.Create()
+	Spring.Echo("NotAI():")
+	Spring.Echo(NotAI())
+	if NotAI() then
+		Hide(fist)
+	end
 	local structureheight = ((-50*GetUnitValue(COB.UNIT_HEIGHT))/1500000)
 	Move( barrack, y_axis, structureheight)
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
@@ -84,7 +92,7 @@ function script.Create()
 	Move( barrack, y_axis, 0, 1000 )
 	Sleep(500)
 
-	StartThread (SmokeUnit, smokePiece)
+	StartThread (SmokeUnit, smokePieces)
 	StartThread( Building )	
 	Spring.SetUnitNanoPieces (unitID, nanoPieces)
 end

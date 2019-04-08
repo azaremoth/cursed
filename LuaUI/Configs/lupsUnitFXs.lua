@@ -101,14 +101,14 @@ effectUnitDefs = {
   },  
   euf_barracks = {
     {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light1"})},
-    {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light2"})},
+--    {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light2"})},
     {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light3"})},	
     {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light4"})},	
 	{class='StaticParticles', options=MergeTable(Redglow_small,{piece="light5"})},	
   },
   euf_barracks_ai = {
     {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light1"})},
-    {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light2"})},
+--    {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light2"})},
     {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light3"})},	
     {class='StaticParticles', options=MergeTable(Redglow_small,{piece="light4"})},	
 	{class='StaticParticles', options=MergeTable(Redglow_small,{piece="light5"})},	

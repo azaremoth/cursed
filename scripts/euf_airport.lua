@@ -3,19 +3,19 @@ include "common.lua"
 
 -- pieces
 local base = piece 'base' 
-local barrack = piece 'barrack' 
-local door = piece 'door' 
-local extension = piece 'extension' 
-local light1 = piece 'light1' 
-local light2 = piece 'light2' 
-local light3 = piece 'light3' 
-local light4 = piece 'light4' 
-local light5 = piece 'light5'
-local fist = piece 'fist'
+local platform = piece 'platform' 
+local building = piece 'building' 
+local emit_sparkles1 = piece 'emit_sparkles1' 
+local emit_sparkles2 = piece 'emit_sparkles2' 
+local emit_sparkles3 = piece 'emit_sparkles3' 
+local fist1 = piece 'fist1'
+local fist2 = piece 'fist2'
+local fist3 = piece 'fist3'
+
 
 -- action pieces
 local buildpoint = piece 'buildpoint' 
-local smokePieces= { barrack, extension, light4 }
+local smokePieces= { platform, building, fist2 }
 local nanoPieces = { base }
 
 -- variables
@@ -24,26 +24,25 @@ local isbuilding = false
 -- FX
 local BOOM	 = 1024+0
 local BUILDINGFX	 = 1025+0
-local LIGHT	 = 1026+0
+local SPARKS	 = 1026+0
+local DUST = 1027+0
 
 ---------------------------
 
 local function Building()
 	while true do
 		if isbuilding then
-			EmitSfx(light1,LIGHT)
+			EmitSfx(emit_sparkles1,SPARKS)
+			EmitSfx(buildpoint,DUST)			
 			Sleep(150)
 		end
 		if isbuilding then
-			EmitSfx(light3,LIGHT)
+			EmitSfx(emit_sparkles2,SPARKS)
 			Sleep(150)
 		end		
 		if isbuilding then
-			EmitSfx(light4,LIGHT)
-			Sleep(150)
-		end	
-		if isbuilding then
-			EmitSfx(light5,LIGHT)
+			EmitSfx(emit_sparkles3,SPARKS)
+			EmitSfx(buildpoint,DUST)				
 		end		
 		Sleep(250)		
 	end
@@ -51,9 +50,6 @@ end
 
 local function Open ()
 	SetSignalMask (1)
-
-	Move( door , y_axis, -40 , 40 )
-	WaitForMove (door, y_axis)
 
 	-- set values
 	SetUnitValue (COB.YARD_OPEN, 1)
@@ -70,17 +66,16 @@ local function Close()
 	SetUnitValue (COB.INBUILDSTANCE, 0)
 
 	-- move pieces back to original spots
-	Move( door , y_axis, 0 , 40 )
 
 end
 
 function script.Create()
-	Spring.Echo("NotAI():")
-	Spring.Echo(NotAI())
 	if NotAI() then
-		Hide(fist)
+		Hide(fist1)
+		Hide(fist2)
+		Hide(fist3)		
 	end
-	local structureheight = ((-10*GetUnitValue(COB.UNIT_HEIGHT))/1000000)
+	local structureheight = ((-15*GetUnitValue(COB.UNIT_HEIGHT))/1000000)
 	Move( base, y_axis, structureheight)
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
 		local leftbuildpercent = (GetUnitValue(COB.BUILD_PERCENT_LEFT))

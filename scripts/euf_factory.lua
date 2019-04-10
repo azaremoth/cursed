@@ -3,19 +3,18 @@ include "common.lua"
 
 -- pieces
 local base = piece 'base' 
-local barrack = piece 'barrack' 
+local factory = piece 'factory' 
 local door = piece 'door' 
-local extension = piece 'extension' 
-local light1 = piece 'light1' 
-local light2 = piece 'light2' 
-local light3 = piece 'light3' 
-local light4 = piece 'light4' 
-local light5 = piece 'light5'
+local emit_sparkles1 = piece 'emit_sparkles1' 
+local emit_sparkles2 = piece 'emit_sparkles2' 
+local emit_sparkles3 = piece 'emit_sparkles3' 
+local emit_smoke1 = piece 'emit_smoke1' 
+local emit_smoke2 = piece 'emit_smoke2' 
 local fist = piece 'fist'
 
 -- action pieces
 local buildpoint = piece 'buildpoint' 
-local smokePieces= { barrack, extension, light4 }
+local smokePieces= { factory, fist }
 local nanoPieces = { base }
 
 -- variables
@@ -24,26 +23,25 @@ local isbuilding = false
 -- FX
 local BOOM	 = 1024+0
 local BUILDINGFX	 = 1025+0
-local LIGHT	 = 1026+0
+local FUNNELSMOKE = 1027+0
+local SPARKS	 = 1026+0
 
 ---------------------------
 
 local function Building()
 	while true do
 		if isbuilding then
-			EmitSfx(light1,LIGHT)
+			EmitSfx(emit_sparkles1,SPARKS)
+			EmitSfx(emit_smoke1,FUNNELSMOKE)			
 			Sleep(150)
 		end
 		if isbuilding then
-			EmitSfx(light3,LIGHT)
+			EmitSfx(emit_sparkles2,SPARKS)
 			Sleep(150)
 		end		
 		if isbuilding then
-			EmitSfx(light4,LIGHT)
-			Sleep(150)
-		end	
-		if isbuilding then
-			EmitSfx(light5,LIGHT)
+			EmitSfx(emit_sparkles3,SPARKS)
+			EmitSfx(emit_smoke2,FUNNELSMOKE)				
 		end		
 		Sleep(250)		
 	end
@@ -80,7 +78,7 @@ function script.Create()
 	if NotAI() then
 		Hide(fist)
 	end
-	local structureheight = ((-10*GetUnitValue(COB.UNIT_HEIGHT))/1000000)
+	local structureheight = ((-15*GetUnitValue(COB.UNIT_HEIGHT))/1000000)
 	Move( base, y_axis, structureheight)
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
 		local leftbuildpercent = (GetUnitValue(COB.BUILD_PERCENT_LEFT))

@@ -1,12 +1,18 @@
+include "constants.lua"
+include "common.lua"
+
 --pieces
 local base = piece "base"
+local raisepoint = piece 'raisepoint'
 local building = piece "building"
 local turret = piece "turret"
 local sleeve = piece "sleeve"
 local barrel1 = piece "barrel1"
 local sleeve = piece "sleeve"
 local barrel2 = piece "barrel2"
-
+local fist1 = piece 'fist1'
+local fist2 = piece 'fist2'
+local fist3 = piece 'fist3'
 
 -- emiters etc.
 local emit1 = piece "emit1"
@@ -69,18 +75,23 @@ function script.Deactivate ( )
 end
 
 function script.Create()
+	if NotAI() then
+		Hide(fist1)
+		Hide(fist2)
+		Hide(fist3)
+	end
 	gun = 1
 	isaiming = false
 	local structureheight = ((-50*GetUnitValue(COB.UNIT_HEIGHT))/3080192)
-	Move( building, y_axis, structureheight)
+	Move( raisepoint, y_axis, structureheight)
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
 		local leftbuildpercent = (GetUnitValue(COB.BUILD_PERCENT_LEFT))
 		local outofground = (0.01*leftbuildpercent*structureheight)
-		Move( building, y_axis, outofground, 200 )
+		Move( raisepoint, y_axis, outofground, 50 )
 		EmitSfx(base,BUILDINGFX)
 		Sleep(100)
 	end
-	Move( building, y_axis, 0, 1000 )
+	Move( raisepoint, y_axis, 0, 200 )
 	Sleep(500)
 	StartThread( MotionControl )	
 end

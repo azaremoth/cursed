@@ -2,7 +2,8 @@ include "constants.lua"
 include "common.lua"
 
 -- pieces
-local base = piece 'base' 
+local base = piece 'base'
+local raisepoint = piece 'raisepoint'
 local barrack = piece 'barrack' 
 local door = piece 'door' 
 local extension = piece 'extension' 
@@ -75,21 +76,19 @@ local function Close()
 end
 
 function script.Create()
-	Spring.Echo("NotAI():")
-	Spring.Echo(NotAI())
 	if NotAI() then
 		Hide(fist)
 	end
 	local structureheight = ((-10*GetUnitValue(COB.UNIT_HEIGHT))/1000000)
-	Move( base, y_axis, structureheight)
+	Move( raisepoint, y_axis, structureheight)
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
 		local leftbuildpercent = (GetUnitValue(COB.BUILD_PERCENT_LEFT))
 		local outofground = (0.01*leftbuildpercent*structureheight)
-		Move( base, y_axis, outofground, 200 )
+		Move( raisepoint, y_axis, outofground, 50 )
 		EmitSfx(base,BUILDINGFX)
 		Sleep(100)
 	end
-	Move( base, y_axis, 0, 1000 )
+	Move( raisepoint, y_axis, 0, 200 )
 	Sleep(500)
 
 	StartThread (SmokeUnit, smokePieces)

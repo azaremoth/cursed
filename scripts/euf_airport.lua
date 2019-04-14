@@ -2,7 +2,8 @@ include "constants.lua"
 include "common.lua"
 
 -- pieces
-local base = piece 'base' 
+local base = piece 'base'
+local raisepoint = piece 'raisepoint'
 local platform = piece 'platform' 
 local building = piece 'building' 
 local emit_sparkles1 = piece 'emit_sparkles1' 
@@ -76,15 +77,15 @@ function script.Create()
 		Hide(fist3)		
 	end
 	local structureheight = ((-15*GetUnitValue(COB.UNIT_HEIGHT))/1000000)
-	Move( base, y_axis, structureheight)
+	Move( raisepoint, y_axis, structureheight)
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
 		local leftbuildpercent = (GetUnitValue(COB.BUILD_PERCENT_LEFT))
 		local outofground = (0.01*leftbuildpercent*structureheight)
-		Move( base, y_axis, outofground, 200 )
+		Move( raisepoint, y_axis, outofground, 50 )
 		EmitSfx(base,BUILDINGFX)
 		Sleep(100)
 	end
-	Move( base, y_axis, 0, 1000 )
+	Move( raisepoint, y_axis, 0, 200 )
 	Sleep(500)
 
 	StartThread (SmokeUnit, smokePieces)
@@ -115,12 +116,12 @@ function script.Killed (recentDamage, maxHealth)
 
 	if (severity <= .5) then
 		EmitSfx(base,BOOM)
-		Explode (door, SFX.SHATTER)
+		Explode (platform, SFX.SHATTER)
 		
 		return 1
 	else
 		EmitSfx(base,BOOM)
-		Explode (door, SFX.SHATTER)
+		Explode (platform, SFX.SHATTER)
 
 		return 2
 	end

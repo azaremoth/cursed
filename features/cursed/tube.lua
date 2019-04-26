@@ -16,6 +16,10 @@ tubeDef["tube"] = {
      collisionVolumeScales = [[30 5 5]],
      collisionVolumeType = [[Box]],
      collisionVolumeOffsets 	= "0 10 0",
+		customparams = { 
+			normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+			normalmaps 		   	= "yes",
+		}, 	
 }
 tubeDef["tube_corner"] = {
      description = [[Tube]],
@@ -31,6 +35,10 @@ tubeDef["tube_corner"] = {
      object      = "features/tube_corner.s3o",  
      footprintX  = 2,
      footprintZ  = 2,
+		customparams = { 
+			normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+			normalmaps 		   	= "yes",
+		}, 	
 }
 tubeDef["tube_down"] = {
      description = [[Tube]],
@@ -46,6 +54,10 @@ tubeDef["tube_down"] = {
      object      = "features/tube_down.s3o",  
      footprintX  = 1,
      footprintZ  = 2,
+		customparams = { 
+			normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+			normalmaps 		   	= "yes",
+		}, 	
 }
 tubeDef["tube_connect"] = {
      description = [[Tube Connector]],
@@ -61,6 +73,10 @@ tubeDef["tube_connect"] = {
      object      = "features/tube_connect.s3o",  
      footprintX  = 2,
      footprintZ  = 2,
+		customparams = { 
+			normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+			normalmaps 		   	= "yes",
+		}, 	
 }
 tubeDef["tube_box"] = {
      description = [[Tube Connector]],
@@ -76,6 +92,10 @@ tubeDef["tube_box"] = {
      object      = "features/tube_box.s3o",  
      footprintX  = 2,
      footprintZ  = 2,
+		customparams = { 
+			normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+			normalmaps 		   	= "yes",
+		}, 	
 }
 
 

@@ -21,5 +21,9 @@ local featureDef  =  {
    reclaimable		= false,
    autoreclaimable	= false,
    world            = "allworld",
+		customparams = { 
+			normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+			normalmaps 		   	= "yes",
+		}, 	   
 }
 return lowerkeys({[featureDef.name] = featureDef})

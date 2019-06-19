@@ -12,7 +12,10 @@ local function CreateWallDef(i)
     category         = [[dragonteeth]],
     autoreclaimable    = "0",
 	mass			   = 1500,
-	customparams = { 	}, 		
+		customparams = { 
+			normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+			normalmaps 		   	= "yes",
+		}, 		
     damage             = 2400,
     description        = "Perimeter Defense",
     footprintX         = 1,

@@ -23,14 +23,13 @@ local function createContainerDef(i)
      object = objects[(i % #objects) + 1] ,
      footprintX  = 2,
      footprintZ  = 5,
-     collisionVolumeScales = [[25 25 60]],
+     collisionVolumeScales = [[30 30 95]],
      collisionVolumeType = [[Box]],
-     collisionVolumeOffsets 	= "0 10 0",
-	 
-	 
- --    customParams = {
- --      mod = true,
- --    },
+     collisionVolumeOffsets 	= "0 0 0",
+		customparams = { 
+			normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+			normalmaps 		   	= "yes",
+		}, 	
   }
 end
 

@@ -18,7 +18,7 @@ options = {
 	simpleColors = {
 		name = "Simple Colors",
 		type = 'bool',
-		value = false,
+		value = true,
 		desc = 'All allies are green, all enemies are red.',
 		OnChange = function() widget:Initialize() end
 	},

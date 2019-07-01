@@ -130,21 +130,21 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 						loadtheseunits[x] = unitID
 						currentassigablecapacity[unitID] = (currentassigablecapacity[unitID] - 1)
 						-- Spring.Echo(currentassigablecapacity[unitID])
-						-- passengerstillmoves[x] = true
+						passengerstillmoves[x] = true
 						local px, py, pz = Spring.GetUnitPosition(x) -- passenger position
 						if cmdOptions.shift then
-							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, x }, {"alt"} )
-						else 
-							Spring.GiveOrderToUnit(unitID, CMD_GUARD, {x}, {})
+							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD.OPT_INTERNAL, px,py,pz }, {"alt"} )
+						else
+							Spring.GiveOrderToUnit(unitID, CMD_MOVE, {px,py,pz}, {})
 						end			
 					end
 				else -- load multiple units
 					local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
---					if cmdOptions.shift then				
---						Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD.OPT_INTERNAL, x,y,z }, {"alt"} )
---					else
---						Spring.GiveOrderToUnit(unitID, CMD_MOVE, {x,y,z}, {})
---					end
+					if cmdOptions.shift then				
+						Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD.OPT_INTERNAL, x,y,z }, {"alt"} )
+					else
+						Spring.GiveOrderToUnit(unitID, CMD_MOVE, {x,y,z}, {})
+					end
 					for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up >c<ircle
 						local cTeam = Spring.GetUnitTeam(cUnitID)
 						if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
@@ -152,17 +152,9 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 							if ((UnitDefs[cUnitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[unitID] > 0) and (unitisontransport[cUnitID] == false) and (loadtheseunits[cUnitID] == nil)) then
 								loadtheseunits[cUnitID] = unitID
 								currentassigablecapacity[unitID] = (currentassigablecapacity[unitID] - 1)
-								Spring.Echo(currentassigablecapacity[unitID])									
-								-- passengerstillmoves[cUnitID] = true
-								-- Spring.GiveOrderToUnit(cUnitID, CMD_MOVE, {x,y,z}, {})
-								
-								if cmdOptions.shift then
-									Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, cUnitID }, {"alt"} )
-								else 
-									Spring.GiveOrderToUnit(unitID, CMD_GUARD, {cUnitID}, {})
-								end		
-								
-								
+								-- Spring.Echo(currentassigablecapacity[unitID])									
+								passengerstillmoves[cUnitID] = true
+								Spring.GiveOrderToUnit(cUnitID, CMD_MOVE, {x,y,z}, {})
 							end
 						end
 					end
@@ -215,16 +207,6 @@ function gadget:UnitUnloaded(unitID, unitDefID, unitTeam, transportID, transport
 	-- Spring.Echo(currentassigablecapacity[transportID])		
 end
 
-local function RemoveGuardCmd(transporterID, passengerID)
-    local cmds = Spring.GetCommandQueue(transporterID, 25)
-    for j=1,#cmds do
-        local cmd = cmds[j]
-        if (cmd.id == CMD.GUARD)and(cmd.params[1] == passengerID) then
-			Spring.GiveOrderToUnit(transporterID,CMD.REMOVE,{cmd.tag},{})
-        end
-    end
-end
-
 function gadget:GameFrame(f)
 	if f % 32 < .1 then
 		for pUnitID, unitID in pairs(loadtheseunits) do
@@ -239,13 +221,12 @@ function gadget:GameFrame(f)
 			local UnitsAroundTransport = Spring.GetUnitsInCylinder(x,z,loadingradius)
 			for _,tUnitID in ipairs(UnitsAroundTransport) do
 				local tUnitDefID = Spring.GetUnitDefID(tUnitID)
-				if (pUnitID == tUnitID and UnitDefs[tUnitDefID].customParams.canbetransported == "true") then  -- Spring.UnitAttach  ( number transporterID, number passengerID, number pieceNum ) -> nil
+				if (pUnitID == tUnitID and UnitDefs[tUnitDefID].customParams.canbetransported == "true") then
 					if (Spring.UnitScript.GetScriptEnv(unitID) == nil) then -- cob/bos compatibility
 						Spring.CallCOBScript( unitID, "TransportPickup", pUnitID)
 					else 
 						Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),pUnitID)					
 					end
-					RemoveGuardCmd(unitID, pUnitID)
 					loadtheseunits[pUnitID] = nil
 					local punitDefID = Spring.GetUnitDefID(pUnitID)				
 					local pud = UnitDefs[punitDefID]

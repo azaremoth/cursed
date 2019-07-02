@@ -37,6 +37,7 @@ local unitDef = {
   iconType           = "bigrhombe",
   idleAutoHeal       = 0.01,
   idleTime           = 400,
+  isImmobile		 = true,
   script             = "euf_bunker.lua",
   levelGround        = true,
   maxDamage          = 4500,

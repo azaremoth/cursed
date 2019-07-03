@@ -33,10 +33,17 @@ local loadtheseunits = {} -- loadtheseunits[passenger] = transporter
 local currenttransportcapacity = {}
 local currentassigablecapacity = {}
 local unitisontransport = {}
+local gameframecommand = {}
 
-
-
-
+local function RemoveGuardCmd(transporterID, passengerID)
+    local cmds = Spring.GetCommandQueue(transporterID, 25)
+    for j=1,#cmds do
+        local cmd = cmds[j]
+        if (cmd.id == CMD.GUARD)and(cmd.params[1] == passengerID) then
+			Spring.GiveOrderToUnit(transporterID,CMD.REMOVE,{cmd.tag},{})
+        end
+    end
+end
 
 local function checkBunkerID(passengerID)
 	local transporterID = loadtheseunits[passengerID]
@@ -50,6 +57,20 @@ local function checkBunkerID(passengerID)
 	return bunkerID
 end
 
+local function loadUpdates(passengerID, newtransID)
+	local oldtransID = loadtheseunits[passengerID]
+	if oldtransID and (oldtransID ~= newtransID) then
+		currentassigablecapacity[oldtransID] = (currentassigablecapacity[oldtransID] + 1)
+		if (checkBunkerID(passengerID) == nil) then
+			RemoveGuardCmd(oldtransID, passengerID)
+		end
+	end
+	gameframecommand[passengerID] = Spring.GetGameFrame()
+	loadtheseunits[passengerID] = newtransID
+	currentassigablecapacity[newtransID] = (currentassigablecapacity[newtransID] - 1)
+	-- Spring.Echo(currentassigablecapacity[newtransID])	
+end
+
 function gadget:UnitCreated(unitID, unitDefID, team, builderID)
 	local transportcapa = tonumber(UnitDefs[unitDefID].customParams.transportcapa)
 	if transportcapa == nil then
@@ -58,6 +79,7 @@ function gadget:UnitCreated(unitID, unitDefID, team, builderID)
 	currenttransportcapacity[unitID] = transportcapa
 	currentassigablecapacity[unitID] = transportcapa
 	unitisontransport[unitID] = false
+	gameframecommand[unitID] = 0	
 end	
 
 function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions)
@@ -79,13 +101,11 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 		end
 	end
 	
-	if (cmdID == 76) then -- LOAD ONTO a TRANSPORT checks for custom parameter
+	if (cmdID == 76) then -- LOAD ONTO a TRANSPORT. Checks for custom parameter
 		local transportID = cmdParams[1]
-		if ((UnitDefs[unitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[transportID] > 0) and (unitisontransport[unitID] == false) and (loadtheseunits[unitID] == nil)) then
+		if ((UnitDefs[unitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[transportID] > 0) and (unitisontransport[unitID] == false) and (loadtheseunits[unitID] == nil or gameframecommand[unitID] < Spring.GetGameFrame())) then
 			Spring.GiveOrderToUnit(unitID, CMD_GUARD, {transportID}, {})
-			loadtheseunits[unitID] = transportID
-			currentassigablecapacity[transportID] = (currentassigablecapacity[transportID] - 1)
-			-- Spring.Echo(currentassigablecapacity[transportID])		
+			loadUpdates(unitID, transportID)
 		else
 			return false
 		end
@@ -105,11 +125,8 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 				if (r == nil) then	-------- load a single unit
 					local xUnitDefID = Spring.GetUnitDefID(x)
 					local xTeam = Spring.GetUnitTeam(x)	
-					if ((UnitDefs[xUnitDefID].customParams.canbetransported == "true") and (xTeam == MyTeam) and (currentassigablecapacity[unitID] > 0) and (unitisontransport[x] == false)  and (loadtheseunits[x] == nil)) then
-						loadtheseunits[x] = unitID
-						currentassigablecapacity[unitID] = (currentassigablecapacity[unitID] - 1)
-						-- Spring.Echo(currentassigablecapacity[unitID])
-						-- Spring.GiveOrderToUnit(x, CMD_RAW_MOVE, {tx,ty,tz}, {})
+					if ((UnitDefs[xUnitDefID].customParams.canbetransported == "true") and (xTeam == MyTeam) and (currentassigablecapacity[unitID] > 0) and (unitisontransport[x] == false)  and (loadtheseunits[x] == nil or gameframecommand[x] < Spring.GetGameFrame())) then
+						loadUpdates(x, unitID)
 						Spring.GiveOrderToUnit(x, CMD_GUARD, {unitID}, {})						
 					end
 				else -------- load multiple unit	
@@ -118,12 +135,8 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 						local cTeam = Spring.GetUnitTeam(cUnitID)
 						if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
 							local cUnitDefID = Spring.GetUnitDefID(cUnitID)
-							if ((UnitDefs[cUnitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[unitID] > 0) and (unitisontransport[cUnitID] == false) and (loadtheseunits[cUnitID] == nil)) then	
-								loadtheseunits[cUnitID] = unitID
-								currentassigablecapacity[unitID] = (currentassigablecapacity[unitID] - 1)	
-								-- Spring.Echo(currentassigablecapacity[unitID])																	
-								-- Spring.GiveOrderToUnit(cUnitID, CMD_RAW_MOVE, {tx,ty,tz}, {})
-								-- Spring.GiveOrderToUnit(unitID, CMD_WAIT, {}, {})
+							if ((UnitDefs[cUnitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[unitID] > 0) and (unitisontransport[cUnitID] == false) and (loadtheseunits[cUnitID] == nil or gameframecommand[cUnitID] < Spring.GetGameFrame())) then	
+								loadUpdates(cUnitID, unitID)		
 								Spring.GiveOrderToUnit(cUnitID, CMD_GUARD, {unitID}, {})										
 							end
 						end
@@ -134,16 +147,14 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 				if (r == nil) then -- load single unit
 					local xUnitDefID = Spring.GetUnitDefID(x)
 					local xTeam = Spring.GetUnitTeam(x)	
-					if ((UnitDefs[xUnitDefID].customParams.canbetransported == "true") and (xTeam == MyTeam) and (currentassigablecapacity[unitID] > 0) and (unitisontransport[x] == false) and (loadtheseunits[x] == nil)) then
-						loadtheseunits[x] = unitID
-						currentassigablecapacity[unitID] = (currentassigablecapacity[unitID] - 1)
-						-- Spring.Echo(currentassigablecapacity[unitID])
+					if ((UnitDefs[xUnitDefID].customParams.canbetransported == "true") and (xTeam == MyTeam) and (currentassigablecapacity[unitID] > 0) and (unitisontransport[x] == false) and (loadtheseunits[x] == nil or gameframecommand[x] < Spring.GetGameFrame())) then
+						loadUpdates(x, unitID)	
 						local px, py, pz = Spring.GetUnitPosition(x) -- passenger position
-						if cmdOptions.shift then
+						--if cmdOptions.shift then
 							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, x }, {"alt"} )
-						else 
-							Spring.GiveOrderToUnit(unitID, CMD_GUARD, {x}, {})
-						end			
+						--else 
+						--	Spring.GiveOrderToUnit(unitID, CMD_GUARD, {x}, {})
+						--end			
 					end
 				else -- load multiple units
 					local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
@@ -152,21 +163,17 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 --					else
 --						Spring.GiveOrderToUnit(unitID, CMD_MOVE, {x,y,z}, {})
 --					end
-					for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up >c<ircle
+					for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up circle
 						local cTeam = Spring.GetUnitTeam(cUnitID)
 						if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
 							local cUnitDefID = Spring.GetUnitDefID(cUnitID)
-							if ((UnitDefs[cUnitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[unitID] > 0) and (unitisontransport[cUnitID] == false) and (loadtheseunits[cUnitID] == nil)) then
-								loadtheseunits[cUnitID] = unitID
-								currentassigablecapacity[unitID] = (currentassigablecapacity[unitID] - 1)
-								Spring.Echo(currentassigablecapacity[unitID])									
-								-- Spring.GiveOrderToUnit(cUnitID, CMD_MOVE, {x,y,z}, {})
-								
-								if cmdOptions.shift then
+							if ((UnitDefs[cUnitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[unitID] > 0) and (unitisontransport[cUnitID] == false) and (loadtheseunits[cUnitID] == nil or gameframecommand[cUnitID] < Spring.GetGameFrame())) then
+								loadUpdates(cUnitID, unitID)	
+								--if cmdOptions.shift then
 									Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, cUnitID }, {"alt"} )
-								else 
-									Spring.GiveOrderToUnit(unitID, CMD_GUARD, {cUnitID}, {})
-								end		
+								--else 
+								--	Spring.GiveOrderToUnit(unitID, CMD_GUARD, {cUnitID}, {})
+								--end		
 							end
 						end
 					end
@@ -213,21 +220,11 @@ function gadget:UnitLoaded(unitID, unitDefID, unitTeam, transportID, transportTe
 end
 
 function gadget:UnitUnloaded(unitID, unitDefID, unitTeam, transportID, transportTeam)
-	Spring.AddUnitImpulse(unitID, 0.1, 0, 0) --add a little impulse to spread units
+	Spring.AddUnitImpulse(unitID, 0.25, 0, 0.25) --add a little impulse to spread units, check further
 	unitisontransport[unitID] = false
 	currenttransportcapacity[transportID] = (currenttransportcapacity[transportID] + 1)
 	currentassigablecapacity[transportID] = (currentassigablecapacity[transportID] + 1)
 	-- Spring.Echo(currentassigablecapacity[transportID])		
-end
-
-local function RemoveGuardCmd(transporterID, passengerID)
-    local cmds = Spring.GetCommandQueue(transporterID, 25)
-    for j=1,#cmds do
-        local cmd = cmds[j]
-        if (cmd.id == CMD.GUARD)and(cmd.params[1] == passengerID) then
-			Spring.GiveOrderToUnit(transporterID,CMD.REMOVE,{cmd.tag},{})
-        end
-    end
 end
 
 function gadget:GameFrame(f)

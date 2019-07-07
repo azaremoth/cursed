@@ -117,6 +117,7 @@ end
 
 function gadget:UnitCreated(unitID, unitDefID, team, builderID)
 	local transportcapa = tonumber(UnitDefs[unitDefID].customParams.transportcapa)
+	-- local transportcapa = tonumber(UnitDefs[unitDefID].transportCapacity )
 	if transportcapa == nil then
 		transportcapa = 0
 	end
@@ -236,19 +237,10 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 					if ((UnitDefs[xUnitDefID].customParams.canbetransported == "true") and (xTeam == MyTeam) and (currentassigablecapacity[unitID] > 0) and (unitisontransport[x] == false) and (loadtheseunits[x] == nil or gameframecommand[x] < Spring.GetGameFrame())) then
 						loadUpdates(x, unitID)	
 						local px, py, pz = Spring.GetUnitPosition(x) -- passenger position
-						--if cmdOptions.shift then
-							Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, x }, {"alt"} )
-						--else 
-						--	Spring.GiveOrderToUnit(unitID, CMD_GUARD, {x}, {})
-						--end			
+						Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, x }, {"alt"} )		
 					end
 				else -- load multiple units
 					local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
---					if cmdOptions.shift then				
---						Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_MOVE, CMD.OPT_INTERNAL, x,y,z }, {"alt"} )
---					else
---						Spring.GiveOrderToUnit(unitID, CMD_MOVE, {x,y,z}, {})
---					end
 					for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up circle
 						local cTeam = Spring.GetUnitTeam(cUnitID)
 						if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
@@ -256,11 +248,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 							-- local clearPath = GetClearPath(unitID, cUnitID)	
 							if ((UnitDefs[cUnitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[unitID] > 0) and (unitisontransport[cUnitID] == false) and (loadtheseunits[cUnitID] == nil or gameframecommand[cUnitID] < Spring.GetGameFrame())) then
 								loadUpdates(cUnitID, unitID)	
-								--if cmdOptions.shift then
-									Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, cUnitID }, {"alt"} )
-								--else 
-								--	Spring.GiveOrderToUnit(unitID, CMD_GUARD, {cUnitID}, {})
-								--end		
+								Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, cUnitID }, {"alt"} )	
 							end
 						end
 					end
@@ -349,7 +337,6 @@ function gadget:GameFrame(f)
 		end
 	end
 end
-
 
 ------------------------------------------------------------------------
 ----------------------------------------------------------------

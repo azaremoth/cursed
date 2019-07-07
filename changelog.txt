@@ -2,6 +2,7 @@
 
 Polishing
 - replaced imperial storage building
+- reworked script controlling loading and unloading of units
 
 Bugs
 - made all collision spheres for the different cursed teeth (tier 1 wall) the same size

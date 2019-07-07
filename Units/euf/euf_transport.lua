@@ -79,9 +79,10 @@ local unitDef = {
   transportCapacity  = 12,
   transportMass      = 100000000,
   transportSize      = 10,
-  transportUnloadMethod = 1, -- was 1
-  unloadSpread       = 0.5, 
-  fallSpeed          = 24,
+  transportUnloadMethod = 1,
+  unloadSpread       = 1.0, 
+  fallSpeed          = 0.2,
+  unitFallSpeed		 = 0.2,
 -------------------------------
   sfxtypes = {
     explosiongenerators = {

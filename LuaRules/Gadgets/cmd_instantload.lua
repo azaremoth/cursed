@@ -34,6 +34,16 @@ local currenttransportcapacity = {}
 local currentassigablecapacity = {}
 local unitisontransport = {}
 local gameframecommand = {}
+local transporter = {}
+
+BunkerUnloadCommand = {
+		id=CMD_UNLOADBUNKER,
+		type=CMDTYPE.ICON,
+		name="",
+		texture="LuaUI/Images/commands/imperials/unload.png",
+		tooltip="Unload.\r\nHint: Releases all units.",
+		action="unloadbunker"
+		}
 
 local function RemoveGuardCmd(transporterID, passengerID)
     local cmds = Spring.GetCommandQueue(transporterID, 25)
@@ -82,8 +92,22 @@ function gadget:UnitCreated(unitID, unitDefID, team, builderID)
 	gameframecommand[unitID] = 0	
 end	
 
+function gadget:UnitFinished(unitID, unitDefID, unitTeam)
+	local movetype = (Spring.GetUnitMoveTypeData(unitID)).name
+	if (movetype == [[static]] and currenttransportcapacity[unitID] > 0) then --is it a bunker?
+		local cmdID = Spring.FindUnitCmdDesc(unitID, 80)
+		if cmdID ~= nil then
+			-- Spring.Echo("DEV: Unload removed")
+			Spring.RemoveUnitCmdDesc(unitID, cmdID) -- remove engine unload
+		end
+		-- Spring.Echo("DEV: Special Unload added")
+		Spring.InsertUnitCmdDesc(unitID, BunkerUnloadCommand)
+	end
+end
+
 function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions)
 	local ud = UnitDefs[unitDefID]
+	-- Spring.Echo("DEV: Command executed: " .. cmdID)
 
 	if (cmdID == 0) then -- STOPP
 		if loadtheseunits[unitID] and checkBunkerID(unitID) then -- passenger received STOPP and is walkimng to a bunker. Mobile transports pick up everything.
@@ -101,6 +125,23 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 		end
 	end
 	
+	if (cmdID == 32646) then -- UNLOAD ONLY ADAPTED FOR bunkers ("CMD_UNLOADBUNKER")
+		-- Spring.Echo("DEV: CMD_UNLOADBUNKER executed")	
+  		local movetype = (Spring.GetUnitMoveTypeData(unitID)).name
+		if (movetype == [[static]]) then --is it a bunker?
+			-- Spring.Echo("DEV: We have a bunker that wants to unload")
+			for pUnitID, _ in pairs(unitisontransport) do
+				local tunitID = transporter[pUnitID]
+				if (unitID == tunitID) then
+					-- Spring.Echo("DEV: Unloading one unit from bunker")
+					local tx, ty, tz = Spring.GetUnitPosition(unitID) -- transport position
+					Spring.UnitDetach(pUnitID)
+					Spring.SetUnitPosition(pUnitID, tx+75, tz+75)
+				end
+			end
+		end
+	end
+	 
 	if (cmdID == 76) then -- LOAD ONTO a TRANSPORT. Checks for custom parameter
 		local transportID = cmdParams[1]
 		if ((UnitDefs[unitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[transportID] > 0) and (unitisontransport[unitID] == false) and (loadtheseunits[unitID] == nil or gameframecommand[unitID] < Spring.GetGameFrame())) then
@@ -183,6 +224,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 	else
 		return true
 	end
+	
 end
 
 function gadget:UnitGiven(unitID, unitDefID, team, oldteam) 
@@ -208,20 +250,22 @@ function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
 	loadtheseunits[unitID] = nil
 	for pUnitID, tunitID in pairs(loadtheseunits) do	-- check if transporter was killed
 		if (unitID == tunitID) then
-			loadtheseunits[pUnitID] = nil			
+			loadtheseunits[pUnitID] = nil
+			transporter[unitID] = nil			
 		end
 	end
 end
 
 function gadget:UnitLoaded(unitID, unitDefID, unitTeam, transportID, transportTeam)
-	unitisontransport[unitID] = true	
---	loadtheseunits[unitID] = nil		
+	unitisontransport[unitID] = true
+	transporter[unitID] = transportID		
 	currenttransportcapacity[transportID] = (currenttransportcapacity[transportID] - 1)
 end
 
 function gadget:UnitUnloaded(unitID, unitDefID, unitTeam, transportID, transportTeam)
 	Spring.AddUnitImpulse(unitID, 0.25, 0, 0.25) --add a little impulse to spread units, check further
 	unitisontransport[unitID] = false
+	transporter[unitID] = nil
 	currenttransportcapacity[transportID] = (currenttransportcapacity[transportID] + 1)
 	currentassigablecapacity[transportID] = (currentassigablecapacity[transportID] + 1)
 	-- Spring.Echo(currentassigablecapacity[transportID])		

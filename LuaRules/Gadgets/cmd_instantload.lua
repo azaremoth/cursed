@@ -32,6 +32,7 @@ local CMD_OPT_SHIFT 	= CMD.OPT_SHIFT
 local loadtheseunits = {} -- loadtheseunits[passenger] = transporter
 local currenttransportcapacity = {}
 local currentassigablecapacity = {}
+local unitsize = {}
 local unitisontransport = {}
 local gameframecommand = {}
 local transporter = {}
@@ -104,23 +105,21 @@ end
 local function loadUpdates(passengerID, newtransID)
 	local oldtransID = loadtheseunits[passengerID]
 	if oldtransID and (oldtransID ~= newtransID) then
-		currentassigablecapacity[oldtransID] = (currentassigablecapacity[oldtransID] + 1)
+		currentassigablecapacity[oldtransID] = (currentassigablecapacity[oldtransID] + unitsize[passengerID])
 		if (checkBunkerID(passengerID) == nil) then
 			RemoveGuardCmd(oldtransID, passengerID)
 		end
 	end
 	gameframecommand[passengerID] = Spring.GetGameFrame()
 	loadtheseunits[passengerID] = newtransID
-	currentassigablecapacity[newtransID] = (currentassigablecapacity[newtransID] - 1)
+	currentassigablecapacity[newtransID] = (currentassigablecapacity[newtransID] - unitsize[passengerID])
 	-- Spring.Echo(currentassigablecapacity[newtransID])	
 end
 
 function gadget:UnitCreated(unitID, unitDefID, team, builderID)
-	local transportcapa = tonumber(UnitDefs[unitDefID].customParams.transportcapa)
-	-- local transportcapa = tonumber(UnitDefs[unitDefID].transportCapacity )
-	if transportcapa == nil then
-		transportcapa = 0
-	end
+	-- local transportcapa = tonumber(UnitDefs[unitDefID].customParams.transportcapa)
+	local transportcapa = tonumber(UnitDefs[unitDefID].transportCapacity) or 0
+	unitsize[unitID] = tonumber(UnitDefs[unitDefID].xsize) or 999
 	currenttransportcapacity[unitID] = transportcapa
 	currentassigablecapacity[unitID] = transportcapa
 	unitisontransport[unitID] = false
@@ -132,10 +131,8 @@ function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 	if (movetype == [[static]] and currenttransportcapacity[unitID] > 0) then --is it a bunker?
 		local cmdID = Spring.FindUnitCmdDesc(unitID, 80)
 		if cmdID ~= nil then
-			-- Spring.Echo("DEV: Unload removed")
 			Spring.RemoveUnitCmdDesc(unitID, cmdID) -- remove engine unload
 		end
-		-- Spring.Echo("DEV: Special Unload added")
 		Spring.InsertUnitCmdDesc(unitID, BunkerUnloadCommand)
 	end
 end
@@ -147,7 +144,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 	if (cmdID == 0) then
 		if loadtheseunits[unitID] and checkBunkerID(unitID) then -- passenger received STOPP and is walking to a bunker. Mobile transports pick up everything.
 			local tUnitID = loadtheseunits[unitID]
-			currentassigablecapacity[tUnitID] = (currentassigablecapacity[tUnitID] + 1)
+			currentassigablecapacity[tUnitID] = (currentassigablecapacity[tUnitID] + unitsize[unitID])
 			RemoveGuardCmd(tUnitID, unitID)
 			-- Spring.Echo(currentassigablecapacity[loadtheseunits[unitID]])	
 			loadtheseunits[unitID] = nil		
@@ -187,7 +184,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 	if (cmdID == 76) then -- Checks for custom parameter
 		local transportID = cmdParams[1]
 		-- local clearPath = GetClearPath(unitID, transportID)
-		if ((UnitDefs[unitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[transportID] > 0) and (unitisontransport[unitID] == false) and (loadtheseunits[unitID] == nil or gameframecommand[unitID] < Spring.GetGameFrame())) then
+		if ((not UnitDefs[unitDefID].cantBeTransported) and (currentassigablecapacity[transportID] >= unitsize[unitID]) and (unitisontransport[unitID] == false) and (loadtheseunits[unitID] == nil or gameframecommand[unitID] < Spring.GetGameFrame())) then
 			Spring.GiveOrderToUnit(unitID, CMD_GUARD, {transportID}, {})
 			loadUpdates(unitID, transportID)
 		else
@@ -204,51 +201,32 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 			local y = cmdParams[2] -- y-position of center of the load circle
 			local z = cmdParams[3] -- z-position of center of the load circle
 			local r = cmdParams[4] -- radius of the load circle
-		------------------------------------BUNKER----------------------------------------------------
-			if (movetype == [[static]]) then --is it a bunker?
-				if (r == nil) then	-------- load a single unit
-					local xUnitDefID = Spring.GetUnitDefID(x)
-					local xTeam = Spring.GetUnitTeam(x)
-					-- local clearPath = GetClearPath(x, unitID)
-					if ((UnitDefs[xUnitDefID].customParams.canbetransported == "true") and (xTeam == MyTeam) and (currentassigablecapacity[unitID] > 0) and (unitisontransport[x] == false)  and (loadtheseunits[x] == nil or gameframecommand[x] < Spring.GetGameFrame())) then
-						loadUpdates(x, unitID)
-						Spring.GiveOrderToUnit(x, CMD_GUARD, {unitID}, {})						
-					end
-				else -------- load multiple unit	
-					local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
-					for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up >c<ircle
-						local cTeam = Spring.GetUnitTeam(cUnitID)
-						if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
-							local cUnitDefID = Spring.GetUnitDefID(cUnitID)
-							-- local clearPath = GetClearPath(cUnitID, unitID)
-							if ((UnitDefs[cUnitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[unitID] > 0) and (unitisontransport[cUnitID] == false) and (loadtheseunits[cUnitID] == nil or gameframecommand[cUnitID] < Spring.GetGameFrame())) then	
-								loadUpdates(cUnitID, unitID)		
-								Spring.GiveOrderToUnit(cUnitID, CMD_GUARD, {unitID}, {})										
-							end
-						end
+			if (r == nil) then -- load single unit
+				local xUnitDefID = Spring.GetUnitDefID(x)
+				local xTeam = Spring.GetUnitTeam(x)
+				-- local clearPath = GetClearPath(unitID, x)
+				if ((not UnitDefs[xUnitDefID].cantBeTransported) and (xTeam == MyTeam) and (currentassigablecapacity[unitID] >= unitsize[x]) and (unitisontransport[x] == false) and (loadtheseunits[x] == nil or gameframecommand[x] < Spring.GetGameFrame())) then
+					loadUpdates(x, unitID)
+					if (movetype == [[static]]) then --is it a bunker?
+						Spring.GiveOrderToUnit(x, CMD_GUARD, {unitID}, {})		
+					else -- it is mobile
+						local px, py, pz = Spring.GetUnitPosition(x) -- passenger position
+						Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, x }, {"alt"} )
 					end
 				end
-		------------------------------------MOBILE----------------------------------------------------			
-			else -- it is mobile
-				if (r == nil) then -- load single unit
-					local xUnitDefID = Spring.GetUnitDefID(x)
-					local xTeam = Spring.GetUnitTeam(x)
-					-- local clearPath = GetClearPath(unitID, x)
-					if ((UnitDefs[xUnitDefID].customParams.canbetransported == "true") and (xTeam == MyTeam) and (currentassigablecapacity[unitID] > 0) and (unitisontransport[x] == false) and (loadtheseunits[x] == nil or gameframecommand[x] < Spring.GetGameFrame())) then
-						loadUpdates(x, unitID)	
-						local px, py, pz = Spring.GetUnitPosition(x) -- passenger position
-						Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, x }, {"alt"} )		
-					end
-				else -- load multiple units
-					local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
-					for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up circle
-						local cTeam = Spring.GetUnitTeam(cUnitID)
-						if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
-							local cUnitDefID = Spring.GetUnitDefID(cUnitID)
-							-- local clearPath = GetClearPath(unitID, cUnitID)	
-							if ((UnitDefs[cUnitDefID].customParams.canbetransported == "true") and (currentassigablecapacity[unitID] > 0) and (unitisontransport[cUnitID] == false) and (loadtheseunits[cUnitID] == nil or gameframecommand[cUnitID] < Spring.GetGameFrame())) then
-								loadUpdates(cUnitID, unitID)	
-								Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, cUnitID }, {"alt"} )	
+			else -- load multiple units
+				local UnitsAroundCommand = Spring.GetUnitsInCylinder(x,z,r)
+				for _,cUnitID in ipairs(UnitsAroundCommand) do -- check all units in transport pick-up circle
+					local cTeam = Spring.GetUnitTeam(cUnitID)
+					if ((cUnitID ~= unitID) and (cTeam == MyTeam)) then	
+						local cUnitDefID = Spring.GetUnitDefID(cUnitID)
+						-- local clearPath = GetClearPath(unitID, cUnitID)	
+						if ((not UnitDefs[cUnitDefID].cantBeTransported) and (currentassigablecapacity[unitID] >= unitsize[cUnitID]) and (unitisontransport[cUnitID] == false) and (loadtheseunits[cUnitID] == nil or gameframecommand[cUnitID] < Spring.GetGameFrame())) then
+							loadUpdates(cUnitID, unitID)
+							if (movetype == [[static]]) then --is it a bunker?
+								Spring.GiveOrderToUnit(cUnitID, CMD_GUARD, {unitID}, {})		
+							else -- it is mobile
+								Spring.GiveOrderToUnit(unitID, CMD_INSERT, {-1, CMD_GUARD, CMD.OPT_INTERNAL, cUnitID }, {"alt"} )
 							end
 						end
 					end
@@ -261,10 +239,10 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
 	return true
 end
 
-function gadget:UnitGiven(unitID, unitDefID, team, oldteam) 
+local function removeUnits(unitID)
 	local transporterID = loadtheseunits[unitID]
 	if (transporterID ~= nil) then
-		currentassigablecapacity[transporterID] = (currentassigablecapacity[transporterID] + 1)	-- remove dead unit from assigned units list
+		currentassigablecapacity[transporterID] = (currentassigablecapacity[transporterID] + unitsize[unitID])	-- remove dead/transfered units from assigned units list
 		-- Spring.Echo(currentassigablecapacity[transporterID])
 	end
 	loadtheseunits[unitID] = nil
@@ -275,62 +253,55 @@ function gadget:UnitGiven(unitID, unitDefID, team, oldteam)
 	end
 end
 
+function gadget:UnitGiven(unitID, unitDefID, team, oldteam) 
+	removeUnits(unitID)
+end
+
 function gadget:UnitDestroyed(unitID, unitDefID, team, attacker)
-	local transporterID = loadtheseunits[unitID]
-	if (transporterID ~= nil) then
-		currentassigablecapacity[transporterID] = (currentassigablecapacity[transporterID] + 1)	-- remove dead unit from assigned units list
-		-- Spring.Echo(currentassigablecapacity[transporterID])
-	end
-	loadtheseunits[unitID] = nil
-	for pUnitID, tunitID in pairs(loadtheseunits) do	-- check if transporter was killed
-		if (unitID == tunitID) then
-			loadtheseunits[pUnitID] = nil
-			transporter[unitID] = nil			
-		end
-	end
+	removeUnits(unitID)
 end
 
 function gadget:UnitLoaded(unitID, unitDefID, unitTeam, transportID, transportTeam)
 	unitisontransport[unitID] = true
 	transporter[unitID] = transportID		
-	currenttransportcapacity[transportID] = (currenttransportcapacity[transportID] - 1)
+	currenttransportcapacity[transportID] = (currenttransportcapacity[transportID] - unitsize[unitID])
 end
 
 function gadget:UnitUnloaded(unitID, unitDefID, unitTeam, transportID, transportTeam)
 	Spring.AddUnitImpulse(unitID, 0.25, 0, 0.25) --add a little impulse to spread units, check further
 	unitisontransport[unitID] = false
 	transporter[unitID] = nil
-	currenttransportcapacity[transportID] = (currenttransportcapacity[transportID] + 1)
-	currentassigablecapacity[transportID] = (currentassigablecapacity[transportID] + 1)
+	currenttransportcapacity[transportID] = (currenttransportcapacity[transportID] + unitsize[unitID])
+	currentassigablecapacity[transportID] = (currentassigablecapacity[transportID] + unitsize[unitID])
 	-- Spring.Echo(currentassigablecapacity[transportID])		
 end
 
 function gadget:GameFrame(f)
 	if f % 32 < .1 then
-		for pUnitID, unitID in pairs(loadtheseunits) do
-			local x, y, z = Spring.GetUnitPosition(unitID) -- transport position
-			local unitDefID = Spring.GetUnitDefID(unitID)				
+		for pUnitID, tUnitID in pairs(loadtheseunits) do
+			local x, y, z = Spring.GetUnitPosition(tUnitID) -- transport position
+			local unitDefID = Spring.GetUnitDefID(tUnitID)				
 			local ud = UnitDefs[unitDefID]
 			local loadingradius = ud.loadingRadius
 			if loadingradius == nil then
 				loadingradius = 300
 			end
 			local UnitsAroundTransport = Spring.GetUnitsInCylinder(x,z,loadingradius)
-			for _,tUnitID in ipairs(UnitsAroundTransport) do
-				local tUnitDefID = Spring.GetUnitDefID(tUnitID)
-				if (pUnitID == tUnitID and UnitDefs[tUnitDefID].customParams.canbetransported == "true") then
-					if (Spring.UnitScript.GetScriptEnv(unitID) == nil) then -- cob/bos compatibility
-						Spring.CallCOBScript( unitID, "TransportPickup", pUnitID)
+			for _,arUnitID in ipairs(UnitsAroundTransport) do
+				local arUnitDefID = Spring.GetUnitDefID(arUnitID)
+				if (pUnitID == arUnitID) then
+					if (Spring.UnitScript.GetScriptEnv(tUnitID) == nil) then -- cob/bos compatibility
+						Spring.CallCOBScript( tUnitID, "TransportPickup", pUnitID)
 					else 
-						Spring.UnitScript.CallAsUnit(unitID,(Spring.UnitScript.GetScriptEnv(unitID).script.TransportPickup),pUnitID)					
+						Spring.UnitScript.CallAsUnit(tUnitID,(Spring.UnitScript.GetScriptEnv(tUnitID).script.TransportPickup),pUnitID)					
 					end
-					RemoveGuardCmd(unitID, pUnitID)
+					RemoveGuardCmd(tUnitID, pUnitID)
 					loadtheseunits[pUnitID] = nil
 					local punitDefID = Spring.GetUnitDefID(pUnitID)				
 					local pud = UnitDefs[punitDefID]
 					local prepairSpeed = pud.repairSpeed	
 					if (prepairSpeed > 0) then -- builder units will automatically repair the transport / bunker				
-						Spring.GiveOrderToUnit(pUnitID, CMD_GUARD, {unitID}, {})
+						Spring.GiveOrderToUnit(pUnitID, CMD_GUARD, {tUnitID}, {})
 					end
 				end
 			end

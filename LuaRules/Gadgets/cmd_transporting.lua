@@ -119,7 +119,7 @@ end
 function gadget:UnitCreated(unitID, unitDefID, team, builderID)
 	-- local transportcapa = tonumber(UnitDefs[unitDefID].customParams.transportcapa)
 	local transportcapa = tonumber(UnitDefs[unitDefID].transportCapacity) or 0
-	unitsize[unitID] = tonumber(UnitDefs[unitDefID].xsize) or 999
+	unitsize[unitID] = tonumber(UnitDefs[unitDefID].xsize/2) or math.huge -- Strangely xsize is always 2x footprintX.
 	currenttransportcapacity[unitID] = transportcapa
 	currentassigablecapacity[unitID] = transportcapa
 	unitisontransport[unitID] = false
@@ -273,6 +273,10 @@ function gadget:UnitUnloaded(unitID, unitDefID, unitTeam, transportID, transport
 	transporter[unitID] = nil
 	currenttransportcapacity[transportID] = (currenttransportcapacity[transportID] + unitsize[unitID])
 	currentassigablecapacity[transportID] = (currentassigablecapacity[transportID] + unitsize[unitID])
+ -- makes sure units are on solid ground and do not suffer falling damage when droped from air
+	local px, _, pz = Spring.GetUnitPosition(unitID)
+	local py = Spring.GetGroundHeight(px,pz)
+	Spring.SetUnitPhysics(unitID, px, py, pz, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 	-- Spring.Echo(currentassigablecapacity[transportID])		
 end
 

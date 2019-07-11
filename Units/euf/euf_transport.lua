@@ -38,7 +38,7 @@ local unitDef = {
   acceleration       = 0.20,
   airHoverFactor     = 0,
   brakeRate          = 0.15,
-  cruiseAlt          = 150,
+  cruiseAlt          = 75,
   maxVelocity        = 6,
   turnRate           = 512,
 -- Collision
@@ -80,9 +80,9 @@ local unitDef = {
   transportMass      = 100000000,
   transportSize      = 10,
   transportUnloadMethod = 1,
-  unloadSpread       = 1.0, 
-  fallSpeed          = 0.2,
-  unitFallSpeed		 = 0.2,
+  unloadSpread       = 2.0, 
+--  fallSpeed          = 24,
+--  unitFallSpeed		 = 0.2,
 -------------------------------
   sfxtypes = {
     explosiongenerators = {

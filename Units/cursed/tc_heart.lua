@@ -26,6 +26,7 @@ local unitDef = {
 --  canReclaim         = true,
 --  canRepair          = false,
   canstop            = true,
+  cantBeTransported  = true, 
 --  captureSpeed       = 0,
   category           = "CURSED LAND HEAVYARMOR",
   useFootPrintCollisionVolume = true,  

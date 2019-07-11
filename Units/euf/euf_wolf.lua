@@ -18,12 +18,12 @@ local unitDef = {
   canGuard           = true,
   canMove            = true,
   canPatrol          = true,
-  canstop            = "1",
+  canstop            = true,
+  cantBeTransported  = false,
   category           = "EUF LAND LIGHTARMOR",
   customParams          = {	
 	factionname		   = "imperials",
 	isinfantry = "true",
-	canbetransported = "true",
 	helptext = "A priest in wolf form."
 	},
   defaultmissiontype = "Standby",

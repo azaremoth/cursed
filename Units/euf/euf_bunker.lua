@@ -20,7 +20,8 @@ local unitDef = {
 
   buildPic           = "euf_bunker.png",    
   category           = "EUF LAND HEAVYARMOR",
-  
+  canstop            = true,
+  cantBeTransported  = true,  
   useFootPrintCollisionVolume = true,
   corpse             = "dead",
   customParams       = {

@@ -10,16 +10,16 @@ local unitDef = {
   armortype          = "HEAVY",
   buildCostEnergy    = 700,
   buildCostMetal     = 700,
-  buildTime          = 700,
-
-buildingGroundDecalDecaySpeed = 0.2,
+  buildTime          = 700,´
+  buildingGroundDecalDecaySpeed = 0.2,
   buildingGroundDecalSizeX = 8,
   buildingGroundDecalSizeY = 8,
   buildingGroundDecalType = "euf_groundplate3.png",
   useBuildingGroundDecal = true,    
-  
   buildPic           = "euf_metalextractor_lvl2.png",    
   category           = "EUF LAND HEAVYARMOR",
+  canstop            = false,
+  cantBeTransported  = true,  
   corpse             = "dead",
   customParams          = {
 		factionname			= "imperials",

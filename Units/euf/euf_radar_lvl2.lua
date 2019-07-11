@@ -20,6 +20,8 @@ local unitDef = {
   
   buildPic           = "euf_radar_lvl2.png",    
   category           = "EUF LAND HEAVYARMOR",
+  canstop            = false,
+  cantBeTransported  = true,  
   corpse             = "dead",   
   customParams          = {	
 		factionname		   	= "imperials",

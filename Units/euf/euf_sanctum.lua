@@ -18,7 +18,8 @@ local unitDef = {
   buildTime          = 800,
   buildPic           = "euf_sanctum.png",  
   category           = "EUF LAND HEAVYARMOR",
-  
+  canstop            = false,
+  cantBeTransported  = true,  
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {

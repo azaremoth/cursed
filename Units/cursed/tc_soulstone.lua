@@ -16,6 +16,7 @@ local unitDef = {
   buildPic           = "tc_soulstone.png",
   buildTime          = 160,
   category           = "CURSED LAND HEAVYARMOR",
+  cantBeTransported  = true, 
   useFootPrintCollisionVolume = true,
   useFootPrintCollisionVolume = true,
   corpse             = "dead",

@@ -20,7 +20,8 @@ local unitDef = {
   
   canAttack          = true,
   canGuard           = true,
-  canstop            = "1",
+  canstop            = true,
+  cantBeTransported  = true, 
   category           = "CURSED LAND HEAVYARMOR",
   collisionVolumeType 		= "Box",
   collisionVolumeScales 	= "45 60 45",

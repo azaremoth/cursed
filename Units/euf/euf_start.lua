@@ -20,6 +20,7 @@ local unitDef = {
   canReclaim         = false,
   canRepair          = false,
   canstop            = false,
+  cantBeTransported  = true,
   captureSpeed       = 0,
   category           = "EUF LAND HEAVYARMOR",
   useFootPrintCollisionVolume = true,  

@@ -15,6 +15,7 @@ local unitDef = {
   buildPic           = "tc_storage.png",
   buildTime          = 200,
   category           = "CURSED LAND HEAVYARMOR",
+  cantBeTransported  = true, 
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {	

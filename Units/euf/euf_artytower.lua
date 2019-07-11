@@ -11,7 +11,7 @@ local unitDef = {
   buildPic           = "euf_artytower.png",
   buildTime          = 950,
   
-buildingGroundDecalDecaySpeed = 0.2,
+  buildingGroundDecalDecaySpeed = 0.2,
   buildingGroundDecalSizeX = 8,
   buildingGroundDecalSizeY = 8,
   buildingGroundDecalType = "euf_groundplate3.png",
@@ -19,7 +19,8 @@ buildingGroundDecalDecaySpeed = 0.2,
   
   canAttack          = true,
   canGuard           = true,
-  canstop            = "1",
+  canstop            = true,
+  cantBeTransported  = true, 
   category           = "EUF LAND HEAVYARMOR",
   collisionVolumeType 		= "Box",
   collisionVolumeScales 	= "50 75 50",

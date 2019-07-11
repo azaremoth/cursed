@@ -19,7 +19,8 @@ local unitDef = {
   --canHover           = true,
   canMove            = true,
   canPatrol          = true,
-  canstop            = "1",
+  canstop            = true,
+  cantBeTransported  = true,
   category           = "CURSED LAND LIGHTARMOR",
   corpse             = "dead",
   customParams          = {
@@ -38,10 +39,8 @@ local unitDef = {
   iconType           = "bigsquare",
   idleAutoHeal       = 6,
   idleTime           = 300,
-   
   crushResistance    = 2000,
   mass               = 300,
-  
   maxDamage          = 3000,
   maxSlope           = 20,
   maxVelocity        = 3.3,

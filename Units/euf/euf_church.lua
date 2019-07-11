@@ -21,9 +21,9 @@ local unitDef = {
   canBeAssisted      = false,
   canMove            = true,
   canPatrol          = true,
-  canstop            = "1",
+  canstop            = true,
+  cantBeTransported  = true, 
   category           = "EUF LAND HEAVYARMOR",
-  
   useFootPrintCollisionVolume = true,  
   corpse             = "dead",
   customParams          = {	

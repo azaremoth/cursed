@@ -18,7 +18,8 @@ local unitDef = {
   canGuard           = true,
   canMove            = true,
   canPatrol          = true,
-  canstop            = "1",
+  canstop            = true,
+  cantBeTransported  = false, 
   category           = "EUF LAND LIGHTARMOR",
   collisionVolumeOffsets 	= "0 0 0",
   collisionVolumeScales 	= "20 40 20",
@@ -27,7 +28,6 @@ local unitDef = {
   customParams          = {
   	factionname		   = "imperials",
 	isinfantry = "true",
-	canbetransported = "true",
 	helptext = "Sometimes a priest in wolf form gets a second chance to live and turns into a werewolf after dying."
   },   
   defaultmissiontype = "Standby",

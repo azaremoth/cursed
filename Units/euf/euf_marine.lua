@@ -24,7 +24,8 @@ local unitDef = {
   canPatrol          = true,
   canReclaim         = false,
   canRepair          = false,
-  canstop            = "1",
+  canstop            = true,
+  cantBeTransported  = false,
   category           = "EUF LAND LIGHTARMOR",
   collisionVolumeOffsets 	= "0 0 0",
   collisionVolumeScales 	= "17 33 17",
@@ -34,7 +35,6 @@ local unitDef = {
   customParams          = {
 	factionname	= "imperials",
 	isinfantry = "true",
-	canbetransported = "true",
     helptext 	= "Basic combat unit. It can shoot airborne targets."
   },
   defaultmissiontype = "Standby",

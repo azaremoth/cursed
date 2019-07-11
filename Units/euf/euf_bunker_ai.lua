@@ -11,19 +11,15 @@ local unitDef = {
   buildCostEnergy    = 600,
   buildCostMetal     = 600,
   buildTime          = 600,
-  
 --buildingGroundDecalDecaySpeed = 0.2,
 --  buildingGroundDecalSizeX = 9,
 --  buildingGroundDecalSizeY = 9,
 --  buildingGroundDecalType = "euf_bunker_aoplane.png",
 --  useBuildingGroundDecal = true,
-
-  
   buildPic           = "euf_bunker.png",    
   category           = "EUF LAND HEAVYARMOR",
-
   capturable         = false, 
-  
+  cantBeTransported  = true,   
   useFootPrintCollisionVolume = true,
   corpse             = "dead",
   customParams       = {	
@@ -41,7 +37,6 @@ local unitDef = {
   iconType           = "bigrhombe",
   idleAutoHeal       = 0.01,
   idleTime           = 400,
-  
 --  isfirePlatform     = true,
 --  loadingradius		 = 150,
 --  releaseHeld        = false,
@@ -51,9 +46,7 @@ local unitDef = {
 --  transportunloadmethod = 0,
 --  unloadSpread       = 0.5,
   script             = "euf_bunker_ai.lua",
-  
   levelGround        = true,
-  
   maxDamage          = 5000,
   maxSlope           = 25,
   maxWaterDepth      = 0,

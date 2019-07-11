@@ -11,7 +11,7 @@ local unitDef = {
   buildPic           = "tc_wall_lvl2.png",
   buildTime          = 30,
   category           = "CURSED LAND HEAVYARMOR",
-  
+  cantBeTransported  = true,  
   collisionVolumeType 		= "Box",
   collisionVolumeScales 	= "80 70 10",
   collisionVolumeOffsets 	= "0 0 5",

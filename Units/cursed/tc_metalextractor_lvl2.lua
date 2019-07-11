@@ -17,6 +17,7 @@ local unitDef = {
   buildingGroundDecalType = "tc_groundplatesm.png",
   buildPic           = "tc_metalextractor_lvl2.png",
   category           = "CURSED LAND HEAVYARMOR",
+  cantBeTransported  = true, 
   corpse             = "dead",
   customParams          = {
 	factionname	= "cursed",

@@ -19,6 +19,7 @@ local unitDef = {
   canReclaim         = false,
   canRepair          = false,
   canstop            = false,
+  cantBeTransported  = true, 
   capturable         = false,  
   captureSpeed       = 0,
   category           = "LAND HEAVYARMOR",

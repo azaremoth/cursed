@@ -12,6 +12,7 @@ local unitDef = {
   buildPic           = "euf_wall.png",
   buildTime          = 10,
   category           = "EUF LAND HEAVYARMOR",
+  canstop            = true,
     customParams          = {	factionname		   = "imperials",  },
   description        = "Light walls",
   footprintX         = 1,

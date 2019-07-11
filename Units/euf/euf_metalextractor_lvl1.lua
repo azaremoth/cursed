@@ -11,15 +11,15 @@ local unitDef = {
   buildCostEnergy    = 30,
   buildCostMetal     = 30,
   buildTime          = 30,
-  
-buildingGroundDecalDecaySpeed = 0.2,
+  buildingGroundDecalDecaySpeed = 0.2,
   buildingGroundDecalSizeX = 5,
   buildingGroundDecalSizeY = 5,
   buildingGroundDecalType = "euf_groundplate3.png",
   useBuildingGroundDecal = true,    
-  
   buildPic           = "euf_metalextractor_lvl1.png",    
   category           = "EUF LAND HEAVYARMOR",
+  canstop            = false,
+  cantBeTransported  = true,
   corpse             = "dead",   
   customParams          = {
 		factionname			= "imperials",

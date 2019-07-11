@@ -12,7 +12,7 @@ local unitDef = {
   buildPic           = "euf_wall_lvl2.png",
   buildTime          = 30,
   category           = "EUF LAND HEAVYARMOR",
-  
+  cantBeTransported  = true, 
   collisionVolumeType 		= "Box",
   collisionVolumeScales 	= "80 70 10",
   collisionVolumeOffsets 	= "0 0 5",

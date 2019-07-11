@@ -21,7 +21,8 @@ local unitDef = {
   
   canAttack          = true,
   canGuard           = true,
-  canstop            = "1",  
+  canstop            = true,
+  cantBeTransported  = true, 
   category           = "CURSED LAND HEAVYARMOR",
   corpse             = "dead",
   collisionVolumeOffsets = "0 0 0",

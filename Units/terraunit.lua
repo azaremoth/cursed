@@ -9,6 +9,7 @@ unitDef = {
   buildPic               = [[crystals.png]],
   capturable             = false,
   category               = [[TERRAFORM]],
+  cantBeTransported  	 = true,   
   collisionVolumeOffsets = [[0 -3000 0]],
   collisionVolumeScales  = [[32 32 32]],
   collisionVolumeType    = [[box]],

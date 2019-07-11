@@ -12,6 +12,7 @@ local unitDef = {
   buildPic           = "tc_teeth.png",
   buildTime          = 10,
   category           = "CURSED LAND HEAVYARMOR",
+  cantBeTransported  = true, 
   customParams          = {	factionname		   = "cursed",  },
   description        = "Perimeter Defense",
   footprintX         = 1,

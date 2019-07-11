@@ -26,7 +26,8 @@ local unitDef = {
   canReclaim         = true,
   canRepair          = true,
   canResurrect       = true,
-  canstop            = "1",
+  canstop            = true,
+  cantBeTransported  = false, 
   captureSpeed       = 0,
   category           = "CURSED LAND LIGHTARMOR",
   collisionVolumeOffsets 	= "0 0 0",
@@ -37,7 +38,6 @@ local unitDef = {
 	noautorepair = "true",
 	area_mex_def = "tc_metalextractor_lvl1",	
 	isinfantry = "true",
-	canbetransported = "true",
 	factionname		   = "cursed",
     helptext = "Necromancers can summon skeletons and resurrect corpses. When the necromancer is in summon stance he acts like a factory."
   },

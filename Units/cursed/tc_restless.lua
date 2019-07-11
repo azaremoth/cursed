@@ -28,7 +28,8 @@ local unitDef = {
   canReclaim         = true,
   canRepair          = true,
   canResurrect       = false,
-  canstop            = "1",
+  canstop            = true,
+  cantBeTransported  = false, 
   capturable         = false,    
   captureSpeed       = 0,
   category           = "CURSED LAND LIGHTARMOR",
@@ -39,7 +40,6 @@ local unitDef = {
 	factionname		   = "cursed",
 	area_mex_def = "tc_metalextractor_lvl1",	
 	isinfantry = "true",
-	canbetransported = "true",
 	isbones = "true",
     helptext = "A hovering structure summoner."			
   },

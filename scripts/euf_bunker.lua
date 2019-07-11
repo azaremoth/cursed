@@ -1,4 +1,5 @@
---#include "basic_spring_stuff.h"
+include "constants.lua"
+include "common.lua"
 
 local base = piece 'base'
 local bunker = piece 'bunker'
@@ -7,6 +8,8 @@ local tubes = piece 'tubes'
 local antenne = piece 'antenne'
 local turret = piece 'turret'
 local link = piece 'link'
+local fist = piece 'fist'
+
 local BOOM	 = 1024+0
 local BUILDINGFX	 = 1025+0
 
@@ -43,6 +46,9 @@ function script.bunkerdrop ( )
 end 
 	
 function script.Create()
+	if NotEnemyAI() then
+		Hide(fist)
+	end
 	x, y, z = Spring.GetUnitPosition(unitID)
 	local structureheight = ((-40*GetUnitValue(COB.UNIT_HEIGHT))/3080192)
 	----------------------------------START BUILD CYCLE

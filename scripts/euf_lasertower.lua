@@ -75,7 +75,7 @@ function script.Deactivate ( )
 end
 
 function script.Create()
-	if NotAI() then
+	if NotEnemyAI() then
 		Hide(fist1)
 		Hide(fist2)
 		Hide(fist3)

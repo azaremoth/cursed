@@ -74,7 +74,7 @@ local function Close()
 end
 
 function script.Create()
-	if NotAI() then
+	if NotEnemyAI() then
 		Hide(fist)
 	end
 	local structureheight = ((-15*GetUnitValue(COB.UNIT_HEIGHT))/1000000)

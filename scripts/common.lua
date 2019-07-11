@@ -20,11 +20,30 @@ function SmokeUnit(smokepiece, SMOKE)
 	end
 end
 
-function NotAI()
-	local team = Spring.GetUnitTeam(unitID)
-	local ai = select(4, Spring.GetTeamInfo(team))
+function NotEnemyAI()
+	local localteam = Spring.GetUnitTeam(unitID)
+	local _,_,_,_,_,localAllyTeam,_,_ = Spring.GetTeamInfo(localteam)
+	Spring.Echo("localAllyTeam")
+	Spring.Echo(localAllyTeam)
+	local ai = select(4, Spring.GetTeamInfo(localteam))
 	if ai then
-		return false
+		local isAlliedToPlayer = false
+		for _,team in ipairs(Spring.GetTeamList()) do	
+			local loopAi = select(4, Spring.GetTeamInfo(team))
+				Spring.Echo("loopAi")
+				Spring.Echo(loopAi)
+			local _,_,_,_,_,allyTeam,_,_ = Spring.GetTeamInfo(team)
+				Spring.Echo("allyTeam")
+				Spring.Echo(allyTeam)
+			if not loopAi and allyTeam == localAllyTeam then
+				isAlliedToPlayer = true
+			end
+		end
+		if isAlliedToPlayer then
+			return true
+		else
+			return false
+		end
 	else
 		return true
 	end

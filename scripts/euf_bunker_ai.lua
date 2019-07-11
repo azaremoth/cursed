@@ -1,4 +1,5 @@
---#include "basic_spring_stuff.h"
+include "constants.lua"
+include "common.lua"
 
 local base = piece 'base'
 local bunker = piece 'bunker'
@@ -8,6 +9,7 @@ local antenne = piece 'antenne'
 local turret = piece 'turret'
 local turret_pitch = piece 'turret_pitch'
 local link = piece 'link'
+local fist = piece 'fist'
 local emit = piece 'emit'
 local emit_groundflash = piece 'emit_groundflash'
 
@@ -19,6 +21,9 @@ local GUNFLARE	 = 1026+0
 local GROUNDFLASH	 = 1027+0
 
 function script.Create()
+	if NotEnemyAI() then
+		Hide(fist)
+	end
 	local structureheight = ((-40*GetUnitValue(COB.UNIT_HEIGHT))/3080192)
 	----------------------------------START BUILD CYCLE
 	Move( bunker, y_axis, structureheight)

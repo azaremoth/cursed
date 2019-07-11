@@ -61,6 +61,15 @@ local usingNewEngine = (#{Spring.GetLosViewColors()} == 5) -- newer engine has r
 
 WG.MinimapDraggingCamera = false --Boolean, false if selection through minimap is possible
 
+local function ToggleShoweco()
+  if (WG.metalSpots and (Spring.GetMapDrawMode() ~= "metal")) then
+    Spring.SendCommands("showmetalmap")
+  else
+    Spring.SendCommands("showstandard")
+  end
+end
+WG.ToggleShoweco = ToggleShoweco
+
 local function toggleTeamColors()
 	if WG.LocalColor and WG.LocalColor.localTeamColorToggle then
 		WG.LocalColor.localTeamColorToggle()

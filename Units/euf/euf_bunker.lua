@@ -57,6 +57,7 @@ local unitDef = {
   yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo",
 ------------- transport ---------  
   isfirePlatform     = true,
+  isTransport        = true, 
   loadingRadius 	 = 300,
   releaseHeld        = false,
   transportCapacity  = 8,

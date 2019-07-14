@@ -37,8 +37,6 @@ local spGetUnitDefID 			= Spring.GetUnitDefID
 local spGetUnitPosition 		= Spring.GetUnitPosition
 local spGiveOrderToUnit 		= Spring.GiveOrderToUnit
 
-local spSetUnitWeaponState 		= Spring.SetUnitWeaponState
-
 local CMD_MOVE = CMD.MOVE
 
 local MAXSPAWN = 35
@@ -71,26 +69,23 @@ local critter_type_count_late = #critterdefs_late
 local critters = {}
 local crittercount = 0
 
-
 local function SpawnCritter()
 	if crittercount > MAXSPAWN then return end
-	
 	local x,y,z
+	local crit_type = math.ceil(critter_type_count * math.random())
+	local critterID = critterdefs_early[crit_type]
+--	Spring.Echo("crit_type")
+--	Spring.Echo(crit_type)
 	local tries = 100
 	while tries>0 do
-	
 		x = Game.mapSizeX * math.random()
 		z = Game.mapSizeZ * math.random()
 		y = Spring.GetGroundHeight(x,z)
-		
 		local unitsincylinder = Spring.GetUnitsInCylinder(x,z,800)
---		Spring.Echo(unitsincylinder[1])
-		
-		if ((y > 0) and (unitsincylinder[1] == nil)) then
+		local canMove = Spring.TestMoveOrder(critterID, x, y, z, 0, 0, 0, true, true, false) or false
+		if ((y > 0) and (unitsincylinder[1] == nil) and canMove) then
 			tries = 0
-
-			local crit_type = math.ceil(critter_type_count * math.random())
-			local critID = Spring.CreateUnit(critterdefs_early[crit_type], x,y,z, 0, Spring.GetGaiaTeamID())
+			local critID = Spring.CreateUnit(critterID, x,y,z, 0, Spring.GetGaiaTeamID())
 			-- Spring.SetUnitNeutral(critID, true)
 			critters[critID] = true
 			crittercount = crittercount + 1			
@@ -121,11 +116,9 @@ function gadget:GameFrame(f)
 				if x then
 					local xoffset = 20 - math.random()*40
 					local zoffset = 20 - math.random()*40
-					
 					x = x + xoffset*xoffset
 					z = z + zoffset*zoffset
 					y = Spring.GetGroundHeight(x,z)
-					--Spring.Echo ('movenow',x,y,z)
 					spGiveOrderToUnit(critter_id, CMD_MOVE, {x,y,z}, {})
 				end
 			end

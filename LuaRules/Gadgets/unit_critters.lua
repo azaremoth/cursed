@@ -46,15 +46,17 @@ local MOVEPERIOD = 15
 
 local critterdefs_early = {
 	UnitDefNames['pig'].id,
-	UnitDefNames['bug_larva'].id,	
-	UnitDefNames['bug_med'].id,	
+	UnitDefNames['bug_larva'].id,
+	UnitDefNames['bug_med'].id,
+	UnitDefNames['pig'].id,	
 }
 
 local critterdefs_late = {
 	UnitDefNames['pig'].id,
-	UnitDefNames['bug_larva'].id,	
-	UnitDefNames['bug_med'].id,	
+	UnitDefNames['bug_larva'].id,
+	UnitDefNames['bug_med'].id,
 	UnitDefNames['bug_big'].id,
+	UnitDefNames['pig'].id,	
 }
 
 
@@ -74,8 +76,6 @@ local function SpawnCritter()
 	local x,y,z
 	local crit_type = math.ceil(critter_type_count * math.random())
 	local critterID = critterdefs_early[crit_type]
---	Spring.Echo("crit_type")
---	Spring.Echo(crit_type)
 	local tries = 100
 	while tries>0 do
 		x = Game.mapSizeX * math.random()

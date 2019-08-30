@@ -1,0 +1,29 @@
+local objectname= "tower" 
+local featureDef  =  {
+   name           = "tower",
+	 autoreclaimable = false,
+     blocking    = true,
+     burnable    = false,
+     nodrawundergray = false,
+     reclaimable = false,
+	 upright 	 = true,
+   mass			   = 1000000000,
+   collisionVolumeType 	= "Box",
+   collisionVolumeScales 	= "60 300 60",
+   collisionVolumeOffsets 	= "0 0 0", 
+   damage            = 1000000000,
+   description       = "Building",
+   energy            = 0,
+   footprintX        = 6,
+   footprintZ        = 6,
+   height      		= "60",
+   hitdensity       = "1000000000",
+   metal            = 0,
+   object           = "features/tower.s3o",  
+   world            = "allworld",
+	customparams = { 
+		normaltex 		= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		= "yes",			
+	},   
+}
+return lowerkeys({[featureDef.name] = featureDef})

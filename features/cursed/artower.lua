@@ -1,0 +1,29 @@
+local objectname= "artower" 
+local featureDef  =  {
+   name           = "artower",
+	 autoreclaimable = false,
+     blocking    = true,
+     burnable    = false,
+     nodrawundergray = false,
+     reclaimable = false,
+	 upright 	 = true,
+   mass			   = 1000000000,
+  collisionVolumeOffsets 	= "0 0 0",
+  collisionVolumeScales 	= "140 500 140",
+  collisionVolumeType 		= "CylY",
+   damage            = 1000000000,
+   description       = "Building",
+   energy            = 0,
+   footprintX        = 10,
+   footprintZ        = 10,
+   height      		= "350",
+   hitdensity       = "1000000000",
+   metal            = 0,
+   object           = "features/artower.s3o",  
+   world            = "allworld",
+	customparams = { 
+		normaltex 		= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		= "yes",			
+	},   
+}
+return lowerkeys({[featureDef.name] = featureDef})

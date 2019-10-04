@@ -166,7 +166,8 @@ effectUnitDefs = {
 	},  
   tc_metalextractor_lvl2 = {
    {class='AirJet', options={color={0.6,1.0,0.15}, emitVector = {0, 1, 0}, width=3, length=50, piece="tamper", onActive=false, noIconDraw = true}},
-  },  
+  },
+---------
   crystals = {
     {class='GroundFlash', options=groundFlashBigViolett},   
 	{class='StaticParticles', options=MergeTable(Purpleglow_bigger,{piece="biggem"})},  
@@ -179,8 +180,12 @@ effectUnitDefs = {
 	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_07"})},
 	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_08"})},
 	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_09"})},		
-  }  
+  },
 -----------
+   noemit_high = {
+    {class='AirJet', options={color={0.6,1.0,0.15}, width=60, length=600, piece="high", emitVector = {0, -1, 0}, onActive=false}},
+    {class='StaticParticles', options=MergeTable(Greenglow_giant,{piece="high"})},			
+  }, 
 }
 
 effectUnitDefsXmas = {}

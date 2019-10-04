@@ -267,6 +267,16 @@ Greenglow_huge = {
   count       = 1,
   repeatEffect = true,
 }
+Greenglow_giant = {
+  life        = 50,
+  lifeSpread  = 0,
+  size        = 250,
+  sizeSpread  = 33,
+  colormap    = { {0.7, 1.0, 0.25, 0.03}, {0.6, 0.8, 0.15, 0.01}, {0.7, 1.0, 0.25, 0.03},  },
+  texture     = 'bitmaps/GPL/smallflare.tga',
+  count       = 1,
+  repeatEffect = true,
+}
 Blueglow_big = {
   life        = 50,
   lifeSpread  = 0,

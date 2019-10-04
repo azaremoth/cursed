@@ -8,7 +8,7 @@ local EMIT 	= 1024+0
 
 local function Emiting()
 	while true do
-		EmitSfx( base,  EMIT )	
+		EmitSfx( high,  EMIT )	
 		Sleep(50)
 	end
 end

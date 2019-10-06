@@ -45,7 +45,7 @@
 			colorMap=0.25 0.25 0.25 0.25  0 0 0 0;
 			Texture=blacksmoke;
 			airdrag=0.75;
-			particleLife=300;
+			particleLife=400;
 			particleLifeSpread=100;
 			numParticles=10;
 			particleSpeed=3.3;

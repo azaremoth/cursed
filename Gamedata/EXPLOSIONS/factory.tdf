@@ -31,7 +31,8 @@
 	}
 }
 
-[FactorySmoke] {
+[FactorySmoke]
+{
 	usedefaultexplosions=0;
 	[smoke] {
 		class=CSimpleParticleSystem;

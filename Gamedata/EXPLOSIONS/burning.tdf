@@ -1,0 +1,65 @@
+[MedCloud_Rise]
+{
+	usedefaultexplosions=0;
+	[smoke] {
+		class=CSimpleParticleSystem;
+		[properties]{
+			sizeGrowth=12 r6;
+			sizeMod=0.5;
+			pos=0, 0, 0;
+			emitVector=0, 1, 0;
+			gravity=-0.3 r0.2, 0.6, -0.25 r0.2;
+			colorMap=0.25 0.25 0.25 0.25  0 0 0 0;
+			Texture=blacksmoke;
+			airdrag=0.75;
+			particleLife=300;
+			particleLifeSpread=100;
+			numParticles=10;
+			particleSpeed=3.0;
+			particleSpeedSpread=2;
+			particleSize=5 r2;
+			particleSizeSpread=2 r2;
+			emitRot=0;
+			emitRotSpread=90 r45;
+			directional=0;
+			alwaysVisible=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=1;
+	}
+}
+
+[BigCloud_Rise]
+{
+	usedefaultexplosions=0;
+	[smoke] {
+		class=CSimpleParticleSystem;
+		[properties]{
+			sizeGrowth=16 r8;
+			sizeMod=0.75;
+			pos=0, 0, 0;
+			emitVector=0, 1, 0;
+			gravity=-0.3 r0.2, 0.6, -0.25 r0.2;
+			colorMap=0.25 0.25 0.25 0.25  0 0 0 0;
+			Texture=blacksmoke;
+			airdrag=0.75;
+			particleLife=300;
+			particleLifeSpread=100;
+			numParticles=10;
+			particleSpeed=3.3;
+			particleSpeedSpread=2;
+			particleSize=5 r2;
+			particleSizeSpread=2 r2;
+			emitRot=0;
+			emitRotSpread=90 r45;
+			directional=0;
+			alwaysVisible=0;
+		}
+		air=1;
+		water=1;
+		ground=1;
+		count=1;
+	}
+}

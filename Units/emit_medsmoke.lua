@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 
-local unitName = "emit_fire"
+local unitName = "emit_medsmoke"
 
 --------------------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ local unitDef = {
   maxWaterDepth      = 0,
   metalMake          = 0,
   mobilestandorders  = "1",
-  name               = "emit_fire",
+  name               = "emit_medsmoke",
   nanoColor          = "0.6 1 0.15",
   noAutoFire         = false,
   objectName         = "empty.s3o",
@@ -57,12 +57,12 @@ local unitDef = {
   stealth		   = 1,
   standingfireorder  = "2",
   standingmoveorder  = "2",
-  unitname           = "emit_fire",
+  unitname           = "emit_medsmoke",
   useBuildingGroundDecal = true,
   yardMap            = "c",
   sfxtypes = {
     explosiongenerators = {
-      "custom:fire1",
+      "custom:MedCloud_Rise",
     },
   },
   sounds = {

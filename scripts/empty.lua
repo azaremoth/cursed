@@ -3,7 +3,9 @@
 local base = piece "base"
 
 function script.Create( )
---	SetUnitValue(COB.ARMORED, 1)
+	SendToUnsynced('setselectable', unitID, false)
+	Spring.SetUnitBlocking(unitID, false, false, false, false, false, false, false)
+	Spring.SetUnitCloak(unitID, 2, 0)
 end
 
 function script.Killed()

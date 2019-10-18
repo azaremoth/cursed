@@ -108,8 +108,11 @@ function GG.DropUnit(unitDefName, x, y, z, facing, teamID, useSetUnitVelocity, t
   if type(unitDefName)=='number' then --incase other gadget use unitDefID, then convert to unitDefNames
     unitDefName = UnitDefs[unitDefName].name
   end  
-  if StartsWith(unitDefName, "chicken") then -- don't drop chickens, make them appear in a cloud of dirt instead
+  if StartsWith(unitDefName, "bug") then -- don't drop bugs, make them appear in a cloud of dirt instead
     Spring.SpawnCEG("BURROWING", x, y, z)
+    return unitID
+   elseif StartsWith(unitDefName, "tc") then -- don't drop undead, make them appear as summoned
+    Spring.SpawnCEG("SUMMONING_BIGGER", x, y, z)
     return unitID
   end
   local unitDef = UnitDefNames[unitDefName]

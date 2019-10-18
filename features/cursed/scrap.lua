@@ -1,16 +1,23 @@
 -- $Id$
 
 local objects = {
-	"features/euf_container1.s3o",
-	"features/euf_container2.s3o",
-	"features/euf_container3.s3o",		
-	"features/euf_container4.s3o",
+	"features/scrap1.s3o",
+	"features/scrap2.s3o",
+	"features/scrap3.s3o",
+	"features/scrap4.s3o",
+	"features/scrap5.s3o",
+	"features/scrap6.s3o",
+	"features/scrap7.s3o",
+	"features/scrap8.s3o",
+	"features/scrap9.s3o",
+	"features/scrap10.s3o",
+	"features/scrap11.s3o",
 }
 
-local containerDef = {}
-local function createContainerDef(i)
-  containerDef["containertype" .. i] = {
-     description = [[Cargo Containers]],
+local scrapDef = {}
+local function createscrapDef(i)
+  scrapDef["scraptype" .. i] = {
+     description = [[Scrap]],
      blocking    = true,
      burnable    = false,
      reclaimable = false,
@@ -22,10 +29,7 @@ local function createContainerDef(i)
      mass        = 9999999999,
      object = objects[(i % #objects) + 1] ,
      footprintX  = 2,
-     footprintZ  = 5,
-     collisionVolumeScales = [[30 30 95]],
-     collisionVolumeType = [[Box]],
-     collisionVolumeOffsets 	= "0 0 0",
+     footprintZ  = 2,
 		customparams = { 
 			normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
 			normalmaps 		   	= "yes",
@@ -33,14 +37,14 @@ local function createContainerDef(i)
   }
 end
 
-for i=1,4 do
-  createContainerDef(i)
+for i=1,11 do
+  createscrapDef(i)
 end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-return lowerkeys( containerDef )
+return lowerkeys( scrapDef )
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

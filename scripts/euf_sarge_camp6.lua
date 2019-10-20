@@ -103,6 +103,12 @@ local function LevelAdjust()
 	Hide(lpistol)
 	Hide(rpistol)
 --	Hide(bfg)
+	Hide(sgbase)
+	Hide(sgarm1)
+	Hide(sgarm2)
+	Hide(sgarm3)
+	Hide(sgun)	
+	Hide(sgsleeve)
 end
 
 --Jumps
@@ -304,50 +310,13 @@ end
 
 --weapon 1 -----------------------------------------------------------------
 function script.QueryWeapon1 ()
-	return emit_sgun end
+			return emit_bfg 
+end
 
 function script.AimFromWeapon1 ()
-	return sgun end
-
-function script.AimWeapon1(heading, pitch)
-
-	Turn2( sgarm1, x_axis, 0, MOVEANIMATIONSPEED*6 )
-	Turn2( sgarm2, x_axis, 0, MOVEANIMATIONSPEED*6 )
-	WaitForTurn( sgarm2, x_axis )	
-	
-	attacking=true
-	Spin ( sgsleeve, z_axis, 300 )	
-	
-	local SIG_Aim = 2^1
-	Signal(SIG_Aim)
-	SetSignalMask(SIG_Aim)
-	
-	Turn( sgarm3, y_axis, heading, 4 )	
-	Turn( sgarm3, x_axis, -pitch, 4 )
-	StartThread( RestoreAfterDelay) 
-	WaitForTurn( sgarm3, x_axis )
-	WaitForTurn( sgarm3, y_axis )
-	return true
-end
-
-function script.FireWeapon1()
-		EmitSfx( emit_sgun, GUNFLARE )
-		return(1)
-end
-
---weapon 2 -----------------------------------------------------------------
-function script.QueryWeapon2 ()
-		if (level < 6) then
-			return emit_rpistol 
-		else
-			return emit_bfg 
-		end
-end
-
-function script.AimFromWeapon2 ()
 	return rloarm end
 
-function script.AimWeapon2(heading, pitch)
+function script.AimWeapon1(heading, pitch)
 	if ((level > 5) and (bfg_sound < 1)) then
 		local x, y, z = Spring.GetUnitPosition(unitID)
 		Spring.PlaySoundFile("sounds/bfg_aim.wav", 80, x, y, z)	
@@ -357,7 +326,7 @@ function script.AimWeapon2(heading, pitch)
 	Turn2( rshoulder, x_axis, 0, MOVEANIMATIONSPEED*6 )
 	attacking=true
 	
-	local SIG_Aim = 2^2
+	local SIG_Aim = 2
 	Signal(SIG_Aim)
 	SetSignalMask(SIG_Aim)
 	
@@ -375,36 +344,27 @@ function script.AimWeapon2(heading, pitch)
 	return true
 end
 
-function script.FireWeapon2()
-		if (level < 6) then
-			EmitSfx( emit_rpistol, GUNFLARE )
-			EmitSfx( emit_rgroundflash, GROUNDFLASH )
-		else
+function script.FireWeapon1()
 			bfg_sound = 0
 			EmitSfx( emit_bfg, BFGFLARE )
 			EmitSfx( emit_rgroundflash, BFGGROUNDFLASH )
-		end
 		return(1)
 end
 
---weapon 3 -----------------------------------------------------------------
-function script.QueryWeapon3 ()
-		if (level < 4) then
-			return emit_lpistol 
-		else
+--weapon 2 -----------------------------------------------------------------
+function script.QueryWeapon2 ()
 			return emit_plasma 
-		end
 end
 
-function script.AimFromWeapon3 ()
+function script.AimFromWeapon2 ()
 	return lloarm end
 
-function script.AimWeapon3(heading, pitch)
+function script.AimWeapon2(heading, pitch)
 			
 	Turn2( lshoulder, x_axis, 0, MOVEANIMATIONSPEED*6 )
 	attacking=true
 	
-	local SIG_Aim = 2^3
+	local SIG_Aim = 2^2
 	Signal(SIG_Aim)
 	SetSignalMask(SIG_Aim)
 	
@@ -416,14 +376,9 @@ function script.AimWeapon3(heading, pitch)
 	return true
 end
 
-function script.FireWeapon3()
-		if (level < 4) then
-			EmitSfx( emit_lpistol, GUNFLARE )
-			EmitSfx( emit_lgroundflash, GROUNDFLASH )
-		else
+function script.FireWeapon2()
 			EmitSfx( emit_plasma, PLASMAGUNFLARE )
 			EmitSfx( emit_lgroundflash, PLASMAGROUNDFLASH )
-		end
 		return(1)
 end
 ---------------------------------------------------------------------------

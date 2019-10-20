@@ -418,19 +418,14 @@ local CAMP6 = {
   },  
   weapons = {
 		[1] = {
-			name               	= "SARGELVL4CHAINGUN",
-			onlyTargetCategory 	= "LAND AIR",
-			badTargetCategory 	= "HEAVYARMOR",
-		},
-		[2] = {
 			name               	= "SARGELVL6BFG",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND",
 			badTargetCategory 	= "HEAVYARMOR",
 		},
-		[3] = {
-			name               	= "SARGELVL4PLASMAGUN",
+		[2] = {
+			name               	= "SARGELVL5PLASMAGUN",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND",

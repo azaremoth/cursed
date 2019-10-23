@@ -52,7 +52,7 @@ local unitDef = {
   sfxtypes = {
   explosiongenerators = {
       "custom:Big_Explosion_YELLOW",
-      "custom:EUF_Structurebuilding_Medium",
+      "custom:NUKE_150",
     },
   },  
   sounds = {

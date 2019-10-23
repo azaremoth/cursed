@@ -29,6 +29,8 @@ local rpistol = piece 'rpistol'
 local emit_rpistol = piece 'emit_rpistol'
 local plasmagun = piece 'plasmagun'
 local emit_plasma = piece 'emit_plasma'
+local blaster = piece 'blaster'
+local emit_blaster = piece 'emit_blaster'
 local bfg = piece 'bfg'
 local emit_bfg = piece 'emit_bfg'
 local sgbase = piece 'sgbase'
@@ -98,6 +100,7 @@ end
 
 ------------------------ LEVEL VISUALS
 local function LevelAdjust()
+	Hide(blaster)
 	Hide(jetpack)
 	Hide(plasmagun)
 	Hide(lpistol)

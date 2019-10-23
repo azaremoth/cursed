@@ -29,6 +29,8 @@ local rpistol = piece 'rpistol'
 local emit_rpistol = piece 'emit_rpistol'
 local plasmagun = piece 'plasmagun'
 local emit_plasma = piece 'emit_plasma'
+local blaster = piece 'blaster'
+local emit_blaster = piece 'emit_blaster'
 local bfg = piece 'bfg'
 local emit_bfg = piece 'emit_bfg'
 local sgbase = piece 'sgbase'
@@ -98,8 +100,9 @@ end
 
 ------------------------ LEVEL VISUALS
 local function LevelAdjust()
+--	Hide(blaster)
 	Hide(jetpack)
---	Hide(plasmagun)
+	Hide(plasmagun)
 	Hide(lpistol)
 	Hide(rpistol)
 --	Hide(bfg)
@@ -353,7 +356,7 @@ end
 
 --weapon 2 -----------------------------------------------------------------
 function script.QueryWeapon2 ()
-			return emit_plasma 
+			return emit_blaster 
 end
 
 function script.AimFromWeapon2 ()
@@ -377,8 +380,8 @@ function script.AimWeapon2(heading, pitch)
 end
 
 function script.FireWeapon2()
-			EmitSfx( emit_plasma, PLASMAGUNFLARE )
-			EmitSfx( emit_lgroundflash, PLASMAGROUNDFLASH )
+--			EmitSfx( emit_plasma, PLASMAGUNFLARE )
+--			EmitSfx( emit_lgroundflash, PLASMAGROUNDFLASH )
 		return(1)
 end
 ---------------------------------------------------------------------------

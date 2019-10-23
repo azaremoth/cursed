@@ -5,6 +5,7 @@ local emit3 = piece "emit3"
 local emit4 = piece "emit4"
 
 local EMIT 	= 1024+0
+local BOOM 	= 1025+0
 
 local function Emiting()
 	local x, y, z = Spring.GetUnitPosition(unitID)
@@ -13,17 +14,23 @@ local function Emiting()
 	Sleep(3000)
 	local emit_smoke = Spring.CreateUnit('emit_smoke', x, y, z, heading, team, false, false)
 	Sleep(6000)	
+	Spring.PlaySoundFile("sounds/explosion/ex_large5.wav", 20, x, y, z)
 	EmitSfx( emit1,  EMIT )	
 	Sleep(300)
 	EmitSfx( emit2,  EMIT )	
+	Spring.PlaySoundFile("sounds/explosion/ex_large3.wav", 20, x, y, z)	
 	Sleep(450)
 	EmitSfx( emit3,  EMIT )
 	EmitSfx( emit4,  EMIT )
+	Spring.PlaySoundFile("sounds/explosion/ex_large5.wav", 20, x, y, z)	
 	Sleep(150)
+	EmitSfx( emit4,  BOOM )	
+	Spring.PlaySoundFile("sounds/explosion/mini_nuke.wav", 20, x, y, z)	
 	local tower_open = Spring.CreateFeature('artower_open', x, y, z, heading, team)
 	local emit_beam = Spring.CreateUnit('noemit_high', x, y, z, heading, team, false, false)
-	local emit_smoke = Spring.CreateUnit('emit_medsmoke', x+250, y-150, z, heading, team, false, false)	
-	Sleep(30)	
+	local rubble = Spring.CreateFeature('rubble3', x-70, y, z+130, heading, team)	
+	local emit_smoke = Spring.CreateUnit('emit_medsmoke', x-70, y, z+130, heading, team, false, false)	
+	Sleep(100)	
 	Spring.DestroyUnit(unitID, false, false)
 end
 

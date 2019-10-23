@@ -425,7 +425,7 @@ local CAMP6 = {
 			badTargetCategory 	= "HEAVYARMOR",
 		},
 		[2] = {
-			name               	= "SARGELVL5PLASMAGUN",
+			name               	= "BLASTER",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND",

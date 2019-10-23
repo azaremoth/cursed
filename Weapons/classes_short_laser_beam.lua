@@ -1,23 +1,42 @@
 ----------------------------------- ADAPTIONS TO BASE CLASS ------------------------------
+local BLASTER = {
+    avoidFriendly      = true,
+	collideFriendly    = true,
+	accuracy           = 512,	
+    areaOfEffect       = 32,	
+	range              = 500,
+    reloadtime 		   = 0.20,
+    rgbColor           = {0, 1, 0},
+	rgbColor2 		   = {1, 1, 1},
+	explosionGenerator = "custom:BlasterImpact",	
+    damage 					= { default = 60, flyer = 60, heavy = 60, light = 60, },
+}
 local SNIPER_RIFLE = {
     avoidFriendly      = true,
 	collideFriendly    = true,
-    areaOfEffect       		= 20,	
-	range                   = 800,
-    reloadtime 				= 7.00,
+	accuracy           = 20,	
+    areaOfEffect       = 20,	
+	range              = 800,
+    reloadtime 		   = 7.00,
+    rgbColor           = {1, 0, 0},
+	rgbColor2 		   = {1, 1, 1},
+	explosionGenerator = "custom:SNIPER_LASER",	
     damage 					= { default = 120, flyer = 120, heavy = 120, light = 800, },
 }
 local SNIPER_RIFLE_BUNKER = {
     avoidFriendly      = false,
 	collideFriendly    = false,
-    areaOfEffect       		= 20,	
-	range                   = 800,
-    reloadtime 				= 7.00,
+	accuracy           = 20,	
+    areaOfEffect       = 20,	
+	range              = 800,
+    reloadtime 		   = 7.00,
+    rgbColor           = {1, 0, 0},
+	rgbColor2 		   = {1, 1, 1},
+	explosionGenerator = "custom:SNIPER_LASER",	
     damage 					= { default = 120, flyer = 120, heavy = 120, light = 800, },
 }
 -----------------------------------  BASE CLASS -------------------------------------------
 local SHORTBEAMBASE = {
-	accuracy           = 20,
     beamTime           = 0.10,
 	beamTTL 		   = 15,
 	beamDecay		   = 0.50,
@@ -25,19 +44,16 @@ local SHORTBEAMBASE = {
     coreThickness      = 0.2,
     craterBoost        = 0,
     craterMult         = 0,
-    energypershot           = 0,
-    explosionGenerator = "custom:SNIPER_LASER",
+    energypershot      = 0,
     fireStarter        = 20,
     impulseBoost       = 0,
     interceptedByShieldType = 1,
     largeBeamLaser     = true,
     laserFlareSize     = 3,
     name               = "Laser Rifle",
-    rgbColor           = {1, 0, 0},
-	rgbColor2 		   = {1, 1, 1},
     soundHit           = "null",
     soundStart         = "sniper_gunshot",
-	soundStartVolume  	= 100,	
+	soundStartVolume   = 100,	
     soundTrigger       = true,
 	sweepFire		   = false,	
     targetMoveError    = 0.4,
@@ -83,6 +99,7 @@ function WeaponDefMergeTable(primary, secondary, deep)
 end
 
 return lowerkeys({
+	BLASTER = WeaponDefMergeTable(SHORTBEAMBASE, BLASTER),
 	SNIPER_RIFLE = WeaponDefMergeTable(SHORTBEAMBASE, SNIPER_RIFLE),
 	SNIPER_RIFLE_BUNKER = WeaponDefMergeTable(SHORTBEAMBASE, SNIPER_RIFLE_BUNKER),
 })

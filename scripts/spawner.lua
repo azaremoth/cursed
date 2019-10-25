@@ -2,19 +2,16 @@
 
 local function Checking()
 	local x, y, z = Spring.GetUnitPosition(unitID)
-	local converterTeam = Spring.GetUnitTeam(unitID)
+	local spawnerTeam = Spring.GetUnitTeam(unitID)
 	while true do
-		local unitsAround = Spring.GetUnitsInSphere(x,y,z, 300)
+		local unitsAround = Spring.GetUnitsInSphere(x,y,z, 450)
 		for _,aUnitID in ipairs(unitsAround) do
 			local aLocalteam = Spring.GetUnitTeam(aUnitID)
 			local aAi = select(4, Spring.GetTeamInfo(aLocalteam))		
-			if (not aAi) and (aLocalteam ~= converterTeam) and Spring.AreTeamsAllied(aLocalteam, converterTeam) then
-				for _,eUnitID in ipairs(unitsAround) do
-					local eTeam = Spring.GetUnitTeam(eUnitID)
-					if (eUnitID ~= unitID) and (eTeam == converterTeam) then
-						Spring.TransferUnit(eUnitID,aLocalteam)
-					end
-				end
+			if (not aAi) and (aLocalteam ~= spawnerTeam) and not Spring.AreTeamsAllied(aLocalteam, spawnerTeam) then
+				local zero = Spring.CreateUnit("tc_ghoul", x-30,y,z+10, math.random(3), spawnerTeam)
+				local one = Spring.CreateUnit("tc_ghoul", x+10,y,z-20, math.random(3), spawnerTeam)
+				local two = Spring.CreateUnit("tc_ghoul", x+20,y,z+10, math.random(3), spawnerTeam)				
 			end
 		end
 		Sleep(1000)

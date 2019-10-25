@@ -9,9 +9,9 @@ local function Checking()
 			local aLocalteam = Spring.GetUnitTeam(aUnitID)
 			local aAi = select(4, Spring.GetTeamInfo(aLocalteam))		
 			if (not aAi) and (aLocalteam ~= spawnerTeam) and not Spring.AreTeamsAllied(aLocalteam, spawnerTeam) then
-				local zero = Spring.CreateUnit("tc_ghoul", x-30,y,z+10, math.random(3), spawnerTeam)
-				local one = Spring.CreateUnit("tc_ghoul", x+10,y,z-20, math.random(3), spawnerTeam)
-				local two = Spring.CreateUnit("tc_ghoul", x+20,y,z+10, math.random(3), spawnerTeam)				
+				local zero = Spring.CreateUnit("bug_med", x-30,y,z+10, math.random(3), spawnerTeam)
+				local one = Spring.CreateUnit("bug_med", x+10,y,z-20, math.random(3), spawnerTeam)
+				local two = Spring.CreateUnit("bug_med", x+20,y,z+10, math.random(3), spawnerTeam)				
 			end
 		end
 		Sleep(1000)

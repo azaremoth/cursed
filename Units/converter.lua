@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 
-local unitName = "noemit_high"
+local unitName = "converter"
 
 --------------------------------------------------------------------------------
 
@@ -39,14 +39,14 @@ local unitDef = {
   maxWaterDepth      = 0,
   metalMake          = 0,
   mobilestandorders  = "1",
-  name               = "noemit_high",
+  name               = "converter",
   nanoColor          = "0.6 1 0.15",
   noAutoFire         = false,
   objectName         = "empty.s3o",
   radarDistance      = 1,
   reclaimable        = false,
   
-  script = 'noemit.lua',
+  script = 'converter.lua',
   
   selfDestructAs     = "SMOKE_EXPLOSION",
   showNanoFrame      = false,
@@ -57,7 +57,7 @@ local unitDef = {
   stealth		   = 1,
   standingfireorder  = "2",
   standingmoveorder  = "2",
-  unitname           = "noemit_high",
+  unitname           = "converter",
   useBuildingGroundDecal = true,
   yardMap            = "c",
   sfxtypes = {

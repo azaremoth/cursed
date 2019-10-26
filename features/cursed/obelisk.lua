@@ -1,25 +1,26 @@
-local objectname= "koth_crystal_small" 
+local objectname= "obelisk" 
 local featureDef  =  {
-   name           = "koth_crystal_small",
-   blocking       = false,	
-   mass			   = 1000000000,
-   collisionVolumeType 	= "Box",
-   collisionVolumeScales 	= "5 5 5",
-   collisionVolumeOffsets 	= "0 0 0",	   
+   name           = "obelisk",
+   blocking       = true,	
+   mass			   = 1000000000,	   
    damage            = 1000000000,
-   description       = "small purple crystals",
+   description       = "Obelisk",
    energy            = 0,
    flammable         = 0,
    nodrawundergray   = false,
    footprintX        = 1,
    footprintZ        = 1,
-   upright          = false,
-   height      		= "5",
+   upright          = true,
+   height      		= "80",
    hitdensity       = "1000000000",
    metal            = 0,
-   object           = "crystal_small.s3o",  
+   object           = "features/obelisk.s3o",  
    reclaimable		= false,
    autoreclaimable	= false,
    world            = "allworld",
+   customparams = { 
+		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
+		normalmaps 		   	= "yes",
+   },   
 }
 return lowerkeys({[featureDef.name] = featureDef})

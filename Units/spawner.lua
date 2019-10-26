@@ -20,7 +20,10 @@ local unitDef = {
   category           = "CANTATTACK",
   corpse             = "",
     customParams          = {	
-				factionname		   = "neutral",
+		factionname		   = "neutral",
+		spawnunitcount	   = "3",
+		spawnradius		   = "450",	
+		spawnunit		   = "bug_med",		
 	},
   damageModifier     = 0.001,
   description        = "Emiter for fire",

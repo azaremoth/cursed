@@ -20,7 +20,8 @@ local unitDef = {
   category           = "CANTATTACK",
   corpse             = "",
     customParams          = {	
-				factionname		   = "neutral",
+		factionname		= "neutral",
+		converterradius	= "300",
 	},
   damageModifier     = 0.001,
   description        = "Emiter for fire",

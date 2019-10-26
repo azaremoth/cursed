@@ -1,4 +1,5 @@
 --include "common.lua"
+local radius = tonumber(UnitDefs[unitDefID].customParams.converterradius) or 300
 
 local function Checking()
 	local x, y, z = Spring.GetUnitPosition(unitID)

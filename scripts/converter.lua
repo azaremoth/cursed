@@ -13,6 +13,8 @@ local function Checking()
 				for _,eUnitID in ipairs(unitsAround) do
 					local eTeam = Spring.GetUnitTeam(eUnitID)
 					if (eUnitID ~= unitID) and (eTeam == converterTeam) then
+						local lx, ly, lz = Spring.GetUnitPosition(eUnitID)
+						Spring.SpawnCEG('SCORPION_CEG', lx, ly, lz)						
 						Spring.TransferUnit(eUnitID,aLocalteam)
 					end
 				end

@@ -23,7 +23,11 @@ end
 local function Spawning()
 	Sleep(50)
 	for i = 1,spawnunitcount do
-		local spawnunit = Spring.CreateUnit(spawnunit, x-(i*10),y,z+(i*10), math.random(3), spawnerTeam)	
+		lx = x-(i*math.random(50))
+		ly = y
+		lz = z+(i*math.random(50))
+		Spring.SpawnCEG('BURROWING_BIGGEST', lx, ly, lz)
+		local spawnunit = Spring.CreateUnit(spawnunit, lx, ly, lz, math.random(3), spawnerTeam)	
 	end
 end
 

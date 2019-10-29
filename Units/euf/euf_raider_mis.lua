@@ -57,6 +57,7 @@ local unitDef = {
   noAutoFire         = false,
   noChaseCategory    = "AIR",
   objectName         = "euf_raider.s3o",
+  script             = "euf_raider.cob",
   selfDestructAs     = "NULL",
   showNanoFrame      = false,
   side               = "imperials",
@@ -73,8 +74,8 @@ local unitDef = {
   trackWidth             = 40, 
 
   turnInPlace        = false,
-  turnInPlaceSpeedLimit = 4.5,
-  turnRate           = 500,
+  turnInPlaceSpeedLimit = 0.1,
+  turnRate           = 0.1,
   
   unitname           = "euf_raider_mis",
   sfxtypes = {

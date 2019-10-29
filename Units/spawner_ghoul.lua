@@ -21,8 +21,8 @@ local unitDef = {
   corpse             = "",
     customParams          = {	
 		factionname		   = "neutral",
-		spawnunitcount	   = "5",
-		spawnradius		   = "450",	
+		spawnunitcount	   = "4",
+		spawnradius		   = "350",	
 		spawnunit		   = "tc_ghoul",		
 	},
   damageModifier     = 0.001,

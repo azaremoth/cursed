@@ -57,6 +57,7 @@ local unitDef = {
   noAutoFire         = false,
   noChaseCategory    = "AIR",
   objectName         = "euf_raider.s3o",
+  script             = "euf_raider.cob",
   selfDestructAs     = "NULL",
   showNanoFrame      = false,
   side               = "imperials",

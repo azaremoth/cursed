@@ -28,8 +28,8 @@ local function createBuildingModuleDef(i)
      footprintX  = 6,
      footprintZ  = 6,
 	 collisionVolumeType 	= "Box",
-	 collisionVolumeScales 	= "60 30 60",
---	 collisionVolumeOffsets 	= "0 0 0", 
+	 collisionVolumeScales 	= "145 55 115",
+  	 collisionVolumeOffsets 	= "0 -8 0", 
 	 customparams = { 
 			normaltex 		= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
 			normalmaps 		= "yes",			

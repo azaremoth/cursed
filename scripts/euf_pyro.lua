@@ -212,7 +212,7 @@ function script.QueryWeapon1 ()
 end
 
 function script.AimFromWeapon1 ()
-	return head end
+	return rloarm end
 
 function script.AimWeapon1(heading, pitch)
 	if inbunker then

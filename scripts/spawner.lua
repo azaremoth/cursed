@@ -2,6 +2,7 @@
 local spawnunitcount = tonumber(UnitDefs[unitDefID].customParams.spawnunitcount) or 5
 local radius = tonumber(UnitDefs[unitDefID].customParams.spawnradius) or 450
 local spawnunit = UnitDefs[unitDefID].customParams.spawnunit or "tc_ghoul"
+local spawningceg = UnitDefs[unitDefID].customParams.spawningceg or 'BURROWING_BIGGEST'
 
 local x, y, z = Spring.GetUnitPosition(unitID)
 local spawnerTeam = Spring.GetUnitTeam(unitID)
@@ -26,8 +27,9 @@ local function Spawning()
 		lx = x-(i*math.random(50))
 		ly = y
 		lz = z+(i*math.random(50))
-		Spring.SpawnCEG('BURROWING_BIGGEST', lx, ly, lz)
-		local spawnunit = Spring.CreateUnit(spawnunit, lx, ly, lz, math.random(3), spawnerTeam)	
+		Spring.SpawnCEG(spawningceg, lx, ly, lz)
+		local unit = Spring.CreateUnit(spawnunit, lx, ly, lz, math.random(3), spawnerTeam)
+		Spring.GiveOrderToUnit(unitID, CMD.PATROL, { lx + math.random(25)-math.random(30), ly, lz + math.random(30)-math.random(25)}, {})
 	end
 end
 

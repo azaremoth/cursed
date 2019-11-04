@@ -99,7 +99,7 @@ local EnemyDecloakEffect      = {
 
 function gadget:UnitCloaked(unitID,unitDefID,teamID)
   local canburrowdef = UnitDefs[unitDefID].customParams.canburrow
-  if (canburrowdef ~= "true" and canburrowdef ~= "1" ) then
+  if (canburrowdef ~= "true" and canburrowdef ~= "1" and Lups ~= nil) then
 	  local allyTeamID = Spring.GetUnitAllyTeam(unitID)
 
 	  local LocalAllyTeamID

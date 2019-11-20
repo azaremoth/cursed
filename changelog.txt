@@ -1,3 +1,13 @@
+>> Major changes 1.443 => 1.444
+
+Polishing
+- furhter optimized script controlling loading and unloading of units. It should be much better now.
+- Atlased all imperial building (will probably not be very obvious ingame)
+
+Features
+- added a lot of code, units and map features that are used in campaign gameplay only. This was a lot of invisible work...
+
+
 >> Major changes 1.442 => 1.443
 
 Polishing

@@ -1100,7 +1100,7 @@ local function SetTeamUnlocks(teamID, customKeys)
 end
 
 local function SetTeamAbilities(teamID, customKeys)
-	local abilityData = CustomKeyToUsefulTable(customKeys and customKeys.campaignabilities)
+--	local abilityData = CustomKeyToUsefulTable(customKeys and customKeys.campaignabilities)
 	if not abilityData then
 		return
 	end

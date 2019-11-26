@@ -1,19 +1,35 @@
 {
   "title" : "Cursed",
   "setups" : [
-    {
-      "package": {
-          "id": "stable",
-          "display": "Stable"
-      },
-      "downloads": {
-          "games" : ["tc:stable", "chobby:test", "tchobby:test"],
-          "engines" : [ "104.0.1-1344-g07bdbaf maintenance" ]
-      },
-      "no_start_script" : true,
-      "launch": {
-      "start_args" : ["--menu", "rapid://tchobby:test"]
-       }
-    }
-  ]
+		{
+		  "package": {
+			  "id": "test-portable",
+			  "display": "Stable",
+              "portable": true			  
+		  },
+		  "downloads": {
+			  "games" : ["tc:stable", "chobby:test", "tchobby:stable"],
+			  "engines" : [ "104.0" ]
+		  },
+		  "no_start_script" : true,
+		  "launch": {
+		  "start_args" : ["--menu", "rapid://tchobby:stable"]
+            }
+        },
+        {
+		  "package": {
+			  "id": "dev-lobby",
+			  "display": "Develop",
+              "portable": true			  
+		  },
+		  "downloads": {
+			  "engines" : [ "104.0" ]
+		  },
+		  "no_start_script" : true,
+          "no_downloads" : true,		  
+		  "launch": {
+		  "start_args" : ["--menu", "tchobby $VERSION"]
+            }
+        }		
+    ]
 }

@@ -1,26 +1,32 @@
 local featureDef	=	{
-	name				= "DesertRock2",
+	name				= "desertcliffs",
 	blocking			= true,
 	category			= "rocks",
-	damage				= 3000,
-	description			= "Desert Rock",
+	damage				= 1000000,
+	description			= "Desert Cliffs",
 
+	collisionVolumeType 		= "Box",
+	collisionVolumeScales 		= "100 200 300",
+	collisionVolumeOffsets 		= "0 90 0",	
+	
 	flammable			= 0,
 	footprintX			= 3,
 	footprintZ			= 3,
-	height				= "36",
+	height				= "120",
 	hitdensity			= "5",
 	metal 				= 0,
 
-	object				= "features/desert/desertrock2.s3o",
-	reclaimable			= true,
-	autoreclaimable		= true, 	
+	object				= "features/rocks/rocks_cliffs.s3o",
+	reclaimable			= false,
+	autoreclaimable		= false, 
+	upright 			= true,
+	
 	world				= "All Worlds",
 	customparams = { 
 		author 	 		= "yughues", 
 		category 	 	= "rock", 
 		normaltex 		= "unittextures/normalmaps/feat_rocksA.png",
-		randomrotate	= "true", 
+		randomrotate	= "false", 
 	}, 
 }
 return lowerkeys({[featureDef.name] = featureDef})

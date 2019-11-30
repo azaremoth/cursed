@@ -1,5 +1,5 @@
 local featureDef	=	{
-	name				= "desertcliffs",
+	name				= "rockcliffs",
 	blocking			= true,
 	category			= "rocks",
 	damage				= 1000000,

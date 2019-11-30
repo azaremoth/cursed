@@ -13,7 +13,7 @@ local objects = {
 local BuildingModuleDef = {}
 local function createBuildingModuleDef(i)
   BuildingModuleDef["rocksmars_big" .. i] = {
-     description = [[Big rocks]],
+     description = [[Big mars rocks]],
 	 autoreclaimable = false,
      blocking    = true,
      burnable    = false,
@@ -29,7 +29,7 @@ local function createBuildingModuleDef(i)
      footprintX  = 8,
      footprintZ  = 8,
 	 customparams = { 
-			normaltex 		= "unittextures/normalmaps/feat_rocksA.png",
+			normaltex 		= "unittextures/normalmaps/feat_rocksM.png",
 			normalmaps 		= "yes",			
 		},  
   }

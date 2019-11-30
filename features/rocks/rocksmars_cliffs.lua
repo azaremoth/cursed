@@ -1,5 +1,5 @@
 local featureDef	=	{
-	name				= "desertcliffs",
+	name				= "marscliffs",
 	blocking			= true,
 	category			= "rocks",
 	damage				= 1000000,
@@ -25,7 +25,7 @@ local featureDef	=	{
 	customparams = { 
 		author 	 		= "yughues", 
 		category 	 	= "rock", 
-		normaltex 		= "unittextures/normalmaps/feat_rocksA.png",
+		normaltex 		= "unittextures/normalmaps/feat_rocksM.png",
 		randomrotate	= "false", 
 	}, 
 }

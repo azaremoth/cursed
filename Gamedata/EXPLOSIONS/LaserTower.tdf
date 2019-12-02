@@ -66,7 +66,7 @@
         size=3;
         length=3;
         sizeGrowth=1.5;
-        ttl=2;
+        ttl=6;
         frontOffset=0;
 		frontTexture=cursedring;
 		sideTexture=null_texture;

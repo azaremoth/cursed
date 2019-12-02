@@ -54,8 +54,29 @@
 	}
 }
 
-[LaserTowerGunProjectileGroundflash]
+[LaserTowerGunProjectile]
 {
+   [BitmapMuzzleFlame]
+   {
+      class = CBitmapMuzzleFlame;
+      [properties]
+      {
+        dir = dir; // don't touch me
+        colorMap=0.0 1 0.0 0.01 0.0 1.0 0.0 0.01 0.2 1 0.5 0.01 0 0 0 0.01; 
+        size=3;
+        length=3;
+        sizeGrowth=1.5;
+        ttl=2;
+        frontOffset=0;
+		frontTexture=cursedring;
+		sideTexture=null_texture;
+      }
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
 	[groundflash]
 	{
       		flashSize = 20;
@@ -63,8 +84,8 @@
       		circleGrowth = 0;
       		circleAlpha = 0;
       		ttl = 7;
-		color = 0.04, 1.0, 0.4;
-		air=1;
+			color = 0.04, 1.0, 0.4;
+			air=1;
      		ground=1;
       		water=1;
 

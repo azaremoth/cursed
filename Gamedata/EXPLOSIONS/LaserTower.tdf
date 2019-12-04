@@ -62,11 +62,11 @@
       [properties]
       {
         dir = dir; // don't touch me
-        colorMap=0.0 1 0.0 0.01 0.0 1.0 0.0 0.01 0.2 1 0.5 0.01 0 0 0 0.01; 
+        colorMap=0.0 1 0.0 0.01 0.2 1 0.5 0.005 0 0 0 0.001; 
         size=3;
         length=3;
         sizeGrowth=1.5;
-        ttl=6;
+        ttl=8;
         frontOffset=0;
 		frontTexture=cursedring;
 		sideTexture=null_texture;

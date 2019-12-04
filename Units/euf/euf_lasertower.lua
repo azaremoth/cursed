@@ -30,7 +30,7 @@ local unitDef = {
 		factionname			= "imperials",
 		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
 		normalmaps 		   	= "yes",
-		helptext 			= "Heavy Defense Tower. Perfect against all sorts of GROUND targets."
+		helptext 			= "Heavy Defense Tower equiped with a high velocity (HV) plasma gun. Perfect against all sorts of GROUND targets."
   },
   defaultmissiontype = "GUARD_NOMOVE",
   description        = "Heavy Defense Tower",
@@ -46,7 +46,7 @@ local unitDef = {
   maxDamage          = 4000,
   maxSlope           = 25,
   maxWaterDepth      = 0,
-  name               = "Tachyon tower",
+  name               = "HV-Plasma tower",
   nanoColor          = "0 0 0",
   noAutoFire         = false,
   objectName         = "euf_lasertower.s3o",
@@ -108,7 +108,7 @@ local unitDef = {
 
 local weaponDefs = {
   LASERTOWERGUN = {
-    name               = "Tachyon Gun",
+    name               = "HV-Plasma",
     areaOfEffect       = 40,	
     accuracy           = 100,
     burnblow           = true,	

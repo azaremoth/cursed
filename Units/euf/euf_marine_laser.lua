@@ -1,46 +1,45 @@
--- UNITDEF -- euf_sniper --
+-- UNITDEF -- EUF_MARINE --
 --------------------------------------------------------------------------------
 
-local unitName = "euf_sniper"
+local unitName = "euf_marine_laser"
 
 --------------------------------------------------------------------------------
 
 local unitDef = {
-  acceleration       = 1.5,
+  acceleration       = 1.0,
+  activateWhenBuilt  = false,
   armortype          = "LIGHT",
+  badTargetCategory  = "AIR",
   brakeRate          = 1.5,
-  buildCostEnergy    = 400,
-  buildCostMetal     = 400,
-  buildPic           = "euf_sniper.png",
-  buildTime          = 400,
+  buildCostEnergy    = 150,
+  buildCostMetal     = 150,
+  buildPic           = "euf_marine.png",
+  buildTime          = 150,
+  canAssist          = false,
   canAttack          = true,
-  canCloak           = true,
+  canBeAssisted      = false,
+  canBeCloaked       = false,
   canGuard           = true,
   canMove            = true,
   canPatrol          = true,
+  canReclaim         = false,
+  canRepair          = false,
   canstop            = true,
   cantBeTransported  = false,
   category           = "EUF LAND LIGHTARMOR",
-  cloakCost          = 0, --was 30
-  cloakCostMoving    = 0, --was 60
-  corpse             = "dead", 
   collisionVolumeOffsets 	= "0 0 0",
   collisionVolumeScales 	= "17 33 17",
   collisionVolumeType 		= "CylY",
   -- collisionVolumeTest 		= 1,
+  corpse             = "dead",
   customParams          = {
-  	factionname		   = "imperials",
-	isinfantry = "true",	
-	mana = 100,
-	manaregeneration = 2,
-	manacloakcosts = 2.25,
-	RequireTech         = "Factory",
-	helptext = "Cloakable long ranged anti-infantry. Very effective against light units and light artillery. Needs a factory to be build."
-  },    
+	factionname	= "imperials",
+	isinfantry = "true",
+    helptext 	= "Basic combat unit with laser gun."
+  },
   defaultmissiontype = "Standby",
-  description        = "Cloakable long ranged anti-infantry. Prerequisite: War Factory",
-  decloakDistance    = 100,
---  energyMake         = "-1",
+  description        = "Combat unit",  
+  --  energyMake         = "-0.5",
   explodeAs          = "NULL",
   firestandorders    = "1",
   footprintX         = 2,
@@ -49,46 +48,49 @@ local unitDef = {
   idleAutoHeal       = 2.5,
   idleTime           = 400,
   mass               = 1100,
-  maxDamage          = 630,
-  maxSlope           = 14,
+  maxDamage          = 900,
+  maxSlope           = 20,
   maxVelocity        = 2.2,
   maxWaterDepth      = 12,
   mobilestandorders  = "1",
   movementClass      = "Trooper2X2",
-  name               = "Sniper",
+  name               = "Marine",
   nanoColor          = "0 0 0",
   noAutoFire         = false,
-  noChaseCategory    = "AIR",
-  objectName         = "euf_sniper.s3o",
+  noChaseCategory    = "",
+  objectName         = "euf_marine_laser.s3o",
   radarDistance      = 512,
-  repairable         = false,  
-  script             = "euf_sniper.lua",
+  repairable         = false,
+  script             = "euf_marine.lua",
   selfDestructAs     = "NULL",
   showNanoFrame      = false,
+  showNanoSpray      = false,
   side               = "imperials",
   sightDistance      = 512,
-  smoothAnim         = true,
+  smoothAnim         = false,
   standingfireorder  = "2",
-  standingmoveorder  = "2",
-  turnRate           = 2500,
-  unitname           = "euf_sniper",
+  standingmoveorder  = "1",
+  terraformSpeed     = 0,
+  turnRate           = 1500,
+  unitname           = "euf_marine_laser",
   upright            = true,
+  workerTime         = 0,
   sfxtypes = {
     explosiongenerators = {
+      "custom:BLOOD_EXPLOSION",
       "custom:RaiderLaserFlare",
       "custom:MARINEGROUNDFLASH",
-      "custom:BLOOD_EXPLOSION",
-      "custom:blood_spray",	  
-    },
+      "custom:blood_spray",
+	  },
   },
-  sounds = {
+	sounds = {
     canceldestruct     = "",
     underattack        = "voices_emergency",
     arrived = {
       "",
     },
     cant = {
-      "",
+      "cannot",
     },
     count = {
       "",
@@ -99,49 +101,48 @@ local unitDef = {
       "",
     },
     ok = {
-      "sniper",
+      "marine_move",
     },
     select = {
-      "sniper",
+      "marine_select",
     },
-  },
+  },  
   weapons = {
-    [1]  = {
-      name                = "SNIPER_RIFLE",
+	[1]  = {
+      name                = "LASERGUN",
       mainDir            = "0 0 1",
-      maxAngleDif        = 120,
-      badTargetCategory  = "AIR HEAVYARMOR",
+      maxAngleDif        = 180,
       onlyTargetCategory = "LAND",
+      badTargetCategory = "HEAVYARMOR",	  
     },
-	[2]  = {
-      name                = "SNIPER_RIFLE_BUNKER",
-      badTargetCategory  = "AIR HEAVYARMOR",
+    [2]  = {
+      name                = "LASERGUN_BUNKER",
       onlyTargetCategory = "LAND",
-    },
+      badTargetCategory = "HEAVYARMOR",	    	  
+	},
   },
 }
-
 
 --------------------------------------------------------------------------------
 
 local featureDefs = {
   dead = {	
-	resurrectable	   = 1,  
+	resurrectable	   = 1,   
     blocking           = false,
-	customParams          = {
-		resurrectintounit	= "tc_enforcer",
-		featuredecaytime	= "60"			
-	},  
+	  customParams          = {
+		resurrectintounit	= "tc_undeadmarine_gun",
+		featuredecaytime	= "60"		
+	  },	
     damage             = 300,
-    mass               = 1100,	
-    description        = "Dead Sniper",
+    mass               = 1100,
+    description        = "Dead marine",
     energy             = 0,
-    footprintX         = 1,
-    footprintZ         = 1,
+    footprintX         = 2,
+    footprintZ         = 2,
     height             = "5",
     hitdensity         = "100",
     metal              = 0,
-    object             = "euf_sniper_dead.s3o",
+    object             = "euf_marine_dead.s3o",
     reclaimable        = false,
 	smoketime 		   = 0,	
   },

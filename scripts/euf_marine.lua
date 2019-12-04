@@ -231,7 +231,7 @@ end
 
 --weapon 1 -----------------------------------------------------------------
 function script.QueryWeapon1 ()
-	return gun
+	return emit
 end
 
 function script.AimFromWeapon1 ()

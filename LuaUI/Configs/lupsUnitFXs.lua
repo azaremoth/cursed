@@ -22,7 +22,10 @@ effectUnitDefs = {
   tc_shade_lvl8 = {    {class='GroundFlash', options=HeroAura},     {class='StaticParticles', options=MergeTable(Greenglow_tiny_stable,{piece="emit_lkatana"})}, {class='AirJet', options={color={0.6,1.0,0.15}, width=3, length=-50, piece="emit_lkatana", onActive=false, noIconDraw = true}},	},
   tc_shade_lvl9 = {    {class='GroundFlash', options=HeroAura},     {class='StaticParticles', options=MergeTable(Greenglow_tiny_stable,{piece="emit_rkatana"})},	{class='StaticParticles', options=MergeTable(Greenglow_tiny_stable,{piece="emit_lkatana"})}, {class='AirJet', options={color={0.6,1.0,0.15}, width=3, length=-50, piece="emit_rkatana", onActive=false, noIconDraw = true}}, {class='AirJet', options={color={0.6,1.0,0.15}, width=3, length=-50, piece="emit_lkatana", onActive=false, noIconDraw = true}},	},
   tc_shade_lvl10 = {    {class='GroundFlash', options=HeroAura},    {class='StaticParticles', options=MergeTable(Greenglow_tiny_stable,{piece="emit_rkatana"})},	{class='StaticParticles', options=MergeTable(Greenglow_tiny_stable,{piece="emit_lkatana"})}, {class='AirJet', options={color={0.6,1.0,0.15}, width=3, length=-50, piece="emit_rkatana", onActive=false, noIconDraw = true}}, {class='AirJet', options={color={0.6,1.0,0.15}, width=3, length=-50, piece="emit_lkatana", onActive=false, noIconDraw = true}},	},
-  
+
+  euf_bazooka = {
+	   {class='AirJet', options={color={1, 0.25, 0.47}, width=2, length=12, piece="emit", emitVector = {0, 0, 1}, onActive=false, noIconDraw = true}},  
+  },    
   euf_factory = { 
 	{class='ShieldJitter', options={layer=-16, life=math.huge, pos={0,0,0}, size=50, precision=1, strength=0.010, onActive=true, repeatEffect=true, noIconDraw = true}},
    }, 
@@ -41,7 +44,7 @@ effectUnitDefs = {
   },
   euf_priest = {
     {class='GroundFlash', options=FocusAura},  
-  },    
+  }, 
   euf_transport = {
        {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, piece="dthrust1", emitVector = {0, 1, 0}, onActive=false, noIconDraw = true}}, 
        {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, piece="dthrust2", emitVector = {0, 1, 0}, onActive=false, noIconDraw = true}}, 

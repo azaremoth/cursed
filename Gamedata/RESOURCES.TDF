@@ -112,6 +112,8 @@
 			whitering=cursed/whitering.tga;			
 			yellowflare=cursed/yellowflare.tga;
 			yellowgunflare=cursed/yellowgunflare.tga;
+			purpleflare=cursed/purpleflare.tga;
+			purplegunflare=cursed/purplegunflare.tga;			
 			yellowgunshot=cursed/yellowgunshot.tga;
 			yellowgunshot_longdelay=cursed/yellowgunshot_longdelay.tga;				
 			blueflare2=cursed/blueflare2.tga;

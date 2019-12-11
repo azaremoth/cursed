@@ -1,0 +1,55 @@
+[RIPPERGUNFLARE]
+{
+   [BitmapMuzzleFlame]
+   {
+	class = CBitmapMuzzleFlame;
+      
+	[properties]
+      	{
+         	dir = dir;
+         	colorMap=1.00 0.25 0.47 0.02	1.00 0.25 0.47 0.02	0 0 0 0.01; 
+          	size=5;
+          	length=20;
+          	sizeGrowth=1;
+          	ttl=2;
+          	frontOffset=0.1;
+          	sideTexture=yellowgunflare;
+          	frontTexture=yellowflare;
+      	}
+   water=1;
+   air=1;
+   underwater=1;
+   ground=1;
+   count=1;
+   }
+	[groundflash]
+	{
+      		flashSize = 10;
+      		flashAlpha = 0.25;
+      		circleGrowth = 0;
+      		circleAlpha = 0;
+      		ttl = 3;
+			color = 1, 0.25, 0.47;
+			air=1;
+     		ground=1;
+      		water=1;
+
+	}
+}
+
+[RIPPERGROUNDFLASH]
+{
+	[groundflash]
+	{
+      	flashSize = 10;
+      	flashAlpha = 0.25;
+      	circleGrowth = 0;
+      	circleAlpha = 0;
+      	ttl = 3;
+		color = 1, 0.25, 0.47;
+		air=1;
+     	ground=1;
+      	water=1;
+
+	}
+}

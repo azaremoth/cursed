@@ -180,7 +180,7 @@ local weaponDefs = {
     },
   },
   BELIALGUN = {
-      name                    = "Plasma Cannon",
+      name                    = "Gattling Cannon",
       accuracy                = 256,
       areaOfEffect            = 24,
       -- beamweapon              = true,
@@ -218,7 +218,7 @@ local weaponDefs = {
       weaponVelocity          = 1500,
     damage = {
       default            = 26,
-      flyer              = (26*0.75),
+      flyer              = 26,
       heavy              = (26*0.75),
       light              = 26,
     },

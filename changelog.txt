@@ -1,3 +1,16 @@
+>> Major changes 1.444 => 1.445
+
+Polishing
+- Made weapon visuals for consistent to damage classes (e.g. plasma good vs. light and heavy, laser good vs. light, ...)
+
+Balance
+- Replaced the Scorpion's gun with a laser (good vs. light armor, no aa capability) 
+
+
+
+
+
+
 >> Major changes 1.443 => 1.444
 
 Polishing
@@ -6,6 +19,7 @@ Polishing
 
 Features
 - added a lot of code, units and map features that are used in campaign gameplay only. This was a lot of invisible work...
+
 
 
 >> Major changes 1.442 => 1.443

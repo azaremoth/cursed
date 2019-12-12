@@ -1,4 +1,30 @@
 ----------------------------------- ADAPTIONS TO BASE CLASS ------------------------------
+local RAIDERLASER = {
+    avoidFriendly      = true,
+	collideFriendly    = true,
+	accuracy           = 64,	
+    areaOfEffect       = 20,	
+	range              = 400,
+    reloadtime 		   = 0.80,
+    rgbColor           = {1, 0, 0},
+	rgbColor2 		   = {1, 1, 1},
+    soundStart         = "medlaser_fire",	
+	explosionGenerator = "custom:RaiderLaserImpact",	
+    damage 					= { default = 160, flyer = (160*0.33), heavy = (160*0.75), light = 160, },
+}
+local SCORPIONLASER = {
+    avoidFriendly      = true,
+	collideFriendly    = true,
+	accuracy           = 64,	
+    areaOfEffect       = 20,	
+	range              = 400,
+    reloadtime 		   = 0.66,
+    rgbColor           = {1, 0, 0},
+	rgbColor2 		   = {1, 1, 1},
+    soundStart         = "scorpion_laser",	
+	explosionGenerator = "custom:RaiderLaserImpact",	
+    damage 					= { default = 100, flyer = (100*0.33), heavy = (100*0.75), light = 100, },
+}
 local LASERGUN = {
     avoidFriendly      = true,
 	collideFriendly    = true,
@@ -10,7 +36,7 @@ local LASERGUN = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "medlaser_fire",	
 	explosionGenerator = "custom:RaiderLaserImpact",	
-    damage 					= { default = 30, flyer = (30*0.75), heavy = (30*0.75), light = 30, },
+    damage 					= { default = 30, flyer = (30*0.33), heavy = (30*0.75), light = 30, },
 }
 local LASERGUN_BUNKER = {
     avoidFriendly      = false,
@@ -23,7 +49,7 @@ local LASERGUN_BUNKER = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "medlaser_fire",	
 	explosionGenerator = "custom:RaiderLaserImpact",	
-    damage 					= { default = 30, flyer = (30*0.75), heavy = (30*0.75), light = 30, },
+    damage 					= { default = 30, flyer = (30*0.33), heavy = (30*0.75), light = 30, },
 }
 local BLASTER = {
     avoidFriendly      = true,
@@ -36,7 +62,7 @@ local BLASTER = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "sniper_gunshot",	
 	explosionGenerator = "custom:BlasterImpact",	
-    damage 					= { default = 60, flyer = 60, heavy = 60, light = 60, },
+    damage 					= { default = 60, flyer = (60*33), heavy = (60*0.75), light = 60, },
 }
 local SNIPER_RIFLE = {
     avoidFriendly      = true,
@@ -127,6 +153,8 @@ function WeaponDefMergeTable(primary, secondary, deep)
 end
 
 return lowerkeys({
+	RAIDERLASER = WeaponDefMergeTable(SHORTBEAMBASE, RAIDERLASER),
+	SCORPIONLASER = WeaponDefMergeTable(SHORTBEAMBASE, SCORPIONLASER),
 	LASERGUN = WeaponDefMergeTable(SHORTBEAMBASE, LASERGUN),
 	LASERGUN_BUNKER = WeaponDefMergeTable(SHORTBEAMBASE, LASERGUN_BUNKER),
 	BLASTER = WeaponDefMergeTable(SHORTBEAMBASE, BLASTER),

@@ -22,13 +22,13 @@ local unitDef = {
   category           = "EUF LAND HEAVYARMOR",
   corpse             = "dead",
   customParams          = {	
-	factionname		   = "imperials",
-	normaltex = "unittextures/normalmaps/euf_scorpion_normal.png",
-	normalmaps = "yes",		
-	helptext = "This unit can dig into the ground and move very slowly but hidden from the enemy. The Gauss Gun can pass through obstacles."	
+	factionname		   		= "imperials",
+	normaltex 				= "unittextures/normalmaps/euf_scorpion_normal.png",
+	normalmaps 				= "yes",		
+	helptext 				= "This unit can dig into the ground and move very slowly but hidden from the enemy. The laser gun is effective against light armor."	
 	},
   defaultmissiontype = "Standby",
-  description        = "Diggeroid",
+  description        = "Digger",
   --  energyMake         = "-3",
   explodeAs          = "SMALL_EXPLOSION_YELLOW",
   firestandorders    = "1",
@@ -106,66 +106,12 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      badTargetCategory  = "HEAVYARMOR",
-      def                = "SCORPION_GUN",
-      onlyTargetCategory = "LAND AIR",
+      name                = "SCORPIONLASER",
+      onlyTargetCategory  = "LAND",
+      badTargetCategory   = "HEAVYARMOR",
     },
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  SCORPION_GUN = {
-      name                    = "Gauss Gun",
-      areaOfEffect            = 8,
-		avoidFeature       = false,
-		avoidFriendly      = false,
-		avoidneutral       = "0",
-		collideFeature     = false,
-		collideFriendly    = false,
-		collideneutral     = "0",		
-      -- beamweapon              = true,
-	  cegTag                  = "SCORPION_CEG",
-      coreThickness           = 0.5,
-      craterBoost             = 1,
-      craterMult              = 2,
-      duration                = 0.01,
-		energypershot           = 0,
-      explosionGenerator      = "custom:ScorpionImpact",
-      fireStarter             = 50,
-	  heightMod               = 1,
-      impactOnly              = true,
-      impulseBoost            = 0,
-      impulseFactor           = 0.4,
-      interceptedByShieldType = 1,
-      -- lineofsight             = true,
-      --noSelfDamage            = true,
-      range                   = 400,
-      reloadtime              = 0.5,
-      -- rendertype              = 0,
-      rgbColor                = "1 1 1",
-	  soundHit           = "null",
-      soundStart              = "scorpion_laser",
-	  soundStartVolume   = 50,
-      soundTrigger            = true,
-      targetMoveError         = 0.15,
-      thickness               = 1.5,
-      tolerance               = 10000,
-      turret                  = true,
-      waterWeapon             = true,	  
-      weaponType              = "LaserCannon",
-      weaponVelocity          = 600,
-      damage = {
-      default            = 100,
-      flyer              = 100,
-      heavy              = (100*0.75),
-      light              = 100,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
 
 --------------------------------------------------------------------------------
 

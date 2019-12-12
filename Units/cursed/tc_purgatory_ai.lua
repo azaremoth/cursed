@@ -159,9 +159,9 @@ local weaponDefs = {
     weaponVelocity     = 900,
     damage = {
       default            = 180,
-      flyer              = "135",
-      heavy              = "180",
-      light              = "135",
+      flyer              = 180,
+      heavy              = 180,
+      light              = (180*0.75),
     },
   },
 }

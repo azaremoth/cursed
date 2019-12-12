@@ -109,7 +109,7 @@ local unitDef = {
 
 local weaponDefs = {
   MLRS = {
-	name			=	"unguided rocket",
+	name			=	"Unguided rocket",
 	weapontype		=	"MissileLauncher",
 	-- rendertype		=	1,
 	model			=	"rocket2.s3o",
@@ -149,7 +149,7 @@ local weaponDefs = {
       default            = 200,
       flyer              = 200,
       heavy              = 200,
-      light              = 200,
+      light              = (200*0.75),
     },
   },
 }

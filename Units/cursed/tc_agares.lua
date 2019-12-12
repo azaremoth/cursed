@@ -26,7 +26,7 @@ local unitDef = {
 	factionname	= "cursed",
 	normaltex = "unittextures/normalmaps/atlas_tc_mechanics_normal.png",
 	normalmaps = "yes",	
-    helptext	= "With the precise long-range laserguns the Agares is the perfect choice against all ground targets. It isn't very stable though."	
+    helptext	= "With the precise long-range tachyon beams the Agares is the perfect choice against all armored targets. It isn't very stable though."	
 	},
   defaultmissiontype = "Standby",
   description        = "Heavy Laser Bot",
@@ -132,7 +132,7 @@ local weaponDefs = {
     interceptedByShieldType = 1,
     largeBeamLaser     = true,
     laserFlareSize     = 3,
-    name               = "Agares Laser",
+    name               = "Tachyon Beam",
 	noSelfDamage     = true,
     range              = 800,
     reloadtime         = 7,
@@ -144,6 +144,7 @@ local weaponDefs = {
     soundTrigger       = true,
 	sweepFire		   = false,		
     targetMoveError    = 0.33,
+	cegtag			=	"BELIAL_CEG",	
     texture1           = "beam1",
     texture2           = "null_texture",
     texture3           = "null_texture",
@@ -155,9 +156,9 @@ local weaponDefs = {
     weaponVelocity     = 1500,
     damage = {
       default            = 1300,
-      flyer              = 1300*0.33,
+      flyer              = 1300,
       heavy              = 1300,
-      light              = 1300,
+      light              = (1300*0.75),
     },
   },
 }

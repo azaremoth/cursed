@@ -127,7 +127,7 @@ local unitDef = {
 
 local weaponDefs = {
 Flamer = {
-	  name					= [[Flamer]],
+	  name					= [[Flame Thrower]],
 	  areaOfEffect			= 128,
 	  avoidFeature			= false,	  
 	  avoidFriendly      	= true,
@@ -163,14 +163,14 @@ Flamer = {
       },
 	  
 	 damage = {
-				default            = 45, --56
-				flyer              = (45*0.75),
-				heavy              = (45*0.50),
-				light              = 45,
+				default            = 22,
+				flyer              = 22,
+				heavy              = 22,
+				light              = (22*2),
 		},
 	},
 Flamer_Bunker = {
-	  name					= [[Flamer_Bunker]],
+	  name					= [[Flame Thrower]],
 	  areaOfEffect			= 128,
 	  avoidFeature			= false,  
 	  avoidFriendly      	= false,
@@ -204,10 +204,10 @@ Flamer_Bunker = {
       },
 	  
 	 damage = {
-				default            = 45,
-				flyer              = (45*0.75),
-				heavy              = (45*0.50),
-				light              = 45,
+				default            = 22,
+				flyer              = 22,
+				heavy              = 22,
+				light              = (22*2),
 		},
 	},
 }

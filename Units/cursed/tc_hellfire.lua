@@ -124,7 +124,7 @@ local weaponDefs = {
     impulseFactor      = 1,
     interceptedByShieldType = 1,
     myGravity          = 0,
-    name               = "Artillery Plasma Cannon",
+    name               = "Artillery Cannon",
     range              = 1800,
     reloadtime         = 5,
     startVelocity      = 500,
@@ -156,7 +156,7 @@ local weaponDefs = {
       default            = 375,
       flyer              = 375,
       heavy              = 375,
-      light              = 375,
+      light              = (375*0.75),
     },
   },
 }

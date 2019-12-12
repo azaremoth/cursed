@@ -109,7 +109,7 @@ local unitDef = {
 
 local weaponDefs = {
   FIREBALL = {
-	  name					= [[Hellfire]],
+	  name					= [[Dragon Fire Breath]],
 	  areaOfEffect			= 128,
 	  avoidFeature			= false,	  
 	  avoidFriendly      	= true,
@@ -145,10 +145,10 @@ local weaponDefs = {
     },	
 	  
     damage = {
-      default            = 80,
-      flyer              = 80,
-      heavy              = 80,
-      light              = 80,
+      default            = 60, -- 80
+      flyer              = 60,
+      heavy              = 60,
+      light              = (60*2),
     },
   },
 }

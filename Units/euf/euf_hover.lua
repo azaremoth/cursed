@@ -26,7 +26,7 @@ local unitDef = {
   	factionname		= "imperials",
 	normaltex = "unittextures/normalmaps/euf_hover_normal.png",
 	normalmaps = "yes",	
-    helptext = "Hovertanks can travel across water and are versatile anti-tank units. In addition, it is equipped with a torpedo launcher."	
+    helptext = "Hovertanks can travel across water and are versatile anti-armor units. In addition, it is equipped with a torpedo launcher."	
   },
   defaultmissiontype = "Standby",
   description        = "Hovertank",
@@ -151,7 +151,7 @@ local weaponDefs = {
     weaponVelocity     = 1500,
     damage = {
       default            = 366,
-      flyer              = 366*0.33,
+      flyer              = 366,
       heavy              = 366,
       light              = (366*0.75),
     },

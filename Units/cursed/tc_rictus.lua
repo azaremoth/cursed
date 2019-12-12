@@ -122,7 +122,7 @@ local weaponDefs = {
     impulseBoost       = 0,
     intensity          = 0.5,
     -- lineofsight        = true,
-    name               = "Hellfire",
+    name               = "Hell Fire Breath",
     range              = 300,
     reloadtime         = 0.2,
     -- rendertype         = 0,
@@ -150,10 +150,10 @@ local weaponDefs = {
     },	
 	
     damage = {
-      default            = 44,
-      flyer              = 44*0.33,
-      heavy              = (44*0.75),
-      light              = 44,
+      default            = 22,
+      flyer              = 22,
+      heavy              = 22,
+      light              = (22*2),
     },
   },
 }

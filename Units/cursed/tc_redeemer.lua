@@ -128,7 +128,7 @@ local weaponDefs = {
     interceptedByShieldType = 1,
     largeBeamLaser     = true,
     laserFlareSize     = 3,
-    name               = "Agares Laser",
+    name               = "Tachyon Beam",
 	noSelfDamage     = true,
     range              = 300,
     reloadtime         = 1.00,
@@ -140,6 +140,7 @@ local weaponDefs = {
     soundTrigger       = true,
 	sweepFire		   = false,		
     targetMoveError    = 0.25,
+	cegtag			=	"BELIAL_CEG",
     texture1           = "beam1",
     texture2           = "null_texture",
     texture3           = "null_texture",
@@ -151,51 +152,13 @@ local weaponDefs = {
     weaponVelocity     = 1500,
     damage = {
       default            = 100,
-      flyer              = 100*0.33,
+      flyer              = 100,
       heavy              = (100*0.75),
       light              = 100,
     },
   },
 }
 unitDef.weaponDefs = weaponDefs
-
---[[local weaponDefs = {
-  REDEEMERGUN = {
-    accuracy           = 920,
-    alphaDecay         = 0.5,
-    areaOfEffect       = 55,
-    gravityAffected          = true,
-    cegTag             = "NULL",
-	cylinderTargeting = 1,
-      energypershot           = 0,	
-    explosionGenerator = "custom:Black_explosion",
-    interceptedByShieldType = 1,
-    movingAccuracy     = 1620,
-    name               = "Plasma Cannon",
-    range              = 300,
-    reloadtime         = 1.00,
-    -- rendertype         = 4,
-    rgbColor           = "0.8745 1 0.1568",
-    separation         = 0.44,
-    size               = 2,
-    sizeDecay          = -0.55,
-    soundHit           = "cannon_hit1",
-    soundStart         = "heatray_fire",
-    stages             = 5,
-    tolerance          = 500,
-    turret             = true,
-    weaponType         = "Cannon",
-    weaponVelocity     = 560,
-    damage = {
-      default            = 100,
-      flyer              = 100*0.33,
-      heavy              = (100*0.75),
-      light              = 100,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs]]--
-
 
 --------------------------------------------------------------------------------
 

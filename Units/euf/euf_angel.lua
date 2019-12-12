@@ -107,7 +107,7 @@ local unitDef = {
 
 local weaponDefs = {
   HOLYBOLT = {
-			name                    = "Holy Bolt",
+			name                    = "Star Fire",
 			areaOfEffect            = 75,
 			avoidFriendly           = false,
 			bouncerebound			= .3,
@@ -153,10 +153,10 @@ local weaponDefs = {
 			weaponVelocity          = 500,
 			wobble                  = 15000,
     damage = {
-      default            = 250,
-      flyer              = 250,
-      heavy              = 250,
-      light              = 250,
+      default            = 200, --250
+      flyer              = 200,
+      heavy              = 200,
+      light              = (200*2),
     },
   },
 }

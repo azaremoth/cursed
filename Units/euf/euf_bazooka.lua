@@ -78,7 +78,7 @@ local unitDef = {
   sfxtypes = {
     explosiongenerators = {
       "custom:BLOOD_EXPLOSION",
-      "custom:MARINEGUNFLARE",
+      "custom:RIPPERGUNFLARE",
       "custom:RIPPERGROUNDFLASH",
       "custom:blood_spray",
       "custom:FLAKImpact",
@@ -149,7 +149,6 @@ local weaponDefs = {
     explosionGenerator = "custom:SMALL_EXPLOSION_PURPLE",
     explosionSpeed     = 65536,
     fireStarter        = 50,
-    flightTime         = 2,
     impulseBoost       = 0,
     impulseFactor      = 1,
     interceptedByShieldType = 1,
@@ -172,7 +171,8 @@ local weaponDefs = {
     cegtag			   = "RIPPERTrail",	
 	RGBColor		   = "1.00 0.25 0.47",	
 --	Weaponspecial ------------------------------------------ 
-    model              = "Skull_glow.s3o",
+    flightTime         = 1.5,
+    model              = "plasma_purple.s3o",
     heightBoostFactor  = 0,
     tracks             = false,
     trajectoryHeight   = 0.65,
@@ -206,7 +206,6 @@ local weaponDefs = {
     explosionGenerator = "custom:SMALL_EXPLOSION_PURPLE",
     explosionSpeed     = 65536,
     fireStarter        = 50,
-    flightTime         = 2,
     impulseBoost       = 0,
     impulseFactor      = 1,
     interceptedByShieldType = 1,
@@ -229,6 +228,7 @@ local weaponDefs = {
     cegtag			   = "RIPPERTrail",	
 	RGBColor		   = "1.00 0.25 0.47",	
 --	Weaponspecial ------------------------------------------ 
+    flightTime         = 1.5,
     model              = "Skull_glow.s3o",
     heightBoostFactor  = 0,
     tracks             = false,

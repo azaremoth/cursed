@@ -1069,16 +1069,16 @@
       emitVector   = 0, 1, 0;
       emitRot      = 20;
       emitRotSpread   = 12;
-      sizeGrowth   = 0.8;
+      sizeGrowth   = 0.6;
       sizeMod      = 1.0;
       airdrag         = 0.8;
-      particleLife      = 7;
-      particleLifeSpread   = 16;
-      numParticles      = 16;
+      particleLife      = 6;
+      particleLifeSpread   = 14;
+      numParticles      = 12;
       particleSpeed      = 12;
       particleSpeedSpread   = 1;
-      particleSize      = 17;
-      particleSizeSpread   = 5;
+      particleSize      = 12;
+      particleSizeSpread   = 4;
       directional      = 0;
       useAirLos      = 0;
       }

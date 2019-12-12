@@ -1,4 +1,52 @@
 ----------------------------------- ADAPTIONS TO BASE CLASS ------------------------------
+local BELIALGUN = { 
+	name   = "Gattling Gun",
+	range              = 550,
+	reloadtime         = 0.1,
+	accuracy           = 256,
+    energypershot      = 5,	
+----------------------------------------------------------------------------------	
+    avoidFriendly      	= true,
+    collideFriendly    	= true,	
+----------------------------------------------------------------------------------	
+    model              	= "gunshot_green.s3o",
+    explosionGenerator 	= "custom:BelialGunImpact",	
+    soundStart         	= "belial_gun",	
+----------------------------------------------------------------------------------
+	damage 			   = { default = 26, flyer = 26, heavy = (26*0.75), light = 26, },
+}
+local DEFENDERGUN = { 
+	name   = "Defender Gun",
+	range              = 550,
+	reloadtime         = 0.13,
+	accuracy           = 64,
+    energypershot      = 5,	
+----------------------------------------------------------------------------------	
+    avoidFriendly      	= true,
+    collideFriendly    	= true,	
+----------------------------------------------------------------------------------	
+    model              	= "gunshot_green.s3o",
+    explosionGenerator 	= "custom:GunImpact",	
+    soundStart         	= "defender_shot",	
+----------------------------------------------------------------------------------
+	damage 			   = { default = 23, flyer = (23*1.5), heavy = (23*0.75), light = 23, },
+}
+local DEFENDERGUN_NOCOST = { 
+	name   = "Defender Gun",
+	range              = 550,
+	reloadtime         = 0.13,
+	accuracy           = 64,
+    energypershot      = 0,	
+----------------------------------------------------------------------------------	
+    avoidFriendly      	= true,
+    collideFriendly    	= true,	
+----------------------------------------------------------------------------------	
+    model              	= "gunshot_green.s3o",
+    explosionGenerator 	= "custom:GunImpact",	
+    soundStart         	= "defender_shot",	
+----------------------------------------------------------------------------------
+	damage 			   = { default = 23, flyer = (23*1.5), heavy = (23*0.75), light = 23, },
+}
 local AATANK_GUN = { 
 	name   = "Anti-Air gun",
 	range              = 550,
@@ -105,6 +153,8 @@ function WeaponDefMergeTable(primary, secondary, deep)
 end
 
 return lowerkeys({
+	DEFENDERGUN = WeaponDefMergeTable(MGBASE, DEFENDERGUN),
+	DEFENDERGUN_NOCOST = WeaponDefMergeTable(MGBASE, DEFENDERGUN_NOCOST),	
 	AA_TANKGUN = WeaponDefMergeTable(MGBASE, AA_TANKGUN),
 	ASSAULT_RIFLE = WeaponDefMergeTable(MGBASE, ASSAULT_RIFLE),
 	ASSAULT_RIFLE_BUNKER = WeaponDefMergeTable(MGBASE, ASSAULT_RIFLE_BUNKER),

@@ -98,68 +98,12 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "DEFENDERGUN",
+      def                = "DEFENDERGUN_NOCOST",
 	  badTargetCategory = "HEAVYARMOR LAND",
       onlyTargetCategory = "LAND AIR",
     },
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  DEFENDERGUN = {
-    avoidFriendly      = true,
-	collideFriendly    = true,  
-    accuracy           = 50,
-    areaOfEffect       = 16,
-    -- beamweapon         = true,
-    burnblow           = true,
-    coreThickness      = 1,
-    craterBoost        = 0,
-    craterMult         = 0,
-	cylinderTargeting = 128,		
-    energypershot      = 0,	
-    explosionGenerator = "custom:GunImpact",
-    interceptedByShieldType = 2,
-    -- lineofsight        = true,
-    name               = "Defender Gun",
-    range              = 550,
-    reloadtime         = .15,
-    rgbColor           = "0.8745 1 0.1568",
-    soundHit           = "defender_hit",
-    soundStart         = "defender_shot",
-    soundStartVolume   = 40,
-    soundTrigger       = true,
-	sweepFire		   = false,
-    tolerance          = 3000,
-    turret             = true,
-    weaponVelocity     = 1600,
---	Weaponspecial ------------------------------------------
-    beamTime           = 0.05,
-    coreThickness      = 0.1,
-    largeBeamLaser     = 1,
-    laserFlareSize     = 2,
-    rgbColor           = "0.45 1 0.45",
-    texture1           = "greengunshot_longdelay",
-    texture2           = "null_texture",
-    texture3           = "null_texture",
-    texture4           = "flash1",
-    thickness          = 2,
-	tileLength         = 400,
-    weaponType         = "BeamLaser",
-------------------------------------------------------------		
-	damage = {
-      default            = 23,
-      flyer              = (23*1.5),
-      heavy              = (23*0.75),
-      light              = 23,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
-
 
 --------------------------------------------------------------------------------
 

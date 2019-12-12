@@ -109,105 +109,19 @@ local unitDef = {
   },  
   weapons = {
 	[1]  = {
-      def                = "ASSAULT_RIFLE",
+      name                = "ASSAULT_RIFLE",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
       onlyTargetCategory = "LAND AIR",
       badTargetCategory = "HEAVYARMOR",	  
     },
     [2]  = {
-      def                = "ASSAULT_RIFLE_BUNKER",
+      name                = "ASSAULT_RIFLE_BUNKER",
       onlyTargetCategory = "LAND AIR",
       badTargetCategory = "HEAVYARMOR",	    	  
 	},
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  ASSAULT_RIFLE = {
-    avoidFriendly      = true,
-    burnblow = 0,
-	collideFriendly    = true,
-    accuracy           = 128,
-    areaOfEffect       = 16,
-	cylinderTargeting = 128,		
-    energypershot           = 0,	
-    explosionGenerator = "custom:SMALL_BULLET_FX",
-	explosionScar      = false,
-    interceptedByShieldType = 1,
-    name               = "Marine Gun",
-    range              = 330,
-    reloadtime         = 1.6,
-    soundStart         = "marine_gunshot",
-	soundHit           = "null",		
-    soundStartVolume   = 15,
-    soundTrigger       = true,
-	sweepFire = true,	
-    tolerance          = 3000,
-    turret             = true,
-    weaponVelocity     = 1600,
---	burst --------------------------------------------------
-	burst = 5,
-	burstrate = 0.075,
-	sprayangle = 1024,
---	Weaponspecial ------------------------------------------
-    model              = "gunshot.s3o",    
-	size               = 5,
-	stages 			   = 0,
-	weaponType         = "Cannon",
-------------------------------------------------------------	  
-    damage = {
-      default            = 30,
-      flyer              = (30*0.75),
-      heavy              = (30*0.75),
-      light              = 30,
-    },
-  },
-  ASSAULT_RIFLE_BUNKER = {
-    avoidFriendly      = false,
-	burnblow = 0,
-	collideFriendly    = false,
-    accuracy           = 128,
-    areaOfEffect       = 16,
-	cylinderTargeting = 128,		
-    energypershot           = 0,	
-    explosionGenerator = "custom:SMALL_BULLET_FX",
-	explosionScar      = false,	
-    interceptedByShieldType = 1,
-    name               = "Marine Gun Bunkered",
-    range              = 330,
-    reloadtime         = 1.6,
-    soundStart         = "marine_gunshot",
-	soundHit           = "null",		
-    soundStartVolume   = 15,
-    soundTrigger       = true,
-	sweepFire = true,	
-    tolerance          = 3000,
-    turret             = true,
-    weaponVelocity     = 1600,
---	burst --------------------------------------------------
-	burst = 5,
-	burstrate = 0.075,
-	sprayangle = 1024,
---	Weaponspecial ------------------------------------------
-    model              = "gunshot.s3o",    
-	size               = 5,
-	stages 			   = 0,
-	weaponType         = "Cannon",
-------------------------------------------------------------	  
-    damage = {
-      default            = 30,
-      flyer              = (30*0.75),
-      heavy              = (30*0.75),
-      light              = 30,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
-
 
 --------------------------------------------------------------------------------
 

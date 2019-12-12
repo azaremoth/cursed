@@ -72,7 +72,7 @@ local unitDef = {
     explosiongenerators = {
       "custom:TRACKED_FX",
       "custom:SMALL_EXPLOSION_YELLOW",
-      "custom:ScorpionFlare",
+      "custom:RaiderLaserFlare",
       "custom:ScorpionGroundflash",
       "custom:BURROWING",	  
     },

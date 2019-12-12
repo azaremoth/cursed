@@ -113,58 +113,12 @@ local unitDef = {
   weapons = {
     [1]  = {
       badTargetCategory  = "HEAVYARMOR",
-      def                = "AATANK_GUN",
+      name                = "AATANK_GUN",
       onlyTargetCategory = "LAND AIR",
       badTargetCategory = "HEAVYARMOR LAND",	
     },
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  AATANK_GUN = {
-    avoidFriendly      = true,
-	burnblow		   = 1,
-	collideFriendly    = true,
-    accuracy           = 64,
-    areaOfEffect       = 32,
-	cylinderTargeting = 128,		
-    energypershot           = 0,	
-    explosionGenerator = "custom:FLAKImpact",
-	explosionScar      = false,
-    interceptedByShieldType = 1,
-    name               = "FLAK",
-    range              = 550,
-    reloadtime         = .05,
-    soundStart         = "flakgun",
-	soundHit           = "null",		
-    soundStartVolume   = 15,
-    soundTrigger       = true,
-    tolerance          = 3000,
-    turret             = true,
-    weaponVelocity     = 1800,
-	sweepFire 		   = true,
---	burst ------------------------------------------
-	burst = 2,
-	burstrate = 0.075,
-	sprayangle = 1024,
---	Weaponspecial ------------------------------------------
-    model              = "gunshot.s3o",    
-	size               = 5,
-	stages 			   = 0,
-	weaponType         = "Cannon",
-------------------------------------------------------------	
-    damage = {
-      default            = 42,
-      flyer              = 42,
-      heavy              = 19*0.33,
-      light              = 42*0.5,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
 
 --------------------------------------------------------------------------------
 

@@ -97,68 +97,12 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "FLAK_CRAWLER",
+      name                = "CRAWLER_AA",
       badTargetCategory = "LAND",
       onlyTargetCategory = "LAND AIR",
     },
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-FLAK_CRAWLER = {
-    avoidFriendly      = true,
-	collideFriendly    = true,  
-    accuracy           = 64,
-    areaOfEffect       = 128,
-    -- beamweapon         = true,
-    burnblow           = true,
-    coreThickness      = 1,
-    craterBoost        = 0,
-    craterMult         = 0,
-	cylinderTargeting = 128,		
-    energypershot      = 5,	
-    explosionGenerator = "custom:FLAKImpact",
-    interceptedByShieldType = 2,
-    -- lineofsight        = true,
-    name               = "Flak Gun",
-    range              = 700,
-    reloadtime         = .4,
-    rgbColor           = "0.8745 1 0.1568",
-    soundHit           = "defender_hit",
-    soundStart         = "flakgun",
-    soundStartVolume   = 40,
-    soundTrigger       = true,
-	sweepFire		   = false,
-    tolerance          = 3000,
-    turret             = true,
-    weaponVelocity     = 1800,
---	Weaponspecial ------------------------------------------
-    beamTime           = 0.05,
-    coreThickness      = 0.1,
-    largeBeamLaser     = 1,
-    laserFlareSize     = 2,
-    rgbColor           = "0.45 1 0.45",
-    texture1           = "greengunshot_longdelay",
-    texture2           = "null_texture",
-    texture3           = "null_texture",
-    texture4           = "flash1",
-    thickness          = 2,
-	tileLength         = 400,
-    weaponType         = "BeamLaser",
-------------------------------------------------------------		
-	damage = {
-      default            = 40,
-      flyer              = 170,
-      heavy              = 40,
-      light              = 75,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
-
 
 --------------------------------------------------------------------------------
 

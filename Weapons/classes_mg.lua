@@ -1,9 +1,10 @@
 ----------------------------------- ADAPTIONS TO BASE CLASS ------------------------------
 local BELIALGUN = { 
 	name   = "Gattling Gun",
+    areaOfEffect       = 16,	
 	range              = 550,
 	reloadtime         = 0.1,
-	accuracy           = 256,
+	accuracy           = 512,
     energypershot      = 5,	
 ----------------------------------------------------------------------------------	
     avoidFriendly      	= true,
@@ -17,6 +18,7 @@ local BELIALGUN = {
 }
 local DEFENDERGUN = { 
 	name   = "Defender Gun",
+    areaOfEffect       = 16,	
 	range              = 550,
 	reloadtime         = 0.13,
 	accuracy           = 64,
@@ -33,6 +35,7 @@ local DEFENDERGUN = {
 }
 local DEFENDERGUN_NOCOST = { 
 	name   = "Defender Gun",
+    areaOfEffect       = 16,	
 	range              = 550,
 	reloadtime         = 0.13,
 	accuracy           = 64,
@@ -45,12 +48,13 @@ local DEFENDERGUN_NOCOST = {
     explosionGenerator 	= "custom:GunImpact",	
     soundStart         	= "defender_shot",	
 ----------------------------------------------------------------------------------
-	damage 			   = { default = 23, flyer = (23*1.5), heavy = (23*0.75), light = 23, },
+	damage 			   = { default = 17, flyer = (17*2), heavy = (17*0.75), light = 17, },
 }
 local AATANK_GUN = { 
 	name   = "Anti-Air gun",
+    areaOfEffect       = 64,	
 	range              = 550,
-	reloadtime         = 0.25,
+	reloadtime         = 0.12,
 	accuracy           = 64,
     energypershot      = 0,	
 ----------------------------------------------------------------------------------	
@@ -61,10 +65,28 @@ local AATANK_GUN = {
     explosionGenerator 	= "custom:FLAKImpact",	
     soundStart         	= "flakgun",	
 ----------------------------------------------------------------------------------
-	damage 			   = { default = 28, flyer = (28*1.5), heavy = (28*0.75), light = 28, },
+	damage 			   = { default = 21, flyer = (21*2), heavy = (21*0.75), light = 21, },
+}
+local CRAWLER_AA = { 
+	name   = "Anti-Air gun",
+    areaOfEffect       = 64,	
+	range              = 700,
+	reloadtime         = 0.4,
+	accuracy           = 64,
+    energypershot      = 0,	
+----------------------------------------------------------------------------------	
+    avoidFriendly      	= true,
+    collideFriendly    	= true,	
+----------------------------------------------------------------------------------	
+    model              	= "gunshot_green.s3o",
+    explosionGenerator 	= "custom:FLAKImpact",	
+    soundStart         	= "flakgun",	
+----------------------------------------------------------------------------------
+	damage 			   = { default = 113, flyer = (113*1.5), heavy = (113*0.75), light = 133, },
 }
 local ASSAULT_RIFLE = { 
 	name   = "Assault rifle",
+    areaOfEffect        = 16,	
 	range              = 330,
 	reloadtime         = 1.6,
 	accuracy           = 128,
@@ -85,6 +107,7 @@ local ASSAULT_RIFLE = {
 }
 local ASSAULT_RIFLE_BUNKER = { 
 	name   = "Assault rifle",
+    areaOfEffect        = 16,	
 	range              = 330,
 	reloadtime         = 1.6,
 	accuracy           = 128,
@@ -106,7 +129,6 @@ local ASSAULT_RIFLE_BUNKER = {
 
 -----------------------------------  BASE CLASS  ---------------------------------
 local MGBASE = {
-    areaOfEffect        = 16,  
     cylinderTargeting 	= 128,		
     explosionScar      	= false,	
     interceptedByShieldType = 1,
@@ -153,9 +175,11 @@ function WeaponDefMergeTable(primary, secondary, deep)
 end
 
 return lowerkeys({
+	BELIALGUN = WeaponDefMergeTable(MGBASE, BELIALGUN),
 	DEFENDERGUN = WeaponDefMergeTable(MGBASE, DEFENDERGUN),
 	DEFENDERGUN_NOCOST = WeaponDefMergeTable(MGBASE, DEFENDERGUN_NOCOST),	
-	AA_TANKGUN = WeaponDefMergeTable(MGBASE, AA_TANKGUN),
+	AATANK_GUN = WeaponDefMergeTable(MGBASE, AATANK_GUN),
+	CRAWLER_AA = WeaponDefMergeTable(MGBASE, CRAWLER_AA),	
 	ASSAULT_RIFLE = WeaponDefMergeTable(MGBASE, ASSAULT_RIFLE),
 	ASSAULT_RIFLE_BUNKER = WeaponDefMergeTable(MGBASE, ASSAULT_RIFLE_BUNKER),
 })

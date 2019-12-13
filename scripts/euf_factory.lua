@@ -24,8 +24,8 @@ local isbuilding = false
 -- FX
 local BOOM	 = 1024+0
 local BUILDINGFX	 = 1025+0
-local FUNNELSMOKE = 1027+0
-local SPARKS	 = 1026+0
+local FUNNELSMOKE = 1026+0
+local SPARKS	 = 1027+0
 
 ---------------------------
 

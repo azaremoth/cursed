@@ -3974,7 +3974,9 @@ function gadget:Initialize()
 				if (aiConfigByName[spGetTeamLuaAI(team)] == nil) then
 					Spring.Echo("CAI: AI was not chosen, thus the game's uses the own LuaAI for team " .. team)
 				end
-				Spring.Echo("CAI: chosen AI is not supported by the game and is replaced with the game's own LuaAI for team " .. team)			
+				if (AIname ~= "Skirmish AI") then 
+					Spring.Echo("CAI: chosen AI is not supported by the game and is replaced with the game's own LuaAI for team " .. team)
+				end
 				local _,_,_,_,_,allyTeam = spGetTeamInfo(team)
 				initialiseAiTeam(team, allyTeam, aiConfigByName["Skirmish AI"])
 				aiOnTeam[allyTeam] = true

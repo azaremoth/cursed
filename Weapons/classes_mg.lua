@@ -86,7 +86,7 @@ local CRAWLER_AA = {
 }
 local ASSAULT_RIFLE = { 
 	name   = "Assault rifle",
-    areaOfEffect        = 16,	
+    areaOfEffect        = 32,	
 	range              = 330,
 	reloadtime         = 1.6,
 	accuracy           = 128,
@@ -107,7 +107,7 @@ local ASSAULT_RIFLE = {
 }
 local ASSAULT_RIFLE_BUNKER = { 
 	name   = "Assault rifle",
-    areaOfEffect        = 16,	
+    areaOfEffect        = 32,	
 	range              = 330,
 	reloadtime         = 1.6,
 	accuracy           = 128,
@@ -137,7 +137,7 @@ local MGBASE = {
     soundTrigger       	= true,
     tolerance          	= 3000,
     turret             	= true,
-    weaponVelocity     = 1800,	
+    weaponVelocity     = 2000,	
 --	Weaponspecial ------------------------------------------  
 	size               	= 5,
 	stages 			  	= 0,

@@ -10,7 +10,7 @@ local RAIDERLASER = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "medlaser_fire",	
 	explosionGenerator = "custom:RaiderLaserImpact",	
-    damage 					= { default = 160, flyer = (60, heavy = (160*0.75), light = 160, },
+    damage 					= { default = 160, flyer = 60, heavy = (160*0.75), light = 160, },
 }
 local SCORPIONLASER = {
     avoidFriendly      = true,

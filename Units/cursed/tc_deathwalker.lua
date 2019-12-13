@@ -153,7 +153,7 @@ local weaponDefs = {
     explosionGenerator = "custom:Mancubus_Hit_Explosion",
 	explosionScar      = true,
     interceptedByShieldType = 2,
-    name               = "Belial Big Gun",
+    name               = "Cannon",
     range              = 550,
     reloadtime         = 2,
     soundHit           = "mediumexplosion",
@@ -180,7 +180,7 @@ local weaponDefs = {
 ------------------------------------------------------------	  
   damage = {
       default            = 150,
-      flyer              = 150*0.33,
+      flyer              = 150,
       heavy              = 150,
       light              = (140*0.75),
     },

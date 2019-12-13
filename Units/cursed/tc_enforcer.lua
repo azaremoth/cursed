@@ -124,7 +124,7 @@ local unitDef = {
 
 local weaponDefs = {
   ENFORCER_GUN = {
-    name               = "Magic Missile",
+    name               = "Hell Missile",
       areaOfEffect            = 24,
       avoidFriendly           = false,
       burst                   = 3,
@@ -172,7 +172,7 @@ local weaponDefs = {
       default            = 100,
       flyer              = 100,
       heavy              = 100,
-      light              = 100,
+      light              = (100*0.75),
     },
   },
 }

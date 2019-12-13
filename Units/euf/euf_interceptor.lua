@@ -136,7 +136,7 @@ local weaponDefs = {
     impulseFactor      = 0,
     interceptedByShieldType = 1,
     model              = "Rocket.s3o",
-    name               = " Missile",
+    name               = "Missile",
     --noSelfDamage       = true,
     range              = 450,
     reloadtime         = 2.5,
@@ -157,10 +157,10 @@ local weaponDefs = {
     weaponType         = "MissileLauncher",
     weaponVelocity     = 600,
     damage = {
-      default            = 180*0.2,
+      default            = 180,
       flyer              = 180,
-      heavy              = 180*0.2,
-      light              = 180*0.2,
+      heavy              = 180,
+      light              = (180*0.75),
     },
   },
 }

@@ -111,7 +111,7 @@ local unitDef = {
 
 local weaponDefs = {
   CURSEDSKULL_SURVIVAL = {
-      name               = "Damned Skull",  
+      name               = "Skull Rocket",  
       areaOfEffect            = 64,
       avoidFriendly           = true,
       collideFriendly         = true,
@@ -153,7 +153,7 @@ local weaponDefs = {
       wobble                  = 32000,
    damage = {
       default            = 333,
-      flyer              = (333*0.33),
+      flyer              = 333,
       heavy              = 333,
       light              = (333*0.75),
     },

@@ -128,7 +128,7 @@ local weaponDefs = {
     explosionGenerator = "custom:SMALL_EXPLOSION_GREEN",
 	explosionScar      = true,
     interceptedByShieldType = 1,
-    name               = "Bomb Gun",
+    name               = "Bomb",
     range              = 300,
     reloadtime         = 5,
     tolerance          = 3000,
@@ -151,7 +151,7 @@ local weaponDefs = {
 ------------------------------------------------------------	 
     damage = {
       default            = 550,
-      flyer              = (550*0.1),
+      flyer              = 550,
       heavy              = 550,
       light              = (550*0.75),
     },

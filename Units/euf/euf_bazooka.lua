@@ -129,7 +129,7 @@ local unitDef = {
 
 local weaponDefs = {
   RIPPER = {
-    name               = "Ripper Plasma Cannon",  
+    name               = "Ripper Cannon",  
     avoidFeature       = false,
     avoidFriendly      = true,
     collideFeature     = true,
@@ -180,13 +180,13 @@ local weaponDefs = {
 ------------------------------------------------------------
     damage = {
       default            = 115,
-      flyer              = 115*0.33,
+      flyer              = 115,
       heavy              = 115,
-      light              = 115*0.75,
+      light              = (115*0.75),
     },
   },  
   RIPPER_BUNKER = {
-    name               = "Ripper Plasma Cannon (Bunker)",  
+    name               = "Ripper Cannon (Bunker)",  
     avoidFeature       = false,
     avoidFriendly      = true,
     collideFeature     = true,
@@ -237,7 +237,7 @@ local weaponDefs = {
 ------------------------------------------------------------
     damage = {
       default            = 170,
-      flyer              = 170*0.33,
+      flyer              = 170,
       heavy              = 170,
       light              = (170*0.75),
     },

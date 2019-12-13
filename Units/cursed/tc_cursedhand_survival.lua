@@ -128,7 +128,7 @@ local weaponDefs = {
     interceptedByShieldType = 1,
     -- lineofsight        = true,
     model              = "Skull.s3o",
-    name               = "Skulls",
+    name               = "Skull Rocket",
     range              = 1000,
     reloadtime         = 1.0,
     -- rendertype         = 1,
@@ -150,7 +150,7 @@ local weaponDefs = {
       default            = 350,
       flyer              = 350,
       heavy              = 350,
-      light              = 350,
+      light              = (350*0.75),
     },
   },
 }

@@ -10,7 +10,7 @@ local RAIDERLASER = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "medlaser_fire",	
 	explosionGenerator = "custom:RaiderLaserImpact",	
-    damage 					= { default = 160, flyer = (160*0.33), heavy = (160*0.75), light = 160, },
+    damage 					= { default = 160, flyer = (60, heavy = (160*0.75), light = 160, },
 }
 local SCORPIONLASER = {
     avoidFriendly      = true,
@@ -23,7 +23,7 @@ local SCORPIONLASER = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "scorpion_laser",	
 	explosionGenerator = "custom:RaiderLaserImpact",	
-    damage 					= { default = 100, flyer = (100*0.33), heavy = (100*0.75), light = 100, },
+    damage 					= { default = 100, flyer = 100, heavy = (100*0.75), light = 100, },
 }
 local LASERGUN = {
     avoidFriendly      = true,
@@ -36,7 +36,7 @@ local LASERGUN = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "medlaser_fire",	
 	explosionGenerator = "custom:RaiderLaserImpact",	
-    damage 					= { default = 30, flyer = (30*0.33), heavy = (30*0.75), light = 30, },
+    damage 					= { default = 30, flyer = 30, heavy = (30*0.75), light = 30, },
 }
 local LASERGUN_BUNKER = {
     avoidFriendly      = false,
@@ -49,7 +49,7 @@ local LASERGUN_BUNKER = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "medlaser_fire",	
 	explosionGenerator = "custom:RaiderLaserImpact",	
-    damage 					= { default = 30, flyer = (30*0.33), heavy = (30*0.75), light = 30, },
+    damage 					= { default = 30, flyer = 30, heavy = (30*0.75), light = 30, },
 }
 local BLASTER = {
     avoidFriendly      = true,
@@ -62,7 +62,7 @@ local BLASTER = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "sniper_gunshot",	
 	explosionGenerator = "custom:BlasterImpact",	
-    damage 					= { default = 60, flyer = (60*33), heavy = (60*0.75), light = 60, },
+    damage 					= { default = 60, flyer = 60, heavy = (60*0.75), light = 60, },
 }
 local SNIPER_RIFLE = {
     avoidFriendly      = true,
@@ -75,7 +75,7 @@ local SNIPER_RIFLE = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "sniper_gunshot",	
 	explosionGenerator = "custom:SNIPER_LASER",	
-    damage 					= { default = 120, flyer = 120, heavy = 120, light = 800, },
+    damage 					= { default = 120, flyer = 120, heavy = 120, light = (120*6.67), },
 }
 local SNIPER_RIFLE_BUNKER = {
     avoidFriendly      = false,
@@ -88,7 +88,7 @@ local SNIPER_RIFLE_BUNKER = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "sniper_gunshot",	
 	explosionGenerator = "custom:SNIPER_LASER",	
-    damage 					= { default = 120, flyer = 120, heavy = 120, light = 800, },
+    damage 					= { default = 120, flyer = 120, heavy = 120, light = (120*6.67), },
 }
 -----------------------------------  BASE CLASS -------------------------------------------
 local SHORTBEAMBASE = {

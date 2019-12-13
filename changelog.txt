@@ -1,15 +1,18 @@
 >> Major changes 1.444 => 1.445
 
 Polishing
-- Made weapon visuals for consistent to damage classes (e.g. plasma good vs. light and heavy, laser good vs. light, ...)
+- Made weapon visuals for consistent to damage classes
 
 Balance
-- Replaced the Scorpion's gun with a laser (good vs. light armor, no aa capability) 
-
-
-
-
-
+- Made visuals and weapons types even more aligned and predictable:
+	> Laser / Electrobeam / Light guns: 				-25% against heavy armor 
+	> Cannon / Tachyon beam / (Magic) Rockets:			-25% against light armor
+	> Fire (incl. dragon breath and Angel`s Star Fire): +100% against light armor
+	> Melee / Plasma Weapons:							Equal damage to light and heavy armor
+	> Special Weapons:
+		-> Sniper Laser gun does high amount of damage against light armor 
+		-> Multipurpose anti-air guns do more damage againt air targets: Defender: +50%, Crawler and AA Tank: +100%
+		
 
 >> Major changes 1.443 => 1.444
 

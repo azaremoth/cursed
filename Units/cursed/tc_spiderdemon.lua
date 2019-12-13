@@ -119,7 +119,7 @@ local unitDef = {
 
 local weaponDefs = {
   PSI_BLAST = {
-      name                    = [[PSI Blast]],
+    name               = [[PSI Plasma Blast]],
 	accuracy           = 128,
     areaOfEffect       = 96,
     avoidFeature       = false,
@@ -160,7 +160,7 @@ local weaponDefs = {
 ------------------------------------------------------------
     damage = {
       default            = 500,
-      flyer              = 500*0.33,
+      flyer              = 500,
       heavy              = 500,
       light              = 500,
     },

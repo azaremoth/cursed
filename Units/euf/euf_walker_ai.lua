@@ -132,7 +132,7 @@ local unitDef = {
 
 local weaponDefs = {
   WALKERLIGHT = {
-      name                    = [[Walker Cannon]],
+      name                    = [[Cannon]],
       areaOfEffect            = 55,
     accuracy           = 500,	  
       avoidFeature            = true,
@@ -164,14 +164,14 @@ local weaponDefs = {
 ------------------------------------------------------------
 		damage = {
 		  default            = 39,
-		  flyer              = 39*0.33,
+		  flyer              = 39,
 		  heavy              = 39,
-		  light              = 39,
+		  light              = (39*0.75),
 		},
 	},
 
   WALKERHEAVY = {
-      name                    = [[Heavy Walker Cannon]],
+      name                    = [[Heavy Cannon]],
       areaOfEffect            = 150,
     accuracy           = 700,	  
       avoidFeature            = true,
@@ -203,7 +203,7 @@ local weaponDefs = {
 ------------------------------------------------------------
 		damage = {
 		  default            = 500,
-		  flyer              = 500*0.33,
+		  flyer              = 500,
 		  heavy              = 500,
 		  light              = (500*0.75),
 		},

@@ -116,60 +116,11 @@ local unitDef = {
   weapons = {
     [1]  = {
       badTargetCategory  = "HEAVYARMOR",
-      def                = "RAIDER_LASER",
-      badTargetCategory = "AIR",	  
+      name                = "RAIDER_LASER",	  
       onlyTargetCategory = "LAND",
     },
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  RAIDER_LASER = {
-      name                    = [[Raider Laser]],
-      areaOfEffect            = 8,
-      -- beamweapon              = true,
-      coreThickness           = 0.5,
-      craterBoost             = 1,
-      craterMult              = 2,
-	cylinderTargeting = 128,			  
-      duration                = 0.02,
-		energypershot           = 0,
-      explosionGenerator      = [[custom:RaiderLaserImpact]],
-      fireStarter             = 50,
-	  heightMod               = 1,
-      impactOnly              = true,
-      impulseBoost            = 0,
-      impulseFactor           = 0.4,
-      interceptedByShieldType = 1,
-      -- lineofsight             = true,
-      --noSelfDamage            = true,
-      range                   = 400,
-      reloadtime              = 0.8,
-      -- rendertype              = 0,
-      rgbColor                = [[1 0.1 0.1]],
-      soundStart              = [[medlaser_fire]],
-	  soundHit           = "null",	  
-	  soundStartVolume   = 50,
-      soundTrigger            = true,
-	  sweepFire		          = true,		  
-      targetMoveError         = 0.0,
-      thickness               = 2.54950975679639,
-      tolerance               = 15000,
-      turret                  = true,
-      weaponType              = [[LaserCannon]],
-      weaponVelocity          = 880,
-      damage = {
-      default            = 160,
-      flyer              = (160*0.33),
-      heavy              = (160*0.75),
-      light              = 160,
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
 
 --------------------------------------------------------------------------------
 

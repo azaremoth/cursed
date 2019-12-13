@@ -120,7 +120,7 @@ local unitDef = {
 local weaponDefs = {
   CHAINLIGHTROCKET = {
     accuracy           = 128,  
-	name			=	"unguided rocket",
+	name			=	"Unguided rocket swarm",
 	weapontype		=	"MissileLauncher",
 	-- rendertype		=	1,
 	model			=	"rocket.s3o",
@@ -159,7 +159,7 @@ local weaponDefs = {
       default            = 120,
       flyer              = 120,
       heavy              = 120,
-      light              = 120,
+      light              = (120*0.75),
     },
   },
 }

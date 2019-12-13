@@ -116,7 +116,7 @@ local unitDef = {
 
 local weaponDefs = {
   CACOBALL = {
- 	  name					= [[Cacodemon Blast]],
+ 	  name					= [[Hell Plasma]],
 	  areaOfEffect			= 32,
 	  accuracy              = 64,	  
 	  avoidFeature			= false,	  

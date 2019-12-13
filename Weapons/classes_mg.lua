@@ -48,7 +48,7 @@ local DEFENDERGUN_NOCOST = {
     explosionGenerator 	= "custom:GunImpact",	
     soundStart         	= "defender_shot",	
 ----------------------------------------------------------------------------------
-	damage 			   = { default = 17, flyer = (17*2), heavy = (17*0.75), light = 17, },
+	damage 			   = { default = 23, flyer = (23*2), heavy = (23*0.75), light = 23, },
 }
 local AATANK_GUN = { 
 	name   = "Anti-Air gun",

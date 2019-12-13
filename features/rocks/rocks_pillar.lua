@@ -5,8 +5,8 @@ local objects = {
 
 local BuildingModuleDef = {}
 local function createBuildingModuleDef(i)
-  BuildingModuleDef["rocks_big" .. i] = {
-     description = [[Big rock pillars]],
+  BuildingModuleDef["grey_pillar" .. i] = {
+     description = [[Grey rock pillars]],
 	 autoreclaimable = false,
      blocking    = true,
      burnable    = false,

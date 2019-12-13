@@ -72,11 +72,14 @@
 			muzzleside=muzzleside.png;
 			muzzlefront=muzzlefront.png;
 			largebeam=largelaserfalloff.tga;
-////////////////////////////////////////////////////////////////////ADD
-			blueflare2=cursed/blueflare2.tga;
+////////////////////////////////////////////////////////////////////BEAMS
+			corelaser=GPL/corelaser.png;
+			corebeam=GPL/corebeam.png;
 			beam1=cursed/beam1.tga;
 			beam2=cursed/beam2.tga;
 			beam3=cursed/beam3.tga;
+////////////////////////////////////////////////////////////////////ADD
+			blueflare2=cursed/blueflare2.tga;			
 			bluenova=cursed/bluenova.tga;
 			BUILDING_BASE_FRONT=cursed/BUILDING_BASE_FRONT.tga;
 			BUILDING_BASE_SIDE=cursed/BUILDING_BASE_SIDE.tga;
@@ -180,6 +183,7 @@
 			smothdirt=smoth/dirt.png;
 			dirtplosion2=smoth/dirtplosion2.tga;
 			electnovaexplo=smoth/electnovaexplo.png;
+			electnovaexplogr=smoth/electnovaexplogr.png;			
 			emptyBuildPane=smoth/emptyBuildPane.bmp;
 			explo=smoth/explo.bmp;
 			explo2=smoth/explo2.bmp;

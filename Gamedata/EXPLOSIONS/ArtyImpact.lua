@@ -5,6 +5,37 @@
 -- medium_smoke
 
 return {
+ ["fire1"] = {
+    fire2 = {
+      air                = true,
+      class              = [[CSimpleParticleSystem]],
+      count              = 1,
+      ground             = true,
+      underwater         = 1,
+      water              = true,
+      properties = {
+        airdrag            = 0.96,
+        colormap           = [[0 0 0 0.0001   0 0 0 0.0001    0.1 0.1 0.1 0.1    0.1 0.1 0.1 0.2  0.05 0.05 0.05 0.2  0 0 0 0.001]],
+        directional        = false,
+        emitrot            = 80,
+        emitrotspread      = 10,
+        emitvector         = [[0, 1, 0]],
+        gravity            = [[0, 0, 0]],
+        numparticles       = 50,
+        particlelife       = 10,
+        particlelifespread = 25,
+        particlesize       = 2,
+        particlesizespread = 1,
+        particlespeed      = 2,
+        particlespeedspread = 4,
+        pos                = [[0, 0, 0]],
+        sizegrowth         = 1.4,
+        sizemod            = 0.985,
+        texture            = [[orangesmoke]],
+      },
+    },
+  },
+  
   ["medium_fire2"] = {
     fire2 = {
       air                = true,

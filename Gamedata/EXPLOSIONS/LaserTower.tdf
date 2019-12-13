@@ -65,7 +65,7 @@
         colorMap=0.0 1 0.0 0.01 0.2 1 0.5 0.005 0 0 0 0.001; 
         size=3;
         length=3;
-        sizeGrowth=1.5;
+        sizeGrowth=3;
         ttl=8;
         frontOffset=0;
 		frontTexture=cursedring;
@@ -77,75 +77,4 @@
    ground=1;
    count=1;
    }
-	[groundflash]
-	{
-      		flashSize = 20;
-      		flashAlpha = 0.25;
-      		circleGrowth = 0;
-      		circleAlpha = 0;
-      		ttl = 7;
-			color = 0.04, 1.0, 0.4;
-			air=1;
-     		ground=1;
-      		water=1;
-
-	}
-}
-
-[LaserTowerGunImpact]
-{
-	[heatcloud]
-	{
-      		[properties]
-      		{
-      		heat = 15;
-		Texture=greenflare;
-      		maxheat = 15;
-      		heatFalloff = 0.86;
-      		size = 1.1;
-      		sizeGrowth = 1.1;
-      		sizemod = 0;
-      		sizemodmod = 0;
-      		speed = -0.3 r0.4, -0.3 r0.4, -0.3 r0.4;
-      		pos = 0.05 r-0.1, 0.05 r-0.1, 0.05 r-0.1;
-      		}
-		air=1;
-      	water=0;
-      	ground=1;
-      	count=12;
-	}
-	[watercloud]
-   	{
-	class=heatcloud;
-      		[properties]
-      		{
-      		heat = 15;
-		Texture=water;
-      		maxheat = 15;
-      		heatFalloff = 0.86;
-      		size = 1.1;
-      		sizeGrowth = 1.1;
-      		sizemod = 0;
-      		sizemodmod = 0;
-      		speed = -0.2 r0.4, -0.2 r0.4, -0.2 r0.4;
-      		pos = 0.1 r-0.2, 0.1 r-0.2, 0.1 r-0.2;
-      		}
-		air=0;
-      	water=1;
-      	ground=0;
-      	count=12;
-	}
-	[groundflash]
-	{
-      		flashSize = 30;
-      		flashAlpha = 0.25;
-      		circleGrowth = 1;
-      		circleAlpha = 0.55;
-      		ttl = 20;
-		color = 0.04, 1.0, 0.4;
-		air=1;
-     		ground=1;
-      		water=1;
-
-	}
 }

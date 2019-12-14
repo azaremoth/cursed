@@ -50,14 +50,17 @@ local BASE = {
     weaponVelocity     = 1500,	
 	------------------------------------------
     beamTime           = 0.75,
-    coreThickness      = 0.3,
+    coreThickness      = 0.5,
+    thickness          = 5,	
     largeBeamLaser     = true,
-    laserFlareSize     = 5,
+    laserFlareSize     = 4,
+	scrollSpeed 	   = 1.5,
+	tileLength         = 200,
+	pulseSpeed 		   = 2,
     texture1           = "corebeam",
     texture2           = "null_texture",
     texture3           = "null_texture",
     texture4           = "flash1",
-    thickness          = 4,	
     weaponType         = "BeamLaser",
 }
 ----------------------------------- FINALIZE ---------------------------------------------

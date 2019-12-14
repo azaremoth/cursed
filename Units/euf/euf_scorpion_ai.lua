@@ -25,7 +25,7 @@ local unitDef = {
 	factionname		   		= "imperials",
 	normaltex 				= "unittextures/normalmaps/euf_scorpion_normal.png",
 	normalmaps 				= "yes",		
-	helptext 				= "This unit can dig into the ground and move very slowly but hidden from the enemy. The laser gun is effective against light armor."	
+	helptext 				= "This unit can dig into the ground and move very slowly but hidden from the enemy. The tachyon gun is effective against heavy armor."	
 	},
   defaultmissiontype = "Standby",
   description        = "Digger",
@@ -106,7 +106,7 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      name                = "SCORPIONLASER",
+      name                = "SCORPION_TACHYON",
       onlyTargetCategory  = "LAND",
       badTargetCategory   = "HEAVYARMOR",
     },

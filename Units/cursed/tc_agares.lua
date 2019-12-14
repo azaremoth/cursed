@@ -102,67 +102,12 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "AGARES_LASER",
-      mainDir            = "0 0 1",
-      maxAngleDif        = 160,
-      badTargetCategory = "AIR",	  
+      name               = "AGARES_TACHYON",
+      badTargetCategory  = "LIGHTARMOR AIR", 
       onlyTargetCategory = "LAND",
     },
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  AGARES_LASER = {
-    avoidFriendly      = true,
-	collideFriendly    = true,  
-    accuracy           = 100,
-    areaOfEffect       = 32,
-    beamtime           = 0.75,
-    burnblow           = true,
-    coreThickness      = 0.4,
-    craterBoost        = 0,
-    craterMult         = 0,
-    energypershot           = 0,
-    explosionGenerator = "custom:AGARES_LASER",
-    fireStarter        = 20,
-    impulseBoost       = 0,
-    interceptedByShieldType = 1,
-    largeBeamLaser     = true,
-    laserFlareSize     = 3,
-    name               = "Tachyon Beam",
-	noSelfDamage     = true,
-    range              = 800,
-    reloadtime         = 7,
-    -- rendertype         = 0,
-	rgbColor           = {0.45, 1, 0.1},
-	rgbColor2 		   = {1, 1, 1},
-    soundHit           = "AgaresLaserHit",
-    soundStart         = "AgaresLaser",
-    soundTrigger       = true,
-	sweepFire		   = false,		
-    targetMoveError    = 0.33,	
-    texture1           = "corebeam",
-    texture2           = "null_texture",
-    texture3           = "null_texture",
-    texture4           = "flash1",
-    thickness          = 4,
-    tolerance          = 1500,
-    turret             = true,
-    weaponType         = "BeamLaser",
-    weaponVelocity     = 1500,
-    damage = {
-      default            = 1300,
-      flyer              = 1300,
-      heavy              = 1300,
-      light              = (1300*0.75),
-    },
-  },
-}
-unitDef.weaponDefs = weaponDefs
-
 
 --------------------------------------------------------------------------------
 

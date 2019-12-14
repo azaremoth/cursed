@@ -51,15 +51,6 @@ effectUnitDefs = {
        {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, piece="dthrust3", emitVector = {0, 1, 0}, onActive=false, noIconDraw = true}}, 
        {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, piece="dthrust4", emitVector = {0, 1, 0}, onActive=false, noIconDraw = true}}, 
   },
-  euf_transport_mis = {
-	   {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, piece="thrust1", onActive=false, noIconDraw = true}},
-	   {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, piece="thrust2", onActive=false, noIconDraw = true}},
-	   {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=15, piece="thrust3", onActive=false, noIconDraw = true}},  
-       {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=20, piece="dthrust1", emitVector = {0, 1, 0}, onActive=false, noIconDraw = true}}, 
-       {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=20, piece="dthrust2", emitVector = {0, 1, 0}, onActive=false, noIconDraw = true}}, 
-       {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=20, piece="dthrust3", emitVector = {0, 1, 0}, onActive=false, noIconDraw = true}}, 
-       {class='AirJet', options={color={0.1,0.4,0.6}, width=8, length=20, piece="dthrust4", emitVector = {0, 1, 0}, onActive=false, noIconDraw = true}}, 
-  },
    tc_heart_ai = {
 	{class='ShieldJitter', options={delay=0, life=math.huge, pos={0,15,0}, size=710, strength = .001, precision=50, repeatEffect=true}},
     {class='AirJet', options={color={0.6,1.0,0.15}, width=15, length=300, piece="base", emitVector = {0, -1, 0}, onActive=false}},
@@ -184,11 +175,6 @@ effectUnitDefs = {
 	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_08"})},
 	{class='StaticParticles', options=MergeTable(Purpleglow_big,{piece="gem_09"})},		
   },
------------
-   noemit_high = {
-    {class='AirJet', options={color={0.6,1.0,0.15}, width=60, length=600, piece="high", emitVector = {0, -1, 0}, onActive=false}},
-    {class='StaticParticles', options=MergeTable(Greenglow_giant,{piece="high"})},			
-  }, 
 }
 
 effectUnitDefsXmas = {}

@@ -121,11 +121,11 @@ local BIGBUGMELEE = {
 local MELEEBASE = {
     name                    = [[Melee]],
 	------------------------------------------
-	avoidFeature			= false,
+	avoidFeature			= true,
 	avoidFriendly      		= false,	  
     canattackground     	= true,
     collideFriendly    		= false,
-    collideFeature    		= false,
+    collideFeature    		= true,
 	------------------------------------------
 	areaOfEffect            = 16,
     craterAreaOfEffect      = 0,

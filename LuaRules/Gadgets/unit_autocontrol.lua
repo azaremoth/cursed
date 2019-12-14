@@ -63,6 +63,7 @@ local swarmArray = {
   "tc_skeleton",
 -- ranged 
   "euf_marine",
+  "euf_marine_laser", 
   "euf_raider", 
   "tc_undeadmarine_gun",  
   "tc_gunner",
@@ -75,13 +76,16 @@ local skrimArray = {
   "bug_larva_undead",  
   "euf_sniper",
   "euf_bazooka",
+  "euf_bazooka_missile", 
   "euf_hover",
   "euf_tank",
   "euf_aatank",
+  "tc_crawler", 
   "tc_enforcer",  
   "tc_bonebeast",
   "tc_mermeoth",    
-  "tc_agares",  
+  "tc_agares", 
+  "tc_spiderdemon",  
   "tc_witch",
 }
 

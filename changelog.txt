@@ -12,7 +12,10 @@ Balance
 	> Special Weapons:
 		-> Sniper Laser gun does high amount of damage against light armor 
 		-> Multipurpose anti-air guns do more damage againt air targets: Defender: +50%, Crawler and AA Tank: +100%
-		
+
+Bugs:
+- fixed spider demons using energy for shooting (was not intended)		
+
 
 >> Major changes 1.443 => 1.444
 

@@ -130,7 +130,7 @@ local weaponDefs = {
     explosionGenerator = "custom:hellfire",
     interceptedByShieldType = 1,	
     movingAccuracy     = 1620,
-    name               = "Hellfire Cannon",
+    name               = "Hellfire PLasma",
     range              = 300, --450
     reloadtime         = 1.5,
     soundHit           = "mediumexplosion",
@@ -150,7 +150,7 @@ local weaponDefs = {
       default            = 180, --150
       flyer              = 180,
       heavy              = 180,
-      light              = (180*0.75),
+      light              = 180,
     },
   },
 }

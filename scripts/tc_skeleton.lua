@@ -273,7 +273,7 @@ end]]--
 
 function script.QueryWeapon1 () return emit_melee end
 
-function script.AimFromWeapon1 () return emit_melee end
+function script.AimFromWeapon1 () return pelvis end
 
 local function Aim(heading, pitch)
 	randomsleeptime = math.random(100)

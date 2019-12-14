@@ -297,7 +297,7 @@ function script.QueryWeapon1 ()
 end
 
 function script.AimFromWeapon1 ()
-	return emit_melee
+	return pelvis
 end
 
 function script.AimWeapon1(heading, pitch)

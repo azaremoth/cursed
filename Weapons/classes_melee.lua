@@ -184,7 +184,7 @@ local MELEEBASE_OLD = {
     turret                  = true,
     waterweapon             = true,
     weaponType              = [[Melee]],
-    weaponVelocity          = 10000,
+    weaponVelocity          = 4000,
 }
 ----------------------------------- FINALIZE ---------------------------------------------
 function WeaponDefCopyTable(tableToCopy, deep)

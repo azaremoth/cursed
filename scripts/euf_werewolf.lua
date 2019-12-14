@@ -177,7 +177,7 @@ end
 
 function script.QueryWeapon1 () return emit_melee end
 
-function script.AimFromWeapon1 () return emit_melee end
+function script.AimFromWeapon1 () return pelvis end
 
 function script.AimWeapon1(heading, pitch)
  	if burrowed then

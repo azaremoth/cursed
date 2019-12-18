@@ -18,7 +18,7 @@ options = {
 	simpleColors = {
 		name = "Simple Colors",
 		type = 'bool',
-		value = true,
+		value = false,
 		desc = 'All allies are green, all enemies are red.',
 		OnChange = function() widget:Initialize() end
 	},
@@ -59,8 +59,8 @@ myTrueColor[2] = mtg
 myTrueColor[3] = mtb
 
 myColor[1] = 0.0
-myColor[2] = 0.5
-myColor[3] = 0.5
+myColor[2] = 0.50
+myColor[3] = 0.75
 
 gaiaColor[1] = 0.25
 gaiaColor[2] = 0.25
@@ -88,19 +88,24 @@ local function SetNewTeamColors()
 	
 	local myAlly = Spring.GetMyAllyTeamID()
 	local teams = Spring.GetTeamList()
+	local myTeam = Spring.GetMyTeamID()	
 	
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
 		local colorSpread = teamColorSpread[teamID] or 0
 		if (allyID == myAlly) then
-			local g = allyColors[2]
-			local r = 0
-			local b = colorSpread
-			Spring.SetTeamColor(teamID, r,g,b)			
+			if (teamID == myTeam) then
+				Spring.SetTeamColor(teamID, unpack(myColor))
+			else
+				local g = allyColors[2]
+				local r = 0.5*colorSpread
+				local b = 2*colorSpread
+				Spring.SetTeamColor(teamID, r,g,b)
+			end
 		elseif (teamID ~= gaia) then	
 			local r = enemyColors[1]
-			local g = 0
-			local b = colorSpread
+			local g = 0.5*colorSpread
+			local b = 2*colorSpread
 			Spring.SetTeamColor(teamID, r,g,b)
 		end
 	end
@@ -111,22 +116,26 @@ local function SetNewSimpleTeamColors()
 	Spring.SetTeamColor(gaia, unpack(gaiaColor))
 	
 	local myAlly = Spring.GetMyAllyTeamID()
-	local myTeam = Spring.GetMyTeamID()
-
+	local myTeam = Spring.GetMyTeamID()	
+	
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
 		if (allyID == myAlly) then
-			Spring.SetTeamColor(teamID, unpack(allyColors))
+			if (teamID == myTeam) then
+				Spring.SetTeamColor(teamID, unpack(myColor))
+			else
+				Spring.SetTeamColor(teamID, unpack(allyColors))
+			end	
 		elseif (teamID ~= gaia) then
 			Spring.SetTeamColor(teamID, unpack(enemyColors))
 		end
 	end
 end
 
-local function SetNewTeamColorsForSpecs()
+local function SetNewDifferentTeamColors()
 	local gaia = Spring.GetGaiaTeamID()
 	Spring.SetTeamColor(gaia, unpack(gaiaColor))
-	
+	local myTeam = Spring.GetMyTeamID()		
 	local myAlly = Spring.GetMyAllyTeamID()
 	local teams = Spring.GetTeamList()
 	
@@ -139,144 +148,110 @@ local function SetNewTeamColorsForSpecs()
 			local g = 0
 			local b = 0
 
-			if (not is_speccing) and (allyID == myAlly) then			
-				r = 0
-				g = 0.5
-				b = 0.5			
-			elseif (allyID == 0) then
-				r = 1
-				g = 0
-				b = colorSpread
-			elseif (allyID == 1) then
-				r = 0
-				g = 1
-				b = colorSpread
-			elseif (allyID == 2) then
-				r = colorSpread
-				g = 0
-				b = 1
-			elseif (allyID == 3) then			
-				r = 1
-				g = 1
-				b = colorSpread
-			elseif (allyID == 4) then
-				r = 1
-				g = colorSpread
-				b = 1
-			elseif (allyID == 5) then
-				r = colorSpread
-				g = 1
-				b = 1
-			elseif (allyID == 6) then
-				r = 0.33
-				g = 0
-				b = colorSpread
-			elseif (allyID == 7) then
-				r = 0
-				g = 0.33
-				b = colorSpread
-			elseif (allyID == 8) then
-				r = colorSpread
-				g = 0
-				b = 0.33
-			elseif (allyID == 9) then			
-				r = 0.33
-				g = 0.33
-				b = colorSpread
-			elseif (allyID == 10) then
-				r = 0.33
-				g = colorSpread
-				b = 0.33
-			elseif (allyID == 11) then
-				r = colorSpread
-				g = 0.33
-				b = 0.33		
-			elseif (allyID == 12) then
-				r = 0.66
-				g = 0
-				b = colorSpread
-			elseif (allyID == 13) then
-				r = 0
-				g = 0.66
-				b = colorSpread
-			elseif (allyID == 14) then
-				r = colorSpread
-				g = 0
-				b = 0.66
-			elseif (allyID == 15) then			
-				r = 0.66
-				g = 0.66
-				b = colorSpread
-			elseif (allyID == 16) then
-				r = 0.66
-				g = colorSpread
-				b = 0.66
-			elseif (allyID == 17) then
-				r = colorSpread
-				g = 0.66
-				b = 0.66				
-			elseif (allyID == 18) then
-				r = colorSpread
-				g = colorSpread
-				b = colorSpread				
+			if (not is_speccing) and (teamID == myTeam) then			
+				Spring.SetTeamColor(teamID, unpack(myColor))
 			else
-				r = math.random()
-				g = math.random()
-				b = math.random()
-			end
-
+				if (allyID == 0) then
+					r = 1
+					g = 0
+					b = colorSpread
+				elseif (allyID == 1) then
+					r = 0
+					g = 1
+					b = colorSpread
+				elseif (allyID == 2) then
+					r = colorSpread
+					g = 0
+					b = 1
+				elseif (allyID == 3) then			
+					r = 1
+					g = 1
+					b = colorSpread
+				elseif (allyID == 4) then
+					r = 1
+					g = colorSpread
+					b = 1
+				elseif (allyID == 5) then
+					r = colorSpread
+					g = 1
+					b = 1
+				elseif (allyID == 6) then
+					r = 0.33
+					g = 0
+					b = colorSpread
+				elseif (allyID == 7) then
+					r = 0
+					g = 0.33
+					b = colorSpread
+				elseif (allyID == 8) then
+					r = colorSpread
+					g = 0
+					b = 0.33
+				elseif (allyID == 9) then			
+					r = 0.33
+					g = 0.33
+					b = colorSpread
+				elseif (allyID == 10) then
+					r = 0.33
+					g = colorSpread
+					b = 0.33
+				elseif (allyID == 11) then
+					r = colorSpread
+					g = 0.33
+					b = 0.33		
+				elseif (allyID == 12) then
+					r = 0.66
+					g = 0
+					b = colorSpread
+				elseif (allyID == 13) then
+					r = 0
+					g = 0.66
+					b = colorSpread
+				elseif (allyID == 14) then
+					r = colorSpread
+					g = 0
+					b = 0.66
+				elseif (allyID == 15) then			
+					r = 0.66
+					g = 0.66
+					b = colorSpread
+				elseif (allyID == 16) then
+					r = 0.66
+					g = colorSpread
+					b = 0.66
+				elseif (allyID == 17) then
+					r = colorSpread
+					g = 0.66
+					b = 0.66				
+				elseif (allyID == 18) then
+					r = colorSpread
+					g = colorSpread
+					b = colorSpread				
+				else
+					r = math.random()
+					g = math.random()
+					b = math.random()
+				end
 			Spring.SetTeamColor(teamID, r,g,b)
-
+			end
 		end
 	end
 end
 
-local function ResetOldTeamColors()
-	for _,team in ipairs(Spring.GetTeamList()) do
-		Spring.SetTeamColor(team,Spring.GetTeamOrigColor(team))
-	end
-end
-
-local function NotifyColorChange()
-	for name,func in pairs(WG.LocalColor.listeners) do
-		if type(func) == "function" then	-- because we don't trust other widget writers to not give us random junk
-			func()				-- yeah we wouldn't even need to do this with static typing :(
-		else
-			Spring.Echo("<Local Team Colors> ERROR: Listener '" .. name .. "' is not a function!" )
-		end
-	end
-end
-
-function WG.LocalColor.localTeamColorToggle()
-	options.simpleColors.value = not options.simpleColors.value
-	widget:Initialize()
-end
-
-function WG.LocalColor.RegisterListener(name, func)
-	WG.LocalColor.listeners[name] = func
-end
-
-function WG.LocalColor.UnregisterListener(name)
-	WG.LocalColor.listeners[name] = nil
-end
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-function widget:Initialize()
-	is_speccing = Spring.GetSpectatingState()
-
+local function InitializeVariables()
 	local allyteams = Spring.GetAllyTeamList()
 	local gaiaT = Spring.GetGaiaTeamID()
 	local gaiaAT = select(6, Spring.GetTeamInfo(gaiaT))
+	local allyCounter = 0
 	for i=1,#allyteams do
 		if allyteams[i] ~= gaiaAT then
 			local teams = Spring.GetTeamList()
 			if #teams > 0  then
-				numberOfAllyTeams = numberOfAllyTeams + 1
+				allyCounter = allyCounter + 1
 			end
 		end
 	end
+	numberOfAllyTeams = allyCounter
 	
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
@@ -300,7 +275,26 @@ function widget:Initialize()
 				teamColorSpread[teamID] = 0
 			end
 	end	
-	
+end
+
+local function ResetOldTeamColors()
+	for _,team in ipairs(Spring.GetTeamList()) do
+		Spring.SetTeamColor(team,Spring.GetTeamOrigColor(team))
+	end
+end
+
+local function NotifyColorChange()
+	for name,func in pairs(WG.LocalColor.listeners) do
+		if type(func) == "function" then	-- because we don't trust other widget writers to not give us random junk
+			func()				-- yeah we wouldn't even need to do this with static typing :(
+		else
+			Spring.Echo("<Local Team Colors> ERROR: Listener '" .. name .. "' is not a function!" )
+		end
+	end
+end
+
+local function ChangeColors()
+	is_speccing = Spring.GetSpectatingState()
 	if (is_speccing or numberOfAllyTeams > 2) then -- FFA and Spec
 		SetNewDifferentTeamColors()
 	elseif options.simpleColors.value then -- red, green, blue only
@@ -310,6 +304,28 @@ function widget:Initialize()
 	end
 	
 	NotifyColorChange()
+end
+
+function WG.LocalColor.localTeamColorToggle()
+	options.simpleColors.value = not options.simpleColors.value
+	ChangeColors()
+--	widget:Initialize()
+end
+
+function WG.LocalColor.RegisterListener(name, func)
+	WG.LocalColor.listeners[name] = func
+end
+
+function WG.LocalColor.UnregisterListener(name)
+	WG.LocalColor.listeners[name] = nil
+end
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+function widget:Initialize()
+	InitializeVariables()
+	ChangeColors()
 end
 
 function widget:Shutdown()

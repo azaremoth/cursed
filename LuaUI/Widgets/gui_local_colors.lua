@@ -112,9 +112,9 @@ local function SetNewTeamColors()
 			
 		end
 	end
-	if not is_speccing then
-		Spring.SetTeamColor(myTeam, unpack(myTrueColor))	-- overrides previously defined color
-	end
+	
+--	Spring.SetTeamColor(myTeam, unpack(myTrueColor))	-- overrides previously defined color
+
 end
 
 local function SetNewSimpleTeamColors() 
@@ -132,9 +132,141 @@ local function SetNewSimpleTeamColors()
 			Spring.SetTeamColor(teamID, unpack(enemyColors))
 		end
 	end
-	if not is_speccing then
-		Spring.SetTeamColor(myTeam, unpack(myColor))	-- overrides previously defined color
+	
+--	Spring.SetTeamColor(myTeam, unpack(myColor))	-- overrides previously defined color
+	
+end
+
+local function SetNewTeamColorsForSpecs()
+	local gaia = Spring.GetGaiaTeamID()
+	Spring.SetTeamColor(gaia, unpack(gaiaColor))
+	
+	local myAlly = Spring.GetMyAllyTeamID()
+	local teams = Spring.GetTeamList()
+	local maxTeamID = 0
+	local maxAllyID = 0
+	local allyTeamSize = {}
+	local teamInAlly = {}	
+
+	for _, teamID in ipairs(Spring.GetTeamList()) do
+		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
+		if tonumber(maxTeamID) > maxTeamID then
+			maxTeamID = tonumber(maxTeamID)
+		end
+		if tonumber(allyID) > maxAllyID then
+			maxAllyID = tonumber(allyID)
+		end
+		if allyTeamSize[allyID] ~= nil then		
+			allyTeamSize[allyID] = allyTeamSize[allyID]+1
+			teamInAlly[teamID] = allyTeamSize[allyID]
+		else
+			allyTeamSize[allyID] = 1
+			teamInAlly[teamID] = allyTeamSize[allyID]
+		end
 	end
+	
+	for _, teamID in ipairs(Spring.GetTeamList()) do
+		if (teamID ~= gaia) then
+			local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
+			local teamAllyID = tonumber(allyID)
+			local teamID = tonumber(teamID)
+			-- local colorSpread = 0.5*(20*teamAllyID + teamID)/(20*maxAllyID + maxTeamID)
+			-- local colorSpread = (30*teamAllyID + teamID)/(30*maxAllyID + maxTeamID)			
+			-- local colorSpread = teamID/maxTeamID
+			-- local colorSpread = (10*teamAllyID + teamID)/(10*maxAllyID + maxTeamID)
+			-- local colorSpread = (teamID/maxTeamID)+(teamAllyID/maxTeamID)/2
+			local colorSpread = teamInAlly[teamID]-1)/allyTeamSize[allyID]
+			Spring.Echo("colorSpread")
+			Spring.Echo(colorSpread)
+			
+			local r = 0
+			local g = 0
+			local b = 0
+
+			
+			if (teamAllyID == 0) then
+				r = 1
+				g = 0
+				b = colorSpread
+			elseif (teamAllyID == 1) then
+				r = 0
+				g = 1
+				b = colorSpread
+			elseif (teamAllyID == 2) then
+				r = colorSpread
+				g = 0
+				b = 1
+			elseif (teamAllyID == 3) then			
+
+			elseif (teamAllyID == 4) then
+				r = 1
+				g = 1
+				b = colorSpread
+			elseif (teamAllyID == 5) then
+				r = 1
+				g = colorSpread
+				b = 1
+			elseif (teamAllyID == 6) then
+				r = 0.66
+				g = colorSpread
+				b = 0.66	
+			elseif (teamAllyID == 7) then
+				r = 0.66
+				g = colorSpread
+				b = colorSpread
+			elseif (teamAllyID == 8) then
+				r = colorSpread
+				g = 0.66
+				b = colorSpread
+			elseif (teamAllyID == 9) then			
+				r = colorSpread
+				g = colorSpread
+				b = 0.66
+			elseif (teamAllyID == 10) then
+				r = 0.66
+				g = 0.66
+				b = colorSpread
+			elseif (teamAllyID == 11) then
+				r = 0.66
+				g = colorSpread
+				b = 0.66
+			elseif (teamAllyID == 12) then
+				r = 0.33
+				g = colorSpread
+				b = 0.33				
+			elseif (teamAllyID == 13) then
+				r = 0.33
+				g = colorSpread
+				b = colorSpread
+			elseif (teamAllyID == 14) then
+				r = colorSpread
+				g = 0.33
+				b = colorSpread
+			elseif (teamAllyID == 15) then			
+				r = colorSpread
+				g = colorSpread
+				b = 0.33
+			elseif (teamAllyID == 16) then
+				r = 0.33
+				g = 0.33
+				b = colorSpread
+			elseif (teamAllyID == 17) then
+				r = 0.33
+				g = colorSpread
+				b = 0.33		
+			else
+				r = math.random()
+				g = math.random()
+				b = math.random()
+			end
+
+			Spring.SetTeamColor(teamID, r,g,b)
+
+		end
+	end
+	
+--	Spring.SetTeamColor(myTeam, unpack(myTrueColor))	-- overrides previously defined color
+
 end
 
 local function ResetOldTeamColors()
@@ -171,7 +303,9 @@ end
 
 function widget:Initialize()
 	is_speccing = Spring.GetSpectatingState()
-	if options.simpleColors.value then
+	if is_speccing then
+		SetNewTeamColorsForSpecs()
+	elseif options.simpleColors.value then
 		SetNewSimpleTeamColors()
 	else
 		SetNewTeamColors()

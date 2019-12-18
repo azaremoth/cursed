@@ -102,11 +102,11 @@ local function SetNewTeamColors()
 				local b = 2*colorSpread
 				Spring.SetTeamColor(teamID, r,g,b)
 			end
-		elseif (teamID ~= gaia) then	
+		elseif (teamID ~= gaia) then
 			local r = enemyColors[1]
 			local g = 0.5*colorSpread
 			local b = 2*colorSpread
-			Spring.SetTeamColor(teamID, r,g,b)
+			Spring.SetTeamColor(teamID, r,g,b)				
 		end
 	end
 end
@@ -150,6 +150,11 @@ local function SetNewDifferentTeamColors()
 
 			if (not is_speccing) and (teamID == myTeam) then			
 				Spring.SetTeamColor(teamID, unpack(myColor))
+			elseif (not is_speccing) and (allyID == myAlly) and (teamID ~= myTeam) then
+				local r = 0.25+colorSpread				
+				local g = myColor[2]
+				local b = myColor[3]
+				Spring.SetTeamColor(teamID, r,g,b)				
 			else
 				if (allyID == 0) then
 					r = 1
@@ -162,7 +167,7 @@ local function SetNewDifferentTeamColors()
 				elseif (allyID == 2) then
 					r = colorSpread
 					g = 0
-					b = 1
+					b = 0
 				elseif (allyID == 3) then			
 					r = 1
 					g = 1
@@ -243,6 +248,8 @@ local function InitializeVariables()
 	local gaiaT = Spring.GetGaiaTeamID()
 	local gaiaAT = select(6, Spring.GetTeamInfo(gaiaT))
 	local allyCounter = 0
+--	local enemyTeamCounter = 0
+	
 	for i=1,#allyteams do
 		if allyteams[i] ~= gaiaAT then
 			local teams = Spring.GetTeamList()
@@ -255,6 +262,8 @@ local function InitializeVariables()
 	
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
+		local myTeam = Spring.GetMyTeamID()
+		local myAlly = Spring.GetMyAllyTeamID()
 		if allyTeamSize[allyID] ~= nil then		
 			allyTeamSize[allyID] = allyTeamSize[allyID]+1
 			teamInAlly[teamID] = allyTeamSize[allyID]
@@ -265,15 +274,21 @@ local function InitializeVariables()
 			allyTeamSize[allyID] = 1
 			teamInAlly[teamID] = allyTeamSize[allyID]
 		end
+--		if (allyID ~= myAlly) and (allyID ~= gaiaAT) then
+--			enemyTeamCounter = enemyTeamCounter + 1
+--		end		
 	end	
 	
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
-			if allyTeamSize[allyID] > 1 then
-				teamColorSpread[teamID] = 0.5*((teamInAlly[teamID]-1)/(allyTeamSize[allyID]-1))
-			else
-				teamColorSpread[teamID] = 0
-			end
+		if allyTeamSize[allyID] > 1 then
+			teamColorSpread[teamID] = 0.5*((teamInAlly[teamID]-1)/(allyTeamSize[allyID]-1))
+		else
+			teamColorSpread[teamID] = 0
+		end
+		if teamColorSpread[teamID] > 1 then
+			teamColorSpread[teamID] = 1
+		end	
 	end	
 end
 
@@ -295,10 +310,10 @@ end
 
 local function ChangeColors()
 	is_speccing = Spring.GetSpectatingState()
-	if (is_speccing or numberOfAllyTeams > 2) then -- FFA and Spec
-		SetNewDifferentTeamColors()
-	elseif options.simpleColors.value then -- red, green, blue only
+	if (not is_speccing and options.simpleColors.value) then -- red, green, blue only
 		SetNewSimpleTeamColors()
+	elseif (is_speccing or numberOfAllyTeams > 2) then -- FFA and Spec
+		SetNewDifferentTeamColors()		
 	else -- shades of red and green
 		SetNewTeamColors()
 	end

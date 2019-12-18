@@ -44,6 +44,13 @@ end
 
 local myTeam = Spring.GetMyTeamID()
 
+local maxAllyTeamSize = 0
+local allyTeamSize = {}
+local numberOfAllyTeams = 0
+local teamInAlly = {}
+local teamColorSpread = {}
+local is_speccing = false
+
 mtr,mtg,mtb,_ = Spring.GetTeamColor(myTeam)
 
 -- Use your set color in any case
@@ -52,8 +59,8 @@ myTrueColor[2] = mtg
 myTrueColor[3] = mtb
 
 myColor[1] = 0.0
-myColor[2] = 0.2
-myColor[3] = 0.8
+myColor[2] = 0.5
+myColor[3] = 0.5
 
 gaiaColor[1] = 0.25
 gaiaColor[2] = 0.25
@@ -81,40 +88,22 @@ local function SetNewTeamColors()
 	
 	local myAlly = Spring.GetMyAllyTeamID()
 	local teams = Spring.GetTeamList()
-
-	local a = 0.30
-	local e = 0.30
-	local increase = 0.25
 	
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
+		local colorSpread = teamColorSpread[teamID] or 0
 		if (allyID == myAlly) then
-			local g = allyColors[2]*a
-			local r = teamRand1[teamID]*g
-			local b = teamRand2[teamID]*g
+			local g = allyColors[2]
+			local r = 0
+			local b = colorSpread
+			Spring.SetTeamColor(teamID, r,g,b)			
+		elseif (teamID ~= gaia) then	
+			local r = enemyColors[1]
+			local g = 0
+			local b = colorSpread
 			Spring.SetTeamColor(teamID, r,g,b)
-			
-			a = a+increase
-			if (a > 1) then 
-				a = 0.1 + rand1
-			end
-			
-		elseif (teamID ~= gaia) then		
-			local r = enemyColors[1]*e
-			local g = teamRand1[teamID]*r
-			local b = teamRand2[teamID]*r
-			Spring.SetTeamColor(teamID, r,g,b)
-			
-			e = e+increase
-			if (e > 1) then  
-				e = 0.1 + rand2
-			end			
-			
 		end
 	end
-	
---	Spring.SetTeamColor(myTeam, unpack(myTrueColor))	-- overrides previously defined color
-
 end
 
 local function SetNewSimpleTeamColors() 
@@ -132,9 +121,6 @@ local function SetNewSimpleTeamColors()
 			Spring.SetTeamColor(teamID, unpack(enemyColors))
 		end
 	end
-	
---	Spring.SetTeamColor(myTeam, unpack(myColor))	-- overrides previously defined color
-	
 end
 
 local function SetNewTeamColorsForSpecs()
@@ -143,117 +129,96 @@ local function SetNewTeamColorsForSpecs()
 	
 	local myAlly = Spring.GetMyAllyTeamID()
 	local teams = Spring.GetTeamList()
-	local maxTeamID = 0
-	local maxAllyID = 0
-	local allyTeamSize = {}
-	local teamInAlly = {}	
-
-	for _, teamID in ipairs(Spring.GetTeamList()) do
-		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
-		if tonumber(maxTeamID) > maxTeamID then
-			maxTeamID = tonumber(maxTeamID)
-		end
-		if tonumber(allyID) > maxAllyID then
-			maxAllyID = tonumber(allyID)
-		end
-		if allyTeamSize[allyID] ~= nil then		
-			allyTeamSize[allyID] = allyTeamSize[allyID]+1
-			teamInAlly[teamID] = allyTeamSize[allyID]
-		else
-			allyTeamSize[allyID] = 1
-			teamInAlly[teamID] = allyTeamSize[allyID]
-		end
-	end
 	
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		if (teamID ~= gaia) then
 			local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
-			local teamAllyID = tonumber(allyID)
-			local teamID = tonumber(teamID)
-			-- local colorSpread = 0.5*(20*teamAllyID + teamID)/(20*maxAllyID + maxTeamID)
-			-- local colorSpread = (30*teamAllyID + teamID)/(30*maxAllyID + maxTeamID)			
-			-- local colorSpread = teamID/maxTeamID
-			-- local colorSpread = (10*teamAllyID + teamID)/(10*maxAllyID + maxTeamID)
-			-- local colorSpread = (teamID/maxTeamID)+(teamAllyID/maxTeamID)/2
-			local colorSpread = teamInAlly[teamID]-1)/allyTeamSize[allyID]
-			Spring.Echo("colorSpread")
-			Spring.Echo(colorSpread)
+			local colorSpread = teamColorSpread[teamID] or 0
 			
 			local r = 0
 			local g = 0
 			local b = 0
 
-			
-			if (teamAllyID == 0) then
+			if (not is_speccing) and (allyID == myAlly) then			
+				r = 0
+				g = 0.5
+				b = 0.5			
+			elseif (allyID == 0) then
 				r = 1
 				g = 0
 				b = colorSpread
-			elseif (teamAllyID == 1) then
+			elseif (allyID == 1) then
 				r = 0
 				g = 1
 				b = colorSpread
-			elseif (teamAllyID == 2) then
+			elseif (allyID == 2) then
 				r = colorSpread
 				g = 0
 				b = 1
-			elseif (teamAllyID == 3) then			
-
-			elseif (teamAllyID == 4) then
+			elseif (allyID == 3) then			
 				r = 1
 				g = 1
 				b = colorSpread
-			elseif (teamAllyID == 5) then
+			elseif (allyID == 4) then
 				r = 1
 				g = colorSpread
 				b = 1
-			elseif (teamAllyID == 6) then
-				r = 0.66
-				g = colorSpread
-				b = 0.66	
-			elseif (teamAllyID == 7) then
-				r = 0.66
-				g = colorSpread
-				b = colorSpread
-			elseif (teamAllyID == 8) then
+			elseif (allyID == 5) then
 				r = colorSpread
-				g = 0.66
-				b = colorSpread
-			elseif (teamAllyID == 9) then			
-				r = colorSpread
-				g = colorSpread
-				b = 0.66
-			elseif (teamAllyID == 10) then
-				r = 0.66
-				g = 0.66
-				b = colorSpread
-			elseif (teamAllyID == 11) then
-				r = 0.66
-				g = colorSpread
-				b = 0.66
-			elseif (teamAllyID == 12) then
+				g = 1
+				b = 1
+			elseif (allyID == 6) then
 				r = 0.33
-				g = colorSpread
-				b = 0.33				
-			elseif (teamAllyID == 13) then
-				r = 0.33
-				g = colorSpread
+				g = 0
 				b = colorSpread
-			elseif (teamAllyID == 14) then
-				r = colorSpread
+			elseif (allyID == 7) then
+				r = 0
 				g = 0.33
 				b = colorSpread
-			elseif (teamAllyID == 15) then			
+			elseif (allyID == 8) then
 				r = colorSpread
+				g = 0
+				b = 0.33
+			elseif (allyID == 9) then			
+				r = 0.33
+				g = 0.33
+				b = colorSpread
+			elseif (allyID == 10) then
+				r = 0.33
 				g = colorSpread
 				b = 0.33
-			elseif (teamAllyID == 16) then
-				r = 0.33
+			elseif (allyID == 11) then
+				r = colorSpread
 				g = 0.33
-				b = colorSpread
-			elseif (teamAllyID == 17) then
-				r = 0.33
-				g = colorSpread
 				b = 0.33		
+			elseif (allyID == 12) then
+				r = 0.66
+				g = 0
+				b = colorSpread
+			elseif (allyID == 13) then
+				r = 0
+				g = 0.66
+				b = colorSpread
+			elseif (allyID == 14) then
+				r = colorSpread
+				g = 0
+				b = 0.66
+			elseif (allyID == 15) then			
+				r = 0.66
+				g = 0.66
+				b = colorSpread
+			elseif (allyID == 16) then
+				r = 0.66
+				g = colorSpread
+				b = 0.66
+			elseif (allyID == 17) then
+				r = colorSpread
+				g = 0.66
+				b = 0.66				
+			elseif (allyID == 18) then
+				r = colorSpread
+				g = colorSpread
+				b = colorSpread				
 			else
 				r = math.random()
 				g = math.random()
@@ -264,9 +229,6 @@ local function SetNewTeamColorsForSpecs()
 
 		end
 	end
-	
---	Spring.SetTeamColor(myTeam, unpack(myTrueColor))	-- overrides previously defined color
-
 end
 
 local function ResetOldTeamColors()
@@ -303,11 +265,47 @@ end
 
 function widget:Initialize()
 	is_speccing = Spring.GetSpectatingState()
-	if is_speccing then
-		SetNewTeamColorsForSpecs()
-	elseif options.simpleColors.value then
+
+	local allyteams = Spring.GetAllyTeamList()
+	local gaiaT = Spring.GetGaiaTeamID()
+	local gaiaAT = select(6, Spring.GetTeamInfo(gaiaT))
+	for i=1,#allyteams do
+		if allyteams[i] ~= gaiaAT then
+			local teams = Spring.GetTeamList()
+			if #teams > 0  then
+				numberOfAllyTeams = numberOfAllyTeams + 1
+			end
+		end
+	end
+	
+	for _, teamID in ipairs(Spring.GetTeamList()) do
+		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
+		if allyTeamSize[allyID] ~= nil then		
+			allyTeamSize[allyID] = allyTeamSize[allyID]+1
+			teamInAlly[teamID] = allyTeamSize[allyID]
+			if allyTeamSize[allyID] > maxAllyTeamSize then
+				maxAllyTeamSize = allyTeamSize[allyID]
+			end
+		else
+			allyTeamSize[allyID] = 1
+			teamInAlly[teamID] = allyTeamSize[allyID]
+		end
+	end	
+	
+	for _, teamID in ipairs(Spring.GetTeamList()) do
+		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
+			if allyTeamSize[allyID] > 1 then
+				teamColorSpread[teamID] = 0.5*((teamInAlly[teamID]-1)/(allyTeamSize[allyID]-1))
+			else
+				teamColorSpread[teamID] = 0
+			end
+	end	
+	
+	if (is_speccing or numberOfAllyTeams > 2) then -- FFA and Spec
+		SetNewDifferentTeamColors()
+	elseif options.simpleColors.value then -- red, green, blue only
 		SetNewSimpleTeamColors()
-	else
+	else -- shades of red and green
 		SetNewTeamColors()
 	end
 	

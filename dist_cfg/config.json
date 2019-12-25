@@ -8,28 +8,13 @@
               "portable": true			  
 		  },
 		  "downloads": {
-			  "games" : ["tc:stable", "chobby:test", "tchobby:stable"],
+			  "games" : ["tc:stable", "chobby:test", "tchobby:stable", "tcampaign:stable"],
 			  "engines" : [ "104.0" ]
 		  },
 		  "no_start_script" : true,
 		  "launch": {
 		  "start_args" : ["--menu", "rapid://tchobby:stable"]
             }
-        },
-        {
-		  "package": {
-			  "id": "dev-lobby",
-			  "display": "Develop",
-              "portable": true			  
-		  },
-		  "downloads": {
-			  "engines" : [ "104.0" ]
-		  },
-		  "no_start_script" : true,
-          "no_downloads" : true,		  
-		  "launch": {
-		  "start_args" : ["--menu", "tchobby $VERSION"]
-            }
-        }		
+        }
     ]
 }

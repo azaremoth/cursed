@@ -228,10 +228,10 @@ local function SpawnBaseCursed (teamID, x, y, z)
 end
 
 local function SpawnUnitsCursed (teamID, x, y, z)
+	local hero = Spring.CreateUnit("tc_shade_lvl1", x-80, y, z, math.random(3), teamID)	
 	local ghoul = Spring.CreateUnit("tc_ghoul", x-30, y, z-70, math.random(3), teamID)
 	local gunner = Spring.CreateUnit("tc_gunner", x+110, y, z-50, math.random(3), teamID)
 	local witch = Spring.CreateUnit("tc_witch", x, y, z+70, math.random(3), teamID)	
-	local hero = Spring.CreateUnit("tc_shade_lvl1", x-80, y, z, math.random(3), teamID)	
 end
 
 local function SpawnBuildersCursed (teamID, x, y, z)
@@ -256,11 +256,11 @@ local function SpawnBaseImperials (teamID, x, y, z)
 end
 
 local function SpawnUnitsImperials (teamID, x, y, z)
+	local hero = Spring.CreateUnit("euf_sarge_lvl1", x-115, y, z+60, 2, teamID)
 	local marine = Spring.CreateUnit("euf_marine", x-130, y, z, 0, teamID)
 	local marine2 = Spring.CreateUnit("euf_marine", x-100, y, z, 0, teamID)
 	local sniper = Spring.CreateUnit("euf_sniper", x-130, y, z-30, 0, teamID)
 	local priest = Spring.CreateUnit("euf_priest", x-100, y, z-30, 0, teamID)
-	local hero = Spring.CreateUnit("euf_sarge_lvl1", x-115, y, z+60, 2, teamID)
 end
 
 local function SpawnBuildersImperials (teamID, x, y, z)
@@ -311,7 +311,6 @@ local function SpawnstartFaction(teamID)
 		SpawnChicken (teamID, x, y, z)				
 	else
 		if (side == "imperials") then
-			SpawnUnitsImperials (teamID, x, y, z)
 			if ((cpvstartbase == true) or ((ai == true) and (team ~= Gaia) and (cheatAItype == "1"))) then
 				SpawnBaseImperials (teamID, x, y, z)
 			end
@@ -320,9 +319,8 @@ local function SpawnstartFaction(teamID)
 			else
 				SpawnBuildersImperials (teamID, x, y, z)
 			end	
-	
+			SpawnUnitsImperials (teamID, x, y, z)	
 		else
-			SpawnUnitsCursed (teamID, x, y, z)
 			if ((cpvstartbase == true) or ((ai == true) and (team ~= Gaia) and (cheatAItype == "1"))) then
 				SpawnBaseCursed (teamID, x, y, z)
 			end
@@ -331,6 +329,7 @@ local function SpawnstartFaction(teamID)
 			else
 				SpawnBuildersCursed (teamID, x, y, z)
 			end	
+			SpawnUnitsCursed (teamID, x, y, z)			
 		end
 	end
 --	local testbox = Spring.CreateFeature("uselessbox", x, y, z, math.random(3), teamID)

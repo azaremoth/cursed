@@ -278,7 +278,7 @@ local cameraPath = 'Settings/Camera'
 			{name = 'FPS',key='FPS', hotkey=nil},
 			{name = 'Free',key='Free', hotkey=nil},
 			{name = 'Rotatable Overhead',key='Rotatable Overhead', hotkey=nil},
-			{name = 'Total War',key='Total War',  hotkey=nil},
+--			{name = 'Total War',key='Total War',  hotkey=nil},
 			{name = 'COFC',key='COFC', desc='Combo Overhead/Free Camera', hotkey=nil},
 		},'Default',
 		function(self)
@@ -291,8 +291,8 @@ local cameraPath = 'Settings/Camera'
 				spSendCommands{cofcDisable ,"viewfree"}
 			elseif key == 'Rotatable Overhead' then
 				spSendCommands{cofcDisable ,"viewrot"}
-			elseif key == 'Total War' then
-				spSendCommands{cofcDisable ,"viewtw"}
+--			elseif key == 'Total War' then
+--				spSendCommands{cofcDisable ,"viewtw"}
 			elseif key == 'COFC' then
 				spSendCommands{"luaui enablewidget Combo Overhead/Free Camera (experimental)",}
 			else
@@ -317,7 +317,7 @@ local camerHotkeys = 'Hotkeys/Camera'
 	ShButton(camerHotkeys, 'Switch FPS', 'viewfps', nil, true)
 	ShButton(camerHotkeys, 'Switch Free', 'viewfree', nil, true)
 	ShButton(camerHotkeys, 'Switch Rotatable', 'viewrot', nil, true)
-	ShButton(camerHotkeys, 'Switch Total War', 'viewtw', nil, true)
+--	ShButton(camerHotkeys, 'Switch Total War', 'viewtw', nil, true)
 	
 	
 --- HUD Panels --- Only settings that pertain to windows/icons at the drawscreen level should go here.

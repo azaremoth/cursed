@@ -20,8 +20,8 @@ options_order = { 'camSpeed', 'tiltZoom'}
 options = {
 	camSpeed = {
 		name = 'Camera Smoothness',
-		type = "number", 
-		value = 0.20, 
+		type = "number",
+		value = 0.30,
 		min = 0,
 		max = 1,
 		step = 0.01,
@@ -30,8 +30,8 @@ options = {
 	},
 	tiltZoom = {
 		name = 'Tilt Zoom',
-		type = "number", 
-		value = 0, 
+		type = "number",
+		value = 0,
 		min = 0,
 		max = 1,
 		step = 0.01,
@@ -65,6 +65,10 @@ function widget:Update(dt)
 		end
 	end
 	local state = spGetCameraState()
+	if state.mode ~= 1 then
+		-- Only apply to default camera.
+		return
+	end
 	if options.tiltZoom.value ~= 0 then
 		if math.abs(state.height - newHeight) > 50 then
 			newHeight = newHeight + (state.height - newHeight)*0.18

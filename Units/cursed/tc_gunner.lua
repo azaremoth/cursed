@@ -130,7 +130,7 @@ local unitDef = {
 
 local weaponDefs = {
   GUNNER_LIGHTNING = {
-    areaOfEffect       = 20,
+    areaOfEffect       = 64,
     avoidFeature       = false,
     avoidFriendly      = true,
     avoidneutral       = "0",
@@ -179,7 +179,7 @@ local weaponDefs = {
     },
   },
   GUNNER_LIGHTNING_BUNKER = {
-    areaOfEffect       = 20,
+    areaOfEffect       = 64,
     avoidFeature       = false,
     avoidFriendly      = false,
     avoidneutral       = "0",

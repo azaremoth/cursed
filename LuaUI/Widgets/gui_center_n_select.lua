@@ -5,7 +5,7 @@ return {
  	author    = "quantum, Evil4Zerggin, TheFatController",
  	date      = "12 Feb 2009",
  	license   = "GNU GPL, v2 or later",
- 	layer     = 5,
+ 	layer     = 5000,
  	enabled   = true
  	}
  end

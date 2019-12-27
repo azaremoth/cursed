@@ -4,6 +4,7 @@ Polishing
 - Made weapon visuals for consistent to damage classes
 
 Balance
+- AoE of cursed gunner increased
 - Made visuals and weapons types even more aligned and predictable:
 	> Laser / Electrobeam / Light guns: 				-25% against heavy armor 
 	> Cannon / Tachyon beam / (Magic) Rockets:			-25% against light armor

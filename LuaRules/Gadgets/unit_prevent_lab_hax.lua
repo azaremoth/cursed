@@ -41,7 +41,7 @@ local spMoveCtrlGetTag         = Spring.MoveCtrl.GetTag
 local abs = math.abs
 local min = math.min
 
-local terraunitDefID = UnitDefNames["terraunit"].id
+-- local terraunitDefID = UnitDefNames["terraunit"].id
 
 local FEATURE_ONLY = {
 	factorygunship = true,
@@ -90,7 +90,7 @@ local function CheckLabs(checkFeatures, onlyUnstick)
 							local vx, vy, vz = spGetUnitVelocity(unitID)
 							
 							if aimY > -18 and aimY >= clearUnits[5] and aimY <= clearUnits[6] then
-								local isAlly = ally == data.ally 
+								local isAlly = ally == data.ally
 								
 								local l = abs(ux - clearUnits[1])
 								local t = abs(uz - clearUnits[2])
@@ -132,7 +132,7 @@ local function CheckLabs(checkFeatures, onlyUnstick)
 										end
 									end
 								end
-							end	
+							end
 						end
 					end
 				end
@@ -269,8 +269,8 @@ function gadget:UnitCreated(unitID, unitDefID,teamID)
 		labList.count = labList.count + 1
 		labList.data[labList.count] = {
 			unitID = unitID,
-			ally = ally, 
-			team = teamID, 
+			ally = ally,
+			team = teamID,
 			face = 0,
 			unitExpulsionParameters = unitExpulsionParameters,
 			featureExpulsionParameters = featureExpulsionParameters,
@@ -330,6 +330,9 @@ function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpt
 	
 	local buildDefID, x, z, face
 	if cmdID == CMD.INSERT then
+		if not cmdParams[2] then
+			return true
+		end
 		if cmdParams[2] >= 0 then
 			return true
 		end
@@ -345,12 +348,16 @@ function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpt
 	end
 	
 	if (not x) or (not z) then
-		-- Sometimes factory construction orders reach here 
+		-- Sometimes factory construction orders reach here
 		return true
 	end
 	
 	local allyTeamID = Spring.GetUnitAllyTeam(unitID)
 	local ud = UnitDefs[buildDefID]
+	if not ud then
+		return true
+	end
+
 	local xsize = (ud.xsize)*4 - 8
 	local zsize = (ud.ysize or ud.zsize)*4 - 8
 	
@@ -377,7 +384,7 @@ function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpt
 		local data = labData[i]
 		if data.ally == allyTeamID then
 			local clearFeatures = data.featureExpulsionParameters
-			if clearFeatures[1] < x + xsize and clearFeatures[3] > x - xsize and 
+			if clearFeatures[1] < x + xsize and clearFeatures[3] > x - xsize and
 					clearFeatures[2] < z + zsize and clearFeatures[4] > z - zsize then
 				return false
 			end

@@ -26,6 +26,7 @@ include("Widgets/COFCtools/TraceScreenRay.lua")
 --------------------------------------------------------------------------------
 
 local init = true
+local centerStart = true
 local trackmode = false --before options
 local thirdperson_trackunit = false
 
@@ -823,6 +824,16 @@ local function DetermineInitCameraState()
 	local csOldry = math.atan2(csOlddx, -csOlddz) - PI
 	spSendCommands("viewfree")
 	local cs = spGetCameraState()
+	
+	local unitArray = Spring.GetTeamUnits(Spring.GetMyTeamID())
+	if unitArray[1] and centerStart then
+		local x, y, z = Spring.GetUnitPosition(unitArray[1])
+		cs.px = x
+		cs.pz = z
+	else
+		cs.px = csOldpx
+		cs.pz = csOldpz	
+	end
 	-- if csOldpx == 0.0 * csOldpz == 0.0 then
 	-- 	cs.px = MWIDTH/2
 	-- 	cs.pz = MHEIGHT/2
@@ -1961,6 +1972,19 @@ function widget:Update(dt)
 		end
 	end
 
+	local unitArray = Spring.GetTeamUnits(Spring.GetMyTeamID())
+	if unitArray[1] and centerStart then
+		local x, y, z = Spring.GetUnitPosition(unitArray[1])
+		cs = DetermineInitCameraState()
+		cs.tiltSpeed = 0
+		cs.scrollSpeed = 0
+		cs.gndOffset = options.freemode.value and 0 or 1
+		centerStart = false
+		
+		SetCameraTarget(x, y, z, 0.5,true, 1750)
+	end	
+	
+	
 	--//HANDLE TIMER FOR VARIOUS SECTION
 	--timer to block tracking when using mouse
 	if follow_timer > 0  then

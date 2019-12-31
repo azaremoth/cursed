@@ -16,6 +16,7 @@ end
 
 
 local go = true
+local runtimesec = 3
 local zDist = 750
 local yDist = 1750
 
@@ -25,19 +26,18 @@ local yDist = 1750
 
 function widget:Update()
   local t = Spring.GetGameSeconds()
-  if (select(3,Spring.GetPlayerInfo(Spring.GetMyPlayerID(),false)) or t > 10) then
+  if (select(3,Spring.GetPlayerInfo(Spring.GetMyPlayerID(),false)) or t > runtimesec) then
     widgetHandler:RemoveWidget(self)
     return
   end
-  if (t > 1) then
+  if (t > 0 and t < runtimesec) then
   
 	local camera = Spring.GetCameraState()
   
     local unitArray = Spring.GetTeamUnits(Spring.GetMyTeamID())
-    if (go and unitArray[1]) then
+	if unitArray[1] then
       local x, y, z = Spring.GetUnitPosition(unitArray[1])
 	  
---	  camera.name = "viewfree"
 	  camera.px = x
 	  camera.py = y+yDist
 	  camera.pz = z+zDist	  
@@ -49,13 +49,12 @@ function widget:Update()
 	  camera.rz = 0
 
 	  Spring.SetCameraState(camera)	  
---	  WG.COFC_SetCameraTarget(x,y+yDist,z+zDist,0.5,true)
-  
-      Spring.SelectUnitArray{unitArray[1]}
-      go = false
-    end
-    if (not go) then
-      widgetHandler:RemoveWidget(self)
+	  WG.COFC_SetCameraTarget(x,y,z,0.5,true,yDist)
+	  if go then
+		Spring.SelectUnitArray{unitArray[1]}
+		go = false
+	  end
+	  -- Spring.Echo("Camera: Updated!")
     end
   end
 end

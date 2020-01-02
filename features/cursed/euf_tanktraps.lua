@@ -20,7 +20,7 @@ local function CreateWallDef(i)
     footprintX         = 1,
     footprintZ         = 1,
     height             = "30",
-    hitdensity         = "1000",
+    hitdensity         = "10000",
     energy      	   = 0,
     metal              = 8,
     reclaimTime 	   = 25,	

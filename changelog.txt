@@ -3,6 +3,7 @@
 Polishing
 - Made weapon visuals for consistent to damage classes
 - morph commands will appear in commands and build tab now (for builders)
+- polished team color automated simple team colors
 
 Balance
 - AoE of cursed gunner increased

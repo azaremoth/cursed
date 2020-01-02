@@ -19,6 +19,10 @@ Balance
 Bugs:
 - fixed spider demons using energy for shooting (was not intended)	
 
+Infracstructure:
+- removed (most) single player specific content from the main archive
+
+
 
 >> Major changes 1.443 => 1.444
 

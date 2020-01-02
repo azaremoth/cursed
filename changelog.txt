@@ -2,6 +2,7 @@
 
 Polishing
 - Made weapon visuals for consistent to damage classes
+- morph commands will appear in commands and build tab now (for builders)
 
 Balance
 - AoE of cursed gunner increased
@@ -15,7 +16,7 @@ Balance
 		-> Multipurpose anti-air guns do more damage againt air targets: Defender: +50%, Crawler and AA Tank: +100%
 
 Bugs:
-- fixed spider demons using energy for shooting (was not intended)		
+- fixed spider demons using energy for shooting (was not intended)	
 
 
 >> Major changes 1.443 => 1.444

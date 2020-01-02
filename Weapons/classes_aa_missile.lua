@@ -2,6 +2,7 @@
 local AA_DW = {
     avoidFriendly      = false,
 	collideFriendly    = false,
+    canattackground         = false,	
     areaOfEffect       		= 32,	
 	range                   = 800,
     reloadtime 				= 0.50,
@@ -11,12 +12,14 @@ local AA_DW = {
     weaponAcceleration      = 400,
 	turnRate                = 3000,	
 	cegTag                  = "GreenRocketTrail",
-    damage 					= { default = 100, flyer = 100, heavy = 100, light = 100, },
+    explosionGenerator      = "custom:FLAKImpact",	
+    damage 					= { default = 100, flyer = 100, heavy = 100, light = 100*0.33, },
 }
 
 local AA_MISSILE_TOWER = {
     avoidFriendly      = false,
 	collideFriendly    = false,
+    canattackground         = false,	
     areaOfEffect       		= 32,	
 	range                   = 1000,
     reloadtime 				= 2.00,
@@ -24,18 +27,45 @@ local AA_MISSILE_TOWER = {
     weaponAcceleration      = 550,
 	turnRate                = 55000,
 	cegTag                  = "MLRSRocketTrail",
-    damage 					= { default = 400, flyer = 400, heavy = 400, light = 400, },
+    explosionGenerator      = "custom:FLAKImpact",	
+    damage 					= { default = 400, flyer = 400, heavy = 400, light = 400*0.33, },
 }
 
+local AA_TROOPER = {
+    avoidFriendly      = true,
+	collideFriendly    = true,
+    canattackground         = true,	
+    areaOfEffect       		= 48,	
+	range                   = 650,
+    reloadtime 				= 4.50,
+    startVelocity           = 250,
+    weaponAcceleration      = 550,
+	turnRate                = 12500,
+	cegTag                  = "MLRSRocketTrail",
+    explosionGenerator      = "custom:FLAKImpact",	
+    damage 					= { default = 170, flyer = 170, heavy = 170, light = 170*0.33, },
+}
+local AA_TROOPER_BUNKER = {
+    avoidFriendly      = false,
+	collideFriendly    = false,
+    canattackground         = true,	
+    areaOfEffect       		= 48,	
+	range                   = 650,
+    reloadtime 				= 4.50,
+    startVelocity           = 300,
+    weaponAcceleration      = 250,
+	turnRate                = 12500,
+	cegTag                  = "MLRSRocketTrail",
+    explosionGenerator      = "custom:FLAKImpact",	
+    damage 					= { default = 170, flyer = 170, heavy = 170, light = 170*0.33, },
+}
 -----------------------------------  BASE CLASS -------------------------------------------
 local AA_MISSILE_BASE = {
       name                    = "AA Missile",
-      canattackground         = false,
       craterBoost             = 0,
       craterMult              = 0,
       cylinderTargeting       = 128,
 	  energypershot           = 10,
-      explosionGenerator      = "custom:FLAKImpact",
       fireStarter             = 20,
       flightTime              = 4,
       impactOnly              = true,
@@ -93,5 +123,7 @@ end
 return lowerkeys({
 	AA_DW = WeaponDefMergeTable(AA_MISSILE_BASE, AA_DW),
 	AA_MISSILE_TOWER = WeaponDefMergeTable(AA_MISSILE_BASE, AA_MISSILE_TOWER),
+	AA_TROOPER = WeaponDefMergeTable(AA_MISSILE_BASE, AA_TROOPER),
+	AA_TROOPER_BUNKER = WeaponDefMergeTable(AA_MISSILE_BASE, AA_TROOPER_BUNKER),	
 })
 

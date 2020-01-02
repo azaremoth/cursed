@@ -25,6 +25,8 @@ local IsALeach = {
 	[UnitDefNames.tc_shade_lvl9.id] = "tc_shade_lvl9",
 	[UnitDefNames.tc_shade_lvl10.id] = "tc_shade_lvl10",	
 	}
+
+local leachRatio = 0.1 -- 10% of done damage
 	
 if (gadgetHandler:IsSyncedCode()) then
 --SYNCED
@@ -32,7 +34,7 @@ if (gadgetHandler:IsSyncedCode()) then
 function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponID, attackerID, attackerDefID, attackerTeam)
 	if (IsALeach [attackerDefID] and attackerID ~= nil) then
 		if (Spring.GetUnitHealth(attackerID) > 0) then
-			Spring.SetUnitHealth(attackerID, (Spring.GetUnitHealth(attackerID))+(damage*0.2))
+			Spring.SetUnitHealth(attackerID, (Spring.GetUnitHealth(attackerID))+(damage*leachRatio))
 		end
 	end 
 end

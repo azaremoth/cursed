@@ -62,7 +62,7 @@ end
 
 function script.QueryNanoPiece()
 --	GG.LUPS.QueryNanoPiece(unitID, unitDefID, spGetUnitTeam(unitID), emit)
-	return nano
+	return emit
 end
 
 function script.Activate ()

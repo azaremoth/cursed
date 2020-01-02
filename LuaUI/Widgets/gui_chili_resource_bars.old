@@ -35,11 +35,6 @@ local spGetTeamRulesParam = Spring.GetTeamRulesParam
 
 local modOptions = Spring.GetModOptions()
 local campaignBattleID = modOptions.singleplayercampaignbattleid
-local cvMode = modOptions.scoremode
-
-if cvMode == nil then
-	cvMode = "disabled"
-end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -65,9 +60,6 @@ local lbl_m_expense
 local lbl_e_expense
 local lbl_m_income
 local lbl_e_income
-
-local bar_cpv
-local lbl_cpv
 
 local blink = 0
 local blink_periode = 2
@@ -533,12 +525,8 @@ function CreateWindow()
 
 	local bars = 2
 	if options.xpBar.value and (not campaignBattleID) then
-		bars = bars+1
+		bars = 3
 	end
-	if cvMode ~= "disabled" then  --XxX
-		bars = bars+2
-	end
-	
 	local function p(a)
 		return tostring(a).."%"
 	end
@@ -551,7 +539,7 @@ function CreateWindow()
 		width = 430
 	end
 	local integralHeigth = screenWidth*4/9
-	local height = bars*25 -- 75  --XxX
+	local height = 75
 	local firstbarstart = 3
 	local barheight = (height-2*firstbarstart)/bars
 	-- local x = math.min(screenWidth/2 - width/2, screenWidth - 400 - width)
@@ -776,10 +764,10 @@ function CreateWindow()
 	bar_xp = Chili.Progressbar:New{
 		parent = window,
 		color  = col_xp,
-		height = barheight,
+		height = "33%",
 		right  = 6,
 		x      = 120,
-		y      = ( 2*barheight+firstbarstart ),
+		y      = "66%",
 		tooltip = "The experience your hero has gained",
 		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
 	}

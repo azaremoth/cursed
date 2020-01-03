@@ -47,6 +47,7 @@ end
 local col_metal = {136/255,214/255,251/255,1}
 local col_energy = {1,1,0,1}
 local col_xp = {0.5, 0.5, 0.5, 1}
+local col_cpv = {1.0, 0.5, 0.5, 1}
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -66,8 +67,8 @@ local lbl_e_expense
 local lbl_m_income
 local lbl_e_income
 
-local bar_cpv
 local lbl_cpv
+local lbl_cpvenemy
 
 local blink = 0
 local blink_periode = 2
@@ -500,6 +501,31 @@ function widget:GameFrame(n)
 		lbl_xp:SetCaption( "Lvl. " .. team_level)
 	end
 
+	if cvMode ~= nil then
+		local currentscore = Spring.GetTeamRulesParam(GetMyTeamID(),"cpv_score") or 0
+--		Spring.Echo("currentscore reported to res bars")
+--		Spring.Echo(currentscore)
+		lbl_cpv.font:SetColor(col_cpv)
+		lbl_cpv:SetCaption( "Score Mode: " .. cvMode .. " Team Score: " .. currentscore)
+		
+--		local allTeams = Spring.GetTeamList()
+--		for _,rteam in ipairs(allTeams) do
+--			local _,_,_,_,_,teamAllyTeamID = Spring.GetTeamInfo(rteam)
+--			local currentscore = score[teamAllyTeamID]
+--			Spring.SetTeamRulesParam(rteam,"cpv_score",currentscore)
+--		end	
+
+--		for _, a in ipairs(Spring.GetAllyTeamList()) do
+--			if (a ~= team) then
+--				Loser(a)
+--			end
+--		end
+
+		lbl_cpvenemy.font:SetColor(col_cpv)
+		lbl_cpvenemy:SetCaption( "Score Mode: " .. cvMode .. " Team Score: " .. currentscore)		
+	end	
+	
+	
 end
 
 --------------------------------------------------------------------------------
@@ -796,7 +822,36 @@ function CreateWindow()
 		font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
 		tooltip = "",
 	}
+	
+	lbl_cpv = Chili.Label:New{
+		parent = window,
+		height = barheight,
+		width  = 400,
+                x      = 10,
+                y      = ( 3*barheight+firstbarstart ),
+		valign = "center",
+		align  = "right",
+		caption = "0",
+		autosize = false,
+		font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
+		tooltip = "",
+	}
+	
+	lbl_cpvenemy = Chili.Label:New{
+		parent = window,
+		height = barheight,
+		width  = 400,
+                x      = 10,
+                y      = ( 4*barheight+firstbarstart ),
+		valign = "center",
+		align  = "right",
+		caption = "0",
+		autosize = false,
+		font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
+		tooltip = "",
+	}
 
+	
 end
 
 function DestroyWindow()

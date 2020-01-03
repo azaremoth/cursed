@@ -675,6 +675,16 @@ if (gadgetHandler:IsSyncedCode()) then
 				end
 			end
 		end
+		if (f % 10) == 1 then -- score "reported" to widgets
+			local allTeams = Spring.GetTeamList()
+			for _,rteam in ipairs(allTeams) do
+				local _,_,_,_,_,teamAllyTeamID = Spring.GetTeamInfo(rteam)
+				local currentscore = score[teamAllyTeamID]
+				Spring.SetTeamRulesParam(rteam,"cpv_score",currentscore)
+--				Spring.Echo("CPV: currentscore / rteam / allyteam")
+--				Spring.Echo(currentscore .. " " .. rteam .. " " .. teamAllyTeamID)
+			end
+		end
 --[[	if f % 300 == 0 then
 		for i = 1, maxpoints do
 				if (points[i] ~= nil) then

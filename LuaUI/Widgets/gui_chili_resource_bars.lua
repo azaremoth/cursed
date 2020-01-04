@@ -485,7 +485,7 @@ function widget:GameFrame(n)
 	lbl_m_income:SetCaption( ("%.1f"):format(mInco+mReci) )
 	lbl_e_income:SetCaption( ("%.1f"):format(eInco) )
 
-	if options.xpBar.value and (not campaignBattleID) then
+	if not campaignBattleID then
 		local current_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"current_xps")*100 or 0
 		local nextlevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"nextlevel_xps")*100 or 0
 		local rellevel_xps = Spring.GetTeamRulesParam(GetMyTeamID(),"rellevel_xps")*100 or 0
@@ -510,7 +510,7 @@ function widget:GameFrame(n)
 --		Spring.Echo("currentscore reported to res bars")
 --		Spring.Echo(currentscore)
 		lbl_cpv.font:SetColor(col_cpv)
-		lbl_cpv:SetCaption( "Score Mode: " .. cvMode .. " My team's score: " .. currentscore)
+		lbl_cpv:SetCaption( "Score Mode: " .. cvMode .. "          My team's score: " .. currentscore)
 		
 		local enemyScores = ""
 		local allyTeamDone = {}	
@@ -557,22 +557,25 @@ function InitializeCPV()
 		end
 	end
 	for _, teamID in ipairs(Spring.GetTeamList()) do
-		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
-		teamScores[teamID] = Spring.GetTeamRulesParam(teamID,"cpv_score") or 0
-		local playerList = Spring.GetPlayerList(teamID)
-		local ai = select(4, Spring.GetTeamInfo(teamID))
-		if ai then
-			if Spring.GetTeamLuaAI(teamID) ~= nil then
-				allyTeamNames[teamID] = Spring.GetTeamLuaAI(teamID)
-			else
-				allyTeamNames[teamID] = "AI"
+		if teamID ~= gaiaT then
+			local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
+			teamScores[teamID] = Spring.GetTeamRulesParam(teamID,"cpv_score") or 0
+			local playerList = Spring.GetPlayerList(teamID)
+			local ai = select(4, Spring.GetTeamInfo(teamID))
+			if ai then
+				if Spring.GetTeamLuaAI(teamID) ~= nil then
+					allyTeamNames[teamID] = Spring.GetTeamLuaAI(teamID)
+				end
 			end
-		end
-		for _,playerId in pairs(playerList)do
-			local _, _, spectator = Spring.GetPlayerInfo(playerId)
-			if not spectator then
-				allyTeamNames[teamID] = Spring.GetPlayerInfo(playerId)
-			end	
+			for _,playerId in pairs(playerList)do
+				local _, _, spectator = Spring.GetPlayerInfo(playerId)
+				if not spectator then
+					allyTeamNames[teamID] = Spring.GetPlayerInfo(playerId)
+				end	
+			end
+			if allyTeamNames[teamID] == nil or allyTeamNames[teamID] == "" then -- filling empty teams
+				allyTeamNames[teamID] = "Unknown"
+			end
 		end
 	end
 end
@@ -604,10 +607,10 @@ end
 function CreateWindow()
 
 	local bars = 2
-	if options.xpBar.value and (not campaignBattleID) then
+	if not campaignBattleID then
 		bars = bars+1
 	end
-	if cvMode ~= "disabled" then  --XxX
+	if cvMode ~= "disabled" then
 		bars = bars+2
 	end
 	
@@ -843,7 +846,7 @@ function CreateWindow()
 	function lbl_e_expense:HitTest(x,y) return self end
 	function lbl_m_expense:HitTest(x,y) return self end
 
-	if not campaignBattleID or options.xpBar.value then
+	if not campaignBattleID then
 		barCount = barCount+1	
 		bar_xp = Chili.Progressbar:New{
 			parent = window,

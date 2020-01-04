@@ -886,7 +886,7 @@ function CreateWindow()
 			align  = "left",
 			caption = "0",
 			autosize = false,
-			font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
+			font   = {size = 17, outline = true, outlineWidth = 4, outlineWeight = 3,},
 			tooltip = "",
 		}
 		

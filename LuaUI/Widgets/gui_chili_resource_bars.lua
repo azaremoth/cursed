@@ -36,6 +36,10 @@ local spGetTeamRulesParam = Spring.GetTeamRulesParam
 local modOptions = Spring.GetModOptions()
 local campaignBattleID = modOptions.singleplayercampaignbattleid
 local cvMode = modOptions.scoremode
+local teamScores = {}
+local allyTeamNames = {}
+local numberOfAllyTeams = 0
+local barCount = 1
 
 if cvMode == nil then
 	cvMode = "disabled"
@@ -47,8 +51,8 @@ end
 local col_metal = {136/255,214/255,251/255,1}
 local col_energy = {1,1,0,1}
 local col_xp = {0.5, 0.5, 0.5, 1}
-local col_cpv = {1.0, 0.5, 0.5, 1}
-
+local col_cpv = {0.5, 0.7, 1.0, 1}
+local col_cpvenemy = {1.0, 0.5, 0.5, 1}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -506,25 +510,29 @@ function widget:GameFrame(n)
 --		Spring.Echo("currentscore reported to res bars")
 --		Spring.Echo(currentscore)
 		lbl_cpv.font:SetColor(col_cpv)
-		lbl_cpv:SetCaption( "Score Mode: " .. cvMode .. " Team Score: " .. currentscore)
+		lbl_cpv:SetCaption( "Score Mode: " .. cvMode .. " My team's score: " .. currentscore)
 		
---		local allTeams = Spring.GetTeamList()
---		for _,rteam in ipairs(allTeams) do
---			local _,_,_,_,_,teamAllyTeamID = Spring.GetTeamInfo(rteam)
---			local currentscore = score[teamAllyTeamID]
---			Spring.SetTeamRulesParam(rteam,"cpv_score",currentscore)
---		end	
-
---		for _, a in ipairs(Spring.GetAllyTeamList()) do
---			if (a ~= team) then
---				Loser(a)
---			end
---		end
-
-		lbl_cpvenemy.font:SetColor(col_cpv)
-		lbl_cpvenemy:SetCaption( "Score Mode: " .. cvMode .. " Team Score: " .. currentscore)		
+		local enemyScores = ""
+		local allyTeamDone = {}	
+		for _, teamID in ipairs(Spring.GetTeamList()) do
+			if teamID ~= Spring.GetMyTeamID() then
+				local _,_,_,_,_,teamAllyID = Spring.GetTeamInfo(teamID)
+				for _, allyID in ipairs(Spring.GetAllyTeamList()) do
+					if allyID == teamAllyID and not allyTeamDone[teamAllyID] then
+						if (enemyScores == nil or enemyScores == "") and allyTeamNames[teamID] ~= nil and teamScores[teamID] ~= nil then 
+							enemyScores = (allyTeamNames[teamID] .. ": " .. teamScores[teamID])
+							allyTeamDone[allyID] = true
+						elseif (enemyScores ~= nil or enemyScores ~= "") and allyTeamNames[teamID] ~= nil and teamScores[teamID] ~= nil then 
+							enemyScores = enemyScores .. "     " .. (allyTeamNames[teamID] .. ": " .. teamScores[teamID])
+							allyTeamDone[allyID] = true					
+						end
+					end			
+				end
+			end
+		end
+		lbl_cpvenemy.font:SetColor(col_cpvenemy)
+		lbl_cpvenemy:SetCaption(enemyScores)		
 	end	
-	
 	
 end
 
@@ -533,6 +541,40 @@ end
 
 function widget:Shutdown()
 	window:Dispose()
+end
+
+function InitializeCPV()
+	local allyteams = Spring.GetAllyTeamList()
+	local gaiaT = Spring.GetGaiaTeamID()
+	local gaiaAT = select(6, Spring.GetTeamInfo(gaiaT))
+	local teams = Spring.GetTeamList()
+	
+	for i=1,#allyteams do
+		if allyteams[i] ~= gaiaAT then
+			if #teams > 0  then
+				numberOfAllyTeams = numberOfAllyTeams + 1
+			end
+		end
+	end
+	for _, teamID in ipairs(Spring.GetTeamList()) do
+		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
+		teamScores[teamID] = Spring.GetTeamRulesParam(teamID,"cpv_score") or 0
+		local playerList = Spring.GetPlayerList(teamID)
+		local ai = select(4, Spring.GetTeamInfo(teamID))
+		if ai then
+			if Spring.GetTeamLuaAI(teamID) ~= nil then
+				allyTeamNames[teamID] = Spring.GetTeamLuaAI(teamID)
+			else
+				allyTeamNames[teamID] = "AI"
+			end
+		end
+		for _,playerId in pairs(playerList)do
+			local _, _, spectator = Spring.GetPlayerInfo(playerId)
+			if not spectator then
+				allyTeamNames[teamID] = Spring.GetPlayerInfo(playerId)
+			end	
+		end
+	end
 end
 
 function widget:Initialize()
@@ -551,6 +593,10 @@ function widget:Initialize()
 	time_old = GetTimer()
 
 	Spring.SendCommands("resbar 0")
+
+	if cvMode ~= nil then
+		InitializeCPV()
+	end
 
 	CreateWindow()
 end
@@ -797,60 +843,64 @@ function CreateWindow()
 	function lbl_e_expense:HitTest(x,y) return self end
 	function lbl_m_expense:HitTest(x,y) return self end
 
-	if campaignBattleID or not options.xpBar.value then return end
-	-- worker usage
-	bar_xp = Chili.Progressbar:New{
-		parent = window,
-		color  = col_xp,
-		height = barheight,
-		right  = 6,
-		x      = 120,
-		y      = ( 2*barheight+firstbarstart ),
-		tooltip = "The experience your hero has gained",
-		font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
-	}
-	lbl_xp = Chili.Label:New{
-		parent = window,
-		height = barheight,
-		width  = 60,
-                x      = 35,
-                y      = ( 2*barheight+firstbarstart ),
-		valign = "center",
-		align  = "right",
-		caption = "0",
-		autosize = false,
-		font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
-		tooltip = "",
-	}
+	if not campaignBattleID or options.xpBar.value then
+		barCount = barCount+1	
+		bar_xp = Chili.Progressbar:New{
+			parent = window,
+			color  = col_xp,
+			height = barheight,
+			right  = 6,
+			x      = 120,
+			y      = ( barCount*barheight+firstbarstart ),
+			tooltip = "The experience your hero has gained",
+			font   = {color = {1,1,1,1}, outlineColor = {0,0,0,0.7}, },
+		}
+		lbl_xp = Chili.Label:New{
+			parent = window,
+			height = barheight,
+			width  = 60,
+					x      = 35,
+					y      = ( barCount*barheight+firstbarstart ),
+			valign = "center",
+			align  = "right",
+			caption = "0",
+			autosize = false,
+			font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
+			tooltip = "",
+		}
+	end
 	
-	lbl_cpv = Chili.Label:New{
-		parent = window,
-		height = barheight,
-		width  = 400,
-                x      = 10,
-                y      = ( 3*barheight+firstbarstart ),
-		valign = "center",
-		align  = "right",
-		caption = "0",
-		autosize = false,
-		font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
-		tooltip = "",
-	}
-	
-	lbl_cpvenemy = Chili.Label:New{
-		parent = window,
-		height = barheight,
-		width  = 400,
-                x      = 10,
-                y      = ( 4*barheight+firstbarstart ),
-		valign = "center",
-		align  = "right",
-		caption = "0",
-		autosize = false,
-		font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
-		tooltip = "",
-	}
-
+	if cvMode ~= nil then
+		barCount = barCount+1
+		
+		lbl_cpv = Chili.Label:New{
+			parent = window,
+			height = barheight,
+			width  = 600,
+					x      = 10,
+					y      = ( barCount*barheight+firstbarstart ),
+			valign = "left",
+			align  = "left",
+			caption = "0",
+			autosize = false,
+			font   = {size = 19, outline = true, outlineWidth = 4, outlineWeight = 3,},
+			tooltip = "",
+		}
+		
+		lbl_cpvenemy = Chili.Label:New{
+			parent = window,
+			height = barheight,
+			width  = 600,
+					x      = 10,
+					y      = ( (barCount+1)*barheight+firstbarstart ),
+			valign = "left",
+			align  = "left",
+			caption = "0",
+			autosize = false,
+			font   = {size = 15, outline = true, outlineWidth = 4, outlineWeight = 3,},
+			tooltip = "",
+		}
+	end
 	
 end
 

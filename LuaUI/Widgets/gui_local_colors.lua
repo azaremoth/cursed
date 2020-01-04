@@ -87,7 +87,6 @@ local function SetNewTeamColors()
 	Spring.SetTeamColor(gaia, unpack(gaiaColor))
 	
 	local myAlly = Spring.GetMyAllyTeamID()
-	local teams = Spring.GetTeamList()
 	local myTeam = Spring.GetMyTeamID()	
 	
 	for _, teamID in ipairs(Spring.GetTeamList()) do
@@ -137,7 +136,6 @@ local function SetNewDifferentTeamColors()
 	Spring.SetTeamColor(gaia, unpack(gaiaColor))
 	local myTeam = Spring.GetMyTeamID()		
 	local myAlly = Spring.GetMyAllyTeamID()
-	local teams = Spring.GetTeamList()
 	
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		if (teamID ~= gaia) then

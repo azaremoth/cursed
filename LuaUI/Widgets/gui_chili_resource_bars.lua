@@ -519,6 +519,9 @@ function widget:GameFrame(n)
 				local _,_,_,_,_,teamAllyID = Spring.GetTeamInfo(teamID)
 				for _, allyID in ipairs(Spring.GetAllyTeamList()) do
 					if allyID == teamAllyID and not allyTeamDone[teamAllyID] then
+						local paraname = "cpv_score_" .. teamID
+						teamScores[teamID] = Spring.GetGameRulesParam(paraname) or 0
+--						Spring.Echo(teamScores[teamID])
 						if (enemyScores == nil or enemyScores == "") and allyTeamNames[teamID] ~= nil and teamScores[teamID] ~= nil then 
 							enemyScores = (allyTeamNames[teamID] .. ": " .. teamScores[teamID])
 							allyTeamDone[allyID] = true
@@ -559,7 +562,9 @@ function InitializeCPV()
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		if teamID ~= gaiaT then
 			local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
-			teamScores[teamID] = Spring.GetTeamRulesParam(teamID,"cpv_score") or 0
+			local paraname = "cpv_score_" .. teamID
+			teamScores[teamID] = Spring.GetGameRulesParam(paraname) or 0						
+--			teamScores[teamID] = Spring.GetTeamRulesParam(teamID,"cpv_score") or 0
 			local playerList = Spring.GetPlayerList(teamID)
 			local ai = select(4, Spring.GetTeamInfo(teamID))
 			if ai then

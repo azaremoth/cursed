@@ -680,7 +680,8 @@ if (gadgetHandler:IsSyncedCode()) then
 			for _,rteam in ipairs(allTeams) do
 				local _,_,_,_,_,teamAllyTeamID = Spring.GetTeamInfo(rteam)
 				local currentscore = score[teamAllyTeamID]
-				Spring.SetTeamRulesParam(rteam,"cpv_score",currentscore)
+				local paraname = "cpv_score_" .. rteam
+				Spring.SetGameRulesParam(paraname,currentscore)
 --				Spring.Echo("CPV: currentscore / rteam / allyteam")
 --				Spring.Echo(currentscore .. " " .. rteam .. " " .. teamAllyTeamID)
 			end

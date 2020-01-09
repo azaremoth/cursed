@@ -52,7 +52,7 @@ local col_metal = {136/255,214/255,251/255,1}
 local col_energy = {1,1,0,1}
 local col_xp = {0.5, 0.5, 0.5, 1}
 local col_cpv = {0.5, 0.7, 1.0, 1}
-local col_cpvenemy = {1.0, 0.5, 0.5, 1}
+local col_cpvenemy = {1.0, 1.0, 1.0, 1}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -72,7 +72,13 @@ local lbl_m_income
 local lbl_e_income
 
 local lbl_cpv
-local lbl_cpvenemy
+local lbl_cpvenemy1
+local lbl_cpvenemy2
+local lbl_cpvenemy3
+local lbl_cpvenemy4
+local lbl_cpvenemy5
+local lbl_cpvenemy6
+local lbl_cpvenemy7
 
 local blink = 0
 local blink_periode = 2
@@ -506,35 +512,69 @@ function widget:GameFrame(n)
 	end
 
 	if cvMode ~= nil then
-		local currentscore = Spring.GetTeamRulesParam(GetMyTeamID(),"cpv_score") or 0
+		local paraname = "cpv_score_" .. GetMyTeamID()
+		teamScores[GetMyTeamID()] = Spring.GetGameRulesParam(paraname) or 0	
+		local currentscore = Spring.GetGameRulesParam(paraname) or 0
 --		Spring.Echo("currentscore reported to res bars")
 --		Spring.Echo(currentscore)
-		lbl_cpv.font:SetColor(col_cpv)
-		lbl_cpv:SetCaption( "Score Mode: " .. cvMode .. "          My team's score: " .. currentscore)
+		lbl_cpv.font:SetColor(Spring.GetTeamColor(GetMyTeamID()))
+		lbl_cpv:SetCaption( "Score Mode: " .. cvMode .. "          Control: " .. currentscore)
 		
 		local enemyScores = ""
+		local enemyScoresAggregated = ""		
 		local allyTeamDone = {}	
+		local enemycount = numberOfAllyTeams - 1		
 		for _, teamID in ipairs(Spring.GetTeamList()) do
-			if teamID ~= Spring.GetMyTeamID() then
+			if teamID ~= Spring.GetMyTeamID() and teamID ~= Spring.GetGaiaTeamID() then
 				local _,_,_,_,_,teamAllyID = Spring.GetTeamInfo(teamID)
 				for _, allyID in ipairs(Spring.GetAllyTeamList()) do
 					if allyID == teamAllyID and not allyTeamDone[teamAllyID] then
 						local paraname = "cpv_score_" .. teamID
 						teamScores[teamID] = Spring.GetGameRulesParam(paraname) or 0
---						Spring.Echo(teamScores[teamID])
-						if (enemyScores == nil or enemyScores == "") and allyTeamNames[teamID] ~= nil and teamScores[teamID] ~= nil then 
+						if allyTeamNames[teamID] ~= nil and teamScores[teamID] ~= nil then 
+							if enemycount > 6 then
+								if (enemyScoresAggregated == nil or enemyScoresAggregated == "") and allyTeamNames[teamID] ~= nil and teamScores[teamID] ~= nil then 
+									enemyScoresAggregated = (allyTeamNames[teamID] .. ": " .. teamScores[teamID])
+									allyTeamDone[allyID] = true
+								elseif (enemyScoresAggregated ~= nil or enemyScoresAggregated ~= "") and allyTeamNames[teamID] ~= nil and teamScores[teamID] ~= nil then 
+									enemyScoresAggregated = enemyScoresAggregated .. ", " .. (allyTeamNames[teamID] .. ": " .. teamScores[teamID])
+									allyTeamDone[allyID] = true					
+								end							
+								lbl_cpvenemy7.font:SetColor(col_cpvenemy)
+								lbl_cpvenemy7:SetCaption(enemyScoresAggregated)
+							end
 							enemyScores = (allyTeamNames[teamID] .. ": " .. teamScores[teamID])
+							if enemycount > 5 then
+								lbl_cpvenemy6.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy6:SetCaption(enemyScores)
+							end								
+							if enemycount > 4 then
+								lbl_cpvenemy5.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy5:SetCaption(enemyScores)
+							end								
+							if enemycount > 3 then
+								lbl_cpvenemy4.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy4:SetCaption(enemyScores)
+							end								
+							if enemycount > 2 then
+								lbl_cpvenemy3.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy3:SetCaption(enemyScores)
+							end								
+							if enemycount > 1 then
+								lbl_cpvenemy2.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy2:SetCaption(enemyScores)
+							end
+							if enemycount > 0 then
+								lbl_cpvenemy1.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy1:SetCaption(enemyScores)
+							end
 							allyTeamDone[allyID] = true
-						elseif (enemyScores ~= nil or enemyScores ~= "") and allyTeamNames[teamID] ~= nil and teamScores[teamID] ~= nil then 
-							enemyScores = enemyScores .. "     " .. (allyTeamNames[teamID] .. ": " .. teamScores[teamID])
-							allyTeamDone[allyID] = true					
+							enemycount = enemycount - 1
 						end
 					end			
 				end
 			end
-		end
-		lbl_cpvenemy.font:SetColor(col_cpvenemy)
-		lbl_cpvenemy:SetCaption(enemyScores)		
+		end	
 	end	
 	
 end
@@ -612,11 +652,17 @@ end
 function CreateWindow()
 
 	local bars = 2
-	if not campaignBattleID then
+	if not campaignBattleID then -- in campaign mode no xp bar is needed
 		bars = bars+1
 	end
 	if cvMode ~= "disabled" then
-		bars = bars+2
+		if numberOfAllyTeams > 7 then
+			bars = bars + 4
+		elseif numberOfAllyTeams > 4 then
+			bars = bars + 3
+		else
+			bars = bars+2 -- up to 4 allyteams (own + 3 enemies)		
+		end
 	end
 	
 	local function p(a)
@@ -880,13 +926,14 @@ function CreateWindow()
 	
 	if cvMode ~= nil then
 		barCount = barCount+1
+		local offsetcpv = firstbarstart + 7
 		
 		lbl_cpv = Chili.Label:New{
 			parent = window,
 			height = barheight,
 			width  = 600,
 					x      = 10,
-					y      = ( barCount*barheight+firstbarstart ),
+					y      = ( barCount*barheight+offsetcpv ),
 			valign = "left",
 			align  = "left",
 			caption = "0",
@@ -894,13 +941,43 @@ function CreateWindow()
 			font   = {size = 17, outline = true, outlineWidth = 4, outlineWeight = 3,},
 			tooltip = "",
 		}
-		
-		lbl_cpvenemy = Chili.Label:New{
+		if numberOfAllyTeams > 1 then
+			lbl_cpvenemy1 = Chili.Label:New{
+				parent = window,
+				height = barheight,
+				width  = 600,
+						x      = 10,
+						y      = ( (barCount+1)*barheight+offsetcpv ),
+				valign = "left",
+				align  = "left",
+				caption = "0",
+				autosize = false,
+				font   = {size = 15, outline = true, outlineWidth = 4, outlineWeight = 3,},
+				tooltip = "",
+			}
+		end
+		if numberOfAllyTeams > 2 then	
+		lbl_cpvenemy2 = Chili.Label:New{
 			parent = window,
 			height = barheight,
 			width  = 600,
-					x      = 10,
-					y      = ( (barCount+1)*barheight+firstbarstart ),
+					x      = "33%",
+					y      = ( (barCount+1)*barheight+offsetcpv ),
+			valign = "left",
+			align  = "left",
+			caption = "0",
+			autosize = false,
+			font   = {size = 15, outline = true, outlineWidth = 4, outlineWeight = 3,},
+			tooltip = "",
+		}		
+		end
+		if numberOfAllyTeams > 3 then
+		lbl_cpvenemy3 = Chili.Label:New{
+			parent = window,
+			height = barheight,
+			width  = 600,
+					x      = "66%",
+					y      = ( (barCount+1)*barheight+offsetcpv ),
 			valign = "left",
 			align  = "left",
 			caption = "0",
@@ -908,6 +985,67 @@ function CreateWindow()
 			font   = {size = 15, outline = true, outlineWidth = 4, outlineWeight = 3,},
 			tooltip = "",
 		}
+		end
+		if numberOfAllyTeams > 4 then
+		lbl_cpvenemy4 = Chili.Label:New{
+			parent = window,
+			height = barheight,
+			width  = 600,
+					x      = 10,
+					y      = ( (barCount+2)*barheight+offsetcpv ),
+			valign = "left",
+			align  = "left",
+			caption = "0",
+			autosize = false,
+			font   = {size = 15, outline = true, outlineWidth = 4, outlineWeight = 3,},
+			tooltip = "",
+		}
+		end
+		if numberOfAllyTeams > 5 then		
+		lbl_cpvenemy5 = Chili.Label:New{
+			parent = window,
+			height = barheight,
+			width  = 600,
+					x      = "33%",
+					y      = ( (barCount+2)*barheight+offsetcpv ),
+			valign = "left",
+			align  = "left",
+			caption = "0",
+			autosize = false,
+			font   = {size = 15, outline = true, outlineWidth = 4, outlineWeight = 3,},
+			tooltip = "",
+		}
+		end
+		if numberOfAllyTeams > 6 then		
+		lbl_cpvenemy6 = Chili.Label:New{
+			parent = window,
+			height = barheight,
+			width  = 600,
+					x      = "66%",
+					y      = ( (barCount+2)*barheight+offsetcpv ),
+			valign = "left",
+			align  = "left",
+			caption = "0",
+			autosize = false,
+			font   = {size = 15, outline = true, outlineWidth = 4, outlineWeight = 3,},
+			tooltip = "",
+		}
+		end
+		if numberOfAllyTeams > 7 then		
+		lbl_cpvenemy7 = Chili.Label:New{
+			parent = window,
+			height = barheight,
+			width  = 600,
+					x      = 10,
+					y      = ( (barCount+3)*barheight+offsetcpv ),
+			valign = "left",
+			align  = "left",
+			caption = "0",
+			autosize = false,
+			font   = {size = 15, outline = true, outlineWidth = 4, outlineWeight = 3,},
+			tooltip = "",
+		}
+		end
 	end
 	
 end

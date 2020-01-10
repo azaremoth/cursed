@@ -956,7 +956,7 @@ else -- UNSYNCED
 
 			
 		  if infoList then gl.DeleteList(infoList) end
-		  infoList = CreateList(drawGameModeInfo)
+--		  infoList = CreateList(drawGameModeInfo)
 		 end
 	end
 
@@ -1194,7 +1194,7 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
   	PopMatrix()
 	end
 	
-	
+
 	function drawScoreboard()
   	PushMatrix()
 			Translate(-(vsx * (uiScale-1))/2, -(vsy * (uiScale-1))/2, 0)
@@ -1297,19 +1297,19 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
 	  viewResize()
 	  
 	  if showGameModeInfo then
-		  if infoList == nil then infoList = CreateList(drawGameModeInfo) end
-	  	CallList(infoList)
+		 -- if infoList == nil then infoList = CreateList(drawGameModeInfo) end
+	  	-- CallList(infoList)
 	  end
 	  
 		local frame = Spring.GetGameFrame()
 		if frame / 1800 > startTime then
-		  if scoreboardList == nil or frame%15==0 then
-		  	if scoreboardList ~= nil then
-		  		gl.DeleteList(scoreboardList)
-		  	end
-		  	scoreboardList = CreateList(drawScoreboard)
-		  end
-	  	CallList(scoreboardList)
+--		  if scoreboardList == nil or frame%15==0 then
+--		  	if scoreboardList ~= nil then
+--		  		gl.DeleteList(scoreboardList)
+--		  	end
+--		  		scoreboardList = CreateList(drawScoreboard)
+--		  end
+--	  	CallList(scoreboardList)
 	  	
   		local mx,my = Spring.GetMouseState()
 			local rectX1 = ((scoreboardX-bgMargin) * uiScale) - ((vsx * (uiScale-1))/2)
@@ -1355,7 +1355,7 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
 			if scoreboardList ~= nil then
 			 	gl.DeleteList(scoreboardList)
 	  	end
-	  	scoreboardList = CreateList(drawScoreboard)
+--	  	scoreboardList = CreateList(drawScoreboard)
 				
 			if mouseoverScoreboardList ~= nil then
 	  		gl.DeleteList(mouseoverScoreboardList)

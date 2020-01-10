@@ -517,8 +517,9 @@ function widget:GameFrame(n)
 		local currentscore = Spring.GetGameRulesParam(paraname) or 0
 --		Spring.Echo("currentscore reported to res bars")
 --		Spring.Echo(currentscore)
-		lbl_cpv.font:SetColor(Spring.GetTeamColor(GetMyTeamID()))
-		lbl_cpv:SetCaption( "Score Mode: " .. cvMode .. "          Control: " .. currentscore)
+--		lbl_cpv.font:SetColor(Spring.GetTeamColor(GetMyTeamID()))
+		lbl_cpv.font:SetColor(col_cpv)
+		lbl_cpv:SetCaption( "Control score: " .. currentscore .. "                 Score Mode: " .. cvMode)
 		
 		local enemyScores = ""
 		local enemyScoresAggregated = ""		
@@ -543,7 +544,7 @@ function widget:GameFrame(n)
 								lbl_cpvenemy7.font:SetColor(col_cpvenemy)
 								lbl_cpvenemy7:SetCaption(enemyScoresAggregated)
 							end
-							enemyScores = (allyTeamNames[teamID] .. ": " .. teamScores[teamID])
+							enemyScores = (allyTeamNames[teamID] .. "'s score: " .. teamScores[teamID])
 							if enemycount > 5 then
 								lbl_cpvenemy6.font:SetColor(Spring.GetTeamColor(teamID))
 								lbl_cpvenemy6:SetCaption(enemyScores)
@@ -926,7 +927,7 @@ function CreateWindow()
 	
 	if cvMode ~= nil then
 		barCount = barCount+1
-		local offsetcpv = firstbarstart + 7
+		local offsetcpv = firstbarstart + 6
 		
 		lbl_cpv = Chili.Label:New{
 			parent = window,

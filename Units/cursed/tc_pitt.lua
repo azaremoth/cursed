@@ -65,6 +65,7 @@ local unitDef = {
   yardMap            = "oooooooo oooooooo ooccccoo ooccccoo ooccccoo ooccccoo ooccccoo ooccccoo",
   buildoptions = {
     "tc_lich_ai",
+    "tc_bonebeast",	
     "tc_rictus",
     "tc_crawler",
     "tc_pestilence",

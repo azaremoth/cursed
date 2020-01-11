@@ -21,6 +21,7 @@ local assaultgroup = {
 	"tc_rictus",	
 	"euf_pyro",	
 	"euf_marine",
+	"euf_marine_laser",	
 	"euf_pyro",	
 	"euf_sniper_ai",
 	"euf_tank",
@@ -32,6 +33,7 @@ local assaultgroup = {
 local skirmishers = {
 	"tc_enforcer",
 	"euf_bazooka",
+	"euf_bazooka_missile",	
 	"tc_gunner",
 	"tc_bonebeast",
 	"tc_mage",		
@@ -43,6 +45,7 @@ local raider = {
 	"tc_skeleton",
 	"euf_raider",	
 	"euf_marine",
+	"euf_marine_laser",		
 	"euf_paladin_ai",
 }
 
@@ -69,7 +72,9 @@ local arty = {
 
 local counteredByAssaults = {
 	"tc_enforcer",
+	"tc_bonebeast",	
 	"euf_bazooka",
+	"euf_bazooka_missile",		
 	"tc_purgatory_ai",
 	"euf_mlrs_ai",	
 }

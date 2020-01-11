@@ -150,8 +150,9 @@ factionBuildConfig = {
 					[2] = {ID = UnitDefNames['bug_med_undead'].id, chance = 0.4},					
 				},
 				[4] = { -- arty
-					importanceMult = 0,
-					count = 0,
+					importanceMult = 0.2,
+					count = 1,
+					[1] = {ID = UnitDefNames['tc_bonebeast'].id, chance = 0.6},					
 				},
 				[5] = { --assault
 					importanceMult = 0.75,
@@ -364,8 +365,9 @@ factionBuildConfig = {
 				},
 				[3] = { -- raider
 					importanceMult = 1,
-					count = 1,
+					count = 2,
 					[1] = {ID = UnitDefNames['euf_marine'].id, chance = 1},
+					[2] = {ID = UnitDefNames['euf_marine_laser'].id, chance = 0.5},					
 				},
 				[4] = { -- arty
 					importanceMult = 1,
@@ -379,8 +381,9 @@ factionBuildConfig = {
 				},
 				[6] = { -- skirm
 					importanceMult = 1,
-					count = 1,
+					count = 2,
 					[1] = {ID = UnitDefNames['euf_pyro'].id, chance = 1},
+					[2] = {ID = UnitDefNames['euf_bazooka_missile'].id, chance = 0.33},					
 				},
 				[7] = { -- riot
 					importanceMult = 0.5,

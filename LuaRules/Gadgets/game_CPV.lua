@@ -1316,20 +1316,20 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
 			local rectY1 = ((scoreboardY+bgMargin) * uiScale) - ((vsy * (uiScale-1))/2)
 			local rectX2 = ((scoreboardX+scoreboardWidth+bgMargin) * uiScale) - ((vsx * (uiScale-1))/2)
 			local rectY2 = ((scoreboardY-scoreboardHeight-bgMargin) * uiScale) - ((vsy * (uiScale-1))/2)
-			if IsOnRect(mx, my, rectX1, rectY2, rectX2, rectY1) then
-				if mouseoverScoreboard == nil then
-					mouseoverScoreboard = true
-					if mouseoverScoreboardList ~= nil then
-			  		gl.DeleteList(mouseoverScoreboardList)
-			  	end
-			  	mouseoverScoreboardList = CreateList(drawMouseoverScoreboard)
-				end
-			else
-				mouseoverScoreboard = nil
-			end
-			if mouseoverScoreboard then
-  			CallList(mouseoverScoreboardList)
-  		end
+--			if IsOnRect(mx, my, rectX1, rectY2, rectX2, rectY1) then
+--				if mouseoverScoreboard == nil then
+--					mouseoverScoreboard = true
+--					if mouseoverScoreboardList ~= nil then
+--			  			gl.DeleteList(mouseoverScoreboardList)
+--			  		end
+--			  		mouseoverScoreboardList = CreateList(drawMouseoverScoreboard)
+--				end
+--			else
+--				mouseoverScoreboard = nil
+--			end
+--			if mouseoverScoreboard then
+-- 				CallList(mouseoverScoreboardList)
+--			end
 		else
 			Text("Capturing points begins in:", vsx - 280, vsy *.58, 18, "lo")
 			local timeleft = startTime * 60 - frame / 30
@@ -1357,10 +1357,10 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
 	  	end
 --	  	scoreboardList = CreateList(drawScoreboard)
 				
-			if mouseoverScoreboardList ~= nil then
-	  		gl.DeleteList(mouseoverScoreboardList)
-	  	end
-	  	mouseoverScoreboardList = CreateList(drawMouseoverScoreboard)
+--			if mouseoverScoreboardList ~= nil then
+--	  		gl.DeleteList(mouseoverScoreboardList)
+--	  	end
+--	  	mouseoverScoreboardList = CreateList(drawMouseoverScoreboard)
 		end
 	end
 

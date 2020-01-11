@@ -62,7 +62,7 @@ local BLASTER = {
 	rgbColor2 		   = {1, 1, 1},
     soundStart         = "sniper_gunshot",	
 	explosionGenerator = "custom:BlasterImpact",	
-    damage 					= { default = 60, flyer = 60, heavy = (60*0.75), light = 60, },
+    damage 					= { default = 66, flyer = 66, heavy = (66*0.75), light = 66, },
 }
 local SNIPER_RIFLE = {
     avoidFriendly      = true,

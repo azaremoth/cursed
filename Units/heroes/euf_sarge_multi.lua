@@ -404,7 +404,7 @@ local LVL10 = {
 local CAMP6 = {
   unitname           = "euf_sarge_camp6",
   name               = "Sarge", 
-  maxDamage          = 3800,
+  maxDamage          = 4500,
   canManualFire      = true,
   script			 = "euf_sarge_camp6.lua",  
   customParams       = {
@@ -418,7 +418,7 @@ local CAMP6 = {
   },  
   weapons = {
 		[1] = {
-			name               	= "SARGELVL6BFG",
+			name               	= "SARGELVL8BFG",
 			mainDir            	= "0 0 1",
 			maxAngleDif        	= 180,
 			onlyTargetCategory 	= "LAND",

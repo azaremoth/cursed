@@ -48,8 +48,10 @@ function widget:Update()
 	  camera.ry = 3.14
 	  camera.rz = 0
 
-	  Spring.SetCameraState(camera)	  
-	  WG.COFC_SetCameraTarget(x,y,z,0.5,true,yDist)
+	  Spring.SetCameraState(camera)
+	  if WG.COFC_SetCameraTarget ~= nil then
+			WG.COFC_SetCameraTarget(x,y,z,0.5,true,yDist)
+	  end
 	  if go then
 		Spring.SelectUnitArray{unitArray[1]}
 		go = false

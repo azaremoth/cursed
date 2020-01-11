@@ -1,15 +1,13 @@
 return {
   name='The Cursed',
-  description='',
+  description='The Cursed',
   shortname='tc',
   version='$VERSION',
-  mutator='',
-  game='',
-  shortGame='',
+  mutator='1',
+  game='The Cursed',
+  shortGame='tc',
   modtype=1,
-  depend = {},
-
-  NTAI = {
-    tdfpath='TC';
+  depend = {
+    'Spring content v1',
   },
 }

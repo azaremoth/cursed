@@ -2809,7 +2809,7 @@ local function initialiseFaction(team)
 	end
 	
 	local shortname = Game.modShortName
-	if shortname == "tc" then
+	if shortname == "tc" or "tcampaign" then
 		local units = spGetTeamUnits(team)
 		for i = 1, #units do
 			local ud = UnitDefs[spGetUnitDefID(units[i])]

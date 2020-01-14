@@ -786,7 +786,7 @@ end
 
 function widget:Initialize()
 	local modOptions = Spring.GetModOptions()
-	local campaignBattleID = Spring.GetModOptions().singleplayercampaignbattleid
+	local campaignBattleID = modOptions.singleplayercampaignbattleid
 	
 	if campaignBattleID or (not WG.Chili) then
 		widgetHandler:RemoveWidget()

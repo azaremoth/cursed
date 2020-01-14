@@ -527,7 +527,7 @@ function widget:GameFrame(n)
 		local enemycount = numberOfAllyTeams - 1		
 		for _, teamID in ipairs(Spring.GetTeamList()) do
 			if teamID ~= Spring.GetMyTeamID() and teamID ~= Spring.GetGaiaTeamID() then
-				local _,_,_,_,_,teamAllyID = Spring.GetTeamInfo(teamID)
+				local teamAllyID = select(6, Spring.GetTeamInfo(teamID))
 				for _, allyID in ipairs(Spring.GetAllyTeamList()) do
 					if allyID == teamAllyID and not allyTeamDone[teamAllyID] then
 						local paraname = "cpv_score_" .. teamID
@@ -592,6 +592,7 @@ function InitializeCPV()
 	local gaiaT = Spring.GetGaiaTeamID()
 	local gaiaAT = select(6, Spring.GetTeamInfo(gaiaT))
 	local teams = Spring.GetTeamList()
+	local myTeamID = GetMyTeamID()	
 	
 	for i=1,#allyteams do
 		if allyteams[i] ~= gaiaAT then
@@ -602,15 +603,42 @@ function InitializeCPV()
 	end
 	for _, teamID in ipairs(Spring.GetTeamList()) do
 		if teamID ~= gaiaT then
-			local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
+			local allyID = select(6, Spring.GetTeamInfo(teamID))
 			local paraname = "cpv_score_" .. teamID
 			teamScores[teamID] = Spring.GetGameRulesParam(paraname) or 0						
 --			teamScores[teamID] = Spring.GetTeamRulesParam(teamID,"cpv_score") or 0
 			local playerList = Spring.GetPlayerList(teamID)
 			local ai = select(4, Spring.GetTeamInfo(teamID))
 			if ai then
+				Spring.Echo("Spring.GetTeamLuaAI(teamID)")
+				Spring.Echo(Spring.GetTeamLuaAI(teamID))
 				if Spring.GetTeamLuaAI(teamID) ~= nil then
 					allyTeamNames[teamID] = Spring.GetTeamLuaAI(teamID)
+				end				
+				if Spring.GetTeamLuaAI(teamID) == "NO AI" or  Spring.GetTeamLuaAI(teamID) == "Skirmish AI" then
+					local side = select(5, Spring.GetTeamInfo(teamID))				
+					if campaignBattleID then 
+						local myAlly = Spring.AreTeamsAllied(teamID, myTeamID)
+						if side == "imperials" then
+							if myAlly then
+								allyTeamNames[teamID] = "Empire"
+							else
+								allyTeamNames[teamID] = "Separatists"
+							end
+						else
+							if myAlly then
+								allyTeamNames[teamID] = "Restless"
+							else
+								allyTeamNames[teamID] = "Hell Spawns"
+							end						
+						end
+--					else
+--						if side == "imperials" then
+--							allyTeamNames[teamID] = "Terrans"
+--						else
+--							allyTeamNames[teamID] = "Undead"						
+--						end					
+					end
 				end
 			end
 			for _,playerId in pairs(playerList)do

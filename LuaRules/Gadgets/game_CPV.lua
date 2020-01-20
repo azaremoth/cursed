@@ -1331,10 +1331,10 @@ There are various options available in the lobby bsettings (use ]] .. yellow .. 
 -- 				CallList(mouseoverScoreboardList)
 --			end
 		else
-			Text("Capturing points begins in:", vsx - 280, vsy *.58, 18, "lo")
-			local timeleft = startTime * 60 - frame / 30
-			timeleft = timeleft - timeleft % 1
-			Text(timeleft .. " seconds", vsx - 280, vsy *.58 - 25, 18, "lo")
+--			Text("Capturing points begins in:", vsx - 280, vsy *.58, 18, "lo")
+--			local timeleft = startTime * 60 - frame / 30
+--			timeleft = timeleft - timeleft % 1
+--			Text(timeleft .. " seconds", vsx - 280, vsy *.58 - 25, 18, "lo")
 		end
 	end
 	

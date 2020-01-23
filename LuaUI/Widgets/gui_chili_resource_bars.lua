@@ -40,6 +40,7 @@ local teamScores = {}
 local allyTeamNames = {}
 local numberOfAllyTeams = 0
 local barCount = 1
+local scoreModeAsString = "Disabled"
 
 if cvMode == nil then
 	cvMode = "disabled"
@@ -238,6 +239,15 @@ local function Format(input, override)
 	else
 		return leadingString .. ("%.0f"):format(input/1000) .. "k" .. WhiteStr
 	end
+end
+
+local function ReadTeamColor(teamID)
+	local teamColor = WG.LocalTeamColor[teamID]
+--	Spring.Echo(teamColor)
+	if teamColor == nil then
+		teamColor = Spring.GetTeamColor(teamID)
+	end
+	return teamColor
 end
 
 local initialReserveSet = false
@@ -515,11 +525,9 @@ function widget:GameFrame(n)
 		local paraname = "cpv_score_" .. GetMyTeamID()
 		teamScores[GetMyTeamID()] = Spring.GetGameRulesParam(paraname) or 0	
 		local currentscore = Spring.GetGameRulesParam(paraname) or 0
---		Spring.Echo("currentscore reported to res bars")
---		Spring.Echo(currentscore)
---		lbl_cpv.font:SetColor(Spring.GetTeamColor(GetMyTeamID()))
+		local modeString = scoreModeAsString or cvMode
 		lbl_cpv.font:SetColor(col_cpv)
-		lbl_cpv:SetCaption( "Control score: " .. currentscore .. "                 Score Mode: " .. cvMode)
+		lbl_cpv:SetCaption( "Control score: " .. currentscore .. "                 Score Mode: " .. modeString)
 		
 		local enemyScores = ""
 		local enemyScoresAggregated = ""		
@@ -546,27 +554,27 @@ function widget:GameFrame(n)
 							end
 							enemyScores = (allyTeamNames[teamID] .. "'s score: " .. teamScores[teamID])
 							if enemycount > 5 then
-								lbl_cpvenemy6.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy6.font:SetColor(ReadTeamColor(teamID))
 								lbl_cpvenemy6:SetCaption(enemyScores)
 							end								
 							if enemycount > 4 then
-								lbl_cpvenemy5.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy5.font:SetColor(ReadTeamColor(teamID))
 								lbl_cpvenemy5:SetCaption(enemyScores)
 							end								
 							if enemycount > 3 then
-								lbl_cpvenemy4.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy4.font:SetColor(ReadTeamColor(teamID))
 								lbl_cpvenemy4:SetCaption(enemyScores)
 							end								
 							if enemycount > 2 then
-								lbl_cpvenemy3.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy3.font:SetColor(ReadTeamColor(teamID))
 								lbl_cpvenemy3:SetCaption(enemyScores)
 							end								
 							if enemycount > 1 then
-								lbl_cpvenemy2.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy2.font:SetColor(ReadTeamColor(teamID))
 								lbl_cpvenemy2:SetCaption(enemyScores)
 							end
 							if enemycount > 0 then
-								lbl_cpvenemy1.font:SetColor(Spring.GetTeamColor(teamID))
+								lbl_cpvenemy1.font:SetColor(ReadTeamColor(teamID))
 								lbl_cpvenemy1:SetCaption(enemyScores)
 							end
 							allyTeamDone[allyID] = true
@@ -593,6 +601,14 @@ function InitializeCPV()
 	local gaiaAT = select(6, Spring.GetTeamInfo(gaiaT))
 	local teams = Spring.GetTeamList()
 	local myTeamID = GetMyTeamID()	
+
+	if cvMode == "countdown" then 
+		scoreModeAsString = "Countdown"
+	elseif cvMode == "tugofwar" then 
+		scoreModeAsString = "Tug of War"
+	elseif cvMode == "domination" then 
+		scoreModeAsString = "Domination"
+	end		
 	
 	for i=1,#allyteams do
 		if allyteams[i] ~= gaiaAT then

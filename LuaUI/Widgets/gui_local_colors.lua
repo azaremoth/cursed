@@ -76,15 +76,24 @@ enemyColors[3] = 0.0
 
 WG.LocalColor = (type(WG.LocalColor) == "table" and WG.LocalColor) or {}
 WG.LocalColor.listeners = WG.LocalColor.listeners or {}
-
+WG.LocalTeamColor = {}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 local is_speccing
 
+local function TeamColorChange(teamID, r,g,b)
+	local teamColor = {}
+	teamColor[1] = r
+	teamColor[2] = g
+	teamColor[3] = b
+	Spring.SetTeamColor(teamID, r,g,b)
+	WG.LocalTeamColor[teamID] = teamColor
+end
+
 local function SetNewTeamColors() 
 	local gaia = Spring.GetGaiaTeamID()
-	Spring.SetTeamColor(gaia, unpack(gaiaColor))
+	TeamColorChange(gaia, unpack(gaiaColor))
 	
 	local myAlly = Spring.GetMyAllyTeamID()
 	local myTeam = Spring.GetMyTeamID()	
@@ -94,25 +103,25 @@ local function SetNewTeamColors()
 		local colorSpread = teamColorSpread[teamID] or 0
 		if (allyID == myAlly) then
 			if (teamID == myTeam) then
-				Spring.SetTeamColor(teamID, unpack(myColor))
+				TeamColorChange(teamID, unpack(myColor))
 			else
 				local g = allyColors[2]
 				local r = 0.5*colorSpread
 				local b = 2*colorSpread
-				Spring.SetTeamColor(teamID, r,g,b)
+				TeamColorChange(teamID, r,g,b)
 			end
 		elseif (teamID ~= gaia) then
 			local r = enemyColors[1]
 			local g = 0.5*colorSpread
 			local b = 2*colorSpread
-			Spring.SetTeamColor(teamID, r,g,b)				
+			TeamColorChange(teamID, r,g,b)				
 		end
 	end
 end
 
 local function SetNewSimpleTeamColors() 
 	local gaia = Spring.GetGaiaTeamID()
-	Spring.SetTeamColor(gaia, unpack(gaiaColor))
+	TeamColorChange(gaia, unpack(gaiaColor))
 	
 	local myAlly = Spring.GetMyAllyTeamID()
 	local myTeam = Spring.GetMyTeamID()	
@@ -121,19 +130,19 @@ local function SetNewSimpleTeamColors()
 		local _,_,_,_,_,allyID = Spring.GetTeamInfo(teamID)
 		if (allyID == myAlly) then
 			if (teamID == myTeam) then
-				Spring.SetTeamColor(teamID, unpack(myColor))
+				TeamColorChange(teamID, unpack(myColor))
 			else
-				Spring.SetTeamColor(teamID, unpack(allyColors))
+				TeamColorChange(teamID, unpack(allyColors))
 			end	
 		elseif (teamID ~= gaia) then
-			Spring.SetTeamColor(teamID, unpack(enemyColors))
+			TeamColorChange(teamID, unpack(enemyColors))
 		end
 	end
 end
 
 local function SetNewDifferentTeamColors()
 	local gaia = Spring.GetGaiaTeamID()
-	Spring.SetTeamColor(gaia, unpack(gaiaColor))
+	TeamColorChange(gaia, unpack(gaiaColor))
 	local myTeam = Spring.GetMyTeamID()		
 	local myAlly = Spring.GetMyAllyTeamID()
 	
@@ -147,12 +156,12 @@ local function SetNewDifferentTeamColors()
 			local b = 0
 
 			if (not is_speccing) and (teamID == myTeam) then			
-				Spring.SetTeamColor(teamID, unpack(myColor))
+				TeamColorChange(teamID, unpack(myColor))
 			elseif (not is_speccing) and (allyID == myAlly) and (teamID ~= myTeam) then
 				local r = 0.25+colorSpread				
 				local g = myColor[2]
 				local b = myColor[3]
-				Spring.SetTeamColor(teamID, r,g,b)				
+				TeamColorChange(teamID, r,g,b)				
 			else
 				if (allyID == 0) then
 					r = 1
@@ -165,7 +174,7 @@ local function SetNewDifferentTeamColors()
 				elseif (allyID == 2) then
 					r = colorSpread
 					g = 0
-					b = 0
+					b = 1
 				elseif (allyID == 3) then			
 					r = 1
 					g = 1
@@ -235,7 +244,7 @@ local function SetNewDifferentTeamColors()
 					g = math.random()
 					b = math.random()
 				end
-			Spring.SetTeamColor(teamID, r,g,b)
+			TeamColorChange(teamID, r,g,b)
 			end
 		end
 	end
@@ -292,7 +301,7 @@ end
 
 local function ResetOldTeamColors()
 	for _,team in ipairs(Spring.GetTeamList()) do
-		Spring.SetTeamColor(team,Spring.GetTeamOrigColor(team))
+		TeamColorChange(team,Spring.GetTeamOrigColor(team))
 	end
 end
 

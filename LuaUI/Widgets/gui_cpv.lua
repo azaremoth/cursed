@@ -90,15 +90,15 @@ You will also gain ]] .. white .. [[+]] .. yellow .. metalPerPoint .. offwhite .
 ]]
 end
 
-local infotext = yellow .. [[CONTROL POINT VICTORY GAME MODE]] .. offwhite .. [[
+local infotext = yellow .. [[CONTROL POINT VICTORY GAME MODE
  
-Controlpoints are spread across the map. They can be captured by moving units into the circles.
+]] .. offwhite .. [[Controlpoints are spread across the map. They can be captured by moving units into the circles.
  
 There are 3 modes (Current mode is ]] .. yellow .. scoreModeAsString .. offwhite .. [[): ]] .. modeDescription .. [[
 
 ]] .. bonusText .. [[
  
-Note that you can only build certain units inside them (e.g. Metal Extractors).]]
+Note that you can only build metal extractors inside them.]]
 
 
 --------------------------------------------------------------------------------
@@ -168,7 +168,7 @@ function widget:Initialize()
         onclick = {SetImperial},
         caption = "",
         backgroundColor = buttonColour,
-        children = { Chili.Image:New{width='100%', height='100%', file='Sidepics/imperials_big.png'} }
+        children = { Chili.Image:New{width='100%', height='100%', file='LuaUI/Images/cpv.png'} }
     }
 	
 	textBox = Chili.TextBox:New{

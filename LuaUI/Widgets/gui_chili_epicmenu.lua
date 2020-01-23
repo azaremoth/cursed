@@ -2147,7 +2147,7 @@ local function MakeExitConfirmWindow(text, action, height)
 		parent = screen0,
 		x = math.floor(screen_width/2 - menu_width/2),  
 		y = math.floor(screen_height/2 - menu_height/2),  
-		classname = "main_window_small_flat",
+		classname = "main_window_small_flat",	
 		dockable = false,
 		clientWidth = menu_width,
 		clientHeight = menu_height,
@@ -2157,17 +2157,29 @@ local function MakeExitConfirmWindow(text, action, height)
 		tweakResizable = false,
 		minimizable = false,
 	}
-	Label:New{
+	window_bck = Chili.Window:New{
+		name = "backgrnd",
+		color = {1,1,1,0.85},
+		x = 0,
+		y = 0,
+		width  = '100%',
+		height = '100%',
+		padding = {8, 8, 8, 8};
 		parent = window_exit_confirm,
+		draggable = false,
+		resizable = false,
+	}	
+	Label:New{
+		parent = window_bck,
 		caption = text,
 		width = "100%",
-		y = 4,
+		y = 0,
 		align = "center",
 		textColor = color.main_fg
-	}
+	}	
 	Button:New{
 		name = 'confirmExitYesButton';
-		parent = window_exit_confirm,
+		parent = window_bck,
 		caption = "Yes",
 		OnClick = {
 			function()
@@ -2175,25 +2187,26 @@ local function MakeExitConfirmWindow(text, action, height)
 				DisposeExitConfirmWindow()
 			end
 		},
-		height = 32,
+		height = 30,
 		x = 4,
 		right = "55%",
-		bottom = 4,
+		bottom = 0,
 	}
 	Button:New{
 		name = 'confirmExitNoButton';
-		parent = window_exit_confirm,
+		parent = window_bck,
 		caption = "No",
 		OnClick = {
 			function()
 				LeaveExitConfirmWindow()
 			end
 		},
-		height = 32,
+		height = 30,
 		x = "55%",
 		right = 4,
-		bottom = 4,
+		bottom = 0,
 	}
+
 end
 WG.crude.MakeExitConfirmWindow = MakeExitConfirmWindow
 

@@ -59,6 +59,12 @@ local tabbedMode = false
 local usingNewEngine = (#{Spring.GetLosViewColors()} == 5) -- newer engine has radar2
 --local init = true
 
+local modOptions = Spring.GetModOptions()
+local cvMode = modOptions.scoremode
+if cvMode == nil then
+	cvMode = "disabled"
+end
+
 WG.MinimapDraggingCamera = false --Boolean, false if selection through minimap is possible
 
 local function ToggleShoweco()
@@ -73,6 +79,10 @@ WG.ToggleShoweco = ToggleShoweco
 local function toggleTeamColors()
 	if WG.LocalColor and WG.LocalColor.localTeamColorToggle then
 		WG.LocalColor.localTeamColorToggle()
+		if cvMode ~= "disabled" then
+			Spring.SendCommands("luaui disablewidget Chili Resource Bars Classic")
+			Spring.SendCommands("luaui enablewidget Chili Resource Bars Classic")
+		end
 	else
 		Spring.SendCommands("luaui enablewidget Local Team Colors")
 	end

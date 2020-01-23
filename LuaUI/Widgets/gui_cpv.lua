@@ -71,7 +71,7 @@ end
 
 local bonusText = ""
 if metalPerPoint > 0 and energyPerPoint > 0 then
-	bonusText = [[
+	bonusText =  [[
  
 You will also gain ]] .. white .. [[+]] .. yellow .. metalPerPoint .. offwhite .. [[ metal and ]] .. white .. [[+]] .. yellow .. energyPerPoint .. offwhite ..[[ energy for each controlpoint you own.
  
@@ -90,7 +90,9 @@ You will also gain ]] .. white .. [[+]] .. yellow .. metalPerPoint .. offwhite .
 ]]
 end
 
-local infotext = offwhite .. [[Controlpoints are spread across the map. They can be captured by moving units into the circles.
+local infotext = yellow .. [[CONTROL POINT VICTORY GAME MODE]] .. offwhite .. [[
+ 
+Controlpoints are spread across the map. They can be captured by moving units into the circles.
  
 There are 3 modes (Current mode is ]] .. yellow .. scoreModeAsString .. offwhite .. [[): ]] .. modeDescription .. [[
 
@@ -127,21 +129,20 @@ function widget:ViewResize(vsx,vsy)
 end
 
 function widget:Initialize()
-   if (not WG.Chili) or cvMode = "disabled" or spGetSpectatingState() or Spring.GetGameFrame() > 300 then
+   if (not WG.Chili) or cvMode == "disabled" or spGetSpectatingState() or Spring.GetGameFrame() > 600 then
 		widgetHandler:RemoveWidget()
         return
     end
     
     Chili = WG.Chili
---    buttonColour = WG.buttonColour
 
 	window_cpl = Chili.Window:New{
 		name = "CPV",
 --		caption = "Control Point Victory",
-		color = {1,1,1,0.5},
-		x = '33%',
+		color = {1,1,1,0.85},
+		x = '25%',
 		y = '33%',
-		width  = '33%',
+		width  = '50%',
 		height = '20%',
 		padding = {8, 8, 8, 8};
 		--autosize   = true;
@@ -150,20 +151,38 @@ function widget:Initialize()
 		resizable = true,
 		minWidth=500;
 		minHeight=400;
+		children = {
+			--Close button
+			Chili.Button:New{
+				caption = 'Close', OnClick = {function(self) self.parent:Dispose() end }, 
+				bottom = 1, right = 1, height = 26, width = 70,
+				name = 'CloseButton';
+			},
+		}		
 	}	
+
+    button = Chili.Button:New{
+        parent = window_cpl,
+        height = '100%',
+        width  = '40%',
+        onclick = {SetImperial},
+        caption = "",
+        backgroundColor = buttonColour,
+        children = { Chili.Image:New{width='100%', height='100%', file='Sidepics/imperials_big.png'} }
+    }
 	
 	textBox = Chili.TextBox:New{
 		parent  = window_cpl;
-		text    = infotext or 'jgjhfjghdjkghdkjghdfkjghdfjkghjkdghdfjkghjkdfghjkdfghjdfghdfghdfghfdjghjghfdjkhgjdhfgjkdfhj',
-		x       = '2%',
-		y       = '2%',
-		width   = '96%',
-		height = '96%',		
+		text    = infotext or 'Something is wrong here!',
+		x       = '43%',
+		y       = '3%',
+		width   = '54%',
+		height = '97%',		
 		valign  = "ascender";
 		align   = "left";
 		font    = {
-			size   = 16;
-			shadow = true;
+			size   = 18;
+			shadow = false;
 		},
 	}	
 		
@@ -173,7 +192,7 @@ function widget:Initialize()
 end
 
 function widget:GameFrame(n)
-	if n > 300 then
+	if n > 600 then
 		widgetHandler:RemoveWidget(self)
 		return
     end

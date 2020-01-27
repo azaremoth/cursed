@@ -4,13 +4,14 @@ Polishing
 - Made weapon visuals for consistent to damage classes
 - morph commands will appear in commands and build tab now (for builders)
 - polished team color automated simple team colors
+- implemented CPV IU elements into Chili interface
 
 Balance
 - AoE of cursed gunner increased
 - Made visuals and weapons types even more aligned and predictable:
 	> Laser / Electrobeam / Light guns: 				-25% against heavy armor 
 	> Cannon / Tachyon beam / (Magic) Rockets:			-25% against light armor
-	> Fire (incl. dragon breath and Angel`s Star Fire): +100% against light armor
+	> Fire (incl. dragon breath and imperial angel`s star fire): +100% against light armor
 	> Melee / Plasma Weapons:							Equal damage to light and heavy armor
 	> Special Weapons:
 		-> Sniper Laser gun does high amount of damage against light armor 

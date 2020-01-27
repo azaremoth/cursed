@@ -94,11 +94,11 @@ local infotext = yellow .. [[CONTROL POINT VICTORY GAME MODE
  
 ]] .. offwhite .. [[Controlpoints are spread across the map. They can be captured by moving units into the circles.
  
-There are 3 modes (Current mode is ]] .. yellow .. scoreModeAsString .. offwhite .. [[): ]] .. modeDescription .. [[
+There are three game modes. You are currently playing ]] .. yellow .. scoreModeAsString .. offwhite .. [[: ]] .. modeDescription .. [[
 
 ]] .. bonusText .. [[
  
-Note that you can only build metal extractors inside them.]]
+Note that you can only build metal extractors inside the control points.]]
 
 
 --------------------------------------------------------------------------------

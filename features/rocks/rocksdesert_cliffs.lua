@@ -1,9 +1,9 @@
 local featureDef	=	{
-	name				= "rockcliffs",
+	name				= "desertcliffs",
 	blocking			= true,
 	category			= "rocks",
 	damage				= 1000000,
-	description			= "Grey Cliffs",
+	description			= "Desert Cliffs",
 
 	collisionVolumeType 		= "Box",
 	collisionVolumeScales 		= "100 200 300",
@@ -16,7 +16,7 @@ local featureDef	=	{
 	hitdensity			= "5",
 	metal 				= 0,
 
-	object				= "features/rocks/rocks_cliffs.s3o",
+	object				= "features/rocksdesert/rocks_cliffs.s3o",
 	reclaimable			= false,
 	autoreclaimable		= false, 
 	upright 			= true,
@@ -25,7 +25,7 @@ local featureDef	=	{
 	customparams = { 
 		author 	 		= "yughues", 
 		category 	 	= "rock", 
-		normaltex 		= "unittextures/normalmaps/feat_rocksA.png",
+		normaltex 		= "unittextures/normalmaps/feat_rocksB.png",
 		randomrotate	= "false", 
 	}, 
 }

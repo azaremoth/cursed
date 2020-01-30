@@ -3,7 +3,7 @@ local featureDef	=	{
 	blocking			= true,
 	category			= "rocks",
 	damage				= 1000000,
-	description			= "Desert Cliffs",
+	description			= "Mars Cliffs",
 
 	collisionVolumeType 		= "Box",
 	collisionVolumeScales 		= "100 200 300",

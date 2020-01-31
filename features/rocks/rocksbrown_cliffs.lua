@@ -1,9 +1,9 @@
 local featureDef	=	{
-	name				= "desertcliffs",
+	name				= "browncliffs",
 	blocking			= true,
 	category			= "rocks",
 	damage				= 1000000,
-	description			= "Desert Cliffs",
+	description			= "Brown Cliffs",
 
 	collisionVolumeType 		= "Box",
 	collisionVolumeScales 		= "100 200 300",
@@ -16,7 +16,7 @@ local featureDef	=	{
 	hitdensity			= "5",
 	metal 				= 0,
 
-	object				= "features/rocksdesert/rocks_cliffs.s3o",
+	object				= "features/rocksbrown/rocks_cliffs.s3o",
 	reclaimable			= false,
 	autoreclaimable		= false, 
 	upright 			= true,

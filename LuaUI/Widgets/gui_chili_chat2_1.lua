@@ -424,7 +424,7 @@ options = {
 	color_background = {
 		name = "Background color",
 		type = "colors",
-		value = { 0, 0, 0, 0},
+		value = { 1, 1, 1, 0.8},
 		OnChange = function(self) 
 			scrollpanel1.backgroundColor = self.value
 			scrollpanel1.borderColor = self.value
@@ -452,7 +452,7 @@ options = {
 		name = "Autohide chat",
 		desc = "Hides the chat when not in use",
 		type = 'bool',
-		value = false,
+		value = true,
 		noHotkey = true,
 		OnChange = onOptionsChanged,
 	},

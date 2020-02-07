@@ -11,13 +11,11 @@ local unitDef = {
   buildCostMetal     = 280,
   buildPic           = "euf_plasmatower.png",
   buildTime          = 280,
-  
-buildingGroundDecalDecaySpeed = 0.2,
+  buildingGroundDecalDecaySpeed = 0.2,
   buildingGroundDecalSizeX = 5,
   buildingGroundDecalSizeY = 5,
   buildingGroundDecalType = "euf_groundplate3.png",
-  useBuildingGroundDecal = true,  
-  
+  useBuildingGroundDecal = true, 
   canAttack          = true,
   canGuard           = true,
   canstop            = true,

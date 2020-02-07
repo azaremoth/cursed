@@ -4,7 +4,7 @@ Polishing
 - Made weapon visuals for consistent to damage classes
 - morph commands will appear in commands and build tab now (for builders)
 - polished team color automated simple team colors
-- implemented CPV IU elements into Chili interface
+- implemented CPV IU elements into Chili interface (Info window after starting + Scores in the Res. Bar)
 
 Balance
 - AoE of cursed gunner increased

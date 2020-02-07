@@ -35,7 +35,7 @@ local unitDef = {
   customParams          = {
   	factionname		   = "imperials",
 	isinfantry = "true",
-    helptext = "The Ripper bazooka trooper is very effective against heavily armored units and buildings. His long range makes him the ideal choice against light defenses."	
+    helptext = "The Ripper trooper is very effective against heavily armored units and buildings. His long range makes him the ideal choice against light defenses."	
 	},  
   defaultmissiontype = "Standby",
   description        = "Building Killer",  

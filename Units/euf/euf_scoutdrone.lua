@@ -31,7 +31,7 @@ local unitDef = {
 	factionname	= "imperials",
 	normaltex = "unittextures/normalmaps/euf_constructor_normal.png",
 	normalmaps = "yes",			
-    helptext 	= "Basic scouting unit."
+    helptext 	= "Fast scout."
   },
   defaultmissiontype = "Standby",
   description        = "Scout drone",  

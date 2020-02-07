@@ -35,7 +35,7 @@ local unitDef = {
   customParams          = {
   	factionname		   = "imperials",
 	isinfantry = "true",
-    helptext = "The Ripper missile trooper is effective against heavily armored units and buildings. The missile is also efective against air targets."	
+    helptext = "The missile trooper is effective against heavily armored units, buildings and air targets."	
 	},  
   defaultmissiontype = "Standby",
   description        = "Building Killer",  
@@ -54,7 +54,7 @@ local unitDef = {
   maxWaterDepth      = 12,
   mobilestandorders  = "1",
   movementClass      = "Trooper2X2",
-  name               = "Rocket Ripper",
+  name               = "Missile Trooper",
   nanoColor          = "0 0 0",
   noAutoFire         = false,
   noChaseCategory    = "AIR",

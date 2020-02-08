@@ -1011,6 +1011,9 @@ function widget:Initialize()
 		end --skip modifier key since they meant player are using click to issue command. Try to not steal click
 		return self
 	end
+
+	local width = 0.33*screenWidth
+	local height = width*4/9
 	
 	window_console = WG.Chili.Window:New{  
 		margin = { 0, 0, 0, 0 },
@@ -1018,9 +1021,12 @@ function widget:Initialize()
 		dockable = true,
 		name = "Chat",
 		x = 0,
-		y = screenHeight * 0.50,
-		width  = screenWidth * 0.30,
-		height = screenHeight * 0.20,
+		bottom = 0,
+		width  = width,
+		height = height,		
+		-- y = screenHeight * 0.50,
+		-- width  = screenWidth * 0.30,
+		-- height = screenHeight * 0.20,
 		--parent = screen0,
 		--visible = false,
 		--backgroundColor = settings.col_bg,

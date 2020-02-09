@@ -1012,8 +1012,10 @@ function widget:Initialize()
 		return self
 	end
 
-	local width = 0.33*screenWidth
-	local height = width*4/9
+	local integralWidth = 0.33*screenWidth
+	local integralHeight = integralWidth*4/9
+	local width = integralWidth
+	local height = 0.85*integralHeight	
 	
 	window_console = WG.Chili.Window:New{  
 		margin = { 0, 0, 0, 0 },
@@ -1021,7 +1023,9 @@ function widget:Initialize()
 		dockable = true,
 		name = "Chat",
 		x = 0,
+		-- right = 0,
 		bottom = 0,
+		-- bottom = height,
 		width  = width,
 		height = height,		
 		-- y = screenHeight * 0.50,

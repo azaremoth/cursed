@@ -294,13 +294,12 @@ local function RestoreAfterDelay()
 --	Move( mask, y_axis, -0.5, 20)	
 	Sleep(400)	
 --	Hide(mask)
-	Sleep(1100)	
+	Sleep(600)	
 	Turn2( sgarm3, y_axis, 0, MOVEANIMATIONSPEED*3 )
 	Turn2( sgarm3, z_axis, 0, MOVEANIMATIONSPEED*3 )
+	attacking = false	
 	Sleep(1000)
 	Turn2( head, y_axis, 0, 120 )
-	attacking = false
-	
 	Sleep(100)	
 	StopSpin  ( sgsleeve, z_axis, 50 )
 	Turn2( sgarm1, x_axis, -70, MOVEANIMATIONSPEED*3 )

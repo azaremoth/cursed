@@ -13,11 +13,16 @@ end
 
 -------------------------------------------------------------------------------
 
-local teamList = Spring.GetTeamList()
-local myTeamID = Spring.GetMyTeamID()
 local modOptions = Spring.GetModOptions()
 local campaignBattleID = modOptions.singleplayercampaignbattleid
+local cvMode = modOptions.scoremode
 
+if cvMode == nil then
+	return false
+end
+
+local teamList = Spring.GetTeamList()
+local myTeamID = Spring.GetMyTeamID()
 local glTexCoord = gl.TexCoord
 local glVertex = gl.Vertex
 local glColor = gl.Color
@@ -39,21 +44,15 @@ local textBox
 
 local size = 600
 
-local cvMode = modOptions.scoremode
-
-if cvMode == nil then
-	cvMode = "disabled"
-end
-
-	local white = "\255\255\255\255"
-	local offwhite = "\255\255\255\255" -- "\255\210\210\210"
-	local yellow = "\255\255\255\0"
+local white = "\255\255\255\255"
+local offwhite = "\255\255\255\255" -- "\255\210\210\210"
+local yellow = "\255\255\255\0"
 	
 dominationScore = tonumber(Spring.GetModOptions().dominationscore)
 dominationScoreTime = tonumber(Spring.GetModOptions().dominationscoretime) -- Time needed holding all points to score in multi domination
 limitScore = tonumber(Spring.GetModOptions().limitscore)
-metalPerPoint = tonumber(Spring.GetModOptions().metalperpoint)
-energyPerPoint = tonumber(Spring.GetModOptions().energyperpoint)
+metalPerPoint = tonumber(Spring.GetModOptions().metalperpoint) or 0
+energyPerPoint = tonumber(Spring.GetModOptions().energyperpoint) or 0
 tugofWarModifier = tonumber(Spring.GetModOptions().tugofwarmodifier) -- Radius around a point in which to capture it
 
 local scoreModeAsString = "Disabled"

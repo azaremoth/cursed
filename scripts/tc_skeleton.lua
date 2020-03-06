@@ -347,7 +347,14 @@ function MeleeAnimations()
 		Turn2( rhand, y_axis, -1.5, ATK_RHAND_SPEED_F		 )
 		Turn2( rhand, z_axis, -17, ATK_RHAND_SPEED_F )
       	local x, y, z = Spring.GetUnitPosition(unitID)
-		Spring.PlaySoundFile("sounds/swoosh.wav", 30, x, y, z)
+		local randomnumber = math.random(100)
+		if (randomnumber < 33) then
+			Spring.PlaySoundFile("sounds/swoosh.wav", 30, x, y, z)
+		elseif (randomnumber > 66) then
+			Spring.PlaySoundFile("sounds/swoosh_soft.wav", 30, x, y, z)
+		else
+			Spring.PlaySoundFile("sounds/swoosh_fast.wav", 30, x, y, z)
+		end
 		WaitForTurn(ruparm, x_axis)
 		WaitForTurn(ruparm, y_axis)
 		WaitForTurn(ruparm, z_axis)

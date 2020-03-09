@@ -1,5 +1,6 @@
 local DECAL0 = {
   unitname           = "grounddecal",
+  description = "Grounddecal",  
   buildingGroundDecalDecaySpeed = 0.01,
   buildingGroundDecalSizeX = 25,
   buildingGroundDecalSizeY = 25,
@@ -7,6 +8,7 @@ local DECAL0 = {
 }
 local DECAL1 = {
   unitname           = "trails1",
+  description = "Trails",
   buildingGroundDecalDecaySpeed = 0.0000000001,
   buildingGroundDecalSizeX = 40,
   buildingGroundDecalSizeY = 40,
@@ -14,6 +16,7 @@ local DECAL1 = {
 }
 local DECAL2 = {
   unitname           = "trails2",
+  description = "Trails",
   buildingGroundDecalDecaySpeed = 0.0000000001,
   buildingGroundDecalSizeX = 40,
   buildingGroundDecalSizeY = 40,
@@ -21,6 +24,7 @@ local DECAL2 = {
 }
 local DECAL3 = {
   unitname           = "trails3",
+  description = "Trails",
   buildingGroundDecalDecaySpeed = 0.0000000001,
   buildingGroundDecalSizeX = 40,
   buildingGroundDecalSizeY = 40,
@@ -28,6 +32,7 @@ local DECAL3 = {
 }
 local DECAL4 = {
   unitname           = "trails4",
+  description = "Trails",
   buildingGroundDecalDecaySpeed = 0.0000000001,
   buildingGroundDecalSizeX = 40,
   buildingGroundDecalSizeY = 40,

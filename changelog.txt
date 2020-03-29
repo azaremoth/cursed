@@ -19,7 +19,8 @@ Balance
 - reduced leached hp for cursed Shade to 10% of damage done (was 20%)
 
 Bugs:
-- fixed spider demons using energy for shooting (was not intended)	
+- fixed spider demons using energy for shooting (was not intended)-
+- fixed jumping scaffolds happening for imperial factories during construction
 
 Infracstructure:
 - removed (most) single player specific content from the main archive

@@ -73,63 +73,49 @@ local scaffoldunit_12x5 = {
 
 local ScaffoldList = {}
 
+local function MakeFeature(scaffold, x, y, z, heading, teamID, unitID)
+		local newFeatureID = Spring.CreateFeature(scaffold, x, y, z, heading, teamID)
+		Spring.SetFeatureCollisionVolumeData(newFeatureID,0,0,0,0,0,0,-1,0,0)
+		Spring.SetFeatureBlocking(newFeatureID,false,false,false,false,false,false,false)
+		Spring.SetFeatureNoSelect(newFeatureID,true)
+		ScaffoldList[unitID] = newFeatureID
+end
+
 function gadget:UnitCreated(unitID, unitDefID, teamID)
 	local x,y,z = Spring.GetUnitPosition(unitID)
 	local heading = Spring.GetUnitHeading(unitID)
 	if scaffoldunit_2x2[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_2x2', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)	
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_2x2', x, y, z, heading, teamID, unitID)
 	end
 	if scaffoldunit_4x4[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_4x4', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)		
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_4x4', x, y, z, heading, teamID, unitID)
 	end
 	if scaffoldunit_6x6[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_6x6', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)	
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_6x6', x, y, z, heading, teamID, unitID)
 	end
 	if scaffoldunit_6x6_high[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_6x6_high', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)		
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_6x6_high', x, y, z, heading, teamID, unitID)
 	end
 	if scaffoldunit_8x8[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_8x8', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)		
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_8x8', x, y, z, heading, teamID, unitID)
 	end	
 	if scaffoldunit_8x8_high[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_8x8_high', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)	
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_8x8_high', x, y, z, heading, teamID, unitID)
 	end	
 	if scaffoldunit_10x10_high[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_10x10_high', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)	
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_10x10_high', x, y, z, heading, teamID, unitID)
 	end	
 	if scaffoldunit_11x11[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_11x11', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)		
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_11x11', x, y, z, heading, teamID, unitID)
 	end		
 	if scaffoldunit_8x12[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_8x12', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)	
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_8x12', x, y, z, heading, teamID, unitID)
 	end	
 	if scaffoldunit_12x12[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_12x12', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)	
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_12x12', x, y, z, heading, teamID, unitID)
 	end
 	if scaffoldunit_12x5[unitDefID] then
-		local newFeatureID = Spring.CreateFeature('scaffold_12x5', x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,1,1,1,0,0,0,0,0,0,0,0)	
-		ScaffoldList[unitID] = newFeatureID
+		MakeFeature('scaffold_12x5', x, y, z, heading, teamID, unitID)
 	end		
 end
 

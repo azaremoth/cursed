@@ -75,8 +75,8 @@ local ScaffoldList = {}
 
 local function MakeFeature(scaffold, x, y, z, heading, teamID, unitID)
 		local newFeatureID = Spring.CreateFeature(scaffold, x, y, z, heading, teamID)
-		Spring.SetFeatureCollisionVolumeData(newFeatureID,0,0,0,0,0,0,-1,0,0)
-		Spring.SetFeatureBlocking(newFeatureID,false,false,false,false,false,false,false)
+--		Spring.SetFeatureCollisionVolumeData(newFeatureID,0,0,0,0,-200,0,-1,0,0)
+		Spring.SetFeatureBlocking(newFeatureID,false,false)
 		Spring.SetFeatureNoSelect(newFeatureID,true)
 		ScaffoldList[unitID] = newFeatureID
 end

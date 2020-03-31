@@ -1,36 +1,42 @@
 ----------------------------------- ADAPTIONS TO BASE CLASS ------------------------------
 local GHOULMELEE = {
     explosionGenerator      = [[custom:HITSPARKLE]],
+	areaOfEffect            = 16,
 	range                   = 70,
     reloadtime 				= 1.30,
     damage 					= { default = 120, flyer = 120, heavy = (120*0.75), light = 120, },
 }
 local SKELMELEE = {
     explosionGenerator      = [[custom:HITSPARKLE]],
+	areaOfEffect            = 16,
 	range                   = 70,
     reloadtime				= 1.60,
     damage 					= { default = 140, flyer = 140, heavy = (140*0.75), light = 140, },
 }
 local UNDEADMARINEMELEE = {
     explosionGenerator      = [[custom:HITSPARKLE]],
+	areaOfEffect            = 16,
 	range                   = 70,
     reloadtime              = 2.60,
     damage 					= { default = 260, flyer = 260, heavy = (260*0.75), light = 260, },
 }
 local PALADINMELEE = {
     explosionGenerator      = [[custom:HITSPARKLE]],
+	areaOfEffect            = 16,
 	range                   = 70,
     reloadtime              = 2.00,
     damage 					= { default = 220, flyer = 220, heavy = (220*0.75), light = 220, },
 }
 local WEREWOLFMELEE = {
     explosionGenerator      = [[custom:HITSPARKLE]],
+	areaOfEffect            = 16,
 	range                   = 70,
     reloadtime              = 1.00,
     damage 					= { default = 200, flyer = 200, heavy = (200*0.75), light = 200, },
 }
 local DECOYSHADEMELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
+	areaOfEffect            = 16,
 	range                   = 80,
     reloadtime              = 0.34,
     damage 					= { default = 50, flyer = 50, heavy = 50, light = 50, },
@@ -44,6 +50,7 @@ local SHADELVL1MELEE = {
 }
 local SHADELVL2MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
+	areaOfEffect            = 16,
     range                   = 80,
     reloadtime              = 0.34,
 	customParams          	= {	circlestrike = "true" },
@@ -51,6 +58,7 @@ local SHADELVL2MELEE = {
 }
 local SHADELVL3MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
+	areaOfEffect            = 16,
     range                   = 80,
     reloadtime              = 0.34,
 	customParams          	= {	circlestrike = "true" },
@@ -58,6 +66,7 @@ local SHADELVL3MELEE = {
 }
 local SHADELVL4MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
+	areaOfEffect            = 16,
     range                   = 80,
     reloadtime              = 0.34,
 	customParams          	= {	circlestrike = "true" },
@@ -65,7 +74,8 @@ local SHADELVL4MELEE = {
 }
 local SHADELVL5MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
-    range                   = 80,
+	areaOfEffect            = 16, 
+	range                   = 80,
     reloadtime              = 0.34,
 	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 156, flyer = 156, heavy = 156, light = 156, },
@@ -80,6 +90,7 @@ local SHADELVL6MELEE = {
 local SHADELVL7MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 80,
+	areaOfEffect            = 16,	
     reloadtime              = 0.34,
 	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 212, flyer = 212, heavy = 212, light = 212, },
@@ -87,12 +98,14 @@ local SHADELVL7MELEE = {
 local SHADELVL8MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
     range                   = 80,
+	areaOfEffect            = 16,	
     reloadtime              = 0.34,
 	customParams          	= {	circlestrike = "true" },
     damage 		    = { default = 240, flyer = 240, heavy = 240, light = 240, },
 }
 local SHADELVL9MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
+	areaOfEffect            = 16,
     range                   = 80,
     reloadtime              = 0.34,
 	customParams          	= {	circlestrike = "true" },
@@ -100,6 +113,7 @@ local SHADELVL9MELEE = {
 }
 local SHADELVL10MELEE = {
     explosionGenerator      = [[custom:GREENHITSPARKLE]],
+	areaOfEffect            = 16,
     range                   = 80,
     reloadtime              = 0.34,
 	customParams          	= {	circlestrike = "true" },
@@ -107,12 +121,14 @@ local SHADELVL10MELEE = {
 }
 local MEDBUGMELEE = {
     explosionGenerator      = [[custom:HITSPARKLE]],
+	areaOfEffect            = 16,
 	range                   = 70,
     reloadtime              = 1.50,
     damage 					= { default = 130, flyer = 130, heavy = (130*0.75), light = 130, },
 }
 local BIGBUGMELEE = {
     explosionGenerator      = [[custom:HITSPARKLE]],
+	areaOfEffect            = 64,
 	range                   = 130,
     reloadtime              = 1.50,
     damage 					= { default = 250, flyer = 250, heavy = 250, light = 250, },
@@ -127,7 +143,6 @@ local MELEEBASE = {
     collideFriendly    		= false,
     collideFeature    		= true,
 	------------------------------------------
-	areaOfEffect            = 16,
     craterAreaOfEffect      = 0,
 	craterBoost             = 0,
     craterMult              = 0,

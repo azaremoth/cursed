@@ -26,15 +26,15 @@ local name
   
 jumpCategory = { 
 	baseclass = {
-		range = 350, height = 100, speed = 10,  reload = 12,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = true},
+		range = 350, height = 150, speed = 10,  reload = 12,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = true},
 	ghoul = 	{
-		range = 300, height = 60, speed = 18,  reload = 8,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = true},
+		range = 300, height = 80, speed = 18,  reload = 8,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = true},
 	hero = {
 		range = 300, height = 150, speed = 10,  reload = 5,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = true},
 	fasthero = {
 		range = 300, height = 100, speed = 50,  reload = 5,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = true},		
 	mage = {
-		range = 500, height = 10, speed = 100,  reload = 15,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = false},
+		range = 500, height = 20, speed = 100,  reload = 15,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = false},
 	warpjump = {
 		range = 100000000, height = 500, speed = 1000,  reload = 50,  aaShootMe = false, delay = 0, cobscript = false, rotateMidAir = false},	
 }

@@ -377,7 +377,7 @@ function MeleeAnimations()
 		elseif (randomnumber > 66) then
 			Spring.PlaySoundFile("sounds/bugbig2.wav", 30, x, y, z)
 		else
-			Spring.PlaySoundFile("sounds/bugbig2.wav", 30, x, y, z)
+			Spring.PlaySoundFile("sounds/bugbig3.wav", 30, x, y, z)
 		end
 		
 		Turn2( chest, x_axis, 0, 300 )

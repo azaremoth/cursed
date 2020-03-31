@@ -97,7 +97,7 @@ buildingGroundDecalDecaySpeed = 0.2,
   },
   weapons = {
     [1]  = {
-      name                = "AA_MISSILE_TOWER",
+      name                = "AA_MISSILE_TOWER_FREE",
       onlyTargetCategory = "AIR",
     },
   },

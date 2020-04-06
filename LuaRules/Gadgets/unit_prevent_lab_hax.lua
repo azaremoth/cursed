@@ -41,12 +41,12 @@ local spMoveCtrlGetTag         = Spring.MoveCtrl.GetTag
 local abs = math.abs
 local min = math.min
 
-local terraunitDefID = UnitDefNames["terraunit"].id
+-- local terraunitDefID = UnitDefNames["terraunit"].id
 
 local FEATURE_ONLY = {
-	factorygunship = true,
-	staticmissilesilo = true,
-	staticrearm = true,
+--	factorygunship = true,
+--	staticmissilesilo = true,
+--	staticrearm = true,
 }
 
 --------------------------------------------------------------------------------

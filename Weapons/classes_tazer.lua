@@ -6,6 +6,13 @@ local TAZER_LIGHT = {
     damage 					= { default = 250, flyer = 250, heavy = 250, light = 250, },
     paralyzetime       		= 15,	
 }
+local TAZER_LIGHT_MG = {
+    areaOfEffect       		= 32,	
+	range                   = 300,
+    reloadtime 				= 0.33,
+    damage 					= { default = 200, flyer = 200, heavy = 200, light = 200, },
+    paralyzetime       		= 20,	
+}
 local TAZER_HEAVY = {
     areaOfEffect       		= 32,	
 	range                   = 300,
@@ -80,6 +87,7 @@ end
 
 return lowerkeys({
 	TAZER_LIGHT = WeaponDefMergeTable(TAZERBASE, TAZER_LIGHT),
+	TAZER_LIGHT_MG = WeaponDefMergeTable(TAZERBASE, TAZER_LIGHT_MG),	
 	TAZER_HEAVY = WeaponDefMergeTable(TAZERBASE, TAZER_HEAVY),
 })
 

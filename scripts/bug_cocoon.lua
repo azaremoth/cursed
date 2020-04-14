@@ -8,9 +8,9 @@ local BUILDINGFX	= 1024+0
 local KILLED	 	= 1025+0
 local DUST	 		= 1026+0
 
-local x_rotation = math.random(30)
-local y_rotation = math.random(180)
-local z_rotation = math.random(30)
+local x_rotation = 0
+local y_rotation = 0
+local z_rotation = 0
 
 local function Turn2(piecenum,axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180
@@ -27,11 +27,11 @@ local function BoredAnimation()
 	while true do	
 		local borednumber = math.random(50)
 		if (borednumber > 45) then
-			Turn2( rotator, y_axis, 30, 15 )
+			Turn2( rotator, y_axis, y_rotation-20, 25 )
 			WaitForTurn( rotator, y_axis )
-			Turn2( rotator, y_axis, -30, 15 )
+			Turn2( rotator, y_axis, y_rotation+20, 25 )
 			WaitForTurn( rotator, y_axis )
-			Turn2( rotator, y_axis, y_rotation, 15 )
+			Turn2( rotator, y_axis, y_rotation, 25 )
 --		elseif (borednumber < 5)then	
 --		else 
 --			Turn2( rotator, y_axis, y_rotation, 5 )
@@ -43,9 +43,12 @@ end
 
 
 function script.Create( )
-	Turn2( rotator, x_axis, x_rotation )	
+	x_rotation = math.random(30)
+	y_rotation = math.random(180)
+	z_rotation = math.random(30)	
+	Turn2( rotator, x_axis, x_rotation )
 	Turn2( rotator, y_axis, y_rotation )
-	Turn2( rotator, z_axis, z_rotation )		
+	Turn2( rotator, z_axis, z_rotation )
 	----------------------------------START BUILD CYCLE
 	while  GetUnitValue( COB.BUILD_PERCENT_LEFT ) > 0 do
 			EmitSfx(sack, BUILDINGFX)

@@ -69,7 +69,7 @@ local unitDef = {
   unitname           = "pig",
   sfxtypes = {
     explosiongenerators = {
-      "custom:SUMMONING",
+      "custom:SMOKE_EXPLOSION",
       "custom:BLOOD_EXPLOSION",
     },
   },

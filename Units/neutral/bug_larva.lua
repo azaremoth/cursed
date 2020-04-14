@@ -63,7 +63,7 @@ local unitDef = {
   upright            = false,
   sfxtypes = {
     explosiongenerators = {
-      "custom:SUMMONING",
+      "custom:SMOKE_EXPLOSION",
       "custom:BLOOD_EXPLOSION_GREEN",
       "custom:BURROWING_BIGGER",
     },

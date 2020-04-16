@@ -43,9 +43,9 @@ end
 
 
 function script.Create( )
-	x_rotation = math.random(30)
+	x_rotation = math.random(25)
 	y_rotation = math.random(180)
-	z_rotation = math.random(30)	
+	z_rotation = math.random(25)	
 	Turn2( rotator, x_axis, x_rotation )
 	Turn2( rotator, y_axis, y_rotation )
 	Turn2( rotator, z_axis, z_rotation )

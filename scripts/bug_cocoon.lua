@@ -32,9 +32,19 @@ local function BoredAnimation()
 			Turn2( rotator, y_axis, y_rotation+20, 25 )
 			WaitForTurn( rotator, y_axis )
 			Turn2( rotator, y_axis, y_rotation, 25 )
---		elseif (borednumber < 5)then	
+		elseif (borednumber < 10)then
+			Turn2( wing1, x_axis, -7, 10 )
+			Turn2( wing2, x_axis, 3, 10 )
+			Turn2( wing2, z_axis, -6, 10 )
+			Turn2( wing3, x_axis, 5, 10 )
+			Turn2( wing3, z_axis, 5, 10 )			
+			WaitForTurn( wing1, x_axis )
+			Turn2( wing1, x_axis, 0, 25 )
+			Turn2( wing2, x_axis, 0, 25 )
+			Turn2( wing2, z_axis, 0, 25 )
+			Turn2( wing3, x_axis, 0, 25 )
+			Turn2( wing3, z_axis, 0, 25 )			
 --		else 
---			Turn2( rotator, y_axis, y_rotation, 5 )
 		end
 	Sleep(1500)		
 	end

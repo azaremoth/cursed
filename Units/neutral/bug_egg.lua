@@ -12,10 +12,11 @@ local unitDef = {
   buildDistance      = 0,
   builder            = false,
   buildingGroundDecalDecaySpeed = 0.005,
-  buildingGroundDecalSizeX = 2,
-  buildingGroundDecalSizeY = 2,
-  buildingGroundDecalType = "bug_decal.png",  
-  buildPic           = "bug_egg.png",
+  buildingGroundDecalSizeX 	= 2,
+  buildingGroundDecalSizeY 	= 2,
+  buildingGroundDecalType 	= "bug_decal.png",  
+  buildPic           		= "bug_egg.png",
+  useBuildingGroundDecal 	= true,  
   buildTime          = 100,
   canAssist          = false,
   canBeAssisted      = false,
@@ -76,7 +77,7 @@ local unitDef = {
     build              = "",
     canceldestruct     = "",
     repair             = "",
-    underattack        = "voices_baseattacked",
+    underattack        = "bug_larva",
     working            = "",
     arrived = {
       "",
@@ -96,7 +97,7 @@ local unitDef = {
       "",
     },
     select = {
-      "guntower_select",
+      "bug_larva",
     },
   },
 }

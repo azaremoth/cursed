@@ -40,7 +40,7 @@ end
 
 function script.Create( )
 	x_rotation = math.random(15)
-	y_rotation = math.random(180)
+	y_rotation = math.random(360)
 	z_rotation = math.random(15)	
 	Turn2( egg, x_axis, x_rotation )
 	Turn2( egg, y_axis, y_rotation )

@@ -16,7 +16,8 @@ local emit_groundflash = piece "emit_groundflash"
 local gun = 1
 local isaiming
 local restore_delay = 8000
-
+local spinsleep = 0
+local isspinning = false
 --signals
 local SIG_AIM1 = 2
 
@@ -87,8 +88,13 @@ end
 local function RestoreAfterDelay()
 	Sleep(restore_delay)
 	Turn2( sleeve,  x_axis, 0, 20 ) 
-	StopSpin  ( barrel1, z_axis, 50 )	
-	isaiming = false			
+	spinsleep = spinsleep - 100	
+	if spinsleep < 1 then
+		StopSpin  ( barrel1, z_axis, 20 )
+		spinsleep = 0
+		isspinning = false			
+	end
+	isaiming = false
 	return (0)
 end
 
@@ -105,11 +111,16 @@ function script.AimWeapon1(heading, pitch)
 	isaiming = true
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
-	Spin  ( barrel1, z_axis, 300 )		
-	Turn( turret, y_axis, heading, 2.5 )
-	Turn( sleeve,  x_axis, -pitch, 2.0 ) 
+	if not isspinning then
+		Spin  ( barrel1, z_axis, 300 )
+	end
+	Turn( turret, y_axis, heading, 3.5 )
+	Turn( sleeve,  x_axis, -pitch, 3.0 ) 
 	WaitForTurn (turret, y_axis)
 	WaitForTurn (sleeve, x_axis)
+	if spinsleep < restore_delay then
+		spinsleep = spinsleep + 100
+	end
 	return true
 end
 

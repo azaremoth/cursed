@@ -11,8 +11,8 @@ local RIPPER_BUNKER = {
 }
 local RIPPER_AI = {
 	reloadtime         = 1,	
-    avoidFriendly      	= true,
-    collideFriendly    	= true,	
+    avoidFriendly      	= false,
+    collideFriendly    	= false,	
 }
 -----------------------------------  BASE CLASS -------------------------------------------
 local RIPPERBASE = {

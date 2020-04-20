@@ -92,8 +92,8 @@ local ASSAULT_RIFLE_AI = {
 	accuracy           = 128,
     energypershot      = 0,	
 ----------------------------------------------------------------------------------	
-    avoidFriendly      	= true,
-    collideFriendly    	= true,	
+    avoidFriendly      	= false,
+    collideFriendly    	= false,	
 ----------------------------------------------------------------------------------	
     model              	= "gunshot.s3o",
     explosionGenerator 	= "custom:SMALL_BULLET_FX",	

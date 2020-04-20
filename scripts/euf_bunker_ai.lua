@@ -8,10 +8,13 @@ local tubes = piece 'tubes'
 local antenne = piece 'antenne'
 local turret = piece 'turret'
 local turret_pitch = piece 'turret_pitch'
+local emit = piece 'emit'
+local turret2 = piece 'turret2'
+local turret_pitch2 = piece 'turret_pitch2'
+local emit2 = piece 'emit2'
+local emit_groundflash = piece 'emit_groundflash'
 local link = piece 'link'
 local fist = piece 'fist'
-local emit = piece 'emit'
-local emit_groundflash = piece 'emit_groundflash'
 
 local pID
 
@@ -68,15 +71,15 @@ end
 
 --- weapon 2 -----------------------------------------------------------------
 
-function script.QueryWeapon1 ()
+function script.QueryWeapon2 ()
 	return emit2
 end
 
-function script.AimFromWeapon1 ()
+function script.AimFromWeapon2 ()
 	return bunker
 end
 
-function script.AimWeapon1(heading, pitch)
+function script.AimWeapon2(heading, pitch)
 	attacking=true
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
@@ -87,7 +90,7 @@ function script.AimWeapon1(heading, pitch)
 	return true
 end
 
-function script.FireWeapon1()
+function script.FireWeapon2()
 		EmitSfx( emit2, GUNFLARE )
 		return(1)
 end

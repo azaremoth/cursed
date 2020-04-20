@@ -84,6 +84,27 @@ local CRAWLER_AA = {
 ----------------------------------------------------------------------------------
 	damage 			   = { default = 113, flyer = (113*1.5), heavy = (113*0.75), light = 133, },
 }
+local ASSAULT_RIFLE_AI = { 
+	name   = "Assault rifle",
+    areaOfEffect        = 32,	
+	range              = 330,
+	reloadtime         = 0.8,
+	accuracy           = 128,
+    energypershot      = 0,	
+----------------------------------------------------------------------------------	
+    avoidFriendly      	= true,
+    collideFriendly    	= true,	
+----------------------------------------------------------------------------------	
+    model              	= "gunshot.s3o",
+    explosionGenerator 	= "custom:SMALL_BULLET_FX",	
+    soundStart         	= "marine_gunshot",	
+----------------------------------------------------------------------------------	
+	burst = 5,
+	burstrate = 0.075,
+	sprayangle = 1024,
+----------------------------------------------------------------------------------
+	damage 			   = { default = 10, flyer = 10, heavy = (10*0.75), light = 10, },
+}
 local ASSAULT_RIFLE = { 
 	name   = "Assault rifle",
     areaOfEffect        = 32,	
@@ -180,6 +201,7 @@ return lowerkeys({
 	DEFENDERGUN_NOCOST = WeaponDefMergeTable(MGBASE, DEFENDERGUN_NOCOST),	
 	AATANK_GUN = WeaponDefMergeTable(MGBASE, AATANK_GUN),
 	CRAWLER_AA = WeaponDefMergeTable(MGBASE, CRAWLER_AA),	
+	ASSAULT_RIFLE_AI = WeaponDefMergeTable(MGBASE, ASSAULT_RIFLE_AI),
 	ASSAULT_RIFLE = WeaponDefMergeTable(MGBASE, ASSAULT_RIFLE),
 	ASSAULT_RIFLE_BUNKER = WeaponDefMergeTable(MGBASE, ASSAULT_RIFLE_BUNKER),
 })

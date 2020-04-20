@@ -110,140 +110,19 @@ local unitDef = {
 	  },  
   weapons = {
     [1]  = {
-      def                = "RIPPER",
+      name                = "RIPPER",
       mainDir            = "0 0 1",
       maxAngleDif        = 180,
       onlyTargetCategory = "LAND",
       badTargetCategory = "AIR LIGHTARMOR",	  
     },
     [2]  = {
-      def                = "RIPPER_BUNKER",
+      name                = "RIPPER_BUNKER",
       onlyTargetCategory = "LAND",
       badTargetCategory = "AIR LIGHTARMOR",	  
     },	
   },
 }
-
-
---------------------------------------------------------------------------------
-
-local weaponDefs = {
-  RIPPER = {
-    name               = "Ripper Cannon",  
-    avoidFeature       = false,
-    avoidFriendly      = true,
-    collideFeature     = true,
-    collideFriendly    = true,
---  General	----------------------------------------------		
-	accuracy           = 800,
-    areaOfEffect       = 45,
-    range              = 650,
-    reloadtime         = 2,	
-    burnblow           = false,
-    collisionSize      = 8,
-    craterBoost        = 0,
-    craterMult         = 0,
-    cylinderTargeting = 0,
-    edgeEffectiveness  = 1,
-    energypershot           = 0,
-    explosionGenerator = "custom:SMALL_EXPLOSION_PURPLE",
-    explosionSpeed     = 65536,
-    fireStarter        = 50,
-    impulseBoost       = 0,
-    impulseFactor      = 1,
-    interceptedByShieldType = 1,
-    myGravity          = 0.15,
-    startVelocity      = 600,
-    targetBorder       = 0,
-    targetMoveError    = 0.8,
-    tolerance          = 500,
-    turret             = true,
-    weaponAcceleration = 0,
-    weaponVelocity     = 600,
-	noSelfDamage       = false,
---  Sound	------------------------------------------------	
-    soundHit           = "mediumexplosion",
-    soundStart         = "heatray_fire5",
-    soundHitVolume     = 50,
-    soundStartVolume   = 50,
-    soundTrigger       = true,
---  Standard Visuals	------------------------------------
-    cegtag			   = "RIPPERTrail",	
-	RGBColor		   = "1.00 0.25 0.47",	
---	Weaponspecial ------------------------------------------ 
-    flightTime         = 1.5,
-    model              = "plasma_purple.s3o",
-    heightBoostFactor  = 0,
-    tracks             = false,
-    trajectoryHeight   = 0.65,
-    weaponType         = "MissileLauncher",	
-------------------------------------------------------------
-    damage = {
-      default            = 115,
-      flyer              = 115,
-      heavy              = 115,
-      light              = (115*0.75),
-    },
-  },  
-  RIPPER_BUNKER = {
-    name               = "Ripper Cannon (Bunker)",  
-    avoidFeature       = false,
-    avoidFriendly      = true,
-    collideFeature     = true,
-    collideFriendly    = true,
---  General	----------------------------------------------		
-	accuracy           = 800,
-    areaOfEffect       = 45,
-    range              = 650,
-    reloadtime         = 2,	
-    burnblow           = false,
-    collisionSize      = 8,
-    craterBoost        = 0,
-    craterMult         = 0,
-    cylinderTargeting = 0,
-    edgeEffectiveness  = 1,
-    energypershot           = 0,
-    explosionGenerator = "custom:SMALL_EXPLOSION_PURPLE",
-    explosionSpeed     = 65536,
-    fireStarter        = 50,
-    impulseBoost       = 0,
-    impulseFactor      = 1,
-    interceptedByShieldType = 1,
-    myGravity          = 0.15,
-    startVelocity      = 600,
-    targetBorder       = 0,
-    targetMoveError    = 0.8,
-    tolerance          = 500,
-    turret             = true,
-    weaponAcceleration = 0,
-    weaponVelocity     = 600,
-	noSelfDamage       = false,
---  Sound	------------------------------------------------	
-    soundHit           = "mediumexplosion",
-    soundStart         = "heatray_fire5",
-    soundHitVolume     = 50,
-    soundStartVolume   = 50,
-    soundTrigger       = true,
---  Standard Visuals	------------------------------------
-    cegtag			   = "RIPPERTrail",	
-	RGBColor		   = "1.00 0.25 0.47",	
---	Weaponspecial ------------------------------------------ 
-    flightTime         = 1.5,
-    model              = "Skull_glow.s3o",
-    heightBoostFactor  = 0,
-    tracks             = false,
-    trajectoryHeight   = 0.65,
-    weaponType         = "MissileLauncher",	
-------------------------------------------------------------
-    damage = {
-      default            = 170,
-      flyer              = 170,
-      heavy              = 170,
-      light              = (170*0.75),
-    },
-  },  
-}
-unitDef.weaponDefs = weaponDefs
 
 --------------------------------------------------------------------------------
 

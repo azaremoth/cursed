@@ -98,10 +98,15 @@ local unitDef = {
   },
   weapons = {
 	[1]  = {
-      def                = "BUNKER_GUN",
+      name                = "ASSAULT_RIFLE_AI",
       onlyTargetCategory = "LAND AIR",
       badTargetCategory = "HEAVYARMOR",	  
     },
+	[2]  = {
+      name                = "RIPPER_AI",
+      onlyTargetCategory = "LAND",
+      badTargetCategory = "LIGHTARMOR",	  
+    },	
   },
 }
 

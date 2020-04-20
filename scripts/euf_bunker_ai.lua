@@ -63,10 +63,34 @@ end
 function script.FireWeapon1()
 		EmitSfx( emit, GUNFLARE )
 		EmitSfx( emit_groundflash, GROUNDFLASH )
-		Sleep(300)
 		return(1)
 end
 
+--- weapon 2 -----------------------------------------------------------------
+
+function script.QueryWeapon1 ()
+	return emit2
+end
+
+function script.AimFromWeapon1 ()
+	return bunker
+end
+
+function script.AimWeapon1(heading, pitch)
+	attacking=true
+	Signal(SIG_AIM1)
+	SetSignalMask(SIG_AIM1)
+	Turn( turret2, y_axis, heading, 20 )
+	Turn( turret_pitch2, x_axis, -pitch, 20 )
+    WaitForTurn( turret2, y_axis )
+    WaitForTurn( turret_pitch2, x_axis )
+	return true
+end
+
+function script.FireWeapon1()
+		EmitSfx( emit2, GUNFLARE )
+		return(1)
+end
 
 
 function script.Killed(severity, corpsetype, smoketype)

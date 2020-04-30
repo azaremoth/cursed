@@ -116,8 +116,8 @@ function script.AimWeapon1(heading, pitch)
 end
 
 function script.FireWeapon1()
-	Move(barrel2, z_axis, -5)
-	Move(barrel2, z_axis, 0, 24)
+	Move(barrel, z_axis, -5)
+	Move(barrel, z_axis, 0, 24)
 	EmitSfx( emit, GUNFLARE )				
 	EmitSfx( emit_groundflash, GROUNDFLASH )			
 --	Sleep(100)
@@ -127,6 +127,7 @@ end
 -----------------------------------------------------------------
 
 function script.Killed( damage, health )
+	Turn2( turret, y_axis, 0, 300 )	
 	EmitSfx(base,BOOM)
 	return (1)
 end

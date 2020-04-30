@@ -1,9 +1,13 @@
 --pieces
 local base = piece "base"
-local turretbase = piece "turretbase"
+local building = piece "building"
 local turret = piece "turret"
 local sleeve = piece "sleeve"
 local barrel = piece "barrel"
+local raisepoint = piece "raisepoint"
+local shaft = piece "shaft"
+local door_l = piece "door_l"
+local door_r = piece "door_r"
 
 -- emiters etc.
 local emit = piece "emit"
@@ -12,6 +16,7 @@ local emit_groundflash = piece "emit_groundflash"
 -- variables
 local isaiming
 local restore_delay = 8000
+local uncloakcount = 2000
 
 --signals
 local SIG_AIM1 = 2
@@ -33,56 +38,60 @@ local function Turn2(piecenum,axis, degrees, speed)
 	end
 end
 
--- Motion Control
-local function MotionControl()
-	while true do
-		if isaiming then
-			Sleep(50)
-		else
-			borednumber = math.random(500)
-			if (borednumber > 496) and not isaiming then
-				Turn2( turret, y_axis, math.random(360), 30 )				
-				WaitForTurn( turret, y_axis )
-				if not isaiming then 				
-					Sleep(250)
-				end
-				if not isaiming then 				
-					Sleep(250)
-				end	
-			end
-		end
-		Sleep(50)		
-	end
-end
-
-
 function script.Activate ( )
 end
 
 function script.Deactivate ( )
 end
 
+local function Recloaking()
+	while true do
+		if (uncloakcount < 1) then		
+			Spring.SetUnitCloak(unitID, 2, 100)
+			Spring.SetUnitStealth(unitID, true)
+		end
+	Sleep(300)
+	uncloakcount = (uncloakcount - 300)
+	end
+end
+
 function script.Create()
 	isaiming = false
 	local structureheight = ((-50*GetUnitValue(COB.UNIT_HEIGHT))/3080192)
-	Move( turretbase, y_axis, structureheight)
+	Move( raisepoint, y_axis, structureheight)
+	Move( shaft, y_axis, -50)
+	Turn2( sleeve,  x_axis, 0, 20 )	
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
 		local leftbuildpercent = (GetUnitValue(COB.BUILD_PERCENT_LEFT))
 		local outofground = (0.01*leftbuildpercent*structureheight)
-		Move( turretbase, y_axis, outofground, 200 )
+		Move( raisepoint, y_axis, outofground, 200 )
 		EmitSfx(base,turretbaseFX)
 		Sleep(100)
 	end
-	Move( turretbase, y_axis, 0, 1000 )
+	Move( raisepoint, y_axis, 0, 1000 )
 	Sleep(500)
-	StartThread( MotionControl )	
+	StartThread( Recloaking )	
 end
 
 local function RestoreAfterDelay()
 	Sleep(restore_delay)
-	Turn2( sleeve,  x_axis, 0, 20 ) 	
-	isaiming = false			
+	if (uncloakcount < 1) then
+		Turn2( turret,  x_axis, -90, 200 ) 	
+		Turn2( sleeve,  x_axis, 0, 50 ) 
+		Move( shaft, y_axis, -50, 50)	
+		Sleep(200)
+		Turn2( door_r,  z_axis, 0, 80 ) 
+		Turn2( door_l,  z_axis, 0, 80 ) 
+		isaiming = false
+	end
 	return (0)
+end
+
+function script.HitByWeapon ( x, z, weaponDefID, damage )
+	uncloakcount = 2000
+	Spring.SetUnitCloak(unitID, false)
+	Spring.SetUnitStealth(unitID, false)		
+	return(damage)
 end
 
 --weapon 1 -----------------------------------------------------------------
@@ -96,8 +105,15 @@ end
 
 function script.AimWeapon1(heading, pitch)
 	isaiming = true
+	Spring.SetUnitCloak(unitID, false)
+	Spring.SetUnitStealth(unitID, false)	
+	uncloakcount = 2000		
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
+	Turn2( turret,  x_axis, 0, 200 ) 	
+	Turn2( door_r,  z_axis, 170, 80 ) 
+	Turn2( door_l,  z_axis, -170, 80 ) 
+	Move( shaft, y_axis, 0, 50)	
 	Turn( turret, y_axis, heading, 2.5 )
 	Turn( sleeve,  x_axis, -pitch, 2.0 ) 
 	WaitForTurn (turret, y_axis)
@@ -106,10 +122,8 @@ function script.AimWeapon1(heading, pitch)
 end
 
 function script.FireWeapon1()
-	Move(barrel2, z_axis, -5)
-	Move(barrel2, z_axis, 0, 24)
---		EmitSfx( emit, GUNFLARE )				
-	EmitSfx( emit_groundflash, GROUNDFLASH )			
+--		EmitSfx( emit, GUNFLARE )	
+	EmitSfx( emit_groundflash, GROUNDFLASH )	
 --	Sleep(100)
 	StartThread( RestoreAfterDelay)	
 	return(1)

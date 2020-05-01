@@ -38,12 +38,6 @@ return {
     name = 'Skirmish AI',
     desc = 'AI that plays regular skirmish games'
   },
-  {
-	-- to be recognised as a CAI there must be an entry with this name in
-	-- LuaRules\Configs\cai\configCoordinator.lua
-    name = 'NO AI',
-    desc = 'This AI does absolutely nothing. For testing purposes only.'
-  },   
 }
 
 

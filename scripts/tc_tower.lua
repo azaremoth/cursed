@@ -1,3 +1,6 @@
+include "constants.lua"
+include "common.lua"
+
 --pieces
 local base = piece "base"
 local hole = piece "hole"
@@ -56,16 +59,6 @@ local GUNFLARE	 = 1027+0
 
 
 -----------------------------------------------------------------
-
-local function Turn2(piecenum,axis, degrees, speed)
-	local radians = degrees * 3.1415 / 180
-	if speed then
-		local speed1 = speed * 3.1415 / 180
-		Turn(piecenum, axis, radians, speed1) 
-	else
-		Turn(piecenum, axis, radians ) 
-	end
-end
 
 -- Motion Control
 local function MotionControl()
@@ -209,19 +202,14 @@ function script.Create()
 	Turn2( uparm_C, y_axis, 0, 15 )
 	Turn2( uparm_D, y_axis, 0, 15 )	
 	Sleep(200)
-	StartThread( MotionControl )	
+	StartThread( MotionControl )
+	StartThread( RestoreAfterDelayCounter )		
 end
 
 -----------------------------------------------------------------
 
-local function RestoreAfterDelay()
-	Sleep(restore_delay)
-	if (restore_delay < 8000) then
-		isaiming = false
-	elseif (restore_delay > 32000) then
-		restore_delay = 8000
-	end
-	return (0)
+local RestoreAfterDelay()
+	isaiming = false
 end
 
 --weapon 1 -----------------------------------------------------------------
@@ -235,7 +223,7 @@ end
 
 function script.AimWeapon1(heading, pitch)
 	isaiming = true
-	restore_delay = (restore_delay+100)
+	idleCount = maxIdleCount
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
 	Turn( wirbel01, y_axis, heading/10, 3.5/10 )
@@ -273,7 +261,6 @@ function script.FireWeapon1()
 	Turn2( midarm_C, y_axis, 50*randomnumber3+0.5, 80 )
 	Turn2( midarm_D, y_axis, -50*randomnumber4+0.5, 80 )		
 	EmitSfx( emit, GUNFLARE )
-	StartThread( RestoreAfterDelay)
 	return(1)
 end
 -----------------------------------------------------------------

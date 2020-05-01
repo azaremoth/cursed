@@ -8,6 +8,19 @@ function Turn2(piecenum,axis, degrees, speed)
 	end
 end
 
+local idleCount = 0
+local maxIdleCount = 8000
+
+local function RestoreAfterDelayCounter()
+	while true do
+		if (idleCount < 1) then		
+			RestoreAfterDelay()
+		end
+		Sleep(300)
+		idleCount = (idleCount - 300)
+	end
+end
+
 function SmokeUnit(smokepiece, SMOKE)
 	while true do
 		health = Spring.GetUnitHealth(unitID)

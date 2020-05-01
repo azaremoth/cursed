@@ -22,7 +22,6 @@ local emit_groundflash = piece "emit_groundflash"
 -- variables
 local gun = 1
 local isaiming = false
-local restore_delay = 8000
 
 --signals
 local SIG_AIM1 = 2
@@ -34,16 +33,6 @@ local GUNFLARE	 = 1026+0
 local GROUNDFLASH	 = 1027+0
 
 -----------------------------------------------------------------
-
-local function Turn2(piecenum,axis, degrees, speed)
-	local radians = degrees * 3.1415 / 180
-	if speed then
-		local speed1 = speed * 3.1415 / 180
-		Turn(piecenum, axis, radians, speed1) 
-	else
-		Turn(piecenum, axis, radians ) 
-	end
-end
 
 -- Motion Control
 local function MotionControl()
@@ -93,14 +82,13 @@ function script.Create()
 	end
 	Move( raisepoint, y_axis, 0, 200 )
 	Sleep(500)
-	StartThread( MotionControl )	
+	StartThread( MotionControl )
+	StartThread( RestoreAfterDelayCounter )		
 end
 
-local function RestoreAfterDelay()
-	Sleep(restore_delay)
+local RestoreAfterDelay()
 	Turn2( sleeve,  x_axis, 0, 20 ) 	
 	isaiming = false			
-	return (0)
 end
 
 --weapon 1 -----------------------------------------------------------------
@@ -119,6 +107,7 @@ end
 
 function script.AimWeapon1(heading, pitch)
 	isaiming = true
+	idleCount = maxIdleCount
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
 	Turn( turret, y_axis, heading, 1.6 )
@@ -132,17 +121,15 @@ function script.FireWeapon1()
 	if gun >= 0 then
 		Move(barrel2, z_axis, -5)
 		Move(barrel2, z_axis, 0, 24)
-		EmitSfx( emit1, GUNFLARE )		
+		EmitSfx( emit1, GUNFLARE )
 	end
 	if gun < 0 then
 		Move(barrel1, z_axis, -5)
 		Move(barrel1, z_axis, 0, 24)
-		EmitSfx( emit2, GUNFLARE )				
+		EmitSfx( emit2, GUNFLARE )
 	end
-	EmitSfx( emit_groundflash, GROUNDFLASH )			
---	Sleep(100)
+	EmitSfx( emit_groundflash, GROUNDFLASH )
 	gun = gun*(-1)
-	StartThread( RestoreAfterDelay)	
 	return(1)
 end
 -----------------------------------------------------------------

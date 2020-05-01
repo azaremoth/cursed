@@ -20,6 +20,7 @@ local emit2 = piece "emit2"
 
 -- varaibles
 local gun = 1
+local isaiming = false
 
 --signals
 local SIG_AIM1 = 2
@@ -29,10 +30,46 @@ local BOOM	 = 1024+0
 local BUILDINGFX	 = 1025+0
 local GUNFLARE	 = 1026+0
 
+-----------------------------------------------------------------
+
+-- Motion Control
+local function MotionControl()
+	while true do
+		if isaiming then
+			Sleep(50)
+		else
+			borednumber = math.random(500)
+			if (borednumber > 497) and not isaiming then
+				Turn2( turret, y_axis, math.random(360), 30 )				
+				WaitForTurn( turret, y_axis )
+				if not isaiming then 				
+					Sleep(250)
+				end
+				if not isaiming then 				
+					Sleep(250)
+				end	
+			end
+		end
+		Sleep(50)		
+	end
+end
+
 function script.Activate ( )
 end
 
 function script.Deactivate ( )
+end
+
+local function RestoreAfterDelay()
+	while true do
+		Sleep(300)
+		idleCount = (idleCount - 300)
+		if (idleCount < 1) then
+			idleCount = 0
+			Turn2( sleeve,  x_axis, 0, 20 )
+			isaiming = false
+		end		
+	end
 end
 
 function script.Create()
@@ -40,6 +77,7 @@ function script.Create()
 		Hide(fist1)
 		Hide(fist2)
 	end
+	isaiming = false	
 	gun = 1
 	local structureheight = ((-50*GetUnitValue(COB.UNIT_HEIGHT))/3080192)
 	Move( raisepoint, y_axis, structureheight)
@@ -54,6 +92,8 @@ function script.Create()
 	Move( raisepoint, y_axis, 0, 200 )
 	Turn( sleeves,  x_axis, 0, 0.4 ) 		
 	Sleep(500)
+	StartThread( MotionControl )
+	StartThread( RestoreAfterDelay )	
 end
 
 
@@ -74,6 +114,8 @@ function script.AimWeapon1(heading, pitch)
 --	if pitch < 0.45 then
 --		return false
 --	end
+	isaiming = true
+	idleCount = maxIdleCount
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
 	Turn( turret, y_axis, heading, 0.6 )

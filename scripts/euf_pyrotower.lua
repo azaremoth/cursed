@@ -44,15 +44,15 @@ end
 function script.Deactivate ( )
 end
 
-local function Recloaking()
+local function RestoreAfterDelay()
 	while true do
 		if (uncloakcount < maxuncloakcount*0.25) then		
 			Turn2( turret,  x_axis, -90, 200 ) 	
 			Turn2( sleeve,  x_axis, 0, 50 ) 
 			Move( shaft, y_axis, -50, 50)	
 			Sleep(200)
-			Turn2( door_r,  z_axis, 0, 80 ) 
-			Turn2( door_l,  z_axis, 0, 80 ) 
+			Turn2( door_r,  z_axis, 0, 100 ) 
+			Turn2( door_l,  z_axis, 0, 100 ) 
 			isaiming = false
 		end
 		if (uncloakcount < 1) then		
@@ -78,7 +78,7 @@ function script.Create()
 		Sleep(100)
 	end
 	Move( raisepoint, y_axis, 0, 1000 )
-	StartThread( Recloaking )	
+	StartThread( RestoreAfterDelay )	
 end
 
 function script.HitByWeapon ( x, z, weaponDefID, damage )
@@ -104,9 +104,9 @@ function script.AimWeapon1(heading, pitch)
 	uncloakcount = maxuncloakcount		
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
-	Turn2( turret,  x_axis, 0, 50 ) 	
-	Turn2( door_r,  z_axis, 170, 80 ) 
-	Turn2( door_l,  z_axis, -170, 80 ) 
+	Turn2( turret,  x_axis, 0, 100 ) 	
+	Turn2( door_r,  z_axis, 170, 200 ) 
+	Turn2( door_l,  z_axis, -170, 200 ) 
 	Move( shaft, y_axis, 0, 50)
 	Turn( turret, y_axis, heading, 2.5 )
 	Turn( sleeve,  x_axis, -pitch, 2.0 ) 

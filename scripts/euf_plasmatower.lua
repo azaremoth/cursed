@@ -1,3 +1,6 @@
+include "constants.lua"
+include "common.lua"
+
 --pieces
 local base = piece "base"
 local turretbase = piece "turretbase"
@@ -5,7 +8,6 @@ local turret = piece "turret"
 local sleeve = piece "sleeve"
 local barrel1 = piece "barrel1"
 local barrel2 = piece "barrel2"
-
 
 -- emiters etc.
 local emit1 = piece "emit1"
@@ -15,7 +17,6 @@ local emit_groundflash = piece "emit_groundflash"
 -- variables
 local gun = 1
 local isaiming
-local restore_delay = 8000
 
 --signals
 local SIG_AIM1 = 2
@@ -27,16 +28,6 @@ local turretbaseFX	 = 1026+0
 local GROUNDFLASH	 = 1027+0
 
 -----------------------------------------------------------------
-
-local function Turn2(piecenum,axis, degrees, speed)
-	local radians = degrees * 3.1415 / 180
-	if speed then
-		local speed1 = speed * 3.1415 / 180
-		Turn(piecenum, axis, radians, speed1) 
-	else
-		Turn(piecenum, axis, radians ) 
-	end
-end
 
 -- Motion Control
 local function MotionControl()
@@ -60,11 +51,22 @@ local function MotionControl()
 	end
 end
 
-
 function script.Activate ( )
 end
 
 function script.Deactivate ( )
+end
+
+local function RestoreAfterDelay()
+	while true do
+		Sleep(300)
+		idleCount = (idleCount - 300)
+		if (idleCount < 1) then
+			idleCount = 0
+			Turn2( sleeve,  x_axis, 0, 20 ) 
+			isaiming = false
+		end		
+	end
 end
 
 function script.Create()
@@ -81,14 +83,8 @@ function script.Create()
 	end
 	Move( turretbase, y_axis, 0, 1000 )
 	Sleep(500)
-	StartThread( MotionControl )	
-end
-
-local function RestoreAfterDelay()
-	Sleep(restore_delay)
-	Turn2( sleeve,  x_axis, 0, 20 ) 	
-	isaiming = false			
-	return (0)
+	StartThread( MotionControl )
+	StartThread( RestoreAfterDelay )	
 end
 
 --weapon 1 -----------------------------------------------------------------
@@ -108,8 +104,8 @@ function script.AimWeapon1(heading, pitch)
 	isaiming = true
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
-	Turn( turret, y_axis, heading, 2.5 )
-	Turn( sleeve,  x_axis, -pitch, 2.0 ) 
+	Turn( turret, y_axis, heading, 3.5 )
+	Turn( sleeve,  x_axis, -pitch, 3.0 ) 
 	WaitForTurn (turret, y_axis)
 	WaitForTurn (sleeve, x_axis)
 	return true
@@ -128,7 +124,6 @@ function script.FireWeapon1()
 	EmitSfx( emit_groundflash, GROUNDFLASH )			
 --	Sleep(100)
 	gun = gun*(-1)
-	StartThread( RestoreAfterDelay)	
 	return(1)
 end
 -----------------------------------------------------------------

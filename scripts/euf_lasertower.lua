@@ -56,11 +56,22 @@ local function MotionControl()
 	end
 end
 
-
 function script.Activate ( )
 end
 
 function script.Deactivate ( )
+end
+
+local function RestoreAfterDelay()
+	while true do
+		Sleep(300)
+		idleCount = (idleCount - 300)
+		if (idleCount < 1) then
+			idleCount = 0
+			Turn2( sleeve,  x_axis, 0, 20 )
+			isaiming = false
+		end		
+	end
 end
 
 function script.Create()
@@ -83,12 +94,7 @@ function script.Create()
 	Move( raisepoint, y_axis, 0, 200 )
 	Sleep(500)
 	StartThread( MotionControl )
-	StartThread( RestoreAfterDelayCounter )		
-end
-
-local RestoreAfterDelay()
-	Turn2( sleeve,  x_axis, 0, 20 ) 	
-	isaiming = false			
+	StartThread( RestoreAfterDelay )
 end
 
 --weapon 1 -----------------------------------------------------------------
@@ -113,7 +119,7 @@ function script.AimWeapon1(heading, pitch)
 	Turn( turret, y_axis, heading, 1.6 )
 	Turn( sleeve,  x_axis, -pitch, 1.0 ) 
 	WaitForTurn (turret, y_axis)
-	WaitForTurn (sleeve, x_axis)
+	WaitForTurn (sleeve, x_axis)	
 	return true
 end
 

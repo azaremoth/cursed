@@ -1,3 +1,6 @@
+idleCount = 0
+maxIdleCount = 8000
+
 function Turn2(piecenum,axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180
 	if speed then
@@ -5,19 +8,6 @@ function Turn2(piecenum,axis, degrees, speed)
 		Turn(piecenum, axis, radians, speed1) 
 	else
 		Turn(piecenum, axis, radians ) 
-	end
-end
-
-local idleCount = 0
-local maxIdleCount = 8000
-
-local function RestoreAfterDelayCounter()
-	while true do
-		if (idleCount < 1) then		
-			RestoreAfterDelay()
-		end
-		Sleep(300)
-		idleCount = (idleCount - 300)
 	end
 end
 

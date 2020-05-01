@@ -1014,7 +1014,7 @@ function widget:Initialize()
 
 	local integralWidth = 0.33*screenWidth
 	local integralHeight = integralWidth*4/9
-	local width = integralWidth
+	local width = integralWidth*0.75
 	local height = 0.85*integralHeight	
 	
 	window_console = WG.Chili.Window:New{  

@@ -57,6 +57,20 @@ end
 function script.Deactivate ( )
 end
 
+local function RestoreAfterDelay()
+	while true do
+		Sleep(300)
+		idleCount = (idleCount - 300)
+		if (idleCount < 1) then
+			idleCount = 0
+			Turn2( sleeve,  x_axis, 0, 20 ) 
+			StopSpin ( barrel1, z_axis, 20 )
+			isspinning = false
+			isaiming = false
+		end		
+	end
+end
+
 function script.Create()
 	gun = 1
 	isaiming = false
@@ -72,14 +86,7 @@ function script.Create()
 	Move( turretbase, y_axis, 0, 1000 )
 	Sleep(500)
 	StartThread( MotionControl )
-	StartThread( RestoreAfterDelayCounter )
-end
-
-local RestoreAfterDelay()
-	Turn2( sleeve,  x_axis, 0, 20 ) 
-	StopSpin  ( barrel1, z_axis, 20 )
-	isspinning = false			
-	isaiming = false
+	StartThread( RestoreAfterDelay )
 end
 
 --weapon 1 -----------------------------------------------------------------

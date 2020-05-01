@@ -39,7 +39,6 @@ local wirbel15 = piece "wirbel15"
 local emit = piece "emit"
 
 -- variables
-local restore_delay = 8000
 local randomnumber1 = math.random()
 local randomnumber2 = math.random()
 local randomnumber3 = math.random()
@@ -155,6 +154,17 @@ end
 function script.Deactivate ( )
 end
 
+local function RestoreAfterDelay()
+	while true do
+		Sleep(300)
+		idleCount = (idleCount - 300)
+		if (idleCount < 1) then
+			idleCount = 0
+			isaiming = false
+		end		
+	end
+end
+
 function script.Create()
 	isaiming = false
 	Turn2( halswirbel01, x_axis, -20, 200 )
@@ -203,13 +213,7 @@ function script.Create()
 	Turn2( uparm_D, y_axis, 0, 15 )	
 	Sleep(200)
 	StartThread( MotionControl )
-	StartThread( RestoreAfterDelayCounter )		
-end
-
------------------------------------------------------------------
-
-local RestoreAfterDelay()
-	isaiming = false
+	StartThread( RestoreAfterDelay )		
 end
 
 --weapon 1 -----------------------------------------------------------------
@@ -249,7 +253,7 @@ function script.AimWeapon1(heading, pitch)
 	Turn2( midarm_B, y_axis, 0, 200 )
 	Turn2( midarm_C, y_axis, 0, 200 )
 	Turn2( midarm_D, y_axis, 0, 200 )	
-	WaitForTurn (jaw, x_axis)		
+	WaitForTurn (jaw, x_axis)
 	return true
 end
 

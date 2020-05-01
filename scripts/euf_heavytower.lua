@@ -57,6 +57,18 @@ end
 function script.Deactivate ( )
 end
 
+local function RestoreAfterDelay()
+	while true do
+		Sleep(300)
+		idleCount = (idleCount - 300)
+		if (idleCount < 1) then
+			idleCount = 0
+			Turn2( sleeve,  x_axis, 0, 20 )
+			isaiming = false
+		end		
+	end
+end
+
 function script.Create()
 	if NotEnemyAI() then
 		Hide(fist1)
@@ -75,12 +87,7 @@ function script.Create()
 	Move( building, y_axis, 0, 1000 )
 	Sleep(500)
 	StartThread( MotionControl )
-	StartThread( RestoreAfterDelayCounter )	
-end
-
-local RestoreAfterDelay()
-	Turn2( sleeve,  x_axis, 0, 20 ) 	
-	isaiming = false			
+	StartThread( RestoreAfterDelay )	
 end
 
 --weapon 1 -----------------------------------------------------------------
@@ -97,10 +104,10 @@ function script.AimWeapon1(heading, pitch)
 	idleCount = maxIdleCount	
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
-	Turn( turret, y_axis, heading, 2.5 )
-	Turn( sleeve,  x_axis, -pitch, 2.0 ) 
+	Turn( turret, y_axis, heading, 2.0 )
+	Turn( sleeve,  x_axis, -pitch, 1.75 ) 
 	WaitForTurn (turret, y_axis)
-	WaitForTurn (sleeve, x_axis)
+	WaitForTurn (sleeve, x_axis)	
 	return true
 end
 

@@ -15,8 +15,8 @@ local emit_groundflash = piece "emit_groundflash"
 
 -- variables
 local isaiming
-local restore_delay = 8000
-local uncloakcount = 2000
+local maxuncloakcount = 4000
+local uncloakcount = 0
 
 --signals
 local SIG_AIM1 = 2
@@ -46,6 +46,15 @@ end
 
 local function Recloaking()
 	while true do
+		if (uncloakcount < maxuncloakcount*0.25) then		
+			Turn2( turret,  x_axis, -90, 200 ) 	
+			Turn2( sleeve,  x_axis, 0, 50 ) 
+			Move( shaft, y_axis, -50, 50)	
+			Sleep(200)
+			Turn2( door_r,  z_axis, 0, 80 ) 
+			Turn2( door_l,  z_axis, 0, 80 ) 
+			isaiming = false
+		end
 		if (uncloakcount < 1) then		
 			Spring.SetUnitCloak(unitID, 2, 100)
 			Spring.SetUnitStealth(unitID, true)
@@ -69,26 +78,11 @@ function script.Create()
 		Sleep(100)
 	end
 	Move( raisepoint, y_axis, 0, 1000 )
-	Sleep(500)
 	StartThread( Recloaking )	
 end
 
-local function RestoreAfterDelay()
-	Sleep(restore_delay)
-	if (uncloakcount < 1) then
-		Turn2( turret,  x_axis, -90, 200 ) 	
-		Turn2( sleeve,  x_axis, 0, 50 ) 
-		Move( shaft, y_axis, -50, 50)	
-		Sleep(200)
-		Turn2( door_r,  z_axis, 0, 80 ) 
-		Turn2( door_l,  z_axis, 0, 80 ) 
-		isaiming = false
-	end
-	return (0)
-end
-
 function script.HitByWeapon ( x, z, weaponDefID, damage )
-	uncloakcount = 2000
+	uncloakcount = maxuncloakcount
 	Spring.SetUnitCloak(unitID, false)
 	Spring.SetUnitStealth(unitID, false)		
 	return(damage)
@@ -107,15 +101,16 @@ function script.AimWeapon1(heading, pitch)
 	isaiming = true
 	Spring.SetUnitCloak(unitID, false)
 	Spring.SetUnitStealth(unitID, false)	
-	uncloakcount = 2000		
+	uncloakcount = maxuncloakcount		
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
-	Turn2( turret,  x_axis, 0, 200 ) 	
+	Turn2( turret,  x_axis, 0, 50 ) 	
 	Turn2( door_r,  z_axis, 170, 80 ) 
 	Turn2( door_l,  z_axis, -170, 80 ) 
-	Move( shaft, y_axis, 0, 50)	
+	Move( shaft, y_axis, 0, 50)
 	Turn( turret, y_axis, heading, 2.5 )
 	Turn( sleeve,  x_axis, -pitch, 2.0 ) 
+	WaitForMove (shaft, y_axis)	
 	WaitForTurn (turret, y_axis)
 	WaitForTurn (sleeve, x_axis)
 	return true
@@ -125,7 +120,6 @@ function script.FireWeapon1()
 --		EmitSfx( emit, GUNFLARE )	
 	EmitSfx( emit_groundflash, GROUNDFLASH )	
 --	Sleep(100)
-	StartThread( RestoreAfterDelay)	
 	return(1)
 end
 -----------------------------------------------------------------

@@ -18,7 +18,7 @@ local fist2 = piece 'fist2'
 local emit1 = piece "emit1"
 local emit2 = piece "emit2"
 
--- varaibles
+-- variables
 local gun = 1
 local isaiming = false
 
@@ -35,22 +35,14 @@ local GUNFLARE	 = 1026+0
 -- Motion Control
 local function MotionControl()
 	while true do
-		if isaiming then
-			Sleep(50)
-		else
+		if not isaiming then
 			borednumber = math.random(500)
-			if (borednumber > 497) and not isaiming then
-				Turn2( turret, y_axis, math.random(360), 30 )				
+			if (borednumber > 495) and not isaiming then
+				Turn2( turret, y_axis, math.random(360), 15 )				
 				WaitForTurn( turret, y_axis )
-				if not isaiming then 				
-					Sleep(250)
-				end
-				if not isaiming then 				
-					Sleep(250)
-				end	
 			end
 		end
-		Sleep(50)		
+		Sleep(200)		
 	end
 end
 
@@ -93,7 +85,7 @@ function script.Create()
 	Turn( sleeves,  x_axis, 0, 0.4 ) 		
 	Sleep(500)
 	StartThread( MotionControl )
-	StartThread( RestoreAfterDelay )	
+	StartThread( RestoreAfterDelay )
 end
 
 

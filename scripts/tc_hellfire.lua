@@ -1,3 +1,6 @@
+include "constants.lua"
+include "common.lua"
+
 --pieces
 local base = piece "base"
 local building = piece "building"
@@ -12,10 +15,30 @@ local emit = piece "emit"
 --signals
 local SIG_AIM1 = 2
 
+-- variables
+local isaiming = false
+
 --FX
-local BOOM	 = 1024+0
-local BUILDINGFX	 = 1025+0
-local GUNFLARE	 = 1026+0
+local BOOM	 		= 1024+0
+local BUILDINGFX	= 1025+0
+local GUNFLARE	 	= 1026+0
+
+-----------------------------------------------------------------
+
+-- Motion Control
+local function MotionControl()
+	while true do
+		if not isaiming then
+			borednumber = math.random(500)
+			if (borednumber > 495) and not isaiming then
+				Turn2( turret, y_axis, math.random(360), 15 )
+				Turn2( rotator, x_axis, math.random(60), 15 )						
+				WaitForTurn( turret, y_axis )
+			end
+		end
+		Sleep(200)		
+	end
+end
 
 function script.Activate ( )
 end
@@ -23,7 +46,20 @@ end
 function script.Deactivate ( )
 end
 
+local function RestoreAfterDelay()
+	while true do
+		Sleep(300)
+		idleCount = (idleCount - 300)
+		if (idleCount < 1) then
+			idleCount = 0
+			Turn2( rotator,  x_axis, 0, 20 )
+			isaiming = false
+		end		
+	end
+end
+
 function script.Create()
+	isaiming = false
 	local structureheight = ((-50*GetUnitValue(COB.UNIT_HEIGHT))/3080192)
 	Move( building, y_axis, structureheight)
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0) do
@@ -35,6 +71,8 @@ function script.Create()
 	end
 	Move( building, y_axis, 0, 1000 )
 	Sleep(500)
+	StartThread( MotionControl )
+	StartThread( RestoreAfterDelay )	
 end
 
 
@@ -52,13 +90,14 @@ function script.AimWeapon1(heading, pitch)
 --	if pitch < 0.25 then
 --		return false
 --	end
+	isaiming = true
+	idleCount = maxIdleCount
 	Signal(SIG_AIM1)
 	SetSignalMask(SIG_AIM1)
 	Turn( turret, y_axis, heading, 0.6 )
 	Turn( rotator,  x_axis, -pitch, 0.4 ) 
 	WaitForTurn (turret, y_axis)
 	WaitForTurn (rotator, x_axis)
-
 	return true
 end
 

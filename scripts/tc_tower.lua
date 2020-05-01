@@ -88,7 +88,7 @@ local function MotionControl()
 			Turn2( jaw, x_axis, 0, 90 )	
 
 			borednumber = math.random(500)
-			if (borednumber > 499) and not isaiming then
+			if (borednumber > 495) and not isaiming then
 				Turn2( chest, x_axis, 50*randomnumber2-30, 30 )				
 				Turn2( wirbel01, y_axis, 10, 20 )
 				Turn2( wirbel02, y_axis, 10, 20 )
@@ -101,12 +101,6 @@ local function MotionControl()
 				Turn2( wirbel09, y_axis, 10, 20 )	
 				Turn2( halswirbel01, y_axis, 30, 75 )			
 				WaitForTurn( wirbel01, y_axis )
-				if not isaiming then 				
-					Sleep(250)
-				end
-				if not isaiming then 				
-					Sleep(250)
-				end	
 			elseif (borednumber < 2) and not isaiming then
 				Turn2( chest, x_axis, 50*randomnumber1-30, 30 )				
 				Turn2( wirbel01, y_axis, -10, 20 )
@@ -117,12 +111,6 @@ local function MotionControl()
 				Turn2( wirbel06, y_axis, -10, 20 )
 				Turn2( halswirbel01, y_axis, -30, 75 )			
 				WaitForTurn( wirbel01, y_axis )
-				if not isaiming then 				
-					Sleep(250)
-				end
-				if not isaiming then 				
-					Sleep(250)
-				end	
 			end
 			if not isaiming then
 				Sleep(100)
@@ -144,7 +132,7 @@ local function MotionControl()
 				Turn2( halswirbel01, y_axis, 0, 75)
 			end
 		end
-		Sleep(50)		
+		Sleep(200)		
 	end
 end
 

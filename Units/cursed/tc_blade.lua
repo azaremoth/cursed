@@ -66,7 +66,7 @@ local unitDef = {
   sfxtypes = {
     explosiongenerators = {
       "custom:SMALL_EXPLOSION_GREEN",
-	  "custom:MLRSRocketTrail",
+	  "custom:Structurebuilding_Small",
     },
   },
   sounds = {

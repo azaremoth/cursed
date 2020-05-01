@@ -239,7 +239,7 @@ options = {
 	highlighted_text_height = {
 		name = 'Highlighted Text Size',
 		type = 'number',
-		value = 16,
+		value = 14,
 		min = 8, max = 30, step = 1,
 		OnChange = onOptionsChanged,
 	},

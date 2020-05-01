@@ -1,7 +1,7 @@
--- UNITDEF -- euf_autocannon --
+-- UNITDEF -- euf_autotower --
 --------------------------------------------------------------------------------
 
-local unitName = "euf_autocannon"
+local unitName = "euf_autotower"
 
 --------------------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ local unitDef = {
   armortype          = "HEAVY",
   buildCostEnergy    = 240,
   buildCostMetal     = 240,
-  buildPic           = "euf_autocannon.png",
+  buildPic           = "euf_autotower.png",
   buildTime          = 240,
   buildingGroundDecalDecaySpeed = 0.2,
   buildingGroundDecalSizeX = 5,
@@ -50,15 +50,15 @@ local unitDef = {
   name               = "Autocannon tower",
   nanoColor          = "0 0 0",
   noAutoFire         = false,
-  objectName         = "euf_autocannon.s3o",
+  objectName         = "euf_autotower.s3o",
   selfDestructAs     = "SMALL_EXPLOSION_YELLOW",
-  script			 = "euf_autocannon.lua",  
+  script			 = "euf_autotower.lua",  
   showNanoFrame      = false,
   side               = "imperials",
   sightDistance      = 576,
   standingfireorder  = "2",
   TEDClass           = "FORT",
-  unitname           = "euf_autocannon",
+  unitname           = "euf_autotower",
   yardMap            = "ooooooooo",
   sfxtypes = {
     explosiongenerators = {

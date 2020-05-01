@@ -113,7 +113,7 @@ local unitDef = {
 --------------------------------------------------------------------------------
 
 local weaponDefs = {
-  REDEEMERGUN = {
+  REDEEMERGUN = { 
     avoidFriendly      = true,
 	collideFriendly    = true,  
     accuracy           = 920,
@@ -127,12 +127,15 @@ local weaponDefs = {
     energypershot           = 0,
     explosionGenerator = "custom:AGARES_LASER",
     fireStarter        = 20,
+--	hardStop 		   = false,
+--	fallOffRate 	   = 0,
     impulseBoost       = 0,
     interceptedByShieldType = 1,
     largeBeamLaser     = true,
     laserFlareSize     = 3,
     name               = "Hell Beam",
-	noSelfDamage     = true,
+	noSelfDamage       = true,
+    minIntensity	   = 1.0,
     range              = 300,
     reloadtime         = 1.00,
     -- rendertype         = 0,

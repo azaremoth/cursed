@@ -28,7 +28,7 @@ local AA_MISSILE_TOWER_FREE = {
 	turnRate                = 55000,
 	cegTag                  = "MLRSRocketTrail",
     explosionGenerator      = "custom:FLAKImpact",	
-    damage 					= { default = 400, flyer = 400, heavy = 400, light = 400*0.33, },
+    damage 					= { default = 360, flyer = 360, heavy = 360, light = 360*0.33, },
 }
 
 local AA_MISSILE_TOWER = {
@@ -44,7 +44,7 @@ local AA_MISSILE_TOWER = {
 	turnRate                = 55000,
 	cegTag                  = "MLRSRocketTrail",
     explosionGenerator      = "custom:FLAKImpact",	
-    damage 					= { default = 400, flyer = 400, heavy = 400, light = 400*0.33, },
+    damage 					= { default = 360, flyer = 360, heavy = 360, light = 360*0.33, },
 }
 
 local AA_TROOPER = {

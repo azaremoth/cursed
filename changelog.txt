@@ -17,6 +17,7 @@ Balance
 		-> Sniper Laser gun does high amount of damage against light armor 
 		-> Multipurpose anti-air guns do more damage againt air targets: Defender: +50%, Crawler and AA Tank: +100%
 - reduced leached hp for cursed Shade to 10% of damage done (was 20%)
+- reduced damage done by imperial AA towers by 10%
 
 Bugs:
 - fixed spider demons using energy for shooting (was not intended)-

@@ -61,9 +61,17 @@ function gadget:GameFrame(f)
 					local eTeam = Spring.GetUnitTeam(eUnitID)
 					local areAllied = Spring.AreTeamsAllied(eTeam, MyTeam)
 					local eunitDefID = Spring.GetUnitDefID(eUnitID)
-					if (UnitDefs[eunitDefID].customParams.isinfantry and eUnitID ~= unitID and eTeam == MyTeam) then
+					if (UnitDefs[eunitDefID].customParams.isinfantry and eUnitID ~= unitID and areAllied) then -- if (UnitDefs[eunitDefID].customParams.isinfantry and eUnitID ~= unitID and eTeam == MyTeam)
+
+						local cmds = Spring.GetCommandQueue(unitID, 1)
+							if (cmd.1 == CMD.GUARD)and(cmd.params[1] == oldUnit) then
+
+							end
+						end						
+						
+						
 						local eUnitIDhealth, eUnitIDmaxhealth, _ ,_ , eUnitBuildProgress = Spring.GetUnitHealth(eUnitID)
-						if (loopmana >= manahealcost and eUnitIDhealth < eUnitIDmaxhealth and hashealed == false and eUnitBuildProgress == 1) then					
+						if (loopmana >= manahealcost and eUnitIDhealth < eUnitIDmaxhealth and not hashealed and eUnitBuildProgress == 1) then					
 							Spring.SetUnitHealth(eUnitID, (eUnitIDhealth+manahealamount))
 							Spring.SetUnitRulesParam(unitID,'mana',(loopmana-manahealcost))
 							local ex, ey, ez = Spring.GetUnitPosition(eUnitID)
@@ -73,7 +81,7 @@ function gadget:GameFrame(f)
 							hashealed = true
 						end
 					-- hurt units made of bones						
-					elseif (UnitDefs[eunitDefID].customParams.isbones and eUnitID ~= unitID and eTeam ~= MyTeam and hashealed == false and manahurtamount ~= nil and manahurtcost ~= nil and areAllied ~= true) then
+					elseif (UnitDefs[eunitDefID].customParams.isbones and eUnitID ~= unitID and eTeam ~= MyTeam and not hashealed and manahurtamount ~= nil and manahurtcost ~= nil and not areAllied) then
 						local eUnitIDhealth = Spring.GetUnitHealth(eUnitID)
 						if loopmana >= manahurtcost then
 							Spring.AddUnitDamage(eUnitID, manahurtamount, 0, unitID)

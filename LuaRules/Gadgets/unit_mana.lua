@@ -56,20 +56,31 @@ function gadget:GameFrame(f)
 			if (UnitDefs[loopunitDefID].customParams.manahealer and manahealrange ~= nil and manahealamount ~= nil and manahealcost ~= nil) then
 				local x, y, z = Spring.GetUnitPosition(unitID)			
 				local HealUnits = Spring.GetUnitsInSphere(x,y,z, manahealrange)
-				local MyTeam = Spring.GetUnitTeam(unitID)		
+				local MyTeam = Spring.GetUnitTeam(unitID)
+				-- checking if priest has a guard assigned
+				local cmds = Spring.GetCommandQueue(unitID, 1) 
+				local cmd = cmds[1]
+				local healGuardingThisUnitID = nil
+				if (cmd ~= nil and cmd.id == CMD.GUARD) then
+					local guardedUnitID = cmd.params[1]
+					if guardedUnitID ~= nil then
+						local guardedUnitValid = Spring.ValidUnitID(guardedUnitID)
+						if guardedUnitValid and guardedUnitID ~= unitID then
+							local gTeam = Spring.GetUnitTeam(guardedUnitID)
+							local areAllied = Spring.AreTeamsAllied(gTeam, MyTeam)
+							local gunitDefID = Spring.GetUnitDefID(guardedUnitID)							
+							if areAllied and UnitDefs[gunitDefID].customParams.isinfantry then -- only focusing healing if unit can be healed
+								healGuardingThisUnitID = guardedUnitID
+							end
+						end								
+					end
+				end
+				-- end checking guards
 				for _,eUnitID in ipairs(HealUnits) do
 					local eTeam = Spring.GetUnitTeam(eUnitID)
 					local areAllied = Spring.AreTeamsAllied(eTeam, MyTeam)
 					local eunitDefID = Spring.GetUnitDefID(eUnitID)
-					if (UnitDefs[eunitDefID].customParams.isinfantry and eUnitID ~= unitID and areAllied) then -- if (UnitDefs[eunitDefID].customParams.isinfantry and eUnitID ~= unitID and eTeam == MyTeam)
-
-						local cmds = Spring.GetCommandQueue(unitID, 1)
-							if (cmd.1 == CMD.GUARD)and(cmd.params[1] == oldUnit) then
-
-							end
-						end						
-						
-						
+					if (UnitDefs[eunitDefID].customParams.isinfantry and eUnitID ~= unitID and areAllied and (healGuardingThisUnitID == nil or healGuardingThisUnitID == eUnitID)) then -- if (UnitDefs[eunitDefID].customParams.isinfantry and eUnitID ~= unitID and eTeam == MyTeam)				
 						local eUnitIDhealth, eUnitIDmaxhealth, _ ,_ , eUnitBuildProgress = Spring.GetUnitHealth(eUnitID)
 						if (loopmana >= manahealcost and eUnitIDhealth < eUnitIDmaxhealth and not hashealed and eUnitBuildProgress == 1) then					
 							Spring.SetUnitHealth(eUnitID, (eUnitIDhealth+manahealamount))

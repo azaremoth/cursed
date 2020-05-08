@@ -5,6 +5,7 @@ Polishing
 - morph commands will appear in commands and build tab now (for builders)
 - polished team color automated simple team colors
 - implemented CPV IU elements into Chili interface (Info window after starting + Scores in the Res. Bar)
+- in case imperial priests have an active guard command assigned to an allied unit they will only heal this unit. They will also heal units from other allied teams.
 
 Balance
 - AoE of cursed gunner increased

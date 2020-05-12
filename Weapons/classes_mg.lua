@@ -158,7 +158,8 @@ local MGBASE = {
     soundTrigger       	= true,
     tolerance          	= 3000,
     turret             	= true,
-    weaponVelocity     = 2000,	
+    weaponVelocity     = 2000,
+	heightMod 			= 0.1,	
 --	Weaponspecial ------------------------------------------  
 	size               	= 5,
 	stages 			  	= 0,

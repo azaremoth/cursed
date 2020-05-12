@@ -51,6 +51,7 @@ local PISTOLBASE = {
     tolerance          	= 3000,
     turret             	= true,
     weaponVelocity     	= 1600,
+	heightMod 			= 0.1,		
 --	Weaponspecial ------------------------------------------
     model              	= "gunshot.s3o",    
 	size               	= 5,
@@ -78,6 +79,7 @@ local CHAINGUNBASE = {
     tolerance          	= 3000,
     turret             	= true,
     weaponVelocity     	= 1600,
+	heightMod 			= 0.1,	
 --	Weaponspecial ------------------------------------------
     model              	= "gunshot.s3o",    
 	size               	= 5,

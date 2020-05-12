@@ -83,6 +83,7 @@ local AA_MISSILE_BASE = {
       cylinderTargeting       = 128,
       fireStarter             = 20,
       flightTime              = 4,
+	  heightMod 			= 0.1,		  
       impactOnly              = true,
       impulseBoost            = 0.123,
       impulseFactor           = 0.0492,

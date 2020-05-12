@@ -163,7 +163,7 @@ local MELEEBASE = {
     tolerance               = 10000,
     turret                  = true,
     waterweapon             = true,
-    weaponVelocity          = 1500,
+    weaponVelocity          = 1500,	
 	------------------------------------------
     beamTime           		= 0.01,
     coreThickness      		= 0,

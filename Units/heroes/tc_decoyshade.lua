@@ -57,6 +57,7 @@ local unitDef = {
   noAutoFire         = false,
   noChaseCategory    = "AIR",
   objectName         = "tc_shade.s3o",
+  repairable         = false,  
   script             = 'tc_shade.lua',
   selfDestructAs     = "NULL",
   showNanoFrame      = false,

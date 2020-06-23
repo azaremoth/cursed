@@ -375,6 +375,7 @@ local BASE = {
   noChaseCategory    = "AIR",
   objectName         = "tc_shade.s3o",
   radarDistance      = 512,
+  repairable         = false,  
   script             = 'tc_shade.lua',  
   selfDestructAs     = "BLOOD_EXPLOSION",
   showNanoFrame      = false,

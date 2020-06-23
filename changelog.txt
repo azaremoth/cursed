@@ -25,6 +25,7 @@ Balance
 Bugs:
 - fixed spider demons using energy for shooting (was not intended)-
 - fixed jumping scaffolds happening for imperial factories during construction
+- fixed cursed Shade: not longer repairable by obelisks
 
 Infracstructure:
 - removed (most) single player specific content from the main archive

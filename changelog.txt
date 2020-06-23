@@ -1,5 +1,4 @@
-
->> Major changes 1.444 => 1.445
+>> Major changes 1.444 => 1.446
 
 Polishing
 - Made weapon visuals for consistent to damage classes
@@ -7,6 +6,8 @@ Polishing
 - polished team color automated simple team colors
 - implemented CPV IU elements into Chili interface (Info window after starting + Scores in the Res. Bar)
 - in case imperial priests have an active guard command assigned to an allied unit they will only heal this unit. They will also heal units from other allied teams.
+- Replaced model for the imperial storage
+- Replaced the imperial tank traps (tier 1 walls) with sandbags. Having tanks crushing tank traps did look a little strange...
 
 Balance
 - AoE of cursed gunner increased

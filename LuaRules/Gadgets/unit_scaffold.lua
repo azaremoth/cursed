@@ -26,6 +26,9 @@ local scaffoldunit_4x4 = {
 	[UnitDefNames['euf_aatower'].id] = true,	
 	[UnitDefNames['euf_metalextractor_lvl1'].id] = true,
 	[UnitDefNames['euf_plasmatower'].id] = true,
+	[UnitDefNames['euf_autotower'].id] = true,
+	[UnitDefNames['euf_heavytower'].id] = true,	
+	[UnitDefNames['euf_pyrotower'].id] = true,		
 }
 
 local scaffoldunit_6x6 = {
@@ -42,7 +45,6 @@ local scaffoldunit_6x6_high = {
 }
 
 local scaffoldunit_8x8 = {}
-
 
 local scaffoldunit_8x8_high = {
 	[UnitDefNames['euf_techcenter'].id] = true,	
@@ -64,7 +66,8 @@ local scaffoldunit_8x12 = {
 
 local scaffoldunit_12x12 = {
 	[UnitDefNames['euf_factory'].id] = true,
-	[UnitDefNames['euf_factory_ai'].id] = true,	
+	[UnitDefNames['euf_factory_ai'].id] = true,
+	[UnitDefNames['euf_storage'].id] = true,	
 }
 
 local scaffoldunit_12x5 = {

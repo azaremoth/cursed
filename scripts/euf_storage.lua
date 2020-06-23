@@ -83,7 +83,6 @@ end
 function script.Create()
 	local structureheight = ((-50*GetUnitValue(COB.UNIT_HEIGHT))/3080192)
 	Move( groundbase, y_axis, structureheight)
-	Turn2( arm1, z_axis, 50 )	
 	while GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0 do
 		local leftbuildpercent = (GetUnitValue(COB.BUILD_PERCENT_LEFT))
 		local outofground = (0.01*leftbuildpercent*structureheight)
@@ -92,7 +91,6 @@ function script.Create()
 		Sleep(100)
 	end
 	Move( groundbase, y_axis, 0, 1000 )	
-	Turn2( arm1, z_axis, 0 )		
 --	StartThread( Animation )
 end
 	

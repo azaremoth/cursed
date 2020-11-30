@@ -1,27 +1,67 @@
-local base = piece 'base' 
-local pelvis = piece 'pelvis' 
-local chest = piece 'chest' 
-local head = piece 'head' 
-local luparm = piece 'luparm' 
-local gun = piece 'gun' 
-local barrel = piece 'barrel' 
-local ruparm = piece 'ruparm' 
-local rocketgun = piece 'rocketgun' 
-local lleg1 = piece 'lleg1' 
-local lleg2 = piece 'lleg2' 
-local lleg3 = piece 'lleg3' 
-local rleg1 = piece 'rleg1' 
-local rleg2 = piece 'rleg2' 
-local rleg3 = piece 'rleg3' 
-local lemit = piece 'lemit' 
-local remit = piece 'remit' 
+local head = piece 'head'
+local pelvis = piece 'pelvis'
+local torso = piece 'torso'
+local lfinger11 = piece 'lfinger11'
+local lfinger12 = piece 'lfinger12'
+local lfinger21 = piece 'lfinger21'
+local lfinger22 = piece 'lfinger22'
+local lfinger31 = piece 'lfinger31'
+local lfinger32 = piece 'lfinger32'
+local lhoof = piece 'lhoof'
+local llarm = piece 'llarm'
+local lleg = piece 'lleg'
+local lshoulder = piece 'lshoulder'
+local lthigh = piece 'lthigh'
+local lwing1 = piece 'lwing1'
+local lwing2 = piece 'lwing2'
+local lwing31 = piece 'lwing31'
+local lwing32 = piece 'lwing32'
+local lwing41 = piece 'lwing41'
+local lwing42 = piece 'lwing42'
+local lwing43 = piece 'lwing43'
+local lwing51 = piece 'lwing51'
+local lwing52 = piece 'lwing52'
+local lwing53 = piece 'lwing53'
+local rfinger11 = piece 'rfinger11'
+local rfinger12 = piece 'rfinger12'
+local rfinger21 = piece 'rfinger21'
+local rfinger22 = piece 'rfinger22'
+local rfinger31 = piece 'rfinger31'
+local rfinger32 = piece 'rfinger32'
+local rhoof = piece 'rhoof'
+local rlarm = piece 'rlarm'
+local rleg = piece 'rleg'
+local rshoulder = piece 'rshoulder'
+local rthigh = piece 'rthigh'
+local rwing1 = piece 'rwing1'
+local rwing2 = piece 'rwing2'
+local rwing31 = piece 'rwing31'
+local rwing32 = piece 'rwing32'
+local rwing41 = piece 'rwing41'
+local rwing42 = piece 'rwing42'
+local rwing43 = piece 'rwing43'
+local rwing51 = piece 'rwing51'
+local rwing52 = piece 'rwing52'
+local rwing53 = piece 'rwing53'
+--local tail1 = piece 'tail1'
+--local tail2 = piece 'tail2'
+--local tail4 = piece 'tail4'
+--local tail5 = piece 'tail5'
+--local tail7 = piece 'tail7'
+--local tail8 = piece 'tail8'
+--local tail9 = piece 'tail9'
+
+local base = piece 'base'
+local aimx1 = piece 'aimx1'
+local aimx2 = piece 'aimx2'
+
+local emit_lgun = piece 'emit_lgun' 
+local emit_rgun = piece 'emit_rgun' 
 local emit_summon = piece 'emit_summon' 
 local emit_rleg = piece 'emit_rleg' 
-local emit_lleg = piece 'emit_lleg' 
-local emit_groundflash_r = piece 'emit_groundflash_r' 
-local emit_groundflash_l = piece 'emit_groundflash_l' 
+local emit_lleg = piece 'emit_lleg'
 
-local RandomNumber2, moving, attacking, MOVEANIMATIONSPEED
+local RandomNumber2, moving, attacking, MOVEANIMATIONSPEED, MOVEANIMATIONSLEEPTIME
 
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4
@@ -30,11 +70,9 @@ local SIG_WALK = 1
 local SUMMONING = 1024+0
 local FOOTDUST = 1025+0
 local BLOOD = 1026+0
-local BIGGUNFLARE = 1027+0
-local SMALLGUNFLARE = 1028+0
-local GROUNDFLASH = 1029+0
+local GUNFLARE = 1027+0
 
-local function Turn2(piecenum,axis, degrees, speed)
+local function Turn2(piecenum, axis, degrees, speed)
 	local radians = degrees * 3.1415 / 180
 	if speed then
 		local speed1 = speed * 3.1415 / 180
@@ -45,12 +83,12 @@ local function Turn2(piecenum,axis, degrees, speed)
 end
 
 local function SetMoveAnimationSpeed()
-	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/1900)
-	MOVEANIMATIONSLEEPTIME = (20000000/GetUnitValue(COB.MAX_SPEED))
+	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/100)
 	--if statements inside walkscript contain wait functions that can take forever if speed is too slow
 	if MOVEANIMATIONSPEED < 50 then 
 		MOVEANIMATIONSPEED = 50
 	end
+	MOVEANIMATIONSLEEPTIME = 1/100*MOVEANIMATIONSPEED	
 	if MOVEANIMATIONSLEEPTIME > 500 then 
 		MOVEANIMATIONSLEEPTIME = 500
 	end
@@ -175,27 +213,27 @@ local function Walkscript()
 			Turn2( rwing53, x_axis, -19.9, MOVEANIMATIONSPEED*0.37 )
 			Turn2( rwing53, z_axis, 7.6, MOVEANIMATIONSPEED*5.18 )
 			Turn2( rwing53, y_axis, 3.5, MOVEANIMATIONSPEED*7.46 )
-			Turn2( tail1, x_axis, -56.1, MOVEANIMATIONSPEED*2.01 )
-			Turn2( tail1, z_axis, -5.5, MOVEANIMATIONSPEED*0.2 )
-			Turn2( tail1, y_axis, 14.2, MOVEANIMATIONSPEED*30.14 )
-			Turn2( tail2, x_axis, 7.8, MOVEANIMATIONSPEED*0.44 )
-			Turn2( tail2, z_axis, -2, MOVEANIMATIONSPEED*4.17 )
-			Turn2( tail2, y_axis, -0.6, MOVEANIMATIONSPEED*0.26 )
-			Turn2( tail4, x_axis, 6.7, MOVEANIMATIONSPEED*0.38 )
-			Turn2( tail4, z_axis, -1.7, MOVEANIMATIONSPEED*3.59 )
-			Turn2( tail4, y_axis, -0.6, MOVEANIMATIONSPEED*0.19 )
-			Turn2( tail5, x_axis, 13.8, MOVEANIMATIONSPEED*0.8 )
-			Turn2( tail5, z_axis, -3.6, MOVEANIMATIONSPEED*7.39 )
-			Turn2( tail5, y_axis, -0.9, MOVEANIMATIONSPEED*0.85 )
-			Turn2( tail7, x_axis, 12.6, MOVEANIMATIONSPEED*0.73 )
-			Turn2( tail7, z_axis, -3.3, MOVEANIMATIONSPEED*6.72 )
-			Turn2( tail7, y_axis, -0.9, MOVEANIMATIONSPEED*0.7 )
-			Turn2( tail8, x_axis, 20.4, MOVEANIMATIONSPEED*1.19 )
-			Turn2( tail8, z_axis, -5.4, MOVEANIMATIONSPEED*10.77 )
-			Turn2( tail8, y_axis, -1.1, MOVEANIMATIONSPEED*1.88 )
-			Turn2( tail9, x_axis, 13.4, MOVEANIMATIONSPEED*0.78 )
-			Turn2( tail9, z_axis, -3.5, MOVEANIMATIONSPEED*7.17 )
-			Turn2( tail9, y_axis, -0.9, MOVEANIMATIONSPEED*0.8 )
+			-- Turn2( tail1, x_axis, -56.1, MOVEANIMATIONSPEED*2.01 )
+			-- Turn2( tail1, z_axis, -5.5, MOVEANIMATIONSPEED*0.2 )
+			-- Turn2( tail1, y_axis, 14.2, MOVEANIMATIONSPEED*30.14 )
+			-- Turn2( tail2, x_axis, 7.8, MOVEANIMATIONSPEED*0.44 )
+			-- Turn2( tail2, z_axis, -2, MOVEANIMATIONSPEED*4.17 )
+			-- Turn2( tail2, y_axis, -0.6, MOVEANIMATIONSPEED*0.26 )
+			-- Turn2( tail4, x_axis, 6.7, MOVEANIMATIONSPEED*0.38 )
+			-- Turn2( tail4, z_axis, -1.7, MOVEANIMATIONSPEED*3.59 )
+			-- Turn2( tail4, y_axis, -0.6, MOVEANIMATIONSPEED*0.19 )
+			-- Turn2( tail5, x_axis, 13.8, MOVEANIMATIONSPEED*0.8 )
+			-- Turn2( tail5, z_axis, -3.6, MOVEANIMATIONSPEED*7.39 )
+			-- Turn2( tail5, y_axis, -0.9, MOVEANIMATIONSPEED*0.85 )
+			-- Turn2( tail7, x_axis, 12.6, MOVEANIMATIONSPEED*0.73 )
+			-- Turn2( tail7, z_axis, -3.3, MOVEANIMATIONSPEED*6.72 )
+			-- Turn2( tail7, y_axis, -0.9, MOVEANIMATIONSPEED*0.7 )
+			-- Turn2( tail8, x_axis, 20.4, MOVEANIMATIONSPEED*1.19 )
+			-- Turn2( tail8, z_axis, -5.4, MOVEANIMATIONSPEED*10.77 )
+			-- Turn2( tail8, y_axis, -1.1, MOVEANIMATIONSPEED*1.88 )
+			-- Turn2( tail9, x_axis, 13.4, MOVEANIMATIONSPEED*0.78 )
+			-- Turn2( tail9, z_axis, -3.5, MOVEANIMATIONSPEED*7.17 )
+			-- Turn2( tail9, y_axis, -0.9, MOVEANIMATIONSPEED*0.8 )
 			Turn2( torso, z_axis, 7.1, MOVEANIMATIONSPEED*12.34 )
 			Sleep(MOVEANIMATIONSLEEPTIME*5.65)			
 		end
@@ -268,19 +306,19 @@ local function Walkscript()
 			Turn2( rwing52, y_axis, 8.1, MOVEANIMATIONSPEED*19.1 )
 			Turn2( rwing53, z_axis, 7.8, MOVEANIMATIONSPEED*2.51 )
 			Turn2( rwing53, y_axis, 2.5, MOVEANIMATIONSPEED*9.97 )
-			Turn2( tail1, y_axis, 10.8, MOVEANIMATIONSPEED*34.4 )
-			Turn2( tail2, x_axis, 7.9, MOVEANIMATIONSPEED*1.06 )
-			Turn2( tail2, z_axis, -1.5, MOVEANIMATIONSPEED*4.68 )
-			Turn2( tail4, z_axis, -1.3, MOVEANIMATIONSPEED*4.03 )
-			Turn2( tail5, x_axis, 14, MOVEANIMATIONSPEED*1.88 )
-			Turn2( tail5, z_axis, -2.8, MOVEANIMATIONSPEED*8.29 )
-			Turn2( tail7, x_axis, 12.7, MOVEANIMATIONSPEED*1.71 )
-			Turn2( tail7, z_axis, -2.5, MOVEANIMATIONSPEED*7.54 )
-			Turn2( tail8, x_axis, 20.7, MOVEANIMATIONSPEED*2.72 )
-			Turn2( tail8, z_axis, -4.2, MOVEANIMATIONSPEED*12.09 )
-			Turn2( tail8, y_axis, -1.3, MOVEANIMATIONSPEED*2.08 )
-			Turn2( tail9, x_axis, 13.6, MOVEANIMATIONSPEED*1.83 )
-			Turn2( tail9, z_axis, -2.7, MOVEANIMATIONSPEED*8.05 )
+			-- Turn2( tail1, y_axis, 10.8, MOVEANIMATIONSPEED*34.4 )
+			-- Turn2( tail2, x_axis, 7.9, MOVEANIMATIONSPEED*1.06 )
+			-- Turn2( tail2, z_axis, -1.5, MOVEANIMATIONSPEED*4.68 )
+			-- Turn2( tail4, z_axis, -1.3, MOVEANIMATIONSPEED*4.03 )
+			-- Turn2( tail5, x_axis, 14, MOVEANIMATIONSPEED*1.88 )
+			-- Turn2( tail5, z_axis, -2.8, MOVEANIMATIONSPEED*8.29 )
+			-- Turn2( tail7, x_axis, 12.7, MOVEANIMATIONSPEED*1.71 )
+			-- Turn2( tail7, z_axis, -2.5, MOVEANIMATIONSPEED*7.54 )
+			-- Turn2( tail8, x_axis, 20.7, MOVEANIMATIONSPEED*2.72 )
+			-- Turn2( tail8, z_axis, -4.2, MOVEANIMATIONSPEED*12.09 )
+			-- Turn2( tail8, y_axis, -1.3, MOVEANIMATIONSPEED*2.08 )
+			-- Turn2( tail9, x_axis, 13.6, MOVEANIMATIONSPEED*1.83 )
+			-- Turn2( tail9, z_axis, -2.7, MOVEANIMATIONSPEED*8.05 )
 			Turn2( torso, z_axis, 6.4, MOVEANIMATIONSPEED*6.79 )
 			Sleep(MOVEANIMATIONSLEEPTIME*0.99)
 		end
@@ -360,19 +398,19 @@ local function Walkscript()
 			Turn2( rwing52, y_axis, 10.3, MOVEANIMATIONSPEED*21.83 )
 			Turn2( rwing53, z_axis, 7.6, MOVEANIMATIONSPEED*2.35 )
 			Turn2( rwing53, y_axis, 3.6, MOVEANIMATIONSPEED*11.29 )
-			Turn2( tail1, y_axis, 7.3, MOVEANIMATIONSPEED*34.4 )
-			Turn2( tail2, z_axis, -1.1, MOVEANIMATIONSPEED*4.74 )
-			Turn2( tail4, z_axis, -0.9, MOVEANIMATIONSPEED*4.08 )
-			Turn2( tail5, x_axis, 14.2, MOVEANIMATIONSPEED*1.39 )
-			Turn2( tail5, z_axis, -2, MOVEANIMATIONSPEED*8.39 )
-			Turn2( tail5, y_axis, -1.1, MOVEANIMATIONSPEED*1.01 )
-			Turn2( tail7, x_axis, 12.9, MOVEANIMATIONSPEED*1.27 )
-			Turn2( tail7, z_axis, -1.8, MOVEANIMATIONSPEED*7.63 )
-			Turn2( tail8, x_axis, 20.9, MOVEANIMATIONSPEED*2.03 )
-			Turn2( tail8, z_axis, -3, MOVEANIMATIONSPEED*12.22 )
-			Turn2( tail8, y_axis, -1.5, MOVEANIMATIONSPEED*2.18 )
-			Turn2( tail9, x_axis, 13.8, MOVEANIMATIONSPEED*1.35 )
-			Turn2( tail9, z_axis, -1.9, MOVEANIMATIONSPEED*8.14 )
+			-- Turn2( tail1, y_axis, 7.3, MOVEANIMATIONSPEED*34.4 )
+			-- Turn2( tail2, z_axis, -1.1, MOVEANIMATIONSPEED*4.74 )
+			-- Turn2( tail4, z_axis, -0.9, MOVEANIMATIONSPEED*4.08 )
+			-- Turn2( tail5, x_axis, 14.2, MOVEANIMATIONSPEED*1.39 )
+			-- Turn2( tail5, z_axis, -2, MOVEANIMATIONSPEED*8.39 )
+			-- Turn2( tail5, y_axis, -1.1, MOVEANIMATIONSPEED*1.01 )
+			-- Turn2( tail7, x_axis, 12.9, MOVEANIMATIONSPEED*1.27 )
+			-- Turn2( tail7, z_axis, -1.8, MOVEANIMATIONSPEED*7.63 )
+			-- Turn2( tail8, x_axis, 20.9, MOVEANIMATIONSPEED*2.03 )
+			-- Turn2( tail8, z_axis, -3, MOVEANIMATIONSPEED*12.22 )
+			-- Turn2( tail8, y_axis, -1.5, MOVEANIMATIONSPEED*2.18 )
+			-- Turn2( tail9, x_axis, 13.8, MOVEANIMATIONSPEED*1.35 )
+			-- Turn2( tail9, z_axis, -1.9, MOVEANIMATIONSPEED*8.14 )
 			Turn2( torso, z_axis, 5.7, MOVEANIMATIONSPEED*6.79 )
 			Sleep(MOVEANIMATIONSLEEPTIME*0.99)
 		end
@@ -451,14 +489,14 @@ local function Walkscript()
 			Turn2( rwing52, y_axis, 11.6, MOVEANIMATIONSPEED*19.22 )
 			Turn2( rwing53, z_axis, 7.4, MOVEANIMATIONSPEED*2.82 )
 			Turn2( rwing53, y_axis, 4.3, MOVEANIMATIONSPEED*10.14 )
-			Turn2( tail1, y_axis, 5, MOVEANIMATIONSPEED*34.4 )
-			Turn2( tail2, z_axis, -0.8, MOVEANIMATIONSPEED*4.77 )
-			Turn2( tail4, z_axis, -0.6, MOVEANIMATIONSPEED*4.11 )
-			Turn2( tail5, z_axis, -1.4, MOVEANIMATIONSPEED*8.45 )
-			Turn2( tail7, z_axis, -1.3, MOVEANIMATIONSPEED*7.68 )
-			Turn2( tail8, z_axis, -2.2, MOVEANIMATIONSPEED*12.31 )
-			Turn2( tail8, y_axis, -1.6, MOVEANIMATIONSPEED*2.24 )
-			Turn2( tail9, z_axis, -1.4, MOVEANIMATIONSPEED*8.2 )
+			-- Turn2( tail1, y_axis, 5, MOVEANIMATIONSPEED*34.4 )
+			-- Turn2( tail2, z_axis, -0.8, MOVEANIMATIONSPEED*4.77 )
+			-- Turn2( tail4, z_axis, -0.6, MOVEANIMATIONSPEED*4.11 )
+			-- Turn2( tail5, z_axis, -1.4, MOVEANIMATIONSPEED*8.45 )
+			-- Turn2( tail7, z_axis, -1.3, MOVEANIMATIONSPEED*7.68 )
+			-- Turn2( tail8, z_axis, -2.2, MOVEANIMATIONSPEED*12.31 )
+			-- Turn2( tail8, y_axis, -1.6, MOVEANIMATIONSPEED*2.24 )
+			-- Turn2( tail9, z_axis, -1.4, MOVEANIMATIONSPEED*8.2 )
 			Turn2( torso, z_axis, 5.3, MOVEANIMATIONSPEED*6.79 )
 			Sleep(MOVEANIMATIONSLEEPTIME*0.65)		
 		end
@@ -537,15 +575,15 @@ local function Walkscript()
 			Turn2( rwing52, y_axis, 13.3, MOVEANIMATIONSPEED*16.65 )
 			Turn2( rwing53, z_axis, 7.1, MOVEANIMATIONSPEED*3.2 )
 			Turn2( rwing53, y_axis, 5.2, MOVEANIMATIONSPEED*8.97 )
-			Turn2( tail1, y_axis, 1.6, MOVEANIMATIONSPEED*34.4 )
-			Turn2( tail2, z_axis, -0.3, MOVEANIMATIONSPEED*4.79 )
-			Turn2( tail4, z_axis, -0.2, MOVEANIMATIONSPEED*4.12 )
-			Turn2( tail5, z_axis, -0.6, MOVEANIMATIONSPEED*8.48 )
-			Turn2( tail5, y_axis, -1.3, MOVEANIMATIONSPEED*1.06 )
-			Turn2( tail7, z_axis, -0.5, MOVEANIMATIONSPEED*7.72 )
-			Turn2( tail8, z_axis, -0.9, MOVEANIMATIONSPEED*12.36 )
-			Turn2( tail8, y_axis, -1.9, MOVEANIMATIONSPEED*2.28 )
-			Turn2( tail9, z_axis, -0.5, MOVEANIMATIONSPEED*8.24 )
+			-- Turn2( tail1, y_axis, 1.6, MOVEANIMATIONSPEED*34.4 )
+			-- Turn2( tail2, z_axis, -0.3, MOVEANIMATIONSPEED*4.79 )
+			-- Turn2( tail4, z_axis, -0.2, MOVEANIMATIONSPEED*4.12 )
+			-- Turn2( tail5, z_axis, -0.6, MOVEANIMATIONSPEED*8.48 )
+			-- Turn2( tail5, y_axis, -1.3, MOVEANIMATIONSPEED*1.06 )
+			-- Turn2( tail7, z_axis, -0.5, MOVEANIMATIONSPEED*7.72 )
+			-- Turn2( tail8, z_axis, -0.9, MOVEANIMATIONSPEED*12.36 )
+			-- Turn2( tail8, y_axis, -1.9, MOVEANIMATIONSPEED*2.28 )
+			-- Turn2( tail9, z_axis, -0.5, MOVEANIMATIONSPEED*8.24 )
 			Turn2( torso, z_axis, 4.6, MOVEANIMATIONSPEED*6.79 )
 			Sleep(MOVEANIMATIONSLEEPTIME*0.99)
 		end
@@ -628,25 +666,25 @@ local function Walkscript()
 			Turn2( rwing53, x_axis, -19.7, MOVEANIMATIONSPEED*0.39 )
 			Turn2( rwing53, z_axis, 5.3, MOVEANIMATIONSPEED*3.75 )
 			Turn2( rwing53, y_axis, 7.5, MOVEANIMATIONSPEED*5.04 )
-			Turn2( tail1, y_axis, -14.5, MOVEANIMATIONSPEED*34.4 )
-			Turn2( tail2, x_axis, 7.8, MOVEANIMATIONSPEED*0.5 )
-			Turn2( tail2, z_axis, 1.9, MOVEANIMATIONSPEED*4.76 )
-			Turn2( tail2, y_axis, -0.9, MOVEANIMATIONSPEED*0.33 )
-			Turn2( tail4, x_axis, 6.7, MOVEANIMATIONSPEED*0.44 )
-			Turn2( tail4, z_axis, 1.7, MOVEANIMATIONSPEED*4.1 )
-			Turn2( tail4, y_axis, -0.8, MOVEANIMATIONSPEED*0.24 )
-			Turn2( tail5, x_axis, 13.9, MOVEANIMATIONSPEED*0.82 )
-			Turn2( tail5, z_axis, 3.4, MOVEANIMATIONSPEED*8.44 )
-			Turn2( tail5, y_axis, -1.8, MOVEANIMATIONSPEED*1.03 )
-			Turn2( tail7, x_axis, 12.6, MOVEANIMATIONSPEED*0.76 )
-			Turn2( tail7, z_axis, 3.1, MOVEANIMATIONSPEED*7.67 )
-			Turn2( tail7, y_axis, -1.6, MOVEANIMATIONSPEED*0.85 )
-			Turn2( tail8, x_axis, 20.6, MOVEANIMATIONSPEED*1.09 )
-			Turn2( tail8, z_axis, 4.8, MOVEANIMATIONSPEED*12.31 )
-			Turn2( tail8, y_axis, -2.9, MOVEANIMATIONSPEED*2.24 )
-			Turn2( tail9, x_axis, 13.5, MOVEANIMATIONSPEED*0.8 )
-			Turn2( tail9, z_axis, 3.3, MOVEANIMATIONSPEED*8.19 )
-			Turn2( tail9, y_axis, -1.7, MOVEANIMATIONSPEED*0.97 )
+			-- Turn2( tail1, y_axis, -14.5, MOVEANIMATIONSPEED*34.4 )
+			-- Turn2( tail2, x_axis, 7.8, MOVEANIMATIONSPEED*0.5 )
+			-- Turn2( tail2, z_axis, 1.9, MOVEANIMATIONSPEED*4.76 )
+			-- Turn2( tail2, y_axis, -0.9, MOVEANIMATIONSPEED*0.33 )
+			-- Turn2( tail4, x_axis, 6.7, MOVEANIMATIONSPEED*0.44 )
+			-- Turn2( tail4, z_axis, 1.7, MOVEANIMATIONSPEED*4.1 )
+			-- Turn2( tail4, y_axis, -0.8, MOVEANIMATIONSPEED*0.24 )
+			-- Turn2( tail5, x_axis, 13.9, MOVEANIMATIONSPEED*0.82 )
+			-- Turn2( tail5, z_axis, 3.4, MOVEANIMATIONSPEED*8.44 )
+			-- Turn2( tail5, y_axis, -1.8, MOVEANIMATIONSPEED*1.03 )
+			-- Turn2( tail7, x_axis, 12.6, MOVEANIMATIONSPEED*0.76 )
+			-- Turn2( tail7, z_axis, 3.1, MOVEANIMATIONSPEED*7.67 )
+			-- Turn2( tail7, y_axis, -1.6, MOVEANIMATIONSPEED*0.85 )
+			-- Turn2( tail8, x_axis, 20.6, MOVEANIMATIONSPEED*1.09 )
+			-- Turn2( tail8, z_axis, 4.8, MOVEANIMATIONSPEED*12.31 )
+			-- Turn2( tail8, y_axis, -2.9, MOVEANIMATIONSPEED*2.24 )
+			-- Turn2( tail9, x_axis, 13.5, MOVEANIMATIONSPEED*0.8 )
+			-- Turn2( tail9, z_axis, 3.3, MOVEANIMATIONSPEED*8.19 )
+			-- Turn2( tail9, y_axis, -1.7, MOVEANIMATIONSPEED*0.97 )
 			Turn2( torso, z_axis, 1.4, MOVEANIMATIONSPEED*6.79 )
 			Sleep(MOVEANIMATIONSLEEPTIME*4.65)
 		end
@@ -690,7 +728,7 @@ local function Walkscript()
 			Turn2( lwing52, y_axis, 6.3, MOVEANIMATIONSPEED*20.12 )
 			Turn2( lwing53, z_axis, -5.5, MOVEANIMATIONSPEED*6.66 )
 			Turn2( lwing53, y_axis, 4.1, MOVEANIMATIONSPEED*8.65 )
-						Move( pelvis, y_axis, -9.3, MOVEANIMATIONSPEED*17.45 )
+			Move( pelvis, y_axis, -9.3, MOVEANIMATIONSPEED*17.45 )
 			Turn2( rhoof, x_axis, 27, MOVEANIMATIONSPEED*176.99 )
 			Turn2( rlarm, x_axis, -33.1, MOVEANIMATIONSPEED*0.78 )
 			Turn2( rlarm, z_axis, 11.5, MOVEANIMATIONSPEED*5.82 )
@@ -723,27 +761,27 @@ local function Walkscript()
 			Turn2( rwing52, y_axis, 17.4, MOVEANIMATIONSPEED*0.61 )
 			Turn2( rwing53, z_axis, 4.6, MOVEANIMATIONSPEED*3.49 )
 			Turn2( rwing53, y_axis, 7.7, MOVEANIMATIONSPEED*1.01 )
-			Turn2( tail1, x_axis, -55, MOVEANIMATIONSPEED*5.71 )
-			Turn2( tail1, z_axis, -5.4, MOVEANIMATIONSPEED*0.56 )
-			Turn2( tail1, y_axis, 4.1, MOVEANIMATIONSPEED*92.87 )
-			Turn2( tail2, x_axis, 8, MOVEANIMATIONSPEED*1.08 )
-			Turn2( tail2, z_axis, -0.6, MOVEANIMATIONSPEED*12.86 )
-			Turn2( tail2, y_axis, -0.7, MOVEANIMATIONSPEED*0.96 )
-			Turn2( tail4, x_axis, 6.9, MOVEANIMATIONSPEED*0.94 )
-			Turn2( tail4, z_axis, -0.5, MOVEANIMATIONSPEED*11.06 )
-			Turn2( tail4, y_axis, -0.6, MOVEANIMATIONSPEED*0.72 )
-			Turn2( tail5, x_axis, 14.3, MOVEANIMATIONSPEED*1.75 )
-			Turn2( tail5, z_axis, -1.2, MOVEANIMATIONSPEED*22.78 )
-			Turn2( tail5, y_axis, -1.2, MOVEANIMATIONSPEED*2.94 )
-			Turn2( tail7, x_axis, 13, MOVEANIMATIONSPEED*1.62 )
-			Turn2( tail7, z_axis, -1.1, MOVEANIMATIONSPEED*20.72 )
-			Turn2( tail7, y_axis, -1.1, MOVEANIMATIONSPEED*2.44 )
-			Turn2( tail8, x_axis, 21, MOVEANIMATIONSPEED*2.28 )
-			Turn2( tail8, z_axis, -1.8, MOVEANIMATIONSPEED*33.21 )
-			Turn2( tail8, y_axis, -1.7, MOVEANIMATIONSPEED*6.28 )
-			Turn2( tail9, x_axis, 13.8, MOVEANIMATIONSPEED*1.71 )
-			Turn2( tail9, z_axis, -1.1, MOVEANIMATIONSPEED*22.11 )
-			Turn2( tail9, y_axis, -1.2, MOVEANIMATIONSPEED*2.77 )
+			-- Turn2( tail1, x_axis, -55, MOVEANIMATIONSPEED*5.71 )
+			-- Turn2( tail1, z_axis, -5.4, MOVEANIMATIONSPEED*0.56 )
+			-- Turn2( tail1, y_axis, 4.1, MOVEANIMATIONSPEED*92.87 )
+			-- Turn2( tail2, x_axis, 8, MOVEANIMATIONSPEED*1.08 )
+			-- Turn2( tail2, z_axis, -0.6, MOVEANIMATIONSPEED*12.86 )
+			-- Turn2( tail2, y_axis, -0.7, MOVEANIMATIONSPEED*0.96 )
+			-- Turn2( tail4, x_axis, 6.9, MOVEANIMATIONSPEED*0.94 )
+			-- Turn2( tail4, z_axis, -0.5, MOVEANIMATIONSPEED*11.06 )
+			-- Turn2( tail4, y_axis, -0.6, MOVEANIMATIONSPEED*0.72 )
+			-- Turn2( tail5, x_axis, 14.3, MOVEANIMATIONSPEED*1.75 )
+			-- Turn2( tail5, z_axis, -1.2, MOVEANIMATIONSPEED*22.78 )
+			-- Turn2( tail5, y_axis, -1.2, MOVEANIMATIONSPEED*2.94 )
+			-- Turn2( tail7, x_axis, 13, MOVEANIMATIONSPEED*1.62 )
+			-- Turn2( tail7, z_axis, -1.1, MOVEANIMATIONSPEED*20.72 )
+			-- Turn2( tail7, y_axis, -1.1, MOVEANIMATIONSPEED*2.44 )
+			-- Turn2( tail8, x_axis, 21, MOVEANIMATIONSPEED*2.28 )
+			-- Turn2( tail8, z_axis, -1.8, MOVEANIMATIONSPEED*33.21 )
+			-- Turn2( tail8, y_axis, -1.7, MOVEANIMATIONSPEED*6.28 )
+			-- Turn2( tail9, x_axis, 13.8, MOVEANIMATIONSPEED*1.71 )
+			-- Turn2( tail9, z_axis, -1.1, MOVEANIMATIONSPEED*22.11 )
+			-- Turn2( tail9, y_axis, -1.2, MOVEANIMATIONSPEED*2.77 )
 			Turn2( torso, z_axis, 0, MOVEANIMATIONSPEED*7.2 )
 			Sleep(MOVEANIMATIONSLEEPTIME*1.99)	
 		end
@@ -837,27 +875,27 @@ local function Walkscript()
 			Turn2( rwing53, x_axis, 0, MOVEANIMATIONSPEED*0.39 )
 			Turn2( rwing53, y_axis, 0, MOVEANIMATIONSPEED*11.29 )
 			Turn2( rwing53, z_axis, 0, MOVEANIMATIONSPEED*5.18 )
-			Turn2( tail1, x_axis, 0, MOVEANIMATIONSPEED*5.71 )
-			Turn2( tail1, y_axis, 0, MOVEANIMATIONSPEED*92.87 )
-			Turn2( tail1, z_axis, 0, MOVEANIMATIONSPEED*0.56 )
-			Turn2( tail2, x_axis, 0, MOVEANIMATIONSPEED*1.08 )
-			Turn2( tail2, y_axis, 0, MOVEANIMATIONSPEED*0.96 )
-			Turn2( tail2, z_axis, 0, MOVEANIMATIONSPEED*12.86 )
-			Turn2( tail4, x_axis, 0, MOVEANIMATIONSPEED*0.94 )
-			Turn2( tail4, y_axis, 0, MOVEANIMATIONSPEED*0.72 )
-			Turn2( tail4, z_axis, 0, MOVEANIMATIONSPEED*11.06 )
-			Turn2( tail5, x_axis, 0, MOVEANIMATIONSPEED*1.88 )
-			Turn2( tail5, y_axis, 0, MOVEANIMATIONSPEED*2.94 )
-			Turn2( tail5, z_axis, 0, MOVEANIMATIONSPEED*22.78 )
-			Turn2( tail7, x_axis, 0, MOVEANIMATIONSPEED*1.71 )
-			Turn2( tail7, y_axis, 0, MOVEANIMATIONSPEED*2.44 )
-			Turn2( tail7, z_axis, 0, MOVEANIMATIONSPEED*20.72 )
-			Turn2( tail8, x_axis, 0, MOVEANIMATIONSPEED*2.72 )
-			Turn2( tail8, y_axis, 0, MOVEANIMATIONSPEED*6.28 )
-			Turn2( tail8, z_axis, 0, MOVEANIMATIONSPEED*33.21 )
-			Turn2( tail9, x_axis, 0, MOVEANIMATIONSPEED*1.83 )
-			Turn2( tail9, y_axis, 0, MOVEANIMATIONSPEED*2.77 )
-			Turn2( tail9, z_axis, 0, MOVEANIMATIONSPEED*22.11 )
+			-- Turn2( tail1, x_axis, 0, MOVEANIMATIONSPEED*5.71 )
+			-- Turn2( tail1, y_axis, 0, MOVEANIMATIONSPEED*92.87 )
+			-- Turn2( tail1, z_axis, 0, MOVEANIMATIONSPEED*0.56 )
+			-- Turn2( tail2, x_axis, 0, MOVEANIMATIONSPEED*1.08 )
+			-- Turn2( tail2, y_axis, 0, MOVEANIMATIONSPEED*0.96 )
+			-- Turn2( tail2, z_axis, 0, MOVEANIMATIONSPEED*12.86 )
+			-- Turn2( tail4, x_axis, 0, MOVEANIMATIONSPEED*0.94 )
+			-- Turn2( tail4, y_axis, 0, MOVEANIMATIONSPEED*0.72 )
+			-- Turn2( tail4, z_axis, 0, MOVEANIMATIONSPEED*11.06 )
+			-- Turn2( tail5, x_axis, 0, MOVEANIMATIONSPEED*1.88 )
+			-- Turn2( tail5, y_axis, 0, MOVEANIMATIONSPEED*2.94 )
+			-- Turn2( tail5, z_axis, 0, MOVEANIMATIONSPEED*22.78 )
+			-- Turn2( tail7, x_axis, 0, MOVEANIMATIONSPEED*1.71 )
+			-- Turn2( tail7, y_axis, 0, MOVEANIMATIONSPEED*2.44 )
+			-- Turn2( tail7, z_axis, 0, MOVEANIMATIONSPEED*20.72 )
+			-- Turn2( tail8, x_axis, 0, MOVEANIMATIONSPEED*2.72 )
+			-- Turn2( tail8, y_axis, 0, MOVEANIMATIONSPEED*6.28 )
+			-- Turn2( tail8, z_axis, 0, MOVEANIMATIONSPEED*33.21 )
+			-- Turn2( tail9, x_axis, 0, MOVEANIMATIONSPEED*1.83 )
+			-- Turn2( tail9, y_axis, 0, MOVEANIMATIONSPEED*2.77 )
+			-- Turn2( tail9, z_axis, 0, MOVEANIMATIONSPEED*22.11 )
 			Turn2( torso, z_axis, 0, MOVEANIMATIONSPEED*12.34 )		
 		end
 		
@@ -876,17 +914,17 @@ local function BoredAnimation()
 		if not attacking then		
 			borednumber = math.random(50)
 			if (borednumber > 45) then
-				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED )
+				Turn2( torso, y_axis, 0, MOVEANIMATIONSPEED )
 				Turn2( head, y_axis, 25, MOVEANIMATIONSPEED*1.5 )			
-				WaitForTurn( chest, y_axis )
+				WaitForTurn( torso, y_axis )
 			elseif (borednumber < 5)then
-				Turn2( chest, y_axis, -100, MOVEANIMATIONSPEED )			
+				Turn2( torso, y_axis, -100, MOVEANIMATIONSPEED )			
 				Turn2( head, y_axis, -10, MOVEANIMATIONSPEED*1.5 )	
-				WaitForTurn( chest, y_axis )
+				WaitForTurn( torso, y_axis )
 			else 
-				Turn2( chest, y_axis, -50, MOVEANIMATIONSPEED )
+				Turn2( torso, y_axis, -50, MOVEANIMATIONSPEED )
 				Turn2( head, y_axis, 25, MOVEANIMATIONSPEED*1.5 )
-				WaitForTurn( chest, y_axis )				
+				WaitForTurn( torso, y_axis )				
 			end
 		end
 	Sleep(1500)		
@@ -897,15 +935,10 @@ function script.Create()
 	SetMoveAnimationSpeed()
 	moving = false
 	attacking = false
-	Turn( luparm , x_axis, math.rad(45) )
-	Turn( ruparm , x_axis, math.rad(45) )
-	Turn( gun , x_axis, math.rad(-45) )
-	Turn( rocketgun , x_axis, math.rad(-45) )
 	Turn( emit_summon , x_axis, math.rad(-90) )
 	--START BUILD CYCLE
 	Sleep(200)
 	while GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0 do
-	
 			EmitSfx(emit_summon,SUMMONING)
 			Sleep(300)
 	end
@@ -924,7 +957,6 @@ end
 
 local function RestoreAfterDelay()
 	Sleep( 5000)
-	StopSpin  ( barrel, z_axis, 50 )	
 	Turn( ruparm , y_axis, 0, 5 )
 	Turn( luparm , y_axis, 0, 5 )
 	Turn( head, y_axis, 0, 1 )
@@ -935,16 +967,16 @@ end
 --weapon 1 -----------------------------------------------------------------
 
 function script.QueryWeapon1 ()
-	return remit	
+	return emit_rgun	
 end
 
 function script.AimFromWeapon1 ()
-	return rocketgun	
+	return aimx1	
 end
 
 function script.AimWeapon1(heading, pitch)
-	Turn2( chest, y_axis, 0, 300 )
-	Turn( ruparm , x_axis, 0, math.rad(500.000000) )
+--	Turn2( torso, y_axis, 0, 300 )
+--	Turn( ruparm , x_axis, 0, math.rad(500.000000) )
 
 	attacking = true
 	Signal( SIG_AIM1)
@@ -952,19 +984,16 @@ function script.AimWeapon1(heading, pitch)
 
 	Turn( head, y_axis, heading, 1 )
 	
-	Turn( ruparm, y_axis, heading, 5 )
-	Turn( rocketgun, x_axis, -pitch, 5 )		
-	
-	
-    WaitForTurn(ruparm, y_axis)
-	WaitForTurn(rocketgun, x_axis)
+--	Turn( ruparm, y_axis, heading, 5 )
+--	Turn( rocketgun, x_axis, -pitch, 5 )		
+--   WaitForTurn(ruparm, y_axis)
+-- 	 WaitForTurn(rocketgun, x_axis)
 	StartThread(RestoreAfterDelay) 
     return (1)
 end
 
 function script.Shot1()
-	EmitSfx( remit,  BIGGUNFLARE )	
-	EmitSfx( emit_groundflash_r,  GROUNDFLASH )
+	EmitSfx( emit_rgun, GUNFLARE )	
 	return (0)
 end
 
@@ -972,34 +1001,30 @@ end
 --weapon 2 -----------------------------------------------------------------
 
 function script.QueryWeapon2 (piecenum)
-	return lemit	
+	return emit_lgun	
 end
 
 function script.AimFromWeapon2 (piecenum)
-	return gun	
+	return aimx2	
 end
 
 function script.AimWeapon2 (heading, pitch)
-	Turn2( chest, y_axis, 0, 300 )
 	Turn( luparm , x_axis, 0, math.rad(500.000000) )
 
 	attacking = true
 	Signal( SIG_AIM2)
-	SetSignalMask( SIG_AIM2)
-	Spring.UnitScript.Spin ( barrel, z_axis, 10, 20)	
+	SetSignalMask( SIG_AIM2)	
 
-	Turn( luparm, y_axis, heading, 5 )
-	Turn( gun, x_axis, -pitch, 5 )	
- 
-    WaitForTurn(luparm, y_axis)
-	WaitForTurn(gun, x_axis)
+--	Turn( luparm, y_axis, heading, 5 )
+--	Turn( gun, x_axis, -pitch, 5 )	 
+--    WaitForTurn(luparm, y_axis)
+--	WaitForTurn(gun, x_axis)
 	StartThread(RestoreAfterDelay) 
     return (1)
 end
 
 function script.Shot2()
-	EmitSfx( lemit,  SMALLGUNFLARE )	
-	EmitSfx( emit_groundflash_l,  GROUNDFLASH )
+	EmitSfx( emit_lgun,  GUNFLARE )	
 	return (0)
 end
 
@@ -1009,13 +1034,13 @@ function script.Killed(severity, corpsetype)
 	local px, py, pz = Spring.GetUnitPosition(unitID)
 	Spring.PlaySoundFile("sounds/demoncry.wav", 10, px, py, pz)
 			
-	Turn( chest , x_axis, math.rad(-43), math.rad(300) )
-	Turn( chest , y_axis, math.rad(15), math.rad(50) )
+	Turn( torso , x_axis, math.rad(-43), math.rad(300) )
+	Turn( torso , y_axis, math.rad(15), math.rad(50) )
 	Turn( luparm , z_axis, math.rad(-(50)), math.rad(200) )
 	Turn( ruparm , z_axis, math.rad(-(-30)), math.rad(200) )
 
-	Turn( rleg1 , y_axis, math.rad(-45), math.rad(500) )
-	Turn( rleg1 , z_axis, math.rad(-(17)), math.rad(500) )
+	Turn( rthigh , y_axis, math.rad(-45), math.rad(500) )
+	Turn( lthigh , z_axis, math.rad(-(17)), math.rad(500) )
 
 	Turn( base , x_axis, math.rad(-25), math.rad(75) )
 	WaitForTurn(base, x_axis)
@@ -1024,11 +1049,11 @@ function script.Killed(severity, corpsetype)
 	Turn( base , x_axis, math.rad(-75), math.rad(400) )
 	WaitForTurn(base, x_axis)
 	
-	EmitSfx( chest,  BLOOD )
+	EmitSfx( torso,  BLOOD )
 	EmitSfx( head,  BLOOD )
 
-	EmitSfx( lleg3,  FOOTDUST )
-	EmitSfx( rleg3,  FOOTDUST )
+	EmitSfx( rleg,  FOOTDUST )
+	EmitSfx( lleg,  FOOTDUST )
 	
 	Sleep( 100)
 

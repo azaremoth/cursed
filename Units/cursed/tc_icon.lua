@@ -80,9 +80,7 @@ local unitDef = {
       "custom:SUMMONING_BIGGEST",
       "custom:Greycloud",
       "custom:BLOOD_EXPLOSION_BIG",
-      "custom:BelialBigGunFlare",
       "custom:BelialGunFlare",
-      "custom:GunGroundFlash_Medium",
     },
   },
   sounds = {

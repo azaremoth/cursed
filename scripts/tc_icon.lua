@@ -1,12 +1,12 @@
 local head = piece 'head'
 local pelvis = piece 'pelvis'
 local torso = piece 'torso'
--- local lfinger11 = piece '-- lfinger11'
--- local lfinger12 = piece '-- lfinger12'
--- local lfinger21 = piece '-- lfinger21'
--- local lfinger22 = piece '-- lfinger22'
--- local lfinger31 = piece '-- lfinger31'
--- local lfinger32 = piece '-- lfinger32'
+-- local lfinger11 = piece 'lfinger11'
+local lfinger12 = piece 'lfinger12'
+-- local lfinger21 = piece 'lfinger21'
+local lfinger22 = piece 'lfinger22'
+-- local lfinger31 = piece 'lfinger31'
+local lfinger32 = piece 'lfinger32'
 local lhand = piece 'lhand'
 local rhand = piece 'rhand'
 local lrot = piece 'lrot'
@@ -27,12 +27,12 @@ local rwing42 = piece 'rwing42'
 local rwing51 = piece 'rwing51'
 local rwing52 = piece 'rwing52'
 -- local rwing53 = piece 'rwing53'
--- local rfinger11 = piece '-- rfinger11'
--- local rfinger12 = piece '-- rfinger12'
--- local rfinger21 = piece '-- rfinger21'
--- local rfinger22 = piece '-- rfinger22'
--- local rfinger31 = piece '-- rfinger31'
--- local rfinger32 = piece '-- rfinger32'
+-- local rfinger11 = piece 'rfinger11'
+local rfinger12 = piece 'rfinger12'
+-- local rfinger21 = piece 'rfinger21'
+local rfinger22 = piece 'rfinger22'
+-- local rfinger31 = piece 'rfinger31'
+local rfinger32 = piece 'rfinger32'
 local rhoof = piece 'rhoof'
 local rlarm = piece 'rlarm'
 local rleg = piece 'rleg'
@@ -105,40 +105,12 @@ local function Walkscript()
 		if moving then 
 			SetMoveAnimationSpeed()
 			if not attacking then
-				-- Turn2( lfinger11, x_axis, -21.3, MOVEANIMATIONSPEED*5.48 )
-				-- Turn2( lfinger11, z_axis, -11.5, MOVEANIMATIONSPEED*39.24 )
-				-- Turn2( lfinger11, y_axis, -36.6, MOVEANIMATIONSPEED*3.5 )
-				-- Turn2( lfinger12, x_axis, -9.5, MOVEANIMATIONSPEED*0.79 )
-				-- Turn2( lfinger12, z_axis, -4.3, MOVEANIMATIONSPEED*19.7 )
-				-- Turn2( lfinger12, y_axis, -18.3, MOVEANIMATIONSPEED*3.59 )
-				-- Turn2( lfinger21, x_axis, -0.2, MOVEANIMATIONSPEED*0.2 )
-				-- Turn2( lfinger21, y_axis, -0.7, MOVEANIMATIONSPEED*2.47 )
-				-- Turn2( lfinger22, x_axis, -79.1, MOVEANIMATIONSPEED*37.61 )
-				-- Turn2( lfinger22, z_axis, -49.9, MOVEANIMATIONSPEED*59.88 )
-				-- Turn2( lfinger22, y_axis, -70.6, MOVEANIMATIONSPEED*9.07 )
-				-- Turn2( lfinger31, x_axis, 17.9, MOVEANIMATIONSPEED*35.53 )
-				-- Turn2( lfinger31, z_axis, -49.4, MOVEANIMATIONSPEED*3.96 )
-				-- Turn2( lfinger31, y_axis, 27.1, MOVEANIMATIONSPEED*83.29 )
-				-- Turn2( lfinger32, x_axis, -24, MOVEANIMATIONSPEED*28.65 )
-				-- Turn2( lfinger32, z_axis, -49.7, MOVEANIMATIONSPEED*7.59 )
-				-- Turn2( lfinger32, y_axis, 23.6, MOVEANIMATIONSPEED*74.42 )
-				-- Turn2( rfinger11, x_axis, -23.1, MOVEANIMATIONSPEED*1.08 )
-				-- Turn2( rfinger11, z_axis, -1.8, MOVEANIMATIONSPEED*16.41 )
-				-- Turn2( rfinger11, y_axis, 12.7, MOVEANIMATIONSPEED*1.74 )
-				-- Turn2( rfinger12, x_axis, -18.2, MOVEANIMATIONSPEED*11.87 )
-				-- Turn2( rfinger12, z_axis, -20.6, MOVEANIMATIONSPEED*53.06 )
-				-- Turn2( rfinger12, y_axis, 43.9, MOVEANIMATIONSPEED*10.2 )
-				-- Turn2( rfinger21, x_axis, -42.3, MOVEANIMATIONSPEED*50.45 )
-				-- Turn2( rfinger21, z_axis, 47.5, MOVEANIMATIONSPEED*26.49 )
-				-- Turn2( rfinger21, y_axis, 45.5, MOVEANIMATIONSPEED*92.78 )
-				-- Turn2( rfinger22, z_axis, 3.1, MOVEANIMATIONSPEED*8.93 )
-				-- Turn2( rfinger22, y_axis, 11.1, MOVEANIMATIONSPEED*9.76 )
-				-- Turn2( rfinger31, x_axis, -28.4, MOVEANIMATIONSPEED*20.97 )
-				-- Turn2( rfinger31, z_axis, 32.7, MOVEANIMATIONSPEED*30.3 )
-				-- Turn2( rfinger31, y_axis, 39.2, MOVEANIMATIONSPEED*54.08 )
-				-- Turn2( rfinger32, x_axis, -81, MOVEANIMATIONSPEED*11.94 )
-				-- Turn2( rfinger32, z_axis, 1.4, MOVEANIMATIONSPEED*43.56 )
-				-- Turn2( rfinger32, y_axis, 43.9, MOVEANIMATIONSPEED*2.63 )			
+				Turn2( lfinger12, y_axis, -50, MOVEANIMATIONSPEED*3.59 )
+				Turn2( lfinger22, y_axis, -65, MOVEANIMATIONSPEED*9.07 )
+				Turn2( lfinger32, y_axis, -75, MOVEANIMATIONSPEED*74.42 )
+				Turn2( rfinger12, y_axis, 60, MOVEANIMATIONSPEED*10.2 )
+				Turn2( rfinger22, y_axis, 75, MOVEANIMATIONSPEED*9.76 )
+				Turn2( rfinger32, y_axis, 65, MOVEANIMATIONSPEED*2.63 )			
 				Turn2( llarm, x_axis, -17.3, MOVEANIMATIONSPEED*0.8 )
 				Turn2( llarm, z_axis, -4.5, MOVEANIMATIONSPEED*7.66 )
 				Turn2( llarm, y_axis, -8.2, MOVEANIMATIONSPEED*0.72 )
@@ -439,6 +411,12 @@ local function RestoreAfterDelay()
 	Turn2( lhand , y_axis, 0, MOVEANIMATIONSPEED*50 )
 	Turn2( lhand , z_axis, 0, MOVEANIMATIONSPEED*50 )	
 	Turn2( head, y_axis, 0, MOVEANIMATIONSPEED*25 )
+	Turn2( lfinger12, y_axis, -50, MOVEANIMATIONSPEED*6.59 )
+	Turn2( lfinger22, y_axis, -65, MOVEANIMATIONSPEED*9.07 )
+	Turn2( lfinger32, y_axis, -75, MOVEANIMATIONSPEED*74.42 )
+	Turn2( rfinger12, y_axis, 60, MOVEANIMATIONSPEED*10.2 )
+	Turn2( rfinger22, y_axis, 75, MOVEANIMATIONSPEED*9.76 )
+	Turn2( rfinger32, y_axis, 65, MOVEANIMATIONSPEED*6.63 )	
 	attacking = false
 	return (0)
 end
@@ -461,7 +439,13 @@ local function RestoreForAim()
 	Turn2( ruparm, x_axis, 0, 300 )
 	Turn2( ruparm, z_axis, 0, 300 )
 	Turn2( rlarm, y_axis, 0, 300 )
-	Turn2( rlarm, z_axis, 0, 300 )	
+	Turn2( rlarm, z_axis, 0, 300 )
+	Turn2( lfinger12, y_axis, 0, 150 )
+	Turn2( lfinger22, y_axis, 0, 150 )
+	Turn2( lfinger32, y_axis, 0, 150 )
+	Turn2( rfinger12, y_axis, 0, 150 )
+	Turn2( rfinger22, y_axis, 0, 150 )
+	Turn2( rfinger32, y_axis, 0, 150 )
 end
 
 --weapon 1 -----------------------------------------------------------------
@@ -471,7 +455,7 @@ function script.QueryWeapon1 ()
 end
 
 function script.AimFromWeapon1 ()
-	return aimx1	
+	return rlarm	
 end
 
 function script.AimWeapon1(heading, pitch)
@@ -501,7 +485,7 @@ function script.QueryWeapon2 (piecenum)
 end
 
 function script.AimFromWeapon2 (piecenum)
-	return aimx2	
+	return llarm
 end
 
 function script.AimWeapon2 (heading, pitch)

@@ -21,11 +21,10 @@ local unitDef = {
   canstop            = true,
   cantBeTransported  = true, 
   category           = "CURSED LAND HEAVYARMOR",
-  corpse             = "dead",
   collisionVolumeOffsets = "0 0 0",
-  collisionVolumeScales = "60 100 60",
+  collisionVolumeScales = "70 100 70",
   collisionVolumeType = "CylY",
-  -- collisionVolumeTest 		= 1,  
+  collisionVolumeTest 		= 1,  
   customParams          = {	
 	factionname		   = "cursed",
 	noxpgain = "1",
@@ -46,7 +45,7 @@ local unitDef = {
   mass               = 30000,
   maxDamage          = 66666,
   maxSlope           = 10,
-  maxVelocity        = 1.3,
+  maxVelocity        = 1.4,
   maxWaterDepth      = 25,
   mobilestandorders  = "1",
   movementClass      = "ULTRAHEAVYWALKER4X4",
@@ -70,7 +69,7 @@ local unitDef = {
   trackStrength          = 8,
   trackStretch           = 1,
   trackType              = [[Walker]],
-  trackWidth             = 60,  
+  trackWidth             = 70,  
   
   turnRate           = 750,
   unitname           = "tc_icon",
@@ -172,45 +171,20 @@ local weaponDefs = {
 ------------------------------------------------------------
     areaOfEffect       		= 48,	
 	range                   = 900,
-    reloadtime 				= 1,
+    reloadtime 				= 1.5,
 	rgbColor           		= {0.45, 1, 0.1},
 	rgbColor2 		   		= {1, 1, 1},
     explosionGenerator 		= "custom:AGARES_LASER",
 ------------------------------------------------------------	
   damage = {
-      default            = 150,
-      flyer              = 150*0.33,
-      heavy              = 150,
-      light              = (140*0.75),
+      default            = 300,
+      flyer              = (300*0.33),
+      heavy              = 300,
+      light              = (300*0.75),
     },
   },
 }
 unitDef.weaponDefs = weaponDefs
-
-
---------------------------------------------------------------------------------
-
-local featureDefs = {
-  dead = {	
-	resurrectable	   = 0,  
-    blocking           = true,
-	customParams       = {
-		featuredecaytime		= "240",
-		resurrectintounit		= "tc_belial"
-	},  
-    damage             = 16000,
-    description        = "Former Belial",
-    energy             = 0,
-    footprintX         = 2,
-    footprintZ         = 2,
-    height             = "25",
-    hitdensity         = "1000",
-    metal              = 0,
-    object             = "tc_belial_dead.s3o",
-    reclaimable        = true,
-  },
-}
-unitDef.featureDefs = featureDefs
 
 --------------------------------------------------------------------------------
 

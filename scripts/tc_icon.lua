@@ -92,7 +92,7 @@ local function SetMoveAnimationSpeed()
 --	Spring.Echo(GetUnitValue(COB.MAX_SPEED))
 --	MOVEANIMATIONSPEED = 1
 --	MOVEANIMATIONSLEEPTIME = 100
-	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/130000) -- ord divisor 85196
+	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/130000) -- org. divisor 85196
 	if MOVEANIMATIONSPEED < 0.1 then 
 		MOVEANIMATIONSPEED = 0.1
 	end
@@ -125,6 +125,10 @@ local function Walkscript()
 				Turn2( torso, z_axis, 7.1, MOVEANIMATIONSPEED*12.34 )
 				Turn2( torso, y_axis, 0, MOVEANIMATIONSPEED*25 )				
 			end
+Turn2( lwing1, x_axis, -100, MOVEANIMATIONSPEED*20 )
+Turn2( lwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
+Turn2( rwing1, x_axis, -50, MOVEANIMATIONSPEED*20 )
+Turn2( rwing2, x_axis, 0, MOVEANIMATIONSPEED*50 )
 			Turn2( lhoof, x_axis, 1.7, MOVEANIMATIONSPEED*72.34 )
 			Turn2( lleg, x_axis, 63.4, MOVEANIMATIONSPEED*75.41 )
 			Turn2( lthigh, x_axis, -65.1, MOVEANIMATIONSPEED*147.75 )
@@ -201,7 +205,9 @@ local function Walkscript()
 				Turn2( rshoulder, x_axis, -5.8, MOVEANIMATIONSPEED*62.77 )
 				Turn2( rshoulder, y_axis, -0.5, MOVEANIMATIONSPEED*6.93 )
 				Turn2( torso, z_axis, 5.3, MOVEANIMATIONSPEED*6.79 )				
-			end			
+			end
+Turn2( rwing1, x_axis, -100, MOVEANIMATIONSPEED*20 )
+Turn2( rwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )		
 			Turn2( lhoof, x_axis, 16.3, MOVEANIMATIONSPEED*353.36 )
 			Turn2( lhoof, z_axis, 0, MOVEANIMATIONSPEED*101.14 )
 			Turn2( lhoof, y_axis, 0, MOVEANIMATIONSPEED*21.34 )
@@ -256,7 +262,9 @@ local function Walkscript()
 				Turn2( rshoulder, z_axis, 0.2, MOVEANIMATIONSPEED*0.41 )
 				Turn2( rshoulder, y_axis, 0.7, MOVEANIMATIONSPEED*1.45 )
 				Turn2( torso, z_axis, 1.4, MOVEANIMATIONSPEED*6.79 )				
-			end			
+			end	
+Turn2( lwing1, x_axis, -50, MOVEANIMATIONSPEED*20 )
+Turn2( lwing2, x_axis, 0, MOVEANIMATIONSPEED*50 )		
 			Turn2( lhoof, x_axis, -27.5, MOVEANIMATIONSPEED*63.21 )
 			Turn2( lleg, x_axis, 24.6, MOVEANIMATIONSPEED*9.82 )
 			Turn2( lthigh, x_axis, 2.9, MOVEANIMATIONSPEED*73.04 )
@@ -313,6 +321,10 @@ local function Walkscript()
 				Turn2( torso, y_axis, 0, MOVEANIMATIONSPEED*12.34 )
 				Turn2( torso, z_axis, 0, MOVEANIMATIONSPEED*12.34 )					
 			end
+	Turn2( lwing1, x_axis, -100, MOVEANIMATIONSPEED*50 )
+	Turn2( lwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
+	Turn2( rwing1, x_axis, -100, MOVEANIMATIONSPEED*50 )
+	Turn2( rwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )						
 			Move( pelvis, y_axis, 0, MOVEANIMATIONSPEED*44.87 )
 			Turn2( lhoof, x_axis, 0, MOVEANIMATIONSPEED*353.36 )
 			Turn2( lhoof, y_axis, 0, MOVEANIMATIONSPEED*21.34 )
@@ -380,7 +392,11 @@ function script.Create()
 	Turn2( rwing41, x_axis, -85, MOVEANIMATIONSPEED*50 )
 	Turn2( rwing42, x_axis, -55, MOVEANIMATIONSPEED*50 )
 	Turn2( rwing51, x_axis, -85, MOVEANIMATIONSPEED*50 )
-	Turn2( rwing52, x_axis, -55, MOVEANIMATIONSPEED*50 )	
+	Turn2( rwing52, x_axis, -55, MOVEANIMATIONSPEED*50 )
+	Turn2( lwing1, z_axis, 10, MOVEANIMATIONSPEED*20 )
+	Turn2( lwing1, y_axis, -25, MOVEANIMATIONSPEED*20 )
+	Turn2( rwing1, z_axis, -10, MOVEANIMATIONSPEED*20 )
+	Turn2( rwing1, y_axis, 25, MOVEANIMATIONSPEED*20 )	
 	--START BUILD CYCLE
 	Sleep(200)
 	while GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0 do
@@ -402,21 +418,21 @@ end
 
 local function RestoreAfterDelay()
 	Sleep( 5000)
-	Turn2( ruparm , y_axis, 0, MOVEANIMATIONSPEED*50 )
-	Turn2( luparm , y_axis, 0, MOVEANIMATIONSPEED*50 )
-	Turn2( rrot , x_axis, 90, MOVEANIMATIONSPEED*50 )
-	Turn2( lrot , x_axis, 90, MOVEANIMATIONSPEED*50 )
-	Turn2( rhand , y_axis, 0, MOVEANIMATIONSPEED*50 )
-	Turn2( rhand , z_axis, 0, MOVEANIMATIONSPEED*50 )
-	Turn2( lhand , y_axis, 0, MOVEANIMATIONSPEED*50 )
-	Turn2( lhand , z_axis, 0, MOVEANIMATIONSPEED*50 )	
-	Turn2( head, y_axis, 0, MOVEANIMATIONSPEED*25 )
-	Turn2( lfinger12, y_axis, -50, MOVEANIMATIONSPEED*6.59 )
-	Turn2( lfinger22, y_axis, -65, MOVEANIMATIONSPEED*9.07 )
-	Turn2( lfinger32, y_axis, -75, MOVEANIMATIONSPEED*74.42 )
-	Turn2( rfinger12, y_axis, 60, MOVEANIMATIONSPEED*10.2 )
-	Turn2( rfinger22, y_axis, 75, MOVEANIMATIONSPEED*9.76 )
-	Turn2( rfinger32, y_axis, 65, MOVEANIMATIONSPEED*6.63 )	
+	Turn2( ruparm , y_axis, 0, MOVEANIMATIONSPEED*70 )
+	Turn2( luparm , y_axis, 0, MOVEANIMATIONSPEED*70 )
+	Turn2( rrot , x_axis, 90, MOVEANIMATIONSPEED*70 )
+	Turn2( lrot , x_axis, 90, MOVEANIMATIONSPEED*70 )
+	Turn2( rhand , y_axis, 0, MOVEANIMATIONSPEED*70 )
+	Turn2( rhand , z_axis, 0, MOVEANIMATIONSPEED*70 )
+	Turn2( lhand , y_axis, 0, MOVEANIMATIONSPEED*70 )
+	Turn2( lhand , z_axis, 0, MOVEANIMATIONSPEED*70 )	
+	Turn2( head, y_axis, 0, MOVEANIMATIONSPEED*5 )
+	Turn2( lfinger12, y_axis, -50, MOVEANIMATIONSPEED*30 )
+	Turn2( lfinger22, y_axis, -65, MOVEANIMATIONSPEED*30 )
+	Turn2( lfinger32, y_axis, -75, MOVEANIMATIONSPEED*30 )
+	Turn2( rfinger12, y_axis, 60, MOVEANIMATIONSPEED*30 )
+	Turn2( rfinger22, y_axis, 75, MOVEANIMATIONSPEED*30 )
+	Turn2( rfinger32, y_axis, 65, MOVEANIMATIONSPEED*30 )	
 	attacking = false
 	return (0)
 end
@@ -449,7 +465,6 @@ local function RestoreForAim()
 end
 
 --weapon 1 -----------------------------------------------------------------
-
 function script.QueryWeapon1 ()
 	return emit_rgun	
 end
@@ -477,9 +492,7 @@ function script.Shot1()
 	return (0)
 end
 
-
 --weapon 2 -----------------------------------------------------------------
-
 function script.QueryWeapon2 (piecenum)
 	return emit_lgun	
 end
@@ -506,7 +519,6 @@ function script.Shot2()
 	return (0)
 end
 
-	
 function script.Killed(severity, corpsetype)
 
 	local px, py, pz = Spring.GetUnitPosition(unitID)

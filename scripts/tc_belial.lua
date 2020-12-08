@@ -148,16 +148,16 @@ local function BoredAnimation()
 		if not attacking then		
 			borednumber = math.random(50)
 			if (borednumber > 45) then
-				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED )
-				Turn2( head, y_axis, 25, MOVEANIMATIONSPEED*1.5 )			
+				Turn2( chest, y_axis, 30, MOVEANIMATIONSPEED )
+				Turn2( head, y_axis, 15, MOVEANIMATIONSPEED*1.5 )			
 				WaitForTurn( chest, y_axis )
 			elseif (borednumber < 5)then
-				Turn2( chest, y_axis, -100, MOVEANIMATIONSPEED )			
-				Turn2( head, y_axis, -10, MOVEANIMATIONSPEED*1.5 )	
+				Turn2( chest, y_axis, -30, MOVEANIMATIONSPEED )			
+				Turn2( head, y_axis, -15, MOVEANIMATIONSPEED*1.5 )	
 				WaitForTurn( chest, y_axis )
 			else 
-				Turn2( chest, y_axis, -50, MOVEANIMATIONSPEED )
-				Turn2( head, y_axis, 25, MOVEANIMATIONSPEED*1.5 )
+				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*2 )
+				Turn2( head, y_axis, 0, MOVEANIMATIONSPEED*1.5 )
 				WaitForTurn( chest, y_axis )				
 			end
 		end

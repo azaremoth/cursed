@@ -1,11 +1,8 @@
 local head = piece 'head'
 local pelvis = piece 'pelvis'
 local torso = piece 'torso'
--- local lfinger11 = piece 'lfinger11'
 local lfinger12 = piece 'lfinger12'
--- local lfinger21 = piece 'lfinger21'
 local lfinger22 = piece 'lfinger22'
--- local lfinger31 = piece 'lfinger31'
 local lfinger32 = piece 'lfinger32'
 local lhand = piece 'lhand'
 local rhand = piece 'rhand'
@@ -20,18 +17,12 @@ local lthigh = piece 'lthigh'
 local rwing1 = piece 'rwing1'
 local rwing2 = piece 'rwing2'
 local rwing31 = piece 'rwing31'
--- local rwing32 = piece 'rwing32'
 local rwing41 = piece 'rwing41'
 local rwing42 = piece 'rwing42'
--- local rwing43 = piece 'rwing43'
 local rwing51 = piece 'rwing51'
 local rwing52 = piece 'rwing52'
--- local rwing53 = piece 'rwing53'
--- local rfinger11 = piece 'rfinger11'
 local rfinger12 = piece 'rfinger12'
--- local rfinger21 = piece 'rfinger21'
 local rfinger22 = piece 'rfinger22'
--- local rfinger31 = piece 'rfinger31'
 local rfinger32 = piece 'rfinger32'
 local rhoof = piece 'rhoof'
 local rlarm = piece 'rlarm'
@@ -42,19 +33,15 @@ local rthigh = piece 'rthigh'
 local lwing1 = piece 'lwing1'
 local lwing2 = piece 'lwing2'
 local lwing31 = piece 'lwing31'
--- local lwing32 = piece 'lwing32'
 local lwing41 = piece 'lwing41'
 local lwing42 = piece 'lwing42'
--- local lwing43 = piece 'lwing43'
 local lwing51 = piece 'lwing51'
 local lwing52 = piece 'lwing52'
--- local lwing53 = piece 'lwing53'
 local tail1 = piece 'tail1'
 local tail3 = piece 'tail3'
 local tail5 = piece 'tail5'
 local tail7 = piece 'tail7'
 local tail9 = piece 'tail9'
-
 
 local base = piece 'base'
 local aimx1 = piece 'aimx1'
@@ -125,10 +112,16 @@ local function Walkscript()
 				Turn2( torso, z_axis, 7.1, MOVEANIMATIONSPEED*12.34 )
 				Turn2( torso, y_axis, 0, MOVEANIMATIONSPEED*25 )				
 			end
-Turn2( lwing1, x_axis, -100, MOVEANIMATIONSPEED*20 )
-Turn2( lwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
-Turn2( rwing1, x_axis, -50, MOVEANIMATIONSPEED*20 )
-Turn2( rwing2, x_axis, 0, MOVEANIMATIONSPEED*50 )
+			Turn2( lwing1, x_axis, -100, MOVEANIMATIONSPEED*20 )
+			Turn2( lwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
+			Turn2( lwing31, x_axis, -65, MOVEANIMATIONSPEED*50 )
+			Turn2( lwing41, x_axis, -50, MOVEANIMATIONSPEED*50 )
+			Turn2( lwing51, x_axis, -65, MOVEANIMATIONSPEED*80 )
+			Turn2( rwing1, x_axis, -50, MOVEANIMATIONSPEED*20 )
+			Turn2( rwing2, x_axis, 0, MOVEANIMATIONSPEED*50 )
+			Turn2( rwing31, x_axis, 30, MOVEANIMATIONSPEED*70 )
+			Turn2( rwing41, x_axis, 25, MOVEANIMATIONSPEED*70 )
+			Turn2( rwing51, x_axis, 65, MOVEANIMATIONSPEED*80 )
 			Turn2( lhoof, x_axis, 1.7, MOVEANIMATIONSPEED*72.34 )
 			Turn2( lleg, x_axis, 63.4, MOVEANIMATIONSPEED*75.41 )
 			Turn2( lthigh, x_axis, -65.1, MOVEANIMATIONSPEED*147.75 )
@@ -206,8 +199,11 @@ Turn2( rwing2, x_axis, 0, MOVEANIMATIONSPEED*50 )
 				Turn2( rshoulder, y_axis, -0.5, MOVEANIMATIONSPEED*6.93 )
 				Turn2( torso, z_axis, 5.3, MOVEANIMATIONSPEED*6.79 )				
 			end
-Turn2( rwing1, x_axis, -100, MOVEANIMATIONSPEED*20 )
-Turn2( rwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )		
+			Turn2( rwing1, x_axis, -100, MOVEANIMATIONSPEED*20 )
+			Turn2( rwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
+			Turn2( rwing31, x_axis, -65, MOVEANIMATIONSPEED*50 )
+			Turn2( rwing41, x_axis, -50, MOVEANIMATIONSPEED*50 )
+			Turn2( rwing51, x_axis, -65, MOVEANIMATIONSPEED*80 )		
 			Turn2( lhoof, x_axis, 16.3, MOVEANIMATIONSPEED*353.36 )
 			Turn2( lhoof, z_axis, 0, MOVEANIMATIONSPEED*101.14 )
 			Turn2( lhoof, y_axis, 0, MOVEANIMATIONSPEED*21.34 )
@@ -263,8 +259,11 @@ Turn2( rwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
 				Turn2( rshoulder, y_axis, 0.7, MOVEANIMATIONSPEED*1.45 )
 				Turn2( torso, z_axis, 1.4, MOVEANIMATIONSPEED*6.79 )				
 			end	
-Turn2( lwing1, x_axis, -50, MOVEANIMATIONSPEED*20 )
-Turn2( lwing2, x_axis, 0, MOVEANIMATIONSPEED*50 )		
+			Turn2( lwing1, x_axis, -50, MOVEANIMATIONSPEED*20 )
+			Turn2( lwing2, x_axis, 0, MOVEANIMATIONSPEED*50 )
+			Turn2( lwing31, x_axis, 30, MOVEANIMATIONSPEED*70 )
+			Turn2( lwing41, x_axis, 25, MOVEANIMATIONSPEED*70 )
+			Turn2( lwing51, x_axis, 60, MOVEANIMATIONSPEED*80 )
 			Turn2( lhoof, x_axis, -27.5, MOVEANIMATIONSPEED*63.21 )
 			Turn2( lleg, x_axis, 24.6, MOVEANIMATIONSPEED*9.82 )
 			Turn2( lthigh, x_axis, 2.9, MOVEANIMATIONSPEED*73.04 )
@@ -321,10 +320,16 @@ Turn2( lwing2, x_axis, 0, MOVEANIMATIONSPEED*50 )
 				Turn2( torso, y_axis, 0, MOVEANIMATIONSPEED*12.34 )
 				Turn2( torso, z_axis, 0, MOVEANIMATIONSPEED*12.34 )					
 			end
-	Turn2( lwing1, x_axis, -100, MOVEANIMATIONSPEED*50 )
-	Turn2( lwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
-	Turn2( rwing1, x_axis, -100, MOVEANIMATIONSPEED*50 )
-	Turn2( rwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )						
+			Turn2( lwing1, x_axis, -100, MOVEANIMATIONSPEED*50 )
+			Turn2( lwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
+			Turn2( rwing1, x_axis, -100, MOVEANIMATIONSPEED*50 )
+			Turn2( rwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
+			Turn2( lwing31, x_axis, -65, MOVEANIMATIONSPEED*30 )
+			Turn2( lwing41, x_axis, -50, MOVEANIMATIONSPEED*30 )
+			Turn2( lwing51, x_axis, -65, MOVEANIMATIONSPEED*80 )	
+			Turn2( rwing31, x_axis, -65, MOVEANIMATIONSPEED*30 )
+			Turn2( rwing41, x_axis, -50, MOVEANIMATIONSPEED*30 )
+			Turn2( rwing51, x_axis, -65, MOVEANIMATIONSPEED*80 )
 			Move( pelvis, y_axis, 0, MOVEANIMATIONSPEED*44.87 )
 			Turn2( lhoof, x_axis, 0, MOVEANIMATIONSPEED*353.36 )
 			Turn2( lhoof, y_axis, 0, MOVEANIMATIONSPEED*21.34 )
@@ -350,16 +355,16 @@ local function BoredAnimation()
 		if not attacking then		
 			borednumber = math.random(50)
 			if (borednumber > 45) then
-				Turn2( torso, y_axis, 0, MOVEANIMATIONSPEED*10 )
-				Turn2( head, y_axis, 25, MOVEANIMATIONSPEED*15 )			
+				Turn2( torso, y_axis, 30, MOVEANIMATIONSPEED*10 )
+				Turn2( head, y_axis, 10, MOVEANIMATIONSPEED*15 )			
 				WaitForTurn( torso, y_axis )
 			elseif (borednumber < 5)then
-				Turn2( torso, y_axis, -100, MOVEANIMATIONSPEED*10 )			
+				Turn2( torso, y_axis, -30, MOVEANIMATIONSPEED*10 )			
 				Turn2( head, y_axis, -10, MOVEANIMATIONSPEED*15 )	
 				WaitForTurn( torso, y_axis )
 			else 
-				Turn2( torso, y_axis, -50, MOVEANIMATIONSPEED*10 )
-				Turn2( head, y_axis, 25, MOVEANIMATIONSPEED*15 )
+				Turn2( torso, y_axis, 0, MOVEANIMATIONSPEED*30 )
+				Turn2( head, y_axis, 0, MOVEANIMATIONSPEED*25 )
 				WaitForTurn( torso, y_axis )				
 			end
 		end
@@ -382,16 +387,16 @@ function script.Create()
 	Turn2( lwing1, x_axis, -100, MOVEANIMATIONSPEED*50 )
 	Turn2( lwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
 	Turn2( lwing31, x_axis, -65, MOVEANIMATIONSPEED*50 )
-	Turn2( lwing41, x_axis, -85, MOVEANIMATIONSPEED*50 )
+	Turn2( lwing41, x_axis, -50, MOVEANIMATIONSPEED*50 )
 	Turn2( lwing42, x_axis, -55, MOVEANIMATIONSPEED*50 )
-	Turn2( lwing51, x_axis, -85, MOVEANIMATIONSPEED*50 )
+	Turn2( lwing51, x_axis, -65, MOVEANIMATIONSPEED*50 )
 	Turn2( lwing52, x_axis, -55, MOVEANIMATIONSPEED*50 )
 	Turn2( rwing1, x_axis, -100, MOVEANIMATIONSPEED*50 )
 	Turn2( rwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
 	Turn2( rwing31, x_axis, -65, MOVEANIMATIONSPEED*50 )
-	Turn2( rwing41, x_axis, -85, MOVEANIMATIONSPEED*50 )
+	Turn2( rwing41, x_axis, -50, MOVEANIMATIONSPEED*50 )
 	Turn2( rwing42, x_axis, -55, MOVEANIMATIONSPEED*50 )
-	Turn2( rwing51, x_axis, -85, MOVEANIMATIONSPEED*50 )
+	Turn2( rwing51, x_axis, -65, MOVEANIMATIONSPEED*50 )
 	Turn2( rwing52, x_axis, -55, MOVEANIMATIONSPEED*50 )
 	Turn2( lwing1, z_axis, 10, MOVEANIMATIONSPEED*20 )
 	Turn2( lwing1, y_axis, -25, MOVEANIMATIONSPEED*20 )
@@ -417,7 +422,7 @@ function script.StopMoving()
 end
 
 local function RestoreAfterDelay()
-	Sleep( 5000)
+	Sleep( 2000)
 	Turn2( ruparm , y_axis, 0, MOVEANIMATIONSPEED*70 )
 	Turn2( luparm , y_axis, 0, MOVEANIMATIONSPEED*70 )
 	Turn2( rrot , x_axis, 90, MOVEANIMATIONSPEED*70 )

@@ -105,7 +105,16 @@ local moveDefs = {
 		depthmod = 0.1,
 		slopemod = 10,		
 		crushStrength = 2500,
-	},	
+	},
+	MEGAHEAVYWALKER4X4 = {
+		footprintx = 4,
+		footprintz = 4,
+		maxwaterdepth = 40,
+		maxslope = 25,
+		depthmod = 0.1,
+		slopemod = 10,		
+		crushStrength = 50000,
+	},
 	TANK4X4 = {
 		footprintx = 4,
 		footprintz = 4,

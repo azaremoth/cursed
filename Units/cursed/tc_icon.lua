@@ -35,7 +35,7 @@ local unitDef = {
   defaultmissiontype = "Standby",
   description        = "Lord of Sins",
   --  energyMake         = "-5",
-  explodeAs          = "NULL",
+  explodeAs          = "SUICIDEBALL_BLAST",
   firestandorders    = "1",
   footprintX         = 4,
   footprintZ         = 4,
@@ -155,11 +155,11 @@ local weaponDefs = {
     turret             = true,
     weaponVelocity     = 1500,	
 	------------------------------------------
-    beamTime           = 0.75,
+    beamTime           = 0.9,
     coreThickness      = 1,
-    thickness          = 9,	
+    thickness          = 10,	
     largeBeamLaser     = true,
-    laserFlareSize     = 4,
+    laserFlareSize     = 3,
 	scrollSpeed 	   = 8,
 	tileLength         = 100,
 	pulseSpeed 		   = 2,
@@ -177,10 +177,10 @@ local weaponDefs = {
     explosionGenerator 		= "custom:AGARES_LASER",
 ------------------------------------------------------------	
   damage = {
-      default            = 300,
-      flyer              = (300*0.33),
-      heavy              = 300,
-      light              = (300*0.75),
+      default            = 500,
+      flyer              = 500,
+      heavy              = 500,
+      light              = (500*0.75),
     },
   },
 }

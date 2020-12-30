@@ -1,3 +1,9 @@
+>> Major changes 1.446 => 1.447
+
+Bugs:
+- fixed camera forcing on start position for skirmishes (was only intended for campaign missions)
+
+
 >> Major changes 1.444 => 1.446
 
 Polishing

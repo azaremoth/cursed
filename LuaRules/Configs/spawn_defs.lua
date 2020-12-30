@@ -13,9 +13,9 @@ playerMalus          = 1         -- how much harder it becomes for each addition
 lagTrigger           = 0.7       -- average cpu usage after which lag prevention mode triggers
 triggerTolerance     = 0.01      -- increase if lag prevention mode switches on and off too fast
 maxAge               = 5*60      -- chicken die at this age, seconds
-queenName            = "tc_dragonqueen"
+queenName            = "tc_icon"
 queenMorphName		 = ""
-miniQueenName		 = "tc_deathwalker"
+miniQueenName		 = "tc_dragonqueen"
 waveRatio            = 0.6       -- waves are composed by two types of chicken, waveRatio% of one and (1-waveRatio)% of the other
 baseWaveSize		 = 2.00		 -- multiplied by malus, 1 = 1 squadSize of chickens
 waveSizeMult		 = 1

@@ -280,7 +280,7 @@ local function SpawnstartFaction(teamID)
 	-- get the team startup info
 	local side = GG.teamside[teamID] or "imperials"
 	local ai = select(4, Spring.GetTeamInfo(teamID))
-	local teamInfo = teamID and select(7, Spring.GetTeamInfo(teamID))
+	local teamInfo = teamID and select(8, Spring.GetTeamInfo(teamID))
 	local IsChickenAI = false
 	if (ai and ChickenAIs[Spring.GetTeamLuaAI(teamID)]) then
 		IsChickenAI = true
@@ -337,11 +337,11 @@ end
 
 local function SetStartingResources(teamID)
 	-- set start resources, either from mod options or custom team keys
-	local teamOptions = select(7, Spring.GetTeamInfo(teamID))
+	local teamOptions = select(8, Spring.GetTeamInfo(teamID))
 	local m = modOptions.startmetal or teamOptions.startmetal or 1000
 	local e = modOptions.startenergy or teamOptions.startenergy or 1000
 	if campaignBattleID then
-		local customKeys = select(7, Spring.GetTeamInfo(teamID))
+		local customKeys = select(8, Spring.GetTeamInfo(teamID))
 		local campaignStartmetal = customKeys.start_metal
 		if campaignStartmetal then
 			m = campaignStartmetal

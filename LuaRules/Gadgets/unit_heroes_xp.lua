@@ -70,7 +70,7 @@ function gadget:Initialize()
 		-------- Needed for campaign only
 		local campaignHeroLevel = 1
 		if campaignBattleID then
-			local customKeys = select(7, Spring.GetTeamInfo(team))
+			local customKeys = select(8, Spring.GetTeamInfo(team))
 			if customKeys then
 				campaignHeroLevel = tonumber(customKeys.static_level)
 				if campaignHeroLevel then

@@ -58,7 +58,7 @@ buildingGroundDecalDecaySpeed = 0.2,
   TEDClass           = "ENERGY",
   unitname           = "euf_powerplant",
   useBuildingGroundDecal = true,
-  yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo oooooo oooooo oooooo oooooo oooooo oooooo",
+  yardMap            = "oooooo oooooo oooooo oooooo oooooo oooooo oooooo oooooo oooooo oooooo oooooo",
   sfxtypes = {
     explosiongenerators = {
       "custom:Powerplant_Explosion",

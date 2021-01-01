@@ -28,10 +28,6 @@ local campaignBattleID = modOptions.singleplayercampaignbattleid
 
 function widget:Update()
 	local t = Spring.GetGameSeconds()
-	if (select(3,Spring.GetPlayerInfo(Spring.GetMyPlayerID(),false)) or t > runtimesec) then
-		widgetHandler:RemoveWidget(self)
-		return
-	end
 	if (t > 0 and t < runtimesec) then
 		local unitArray = Spring.GetTeamUnits(Spring.GetMyTeamID())
 		if unitArray[1] and go then
@@ -58,6 +54,10 @@ function widget:Update()
 			end
 		end
 	end
+	if (select(3,Spring.GetPlayerInfo(Spring.GetMyPlayerID(),false)) or t > runtimesec) then
+		widgetHandler:RemoveWidget(self)
+		return
+	end	
 end
 
 

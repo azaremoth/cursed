@@ -146,10 +146,13 @@ local chickenTypes = {
   tc_rictus 			=  {time = 15, squadSize = 0.3},
   tc_mancubus			=  {time = 15, squadSize = 0.4},
   
-  tc_purgatory_ai		=  {time = 30, squadSize = 0.2},
+  tc_purgatory_ai		=  {time = 25, squadSize = 0.2},
+  tc_mancubus			=  {time = 25, squadSize = 0.6},
   
-  tc_belial				=  {time = 36, squadSize = 0.3},
+  tc_belial				=  {time = 30, squadSize = 0.3},
 
+  tc_deathwalker		=  {time = 35, squadSize = 0.15},
+  
   tc_dragon				=  {time = 40, squadSize = 0.15},
   
   tc_shade			=  {time = 5, squadSize = 0.01},
@@ -159,14 +162,15 @@ local chickenTypes = {
   tc_shade			=  {time = 15, squadSize = 0.01},
   tc_shade			=  {time = 20, squadSize = 0.01},
   tc_shade			=  {time = 25, squadSize = 0.01},
-  tc_shade			=  {time = 30, squadSize = 0.01},
-  tc_shade			=  {time = 36, squadSize = 0.01},
+  tc_shade_lvl10	=  {time = 30, squadSize = 0.01},
+  tc_shade_lvl10	=  {time = 35, squadSize = 0.01},
   
 }
 
 local defenders = {
   tc_defender_survival 	= {time = 5, squadSize = 0.5 },
-  tc_tower_survival 	= {time = 20,  squadSize = 0.4}, 
+  tc_hellfire_survival 	= {time = 15,  squadSize = 0.4}, 
+  tc_tower_survival 	= {time = 20,  squadSize = 0.4},   
   tc_witch_shield 		= {time = 30,  squadSize = 0.2},
 }
 
@@ -175,8 +179,6 @@ local supporters = {
   tc_lich 				=  {time = 30, squadSize = 0.2},
 }
 
--- TODO
--- cooldown is in waves
 local specialPowers = {
 	--{name = "Digger Ambush", maxAggro = -2, time = 15, obsolete = 40, unit = "chicken_digger", burrowRatio = 1.25, minDist = 100, maxDist = 450, cooldown = 3, targetHuman = true},
 	--{name = "Wurmsign", maxAggro = -3, time = 40, unit = "chickenwurm", burrowRatio = 0.2, cooldown = 4},

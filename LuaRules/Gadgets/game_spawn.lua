@@ -280,14 +280,15 @@ local function SpawnstartFaction(teamID)
 	-- get the team startup info
 	local side = GG.teamside[teamID] or "imperials"
 	local ai = select(4, Spring.GetTeamInfo(teamID))
-	local teamInfo = teamID and select(8, Spring.GetTeamInfo(teamID))
+	local customKeys = teamID and select(8, Spring.GetTeamInfo(teamID))
+	if (type(customKeys) ~= "table") then customKeys = select(7, Spring.GetTeamInfo(teamID, true)) end --for Spring 104 compatibility	
+
 	local IsChickenAI = false
 	if (ai and ChickenAIs[Spring.GetTeamLuaAI(teamID)]) then
 		IsChickenAI = true
 	end
 
 	local startPosIsFine = CheckValidStartPositions() -- Check if positions are set right
-
 	local x = Game.mapSizeX / 2
 	local z = Game.mapSizeZ / 2
 	local y = Spring.GetGroundHeight(x,z)
@@ -295,13 +296,12 @@ local function SpawnstartFaction(teamID)
 	if (startPosIsFine == true) then
 		x,y,z = Spring.GetTeamStartPosition(teamID)
 	else
-		x,y,z = GetStartPos(teamID, teamInfo, ai)
+		x,y,z = GetStartPos(teamID, customKeys, ai)
 	end
 	
 	if	(ai and Game.startPosType == 2) then -- AIs are not able to choose starting position in boxes
 		x,y,z = getPositionInStartBox(teamID)
 	end
-
 
 	if Spring.GetModOptions().cheatingai ~= nil then
 		cheatAItype = Spring.GetModOptions().cheatingai
@@ -337,11 +337,11 @@ end
 
 local function SetStartingResources(teamID)
 	-- set start resources, either from mod options or custom team keys
-	local teamOptions = select(8, Spring.GetTeamInfo(teamID))
-	local m = modOptions.startmetal or teamOptions.startmetal or 1000
-	local e = modOptions.startenergy or teamOptions.startenergy or 1000
+	local customKeys = select(8, Spring.GetTeamInfo(teamID))
+	if (type(customKeys) ~= "table") then customKeys = select(7, Spring.GetTeamInfo(teamID, true)) end --for Spring 104 compatibility		
+	local m = modOptions.startmetal or customKeys.startmetal or 1000
+	local e = modOptions.startenergy or customKeys.startenergy or 1000
 	if campaignBattleID then
-		local customKeys = select(8, Spring.GetTeamInfo(teamID))
 		local campaignStartmetal = customKeys.start_metal
 		if campaignStartmetal then
 			m = campaignStartmetal

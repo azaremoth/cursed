@@ -257,7 +257,7 @@ local function UpdateRules()
 	queenTimeReduction = math.max(queenTimeReduction, 0)
 	
 	local tooltipAnger = "Killing a burrow (at current PAR) reduces time remaining by ".. ("%.1f"):format(queenTimeReduction) .." seconds"
-	if miniQueenTime then tooltipAnger = tooltipAnger .. "\nDragon Queen arrives at ".. FormatTime(math.floor(gameInfo.queenTime * miniQueenTime)) .. " (".. math.floor(miniQueenTime*100) .."%)" end
+	if miniQueenTime then tooltipAnger = tooltipAnger .. "\nLord of Sins arrives at ".. FormatTime(math.floor(gameInfo.queenTime * miniQueenTime)) .. " (".. math.floor(miniQueenTime*100) .."%)" end
 	label_anger.tooltip = tooltipAnger
 		
 	local techTime = -gameInfo["humanAggro"]

@@ -1,8 +1,8 @@
 >> Major changes 1.446 => 1.447
 
 Bugs:
-- fixed camera forcing on start position for skirmishes (was only intended for campaign missions)
 - fixed lua code pieces not being compatible with Spring 105
+- fixed camera forced on start position always in the first seconds of the game (was only intended for campaign missions)
 
 Features
 - added the Lord of Sins (big bad-ass demon) as final boss for the survival game mode and did adapt the spawning accordingly

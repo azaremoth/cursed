@@ -34,7 +34,6 @@ end
 
 
 if (killstragglers == "1" and kothisactive == false) then
-
 	
 	local NonChickenAITeams = {}
 	local AIbuildings = {}

@@ -130,15 +130,17 @@ local chickenTypes = {
   tc_ghoul				=  {time =  -60, squadSize = 1.4, obsolete = 30},
   tc_undeadmarine_melee	=  {time =  -60, squadSize = 1.2, obsolete = 30},
 
-  tc_skeleton			=  {time =  5, squadSize = 0.2, obsolete = 30},
+  tc_skeleton			=  {time = 5, squadSize = 0.2, obsolete = 30},
   tc_gunner       		=  {time = 5, squadSize = 0.8, obsolete = 30},
   
   tc_mage				=  {time = 7, squadSize = 0.5},
   tc_bonebeast			=  {time = 7, squadSize = 0.5, obsolete = 40},
+  bug_med_undead		=  {time = 7, squadSize = 0.5, obsolete = 30},  
   
-  tc_enforcer			=  {time = 9, squadSize = 1.0, obsolete = 30},
+  tc_enforcer			=  {time = 9, squadSize = 1.0},
+  bug_big_undead		=  {time = 7, squadSize = 0.5},  
   
-  tc_undeadmarine_gun	=  {time = 10, squadSize = 0.4, obsolete = 30},
+  tc_undeadmarine_gun	=  {time = 10, squadSize = 0.6, obsolete = 30},
   tc_redeemer			=  {time = 10, squadSize = 0.3},
   tc_blade				=  {time = 10, squadSize = 0.3},
   

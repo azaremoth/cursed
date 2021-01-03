@@ -39,7 +39,7 @@ function script.Create()
 	else	
 			local newFeatureID = Spring.CreateFeature('tc_wall_lvl2_2', x, y, z, heading, teamID)
 	end
-	
+	Spring.DestroyUnit(unitID, false, false, unitID)
 end
 	
 function script.Killed( damage, health )

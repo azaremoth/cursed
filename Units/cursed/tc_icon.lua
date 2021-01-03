@@ -169,7 +169,7 @@ local weaponDefs = {
     texture4           = "flash1",
     weaponType         = "BeamLaser",
 ------------------------------------------------------------
-    areaOfEffect       		= 48,	
+    areaOfEffect       		= 64,	
 	range                   = 900,
     reloadtime 				= 1.5,
 	rgbColor           		= {0.45, 1, 0.1},

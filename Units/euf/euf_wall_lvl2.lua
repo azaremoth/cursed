@@ -1,4 +1,3 @@
--- UNITDEF -- euf_wall_lvl2 --
 --------------------------------------------------------------------------------
 
 local unitName = "euf_wall_lvl2"
@@ -17,15 +16,12 @@ local unitDef = {
   collisionVolumeScales 	= "80 70 10",
   collisionVolumeOffsets 	= "0 0 5",
   -- collisionVolumeTest 		= 1,  
-  
-  corpse             = "euf_wall_lvl2_dead",    
-    customParams          = {	factionname		   = "imperials",  },
+  customParams          = {	factionname		   = "imperials",  },
   description        = "Heavy wall",
   footprintX         = 5,
   footprintZ         = 1,
   idleAutoHeal       = 0.01,
   idleTime           = 400,
-  isFeature          = true,
   levelGround        = false,
   maxDamage          = 6000,
   maxSlope           = 15,
@@ -43,47 +39,14 @@ local unitDef = {
   TEDClass           = "FORT",
   unitname           = "euf_wall_lvl2",
   yardMap            = "fffff",
-  explodeAs          = "NULL",
-  selfDestructAs     = "NULL",  
+  explodeAs          = "SMOKE_EXPLOSION",
+  selfDestructAs     = "SMOKE_EXPLOSION",
   sfxtypes = {
     explosiongenerators = {
       "custom:EUF_Structurebuilding_Small",
     },
   },
 }
-
---------------------------------------------------------------------------------
-
-local featureDefs = {
-  euf_wall_lvl2_dead = {	
-	resurrectable	   = 0,  
-    category         = [[dragonteeth]],
-    nodrawundergray  = true,  
-    autoreclaimable    = "0",
-    blocking           = true,
-	mass			   = 10000,
-	customparams = { 
-		normaltex 		   	= "unittextures/normalmaps/atlas_euf_buildings_normal.png",
-		normalmaps 		   	= "yes",
-	}, 	
-  collisionVolumeType 		= "Box",
-  collisionVolumeScales 	= "80 70 10",
-  collisionVolumeOffsets 	= "0 0 5",	
-    damage             = 10000,
-    description        = "Defensewall",
-    footprintX         = 5,
-    footprintZ         = 1,
-    height             = "15",
-    hitdensity         = "10000",
-    metal              = 20,
-    object             = "euf_wall_lvl2.s3o",
-    reclaimable        = true,
-    upright            = true,
-    world              = "allworld",
-  },
-}
-unitDef.featureDefs = featureDefs
-
 
 --------------------------------------------------------------------------------
 

@@ -13,7 +13,13 @@ function script.Create()
 		Sleep(100)
 	end
 	Move( wall, y_axis, 0, 1000 )
-	Sleep(500)
+
+	local x, y, z = Spring.GetUnitPosition(unitID)
+	local teamID = Spring.GetUnitTeam(unitID)
+	local heading = Spring.GetUnitHeading(unitID)
+	
+	local wall = Spring.CreateFeature("euf_wall_lvl2", x, y, z, heading, teamID)
+	Spring.DestroyUnit(unitID, false, false, unitID)
 end
 	
 function script.Killed( damage, health )

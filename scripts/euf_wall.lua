@@ -18,6 +18,7 @@ function script.Create()
 		else
 			local wall3 = Spring.CreateFeature("euf_wall_lvl1_3", x, y, z, math.random(0, 3), team)	
 		end
+	Spring.DestroyUnit(unitID, false, false, unitID)
 end
 	
 function script.Killed( damage, health )

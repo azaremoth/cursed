@@ -1,7 +1,7 @@
->> Major changes 1.446 => 1.447
+>> Major changes 1.446 => 1.448
 
 Bugs:
-- fixed lua code pieces not being compatible with Spring 105
+- fixed lua code pieces not being compatible with Spring 105 (handling of customparas and defense walls)
 - fixed camera forced on start position always in the first seconds of the game (was only intended for campaign missions)
 
 Features

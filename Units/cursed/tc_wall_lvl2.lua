@@ -16,14 +16,12 @@ local unitDef = {
   collisionVolumeScales 	= "80 70 10",
   collisionVolumeOffsets 	= "0 0 5",
   -- collisionVolumeTest 		= 1,  
-  
-    customParams          = {	factionname		   = "cursed",  },
+  customParams          = {	factionname		   = "cursed",  },
   description        = "Defensive Wall",
   footprintX         = 5,
   footprintZ         = 1,
   idleAutoHeal       = 0.01,
   idleTime           = 400,
-  isFeature          = true,
   levelGround        = false,
   maxDamage          = 6000,
   maxSlope           = 15,
@@ -41,8 +39,8 @@ local unitDef = {
   TEDClass           = "FORT",
   unitname           = "tc_wall_lvl2",
   yardMap            = "fffff",
-  explodeAs          = "NULL",
-  selfDestructAs     = "NULL",  
+  explodeAs          = "SMOKE_EXPLOSION",
+  selfDestructAs     = "SMOKE_EXPLOSION",  
   sfxtypes = {
     explosiongenerators = {
       "custom:Structurebuilding_Medium",

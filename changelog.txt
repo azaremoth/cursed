@@ -7,6 +7,9 @@ Bugs:
 Features
 - added the Lord of Sins (big bad-ass demon) as final boss for the survival game mode and did adapt the spawning accordingly
 
+Balance
+- The cursed heart will not produce metal anymore
+
 
 
 >> Major changes 1.444 => 1.446

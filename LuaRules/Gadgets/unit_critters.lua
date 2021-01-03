@@ -17,7 +17,7 @@ local modOptions = Spring.GetModOptions()
 local cittersenabled = modOptions.critters
 local campaignBattleID = Spring.GetModOptions().singleplayercampaignbattleid
 
-if (cittersenabled == nil) or campaignBattleID then
+if (cittersenabled == nil) or (cittersenabled == "0") or campaignBattleID then
 	cittersenabled = false
 end
 

@@ -1,13 +1,15 @@
 idleCount = 0
 maxIdleCount = 8000
 
-function Turn2(piecenum,axis, degrees, speed)
-	local radians = degrees * 3.1415 / 180
-	if speed then
-		local speed1 = speed * 3.1415 / 180
-		Turn(piecenum, axis, radians, speed1) 
-	else
-		Turn(piecenum, axis, radians ) 
+function Turn2(piecenum, axis, degrees, speed)
+	if (piecenum ~= nil and axis ~= nil and degrees ~= nil) then
+		local radians = degrees * 3.1415 / 180
+		if speed then
+			local speed1 = speed * 3.1415 / 180
+			Turn(piecenum, axis, radians, speed1) 
+		else
+			Turn(piecenum, axis, radians ) 
+		end
 	end
 end
 

@@ -212,8 +212,11 @@ end
 
 ---- Chicken Spawns -------------------------------------------
 local function SpawnChicken (teamID, x, y, z)
-	local zero = Spring.CreateUnit("tc_cursedhand_survival", x-50,y,z+50, math.random(3), teamID)
-	local one = Spring.CreateUnit("tc_cursedhand_survival", x+100,y,z-100, math.random(3), teamID)	
+	local zero = Spring.CreateUnit("tc_cursedhand_survival", x-75,y,z-75, math.random(3), teamID)
+	local one = Spring.CreateUnit("tc_cursedhand_survival", x+75,y,z+75, math.random(3), teamID)
+	local two = Spring.CreateUnit("tc_hellfire_survival", x+75,y,z-75, math.random(3), teamID)
+	local three = Spring.CreateUnit("tc_hellfire_survival", x-75,y,z+75, math.random(3), teamID)
+	local three = Spring.CreateUnit("tc_witch_survival", x,y,z, math.random(3), teamID)
 end
 
 ---- Cursed Spawns -------------------------------------------

@@ -171,9 +171,9 @@ local chickenTypes = {
 
 local defenders = {
   tc_defender_survival 	= {time = 5, squadSize = 0.5 },
-  tc_hellfire_survival 	= {time = 15,  squadSize = 0.4}, 
-  tc_tower_survival 	= {time = 20,  squadSize = 0.4},   
-  tc_witch_shield 		= {time = 30,  squadSize = 0.2},
+  tc_hellfire_survival 	= {time = 15,  squadSize = 0.2}, 
+  tc_tower_survival 	= {time = 20,  squadSize = 0.3},   
+  tc_witch_survival		= {time = 20,  squadSize = 0.2},
 }
 
 local supporters = {

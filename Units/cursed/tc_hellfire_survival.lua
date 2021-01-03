@@ -35,7 +35,7 @@ local unitDef = {
   },
   defaultmissiontype = "GUARD_NOMOVE",
   description        = "Artillery Defense Tower",
-  --  energyMake         = "-5",
+  energyMake         = 20,
   explodeAs          = "MEDIUM_EXPLOSION_GREEN",
   firestandorders    = "1",
   footprintX         = 5,

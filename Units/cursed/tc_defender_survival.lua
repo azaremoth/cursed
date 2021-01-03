@@ -36,7 +36,7 @@ local unitDef = {
   },
   defaultmissiontype = "GUARD_NOMOVE",
   description        = "Light Defense Tower",
-  energyMake         = "5",
+  energyMake         = 20,
   explodeAs          = "MEDIUM_EXPLOSION_GREEN",
   firestandorders    = "1",
   footprintX         = 3,
@@ -98,9 +98,9 @@ local unitDef = {
   },
   weapons = {
     [1]  = {
-      def                = "DEFENDERGUN_NOCOST",
-	  badTargetCategory = "HEAVYARMOR LAND",
-      onlyTargetCategory = "LAND AIR",
+      name                = "DEFENDERGUN_NOCOST",
+	  badTargetCategory   = "HEAVYARMOR LAND",
+      onlyTargetCategory  = "LAND AIR",
     },
   },
 }

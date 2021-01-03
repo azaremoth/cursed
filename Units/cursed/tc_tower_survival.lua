@@ -35,7 +35,7 @@ local unitDef = {
   },
   defaultmissiontype = "GUARD_NOMOVE",
   description        = "Heavy Defense Tower",
-  --  energyMake         = "-10",
+  energyMake         = 20,
   explodeAs          = "SMALL_EXPLOSION_GREEN",
   firestandorders    = "1",
   footprintX         = 3,

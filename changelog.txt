@@ -3,6 +3,8 @@
 Bugs:
 - fixed lua code pieces not being compatible with Spring 105 (handling of customparas and defense walls)
 - fixed camera forced on start position always in the first seconds of the game (was only intended for campaign missions)
+- fixed spawned defender towers not shooting in survival mode for survival AI
+- fixed critter spawning not being deactivated by respective mod option
 
 Features
 - added the Lord of Sins (big bad-ass demon) as final boss for the survival game mode and did adapt the spawning accordingly

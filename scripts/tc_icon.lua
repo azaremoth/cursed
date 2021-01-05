@@ -53,7 +53,9 @@ local emit_summon = piece 'emit_summon'
 local emit_rleg = piece 'emit_rleg' 
 local emit_lleg = piece 'emit_lleg'
 
-local RandomNumber2, moving, attacking, MOVEANIMATIONSPEED, MOVEANIMATIONSLEEPTIME
+local moving = false
+local attacking = false
+local MOVEANIMATIONSPEED
 
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4

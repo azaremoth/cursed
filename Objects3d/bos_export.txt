@@ -1,3 +1,0 @@
-// Generated for D:\Spiele\Spring-105\games\cursed.sdd\Objects3d\euf_walker.blend
-// Using https://github.com/Beherith/Skeletor_S3O 
-// this animation uses the static-var animSpeed which contains how many frames each keyframe takes

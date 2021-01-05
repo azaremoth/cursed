@@ -75,13 +75,7 @@ local function Turn2(piecenum, axis, degrees, speed)
 end
 
 local function SetMoveAnimationSpeed()
---	Spring.Echo("GetUnitValue(COB.MAX_SPEED)")
---	Spring.Echo(GetUnitValue(COB.MAX_SPEED))
---	MOVEANIMATIONSPEED = 1
---	MOVEANIMATIONSLEEPTIME = 100
-	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/200000) -- org. divisor 85196
---	Spring.Echo("MOVEANIMATIONSPEED")
---	Spring.Echo(MOVEANIMATIONSPEED)
+	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/200000)
 	if MOVEANIMATIONSPEED < 0.05 then 
 		MOVEANIMATIONSPEED = 0.05
 	end

@@ -21,7 +21,9 @@ local emit_lleg = piece 'emit_lleg'
 local emit_groundflash_r = piece 'emit_groundflash_r' 
 local emit_groundflash_l = piece 'emit_groundflash_l' 
 
-local RandomNumber2, moving, attacking, MOVEANIMATIONSPEED
+local moving = false
+local attacking = false
+local MOVEANIMATIONSPEED
 
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4
@@ -45,15 +47,11 @@ local function Turn2(piecenum,axis, degrees, speed)
 end
 
 local function SetMoveAnimationSpeed()
-	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/1900)
-	MOVEANIMATIONSLEEPTIME = (20000000/GetUnitValue(COB.MAX_SPEED))
-	--if statements inside walkscript contain wait functions that can take forever if speed is too slow
-	if MOVEANIMATIONSPEED < 50 then 
-		MOVEANIMATIONSPEED = 50
+	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/180000) --200000
+	if MOVEANIMATIONSPEED < 0.05 then 
+		MOVEANIMATIONSPEED = 0.05
 	end
-	if MOVEANIMATIONSLEEPTIME > 500 then 
-		MOVEANIMATIONSLEEPTIME = 500
-	end
+	MOVEANIMATIONSLEEPTIME = 80/MOVEANIMATIONSPEED --100
 end
 
 -- Walk Motion
@@ -62,81 +60,82 @@ local function Walkscript()
 		if moving then 
 --			SetSignalMask(SIG_WALK)	
 			SetMoveAnimationSpeed()
+			Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*55 )
+			Turn2( head, y_axis, 0, MOVEANIMATIONSPEED*60 )			
 			if not attacking then
-				Turn( luparm , x_axis, math.rad(-25), math.rad(MOVEANIMATIONSPEED*0.8) )
-			end
-			Turn( rleg1 , x_axis, math.rad(-30), math.rad(MOVEANIMATIONSPEED) )
-			Turn( rleg2 , x_axis, math.rad(40), math.rad(MOVEANIMATIONSPEED*1.6) )
-			Move( pelvis , y_axis, 0.3 , 8 )
-			WaitForTurn(lleg1, x_axis)
-			Sleep(MOVEANIMATIONSLEEPTIME)			
-		end
-		if moving then
-			if not attacking then
-				Turn( ruparm , x_axis, math.rad(15), math.rad(MOVEANIMATIONSPEED*0.8) )
-				Turn( chest , z_axis, math.rad(-(-2)), math.rad(MOVEANIMATIONSPEED) )
-				Turn( head , z_axis, math.rad(-(5)), math.rad(MOVEANIMATIONSPEED*0.3) )
+				Turn2( luparm , x_axis, 25, MOVEANIMATIONSPEED*75 )
+				Turn2( ruparm , x_axis, -35, MOVEANIMATIONSPEED*75 )				
 			end
 			EmitSfx( emit_lleg,  FOOTDUST )
-			Turn( lleg1 , x_axis, math.rad(20), math.rad(MOVEANIMATIONSPEED) )		
-			Turn2( pelvis, z_axis, -2, MOVEANIMATIONSPEED*0.3 )			
-			Turn( rleg1 , z_axis, math.rad(-(-5)), math.rad(MOVEANIMATIONSPEED*0.8) )
-			WaitForTurn(rleg2, x_axis)
-			Sleep(MOVEANIMATIONSLEEPTIME)			
-		end
-		if moving then
-			Turn( rleg2 , x_axis, math.rad(0 ), math.rad(MOVEANIMATIONSPEED*1.6) )
-			Move( pelvis , y_axis, 0 , 8 )
-			WaitForTurn(rleg1, x_axis)
-			Sleep(MOVEANIMATIONSLEEPTIME)					
+			Move( pelvis, y_axis, 3, MOVEANIMATIONSPEED*25 )			
+			Turn2( lleg1, x_axis, 10.5, MOVEANIMATIONSPEED*79.91 )
+			Turn2( lleg2, x_axis, -10.8, MOVEANIMATIONSPEED*67.38 )
+			Turn2( lleg3, x_axis, 0.5, MOVEANIMATIONSPEED*147.29 )
+			Turn2( rleg1, x_axis, -26.7, MOVEANIMATIONSPEED*221.14 )
+			Turn2( rleg2, x_axis, 1.9, MOVEANIMATIONSPEED*148.02 )
+			Turn2( rleg3, x_axis, 25.5, MOVEANIMATIONSPEED*73.13 )
+			Sleep(MOVEANIMATIONSLEEPTIME*4.65)
 		end
 		if moving then
 			if not attacking then
-				Turn( ruparm , x_axis, math.rad(-25), math.rad(MOVEANIMATIONSPEED*0.8) )
-				Turn( chest , z_axis, math.rad(-(2)), math.rad(MOVEANIMATIONSPEED) )
-				Turn( head , z_axis, math.rad(-(-5)), math.rad(MOVEANIMATIONSPEED*0.3) )
+				Turn2( chest , z_axis, 3, MOVEANIMATIONSPEED*15 )
+				Turn2( head , z_axis, -5, MOVEANIMATIONSPEED*22 )
+			end
+			Move( pelvis, y_axis, 0, MOVEANIMATIONSPEED*10 )			
+			Turn2( lleg1, x_axis, 62.3, MOVEANIMATIONSPEED*172.62 )
+			Turn2( lleg2, x_axis, -44.4, MOVEANIMATIONSPEED*112.17 )
+			Turn2( lleg3, x_axis, -17.6, MOVEANIMATIONSPEED*60.44 )
+			Turn2( rleg2, x_axis, -40.3, MOVEANIMATIONSPEED*140.58 )
+			Turn2( rleg3, x_axis, 67.6, MOVEANIMATIONSPEED*140.28 )
+			Sleep(MOVEANIMATIONSLEEPTIME*2.99)
+		end
+		if moving then
+			if not attacking then
+				Turn2( luparm , x_axis, -35, MOVEANIMATIONSPEED*75 )
+				Turn2( ruparm , x_axis, 25, MOVEANIMATIONSPEED*75 )
 			end
 			EmitSfx( emit_rleg,  FOOTDUST )
-			Turn( rleg1 , x_axis, math.rad(20), math.rad(MOVEANIMATIONSPEED) )
-			Turn2( pelvis, z_axis, 2, MOVEANIMATIONSPEED*0.3 )		
-			Turn( lleg1 , z_axis, math.rad(-(5)), math.rad(MOVEANIMATIONSPEED*0.8) )
---			Turn( rleg1 , z_axis, math.rad(-(10)), math.rad(MOVEANIMATIONSPEED*0.8) )
-			WaitForTurn(lleg1, x_axis)
-			Sleep(MOVEANIMATIONSLEEPTIME)					
+			Move( pelvis, y_axis, 3, MOVEANIMATIONSPEED*25 )			
+			Turn2( lleg1, x_axis, -32.7, MOVEANIMATIONSPEED*178.24 )
+			Turn2( lleg2, x_axis, 7.7, MOVEANIMATIONSPEED*97.77 )
+			Turn2( lleg3, x_axis, 25.3, MOVEANIMATIONSPEED*80.47 )
+			Turn2( rleg1, x_axis, 20.8, MOVEANIMATIONSPEED*88.75 )
+			Turn2( rleg2, x_axis, -16.8, MOVEANIMATIONSPEED*44.08 )
+			Turn2( rleg3, x_axis, -3.3, MOVEANIMATIONSPEED*132.83 )
+			Sleep(MOVEANIMATIONSLEEPTIME*5.32)
 		end
 		if moving then
 			if not attacking then
-				Turn( luparm , x_axis, math.rad(15), math.rad(MOVEANIMATIONSPEED*0.8) )
+				Turn2( chest , z_axis, -3, MOVEANIMATIONSPEED*15 )
+				Turn2( head , z_axis, 5, MOVEANIMATIONSPEED*22 )				
 			end
-			Turn( lleg1 , x_axis, math.rad(-30), math.rad(MOVEANIMATIONSPEED) )
-			Turn( lleg2 , x_axis, math.rad(40), math.rad(MOVEANIMATIONSPEED*1.6) )
-			Move( pelvis , y_axis, 0.3 , 8 )
-			WaitForTurn(lleg2, x_axis)
-			Sleep(MOVEANIMATIONSLEEPTIME)					
-		end
-		if moving then 
-			Turn( lleg2 , x_axis, math.rad(0 ), math.rad((MOVEANIMATIONSPEED*1.6)) )
-			Move( pelvis , y_axis, 0 , 8 )
-			WaitForTurn(rleg1, x_axis)
-			Sleep(MOVEANIMATIONSLEEPTIME)					
+			Move( pelvis, y_axis, 0, MOVEANIMATIONSPEED*10 )			
+			Turn2( lleg1, x_axis, -27.7, MOVEANIMATIONSPEED*16.89 )
+			Turn2( lleg2, x_axis, -38.4, MOVEANIMATIONSPEED*153.54 )
+			Turn2( lleg3, x_axis, 66.3, MOVEANIMATIONSPEED*136.66 )
+			Turn2( rleg1, x_axis, 75.5, MOVEANIMATIONSPEED*182.43 )
+			Turn2( rleg2, x_axis, -66, MOVEANIMATIONSPEED*164.12 )
+			Turn2( rleg3, x_axis, -8.8, MOVEANIMATIONSPEED*18.31 )
+			Sleep(MOVEANIMATIONSLEEPTIME*2.99)		
 		end
 		if not moving then 
-			if not attacking then	
-				Turn( luparm , x_axis, math.rad(-15), math.rad(MOVEANIMATIONSPEED*1.2) )
-				Turn( ruparm , x_axis, math.rad(-15), math.rad(MOVEANIMATIONSPEED*1.2) )
-				Turn( gun , x_axis, math.rad(60), math.rad(MOVEANIMATIONSPEED*1.2) )
-				Turn( rocketgun , x_axis, math.rad(60), math.rad(MOVEANIMATIONSPEED*1.2) )		
-				Turn( chest , z_axis, math.rad(-(0)), math.rad(MOVEANIMATIONSPEED) )
-				Turn( head , z_axis, math.rad(-(0)), math.rad(MOVEANIMATIONSPEED*0.3) )
+			if not attacking then
+				Turn2( luparm , x_axis, 15, 20 )
+				Turn2( luparm , y_axis, 0, 10 )			
+				Turn2( ruparm , x_axis, 15, 20 )
+				Turn2( ruparm , y_axis, 0, 10 )	
+				Turn2( gun , x_axis, 45, 20 )
+				Turn2( rocketgun , x_axis, 45, 20 )	
+				Turn2( chest , z_axis, 0, 20 )
+				Turn2( head , z_axis, 0, 20 )				
 			end					
-			Turn( rleg1 , x_axis, math.rad(0 ), math.rad(MOVEANIMATIONSPEED) )
-			Turn( lleg1 , x_axis, math.rad(0 ), math.rad(MOVEANIMATIONSPEED) )
-			Turn( rleg2 , x_axis, math.rad(0 ), math.rad(MOVEANIMATIONSPEED*1.6) )
-			Turn( lleg2 , x_axis, math.rad(0 ), math.rad(MOVEANIMATIONSPEED*1.6) )
-			Turn2( pelvis, z_axis, 0, MOVEANIMATIONSPEED*0.3 )		
-			Turn( lleg1 , z_axis, math.rad(-(0 )), math.rad(MOVEANIMATIONSPEED*0.8) )
-			Turn( rleg1 , z_axis, math.rad(-(0 )), math.rad(MOVEANIMATIONSPEED*0.8) )
-			Move( pelvis , y_axis, 0 , 8 )
+			Move( pelvis, y_axis, 0, MOVEANIMATIONSPEED*10 )
+			Turn2( lleg1, x_axis, 0, MOVEANIMATIONSPEED*178.24 )
+			Turn2( lleg2, x_axis, 0, MOVEANIMATIONSPEED*153.54 )
+			Turn2( lleg3, x_axis, 0, MOVEANIMATIONSPEED*147.29 )
+			Turn2( rleg1, x_axis, 0, MOVEANIMATIONSPEED*221.14 )
+			Turn2( rleg2, x_axis, 0, MOVEANIMATIONSPEED*164.12 )
+			Turn2( rleg3, x_axis, 0, MOVEANIMATIONSPEED*140.28 )
 	end
 		Sleep( 10)
 	end
@@ -145,19 +144,19 @@ end
 -- Bored Animation ------------------------
 local function BoredAnimation()
 	while true do
-		if not attacking then		
+		if not attacking and not moving then		
 			borednumber = math.random(50)
 			if (borednumber > 45) then
-				Turn2( chest, y_axis, 30, MOVEANIMATIONSPEED )
-				Turn2( head, y_axis, 15, MOVEANIMATIONSPEED*1.5 )			
+				Turn2( chest, y_axis, 30, MOVEANIMATIONSPEED*20 )
+				Turn2( head, y_axis, 15, MOVEANIMATIONSPEED*30 )			
 				WaitForTurn( chest, y_axis )
 			elseif (borednumber < 5)then
-				Turn2( chest, y_axis, -30, MOVEANIMATIONSPEED )			
-				Turn2( head, y_axis, -15, MOVEANIMATIONSPEED*1.5 )	
+				Turn2( chest, y_axis, -30, MOVEANIMATIONSPEED*20 )			
+				Turn2( head, y_axis, -15, MOVEANIMATIONSPEED*30 )	
 				WaitForTurn( chest, y_axis )
 			else 
-				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*2 )
-				Turn2( head, y_axis, 0, MOVEANIMATIONSPEED*1.5 )
+				Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*35 )
+				Turn2( head, y_axis, 0, MOVEANIMATIONSPEED*30 )
 				WaitForTurn( chest, y_axis )				
 			end
 		end
@@ -167,13 +166,11 @@ end
 
 function script.Create()
 	SetMoveAnimationSpeed()
-	moving = false
-	attacking = false
-	Turn( luparm , x_axis, math.rad(45) )
-	Turn( ruparm , x_axis, math.rad(45) )
-	Turn( gun , x_axis, math.rad(-45) )
-	Turn( rocketgun , x_axis, math.rad(-45) )
-	Turn( emit_summon , x_axis, math.rad(-90) )
+	Turn2( luparm , x_axis, 15 )
+	Turn2( ruparm , x_axis, 15 )
+	Turn2( gun , x_axis, 45 )
+	Turn2( rocketgun , x_axis, 45 )
+	Turn2( emit_summon , x_axis, -90 )
 	--START BUILD CYCLE
 	Sleep(200)
 	while GetUnitValue(COB.BUILD_PERCENT_LEFT) > 0 do
@@ -197,9 +194,6 @@ end
 local function RestoreAfterDelay()
 	Sleep( 5000)
 	StopSpin  ( barrel, z_axis, 50 )	
-	Turn( ruparm , y_axis, 0, 5 )
-	Turn( luparm , y_axis, 0, 5 )
-	Turn( head, y_axis, 0, 1 )
 	attacking = false
 	return (0)
 end
@@ -216,7 +210,7 @@ end
 
 function script.AimWeapon1(heading, pitch)
 	Turn2( chest, y_axis, 0, 300 )
-	Turn( ruparm , x_axis, 0, math.rad(500.000000) )
+	Turn2( ruparm , x_axis, 0, 300 )
 
 	attacking = true
 	Signal( SIG_AIM1)
@@ -226,8 +220,6 @@ function script.AimWeapon1(heading, pitch)
 	
 	Turn( ruparm, y_axis, heading, 5 )
 	Turn( rocketgun, x_axis, -pitch, 5 )		
-	
-	
     WaitForTurn(ruparm, y_axis)
 	WaitForTurn(rocketgun, x_axis)
 	StartThread(RestoreAfterDelay) 
@@ -253,7 +245,7 @@ end
 
 function script.AimWeapon2 (heading, pitch)
 	Turn2( chest, y_axis, 0, 300 )
-	Turn( luparm , x_axis, 0, math.rad(500.000000) )
+	Turn2( luparm , x_axis, 0, 300 )
 
 	attacking = true
 	Signal( SIG_AIM2)
@@ -281,19 +273,19 @@ function script.Killed(severity, corpsetype)
 	local px, py, pz = Spring.GetUnitPosition(unitID)
 	Spring.PlaySoundFile("sounds/demoncry.wav", 10, px, py, pz)
 			
-	Turn( chest , x_axis, math.rad(-43), math.rad(300) )
-	Turn( chest , y_axis, math.rad(15), math.rad(50) )
-	Turn( luparm , z_axis, math.rad(-(50)), math.rad(200) )
-	Turn( ruparm , z_axis, math.rad(-(-30)), math.rad(200) )
+	Turn2( chest , x_axis, -43, 300 )
+	Turn2( chest , y_axis, 15, 50 )
+	Turn2( luparm , z_axis, -50, 200 )
+	Turn2( ruparm , z_axis, 30, 200 )
 
-	Turn( rleg1 , y_axis, math.rad(-45), math.rad(500) )
-	Turn( rleg1 , z_axis, math.rad(-(17)), math.rad(500) )
+	Turn2( rleg1 , y_axis, -45, 500 )
+	Turn2( rleg1 , z_axis, -17, 500 )
 
-	Turn( base , x_axis, math.rad(-25), math.rad(75) )
+	Turn2( base , x_axis, -25, 75 )
 	WaitForTurn(base, x_axis)
-	Turn( base , x_axis, math.rad(-50), math.rad(200) )
+	Turn2( base , x_axis, -50, 200 )
 	WaitForTurn(base, x_axis)
-	Turn( base , x_axis, math.rad(-75), math.rad(400) )
+	Turn2( base , x_axis, -75, 400 )
 	WaitForTurn(base, x_axis)
 	
 	EmitSfx( chest,  BLOOD )

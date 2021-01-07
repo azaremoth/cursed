@@ -5,7 +5,7 @@ local BELIALGUN = {
 	range              = 550,
 	reloadtime         = 0.1,
 	accuracy           = 512,
-    energypershot      = 5,	
+    energypershot      = 0,	
 ----------------------------------------------------------------------------------	
     avoidFriendly      	= true,
     collideFriendly    	= true,	

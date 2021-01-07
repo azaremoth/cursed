@@ -1,4 +1,15 @@
->> Major changes 1.446 => 1.448
+>> Major changes 1.449 => 1.450
+
+Bugs:
+- fixed wrongly allocated animation script for the cursed witch
+- fixed belial's autogun needing energy to fire
+
+Polishing
+- polished walking anitmations for the the Belial and the Imperial Walker
+
+
+
+>> Major changes 1.446 => 1.449
 
 Bugs:
 - fixed lua code pieces not being compatible with Spring 105 (handling of customparas and defense walls)

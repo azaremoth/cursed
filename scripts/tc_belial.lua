@@ -27,7 +27,6 @@ local MOVEANIMATIONSPEED
 
 local SIG_AIM1 = 2
 local SIG_AIM2 = 4
-local SIG_WALK = 1
 
 local SUMMONING = 1024+0
 local FOOTDUST = 1025+0
@@ -57,26 +56,10 @@ end
 -- Walk Motion
 local function Walkscript()
 	while true do
-		if moving then 
---			SetSignalMask(SIG_WALK)	
+		if moving then
 			SetMoveAnimationSpeed()
 			Turn2( chest, y_axis, 0, MOVEANIMATIONSPEED*55 )
 			Turn2( head, y_axis, 0, MOVEANIMATIONSPEED*60 )			
-			if not attacking then
-				Turn2( luparm , x_axis, 25, MOVEANIMATIONSPEED*75 )
-				Turn2( ruparm , x_axis, -35, MOVEANIMATIONSPEED*75 )				
-			end
-			EmitSfx( emit_lleg,  FOOTDUST )
-			Move( pelvis, y_axis, 3, MOVEANIMATIONSPEED*25 )			
-			Turn2( lleg1, x_axis, 10.5, MOVEANIMATIONSPEED*79.91 )
-			Turn2( lleg2, x_axis, -10.8, MOVEANIMATIONSPEED*67.38 )
-			Turn2( lleg3, x_axis, 0.5, MOVEANIMATIONSPEED*147.29 )
-			Turn2( rleg1, x_axis, -26.7, MOVEANIMATIONSPEED*221.14 )
-			Turn2( rleg2, x_axis, 1.9, MOVEANIMATIONSPEED*148.02 )
-			Turn2( rleg3, x_axis, 25.5, MOVEANIMATIONSPEED*73.13 )
-			Sleep(MOVEANIMATIONSLEEPTIME*4.65)
-		end
-		if moving then
 			if not attacking then
 				Turn2( chest , z_axis, 3, MOVEANIMATIONSPEED*15 )
 				Turn2( head , z_axis, -5, MOVEANIMATIONSPEED*22 )
@@ -118,6 +101,21 @@ local function Walkscript()
 			Turn2( rleg3, x_axis, -8.8, MOVEANIMATIONSPEED*18.31 )
 			Sleep(MOVEANIMATIONSLEEPTIME*2.99)		
 		end
+		if moving then 		
+			if not attacking then
+				Turn2( luparm , x_axis, 25, MOVEANIMATIONSPEED*75 )
+				Turn2( ruparm , x_axis, -35, MOVEANIMATIONSPEED*75 )				
+			end
+			EmitSfx( emit_lleg,  FOOTDUST )
+			Move( pelvis, y_axis, 3, MOVEANIMATIONSPEED*25 )			
+			Turn2( lleg1, x_axis, 10.5, MOVEANIMATIONSPEED*79.91 )
+			Turn2( lleg2, x_axis, -10.8, MOVEANIMATIONSPEED*67.38 )
+			Turn2( lleg3, x_axis, 0.5, MOVEANIMATIONSPEED*147.29 )
+			Turn2( rleg1, x_axis, -26.7, MOVEANIMATIONSPEED*221.14 )
+			Turn2( rleg2, x_axis, 1.9, MOVEANIMATIONSPEED*148.02 )
+			Turn2( rleg3, x_axis, 25.5, MOVEANIMATIONSPEED*73.13 )
+			Sleep(MOVEANIMATIONSLEEPTIME*4.65)
+		end		
 		if not moving then 
 			if not attacking then
 				Turn2( luparm , x_axis, 15, 20 )
@@ -136,8 +134,9 @@ local function Walkscript()
 			Turn2( rleg1, x_axis, 0, MOVEANIMATIONSPEED*221.14 )
 			Turn2( rleg2, x_axis, 0, MOVEANIMATIONSPEED*164.12 )
 			Turn2( rleg3, x_axis, 0, MOVEANIMATIONSPEED*140.28 )
+			Sleep(MOVEANIMATIONSLEEPTIME)				
 	end
-		Sleep( 10)
+		Sleep(5)
 	end
 end
 

@@ -87,55 +87,8 @@ end
 -- Walk Motion
 local function Walkscript()
 	while true do
-		if moving then 
-			SetMoveAnimationSpeed()
-			if not attacking then
-				Turn2( lfinger12, y_axis, -50, MOVEANIMATIONSPEED*3.59 )
-				Turn2( lfinger22, y_axis, -65, MOVEANIMATIONSPEED*9.07 )
-				Turn2( lfinger32, y_axis, -75, MOVEANIMATIONSPEED*74.42 )
-				Turn2( rfinger12, y_axis, 60, MOVEANIMATIONSPEED*10.2 )
-				Turn2( rfinger22, y_axis, 75, MOVEANIMATIONSPEED*9.76 )
-				Turn2( rfinger32, y_axis, 65, MOVEANIMATIONSPEED*2.63 )			
-				Turn2( llarm, x_axis, -17.3, MOVEANIMATIONSPEED*0.8 )
-				Turn2( llarm, z_axis, -4.5, MOVEANIMATIONSPEED*7.66 )
-				Turn2( llarm, y_axis, -8.2, MOVEANIMATIONSPEED*50 )
-				Turn2( lshoulder, x_axis, 27, MOVEANIMATIONSPEED*65 )
-				Turn2( lshoulder, z_axis, 0.8, MOVEANIMATIONSPEED*1.34 )
-				Turn2( lshoulder, y_axis, 3.2, MOVEANIMATIONSPEED*5.7 )	
-				Turn2( rlarm, x_axis, -33.9, MOVEANIMATIONSPEED*1.36 )
-				Turn2( rlarm, z_axis, 6.1, MOVEANIMATIONSPEED*9.57 )
-				Turn2( rlarm, y_axis, 8.6, MOVEANIMATIONSPEED*50 ) --8.6
-				Turn2( rshoulder, x_axis, -40, MOVEANIMATIONSPEED*65.26 )
-				Turn2( rshoulder, y_axis, 0.4, MOVEANIMATIONSPEED*0.55 )
-				Turn2( torso, z_axis, 7.1, MOVEANIMATIONSPEED*12.34 )
-				Turn2( torso, y_axis, 0, MOVEANIMATIONSPEED*25 )				
-			end
-			EmitSfx( rhoof, FOOTDUST )			
-			Turn2( lwing1, x_axis, -100, MOVEANIMATIONSPEED*20 )
-			Turn2( lwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
-			Turn2( lwing31, x_axis, -65, MOVEANIMATIONSPEED*50 )
-			Turn2( lwing41, x_axis, -65, MOVEANIMATIONSPEED*50 )
-			Turn2( lwing51, x_axis, -65, MOVEANIMATIONSPEED*80 )
-			Turn2( rwing1, x_axis, -50, MOVEANIMATIONSPEED*20 )
-			Turn2( rwing2, x_axis, 0, MOVEANIMATIONSPEED*50 )
-			Turn2( rwing31, x_axis, 30, MOVEANIMATIONSPEED*70 )
-			Turn2( rwing41, x_axis, 20, MOVEANIMATIONSPEED*70 )
-			Turn2( rwing51, x_axis, 10, MOVEANIMATIONSPEED*80 )
-			Turn2( lhoof, x_axis, 1.7, MOVEANIMATIONSPEED*72.34 )	
-			Turn2( lleg, x_axis, 63.4, MOVEANIMATIONSPEED*75.41 )
-			Turn2( lthigh, x_axis, -65, MOVEANIMATIONSPEED*147.75 )
-			Move( pelvis, y_axis, -6.3, MOVEANIMATIONSPEED*7.92 )
-			Turn2( rhoof, x_axis, -27.6, MOVEANIMATIONSPEED*80.25 )
-			Turn2( rleg, x_axis, 32.5, MOVEANIMATIONSPEED*20 )	--SPEED 22.71		
-			Turn2( rthigh, x_axis, -4.9, MOVEANIMATIONSPEED*45 )	--SPEED 57.55
-			Turn2( tail1, y_axis, math.random(5,15), MOVEANIMATIONSPEED*30 )
-			Turn2( tail3, y_axis, math.random(5,15), MOVEANIMATIONSPEED*30 )
-			Turn2( tail5, y_axis, math.random(5,15), MOVEANIMATIONSPEED*30 )
-			Turn2( tail7, y_axis, math.random(5,15), MOVEANIMATIONSPEED*30 )
-			Turn2( tail9, y_axis, math.random(5,15), MOVEANIMATIONSPEED*30 )			
-			Sleep(MOVEANIMATIONSLEEPTIME*5.5) -- 5.65
-		end
 		if moving then
+			SetMoveAnimationSpeed()		
 			if not attacking then
 				Turn2( llarm, x_axis, -17.5, MOVEANIMATIONSPEED*1.74 )
 				Turn2( llarm, z_axis, -5.2, MOVEANIMATIONSPEED*6.76 )
@@ -301,6 +254,53 @@ local function Walkscript()
 			Turn2( rthigh, x_axis, -30, MOVEANIMATIONSPEED*175.51 )
 			Sleep(MOVEANIMATIONSLEEPTIME*2)	
 		end
+		if moving then 
+			if not attacking then
+				Turn2( lfinger12, y_axis, -50, MOVEANIMATIONSPEED*3.59 )
+				Turn2( lfinger22, y_axis, -65, MOVEANIMATIONSPEED*9.07 )
+				Turn2( lfinger32, y_axis, -75, MOVEANIMATIONSPEED*74.42 )
+				Turn2( rfinger12, y_axis, 60, MOVEANIMATIONSPEED*10.2 )
+				Turn2( rfinger22, y_axis, 75, MOVEANIMATIONSPEED*9.76 )
+				Turn2( rfinger32, y_axis, 65, MOVEANIMATIONSPEED*2.63 )			
+				Turn2( llarm, x_axis, -17.3, MOVEANIMATIONSPEED*0.8 )
+				Turn2( llarm, z_axis, -4.5, MOVEANIMATIONSPEED*7.66 )
+				Turn2( llarm, y_axis, -8.2, MOVEANIMATIONSPEED*50 )
+				Turn2( lshoulder, x_axis, 27, MOVEANIMATIONSPEED*65 )
+				Turn2( lshoulder, z_axis, 0.8, MOVEANIMATIONSPEED*1.34 )
+				Turn2( lshoulder, y_axis, 3.2, MOVEANIMATIONSPEED*5.7 )	
+				Turn2( rlarm, x_axis, -33.9, MOVEANIMATIONSPEED*1.36 )
+				Turn2( rlarm, z_axis, 6.1, MOVEANIMATIONSPEED*9.57 )
+				Turn2( rlarm, y_axis, 8.6, MOVEANIMATIONSPEED*50 ) --8.6
+				Turn2( rshoulder, x_axis, -40, MOVEANIMATIONSPEED*65.26 )
+				Turn2( rshoulder, y_axis, 0.4, MOVEANIMATIONSPEED*0.55 )
+				Turn2( torso, z_axis, 7.1, MOVEANIMATIONSPEED*12.34 )
+				Turn2( torso, y_axis, 0, MOVEANIMATIONSPEED*25 )				
+			end
+			EmitSfx( rhoof, FOOTDUST )			
+			Turn2( lwing1, x_axis, -100, MOVEANIMATIONSPEED*20 )
+			Turn2( lwing2, x_axis, 80, MOVEANIMATIONSPEED*50 )
+			Turn2( lwing31, x_axis, -65, MOVEANIMATIONSPEED*50 )
+			Turn2( lwing41, x_axis, -65, MOVEANIMATIONSPEED*50 )
+			Turn2( lwing51, x_axis, -65, MOVEANIMATIONSPEED*80 )
+			Turn2( rwing1, x_axis, -50, MOVEANIMATIONSPEED*20 )
+			Turn2( rwing2, x_axis, 0, MOVEANIMATIONSPEED*50 )
+			Turn2( rwing31, x_axis, 30, MOVEANIMATIONSPEED*70 )
+			Turn2( rwing41, x_axis, 20, MOVEANIMATIONSPEED*70 )
+			Turn2( rwing51, x_axis, 10, MOVEANIMATIONSPEED*80 )
+			Turn2( lhoof, x_axis, 1.7, MOVEANIMATIONSPEED*72.34 )	
+			Turn2( lleg, x_axis, 63.4, MOVEANIMATIONSPEED*75.41 )
+			Turn2( lthigh, x_axis, -65, MOVEANIMATIONSPEED*147.75 )
+			Move( pelvis, y_axis, -6.3, MOVEANIMATIONSPEED*7.92 )
+			Turn2( rhoof, x_axis, -27.6, MOVEANIMATIONSPEED*80.25 )
+			Turn2( rleg, x_axis, 32.5, MOVEANIMATIONSPEED*20 )	--SPEED 22.71		
+			Turn2( rthigh, x_axis, -4.9, MOVEANIMATIONSPEED*45 )	--SPEED 57.55
+			Turn2( tail1, y_axis, math.random(5,15), MOVEANIMATIONSPEED*30 )
+			Turn2( tail3, y_axis, math.random(5,15), MOVEANIMATIONSPEED*30 )
+			Turn2( tail5, y_axis, math.random(5,15), MOVEANIMATIONSPEED*30 )
+			Turn2( tail7, y_axis, math.random(5,15), MOVEANIMATIONSPEED*30 )
+			Turn2( tail9, y_axis, math.random(5,15), MOVEANIMATIONSPEED*30 )			
+			Sleep(MOVEANIMATIONSLEEPTIME*5.5) -- 5.65
+		end		
 		if not moving then
 			if not attacking then		
 				Turn2( lshoulder, x_axis, 0, MOVEANIMATIONSPEED*94.55 )
@@ -346,8 +346,9 @@ local function Walkscript()
 			Turn2( tail5, y_axis, 25, MOVEANIMATIONSPEED*50 )
 			Turn2( tail7, y_axis, 35, MOVEANIMATIONSPEED*50 )
 			Turn2( tail9, y_axis, 15, MOVEANIMATIONSPEED*50 )
+			Sleep(MOVEANIMATIONSLEEPTIME)		
 		end
-		Sleep( 10)
+		Sleep(5)
 	end
 end
 

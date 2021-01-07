@@ -5,7 +5,7 @@ Bugs:
 - fixed belial's autogun needing energy to fire
 
 Polishing
-- polished walking anitmations for the the Belial and the Imperial Walker
+- polished walking animations for the Belial and the Imperial Walker
 
 
 

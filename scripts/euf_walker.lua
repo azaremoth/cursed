@@ -70,11 +70,13 @@ local function Turn2(piecenum,axis, degrees, speed)
 end
 
 local function SetMoveAnimationSpeed()
-	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/1300000)
+	MOVEANIMATIONSPEED = (GetUnitValue(COB.MAX_SPEED)/2000000)
+	Spring.Echo("MOVEANIMATIONSPEED")
+	Spring.Echo(MOVEANIMATIONSPEED)
 	if MOVEANIMATIONSPEED < 0.01 then 
 		MOVEANIMATIONSPEED = 0.01
 	end
-	MOVEANIMATIONSLEEPTIME = 30/MOVEANIMATIONSPEED --33 as exported
+	MOVEANIMATIONSLEEPTIME = 33.33/MOVEANIMATIONSPEED --33 as exported
 end
 
 -- Walk Motion
@@ -82,8 +84,8 @@ local function Walkscript()
 	while true do
 		if moving then 
 			SetMoveAnimationSpeed()	
-			Turn(chest, y_axis, 0, 20 * MOVEANIMATIONSPEED)				
 			if not attacking then
+			Turn(chest, y_axis, 0, 20 * MOVEANIMATIONSPEED)			
 				Turn(chest, z_axis, 0.034907, 1.047198 * MOVEANIMATIONSPEED) -- delta=-2.00
 			end
 			Turn(lfoot, x_axis, -0.197979, 11.491924 * MOVEANIMATIONSPEED) -- delta=21.95
@@ -180,7 +182,7 @@ local function Walkscript()
 			Turn(rleg1, x_axis, 0, 23.148138 * MOVEANIMATIONSPEED)
 			Turn(rleg2, x_axis, 0, 32.643035 * MOVEANIMATIONSPEED)
 			Turn(rleg3, x_axis, 0, 21.548528 * MOVEANIMATIONSPEED)
-			Sleep(MOVEANIMATIONSLEEPTIME*0.5)			
+			Sleep(MOVEANIMATIONSLEEPTIME*0.5)
 		end
 		Sleep(5)
 	end

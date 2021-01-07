@@ -65,11 +65,11 @@ local unitDef = {
   standingmoveorder  = "1",
   
   leavetracks            = 1,
-  trackOffset            = 0,
+  trackOffset            = 15,
   trackStrength          = 8,
   trackStretch           = 1,
   trackType              = [[Walker]],
-  trackWidth             = 70,  
+  trackWidth             = 90,  
   
   turnRate           = 750,
   unitname           = "tc_icon",

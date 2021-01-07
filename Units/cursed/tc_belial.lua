@@ -66,11 +66,11 @@ local unitDef = {
   standingmoveorder  = "1",
   
   leavetracks            = 1,
-  trackOffset            = 0,
+  trackOffset            = 10,
   trackStrength          = 8,
   trackStretch           = 1,
-  trackType              = [[Walker]],
-  trackWidth             = 60,  
+  trackType              = [[Walker_wide]],
+  trackWidth             = 80,  
   
   turnRate           = 750,
   unitname           = "tc_belial",

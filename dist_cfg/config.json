@@ -1,20 +1,29 @@
 {
-  "title" : "Cursed",
+  "title" : "Cursed Development Local",
   "setups" : [
-		{
-		  "package": {
-			  "id": "test-portable",
-			  "display": "Stable",
-              "portable": true			  
-		  },
-		  "downloads": {
-			  "games" : ["tc:stable", "chobby:test", "tchobby:stable", "tcampaign:stable"],
-			  "engines" : [ "104.0" ]
-		  },
-		  "no_start_script" : true,
-		  "launch": {
-		  "start_args" : ["--menu", "rapid://tchobby:stable"]
+        {
+            "package": {
+                "id": "dev-local-windows",
+                "display": "Development Local",
+                "platform": "win32",
+				"portable": true					
+            },
+            "downloads": {
+                "resources": [
+                    {
+					"url": "https://content.spring-launcher.com/engines/spring_105.0_win64-minimal-portable.7z",
+					"destination": "engine/105.0",
+					"extract": true
+                    }
+                ]
+            },
+            "no_start_script" : true,
+            "no_downloads" : true,
+            "launch": {
+				"start_args" : ["--menu", "tchobby $VERSION"],
+				"engine": "105.0"
             }
         }
     ]
+
 }

@@ -2,9 +2,9 @@
 √ Add ingame faction change button
 √ update chilli epic menue to fit to Chobby: double settings button etc.
 √ Do Chobby stuff relative to thecursed:latest -> test needed
-√ Enhanced hero implementation (higher level, xp bar, more features, ...) -> test needed
+√ Enhanced hero implementation (higher level, xp bar, more features, ...)
 - Full Chobby implementation
-- Add quick start missions (as "Tutorials") to replace quick start menue
+√ Add quick start missions (as "Tutorials") to replace quick start menue -> Included in Chobby campaign
 
 Secondary:
 - Convert CPV UI elements to Chili
@@ -15,5 +15,5 @@ Secondary:
 - normal maped creep
 - growing creep
 - feature conversion on creep
-√ fixing strange shader effect for derefered lights on terrain/maps with normals applied and normal mapped units
+- fixing strange shader effect for derefered lights on terrain/maps with normals applied and normal mapped units
 - nicer wall placement

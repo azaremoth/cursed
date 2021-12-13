@@ -8,7 +8,7 @@
                 "platform": "win32"
             },
             "downloads": {
-				"games" : ["chobby:test", "tchobby:stable", "tc:stable", "tcampaign:stable"],
+				"games" : ["tchobby:stable", "chobby:test", "tc:stable", "tcampaign:stable"],
 				"maps" : ["Comet Catcher Redux", "TandemCraters", "Barren 2", "Onyx Cauldron 1.9", "Titan v3.1", "Ravaged_v2", "Badlands 2.1", "Iceland_v1", "Mescaline_V2", "FrozenPlanetV3", "FolsomDamCoreV0.95", "Wanderlust v03"],
 				"resources": [
 					{

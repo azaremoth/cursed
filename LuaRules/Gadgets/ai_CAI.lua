@@ -48,6 +48,7 @@ local spValidUnitID			= Spring.ValidUnitID
 local spGetUnitTeam			= Spring.GetUnitTeam
 --local spSetUnitSensorRadius = Spring.SetUnitSensorRadius
 local spIsPosInRadar		= Spring.IsPosInRadar
+local spGetTeamUnits		= Spring.GetTeamUnits
 
 local GiveClampedOrderToUnit = Spring.Utilities.GiveClampedOrderToUnit
 
@@ -981,7 +982,7 @@ end
 
 
 -- makes a nano turret for nearest factory
-local function makeNano(team,unitID)
+--[[local function makeNano(team,unitID)
 
 	local a = aiTeamData[team]
 	local factory = a.controlledUnit.factory
@@ -1045,7 +1046,7 @@ local function makeNano(team,unitID)
 	end
 
 	GiveClampedOrderToUnit(unitID, -nanoDefID, {x,0,z}, 0)
-end
+end ]]--
 
 -- queues energy order or helps nearby construction
 local function makeEnergy(team,unitID)
@@ -1379,8 +1380,8 @@ local function conJobHandler(team)
 			controlledUnit.conByID[unitID].makingDefence = false
 			controlledUnit.conByID[unitID].oldJob = conJob.factory.index
 			assignFactory(team,unitID,cQueue)
-		elseif a.wantedNanoCount > controlledUnit.nano.count and math.random() < a.nanoChance then
-			makeNano(team, unitID)
+--		elseif a.wantedNanoCount > controlledUnit.nano.count and math.random() < a.nanoChance then
+--			makeNano(team, unitID)
 		end
 	end
 	
@@ -1418,7 +1419,7 @@ local function setUnitPosting(team, unitID)
 	
 end
 
-local function setRetreatState(unitID, unitDefID, unitTeam, num)
+--[[ local function setRetreatState(unitID, unitDefID, unitTeam, num)
 	local unitDef = UnitDefs[unitDefID]
 	if (unitDef.customParams.level) then
 		if not aiTeamData[unitTeam].retreatComm then
@@ -1430,7 +1431,7 @@ local function setRetreatState(unitID, unitDefID, unitTeam, num)
 		end
 	end
 	spGiveOrderToUnit(unitID, CMD_RETREAT, {num}, 0)
-end
+end ]]--
 
 local function getPositionTowardsMiddle(unitID, range, inc, count)
 		count = count or 4
@@ -2800,8 +2801,70 @@ local function initialiseFaction(team)
 		return true
 	end
 	
-	a.buildDefs = a.buildConfig.robots
-	return true
+	local shortname = Game.modShortName
+	if shortname == "tc" or "tcampaign" then
+		local units = spGetTeamUnits(team)
+		for i = 1, #units do
+			local ud = UnitDefs[spGetUnitDefID(units[i])]
+			if ud.customParams then
+				local faction = ud.customParams.factionname
+				if faction == "cursed" then
+					a.buildDefs = a.buildConfig.cursed
+					return true
+				elseif faction == "imperials" then
+					a.buildDefs = a.buildConfig.imperials
+					return true
+				end
+			end
+		end
+	else
+		local units = spGetTeamUnits(team)
+		for i = 1, #units do
+			local ud = UnitDefs[spGetUnitDefID(units[i])]
+			if ud.customParams then
+				local faction = ud.customParams.factionname
+				if faction == "arm" then
+					a.buildDefs = a.buildConfig.arm
+					return true
+				elseif faction == "core" then
+					a.buildDefs = a.buildConfig.core
+					return true
+				end
+			end
+		end
+	end
+	
+	return false
+end
+
+
+
+local function initialiseFaction(team)
+
+	local a = aiTeamData[team]
+	if a.buildDefs then
+		return true
+	end
+
+	local shortname = Game.modShortName
+	if shortname == "tc" or "tcampaign" then
+		local units = spGetTeamUnits(team)
+		for i = 1, #units do
+			local ud = UnitDefs[spGetUnitDefID(units[i])]
+			if ud.customParams then
+				local faction = ud.customParams.factionname
+				if faction == "cursed" then
+					a.buildDefs = a.buildConfig.cursed
+					return true
+				elseif faction == "imperials" then
+					a.buildDefs = a.buildConfig.imperials
+					return true
+				end
+			end
+		end
+	else
+		return false
+	end
 end
 
 local function echoEnemyForceComposition(allyTeam)
@@ -3415,7 +3478,7 @@ function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 					a.unassignedCons.count = a.unassignedCons.count + 1
 					a.unassignedCons[a.unassignedCons.count] = unitID
 					controlledUnit.conByID[unitID].finished = true
-					setRetreatState(unitID, unitDefID, unitTeam, 2)
+					-- setRetreatState(unitID, unitDefID, unitTeam, 2)
 				else -- nano turret
 					local x,y,z = spGetUnitPosition(unitID)
 					spGiveOrderToUnit(unitID, CMD_MOVE_STATE, { 2 }, 0)
@@ -3424,22 +3487,22 @@ function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 				end
 			elseif controlledUnit.anyByID[unitID].isScout then
 				controlledUnit.scoutByID[unitID].finished = true
-				setRetreatState(unitID, unitDefID, unitTeam, 3)
+				-- setRetreatState(unitID, unitDefID, unitTeam, 3)
 			elseif controlledUnit.anyByID[unitID].isRaider then
 				controlledUnit.raiderByID[unitID].finished = true
-				setRetreatState(unitID, unitDefID, unitTeam, 1)
+				-- setRetreatState(unitID, unitDefID, unitTeam, 1)
 			elseif ud.canFly then -- aircraft
 				if ud.maxWeaponRange > 0 then
 					spGiveOrderToUnit(unitID, CMD_MOVE_STATE, { 1 }, 0)
 					spGiveOrderToUnit(unitID, CMD_FIRE_STATE, { 2 }, 0)
 					if ud.isFighter then -- fighter
 						controlledUnit.fighterByID[unitID].finished = true
-						setRetreatState(unitID, unitDefID, unitTeam, 2)
+						-- setRetreatState(unitID, unitDefID, unitTeam, 2)
 					elseif ud.isBomber then -- bomber
 						controlledUnit.bomberByID[unitID].finished = true
 					else -- gunship
 						controlledUnit.gunshipByID[unitID].finished = true
-						setRetreatState(unitID, unitDefID, unitTeam, 2)
+						-- setRetreatState(unitID, unitDefID, unitTeam, 2)
 					end
 				else -- scout plane
 					controlledUnit.scoutByID[unitID].finished = true
@@ -3450,17 +3513,17 @@ function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 				if ud.weapons[1].onlyTargets.land then -- land firing combat
 					if ud.speed >= 3*30 then -- raider
 						controlledUnit.raiderByID[unitID].finished = true
-						setRetreatState(unitID, unitDefID, unitTeam, 1)
+						-- setRetreatState(unitID, unitDefID, unitTeam, 1)
 					elseif ud.maxWeaponRange > 650 then -- arty
 						controlledUnit.artyByID[unitID].finished = true
-						setRetreatState(unitID, unitDefID, unitTeam, 3)
+						-- setRetreatState(unitID, unitDefID, unitTeam, 3)
 					else -- other combat
 						controlledUnit.combatByID[unitID].finished = true
-						setRetreatState(unitID, unitDefID, unitTeam, 2)
+						-- setRetreatState(unitID, unitDefID, unitTeam, 2)
 					end
 				else -- mobile anti air
 					controlledUnit.aaByID[unitID].finished = true
-					setRetreatState(unitID, unitDefID, unitTeam, 3)
+					-- setRetreatState(unitID, unitDefID, unitTeam, 3)
 				end
 				
 			elseif ud.isImmobile then -- building
@@ -4049,7 +4112,7 @@ function gadget:Initialize()
 	for _,team in ipairs(spGetTeamList()) do
 		--local _,_,_,isAI,side = spGetTeamInfo(team, false)
 		if aiConfigByName[spGetTeamLuaAI(team)] then
-			local _,_,_,_,_,allyTeam,CustomTeamOptions = spGetTeamInfo(team)
+			local _,_,_,_,_,allyTeam,_,CustomTeamOptions = spGetTeamInfo(team)
 			if (not CustomTeamOptions) or (not CustomTeamOptions["aioverride"]) then -- what is this for?
 				initialiseAiTeam(team, allyTeam, aiConfigByName[spGetTeamLuaAI(team)])
 				aiOnTeam[allyTeam] = true
@@ -4257,7 +4320,7 @@ function gadget:Initialize()
 	for _,team in ipairs(spGetTeamList()) do
 		--local _,_,_,isAI,side = spGetTeamInfo(team, false)
 		if aiConfigByName[spGetTeamLuaAI(team)] then
-			local _,_,_,_,_,_,CustomTeamOptions = spGetTeamInfo(team)
+			local _,_,_,_,_,_,_,CustomTeamOptions = spGetTeamInfo(team)
 			if (not CustomTeamOptions) or (not CustomTeamOptions["aioverride"]) then -- what is this for?
 				usingAI = true
 			end

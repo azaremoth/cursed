@@ -1,147 +1,93 @@
+local assaultgroup = {
+	"tc_shade",
+	"tc_shade_lvl1",
+	"tc_shade_lvl2",
+	"tc_shade_lvl3",
+	"tc_shade_lvl4",
+	"tc_shade_lvl5",
+	"euf_sarge",
+	"euf_sarge_lvl1",
+	"euf_sarge_lvl2",
+	"euf_sarge_lvl3",
+	"euf_sarge_lvl4",	
+	"euf_sarge_lvl5",	
+	"tc_ghoul",
+	"tc_gunner",
+	"tc_enforcer",
+	"tc_mage",	
+	"tc_mancubus",		
+	"tc_belial",
+	"tc_crawler",	
+	"tc_rictus",	
+	"euf_pyro",	
+	"euf_marine",
+	"euf_marine_laser",	
+	"euf_pyro",	
+	"euf_sniper_ai",
+	"euf_tank",
+	"euf_aatank",
+	"euf_scorpion",	
+	"euf_hover",	
+}	
+
+local skirmishers = {
+	"tc_enforcer",
+	"euf_bazooka",
+	"euf_bazooka_missile",	
+	"tc_gunner",
+	"tc_bonebeast",
+	"tc_mage",		
+	"euf_sniper_ai",	
+}	
+
 local raider = {
-	"cloakraid",
-	"cloakheavyraid",
-	"shieldraid",
-	"armflash",
-	"vehscout",
-	"vehraid",
-	"amphraid",
-	
-	"jumpraid",
-	"tankheavyraid",
-	"tankraid",
-	
-	"armsh",
-	"hoverraid",
-	"hoverheavyraid",
-	
-	"chicken",
-	"chicken_leaper",
-}
-
-local assault = {
-	"shieldassault",
-	"vehassault",
-	
-	"cloakassault",
-	--"spidercrabe",
-	"spiderassault",
-	"jumpassault",
-	--"jumpsumo",
-	"armbull",
-	"tankassault",
-	"tankheavyassault",
-	"amphassault",
-	
-	"armanac",
-	"hoverassault",
-	
-	--"striderbantha",
-	--"striderdetriment",
-	--"corkrog",
-	
-	--"chickena",
-	--"chickenc",
-	--"chicken_tiamat",
-}
-
-local skirm = {
-	"cloakskirm",
-	"shieldskirm",
-	"armjanus",
-	"armstump",
-	"amphfloater",
-	
-	"spiderskirm",
-	"cloaksnipe",
-	"cormort",
-	"jumpskirm",
-	"cormortgold",
-	"hoverarty",
-	
-	"hoverskirm",
-	
-	"chickens",
-	"chicken_sporeshooter",
-	--"striderscorpion",
+	"tc_ghoul",
+	"tc_skeleton",
+	"euf_raider",	
+	"euf_marine",
+	"euf_marine_laser",		
+	"euf_paladin_ai",
 }
 
 local jumper = { -- uses jump for offense. IE do not put commander or AA here.
-	"jumpassault",
-	"jumpsumo",
-}
-
-local riot = {
-	"cloakriot",
-	"shieldriot",
-	"vehriot",
-	"spiderriot",
-	"amphimpulse",
-	"amphriot",
-	
-	"spideremp",
-	"tawf003",
-	"tankriot",
-
-	"hoverriot",
-	
-	"armraz",
-	"striderdante",
-	
-	"chickenwurm",
+	"euf_pyro",
+	"tc_ghoul",
+	"tc_mage",	
+	"tc_cacodemon",	
+	"euf_sarge_lvl2",
+	"euf_sarge_lvl3",
+	"euf_sarge_lvl4",
+	"euf_sarge_lvl5",	
+	"tc_shade_lvl2",
+	"tc_shade_lvl3",
+	"tc_shade_lvl4",
+	"tc_shade_lvl5",
+	"bug_med",		
 }
 
 local arty = {
-	"cloakarty",
-	"punisher",
-	"jumparty",
-	"tawf013",
-	"veharty",
-	
-	"vehheavyarty",
-	--"hoverarty",
-	"tankarty",
-	"tankheavyarty",
-	
-	"armshock",
-	"striderarty",
-	
-	"hoverartillery",
-	
-	"chickenr",
-	"chickenblobber",
+	"tc_purgatory_ai",
+	"euf_mlrs_ai",	
 }
 
 local counteredByAssaults = {
-	"jumpscout",
-	"vehsupport",
+	"tc_enforcer",
+	"tc_bonebeast",	
+	"euf_bazooka",
+	"euf_bazooka_missile",		
+	"tc_purgatory_ai",
+	"euf_mlrs_ai",	
 }
 
 local prioritySos = {
-	"energyfusion",
-	"energysingu",
-	"factoryshield",
-    "factorycloak",
-    "factoryveh",
-    "factoryplane",
-    "factorygunship",
-    "factoryhover",
-    "factoryspider",
-    "factoryjump",
-    "factorytank",
-    "factoryship",
-	"dyntrainer_recon_base",
-	"dyntrainer_support_base",
-	"dyntrainer_assault_base",
-	"dyntrainer_strike_base",
-	"comm_trainer_strike_0",
-	"armcom1",
-	"corcom1",
-	"commrecon1",
-	"commsupport1",
-	"benzcom1",
-	"cremcom1",
+	"tc_pyramid_ai",
+	"euf_barracks_ai",
 }
+	
+
+local riot = assaultgroup
+local assault = assaultgroup
+local skirm = skirmishers
 
 --global versions
 raiderArray = {}

@@ -326,9 +326,9 @@ factionBuildConfig = {
 				index = 1,
 			},
 		},
---		airpadDefID = UnitDefNames['armasp'].id,
---		nanoDefID = UnitDefNames['armnanotc'].id,
---		metalStoreDefID = UnitDefNames['armmstor'].id,
+		airpadDefID = nil,
+		nanoDefID = nil,
+		metalStoreDefID = UnitDefNames['euf_storage'].id,
 	},
 
 	imperials = {
@@ -636,5 +636,9 @@ factionBuildConfig = {
 				index = 1,
 			},
 		},
+
+		airpadDefID = nil,
+		nanoDefID = nil,
+		metalStoreDefID = UnitDefNames['euf_storage'].id,
 	},
 }

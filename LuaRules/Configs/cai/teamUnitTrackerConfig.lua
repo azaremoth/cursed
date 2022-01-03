@@ -1,218 +1,47 @@
 
 local completeUnitListNames = {
 
-	turretAA = {
-		"turretaalaser",
-		"turretaaclose",
-		"turretaafar",
-		"turretaaflak",
-		"turretaaheavy",
-	},
+	turretAA = {	},
 
-	turret = {
-		"turretmissile",
-		"turretlaser",
-		"turretimpulse",
-		"turretemp",
-		"turretriot",
-		"turretheavylaser",
-		"turretgauss",
-		"turretantiheavy",
-		"turretheavy",
-	},
+	turret = {	},
 	
-	economy = {
-		"staticmex",
-		"energywind",
-		"energysolar",
-		"energyfusion",
-		"energysingu",
-		"energygeo",
-		"energyheavygeo",
-		"staticcon",
-		"factoryshield",
-		"factorycloak",
-		"factoryveh",
-		"factoryplane",
-		"factorygunship",
-		"factoryhover",
-		"factoryamph",
-		"factoryspider",
-		"factoryjump",
-		"factorytank",
-		"striderhub",
-		"factoryship",
-	},
+	economy = {	},
 	
-	constructor = {
-		"cloakcon",
-		"shieldcon",
-		"vehcon",
-		"tankcon",
-		"spidercon",
-		"jumpcon",
-		"hovercon",
-		"amphcon",
-		"planecon",
-		"gunshipcon",
-		"shipcon",
-	},
+	constructor = {	},
 }
 
 local ground = {
 
-	raider = {
-		"cloakraid",
-		"cloakheavyraid",
-		"shieldraid",
-		"vehscout",
-		"vehraid",
-		"tankheavyraid",
-		"tankraid",
-		"spiderscout",
-		"jumpraid",
-		"amphraid",
-		"hoverraid",
-		"hoverheavyraid",
-		"chicken",
-		"chicken_leaper",
-	},
+	raider = {	},
 
-	assault = {
-		"cloakassault",
-		"shieldassault",
-		"vehassault",
-		"spiderassault",
-		"jumpassault",
-		"jumpsumo",
-		"tankassault",
-		"tankheavyassault",
-		"amphassault",
-		"hoverassault",
-		"striderbantha",
-		"striderdetriment",
-		"corkrog",
-		"chickena",
-		"chickenc",
-		"chicken_tiamat",
-	},
+	assault = {	},
 
-	skirm = {
-		"cloakskirm",
-		"shieldskirm",
-		"hoverskirm",
-		"amphfloater",
-		"spiderskirm",
-		"cloaksnipe",
-		"jumpskirm",
-		"chickens",
-		"chicken_sporeshooter",
-		"striderscorpion",
-	},
+	skirm = {	},
 	
-	antiSkirm = {
-		"spidercrabe",
-		"vehsupport",
-		"jumparty",
-	},
+	antiSkirm = {	},
 
-	riot = {
-		"cloakriot",
-		"shieldriot",
-		"vehriot",
-		"spiderriot",
-		"amphimpulse",
-		"amphriot",
-		"shieldfelon",
-		"spiderriot",
-		"spideremp",
-		"tankriot",
-		"hoverriot",
-		"striderdante",
-		"chickenwurm",
-	},
+	riot = {	},
 
-	arty = {
-		"cloakarty",
-		"veharty",
-		"vehheavyarty",
-		"hoverarty",
-		"tankarty",
-		"tankheavyarty",
-		"striderarty",
-		"chickenr",
-		"chickenblobber",
-	},
+	arty = {	},
 }
 
 local antiAir = {
-	antiAir = {
-		"cloakaa",
-		"shieldaa",
-		"vehaa",
-		"tankaa",
-		"hoveraa",
-		"spideraa",
-		"jumpaa",
-		"amphaa",
-		"shipaa",
-		"gunshipaa",
-	},
+	antiAir = {	},
 }
 
 local air = {
-	bomber = {
-		"bomberprec",
-		"bomberriot",
-		"bomberdisarm",
-		"bomberheavy",
-	},
+	bomber = {	},
 	
-	gunship = {
-		"gunshipemp",
-		"gunshipbomb",
-		"gunshipraid",
-		"gunshipskirm",
-		"gunshipassault",
-		"gunshipheavyskirm",
-		"gunshipkrow",
-	},
+	gunship = {	},
 	
-	transport = {
-		"gunshiptrans",
-		"gunshipheavytrans",
-	},
+	transport = {	},
 }
 
 local fighter = {
-	fighter = {
-		"planefighter",
-		"planeheavyfighter",
-	},
+	fighter = {	},
 }
 
-local defenseRequirementNames =  {
-	["staticmex"] = {mult = 1.5},
-	["energywind"] = {mult = 1},
-	["energysolar"] = {mult = 0.6},
-	["energyfusion"] = {mult = 1},
-	["energysingu"] = {mult = 1},
-	["energygeo"] = {mult = 1.5},
-	["energyheavygeo"] = {mult = 1.5},
-	["staticcon"] = {mult = 1},
-	["factoryshield"] = {mult = 0.2},
-	["factorycloak"] = {mult = 0.2},
-	["factoryveh"] = {mult = 0.2},
-	["factoryplane"] = {mult = 0.2},
-	["factorygunship"] = {mult = 0.2},
-	["factoryhover"] = {mult = 0.2},
-	["factoryamph"] = {mult = 0.2},
-	["factoryspider"] = {mult = 0.2},
-	["factoryjump"] = {mult = 0.2},
-	["factorytank"] = {mult = 0.2},
-	["striderhub"] = {mult = 0.2},
-	["factoryship"] = {mult = 0.2},
-}
+local defenseRequirementNames =  { }
 
 local function FlattenTableInto(tableToFlatten, category, otherTable)
 	for _, namesList in pairs(tableToFlatten) do

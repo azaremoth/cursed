@@ -8,7 +8,7 @@
 
 aiConfigByName =
 {
-	["CAI"] =
+	["Skirmish AI"] =
 	{
 		controlFunction = constructionAndEconomyHandler,
 		buildConfig = factionBuildConfig,

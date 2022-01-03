@@ -93,6 +93,20 @@ local numCapPoints = 25
 local cvActiveX = {}
 local cvActiveZ = {}
 
+--[[local function spGiveOrderToUnit (unitID, cmdID, params, options)
+	Spring.Echo("Order:")	
+	Spring.Echo(unitID)
+	Spring.Echo(cmdID)
+	Spring.Echo(params)
+	Spring.Echo(options)
+	if cmdID < 0 then
+		Spring.Echo("Wants to build:")
+		local unitDefID = -1*cmdID
+		local humanName = UnitDefs[unitDefID].humanName or "?"
+		Spring.Echo(humanName)
+	end
+	Spring.GiveOrderToUnit(unitID, cmdID, params, options)
+end]]--
 
 local function updateCvTarget()
 	local teams = Spring.GetTeamList()

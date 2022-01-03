@@ -6,16 +6,13 @@ example buildTasksMods
 			buildConfig.robots.factoryByDefId[UnitDefNames['factoryveh'].id].importance = 0
 			buildConfig.robots.factoryByDefId[UnitDefNames['factoryspider'].id].importance = 0
 		end,
-
-strikecomm = armcom
-battlecomm = corcom
 --]]
 local function noFunc()
 end
 
 -- these buildTaskMods function by editing the config supplied as the arg
 
---[[local function BuildTasksMod_Blitz(buildConfig)
+local function BuildTasksMod_Blitz(buildConfig)
 	local factory = buildConfig.robots.factoryByDefId
 	factory[UnitDefNames['factorycloak'].id].importance = 1.1
 	factory[UnitDefNames['factoryshield'].id].importance = 0.9
@@ -133,31 +130,79 @@ local function BuildTasksMod_Lolz(buildConfig)
 			data.airDefenceQuota[i] = data.airDefenceQuota[i] * 1.2
 		end
 	end
-end]]--
+end
 
 strategies = {
 	[1] = {	-- standard
 		name = "Standard",
-		chance	= 1,
+		chance	= 0.2,
 		commanders = {
-			count = 0,
+			{ID = "dyntrainer_strike_base", chance = 1},
 		},
 		buildTasksMods = noFunc,
+		conAndEconHandlerMods = {},
+	},
+	[2] = {	-- blitz
+		name = "Blitz",
+		chance	= 0.2,
+		commanders = {
+			{ID = "dyntrainer_strike_base", chance = 0.5},
+			{ID = "dyntrainer_recon_base", chance = 0.5},
+		},
+		buildTasksMods = BuildTasksMod_Blitz,
+		conAndEconHandlerMods = {},
+	},
+	[3] = {	-- pusher
+		name = "Push",
+		chance	= 0.2,
+		commanders = {
+			{ID = "dyntrainer_strike_base", chance = 0.5},
+			{ID = "dyntrainer_assault_base", chance = 0.5},
+		},
+		buildTasksMods = BuildTasksMod_Pusher,
+		conAndEconHandlerMods = {},
+	},
+	[4] = {	-- defensive
+		name = "Defensive",
+		chance	= 0.2,
+		commanders = {
+			{ID = "dyntrainer_strike_base", chance = 0.5},
+			{ID = "dyntrainer_assault_base", chance = 0.5},
+		},
+		buildTasksMods =  BuildTasksMod_Defensive,
+		conAndEconHandlerMods = {},
+	},
+	[5] = {	-- econ	-- FIXME: doesn't do anything right now
+		name = "Econ",
+		chance	= 0.2,
+		commanders = {
+			{ID = "dyntrainer_strike_base", chance = 0.5},
+			{ID = "dyntrainer_support_base", chance = 0.5},
+		},
+		buildTasksMods = noFunc,
+		conAndEconHandlerMods = {},
+	},
+	[6] = {	-- lolz
+		name = "lolz",
+		chance = 0,
+		commanders = {
+			{ID = "dyntrainer_strike_base", chance = 1},
+		},
+		buildTasksMods = BuildTasksMod_Lolz,
 		conAndEconHandlerMods = {},
 	},
 }
 
 local function SelectComm(player, team, strat)
-	local count = strategies[strat].commanders.count
 	local rand = math.random()
-	
+
 	local commName
 	local total = 0
-	for i = 1, count do
+	for i = 1, #strategies[strat].commanders do
 		total = total + strategies[strat].commanders[i].chance
 		if rand < total then
 			commName = strategies[strat].commanders[i].ID
-			GG.SetFaction(commName, player, team)
+			Spring.SetTeamRulesParam(team, "start_unit", commName)
 			Spring.Echo("CAI: team "..team.." has selected strategy: "..strategies[strat].name..", using commander "..commName)
 			break
 		end
@@ -172,7 +217,7 @@ function SelectRandomStrat(player, team)
 	local total = 0
 	for i = 1, count do
 		total = total + strategies[i].chance
-		if rand < total then
+		if rand <= total then
 			SelectComm(player, team, i)
 			stratIndex = i
 			break

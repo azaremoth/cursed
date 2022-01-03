@@ -169,14 +169,19 @@ local moveDefs = {
 		slopemod = 0,		
 		crushStrength = 0,
 	},
---[[	UBOAT = {
+	BOAT3x3 = {
 		footprintx = 3,
 		footprintz = 3,
-        minwaterdepth = 10,
-		maxwaterdepth = 100000,
-		crushstrength = 5,
+		minwaterdepth = 5,
+		crushstrength = 150,
+	},
+--[[	UBOAT3 = {
+		footprintx = 3,
+		footprintz = 3,
+		minwaterdepth = 15,
+		crushstrength = 150,
 		subMarine = 1,
-	},]]
+	}, ]]	
 }
 
 

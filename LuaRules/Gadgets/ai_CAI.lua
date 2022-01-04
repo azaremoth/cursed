@@ -52,7 +52,11 @@ local spGetTeamUnits		= Spring.GetTeamUnits
 
 local GiveClampedOrderToUnit = Spring.Utilities.GiveClampedOrderToUnit
 
-local jumpDefs = VFS.Include"LuaRules/Configs/jump_defs.lua"
+local GaiaAITeam = Spring.GetGaiaTeamID()
+-- local jumpDefs = VFS.Include"LuaRules/Configs/jump_defs.lua" -- JUMP handled by other Cursed scripts
+local ChickenAIs = VFS.Include("LuaRules/Configs/ai_chickenlist.lua")	
+local SupportedAIs = VFS.Include("LuaRules/Configs/ai_supported.lua")
+
 
 local SAVE_FILE = "Gadgets/ai_cai.lua"
 
@@ -90,6 +94,105 @@ if (gadgetHandler:IsSyncedCode()) then
 --------------------------------------------------------------------------------
 -- SYNCED
 --------------------------------------------------------------------------------
+
+--[[local function spGiveOrderToUnit (unitID, cmdID, params, options)
+	Spring.Echo("Order:")	
+	Spring.Echo(unitID)
+	Spring.Echo(cmdID)
+	Spring.Echo(params)
+	Spring.Echo(options)
+	if cmdID < 0 then
+		Spring.Echo("Wants to build:")
+		local unitDefID = -1*cmdID
+		local humanName = UnitDefs[unitDefID].humanName or "?"
+		Spring.Echo(humanName)
+	end
+	Spring.GiveOrderToUnit(unitID, cmdID, params, options)
+end]]--
+
+local numCapPoints = 25
+local cvActiveX = {}
+local cvActiveZ = {}
+
+local function updateCvTarget()
+	local teams = Spring.GetTeamList()
+	for i = 1,#teams do
+		local px = MapCenterX
+		local pz = MapCenterZ
+		local activepoint = 1
+		local freepoint = nil
+		
+		local teamID = teams[i]
+		local ai = select(4, Spring.GetTeamInfo(teamID))
+		local IsGaiaAI = false
+		if (teamID == GaiaAITeam) then
+			IsGaiaAI = true
+		end
+		if (ai and (not IsGaiaAI)) then
+			local sx,_,sz = Spring.GetTeamStartPosition(teamID)
+			-- Spring.Echo("CAI: Startpos for team " .. teamID .. " x: " .. sx .. " z: " .. sz)
+			if ((GG.capturepointsx ~= nil) and ((GG.capturepointsz ~= nil))) then
+				local pointsx = GG.capturepointsx
+				local pointsz = GG.capturepointsz				
+				-- Spring.Echo("CAI: numCapPoints: " .. numCapPoints)
+				local shortestDist = 0				
+				for i = 1, numCapPoints do
+					if ((pointsx[i] == nil) and (pointsx[(i-1)] ~= nil)) then
+							numCapPoints = (i-1)
+					elseif (pointsx[i] ~= nil) then
+						-- Spring.Echo("CAI: Current point checked: " .. i .. " X: " .. pointsx[i] .. " Z: " .. pointsz[i])
+						local owner = GG.capturepointowner[i]
+						local validtarget = false
+						
+						--if (owner ~= nil ) then
+							-- Spring.Echo("CAI: Owner of point " .. i .. " is " .. owner )
+						-- else 
+							-- Spring.Echo("CAI: Owner of point " .. i .. " is nobody" )
+							-- Spring.SpawnCEG('AURA_HEAL', pointsx[i], 100, pointsz[i])
+						-- end
+						
+						if (owner == nil) then
+							validtarget = true
+							-- Spring.Echo("CAI: Point can be taken as not occupied")
+						elseif ((owner ~= teamID) and (not Spring.AreTeamsAllied(owner, teamID))) then
+							validtarget = true
+							-- Spring.Echo("CAI: Point can be taken as it belongs to an enemy") 
+						elseif ((owner == teamID) or Spring.AreTeamsAllied(owner, teamID)) then
+							validtarget = false
+							-- Spring.Echo("CAI: Point " .. i .. " already is mine. Team " .. teamID) 
+						end
+						
+						if (validtarget == true) then
+							px = pointsx[i]
+							pz = pointsz[i]
+							local distStartCP = math.sqrt((sx-px)*(sx-px)+(sz-pz)*(sz-pz))
+						--	Spring.Echo("CAI: Current valid point checked for coords: " .. px .. " " .. pz )
+							-- Spring.Echo("CAI: CP vs. Startpos distance is: " .. distStartCP)
+							if ((shortestDist == 0) or (distStartCP < shortestDist)) then
+								shortestDist = distStartCP
+								activepoint = i
+								if (owner == nil) then
+									freepoint = i
+								end
+								-- Spring.Echo("CAI: current active shortest distance point in loop: " .. activepoint)
+							end
+						end
+					end
+				end
+				
+				if (pointsx[freepoint] ~= nil) then
+					cvActiveX[teamID] = pointsx[freepoint]
+					cvActiveZ[teamID] = pointsz[freepoint]
+					-- Spring.Echo("CAI: Active free X and Z value for team " .. teamID .. " is " .. pointsx[freepoint] .. " " .. pointsz[freepoint] .. " (".. freepoint .. ")")
+				elseif (pointsx[activepoint] ~= nil) then
+					cvActiveX[teamID] = pointsx[activepoint]
+					cvActiveZ[teamID] = pointsz[activepoint]
+					--  Spring.Echo("CAI: Active occupied X and Z value for team " .. teamID .. " is " .. pointsx[activepoint] .. " " .. pointsz[activepoint] .. " (".. activepoint .. ")")
+				end
+			end
+		end
+	end	
+end
 
 local function CopyTable(original)   -- Warning: circular table references lead to
 	local copy = {}               -- an infinite loop.
@@ -686,12 +789,12 @@ local function runAway(unitID, enemyID, range)
 	vectorX = vectorX/vectorMag
 	vectorZ = vectorZ/vectorMag
 	
-	local jump = spGetUnitRulesParam(unitID, "jumpReload")
-	if ((not jump) or jump == 1) and jumpDefs[spGetUnitDefID(unitID)] then
-		GiveClampedOrderToUnit(unitID, CMD_JUMP, { ex - vectorX*range, 0, ez - vectorZ*range}, 0)
-	else
+--	local jump = spGetUnitRulesParam(unitID, "jumpReload")
+--	if ((not jump) or jump == 1) and jumpDefs[spGetUnitDefID(unitID)] then
+--		GiveClampedOrderToUnit(unitID, CMD_JUMP, { ex - vectorX*range, 0, ez - vectorZ*range}, 0)
+--	else
 		GiveClampedOrderToUnit(unitID, CMD_MOVE_TO_USE, { ex - vectorX*range, 0, ez - vectorZ*range}, 0)
-	end
+--	end -- JUMP handled by other Cursed scripts
 end
 
 -- makes defence using wantedDefence position
@@ -1686,16 +1789,26 @@ local function battleGroupHandler(team, frame, slowUpdate)
 		end
 
 		if data.tempTarget then
-			if spValidUnitID(data.tempTarget) and isUnitVisible(data.tempTarget,a.allyTeam) then
-				local x, y, z = spGetUnitPosition(data.tempTarget)
-				for unitID,_ in pairs(data.unit) do
+			if (cvmode == true) then -- should order units to next free CPV capture point
+				-- Spring.Echo("CAI: cvmode passed command")
+				for unitID,_ in pairs(data.unit) do			
 					if not data.aa[unitID] then
-						GiveClampedOrderToUnit(unitID, CMD_FIGHT , {x,y,z}, 0)
+						-- Spring.Echo("CAI: Team " .. team .. " attacks X " .. cvActiveX[team] .. " and Z " .. cvActiveZ[team])
+						spGiveOrderToUnit(unitID, CMD_FIGHT , {cvActiveX[team],0,cvActiveZ[team]}, {})
 					end
 				end
-			else
-				data.tempTarget = false
-			end
+			else --added until here CPV
+				if spValidUnitID(data.tempTarget) and isUnitVisible(data.tempTarget,a.allyTeam) then
+					local x, y, z = spGetUnitPosition(data.tempTarget)
+					for unitID,_ in pairs(data.unit) do
+						if not data.aa[unitID] then
+							GiveClampedOrderToUnit(unitID, CMD_FIGHT , {x,y,z}, 0)
+						end
+					end
+				else
+					data.tempTarget = false
+				end
+			end -- added CPV
 		else
 			
 			local aX = math.ceil(averageX/heatSquareWidth)
@@ -2674,7 +2787,7 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 	local a = aiTeamData[unitTeam]
 	
 	if attackerID then
-		if jumperArray[unitDefID] then
+--[[		if jumperArray[unitDefID] then
 			local ud = UnitDefs[attackerDefID]
 			if not ud.canFly then
 				local jump = spGetUnitRulesParam(unitID, "jumpReload")
@@ -2686,7 +2799,7 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weap
 					end
 				end
 			end
-		end
+		end ]] -- included in other Cursed scripts
 	
 		spotEnemyUnit(a.allyTeam, attackerID, attackerDefID, false)
 	
@@ -2897,6 +3010,10 @@ end
 
 function gadget:GameFrame(n)
 	gameframe = n
+	if n%300 == 1 then
+		updateCvTarget()
+	end	
+	
 	for team,data in pairs(aiTeamData) do
 	
 		initialiseFaction(team)
@@ -3942,6 +4059,8 @@ local function setAllyteamStartLocations(allyTeam)
 
 	local boxID = Spring.GetTeamRulesParam(teamList[1], "start_box_id")
 	if boxID then
+		function GG.SetStartLocation() -- added as not included in Cursed
+		end -- added as not included in Cursed
 		local boxConfig = GG.startBoxConfig[boxID] and GG.startBoxConfig[boxID].startpoints
 		if boxConfig and boxConfig[1] then
 			for i = 1, listOfAis.count do
@@ -4108,8 +4227,74 @@ function gadget:Initialize()
 		Spring.SetGameRulesParam("CAI_disabled", 1)
 		gadgetHandler:RemoveGadget()
 	end
-	
+    -- CPV Mode 
+	local chickens = 0
+	GG.capturepointsx = GG.capturepointsx or {}
+	GG.capturepointsz = GG.capturepointsz or {}			
+	GG.capturepointowner = GG.capturepointowner or {}
+
 	for _,team in ipairs(spGetTeamList()) do
+
+		if aiConfigByName[spGetTeamLuaAI(team)] then
+			local _,_,_,_,_,allyTeam,_,CustomTeamOptions = spGetTeamInfo(team)
+			if (not CustomTeamOptions) or (not CustomTeamOptions["aioverride"]) then -- what is this for?
+				initialiseAiTeam(team, allyTeam, aiConfigByName[spGetTeamLuaAI(team)])
+				aiOnTeam[allyTeam] = true
+				usingAI = true
+			end
+		end
+	
+		local ai = select(4, Spring.GetTeamInfo(team))
+		local IsChickenAI = false
+		local IsGaiaAI = false
+		local IsSupportedAI = false
+		if (ai and ChickenAIs[Spring.GetTeamLuaAI(team)]) then
+			IsChickenAI = true
+			chickens = (chickens + 1)
+			Spring.Echo("Skirmish AI: Chicken AI detected")
+		elseif (team == GaiaAITeam) then
+			IsGaiaAI = true
+			-- Spring.Echo("GAIA AI detected")
+		elseif (ai and SupportedAIs[spGetTeamLuaAI(team)]) then
+			IsChickenAI = true
+			Spring.Echo("Skirmish AI: Chicken AI detected")			
+		end
+			
+		if (ai and (not IsGaiaAI)) then
+			cvActiveX[team] = MapCenterX
+			cvActiveZ[team] = MapCenterZ
+		end
+		if (ai and (not IsGaiaAI) and (not IsChickenAI) and (not IsSupportedAI)) then
+			Spring.Echo("CAI: AI identified:")
+			local AIname,_,_,_,_,_ = spGetTeamLuaAI(team) 
+			Spring.Echo(AIname)
+			if (AIname == "NO AI") then 
+				Spring.Echo("CAI: The NO AI was chosen, thus the game will runs without an LuaAI. Nothing schould happen for team " .. team)
+			else
+				if (aiConfigByName[spGetTeamLuaAI(team)] == nil) then
+					Spring.Echo("CAI: AI was not chosen, thus the game's uses the own LuaAI for team " .. team)
+				end
+				if (AIname ~= "Skirmish AI") then 
+					Spring.Echo("CAI: chosen AI is not supported by the game and is replaced with the game's own LuaAI for team " .. team)
+				end
+				local _,_,_,_,_,allyTeam = spGetTeamInfo(team)
+				initialiseAiTeam(team, allyTeam, aiConfigByName["Skirmish AI"])
+				aiOnTeam[allyTeam] = true
+				usingAI = true
+			end
+		end
+	end
+	
+	if (Spring.GetModOptions().scoremode ~= nil) then
+		if ((Spring.GetModOptions().scoremode ~= "disabled") and (chickens < 1)) then
+			cvmode = true
+			Spring.Echo("Skirmish AI: CPV mode active")	
+		end
+	end
+	-- END CPV mode
+
+	
+--[[	for _,team in ipairs(spGetTeamList()) do
 		--local _,_,_,isAI,side = spGetTeamInfo(team, false)
 		if aiConfigByName[spGetTeamLuaAI(team)] then
 			local _,_,_,_,_,allyTeam,_,CustomTeamOptions = spGetTeamInfo(team)
@@ -4119,7 +4304,7 @@ function gadget:Initialize()
 				usingAI = true
 			end
 		end
-	end
+	end ]] -- merged to CPV additions
 	
 	if usingAI then
 		for _,allyTeam in ipairs(spGetAllyTeamList()) do

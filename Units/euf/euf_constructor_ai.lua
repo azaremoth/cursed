@@ -30,7 +30,6 @@ local unitDef = {
   canRepair          = true,
   canResurrect       = false,
   canstop            = true,
-  cantBeTransported  = false,
   capturable         = false, 
   captureSpeed       = 0,
   category           = "EUF LAND LIGHTARMOR",

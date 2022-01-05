@@ -1,3 +1,13 @@
+>> Major changes 1.450 => 1.451
+
+Fixes:
+- dragon script
+- witch script
+- imperial dropship speed
+
+- removed progressive mines/mexes due to lua resource demand
+
+
 >> Major changes 1.449 => 1.450
 
 Bugs:

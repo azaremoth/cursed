@@ -7,6 +7,10 @@ Fixes:
 
 - removed progressive mines/mexes due to lua resource demand
 
+Polishing
+- updated Skirmish AI. It should be more challenging now
+
+
 
 >> Major changes 1.449 => 1.450
 

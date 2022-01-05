@@ -56,6 +56,8 @@ local shooting = false
 local dying = false
 
 local restore_delay = 3000
+local MOVEANIMATIONSPEED = 1
+local MOVEANIMATIONSLEEPTIME = 340
 
 local BOOM	 = 1024+0
 local BOOM2	 = 1025+0

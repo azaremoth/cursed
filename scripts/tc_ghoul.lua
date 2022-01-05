@@ -38,7 +38,8 @@ local indeepwater = false
 -- local jumpingdamage = 0
 -- local prejumpinghealth = 0
 
-local restore_delay, MOVEANIMATIONSPEED
+local restore_delay = 6000
+local MOVEANIMATIONSPEED = 1
 local MOVEANIMATIONSLEEPTIME = 340
 
 local SIG_WALK = 1

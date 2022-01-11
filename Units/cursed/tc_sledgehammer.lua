@@ -36,7 +36,7 @@ local unitDef = {
   acceleration       = 1.0,
   airHoverFactor     = 0.1,
   brakeRate          = 0.66,
-  cruiseAlt          = 150,
+  cruiseAlt          = 120,
   maxVelocity        = 6.0,
   turnRate           = 500,
 -- Collision
@@ -122,7 +122,7 @@ local weaponDefs = {
     accuracy           = 128,  
 	name			=	"Unguided rocket swarm",
 	weapontype		=	"MissileLauncher",
-    cylinderTargeting = 128,
+--    cylinderTargeting = 128,
 	heightMod 			= 0.1,	
 	model			=	"rocket.s3o",
 	turret		=	1,

@@ -37,7 +37,7 @@ local unitDef = {
   acceleration       = 0.30,
   airHoverFactor     = 0,
   brakeRate          = 0.15,
-  cruiseAlt          = 175,
+  cruiseAlt          = 120,
   maxVelocity        = 6,
   turnRate           = 512,
 -- Collision
@@ -123,7 +123,7 @@ local weaponDefs = {
 	collideFriendly    = false,
     accuracy           = 768,
     areaOfEffect       = 128,
-    cylinderTargeting = 128,
+--    cylinderTargeting = 128,
 	heightMod 			= 0.1,		
     energypershot      = 0,	
     explosionGenerator = "custom:SMALL_EXPLOSION_GREEN",
@@ -132,7 +132,7 @@ local weaponDefs = {
     name               = "Bomb",
     range              = 300,
     reloadtime         = 5,
-    tolerance          = 3000,
+    tolerance          = 6000,
     turret             = true,
     weaponVelocity     = 150,
 --  Sound	------------------------------------------------	

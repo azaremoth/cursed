@@ -38,7 +38,7 @@ local unitDef = {
   acceleration       = 0.02,
   airHoverFactor     = 0.1,
   brakeRate          = 0.931,
-  cruiseAlt          = 100,
+  cruiseAlt          = 80,
   maxVelocity        = 2.8,
   turnRate           = 500,
 -- Collision
@@ -123,7 +123,7 @@ local weaponDefs = {
     coreThickness      = 0.5,
     craterBoost        = 0,
     craterMult         = 0,
-    cylinderTargeting 	= 128,
+--    cylinderTargeting 	= 128,
 	heightMod 			= 0.1,
     energypershot           = 0,
     explosionGenerator = "custom:AGARES_LASER",

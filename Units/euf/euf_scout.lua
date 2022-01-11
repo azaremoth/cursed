@@ -31,7 +31,7 @@ local unitDef = {
 	normalmaps = "yes",			
 	helptext = "A quick gunship that is useful against lightly armoured targets."	
 	},
-  cruiseAlt          = 150,
+  cruiseAlt          = 120,
   description        = "Light gunship",
   dontland           = "1",
   --  energyMake         = "-1",
@@ -116,7 +116,7 @@ local weaponDefs = {
 	collideFriendly    = true,
     accuracy           = 384,
     areaOfEffect       = 16,
-	cylinderTargeting = 128,
+--	cylinderTargeting = 128,
 	heightMod 			= 0.1,	
     energypershot           = 0,	
     explosionGenerator = "custom:SMALL_BULLET_FX",

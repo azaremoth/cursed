@@ -36,7 +36,7 @@ local unitDef = {
 	normalmaps = "yes",			
     helptext = "The Interceptor is the ideal choice against airborne targets."	
 	},
-  cruiseAlt          = 200,
+  cruiseAlt          = 120,
   dontland           = "1",
   --  energyMake         = "-1",
   explodeAs          = "SMALL_EXPLOSION_YELLOW",
@@ -127,7 +127,7 @@ local weaponDefs = {
     collisionSize      = 8,
     craterBoost        = 0,
     craterMult         = 0,
-    cylinderTargeting = 128,
+--    cylinderTargeting = 128,
 	heightMod 			= 0.1,	
       energypershot           = 0,
 	explosiongenerator=	"custom:SMALL_EXPLOSION_BLUE",

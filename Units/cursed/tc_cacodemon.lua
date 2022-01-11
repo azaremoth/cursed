@@ -40,7 +40,7 @@ local unitDef = {
   acceleration       = 0.1,
   airHoverFactor     = 0.1,
   brakeRate          = 0.931,
-  cruiseAlt          = 150,
+  cruiseAlt          = 80,
   maxVelocity        = 2.0,
   turnRate           = 700,
 -- Collision
@@ -123,7 +123,7 @@ local weaponDefs = {
 	  avoidFriendly      	= true,
 	  cegTag				= [[CACO_SHELLFLARE]],
 	  CollideFriendly		= true,  
-	  cylinderTargeting = 128,
+--	  cylinderTargeting = 128,
 	  heightMod 			= 0.1,		  
 	  edgeEffectiveness		= 0.5,
 	  energypershot         = 0,	  

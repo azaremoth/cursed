@@ -3139,9 +3139,9 @@ local function ProcessUnitDestroyed(unitID, unitDefID, unitTeam, changeAlly)
 				removeIndexFromArray(controlledUnit.mex,index)
 			elseif ud.isFactory and buildDefs.factoryByDefId[unitDefID] then -- factory
 				local data = controlledUnit.factoryByID[unitID]
-				if data.retreatPointSet then
-					GG.Retreat_ToggleHaven(unitTeam, data.nanoX, data.nanoZ)
-				end
+--				if data.retreatPointSet then
+--					GG.Retreat_ToggleHaven(unitTeam, data.nanoX, data.nanoZ)
+--				end
 				if controlledUnit.factoryByID[unitID].onDefenceHeatmap then
 					editDefenceHeatmap(unitTeam,unitID,buildDefs.factoryByDefId[unitDefID].defenceQuota,buildDefs.factoryByDefId[unitDefID].airDefenceQuota,buildDefs.factoryByDefId[unitDefID].defenceRange,-1,0)
 				end
@@ -3441,10 +3441,10 @@ local function ProcessUnitCreated(unitID, unitDefID, unitTeam, builderID, change
 					if closestFactory then
 						local data = a.controlledUnit.factoryByID[closestFactory]
 						data.nanoCount = a.controlledUnit.factoryByID[closestFactory].nanoCount + 1
-						if not data.retreatPointSet then
-							GG.Retreat_ToggleHaven(unitTeam, data.nanoX, data.nanoZ)
-							data.retreatPointSet = true
-						end
+--						if not data.retreatPointSet then
+--							GG.Retreat_ToggleHaven(unitTeam, data.nanoX, data.nanoZ)
+--							data.retreatPointSet = true
+--						end
 					end
 					controlledUnit.nanoByID[unitID] = {index = controlledUnit.nano.count,  finished = false, ud = ud,
 						bp = ud.buildSpeed, x = x, y = y, z = z, cost = ud.metalCost, closestFactory = closestFactory}

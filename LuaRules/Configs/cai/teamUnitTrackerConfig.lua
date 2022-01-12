@@ -1,44 +1,114 @@
 
 local completeUnitListNames = {
 
-	turretAA = {	},
+	turretAA = {
+		"tc_defender",
+		"euf_aatower",
+	},
 
-	turret = {	},
+	turret = {
+		"tc_defender",
+		"tc_tower",
+		"tc_hellfire",		
+		"euf_plasmatower",
+		"euf_lasertower",
+		"euf_artytower",		
+	},
 	
-	economy = {	},
+	economy = {
+		"euf_metalextractor_lvl1",
+		"euf_metalextractor_lvl2",
+		"tc_metalextractor_lvl1",
+		"tc_metalextractor_lvl2",
+	},
 	
-	constructor = {	},
+	constructor = {
+		"tc_restless",
+		"tc_lich_ai",
+		"euf_constructor_ai",
+		"euf_constructor_lvl2_ai",		
+	},
 }
 
 local ground = {
 
-	raider = {	},
+	raider = {
+		"tc_ghoul",
+		"tc_skeleton",
+		"euf_marine",
+		"euf_pyro",
+	},
 
-	assault = {	},
+	assault = {
+		"euf_marine",
+		"tc_gunner",
+		"euf_walker",
+		"tc_belial",
+	},
 
-	skirm = {	},
+	skirm = {
+		"euf_sniper_ai",
+		"euf_hover",		
+		"tc_enforcer",
+		"tc_mage",
+		"tc_witch",		
+		"tc_agares",		
+	},
 	
-	antiSkirm = {	},
+	antiSkirm = {
+		"euf_pyro",
+		"tc_ghoul",		
+	},
 
-	riot = {	},
+	riot = {
+		"euf_tank",	
+		"tc_mancubus",
+		"bug_med_undead",
+		"bug_big_undead",
+	},
 
-	arty = {	},
+	arty = {
+		"euf_bazooka",
+		"euf_mlrs_ai",
+		"tc_bonebeast",	
+		"tc_purgatory_ai",		
+	},
 }
 
 local antiAir = {
-	antiAir = {	},
+	antiAir = {
+		"euf_marine",
+		"euf_aatank",		
+		"tc_mage",
+		"tc_crawler",		
+	},
 }
 
 local air = {
-	bomber = {	},
+	bomber = {
+		"euf_bomber",
+		"tc_acranius",
+	},
 	
-	gunship = {	},
+	gunship = {
+		"euf_scout",
+		"euf_angel",			
+		"tc_dragon",		
+		"tc_cacodemon",		
+		"tc_redeemer",
+		"tc_sledgehammer",
+	},
 	
-	transport = {	},
+	transport = {
+		"euf_transport",
+	},
 }
 
 local fighter = {
-	fighter = {	},
+	fighter = {
+		"euf_interceptor",
+		"tc_blade",	
+	},
 }
 
 local defenseRequirementNames =  { }

@@ -1,7 +1,7 @@
 ----------------------------------- ADAPTIONS TO BASE CLASS ------------------------------
 local HOVER_TACHYON = {
     areaOfEffect       		= 48,	
-	range                   = 500,
+	range                   = 650,
     reloadtime 				= 2.50,
 	rgbColor           		= {0.39, 1, 0.84},
 	rgbColor2 		   		= {1, 1, 1},	

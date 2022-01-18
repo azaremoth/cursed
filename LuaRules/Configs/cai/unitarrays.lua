@@ -10,7 +10,8 @@ local assaultgroup = {
 	"euf_sarge_lvl2",
 	"euf_sarge_lvl3",
 	"euf_sarge_lvl4",	
-	"euf_sarge_lvl5",	
+	"euf_sarge_lvl5",
+	"tc_dragon",	
 	"tc_ghoul",
 	"tc_gunner",
 	"tc_enforcer",
@@ -41,6 +42,7 @@ local skirmishers = {
 }	
 
 local raider = {
+	"tc_cacodemon",	
 	"tc_ghoul",
 	"tc_skeleton",
 	"euf_raider",	
@@ -49,7 +51,7 @@ local raider = {
 	"euf_paladin_ai",
 }
 
-local jumper = { -- uses jump for offense. IE do not put commander or AA here.
+local jumper = { -- uses jump for offense. IE do not put commander or AA here. -- Jumping deactivated for CAI in the cursed, as controlled otherwise
 	"euf_pyro",
 	"tc_ghoul",
 	"tc_mage",	

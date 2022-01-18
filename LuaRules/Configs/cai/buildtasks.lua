@@ -35,7 +35,8 @@ factionBuildConfig = {
 			[1] = {ID = UnitDefNames['tc_pyramid_ai'].id},
 			[2] = {ID = UnitDefNames['tc_darkassembler'].id},
 			[3] = {ID = UnitDefNames['tc_pitt'].id},
-			[4] = {ID = UnitDefNames['tc_damnedportal_ai'].id},				
+			[4] = {ID = UnitDefNames['tc_damnedportal_ai'].id},	
+			[5] = {ID = UnitDefNames['tc_altar'].id},				
 		},
 		factoryByDefId = {	
 			[UnitDefNames['tc_pyramid_ai'].id] = {
@@ -211,6 +212,47 @@ factionBuildConfig = {
 					importanceMult = 1,
 					count = 1,
 					[1] = {ID = UnitDefNames['tc_agares'].id, chance = 1},					
+				},
+				[7] = { -- riot
+					importanceMult = 0,
+					count = 0,
+				},	
+				[8] = { -- aa
+					importanceMult = 0,
+					count = 0,
+				},	
+			},
+			[UnitDefNames['tc_altar'].id] = {
+				defenceQuota = {2,0.6,0.3},
+				defenceRange = 400,
+				airDefenceQuota = {2,1,0.1},
+				importance = 0.2,
+				BPQuota = 100,
+				minFacCount = 1,
+				[1] = { -- con
+					importanceMult = 0,
+					count = 0,
+				},
+				[2] = { -- scout
+					importanceMult = 0,
+					count = 0,					
+				},
+				[3] = { -- raider
+					importanceMult = 0,
+					count = 0,
+				},
+				[4] = { -- arty
+					importanceMult = 0,
+					count = 0,
+				},
+				[5] = { --assault
+					importanceMult = 0,
+					count = 1,
+					[1] = {ID = UnitDefNames['tc_dragon'].id, chance = 1},
+				},
+				[6] = { -- skirm
+					importanceMult = 0,
+					count = 0,				
 				},
 				[7] = { -- riot
 					importanceMult = 0,

@@ -242,7 +242,7 @@ function script.Create()
 			Sleep(300)
 	end
 	--END BUILD CYCLE
-	Spring.SetUnitBlocking(unitID, true, true, true)		
+	Spring.SetUnitBlocking(unitID, true, true, true, true, true, true, false)	
 	StartThread( Walkscript )
 	StartThread( BoredAnimation )	
 end

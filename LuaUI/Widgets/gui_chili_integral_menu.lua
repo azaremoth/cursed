@@ -761,7 +761,7 @@ local function BuildRowButtonFunc(num, cmdid, left, right,addInput,insertMode,cu
 	end
 	
 	-- skip over the commands with an id of 0, left behind by removal
-	local commands = Spring.GetFactoryCommands(targetFactory)
+	local commands = Spring.GetFactoryCommands(targetFactory, -1)
 	local i = 1
 	while i <= pos do
 		if not commands[i] then --end of queue reached

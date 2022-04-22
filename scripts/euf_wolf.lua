@@ -109,7 +109,7 @@ end
 function script.Create()
 	SetMoveAnimationSpeed()
 	StartThread( Walkscript )
-	Spring.SetUnitBlocking(unitID, true, true, true)	
+	Spring.SetUnitBlocking(unitID, true, true, true, true, true, true, false)
 end
 
 function script.StartMoving()

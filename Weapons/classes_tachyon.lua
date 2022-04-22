@@ -2,11 +2,11 @@
 local HOVER_TACHYON = {
     areaOfEffect       		= 48,	
 	range                   = 650,
-    reloadtime 				= 2.50,
+    reloadtime 				= 2.3, -- was 2.5
 	rgbColor           		= {0.39, 1, 0.84},
 	rgbColor2 		   		= {1, 1, 1},	
     explosionGenerator 		= "custom:HOVER_LASER",	
-    damage 					= { default = 366, flyer = 366, heavy = 366, light = (366*0.75), },
+    damage 					= { default = 420, flyer = 420, heavy = 420, light = (420*0.75), }, -- was 366
 }
 local AGARES_TACHYON = {
     areaOfEffect       		= 48,	

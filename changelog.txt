@@ -9,7 +9,7 @@ Fixes:
 - fixed IU crashing when trying to cancel build queues
 
 Polishing
-- updated Skirmish AI. It should be more challenging now
+- updated Skirmish AI. It should be a little more challenging now
 
 Balance
 - increased damage output abd slightly reduced reload time of imperial hovertanks

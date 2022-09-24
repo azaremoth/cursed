@@ -188,17 +188,17 @@ confdata.subMenuIcons = {
 
 confdata.simpleModeDirectory = {
 	['Reset Settings'] = true,
---	['Interface'] = true,
+	['Interface'] = true,
 	['Audio'] = true,
---	['Graphics'] = true,
+	['Graphics'] = true,
 	['Camera'] = true,
---	['Unit Behaviour'] = true,
---	['Accessibility'] = true,
+	['Unit Behaviour'] = false,
+	['Accessibility'] = false,
 }
 confdata.simpleModeFullDirectory = {
 	'Reset Settings',
 	'Hotkeys',
---	'Unit Behaviour',
+	'Unit Behaviour',
 	'Help',
 }
 

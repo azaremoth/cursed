@@ -1150,8 +1150,8 @@ end
 local gameFrame;
 local SYNCED = SYNCED
 local CallAsTeam = CallAsTeam
-local spairs = spairs
-local snext = snext
+local pairs = pairs
+local next = next
 
 local GetUnitTeam         = Spring.GetUnitTeam
 local GetUnitHeading      = Spring.GetUnitHeading
@@ -1287,7 +1287,7 @@ function gadget:Update()
   local frame = spGetGameFrame()
   if (frame>oldFrame) then
     oldFrame = frame
-    if snext(SYNCED.morphUnits) then
+    if next(SYNCED.morphUnits) then
       local useLuaUI_ = Script.LuaUI('MorphUpdate')
       if (useLuaUI_~=useLuaUI) then --//Update Callins on change
         drawProgress = not Script.LuaUI('MorphDrawProgress')
@@ -1301,7 +1301,7 @@ function gadget:Update()
           then readTeam = Script.ALL_ACCESS_TEAM
           else readTeam = GetLocalTeamID() end
         CallAsTeam({ ['read'] = readTeam }, function()
-          for unitID, morphData in spairs(SYNCED.morphUnits) do
+          for unitID, morphData in pairs(SYNCED.morphUnits) do
             if (unitID and morphData)and(IsUnitVisible(unitID)) then
               morphTable[unitID] = {progress=morphData.progress, into=morphData.def.into, combatMorph = morphData.combatMorph}
             end
@@ -1421,7 +1421,7 @@ function gadget:DrawWorld()
   end
 
 
-  if (not snext(morphUnits)) then
+  if (not next(morphUnits)) then
     return --//no morphs to draw
   end
 
@@ -1439,7 +1439,7 @@ function gadget:DrawWorld()
   end
 
   CallAsTeam({ ['read'] = readTeam }, function()
-    for unitID, morphData in spairs(morphUnits) do
+    for unitID, morphData in pairs(morphUnits) do
       if (unitID and morphData)and(IsUnitVisible(unitID)) then
 		if morphData.combatMorph then
 		  DrawCombatMorphUnit(unitID, morphData,readTeam)	

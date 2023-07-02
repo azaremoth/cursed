@@ -1318,7 +1318,7 @@ local SYNCED = SYNCED
 function WrapToLuaUI()
   if (Script.LuaUI('ChickenEvent')) then
     local chickenEventArgs = {}
-    for k, v in spairs(SYNCED.chickenEventArgs) do
+    for k, v in pairs(SYNCED.chickenEventArgs) do
       chickenEventArgs[k] = v
     end
     Script.LuaUI.ChickenEvent(chickenEventArgs)

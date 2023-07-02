@@ -1013,12 +1013,12 @@ else--unsynced
 
 		-- Placing a unit or giving an order requiring ranged tech
 		if SYNCED.Tech.AccessionTable[cmd] then
-			for _,tech in spairs(SYNCED.Tech.AccessionTable[cmd]) do
+			for _,tech in pairs(SYNCED.Tech.AccessionTable[cmd]) do
 				if SYNCED.Tech.TechTable[tech.tech].Ranged then
 					DrawWorldTimer=DrawWorldTimer or Spring.GetTimer()
 					local cm=math.abs(((Spring.DiffTimers(Spring.GetTimer(),DrawWorldTimer)/.78)%2)-1)
 					RangedProviders={}
-					for _,id in sipairs(SYNCED.Tech.TechTable[tech.tech].ProvidedBy) do
+					for _,id in ipairs(SYNCED.Tech.TechTable[tech.tech].ProvidedBy) do
 						if SYNCED.Tech.ProviderTable[id][tech.tech].range then
 							table.insert(RangedProviders,id)
 						end

@@ -113,7 +113,7 @@
 		}
 	[particlesystem_dirt_SMALL_BULLET_FX]
 		{
-			class=CSphereParticleSpawner;
+			class=CSimpleParticleSystem;
 			[properties]
 			{
 			sizeGrowth=-0.005;
@@ -145,7 +145,7 @@
 		}
 	[particlesystem_watersplash_SMALL_BULLET_FX01]
 		{
-			class=CSphereParticleSpawner;
+			class=CSimpleParticleSystem;
 			[properties]
 			{
 			sizeGrowth=-0.1;
@@ -177,7 +177,7 @@
 		}
 	[particlesystem_watersplash_SMALL_BULLET_FX02]
 		{
-			class=CSphereParticleSpawner;
+			class=CSimpleParticleSystem;
 			[properties]
 			{
 			sizeGrowth=-0.1;

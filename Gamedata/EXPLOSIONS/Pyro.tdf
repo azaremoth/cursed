@@ -145,7 +145,7 @@
 {
 	[Smokecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;

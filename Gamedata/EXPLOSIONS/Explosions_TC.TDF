@@ -514,7 +514,7 @@
 {
 	[Smokecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -547,7 +547,7 @@
 {
 	[Smokecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -580,7 +580,7 @@
 {
 	[Smokecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -666,7 +666,7 @@
 	}
 	[Bloodcloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.55;
@@ -753,7 +753,7 @@
 	}
 	[Bloodcloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.55;
@@ -838,7 +838,7 @@
 	}
 	[Bloodcloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.55;
@@ -923,7 +923,7 @@
 	}
 	[Bloodcloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.55;
@@ -1008,7 +1008,7 @@
 	}
 	[Bloodcloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.55;
@@ -1037,7 +1037,7 @@
 	}
 	[Greenishcloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.55;

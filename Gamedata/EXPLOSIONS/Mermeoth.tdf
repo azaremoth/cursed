@@ -61,7 +61,7 @@
 	}
 	[Firecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.55;
@@ -157,7 +157,7 @@
 {
 	[Watercloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0.25;

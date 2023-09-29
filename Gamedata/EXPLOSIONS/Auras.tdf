@@ -2,7 +2,7 @@
 {
 	[Healing]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0.2;
@@ -35,7 +35,7 @@
 {
 	[Healing]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0.2;
@@ -68,7 +68,7 @@
 {
 	[Runes]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0.2;
@@ -101,7 +101,7 @@
 {
 	[Smokecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;

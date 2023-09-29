@@ -35,7 +35,7 @@
 	}
 	[Runes]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0;
@@ -101,7 +101,7 @@
 	}
 	[Runes]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0;
@@ -167,7 +167,7 @@
 	}
 	[Runes]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0;

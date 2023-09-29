@@ -203,7 +203,7 @@
 	}
 	[particlesystem_flame_slow_BIG_EXPLOSION_FX01]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0.05;
@@ -235,7 +235,7 @@
 	}
 	[particlesystem_flame_fast_BIG_EXPLOSION_FX01]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.15;
@@ -267,7 +267,7 @@
 	}
 	[particlesystem_watersplash_BIG_EXPLOSION_FX01]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.1;
@@ -299,7 +299,7 @@
 	}
 	[particlesystem_watersplash_BIG_EXPLOSION_FX02]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0;

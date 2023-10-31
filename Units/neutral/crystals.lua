@@ -6,12 +6,12 @@ local unitName = "crystals"
 
 local unitDef = {
   armortype          = "HEAVY",
-  buildCostEnergy    = 0,
-  buildCostMetal     = 0,
+  buildCostEnergy    = 1,
+  buildCostMetal     = 1,
   buildDistance      = 0,
   builder            = false,
   buildPic           = "crystals.png",
-  buildTime          = 0,
+  buildTime          = 1,
   canAssist          = false,
   canBeAssisted      = false,
   canGuard           = false,

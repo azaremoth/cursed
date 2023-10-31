@@ -7,7 +7,7 @@ local unitName = "tc_soulstone"
 
 local unitDef = {
   armortype          = "HEAVY",
-  buildCostEnergy    = 0,
+  buildCostEnergy    = 1,
   buildCostMetal     = 160,
   buildingGroundDecalDecaySpeed = 0.005,
   buildingGroundDecalSizeX = 10,

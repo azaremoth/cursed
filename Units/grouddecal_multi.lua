@@ -46,11 +46,11 @@ local DECAL4 = {
 ------------------------------------------------------ BASE CLASS
 local BASE = {
   armortype          = "HEAVY",
-  buildCostEnergy    = 0,
-  buildCostMetal     = 0,
+  buildCostEnergy    = 1,
+  buildCostMetal     = 1,
   useBuildingGroundDecal = true,  
   buildPic           = "NULL.png",
-  buildTime          = 0,
+  buildTime          = 1,
   canAssist          = false,
   canBeAssisted      = false,
   canMove            = false,

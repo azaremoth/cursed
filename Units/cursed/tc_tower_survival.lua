@@ -7,10 +7,10 @@ local unitName = "tc_tower_survival"
 local unitDef = {
   armortype          = "HEAVY",
   badTargetCategory  = "AIR",
-  buildCostEnergy    = 0,
-  buildCostMetal     = 0,
+  buildCostEnergy    = 1,
+  buildCostMetal     = 1,
   buildPic           = "tc_tower.png",
-  buildTime          = 0,
+  buildTime          = 1,
   
   buildingGroundDecalDecaySpeed = 0.005,
   buildingGroundDecalSizeX = 14,

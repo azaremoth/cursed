@@ -6,8 +6,8 @@ local unitName = "burrowcrust"
 
 local unitDef = {
   armortype          = "HEAVY",
-  buildCostEnergy    = 0,
-  buildCostMetal     = 0,
+  buildCostEnergy    = 1,
+  buildCostMetal     = 1,
   builder            = true,
   buildPic           = "NULL.png",
   buildTime          = 3600,

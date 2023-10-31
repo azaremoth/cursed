@@ -86,7 +86,7 @@
 	}
 	[Firecloud_small]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.55;
@@ -115,7 +115,7 @@
 	}
 	[Watersplash]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.1;
@@ -144,7 +144,7 @@
 	}
 	[Watersplash_Pillar]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0;

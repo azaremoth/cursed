@@ -2,7 +2,7 @@
 {
 	[Smokecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -31,7 +31,7 @@
 	}
 	[Smokecloud2]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -64,7 +64,7 @@
 {
 	[Smokecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -93,7 +93,7 @@
 	}
 	[Smokecloud2]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -126,7 +126,7 @@
 {
 	[Smokecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -155,7 +155,7 @@
 	}
 	[Smokecloud2]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -188,7 +188,7 @@
 {
 	[Smokecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -217,7 +217,7 @@
 	}
 	[Smokecloud2]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -368,7 +368,7 @@
 {
 	[Smokecloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;
@@ -397,7 +397,7 @@
 	}
 	[Smokecloud2]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=-0.33;

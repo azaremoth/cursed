@@ -2,7 +2,7 @@
 {
 	[Watercloud]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0.25;

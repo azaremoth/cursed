@@ -99,7 +99,7 @@
 {
 	[Runes]
 	{
-		class=CSphereParticleSpawner;
+		class=CSimpleParticleSystem;
 		[properties]
 		{
 		sizeGrowth=0.2;

@@ -1,3 +1,10 @@
+>> Major changes 1.451 => 1.500 "Recoil ready"
+
+Fixes:
+- adapted LuaUI scripts to avoid issues
+- added normal maps for ground decals, scars and tracks
+
+
 >> Major changes 1.450 => 1.451
 
 Fixes:

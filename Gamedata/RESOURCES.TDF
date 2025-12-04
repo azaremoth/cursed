@@ -23,7 +23,20 @@
 			scar2=scars/scar2.bmp;
 			scar3=scars/scar3.bmp;
 			scar4=scars/scar4.bmp;
+			scar5=scars/scar5.bmp;
+			scar6=scars/scar6.bmp;			
 		}
+		[tracks]
+		{
+			comtrack=tracks/comtrack.bmp;
+			pointy=tracks/pointy.bmp;
+			sarge=tracks/sarge.bmp;
+			stdtank=tracks/stdtank.bmp;
+			stdtank_small=tracks/stdtank_small.bmp;
+			tracks=tracks/tracks.bmp;
+			walker=tracks/walker.bmp;
+			walker_wide=tracks/walker_wide.bmp;
+		}	
 		[trees]
 		{
 			bark=defaults/trees/bark.bmp;

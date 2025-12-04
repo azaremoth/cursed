@@ -68,7 +68,7 @@ local unitDef = {
   trackOffset            = 15,
   trackStrength          = 8,
   trackStretch           = 1,
-  trackType              = [[Walker]],
+  trackType              = [[walker]],
   trackWidth             = 90,  
   
   turnRate           = 750,

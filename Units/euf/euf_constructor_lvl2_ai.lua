@@ -78,7 +78,7 @@ local unitDef = {
   trackOffset            = 0,
   trackStrength          = 5,
   trackStretch           = 1,
-  trackType              = [[StdTank]],
+  trackType              = [[stdtank]],
   trackWidth             = 30,  
 
   turnRate           = 500,

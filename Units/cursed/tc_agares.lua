@@ -62,7 +62,7 @@ local unitDef = {
   trackOffset            = 0,
   trackStrength          = 9,
   trackStretch           = 1,
-  trackType              = [[Pointy]],
+  trackType              = [[pointy]],
   trackWidth             = 40,  
   
   turnRate           = 350,
